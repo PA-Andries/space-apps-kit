@@ -9,13 +9,13 @@ A submission that breaks a rule is out of global judging, whatever its quality. 
 
 ## Input
 
-The project page draft in `work/project-page.md` (from `templates/project-page.md`) and, if available locally, the demo video or slides file.
+The project page draft in `work/project-page.md` (from `project-page-template.md` in this skill folder) and, if available locally, the demo video or slides file.
 
 ## Procedure
 
 1. Run the automated checks:
    ```bash
-   python3 scripts/check_submission.py work/project-page.md --demo path/to/video.mp4   # or slides.pdf / slides.pptx
+   uv run check-submission work/project-page.md --demo path/to/video.mp4   # or slides.pdf / slides.pptx
    ```
    It checks required sections, English-only hints, that every URL answers publicly (no login redirect), video duration ≤ 30 s (needs `ffprobe`) and slide count ≤ 7 (PDF or PPTX).
 2. Then review by hand what a script can't judge:

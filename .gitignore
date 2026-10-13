@@ -1,9 +1,24 @@
+# Environment and secrets
 .venv/
+.env
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Python caches and builds
 __pycache__/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+dist/
+build/
+*.egg-info/
+
+# Large data files: commit the download command, not the file
+data/raw/
 *.nc
 *.h5
 *.hdf
 *.tif
 *.tiff
-data/
+
 .DS_Store

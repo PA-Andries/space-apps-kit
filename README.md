@@ -1,58 +1,51 @@
 # Space Apps Kit
 
-A prep and execution kit for the **NASA Space Apps Challenge 2026** (Paris local event, 14-15 Nov 2026), built as Claude Code skills plus templates and a submission checker.
+The team's shared repo for the **NASA Space Apps Challenge 2026** (Paris local event, 14-15 Nov 2026): Claude Code skills, the rules that matter, and a submission checker, on a clean Python setup.
 
-It contains **no project code**: it's tooling to choose a challenge, understand the data, turn a brainstorm into a spec, write the pitch, and check the submission. Project code starts on Saturday 14 Nov at 09:00 in a separate repo.
-
-## Workflow
-
-| When | Step | Skill / file |
-|---|---|---|
-| Now | Fill in the team profile | `docs/team-profile.md` |
-| 28 Oct (statements out) | Paste each challenge statement into `challenges/` | `challenges/_template.md` |
-| 28 Oct → 1 Nov | Rank challenges against the team | `/challenge-scout` |
-| 1 Nov → 13 Nov | Find, download and document the datasets | `/data-recon` |
-| 1 Nov → 13 Nov | Brainstorm and freeze a one-page spec | `/brainstorm-spec` |
-| 1 Nov → 15 Nov | Write the 30-second video script, storyboard and 7-slide fallback | `/pitch-builder` |
-| Sunday 15 Nov | Check the project page, links and demo before submitting | `/submission-checker` + `scripts/check_submission.py` |
+It contains **no project code**. The project itself is built from Saturday 14 Nov 09:00 (see `CLAUDE.md`).
 
 ## Setup
 
+Needs [uv](https://docs.astral.sh/uv/getting-started/installation/) and, for the skills, [Claude Code](https://code.claude.com).
+
 ```bash
-git clone <this repo> && cd space-apps-kit
-claude            # Claude Code picks up CLAUDE.md and .claude/skills automatically
+git clone https://github.com/PA-Andries/space-apps-kit && cd space-apps-kit
+uv sync                 # one shared environment (.venv) from uv.lock: Python 3.12 + dev tools
+uv sync --group data    # add the NASA data stack (earthaccess, xarray, geopandas...) when you need it
+cp .env.example .env    # Earthdata and api.nasa.gov credentials, never committed
+claude                  # picks up CLAUDE.md and .claude/skills automatically
 ```
 
-Then type `/challenge-scout`, `/data-recon <challenge>`, etc.
+## Workflow
 
-Without Claude Code, every skill is a readable Markdown procedure in `.claude/skills/*/SKILL.md` you can follow by hand or paste into any AI assistant.
+| When | Step | Skill |
+|---|---|---|
+| Now | Fill in the team profile | `docs/team-profile.md` |
+| 28 Oct (statements out) | One file per challenge in `challenges/` | `challenges/_template.md` |
+| 28 Oct → 1 Nov | Rank challenges against the team | `/challenge-scout` |
+| 1 Nov → 13 Nov | Find and document the datasets | `/data-recon` |
+| 1 Nov → 13 Nov | Brainstorm and freeze a one-page spec | `/brainstorm-spec` |
+| 1 Nov → 15 Nov | 30-second video script and 7-slide fallback | `/pitch-builder` |
+| Sunday 15 Nov | Check page, links and demo before submitting | `/submission-checker` |
+
+Each skill is a readable Markdown procedure in `.claude/skills/<name>/SKILL.md`, next to the templates it fills in, so teammates without Claude Code can follow it by hand.
 
 ## Layout
 
 ```
-CLAUDE.md                     event rules and judging context loaded in every session
-.claude/skills/               the five skills
-docs/rules.md                 rules summary (submission, data, AI use, branding)
-docs/judging.md               criteria, awards, past winners
-docs/team-profile.md          who we are, skills, availability (fill in)
-docs/data-portals.md          where NASA and partner data lives
-challenges/                   one file per challenge statement (fill in on 28 Oct)
-templates/                    spec, data cheat sheet, pitch, slides, project page
-scripts/check_submission.py   checks the project page draft, public links and demo limits
-starter/                      generic environment (Python data stack), no project code
-work/                         outputs written by the skills (shortlist, specs, scripts)
+CLAUDE.md                   rules and context loaded in every Claude session
+CONTRIBUTING.md             how we work: environment, checks, branches, PRs, commits
+.claude/skills/             the five skills, each with its templates
+.claude/settings.json       shared Claude Code permissions
+docs/                       rules, judging criteria, team profile
+challenges/                 one file per official challenge statement
+work/                       outputs of the skills (shortlist, data notes, spec, pitch)
+src/space_apps_kit/         shared Python tooling (check-submission)
+tests/                      tests for that tooling
+pyproject.toml, uv.lock     dependencies, pinned for everyone
+.github/workflows/ci.yml    quality check on every PR: ruff lint, ruff format, pytest
 ```
-
-## Rules that matter most
-
-- Teams of 1-6, all registered at the Paris local event.
-- Official challenge only, NASA data required for global awards.
-- Demo: video **≤ 30 s** or **≤ 7 slides**, English (or English subtitles), public links.
-- AI tools allowed but must be declared; AI images/video watermarked; no NASA logos.
-- Original content must be open source.
-
-Details and sources in `docs/rules.md`. Re-check against the 2026 Project Submission Guide released on 13 Nov.
 
 ## License
 
-MIT for this kit. Your hackathon project must use an OSI open-source license (see `docs/rules.md`).
+MIT. The hackathon project must also use an OSI open-source license (see `docs/rules.md`).

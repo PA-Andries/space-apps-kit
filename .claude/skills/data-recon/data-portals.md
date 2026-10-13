@@ -32,4 +32,4 @@ Start from the datasets named in the challenge statement. These portals cover mo
 
 ## Python stack for sampling
 
-`earthaccess`, `xarray`, `netCDF4`/`h5netcdf`, `rioxarray`/`rasterio`, `pystac-client`, `geopandas`, `pandas`, `matplotlib`. See `starter/requirements.txt`.
+`earthaccess`, `xarray`, `netCDF4`/`h5netcdf`, `rioxarray`/`rasterio`, `pystac-client`, `geopandas`, `pandas`, `matplotlib`. Installed with `uv sync --group data` (see `pyproject.toml`).

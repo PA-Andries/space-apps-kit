@@ -13,7 +13,7 @@ Target: ≤ 30.0 s, ~70-80 spoken words, English (or English subtitles).
 Word count: <n>
 
 ## Checklist
-- [ ] ≤ 30.0 s (check with `ffprobe` or `scripts/check_submission.py --demo`)
+- [ ] ≤ 30.0 s (check with `ffprobe` or `uv run check-submission --demo`)
 - [ ] English voice-over or English subtitles
 - [ ] No NASA logos, flags, mission patches
 - [ ] AI-generated visuals carry a visible "AI-generated" watermark
