@@ -1,0 +1,14 @@
+# Generic data-sampling environment for data-recon (no project code).
+earthaccess
+xarray
+netCDF4
+h5netcdf
+rioxarray
+rasterio
+pystac-client
+geopandas
+pandas
+matplotlib
+requests
+jupyterlab
+pypdf
