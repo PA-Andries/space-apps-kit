@@ -25,3 +25,5 @@ Influence, Creativity, Validity, Relevance, Presentation. See `docs/judging.md`.
 - Write outputs under `work/` (create it if needed): `work/shortlist.md`, `work/data/<challenge>.md`, `work/spec.md`, `work/pitch.md`.
 - Be explicit about what is verified (from a statement, dataset or source) and what is assumed.
 - Prefer small, demo-able scope: one complete user flow on real NASA data beats many partial features.
+- Python: one environment managed by uv (`uv sync`, `uv run ...`); add dependencies with `uv add`, never `pip install`. Before proposing a commit, run `uv run ruff check .`, `uv run ruff format --check .` and `uv run pytest` (what CI runs).
+- Never write keys or passwords in code; they go in `.env` (see `.env.example`). Team workflow (branches, PRs, commits): `CONTRIBUTING.md`.
