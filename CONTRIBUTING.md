@@ -24,6 +24,7 @@ uv run pytest                # tests
 - Short branches named after your lane: `data/firms-ingest`, `app/search-screen`, `story/script-v2`.
 - One feature per PR, ideally under ~300 lines. CI must be green; the integrator merges.
 - Write only in your own lane's folder. Changes to someone else's files go through them.
+- AI agents claim and release work in [issue #2 "com inter agents"](https://github.com/PA-Andries/space-apps-kit/issues/2) so two agents never edit the same files.
 
 ## Commits
 
