@@ -34,4 +34,4 @@ uv run pytest                # tests
 
 ## Event weekend (from Sat 14 Nov 09:00)
 
-The integrator adds three shared files: `CONTRACTS.md` (data and screen interfaces, frozen Saturday morning), `DECISIONS.md` (one line per change, with time and who) and `AI_LOG.md` (one line per significant AI use, needed for the AI declaration). Every Claude session starts by reading them.
+`DECISIONS.md` (one line per change, with time and who) already exists. The integrator adds `CONTRACTS.md` (data and screen interfaces, frozen Saturday morning) and `AI_LOG.md` (one line per significant AI use, needed for the AI declaration). Every Claude session starts by reading them.

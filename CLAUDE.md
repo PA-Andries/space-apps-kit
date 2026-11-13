@@ -2,6 +2,8 @@
 
 This repo prepares a team for the **NASA Space Apps Challenge 2026**, Paris local event, 14-15 Nov 2026 (theme "The Next Frontier"). Submission closes Sunday 15 Nov 23:59 Paris time.
 
+**Chosen challenge: Flame in Freefall** (`challenges/flame-in-freefall.md`). Read `DECISIONS.md` before any task; it is the latest truth on scope.
+
 ## Hard constraints (never violate)
 
 - **No project code before Sat 14 Nov 09:00.** This repo holds tooling, research, specs and pitch drafts only. Generic boilerplate is fine; the actual app is built during the event in a separate repo.
