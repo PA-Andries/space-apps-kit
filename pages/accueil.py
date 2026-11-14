@@ -164,6 +164,19 @@ if st.session_state.get("ui_analysed"):
             st.info("No investigation scores for this environment yet.")
         for _, fiche in best.iterrows():
             investigation_card(fiche)
+        # The 3 compared with each other (role C): where they agree, where to be careful.
+        summary = getattr(recherche, "synthese_des_plus_pertinentes", None)
+        compared = summary(fiches, tests, scenario) if summary is not None else None
+        if compared and compared["investigations"]:
+            agree_column, careful_column = st.columns(2, gap="medium")
+            with agree_column:
+                st.markdown("**Where they agree**")
+                for sentence in compared["accords"] or ["No common fuel, material or oxygen level."]:
+                    st.markdown(f"- {sentence}")
+            with careful_column:
+                st.markdown("**Be careful**")
+                for sentence in compared["attention"] or ["Nothing to flag."]:
+                    st.markdown(f"- {sentence}")
         st.page_link("pages/recherche.py", label="All investigations, ranked and explained  ›")
     with gaps_column, st.container(key="ui_card_gaps", height="stretch"):
         card_title("What we don't know", "Where NASA's data stops, for this environment.")
