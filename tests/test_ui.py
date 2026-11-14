@@ -209,6 +209,22 @@ def test_a_typed_value_survives_a_visit_to_another_page():
     assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
 
 
+def test_every_page_receives_the_environment_of_page_one():
+    # Lot F is done when "Moon base" (here the rover, same statement values) fills O2 >= 30 % and <= 70.3 kPa
+    # and the other pages receive this scenario (they read it with get_scenario(), lot A).
+    pages = re.findall(r'st\.Page\("([^"]+)"', Path(APP).read_text(encoding="utf-8"))
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    site.button(key="ui_body_Lune").click().run()
+    site.button(key="ui_place_Rover pressurisé").click().run()
+    site.slider(key="ui_oxygen").set_value((32.0, 100.0)).run()
+    for page in pages:
+        site.switch_page(page).run()
+        assert not site.exception, page
+        assert site.session_state["habitat"] == "Rover pressurisé", page
+        assert site.session_state["scenario_oxygene_pct"] == (32.0, None), page
+        assert site.session_state["scenario_pression_kpa"] == (None, 70.3), page
+
+
 def test_analyse_shows_the_three_most_relevant():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert "ui_analysed" not in site.session_state  # the results wait for ANALYSE
