@@ -19,6 +19,7 @@ from flame.ui.home import (
     talking,
 )
 from flame.ui.intro import how_to_use
+from flame.ui.investigation import investigation_details
 from flame.ui.labels import label
 from flame.ui.outcomes import answer, count_outcomes, kind_of_result, outcomes_card
 from flame.ui.places import EARTH, body_of, place_conditions
@@ -57,6 +58,7 @@ __all__ = [
     "footer",
     "hero",
     "investigation_card",
+    "investigation_details",
     "how_to_use",
     "label",
     "mascot",

@@ -20,7 +20,7 @@ from flame.ui import (
     fold_sidebar_after_home,
     footer,
     how_to_use,
-    investigation_card,
+    investigation_details,
     label,
     outcomes_card,
     place_buttons,
@@ -176,8 +176,9 @@ if st.session_state.get("ui_analysed"):
         best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
         if best.empty:
             st.info("No investigation scores for this environment yet.")
-        for _, fiche in best.iterrows():
-            investigation_card(fiche)
+        # Each one with what the experiment studied and why it matters here (role C's `descriptif`).
+        for rank, (_, fiche) in enumerate(best.iterrows(), start=1):
+            investigation_details(fiche, recherche.descriptif(fiche, scenario, tests), rank, label(shown_place))
         # The 3 compared with each other (role C): where they agree, where to be careful.
         summary = getattr(recherche, "synthese_des_plus_pertinentes", None)
         compared = summary(fiches, tests, scenario) if summary is not None else None
