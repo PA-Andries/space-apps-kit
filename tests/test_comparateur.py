@@ -469,3 +469,30 @@ def test_la_page_data_change_de_vue():
     site = _page_donnees()
     site.radio(key="comparateur_donnees_vue").set_value("Oxygen × air flow").run()
     assert not site.exception
+
+
+def test_le_graphique_de_repartition_tient_en_trois_couleurs():
+    """La vue d'ensemble : deux séries de barres, aucune légende, et la frontière des solides tracée."""
+    from flame.comparateur import graphique_repartition
+    from flame.comparateur.conditions import COULEUR_ACCENT, COULEUR_STRUCTURE
+
+    fiches, tests = charger_fiches(), charger_tests()
+    figure = graphique_repartition(tests, fiches, LUNE, frontiere=22.2)
+    barres = [trace for trace in figure.data if trace.type == "bar"]
+    assert len(barres) == 2
+    assert [trace.marker.color for trace in barres] == [COULEUR_STRUCTURE, COULEUR_ACCENT]
+    assert COULEUR_ACCENT == "#ff7a3d"  # l'accent du site (primaryColor), et lui seul
+    assert all(trace.showlegend is False for trace in barres)
+    assert figure.layout.barmode == "stack"
+    formes = [forme for forme in figure.layout.shapes]
+    assert any(forme.type == "line" for forme in formes)  # la frontière
+    assert any("no solid tested above 22.2 %" in (note.text or "") for note in figure.layout.annotations)
+
+
+def test_le_graphique_de_repartition_compte_tous_les_tests_notes():
+    from flame.comparateur import graphique_repartition
+
+    fiches, tests = charger_fiches(), charger_tests()
+    figure = graphique_repartition(tests, fiches, LUNE)
+    total = sum(int(valeur) for trace in figure.data for valeur in trace.y)
+    assert total == int(tests["oxygene_pct"].notna().sum())

@@ -6,6 +6,8 @@ Données d'exemple (data/exemples/tests.csv) :
 - EXEMPLE-D (gaz) : 21 et 40 %, à 101 kPa.
 """
 
+from importlib import import_module
+
 import pandas as pd
 import pytest
 
@@ -13,11 +15,16 @@ from flame.commun import INCONNU, charger_fiches, charger_tests
 from flame.recherche import (
     ce_quon_ne_sait_pas,
     champs_inconnus,
+    descriptif,
     detail_du_score,
     filtrer,
+    frontiere_des_solides,
+    independance,
     les_plus_pertinentes,
     rechercher,
+    synthese_des_plus_pertinentes,
     valeurs_possibles,
+    verdict,
 )
 from flame.recherche import (
     tests_dans_les_plages as dans_les_plages,
@@ -223,6 +230,46 @@ def test_champs_inconnus_d_une_fiche():
     assert champs_inconnus(incomplete) == ["pressure"]
 
 
+# --- La synthèse des 3 plus pertinentes (pour la page 1) ---
+
+
+def test_la_synthese_compare_les_trois_plus_pertinentes():
+    synthese = synthese_des_plus_pertinentes(charger_fiches(), charger_tests(), LUNE)
+    assert len(synthese["investigations"]) == 3
+    assert "All 3 ran tests at 21 % oxygen: a common ground to compare them." in synthese["accords"]
+    assert any(phrase.startswith("They burn different fuels") for phrase in synthese["attention"])
+    assert any("partial gravity of the Moon base (0.165 g)" in phrase for phrase in synthese["attention"])
+
+
+def test_la_synthese_trouve_le_combustible_et_le_materiau_communs():
+    fiches = charger_fiches()
+    fiches.loc[fiches["id"] != "EXEMPLE-B", ["type_combustible", "combustible"]] = ["solide", "PMMA slab"]
+    accords = synthese_des_plus_pertinentes(fiches, charger_tests(), LUNE)["accords"]
+    assert "All 3 burn solid fuel." in accords
+    assert "All 3 burned PMMA (acrylic): their results can be read side by side." in accords
+
+
+def test_la_synthese_previent_quand_les_donnees_sont_minces():
+    fiches = charger_fiches()
+    fiches.loc[fiches["id"] == "EXEMPLE-A", "nb_tests"] = 2
+    attention = synthese_des_plus_pertinentes(fiches, charger_tests(), STATION)["attention"]
+    assert any(phrase.endswith("has only 2 test(s): thin evidence.") for phrase in attention)
+
+
+def test_la_synthese_dit_que_l_atmosphere_de_mars_est_inconnue():
+    attention = synthese_des_plus_pertinentes(charger_fiches(), charger_tests(), MARS)["attention"]
+    assert attention[0].startswith("The atmosphere of the Mars base is unknown")
+
+
+def test_la_synthese_sans_fiche_est_vide():
+    aucune_fiche = filtrer(charger_fiches(), types_combustible=["plasma"])
+    assert synthese_des_plus_pertinentes(aucune_fiche, charger_tests(), LUNE) == {
+        "investigations": [],
+        "accords": [],
+        "attention": [],
+    }
+
+
 # --- Filtres et valeurs (utilisés par la page 1) ---
 
 
@@ -238,3 +285,119 @@ def test_filtrer_sans_choix_ne_retire_rien():
 
 def test_valeurs_possibles_separe_les_valeurs_multiples():
     assert valeurs_possibles(charger_fiches(), "pilier") == ["Détecter", "Prévenir", "Éteindre"]
+
+
+# --- Le descriptif d'une investigation : ce qu'elle a étudié, et pourquoi elle compte ---
+
+
+@pytest.fixture
+def investigations_psi():
+    """Une petite table `investigations` fictive, au format du rôle B."""
+    ligne = {
+        "investigation_id": "EXEMPLE-A",
+        "title": "Example Burning of Solids",
+        "project_type": "Microgravity Investigation",
+        "flight_platform": "International Space Station (ISS)",
+        "start_date": "01-01-2010",
+        "end_date": "12-31-2012",
+        "objectives": "First sentence of the objectives. " + "A much longer second sentence. " * 30,
+        "approach": "How the tests were run.",
+        "hypothesis": None,
+        "impacts_earth_benefits": "",
+        "n_publications": 3,
+        "cited_in_statement_as_fire_safety": 1,
+    }
+    return pd.DataFrame([ligne])
+
+
+def test_le_descriptif_reprend_les_textes_de_nasa_sans_les_changer(investigations_psi, pertinence):
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), investigations_psi, pertinence)
+    assert detail["titre"] == "Example Burning of Solids"
+    assert detail["cadre"] == "Microgravity investigation · International Space Station (ISS) · 2010–2012"
+    assert "3 publications" in detail["chiffres"]
+    assert detail["textes"]["Objectives"] == investigations_psi.iloc[0]["objectives"].strip()
+    assert detail["textes"]["Approach"] == "How the tests were run."
+    assert set(detail["textes"]) == {"Objectives", "Approach"}  # un texte absent n'est pas inventé
+    assert detail["citee"]
+
+
+def test_le_descriptif_coupe_les_objectifs_en_fin_de_phrase(investigations_psi, pertinence):
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), investigations_psi, pertinence)
+    court = detail["objectif_court"]
+    assert len(court) <= 385 and court.endswith(". …")
+    assert court.startswith("First sentence of the objectives.")
+
+
+def test_le_descriptif_donne_les_raisons_du_classement_sans_les_points(investigations_psi, pertinence):
+    tests = charger_tests()
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, tests, investigations_psi, pertinence)
+    attendu = detail_du_score(fiche("EXEMPLE-A"), LUNE, pertinence, tests)
+    assert detail["raisons"] == list(zip(attendu["critere"], attendu["explication"], strict=True))
+    assert [critere for critere, _ in detail["raisons"]] == ["Atmosphere", "Fuel", "Gravity", "Data"]
+
+
+def test_le_descriptif_marche_sans_la_table_de_nasa(pertinence):
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), pd.DataFrame(), pertinence)
+    assert detail["titre"] == "" and detail["cadre"] == "" and not detail["citee"]
+    assert detail["en_bref"] == fiche("EXEMPLE-A")["resume"]
+    assert len(detail["raisons"]) == 4
+
+
+def test_le_verdict_de_mars_dit_que_l_atmosphere_manque():
+    verdict_mars = verdict(charger_fiches(), charger_tests(), MARS)
+    assert verdict_mars["chiffre"] == "—" and verdict_mars["grave"] is True
+    assert "no oxygen and no pressure" in verdict_mars["phrase"]
+    assert "statement" in verdict_mars["source"]
+
+
+def test_le_verdict_compte_zero_quand_aucun_test_ne_rentre():
+    impossible = {**LUNE, "oxygene_pct": (99.0, 100.0), "pression_kpa": (1.0, 2.0)}
+    assert verdict(charger_fiches(), charger_tests(), impossible)["chiffre"] == "0"
+
+
+def test_le_verdict_nomme_les_experiences_a_venir_en_gravite_partielle():
+    fiches, tests = charger_fiches(), charger_tests()
+    assert "LUCI" in verdict(fiches, tests, LUNE)["comblement"]
+    assert "FM2" in verdict(fiches, tests, LUNE)["comblement"]
+    assert verdict(fiches, tests, STATION)["comblement"] == ""  # la station est en microgravité, pas partielle
+
+
+def test_le_verdict_sans_trou_n_est_pas_peint():
+    fiches, tests = charger_fiches(), charger_tests()
+    # Une atmosphère donnée mais très large : des tests rentrent, et aucun ne manque sous le minimum.
+    tout = {**STATION, "oxygene_pct": (0.0, 100.0), "pression_kpa": (0.0, 400.0), "type_combustible": ["gaz"]}
+    verdict_large = verdict(fiches, tests, tout)
+    assert verdict_large["grave"] is False and verdict_large["chiffre"] != "0"
+
+
+def test_la_frontiere_des_solides_exclut_les_emulateurs():
+    frontiere = frontiere_des_solides(charger_fiches(), charger_tests())
+    assert frontiere["reel"] is None or frontiere["reel"] > 0
+    if frontiere["emule"] is not None:
+        assert "ACME BRE" in frontiere["emulateurs"]
+
+
+def test_l_independance_replie_les_chaines_de_reutilisation(monkeypatch):
+    module = import_module("flame.recherche.independance")
+
+    relations = pd.DataFrame(
+        [
+            {"from_id": "PSI-117", "to_id": "PSI-69", "relation": "reuses data from"},
+            {"from_id": "PSI-142", "to_id": "PSI-69", "relation": "reuses data from"},
+            {"from_id": "PSI-22", "to_id": "PSI-23", "relation": "related to"},
+        ]
+    )
+    monkeypatch.setattr(module, "charger_table_psi", lambda nom: relations if nom == "relations" else pd.DataFrame())
+    resultat = independance(["PSI-69", "PSI-117", "PSI-142"])
+    assert resultat["total"] == 3 and resultat["independantes"] == 1
+    assert set(resultat["reanalyses"]) == {"PSI-117", "PSI-142"}
+    # « related to » ne replie rien : deux investigations liées restent deux mesures.
+    assert independance(["PSI-22", "PSI-23"])["independantes"] == 2
+
+
+def test_l_independance_sans_table_ne_replie_personne(monkeypatch):
+    module = import_module("flame.recherche.independance")
+
+    monkeypatch.setattr(module, "charger_table_psi", lambda nom: pd.DataFrame())
+    resultat = independance(["PSI-69", "PSI-117"])
+    assert resultat["independantes"] == 2 and resultat["reanalyses"] == {}

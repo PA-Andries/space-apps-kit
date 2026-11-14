@@ -35,13 +35,15 @@ def test_three_js_has_an_exact_version():
 ZONE = {"cx": 0.5, "cy": 0.5, "w": 0.5, "h": 0.5}
 
 
-def test_places_scene_highlights_the_chosen_object():
-    assert '"chosen": 1' in places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], "rover_moon")
-    assert '"chosen": -1' in places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], None)
+def test_places_scene_does_not_change_with_the_choice():
+    # The scene reads the chosen button in the page: its HTML must not depend on the choice (no reload).
+    page = places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], "ui_pick_ui_place")
+    assert '"pickKey": "ui_pick_ui_place"' in page
+    assert '"chosen"' not in page
 
 
 def test_places_scene_gets_its_zones_and_zoom():
-    page = places_page(["mars_whole"], [ZONE], None, zoom_from=2)
+    page = places_page(["mars_whole"], [ZONE], "ui_pick_ui_place", zoom_from=2)
     assert '"zones": [{"cx": 0.5, "cy": 0.5, "w": 0.5, "h": 0.5}]' in page
     assert '"zoomFrom": 2' in page
 
@@ -74,6 +76,7 @@ def test_label_translates_contract_values():
         assert label(value) != value
     assert label("Prévenir;Éteindre") == "Prevent, Extinguish"
     assert label("missing value") == "missing value"
+    assert label("solide (modèle)") == "solid (model)"
 
 
 def test_every_place_has_its_conditions():
@@ -107,12 +110,11 @@ def test_the_rover_is_only_on_the_moon():
     assert body_of("Station") == "Terre"
 
 
-def _pick_moon_rover_then_detect():
-    from flame.ui.places import choose_body, choose_pillar, choose_place
+def _pick_moon_rover():
+    from flame.ui.places import choose_body, choose_place
 
     choose_body("Lune")
     choose_place("Rover pressurisé")
-    choose_pillar("Détecter")
 
 
 def _pick_station_then_earth():
@@ -121,6 +123,14 @@ def _pick_station_then_earth():
     choose_body("Terre")
     choose_place("Station")
     choose_place("Terre")
+
+
+def _pick_moon_base_then_spacesuit():
+    from flame.ui.places import choose_body, choose_place
+
+    choose_body("Lune")
+    choose_place("Base lunaire")
+    choose_place("Scaphandre")
 
 
 def _pick_moon_then_mars():
@@ -134,10 +144,9 @@ def _pick_moon_then_mars():
 # After a click, AppTest reruns only the page, not `app.py`: these tests check the keys
 # the buttons write, which the top bar reads on the next run.
 def test_a_chosen_habitat_becomes_the_scenario_habitat():
-    site = AppTest.from_function(_pick_moon_rover_then_detect).run()
+    site = AppTest.from_function(_pick_moon_rover).run()
     assert site.session_state["ui_body"] == "Lune"
     assert site.session_state["ui_habitat"] == "Rover pressurisé"
-    assert site.session_state["ui_pillar"] == "Détecter"
 
 
 def test_earth_does_not_change_the_habitat():
@@ -146,64 +155,143 @@ def test_earth_does_not_change_the_habitat():
     assert site.session_state["ui_habitat"] == "Station"
 
 
+def test_the_spacesuit_does_not_change_the_habitat():
+    """Like Earth, the spacesuit is a reference: it is explored without replacing the crew's habitat."""
+    site = AppTest.from_function(_pick_moon_base_then_spacesuit).run()
+    assert site.session_state["ui_place"] == "Scaphandre"
+    assert site.session_state["ui_habitat"] == "Base lunaire"
+
+
 def test_a_new_body_resets_the_place():
     site = AppTest.from_function(_pick_moon_then_mars).run()
     assert site.session_state["ui_body"] == "Mars"
     assert "ui_place" not in site.session_state
-    assert site.session_state["ui_zoom_pending"] is True
 
 
-def _zoom_plays_once():
-    import streamlit as st
+def test_planet_maps_are_sent_only_when_needed():
+    from flame.ui.scene import scene_assets
 
-    from flame.ui.places import choose_body, take_zoom
-
-    choose_body("Lune")
-    st.session_state["first"] = take_zoom()
-    st.session_state["second"] = take_zoom()
+    assert set(scene_assets(["moon", "mars"])) == {"moon", "mars"}
+    assert scene_assets(["spacecraft"]) == {}
+    assert scene_assets(["earth_whole"])["earth"].startswith("data:image/jpeg;base64,")
 
 
-def test_the_zoom_plays_only_once():
-    site = AppTest.from_function(_zoom_plays_once).run()
-    assert site.session_state["first"] is True
-    assert site.session_state["second"] is False
-
-
-def test_home_page_goes_step_by_step():
+def test_page_one_keeps_the_environment_and_the_top_three():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert [b.key for b in site.button if not b.key.startswith("ui_body_")] == []
-    site.button(key="ui_body_Mars").click().run()
-    assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []
-    assert [b.key for b in site.button if b.key.startswith("ui_place_")] == ["ui_place_Base martienne"]
+    assert not site.exception
+    assert not site.dataframe  # the full ranking lives on the Investigations page now
     site.button(key="ui_place_Base martienne").click().run()
-    assert len([b for b in site.button if b.key.startswith("ui_pillar_")]) == 3
-    assert len(site.slider) == 0
-    site.button(key="ui_pillar_Éteindre").click().run()
+    assert site.session_state["ui_habitat"] == "Base martienne"  # app.py turns it into the scenario
     assert not site.exception
-    assert len(site.slider) == 1
 
 
-def test_back_button_returns_to_the_bodies():
+def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_body_Lune").click().run()
-    site.button(key="ui_back").click().run()
+    site.button(key="ui_place_Base lunaire").click().run()
     assert not site.exception
-    assert len([b for b in site.button if b.key.startswith("ui_body_")]) == 3
+    # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa (statement). A handle at the end of its scale = no bound.
+    assert site.slider(key="ui_oxygen").value == (30.0, 100.0)
+    assert site.slider(key="ui_pressure").value == (0.0, 70.3)
+    assert site.session_state["ui_gravity"] is None  # no Moon button: the base keeps its 0.165 g
+    # Mars: the statement gives no atmosphere, so no bound at all.
+    site.button(key="ui_place_Base martienne").click().run()
+    assert site.session_state["ui_gravity"] is None  # no Mars button either; its 0.38 g is kept
+    assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
+    assert site.slider(key="ui_pressure").value == (0.0, 350.0)
+
+
+def test_a_typed_value_stays_while_the_habitat_does_not_change():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    site.run()  # another rerun, as after a click elsewhere
+    assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
+    site.button(key="ui_place_Station").click().run()
+    assert site.slider(key="ui_oxygen").value == (19.0, 23.0)  # a new habitat brings its own values
+
+
+def test_a_typed_value_survives_a_visit_to_another_page():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    assert site.session_state["scenario_oxygene_pct"] == (25.0, None)  # written in the scenario (lot A)
+    site.switch_page("pages/comparateur.py").run()
+    site.switch_page("pages/accueil.py").run()
+    assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
+
+
+def test_every_page_receives_the_environment_of_page_one():
+    # Lot F is done when "Moon base" (here the rover, same statement values) fills O2 >= 30 % and <= 70.3 kPa
+    # and the other pages receive this scenario (they read it with get_scenario(), lot A).
+    pages = re.findall(r'st\.Page\("([^"]+)"', Path(APP).read_text(encoding="utf-8"))
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    site.button(key="ui_place_Rover pressurisé").click().run()
+    site.slider(key="ui_oxygen").set_value((32.0, 100.0)).run()
+    for page in pages:
+        site.switch_page(page).run()
+        assert not site.exception, page
+        assert site.session_state["habitat"] == "Rover pressurisé", page
+        assert site.session_state["scenario_oxygene_pct"] == (32.0, None), page
+        assert site.session_state["scenario_pression_kpa"] == (None, 70.3), page
+
+
+def test_the_three_most_relevant_are_shown_without_a_click():
+    """Hierarchy (Ethan, 14 Nov): the results no longer wait for ANALYSE, which now opens the full ranking."""
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    textes = [block.value for block in site.markdown]
+    assert any("Where they agree" in texte for texte in textes)  # the comparison of the three
+    assert any("PSI's tables" in texte for texte in textes)  # the data gaps, on arrival
+    assert site.button(key="ui_analyse_button").label == "ANALYSE ALL 24"
+
+
+def test_slider_ranges_round_trip():
+    from importlib import import_module
+
+    assert import_module("flame.ui.environment").bounds_text("O₂", (30, None), "%") == "O₂ ≥ 30 %"
+
+
+def test_mars_conditions_contain_no_atmosphere_figure():
+    from flame.ui import conditions
+
+    mars = conditions("Base martienne")
+    assert mars["oxygene_pct"] == (None, None) and mars["pression_kpa"] == (None, None)
+    assert mars["sources"]["oxygene_pct"] == "inconnu"
+
+
+def test_page_one_has_one_button_per_crew_environment():
+    from flame.commun import HABITATS
+    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS, SPACESUIT
+
+    offered = [place for row in PLACE_ROWS for place in row]
+    # Every habitat of the contract, plus the two references the statement gives: Earth air and the suit.
+    assert sorted(offered) == sorted([*HABITATS, EARTH, SPACESUIT])
+    assert set(PLACE_ICONS) == set(offered)  # each button has its small logo
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [f"ui_place_{place}" for place in offered]
+    assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []  # no planet to tap first
+
+
+def test_the_button_of_the_current_habitat_is_highlighted():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"  # the scenario starts on the Moon base
+    site.button(key="ui_place_Station").click().run()
+    assert site.button(key="ui_place_Station").proto.type == "primary"
+    assert site.button(key="ui_place_Base lunaire").proto.type == "secondary"
 
 
 def test_earth_button_shows_the_reference():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_body_Terre").click().run()
     site.button(key="ui_place_Terre").click().run()
-    site.button(key="ui_pillar_Prévenir").click().run()
     assert not site.exception
     assert site.session_state["ui_place"] == "Terre"
-    assert len(site.info) == 1
+    assert any("Earth is the reference" in caption.value for caption in site.caption)
 
 
-def test_student_is_not_offered():
+def test_no_scenario_bar_and_student_is_not_offered():
+    from flame.ui.top_bar import PROFILES_OFFERED
+
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert "Étudiant" not in site.selectbox(key="ui_profile").options
+    assert len(site.selectbox) == 0  # the scenario is set by the home page clicks only
+    assert "Étudiant" not in PROFILES_OFFERED
     assert site.session_state["profil"] == "Chercheur"
 
 
@@ -213,3 +301,170 @@ def test_french_contract_names_still_work():
     assert afficher_cadre is show_top_bar
     assert carte_fiche is investigation_card
     assert scene_3d is flame_scene
+
+
+def _two_tiles():
+    from flame.ui.home import stat_tiles
+
+    stat_tiles([(None, "Oxygen"), ("0.38 g", "Gravity")], "note")
+
+
+def test_stat_tiles_show_unknown_instead_of_a_guess():
+    site = AppTest.from_function(_two_tiles).run()
+    assert not site.exception
+
+
+def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
+    import flame.comparateur as comparateur
+    from flame.commun import charger_fiches, charger_tests
+    from flame.ui import style_conditions_chart
+
+    tests, fiches = charger_tests(), charger_fiches()
+    scenario = {"oxygene_pct": (32.0, None), "pression_kpa": (None, 70.3), "debit_air_cm_s": (None, None)}
+    for view in ("pression", "debit"):
+        figure = style_conditions_chart(
+            comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view
+        )
+        box, *others = figure.data
+        assert box.name == "Your selection" and box.fill == "toself"
+        assert min(box.x) == 32.0
+        zones = [trace for trace in others if trace.line.dash == "dot"]
+        assert len(zones) == 2 and all(trace.fill == "none" for trace in zones)
+        points = [trace for trace in others if trace.mode == "markers" and trace.marker.symbol != "star"]
+        grey = [trace for trace in points if trace.name == "Other tests"]
+        assert grey and all(trace.marker.color == "#7d86a8" for trace in grey)
+        assert all(trace.name.endswith("(matches)") for trace in points if trace not in grey)
+    empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
+    figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
+    assert "Your selection" not in [trace.name for trace in figure.data]
+
+
+def test_the_assistant_page_shows_the_flame_and_it_talks_while_answering():
+    page = AppTest.from_file("../pages/assistant.py", default_timeout=60).run()
+    assert not page.exception
+    # The flame stands in the bottom bar, just before the chat box (which hides its lower half).
+    bottom_bar = [block for block in page._tree.children.values() if "assistant_question" in str(block)][0]
+    flame, chat_box = [str(child.proto) for child in bottom_bar.children.values()]
+    assert "ui_assistant_mascot" in flame and "assistant_question" in chat_box
+
+    def answer_while_talking():
+        import streamlit as st
+
+        from flame.ui import talking
+
+        with talking():
+            st.session_state["marker_seen"] = True
+        st.session_state["done"] = True
+
+    page = AppTest.from_function(answer_while_talking).run()
+    assert not page.exception and page.session_state["done"]
+    # The marker is gone once the answer is written: the flame stops talking.
+    assert "ff-talking" not in str(page.main)
+    assert "ff-talking" in Path("flame/ui/three/mascot.html").read_text()
+
+
+def test_colours_follow_the_60_30_10_rule():
+    from flame.ui import chart, style
+
+    # One accent only (flame orange): no pink, green or violet left in the interface's colours.
+    interface = Path("flame/ui/style.py").read_text() + Path("flame/ui/components.py").read_text()
+    for colour in ("#d9365e", "#f0457a", "#e44a70", "22, 163, 74", "124, 58, 237"):
+        assert colour not in interface
+    assert style.FLAME == style.ACCENT == "#ff7a3d"
+    assert chart.SELECTION_COLOR == "255, 122, 61"  # the user's selection is the accent
+
+
+def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
+    assert 'label="Flamy"' in Path("flame/ui/home.py").read_text()
+    assert 'st.title("Flamy")' in Path("pages/assistant.py").read_text()
+    assert ".st-key-ui_home_link { display: none; }" in Path("pages/accueil.py").read_text()
+
+
+def test_home_goes_to_page_one_and_folds_the_sidebar():
+    top_bar = Path("flame/ui/top_bar.py").read_text()
+    assert 'st.button("Home"' in top_bar and 'st.switch_page("pages/accueil.py")' in top_bar
+
+    def home_page_after_a_click():
+        import streamlit as st
+
+        from flame.ui import fold_sidebar_after_home
+
+        st.session_state.setdefault("ui_home_clicked", 1)
+        fold_sidebar_after_home()
+
+    page = AppTest.from_function(home_page_after_a_click).run()
+    assert not page.exception
+    # The click is used once: the folding script is shown, then the click is forgotten.
+    assert "ui_home_clicked" not in page.session_state
+    assert "ui_fold_sidebar" in str([block.proto for block in page.main.children.values()])
+    script = __import__("flame.ui.top_bar", fromlist=["_FOLD_SCRIPT"])._FOLD_SCRIPT
+    assert "stSidebarCollapseButton" in script
+
+
+def test_outcomes_sort_nasa_results_and_show_on_arrival():
+    import pandas as pd
+
+    from flame.ui import count_outcomes, kind_of_result
+
+    assert kind_of_result("Extinction") == "went_out"
+    assert kind_of_result("hot ignition: No; end: -") == "no_ignition"
+    assert kind_of_result("hot ignition: yes; end: FT") == "burned"
+    assert kind_of_result("cool flame observed") == "burned"
+    assert kind_of_result(float("nan")) == "unknown"
+    assert kind_of_result("no cool-flame burning rate reported") == "unknown"
+    tests = pd.DataFrame({"resultat": ["Extinction", "Completion", None, "hot ignition: no; end: -"]})
+    assert count_outcomes(tests) == {"burned": 1, "went_out": 1, "no_ignition": 1, "unknown": 1}
+
+    from flame.ui import answer
+
+    moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
+    assert answer({"burned": 3, "went_out": 1, "no_ignition": 0, "unknown": 5}, moon)[0] == "yes"
+    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    assert answer({"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 4}, moon)[1] == "No data"
+    mars = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}  # no atmosphere bounds: no answer
+    assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    # The card's sentence and its caption, from the matching tests' results.
+    texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
+    assert "match your environment" in texts and "not fires" in texts
+
+
+def test_page_one_explains_how_to_use_the_dashboard():
+    from flame.ui.intro import STEPS
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert "How to use this dashboard" in shown
+    for title, _ in STEPS:
+        assert title in shown, title
+
+
+def test_the_how_to_card_folds_away_and_comes_back():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_intro_hide").click().run()
+    assert not site.exception
+    assert [b.key for b in site.button if b.key == "ui_intro_hide"] == []
+    assert "Choose your environment" not in " ".join(str(block.value) for block in site.get("html"))
+    site.button(key="ui_intro_show").click().run()
+    assert [b.key for b in site.button if b.key == "ui_intro_hide"] == ["ui_intro_hide"]
+
+
+def test_page_one_explains_each_of_the_three_investigations():
+    """The detailed cards of #49, now shown on arrival: the results no longer wait for ANALYSE."""
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert shown.count("What the experiment studied") == 3
+    assert shown.count("Why it matters for Moon base") == 3
+    assert "Atmosphere:" in shown and "Gravity:" in shown
+
+
+def test_the_ranking_explains_every_investigation():
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    site.switch_page("pages/recherche.py").run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert shown.count("Why it matters for Moon base") >= 3

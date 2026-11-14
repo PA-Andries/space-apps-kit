@@ -1,9 +1,13 @@
 # Look of the site. Owner: role F (Interface and 3D).
-# Soft light theme: blue-grey page, slate text, a warm orange as the main colour. The 3D scenes are
-# twilight-blue "portholes" on space, close enough in tone to the page to avoid a harsh contrast.
+# Space look: a deep night-blue page with nebula glows and stars, frosted-glass cards, light text,
+# flame orange as the main colour. The universe itself (stars, nebulae, glass) is in flame/ui/style.py.
 [theme]
-base = "light"
-primaryColor = "#e0662a"
-backgroundColor = "#e8ecf4"
-secondaryBackgroundColor = "#dde3ee"
-textColor = "#26314d"
+base = "dark"
+primaryColor = "#ff7a3d"
+backgroundColor = "#070a1c"
+secondaryBackgroundColor = "#141a3a"
+textColor = "#e9ecf8"
+
+[client]
+# Hide the developer menu for visitors.
+toolbarMode = "minimal"

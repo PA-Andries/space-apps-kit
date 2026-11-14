@@ -1,7 +1,7 @@
 """Les tests qui tombent dans l'environnement de l'utilisateur (plages d'oxygène et de pression du scénario).
 
-Même règle que le lot D (`tests_correspondants`) : `flame.recherche` n'a pas le droit d'importer
-`flame.comparateur`, on la refait ici.
+La règle de plage est `dans_la_plage` du rôle A, partagée avec le lot D (`flame.recherche` n'a pas le droit
+d'importer `flame.comparateur`).
 - Une plage est un couple (minimum, maximum) ; None = pas de borne.
 - Si une plage d'oxygène est donnée, un test sans oxygène noté n'y est pas.
 - Une plage de pression ne retire que les tests dont la pression est notée (beaucoup de tests de solides
@@ -10,7 +10,7 @@ Même règle que le lot D (`tests_correspondants`) : `flame.recherche` n'a pas l
 
 import pandas as pd
 
-from flame.commun import HABITAT_PERSONNALISE, conditions_habitat
+from flame.commun import HABITAT_PERSONNALISE, conditions_habitat, dans_la_plage
 from flame.ui import label
 
 PLAGE_VIDE = (None, None)
@@ -38,26 +38,15 @@ def atmosphere_connue(scenario: dict | None) -> bool:
     return any(borne is not None for plage in plages_du_scenario(scenario).values() for borne in plage)
 
 
-def _dans(valeurs: pd.Series, plage: tuple) -> pd.Series:
-    minimum, maximum = plage
-    garder = pd.Series(True, index=valeurs.index)
-    if minimum is not None:
-        garder &= valeurs >= minimum
-    if maximum is not None:
-        garder &= valeurs <= maximum
-    return garder
-
-
 def tests_dans_les_plages(tests: pd.DataFrame, scenario: dict | None) -> pd.DataFrame:
-    """Les tests dans les plages d'oxygène et de pression du scénario (tous si aucune plage n'est donnée)."""
+    """Les tests dans les plages d'oxygène et de pression du scénario (tous si aucune plage n'est donnée).
+
+    S'appuie sur `dans_la_plage` (rôle A), la règle partagée avec la page Compare.
+    """
     plages = plages_du_scenario(scenario)
-    oxygene = pd.to_numeric(tests["oxygene_pct"], errors="coerce")
-    pression = pd.to_numeric(tests["pression_kpa"], errors="coerce")
-    garder = pd.Series(True, index=tests.index)
-    if any(borne is not None for borne in plages["oxygene_pct"]):
-        garder &= oxygene.notna() & _dans(oxygene, plages["oxygene_pct"])
-    if any(borne is not None for borne in plages["pression_kpa"]):
-        garder &= pression.isna() | _dans(pression, plages["pression_kpa"])
+    garder = dans_la_plage(tests["oxygene_pct"], plages["oxygene_pct"])
+    pression_notee = pd.to_numeric(tests["pression_kpa"], errors="coerce").notna()
+    garder &= ~pression_notee | dans_la_plage(tests["pression_kpa"], plages["pression_kpa"])
     return tests[garder]
 
 

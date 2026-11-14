@@ -2,6 +2,7 @@
 
 Recadrage du 14 novembre et REPRISE (issue n°2) : trois onglets, Classement · Fiche · Ce qu'on ne sait pas.
 Le classement repose sur les preuves pour l'environnement choisi en page 1 ; il n'y a plus de pilier.
+Le score sert à trier mais n'est pas affiché : la page dit seulement « les plus en lien avec votre environnement ».
 Chaque fiche montre les rubriques du tableau blanc (comportement, dangers, prévention, trace des données,
 comparer), tirées des fiches et des tests sans rien inventer.
 """
@@ -13,13 +14,12 @@ from flame.commun import charger_fiches, charger_tests, get_scenario
 from flame.recherche import (
     ce_quon_ne_sait_pas,
     champs_inconnus,
-    detail_du_score,
+    descriptif,
     les_plus_pertinentes,
     tests_dans_les_plages,
 )
-from flame.ui import carte_fiche, label
+from flame.ui import carte_fiche, investigation_details, label
 
-TITRES_SCORE = {"critere": "Criterion", "points": "Points", "maximum": "Out of", "explication": "Why"}
 TITRES_TESTS = {
     "investigation_id": "Investigation",
     "test_id": "Test",
@@ -63,22 +63,15 @@ classement = les_plus_pertinentes(fiches, scenario)
 onglet_classement, onglet_fiche, onglet_inconnu = st.tabs(["Ranking", "Investigation", "What we don't know"])
 
 with onglet_classement:
+    # Le classement suit toujours le score sur les preuves, mais le score n'est pas affiché (demande du rôle C).
     st.caption(
-        f"{len(classement)} investigations. The score rests on the evidence for your environment: atmosphere 40 "
-        "(share of the tests in your oxygen and pressure), fuel 25, gravity 20, data 15. "
-        "These weights are the team's judgement."
+        f"The {len(classement)} investigations most related to your environment, the closest first: "
+        "the tests nearest your oxygen and pressure, your fuels and your gravity."
     )
-    for _, fiche in classement.iterrows():
-        carte_fiche(fiche)
-        st.markdown(f"**Score: {int(fiche['score'])} / 100**")
-        with st.expander(f"Why {fiche['id']} is ranked here"):
-            st.dataframe(
-                detail_du_score(fiche, scenario, tests=tests),
-                hide_index=True,
-                column_config=TITRES_SCORE,
-                key=f"recherche_score_{fiche['id']}",
-            )
-        st.page_link("pages/comparateur.py", label="Compare", query_params={"id": fiche["id"]})
+    # Chaque investigation avec ce que l'expérience a étudié (textes de NASA) et les raisons de son rang,
+    # critère par critère, sans les points.
+    for rang, (_, fiche) in enumerate(classement.iterrows(), start=1):
+        investigation_details(fiche, descriptif(fiche, scenario, tests), rang, label(habitat))
 
 with onglet_fiche:
     noms = dict(zip(classement["id"], classement["nom"], strict=True))

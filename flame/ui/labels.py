@@ -16,6 +16,7 @@ LABELS = {
     "Base lunaire": "Moon base",
     "Base martienne": "Mars base",
     "Rover pressurisé": "Pressurized rover",
+    "Scaphandre": "spacesuit",
     # Pillars
     "Prévenir": "Prevent",
     "Détecter": "Detect",
@@ -23,11 +24,13 @@ LABELS = {
     # Profiles
     "Chercheur": "Researcher",
     "Ingénieur": "Engineer",
-    # Fuel types
+    # Fuel types and other contract values
     "solide": "solid",
     "liquide": "liquid",
     "gaz": "gas",
     "aucun": "none",
+    "fumée": "smoke",
+    "poussière": "dust",
     INCONNU: "unknown",
 }
 
@@ -39,4 +42,12 @@ def label(value: object) -> str:
     dictionary is shown as it is.
     """
     parts = [part.strip() for part in str(value).split(";") if part.strip()]
-    return ", ".join(LABELS.get(part, part) for part in parts)
+    return ", ".join(_one(part) for part in parts)
+
+
+def _one(part: str) -> str:
+    """One value in English; "solide (modèle)" (a fuel modelled by a gas) gives "solid (model)"."""
+    base, _, detail = part.partition(" (")
+    if detail.startswith("modèle"):
+        return f"{LABELS.get(base, base)} (model)"
+    return LABELS.get(part, part)
