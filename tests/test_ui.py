@@ -165,9 +165,6 @@ def test_page_one_keeps_the_environment_and_the_top_three():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
     assert not site.dataframe  # the full ranking lives on the Investigations page now
-    site.button(key="ui_body_Mars").click().run()
-    assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []
-    assert [b.key for b in site.button if b.key.startswith("ui_place_")] == ["ui_place_Base martienne"]
     site.button(key="ui_place_Base martienne").click().run()
     assert site.session_state["ui_habitat"] == "Base martienne"  # app.py turns it into the scenario
     assert not site.exception
@@ -175,7 +172,6 @@ def test_page_one_keeps_the_environment_and_the_top_three():
 
 def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_body_Lune").click().run()
     site.button(key="ui_place_Base lunaire").click().run()
     assert not site.exception
     # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa (statement). A handle at the end of its scale = no bound.
@@ -183,8 +179,6 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     assert site.slider(key="ui_pressure").value == (0.0, 70.3)
     assert site.slider(key="ui_gravity").value == 0.165
     # Mars: the statement gives no atmosphere, so no bound at all.
-    site.button(key="ui_back").click().run()
-    site.button(key="ui_body_Mars").click().run()
     site.button(key="ui_place_Base martienne").click().run()
     assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
     assert site.slider(key="ui_pressure").value == (0.0, 350.0)
@@ -195,7 +189,6 @@ def test_a_typed_value_stays_while_the_habitat_does_not_change():
     site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
     site.run()  # another rerun, as after a click elsewhere
     assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
-    site.button(key="ui_body_Terre").click().run()
     site.button(key="ui_place_Station").click().run()
     assert site.slider(key="ui_oxygen").value == (19.0, 23.0)  # a new habitat brings its own values
 
@@ -214,7 +207,6 @@ def test_every_page_receives_the_environment_of_page_one():
     # and the other pages receive this scenario (they read it with get_scenario(), lot A).
     pages = re.findall(r'st\.Page\("([^"]+)"', Path(APP).read_text(encoding="utf-8"))
     site = AppTest.from_file(APP, default_timeout=60).run()
-    site.button(key="ui_body_Lune").click().run()
     site.button(key="ui_place_Rover pressurisé").click().run()
     site.slider(key="ui_oxygen").set_value((32.0, 100.0)).run()
     for page in pages:
@@ -247,17 +239,28 @@ def test_mars_conditions_contain_no_atmosphere_figure():
     assert mars["sources"]["oxygene_pct"] == "inconnu"
 
 
-def test_back_button_returns_to_the_bodies():
+def test_page_one_has_one_button_per_crew_environment():
+    from flame.commun import HABITATS
+    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS
+
+    offered = [place for row in PLACE_ROWS for place in row]
+    assert sorted(offered) == sorted([*HABITATS, EARTH])  # every habitat of the contract, and the Earth reference
+    assert set(PLACE_ICONS) == set(offered)  # each button has its small logo
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_body_Lune").click().run()
-    site.button(key="ui_back").click().run()
-    assert not site.exception
-    assert len([b for b in site.button if b.key.startswith("ui_body_")]) == 3
+    assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [f"ui_place_{place}" for place in offered]
+    assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []  # no planet to tap first
+
+
+def test_the_button_of_the_current_habitat_is_highlighted():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"  # the scenario starts on the Moon base
+    site.button(key="ui_place_Station").click().run()
+    assert site.button(key="ui_place_Station").proto.type == "primary"
+    assert site.button(key="ui_place_Base lunaire").proto.type == "secondary"
 
 
 def test_earth_button_shows_the_reference():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_body_Terre").click().run()
     site.button(key="ui_place_Terre").click().run()
     assert not site.exception
     assert site.session_state["ui_place"] == "Terre"
@@ -290,3 +293,24 @@ def _two_tiles():
 def test_stat_tiles_show_unknown_instead_of_a_guess():
     site = AppTest.from_function(_two_tiles).run()
     assert not site.exception
+
+
+def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
+    import flame.comparateur as comparateur
+    from flame.commun import charger_fiches, charger_tests
+    from flame.ui import style_conditions_chart
+
+    tests, fiches = charger_tests(), charger_fiches()
+    scenario = {"oxygene_pct": (32.0, None), "pression_kpa": (None, 70.3), "debit_air_cm_s": (None, None)}
+    for view in ("pression", "debit"):
+        figure = style_conditions_chart(
+            comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view
+        )
+        box, *others = figure.data
+        assert box.name == "Your selection" and box.fill == "toself"
+        assert min(box.x) == 32.0
+        zones = [trace for trace in others if trace.line.dash == "dot"]
+        assert len(zones) == 2 and all(trace.fill == "none" for trace in zones)
+    empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
+    figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
+    assert "Your selection" not in [trace.name for trace in figure.data]

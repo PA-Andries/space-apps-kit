@@ -10,6 +10,9 @@ from flame.ui.labels import label
 from flame.ui.places import (
     BODIES,
     EARTH,
+    PLACE_ICONS,
+    PLACE_NAMES,
+    PLACE_ROWS,
     PLACES_BY_BODY,
     choose_body,
     choose_place,
@@ -207,9 +210,46 @@ def _pick_on_image(body: str, chosen: str | None) -> None:
     st.caption(credit)
 
 
+# The place buttons of page 1: large white tiles, the logo in the flame colour; the chosen one is filled.
+PLACE_BUTTONS_STYLE = """<style>
+.st-key-ui_places { gap: 0.7rem; margin-top: 0.4rem; }
+.st-key-ui_places button {
+  min-height: 8rem; border-radius: 18px; padding: 0.6rem 1rem;
+  background: #f5f5f7; border: 1.5px solid transparent;
+}
+.st-key-ui_places button p { font-weight: 600; font-size: 1rem; }
+.st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 1.6rem; color: #e0662a; margin-right: 0.2rem; }
+.st-key-ui_places [data-testid="stBaseButton-primary"] [data-testid="stIconMaterial"] { color: #fff; }
+.st-key-ui_places button:hover { border-color: #e0662a; background: #fff; color: inherit; }
+.st-key-ui_places [data-testid="stBaseButton-primary"] { background: #e0662a; border-color: #e0662a; }
+.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #c9541c; color: #fff; }
+.st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
+</style>"""
+
+
+def place_buttons(current: str) -> str:
+    """One button per habitable crew environment, each with a small logo, and Earth as the reference.
+
+    `current`: the place to show while the user has not clicked yet (the scenario's habitat).
+    Returns the place to show; its button is highlighted.
+    """
+    chosen = current_place() or current
+    st.html(PLACE_BUTTONS_STYLE)
+    with st.container(key="ui_places"):
+        for row in PLACE_ROWS:
+            _button_row(row, chosen, choose_place, "ui_place", place_name, PLACE_ICONS)
+    return chosen
+
+
+def place_name(place: str) -> str:
+    """The text of a place's button: "Moon base", or "Earth (reference)"."""
+    return PLACE_NAMES.get(place, label(place))
+
+
 def place_picker() -> tuple[str | None, str | None]:
     """Earth, Moon and Mars in 3D; Earth zooms in on its orbit, the Moon and Mars show a NASA image to tap in.
 
+    No longer on page 1, which uses `place_buttons()` (Hugo's request, with Mathéo's agreement); kept for reuse.
     Returns (body, place), each None until chosen.
     """
     body = current_body()

@@ -18,6 +18,19 @@ PLACES_BY_BODY = {
     "Mars": ["Base martienne"],
 }
 
+# Page 1 offers one button per place, two per row: in orbit, on the Moon, then Mars and the Earth reference.
+PLACE_ROWS = [["Station", "Vaisseau"], ["Base lunaire", "Rover pressurisé"], ["Base martienne", EARTH]]
+# The small logo of each button: a Material icon drawn by Streamlit (no NASA logo or insignia).
+PLACE_ICONS = {
+    "Station": ":material/satellite_alt:",
+    "Vaisseau": ":material/rocket_launch:",
+    "Base lunaire": ":material/nightlight:",
+    "Rover pressurisé": ":material/airport_shuttle:",
+    "Base martienne": ":material/landscape:",
+    EARTH: ":material/public:",
+}
+PLACE_NAMES = {EARTH: "Earth (reference)"}  # the other places use `label()`
+
 # Atmospheres attributed to the challenge statement by BRIEF_EQUIPE_IA.md: Earth 21 % / 14.7 psi (about
 # 101 kPa); "lunar base and pressurized rovers" 30 % / 10.2 psi (about 70 kPa, as in the contract ATMOSPHERES).
 # For any other place the statement gives nothing: the site shows no figure rather than a guess.
