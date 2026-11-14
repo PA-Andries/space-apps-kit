@@ -1,0 +1,1974 @@
+Source : NASA PSI, PSI-22, Science Documents, E-FIELD Flames data interpretation document.pdf
+
+--- page 1 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+1 
+ 
+ 
+Advanced Combustion via Microgravity Experiments (ACME) 
+Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) 
+ 
+ 
+ACME/E-FIELD Flames Data Interpretation 
+ 
+ 
+Prepared by: 
+Dennis P. Stocker, NASA Glenn Research Center 
+dennis.p.stocker@nasa.gov, 216-433-2166 
+ 
+ 
+ 
+ 
+Dennis Stocker , the ACME Project Scientist , at the science console for the 
+Combustion Integrated Rack ( CIR) in NASA’s Glen n ISS Payload Operations 
+Center (GIPOC).  In this photo, he is reviewing data from an ACME experiment 
+other than E-FIELD Flames.  
+ 
+ 
+Commercial products are identified for reference and are not meant to indicate endorsement by NASA or 
+the federal government.
+
+--- page 2 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+2 
+ 
+ 
+Table of Contents         Page 
+1. Introduction 2 
+2. E-FIELD Flames Overview 3 
+3. Tests Conducted 4 
+4. Data Interpretation 6 
+A. Non-Imaging Data 6 
+1. Data Output File 6 
+2. Mass Flow Controller (MFC) Setpoint File 9 
+3. Fuel Oxidizer Management Assembly (FOMA) data 10 
+4. Space Acceleration Measurement System (SAMS) data 11 
+B. Image Files 12 
+1. Analog, operations (ops), internal camera 12 
+2. ACME Data Camera (DataCam) 13 
+3. Cool Flames Investigation (CFI) intensified camera 19 
+4. High Bit-depth Multi-spectral (HiBMs) camera and CIR illumination package 23 
+C. Test Parameters and Other Files 24 
+1. Test parameter file 24 
+2. Notes 24 
+3. Test timing 25 
+4. Logs 26 
+Appendices 
+A. Nomenclature 37 
+B. Installation of QtOMA2 on a PC 38 
+ 
+ 
+ 
+ 
+ 
+1. Introduction 
+The purpose of this report is to  describe the data acquired for ACME’s E -FIELD Flames experiment  to 
+facilitate its analysis.  The data is all digital , where the fuel was gaseous and the re was no collection of 
+soot or the combustion gases.  For each test, the key data consists of image files and a file with the non-
+imaging measurements.  Additional files such as camera metadata  and operational  logs provid e 
+information that can support the analysis. 
+ 
+It is recommended that readers interested in analyzing the E-FIELD Flames data begin by familiarizing 
+themselves with the hardware  and instrumentation, either through the overview in the E-FIELD Flames 
+Final Report or the more comprehensive  description found in the  ACME Engineering Implementation 
+document. 
+ 
+Those seeking to analyze the data should next review this document.  To interpret the non-imaging data, 
+it is suggested that a sample data file be opened, named for example 18073A3_data.csv, which has 
+comma-separated values and can be opened with spreadsheet software such as Microsoft Excel.  The data 
+is in raw voltages, where conversion to engineering units requires study of ACME’s Software Interface 
+Design Description, i.e., ACME-DOC-010 (where the latest version at the time of this writing is revision D).
+
+--- page 3 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+3 
+ 
+ 
+Additional documents that may be important include: 
+ACME-RPT-010 A Data Camera Characterization Report, Rev. A 
+ACME-RPT-011 Radiometer Characterization Report 
+ACME-RPT-013 PMT Characterization Report 
+However, the BRE Radiometer Characterization Report, ACME-RPT-012, is not relevant because the BRE 
+radiometer was developed specifically for ACME’s Burning Rate Emulator (BRE) experiment.  E-FIELD 
+Flames instead made use of the standard radiometers addressed in ACME-RPT-011. 
+ 
+ 
+2. E-FIELD Flames Overview 
+This text is the “Overview” from the ACME/E-FIELD Flames Final Report, which provides descriptions of the 
+science, preliminary results, and more.  It is suggested that it be reviewed by those interested in analyzing 
+the E-FIELD Flames data. 
+ 
+The Electric -Field Effects on Laminar D iffusion Flames ( E-FIELD Flames ) experiment is one of six 
+independent experiments that make up the Advanced Combustion via Microgravity Experiments (ACME) 
+project for which tests are conducted within the Combustion Integrated Rack ( CIR) on the Internati onal 
+Space Station (ISS). 
+ 
+The experiment’s Principal Investigator (PI) is Prof. Derek Dunn -Rankin of the University of California, 
+Irvine ( UC Irvine).  Dr. Yu -Chien (Alice) Chien, also of UC Irvine, served as the Project Scientist at the 
+university.  Meanwhile, Dennis P. Stocker of the NASA Glenn Research Center is NASA’s Project Scientist 
+(PS) for ACME includ ing E-FIELD Flames and the rest of the AC ME investigations.  In preparatory drop 
+testing, etc., Dr. Fumiaki Takahashi of the Case Western Reserve University (CWRU) served as the Deputy 
+Project Scientist.  For ACME’s spaceflight operations, the NASA science team includes Drs. Uday G. Hegde 
+and Vedha Nayagam who are also with CWRU. 
+ 
+The experiment had two Co-Investigators, the first of which was Prof. Felix Weinberg of London’s Imperial 
+College.  Prof. Weinberg was a pioneer in researching the effects of electrical fields on flames in 
+microgravity, but unfortunately died in 2012 (see http://www.imperial.ac.uk/news/117808/tribute-felix-
+weinberg/) before the hardware was built and the tests w ere conducted on the ISS.  The second Co -
+Investigator was Dr. Sunny Karnani who did his doctoral research in preparation of the spaceflight 
+experiment and afterward worked for ClearSign Combustion Corp., which marke ts Electrodynamic 
+Combustion Control (https://www.clearsign.com/technology/electrodynamic-combustion-control/).  The 
+corporation provided some support to the E -FIELD Flames research effort, but Karnani left Cl earSign to 
+conduct research for the U.S. Army, effectively ending his intimate role in the project prior to the 
+spaceflight operations.  He remains a collaborator. 
+ 
+E-FIELD Flames operations were conducted in two rounds of testing during Increments 55-57, which were 
+more specifically in March -May and September -November 2018.  The break in testing (from May to 
+September) was intentional and planned years in advance to allow the research team to analyze early 
+results and use the insights obtained from the ana lysis to plan the second round so as to maximize its 
+scientific output.
+
+--- page 4 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+4 
+ 
+ 
+3. Tests Conducted 
+This text is an excerpt from the “Results” section of the ACME/E-FIELD Flames – 30-Day Operation 
+Accomplishments Report for ISS Increments 57 and 58 (which is included in the ACME/E-FIELD Flames Final 
+Report). 
+  
+A total of 219 flames were ignited for the E -FIELD Flames experiment, with 142 and 77 
+respectively ignited during Increments 55-56 and 57-58.  Note that the investigation’s testing was 
+completed during Increment 57, so no flames were ignited during Increment 58.  The first and 
+second rounds of testing respectively occurred in March -May 2018 and September -November 
+2018.  The two rounds of tests resulted in 120 and 99 ignited flames conducted with coflow and 
+gas-jet burners, respectively.  The coflow burner was developed for the Coflow Laminar Diffusion 
+Flame (CLD Flame) experiment, where CLD Flames’ second round occurred between the two 
+rounds of the E-FIELD Flames experiment.  The ‘interruption’ in the E -FIELD Flames testing was 
+intentionally planned years in advance to enable the PI team to review the initial results in detail 
+and with that knowledge plan the second round of tests to maximize its scientific outcome. 
+ 
+E-FIELD Flames does not have living subjects lik e a life science experiment, but the tests are 
+independently conducted with two different gaseous fuels, methane and ethylene.  Both are 
+simple hydrocarbon gases for which the chemistry i s well understood.  Methane (CH4) is the 
+primary component of natural gas and tends to produce low levels of soot given the absence of 
+carbon-carbon bonds.  Meanwhile, ethylene (C2H4), is highly sooting because of its carbon 
+double bond.  For both fuels, t ests were conducted with pure fuel and fuel mixed with nitrogen 
+over a broad range of dilutions.  For limited cases, the fuel and nitrogen was premixed on the 
+ground prior to launch.  ACME bottles were launched with methane concentrations of 30%, 40%, 
+45%, and 100% with a balance of nitrogen (on a volume basis).  Similarly, bottles were launched 
+with ethylene concentrations of 30%, 50%, and 100%, again with a balance of nitrogen (on a 
+volume basis).  But the ACME hardware also allows for simultaneous flow of fuel and nitrogen to 
+the burner, allowing for on-orbit fuel dilution and testing at a continuum of fuel concentrations.  
+In all cases, the coflow was 21% oxygen with a balance of nitrogen (on a volume basis).  
+ 
+No samples (e.g., of soot) were collected f or E -FIELD Flames; all of the ISS results were 
+electronically transmitted to the ground.  That is furthermore the case for all currently planned 
+ACME experiments.
+
+--- page 5 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+5 
+ 
+ 
+A summary log of the E -FIELD Flames ignited for E -FIELD Flames during Increments 55-57, 
+including a limited overview of the test conditions is presented here. 
+ 
+Table 1. 
+E-FIELD Flames log of flames ignited in Increments 55-57  
+(where the investigation was completed prior to Increment 58) 
+Test 
+Day1 Year Month Date 
+Mesh 
+Polarity2 Fuel bottle Fuel conc.3 
+Flames 
+ignited4 
+First round of tests, with the coflow burner, in March to May 2018 (Increment 55) 
+18073 
+2018 
+3 
+14 
+negative 
+100% CH4 100% 10 18078 19 70%, 100% 10 
+18080 21 40% CH4 40% 8 
+18087 28 100% C2H4 80%, 100% 10 
+18092 
+4 
+2 30% C2H4 30%  11 18095 5 
+positive 
+30% 10 
+18102 12 40% CH4 40% 8 18106 16 40% 13 
+18113 23 100% CH4 100% 15 18130 5 10 70% 13 18137 17 100% C2H4 80%, 100% 12 
+Second round of tests, with the gas-jet burner, in Sept.-Nov. 2018 (Increments 56-57) 
+18269 
+2018 
+9 26 
+negative 
+40% CH4 40% 11 
+18274 
+10 
+1 30% C2H4 30% 11 
+18282 9 100% CH4 70%, 100% 13 
+18285 12 100% C2H4 100% 10 18290 17 80% 11 
+18298 25 
+positive 
+40% CH4 40% 9 
+18302 29 30% C2H4 30% 10 
+18312 
+11 
+8 100% CH4 70%, 100% 13 
+18319 15 100% C2H4 25%, 50%, 80%, 100% 11 
+1Test Day includes the year as the first two digits followed by the 3-digit day of the year. 
+2Mesh Polarity refers to the polarity of the high -voltage power supply and the copper 
+electrode mesh relative to the burner. 
+3Fuel conc. (as diluted with nitrogen on a volume basis) was varied between tests, but 
+typically matched the bottle.  The list only accounts for the flames which ignited. 
+4Flames ignited is the number ignited on that day (neglecting the day change on ISS).
+
+--- page 6 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+6 
+ 
+ 
+4. Data Interpretation 
+This key section provides (1) a general description of the raw experimental data and associated files and 
+(2) guidance on data conversions, e.g., to engineering units .  Only limited guidance is provided for the 
+processing of image data, with the important exception of the conversion of the ACME DataCam images 
+from the raw Halcon object (HOBJ) format. 
+ 
+A. Non-Imaging Data 
+Data and files discussed in this section include the following: 
+Data Output File 
+Mass Flow Controller (MFC) Setpoint File 
+Fuel Oxidizer Management Assembly (FOMA) data 
+Space Acceleration Measurement System (SAMS) data 
+ 
+Some ACME experiments featured measurements made with the CIR’s Gas Chromatograph 
+Instrumentation Package (GCIP), but it was not used for the E-FIELD Flames experiment and a such 
+that data type is not addressed in this document. 
+ 
+1. Data Output File 
+The basic ACME non-imaging measurements for each test are together in a file described in 
+Section 8.1 Data Output File on page 124 of Software Interface Design Description ( ACME-
+DOC-010 Rev D).  The test number is made up of the year (2-digts), day of year (3 digits), and 
+test (a letter and single-digit number).  As such, the example, 18073A3 is test A3 conducted 
+on the 73rd day of 2018.  But the test could also be early on the next (e.g., 74th) day because 
+the day portion of ACME test numbers is not ch anged when operations continue past 
+midnight (whether GMT or Eastern) into the start of the next day. 
+ 
+Tests numbers that only differ by the final digit (e.g., 18073A1, 18073A2, and 18073A3) are 
+normally similar and occasionally identical, where the number  is indicative of the variant or 
+repeat.  Letters I and O are not used because of their similarity to 1 and 0.  While initially used 
+in ACME testing, the letter E ceased to be used because Excel software (for example) by 
+default interpreted it as represent ing an exponential which was inconvenient.  As a related 
+aside, ACME tests are often not conducted in order and some planned tests are regularly not 
+conducted at all.  The latter results in additional letter gaps if the tests from a day are sorted 
+alphabetically.  However, ACME testing often begins with test A1, where the final digit begins 
+with 1 and is increased from there with variant or repeat tests for the same letter. 
+ 
+The basic data is in a CSV format, i.e., with comma-separated values, which can be opened by 
+spreadsheet software such as Microsoft Excel.  The first row is a header and provides a limited 
+summary of the hardware and operational conditions.  The header is explained in Section 10.1 
+Metadata Header of ACME-DOC-010 Rev D, which begins on page 126.
+
+--- page 7 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+7 
+ 
+ 
+As an example, the header from 18073A3_data.csv includes the following information 
+(displayed in two columns rather than a long row): 
+2018-03-14 073 16:23:54:139  
+Experiment: 3 
+Test Point: 18073A3 
+MFCA1 Gas: 0 
+MFCA1 Full Scale: 20.000000 
+MFCA2 Gas: 0 
+MFCA2 Full Scale: 0.050000 
+MFCA3 Gas: 0 
+MFCA3 Full Scale: 0.100000 
+EField: 1 
+EFieldPol: 1 
+Igniter: 1 
+Burner: 3 
+Thermocouple: 2 
+Radiometer: 0 
+IPSU 1: 1 
+IPSU 2: 0 
+IPSU 3: 0 
+IPSU 4: 0 
+IPSU 5: 1 
+IPSU 6: 0 
+Fiber: 1 
+PMT 1 Gain: 6.250000 
+PMT 2 Gain: 6.500000 
+PMT 3 Gain: 6.500000 
+ 
+Meanwhile, the column headings are found in the second row which are explained in Section 
+10.2 Data Conversions (non -BRE) of ACME-DOC-010 Rev D, which begins on page 128.  The 
+basic conversions of the 125 -Hz data to engineering  units are provided in this section , but 
+information on temperature conversions are provided in Sections 10.4 and 10.5 which are 
+found in the same document on pages 142-143.  Note that E-FIELD Flames did not make use 
+of a thermocouple rake  (which were intended for other ACME experiments) , so the data in 
+columns TCA, TCB, TCC, and TCD should be ignored.   Meanwhile, the coflow burner used in 
+the first round of E-FIELD Flames testing wasn’t instrumented with a thermocouple while the 
+gas-jet burner used in the second-round testing did, so the TCBurner column is only relevant 
+for the second-round tests. 
+ 
+As an example, the column headings from 18073A3_data.csv include the following (again 
+displayed in two columns rather than a long row): 
+Time 
+MFCA1StaticMixerFlow 
+MFCA2BypassFlow 
+MFCA3FuelFlow 
+IonCurrent 
+PTA1 
+PTA2 
+PTA3 
+EfieldVoltage 
+PMT1 
+PMT2 
+PMT3 
+TCA 
+TCB 
+TCC 
+TCD 
+TC200A 
+TC200B 
+TCBurner 
+Radiometer+60 
+Radiometer+60CJ 
+Radiometer+30 
+Radiometer+30CJ 
+RadiometerCenter 
+RadiometerCenterCJ 
+Radiometer-30 
+Radiometer-30CJ 
+Radiometer-60 
+Radiometer-60CJ 
+RadiometerOffset 
+RadiometerOffsetCJ 
+TCE 
+Ch20 
+Ch21 
+TCCJ 
+EfieldSetpointOut
+
+--- page 8 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+8 
+ 
+ 
+Additional conversion is required for the measurements of the gas flow rates found in second 
+through fourth columns of the data file.  By column (e.g., in Excel), the flow rates are for: 
+ B MFCA1StaticMixerFlow  oxidizer (or inert) gas 
+ C MFCA2BypassFlow  nitrogen 
+ D MFCA3FuelFlow  fuel 
+ 
+The ACME MFCs are Hastings HFC -D-302 with default standard temperature and pressures 
+(STP) of 0 Celsius and 760 torr for computations of volume tric flow or velocity.  It is very 
+important to understand that slpm, i.e., standard liters per minute, is a measurement of the 
+mass (or alternatively molar) flow rate wh ich is independent of the actual temperature or 
+pressure.  This is discussed for examp le in the MFC manual, where chapter 9 (on page 39) is 
+“Volumetric vs. Mass Flow.” 
+ 
+Conversions for the actual gases can be made with information provided in the manual on 
+subsequent pages and the spreadsheets GasDataTables.xls and Inside gas mix calculator .xls 
+which were both provided by the MFC manufacturer.  First, open GasDataTable s.xls and 
+enable content, and then open Inside gas mix calculator.xls and enable content.  From this, 
+one should be able to enter mixtures and compute appropriate Gas Conversio n Factors 
+(GCFs). 
+ 
+Alternatively, the conversions above can be made with spreadsheets prepared by the ACME 
+engineering team, where options include the following: 
+ACMEFlowCalculator.xlsx 
+ACMEFlowAndPressuresRawDataConversion.xlsx 
+  
+Computation of gas veloci ties, for example for the gas -jet and coflow burners, depends on 
+burner dimensions.  For the coflow burner, ACME mechanical design engineer Adrian Drake 
+indicated the following: 
+ 
+“The inner diameter of the inner tube is .085 inches.   Its cross sectional  area is .00567 
+in^2, or 3.66 x 10^-6 m^2.  
+  
+The flow of the outer tube is a little tricky to calculate, based on where and how you 
+measure.  There’s an internal step in the outer tube that can’t be seen from outside, and 
+blocks the flow to the outer honeycombs.  Because of this, when we calculated the cross-
+sectional are of the outer tube, it measures from the inner step.   
+  
+The outer tube’s outer diameter at that step is 0.984 inches.  Its cross section area at that 
+diameter is .7605 in^2.   From this we  have to subtract the inner tube’s outer 
+diameter:  .095 inch diameter, so area is .00709.   Subtract from the Outer Diameter and 
+we get .7534 in^2, or .000486 m^2.”
+
+--- page 9 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+9 
+ 
+ 
+The dimensions of the coflow burner’s inner tube are documented in greater detail in the 
+ACME Inspection Verification Report (ACME-VER-001 Rev. A, ACME-VER-001_A.pdf) on 
+pages 138-143 of the pdf file.  From that section: 
+ 
+  
+ 
+The 2.1-mm gas-jet burner used for the E-FIELD Flames experiment used the same tubing as 
+the coflow burner’s inner tube, where the tube dimensions are based on certification by the 
+tubing manufacturer rather than measurement.  The tubing dimensions for thi s burner are 
+documented in greater detail in pages 102-104 of ACME-VER-001_A.pdf.   From that section: 
+ 
+ 
+ 
+Of course, d imensions are also available from the burner drawings, but the dimensions are 
+often not found on the assembly drawings so the appropriat e component drawings must 
+typically be consulted. 
+ 
+2. Mass Flow Controller (MFC) Setpoint File 
+While the basic data file in cludes measurement of the gas flow rates, it may be helpful to 
+understand the intended flow rates, where that information is found in a separate file for 
+each test with a name like 18073A3_mfcSetpoints.csv.  While it shares stro ng similarities to 
+the basic data file, the rows of data are not added at a continuous and consistent rate.  The 
+file is briefly discussed in section 8.2 Mass Flow Controller Setpoint File on page 124 of ACME-
+DOC-010 Rev D.
+
+--- page 10 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+10 
+ 
+ 
+3. Fuel Oxidizer Management Assembly (FOMA) data 
+Relevant pressure, temperature, etc. data from the CIR  is not found in the data output file 
+discussed in section 4.A.1 of this document.  Instead, it is found in 1-Hz files with names such 
+as 18073A3_ACME_CAM3_Exposures.txt which are again in a comma-separated values (CSV) 
+format despite the misleading txt suffix.   As such, these files can be opened with standard 
+spreadsheet software. 
+ 
+Columns A and B (e.g., in Excel) both include timestamps, which can slightly differ (e.g., by a 
+second), where column A is from the Image Processing and Storage Unit for Gigabit ethernet 
+cameras (IPSU-G, which is also referred to as IPSU -5).  The IPSU -G was used to record the 
+image data from the ACME Data Camera (DataCam) and the Cool Flames Investigation (CFI) 
+intensified camera.  Meanwhile, column B provides timestamps for the CIR’s FOMA Control 
+Unit (FCU), where the FOMA is the Fuel Oxizidizer Management Assembly.  The headings for 
+the first two columns are therefore: 
+IPSU5 TimeStamp FCU TimeStamp 
+ 
+Columns C-W have data from the IPSUG, of which the most significant is column T , named 
+IPSUG_CAMERA_3_MAN_EXP(N/A).  That column provides the ACME DataCam exposure 
+time in microseconds and is the source of the file name.  The headings for these columns are 
+listed here in two columns rather than a long row: 
+IPSUG_SYSTEM_STATE(N/A) IPSUG_CAMERA_1_GAIN_MODE(N/A) 
+IPSUG_SYSTEM_5V_POS(Volts) IPSUG_CAMERA_1_AUTO_GAIN(N/A) 
+IPSUG_SYSTEM_12V_POS(Volts) IPSUG_CAMERA_1_MAN_GAIN(N/A) 
+IPSUG_LV_ACTIVE_CAMERAS(N/A) IPSUG_CAMERA_3_FRAME_RATE(N/A) 
+IPSUG_LV_LEFT_CAMERA(N/A) IPSUG_CAMERA_3_EXP_MODE(N/A) 
+IPSUG_LV_RIGHT_CAMERA(N/A) IPSUG_CAMERA_3_AUTO_EXP(N/A) 
+IPSUG_CAMERA_1_PIXEL_FORMAT(N/A) IPSUG_CAMERA_3_MAN_EXP(N/A) 
+IPSUG_CAMERA_1_FRAME_RATE(N/A) IPSUG_CAMERA_3_GAIN_MODE(N/A) 
+IPSUG_CAMERA_1_EXP_MODE(N/A) IPSUG_CAMERA_3_AUTO_GAIN(N/A) 
+IPSUG_CAMERA_1_AUTO_EXP(N/A) IPSUG_CAMERA_3_MAN_GAIN(N/A) 
+IPSUG_CAMERA_1_MAN_EXP(N/A) 
+ 
+Neglecting the timestamp in column B, the FOMA data begins in column X, where columns X-
+AR provide measurements from numerous pressure transducers in psia.   
+ 
+Columns AS-BB provide the measurements of the gas flow rates (AS-AW) and their setpoints 
+(AX-BB) in slpm.  However, the needed FOMA MFCs were simply forced to be full open when 
+needed, where the flow was more accurately measured and controlled by ACME’s MFCs.  The 
+column headings are listed below in two columns, where the CIR MFCs are identified per thee 
+ACME/CIR Integrated Pneumatic Schematic, drawing S1101MFS0004_rev_A: 
+Fuel FCU_MP_MFC1_RATE(Slpm)  FCU_MP_MFC1_CONTROL(SLPM) 
+Diluent FCU_MP_MFC2_RATE(Slpm)  FCU_MP_MFC2_CONTROL(SLPM) 
+Oxygen FCU_MP_MFC3_RATE(Slpm)  FCU_MP_MFC3_CONTROL(SLPM) 
+Nitrogen FCU_MP_MFC4_RATE(Slpm)  FCU_MP_MFC4_CONTROL(SLPM) 
+Vent FCU_MP_MFC5_RATE(Slpm)  FCU_MP_MFC5_CONTROL(SLPM) 
+It is important to understand that nitrogen was not delivered through MFC4  during ACME 
+tests, but instead through a bypass with no FOMA MFC.  ACME had its own MFCs for fuel
+
+--- page 11 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+11 
+ 
+ 
+(often diluted), oxygen (always diluted with an inert), and nitrogen (from the bypass). 
+ 
+Columns BC -BF provide the combustion chamber temperature in Celsius from four 
+thermistors (abbreviated as TM in the column h eadings).  The column headings are listed 
+below in two columns (instead of a row): 
+FCU_MP_TM1(Deg C)  FCU_MP_TM3(Deg C) 
+FCU_MP_TM2(Deg C)  FCU_MP_TM4(Deg C) 
+ 
+Columns BG-FX provide the combustion chamber pressures (in psia) measured by four 
+pressure transducers (abbreviated as PT in the column headings), where there are 30 adjacent 
+columns numbered 0-29 for each of those transducers, namely PT16, PT17, PT28, and PT29 .  
+Through a clever approach, the many columns provide these measurements at 30 Hz wit hin 
+a file which is otherwise at 1 Hz.  At 1 Hz, this data is also found respectively in columns AJ, 
+AK, AN, and AO.  Note that PT28  is an outlier, where it may be appropriate to neglect that 
+transducer’s data in computing an average FOMA measurement of the chamber pressure.  
+The chamber pressure is also measured by the ACME hardware, where that measurement is 
+found (in volts) in the basic data previously discussed under the heading PTA3.  As an example, 
+the column headings for 30-Hz PT16 data (starting at column BG) are as follows (in three 
+columns): 
+FCU_PT16_INDEX_0(PSIA)  FCU_PT16_INDEX_10(PSIA) FCU_PT16_INDEX_20(PSIA) 
+FCU_PT16_INDEX_1(PSIA)  FCU_PT16_INDEX_11(PSIA) FCU_PT16_INDEX_21(PSIA) 
+FCU_PT16_INDEX_2(PSIA) FCU_PT16_INDEX_12(PSIA) FCU_PT16_INDEX_22(PSIA) 
+FCU_PT16_INDEX_3(PSIA)  FCU_PT16_INDEX_13(PSIA) FCU_PT16_INDEX_23(PSIA) 
+FCU_PT16_INDEX_4(PSIA) FCU_PT16_INDEX_14(PSIA) FCU_PT16_INDEX_24(PSIA) 
+FCU_PT16_INDEX_5(PSIA) FCU_PT16_INDEX_15(PSIA) FCU_PT16_INDEX_25(PSIA) 
+FCU_PT16_INDEX_6(PSIA) FCU_PT16_INDEX_16(PSIA) FCU_PT16_INDEX_26(PSIA) 
+FCU_PT16_INDEX_7(PSIA) FCU_PT16_INDEX_17(PSIA) FCU_PT16_INDEX_27(PSIA) 
+FCU_PT16_INDEX_8(PSIA) FCU_PT16_INDEX_18(PSIA) FCU_PT16_INDEX_28(PSIA) 
+FCU_PT16_INDEX_9(PSIA) FCU_PT16_INDEX_19(PSIA) FCU_PT16_INDEX_29(PSIA) 
+ 
+4. Space Acceleration Measurement System (SAMS) data 
+The Combustion Integrated Rack (CIR) in which the experiment was conducted, was equipped 
+with a Passive Rack Isolation System (PaRIS), but it was not utilized for ACME testing because 
+of the need for crew time to enable and disable the isolation (by respectively removing and 
+installing alignment guides) on each test day.  However, the CIR was equipped with a 3 -axis 
+SAMS sensor head.  The acceleration archives, along with relevant documentation, are 
+accessible from https://gipoc.grc.nasa.gov/wp/pims/home/, the home page for the Principal 
+Investigator Microgravity Services (PIMS). 
+ 
+The following guidance for the SAMS data was provided by Kenneth Hrovat (NASA Glenn):  In 
+addition to the documentation and links from the PIMS home page, we introduce a few ways 
+below to get started with exploring the CIR microgravity environment taking the perspective 
+of SAMS measurements from within the rack. 
+ 
+Roadmap Spectrograms 
+To get a high-level, spectral roadmap view within two days after measurement, you can: 
+a. Use your browser and start at this link: http://pims.grc.nasa.gov/roadmap
+
+--- page 12 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+12 
+ 
+ 
+b. In the upper left pane, you can navigate by GMT date to see a list of plots (PDF files) 
+in the right pane for the GMT date of your choice.  We refer to these PDFs as roadmap 
+plots.  For SAMS, these are acceleration spectrograms, which for vibratory data are a 
+good way to look at patterns, structures and boundaries in both time and frequency 
+for long time spans -- nominally, 8 hours per plot.  These spectrograms are mostly 
+qualitative and crudely quantitative three -dimensional plots in that a color scale 
+attempts to map power spectral density magnitude as a color for the 3rd dimension. 
+NOTE: Ticking the Navigation Filter for “es05” in the bottom pane will then only 
+highlight days in yellow in the upper left pane when the operations team powered on 
+the SAMS sensor in the CIR to take measurements. 
+c. You might want to navigate directly to a GMT day of interest for your science 
+operations or run, but you can also browse day -by-day too in order to get some 
+context comparing vario us 8 -hour spans to get a feel for the environment under 
+various conditions. 
+ 
+Binary Data 
+To download actual SAMS measurement data for use with your models or to correlate 
+acceleration measurements with your science or support data, you can… 
+a. Use your browser and start at this link: http://pims.grc.nasa.gov/ftp/pad 
+b. Navigate by GMT date, for example you can follow year, month and day links to end 
+up at: https://pims.grc.nasa.gov/ftp/pad/year2020/month06/day18/  where you see 
+a l ist of SAMS sensor directories.  The sensor subdirectory of interest for CIR is 
+samses_accel_es05. 
+c. Once you click into that directory link, you will see data and header files listed for the 
+CIR sensor. 
+d. The instructions at the following link help you to read these data: 
+http://pims.grc.nasa.gov/plots/user/mohan/how2read_pad_binary_files.html 
+ 
+ 
+B. Image Files 
+Image data and files discussed in this section are associated with the following cameras: 
+Analog, operations (ops), internal camera 
+ACME Data Camera (DataCam) 
+Cool Flames Investigation (CFI) intensified camera 
+ High Bit-depth Multi-spectral (HiBMs) camera and CIR illumination package 
+ 
+The Low Light Level Ultraviolet (LLL-UV) camera is not addressed herein because it was not used 
+for E -FIELD Flames or most of the current ACME experiments.  Thus far, the Structure and 
+Response of Spherical Diffusion Flames (s-Flame) investigation is the only ACME study to use the 
+LLL-UV camera. 
+ 
+1. Analog, internal, operations (ops) camera  
+This color analog camera is mounted on the ACME chamber insert, and as such is within the 
+combustion chamber and is sometimes referred to as the internal camera.  Its primary 
+purpose is to support the operations, e.g., to visualize  the burner and igniter, and as such is 
+also often referred to as the operations or ops camera.
+
+--- page 13 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+13 
+ 
+ 
+The NTSC video (named for the National Television System Committee) from the ops camera 
+is at 29.97 frames per second (fps) or nominally 30 fps.  It is not recorded on the space station 
+but is streamed to the ground in near real time and is recorded on CIR consoles at the Glenn 
+ISS Payload Operations Center ( GIPOC) in a Transport Stream (TS)  format using VLC Media 
+Player which can be freely downloaded from https://www.videolan.org/vlc/.  That software 
+has a snapshot function allowing for convenient extraction of still images, e.g., for making 
+measurements of flame dimensions. 
+ 
+2. ACME Data Camera (DataCam) 
+ACME’s prim ary camera  is a high-definition (1360 x 1024), 12 -bit color camera mounted 
+outside the chamber on CIR’s optical bench.  It is equipped with a motorized lens with 
+independent control of the zoom, iris, and focus.  It has a filter barrel with a fused silica 
+window (for color imaging), a blue -green BG7 Schott glass filter, and bandpass filters for 
+imaging CH* and HCHO (formaldehyde) chemiluminescence. 
+ 
+It was characterized prior to launch to enable temperature measurements via soot pyrometry 
+and Thin Filament Pyrometry (TFP), soot volume fraction, and quantitative determination of 
+the CH* concentration. 
+ 
+Soot temperatures can be determined from this camera’s images via techniques such as those 
+described in the following references: 
+a. S. De Iuliis, M. Barbini, S. Benecchi, F. Cignoli, and G. Zizak, Determination of the Soot 
+Volume Fraction in an Ethylene Diffusion Flame by Multiwavelength Analysis of Soot 
+Radiation, Combustion and Flame 115 (1998) 253–261. 
+b. B. Ma and M. B. Long, Combined Soot Optical Characterization Using 2-D Multi-Angle 
+Light Scattering and Spectrally Resolved Line-of-Sight Attenuation and Its Implication 
+on Soot Color-Ratio Pyrometry, Applied Physics B 117 (2014) 287–303. 
+c. B. Ma, S. Cao, D. Giassi, D. P. Stocker, F. Takahashi, B. A. V. Bennett, M. D. Smooke, 
+and M. B. Long, An Experimental and Computational Study of Soot Formation in a 
+Coflow Jet Flame under Microgravity and Normal Gravity, Proceedings of the 
+Combustion Institute 35 (2015) 839–846. 
+d. N. J. K empema, B. Ma, and M. B. Long, I nvestigation of In -Flame Soot Optical 
+Properties in Laminar Coflow Diffusion Flames Using Thermophoretic Particle 
+Sampling and Spectral Light Extinction, Applied Physics B 122 (2016). 
+e. N. J. Kempema and M. B. Long, Effect of Soot Self -Absorption on Color -Ratio 
+Pyrometry in Laminar Coflow Diffusion Flames, Optics Letters 43 (2018) 1103. 
+ 
+Meanwhile, TFP measurements can be made using approaches such as those discussed in:  
+f. V. Vilimpoc and L. P. Goss, SiC -Based Thin-Filament Pyrometry: Theory and Thermal 
+Properties, Symposium (International) on Combustion 22 (1989) 1907–1914. 
+g. W. M. Pitts, Thin -Filament Pyrometry in Flickering Laminar Diffusion Flames, 
+Symposium (International) on Combustion 26 (1996) 1171–1179. 
+h. J. D. Maun, P. B. Sunderland, and D. L. Urban, Thin-Filament Pyrometry with a Digital 
+Still Camera, Applied Optics 46 (2007) 483–488.
+
+--- page 14 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+14 
+ 
+ 
+i. P. B. Kuhn, B. Ma, B. C. Connelly, M. D. Smooke, and M. B. Long, Soot and Thin -
+Filament Pyrometry Using a Color Digital Camera, Proceedings o f the Combustion 
+Institute 33 (2011) 743–750. 
+j. B. Ma, G. Wang, G. Magnotti, R. S. Barlow, and M. B. Long, Intensity-Ratio and Color-
+Ratio Thin-Filament Pyrometry: Uncertainties and Accuracy, Combustion and Flame 
+161 (2014) 908–916. 
+ 
+Particularly when making quantitative measurements, implementation of an Abel transform 
+or similar is likely appropriate given the axisymmetry of the flames in the E -FIELD Flames 
+investigation.  In fact, all  six of the current ACME experiments feature axisymmetric or 
+spherically symmetric flames.   Approaches are compared in this paper: 
+k. C. J. Dasch, One -Dimensional Tomography: A Comparison of Abel, Onion -
+Peeling, and Filtered Backprojection Methods, Applied optics 31 (1992) 1146–
+1152. 
+ 
+The a-k references above were taken from the following conference paper on early ACME 
+results from the Coflow Laminar Diffusion Flame (CLD Flame) experiment: 
+Jesse Tinajero, Davide Giassi, Dennis Stocker, and Marshall Long. “Experimental Study on 
+the Influence of Gravity on Highly Diluted and Sooting Coflow Flames,” 11th US National 
+Combustion Meeting of the Combustion Institute, Pasadena, CA, 24-27 March 2019.   
+ 
+Meanwhile, this paper on a n ISS pre cursor to the CLD Flame expe riment is an appropriate 
+reference for determination of CH* concentration. 
+D. Giassi, S. Cao, B.A. Bennett, D.P. Stocker, F. Takahashi, M.D. Smooke, and M.B. Long, 
+“Analysis of CH* Concentration and Flame Heat Release Rate in Laminar Coflow Diffusion 
+Flames under Microgravity and Normal Gravity,” Combustion and Flame , Vol. 167, p p. 
+198-206 (2016). 
+ 
+Images are normally downlinked within a week of the testing, but selected images are often 
+downlinked during a test day.  Regardless, the images are downloaded in a wrapped Halcon 
+object (HOBJ) format, which are not readily opened with typical image processing software. 
+ 
+Most ACME investigators are processing the HOBJ files using the OMA2 software developed 
+by Prof. Marshall Long (Yale U.), the lead for ACME’s CLD Flame experiment.   Th e OMA2 
+software is freely available in both Mac and cross-platform (Qt) versions, where the latter can 
+be used with both PC and Linux operating systems. 
+ 
+The OMA2 read-hobj function was also rewritten as a Python function by Dr. Jesse Tinajero 
+(Yale U.), where Python is an open source programming language that is easily obtainable for 
+MacOS, Linux, and Windows operating systems.  The Python script to open the HOBJ files can 
+be downloaded from https://github.com/mblong/hobjExample.
+
+--- page 15 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+15 
+ 
+ 
+The HOBJ files can also be readily viewed and processed using ImageJ or its preloaded Fiji 
+variant, where both can be freely downloaded.  In either software package, the HOBJ files can 
+imported (rather than opened) as raw files with the following settings: 
+ Image type 16-bit unsigned 
+ Width 1360 
+ Height 1024 
+ Offset to first image 6244 
+However, imported DataCam image s will be monochrome unless a Bayer filter (e.g., as 
+described at  https://en.wikipedia.org/wiki/Bayer_filter) i s subsequently implemented.  It 
+should be possible to install a plug-in to accomplish that color conversion.  As another option, 
+Python and Matlab both have image demosaicing functions. 
+ 
+NASA is also working (at the time of this writing) toward providing converted images from the 
+ACME DataCam, where the general priority is to support the ongoing ACME testing rather 
+than covert images for experiments like E-FIELD Flames which have already been completed. 
+ 
+In order to use the ACME DataCam for quantitative measurements it is critical to avoid 
+saturation, for example by using a camera gain of zero.  Another employed approach was to 
+not use the camera’s white balance which by default multiplies the red and blue by 1.41 and 
+1.68, respectively, because that could inadvertently lead to saturation.  Such multiplication 
+can be done after the HOBJ file is converted and the colors demosaiced, where in OMA2 the 
+white balancing is accomplished with the commands: 
+*rgb 1.41 1 1.68 
+clip 4095 
+In summary, the white balance, if desired, needs to be done after the fact through software 
+because it was generally not done with the hardware to avoid the risk of saturation.  
+ 
+Note that the ACME images will be naturally dark because of the use of the 16-bit file format 
+with 12 -bit image data.  As such,  adjustments to the imag e brightness will generally be 
+necessary even if the images are not demos aiced.  Furthermore, cameras’ CCD arrays are 
+susceptible to radiation damage while in orbit.  As a result, the images feature hot pixels which 
+increase in number over the months and years in space.  As such, it will appear as if there is a 
+star field within the combustion chamber.  Therefore, the images should ideally be processed 
+to remove the bright outlying pixels.  The radiation damage is also obvious in the ops camera 
+imaging. 
+ 
+Although the DataCam was typically set for imaging at 30 fps, that is trumped by the exposure 
+settings which were often long because of the dim nature of the microgravity flames.  As a 
+result, the framing rate was typically far less.  Different exposures could have been selected 
+for different phases of the tests, e.g., prior to ignition and during the test, so the framing rate 
+may not be consistent .  Bracketed imaging could also be employed, where a repeating 
+sequence of different exposure  durations is used to enable appropriate photography under 
+uncertain or varying flame intensities.  Bracketing is also used to simultaneously accomplish 
+multiple imaging objectives, e.g., to appropriately image both brightly glowing soot (or TFP 
+fibers) as well as the much dimmer blue portion of the flame. 
+ 
+In interpreting the image data, it may be helpful to check  the ACME DataCam metadata file
+
+--- page 16 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+16 
+ 
+ 
+which should be available for each successful flame test, e.g., to verify the exposure duration.  
+The formatting of this file changed during early 2018 (between mid-March and early April) , 
+when the first round of E-FIELD Flames tests (using the coflow burner) was being conducted 
+on the ISS.  Therefore, examples of early and later versions are presented, where their suffixes 
+were respectively metadata and mdipsug.  However, both are in a comma -delimited (CSV) 
+format and can be op ened with spreadsheet software or alternately as a text file.  Column 
+headings are found in the first row of such files. 
+ 
+Early version of the ACME DataCam metadata 
+An early example is 20180314_162445.789_ACME_18073A3.metadata where ACME 
+designates the DataCam.  Presented below are the column headings and example values from 
+the test’s first image  (numbered 000000), and the corresponding camera parameter and a 
+description provided by ACME software engineer Jeffrey Eggers: 
+Filename /sd0/sci/18073A3/20180314_162445.925_ACME_18073A3_00000.hobj  
+Camera parameter:  n/a  
+Image path and file name with timestamp of when the image was gra bbed from the 
+camera. 
+BufferIncompleteTotal 0  
+Camera parameter:  GtlIncompleteBuffers 
+Current number of incomplete buffers received. 
+BufferIncomplete 0  
+Camera parameter:  GtlBufferIncomplete 
+State of the current buffer. In case of an incomplete buffer 1 is returned. When using 
+the filter driver incomplete buffers are silently discarded. Check the GtlBlockID to see 
+if buffers are missing. 
+BuffersNum 5  
+Camera parameter:  GtlNumBuffers 
+Number of currently used buffers for the internal ring buffer. 
+BlockId 690  
+Camera parameter:  GtlBlockID 
+ID of the last received block (typically of type image) as reported by the device. If no 
+block has been received, 0 is returned. 
+TickTimestamp 14178831461500  
+Camera parameter:  GtlBufferTimestamp 
+Time stamp of the current buffer in ticks. The time in seconds can be calculated via the 
+parameter 'GevTimestampTickFrequency.' 
+Timestamp 20180314_162445.925  
+Camera parameter:  n/a 
+The timestamp portion of the filename, when the image was grabbed from the 
+camera. 
+Milliseconds 136  
+Camera parameter:  n/a 
+Difference between last image timestamp and current image timestamp. 
+CalculatedRate 0  
+Camera parameter:  n/a 
+This is GevTimestampTickFrequency / (GtlBufferTimestamp - GtlBufferTimestamp of 
+last image).  GevTimestampTickFrequency is querried each image.
+
+--- page 17 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+17 
+ 
+ 
+BinningX 1  
+Camera parameter:  BinningHorizontal 
+Binning in horizontal direction. Binning is the summing of charge of adjacent pixels. 
+BinningY 1  
+Camera parameter:  BinningVertical 
+Binning in vertical direction. Binning is the summing of charge of adjacent pixels. 
+PixelFormat BayerRG12  
+Camera parameter:  PixelFormat 
+Format of the image data. 
+Exposure 100000  
+Camera parameter:  ExposureTimeAbs 
+Exposure duration, in microseconds. 
+FrameRate 30.0003  
+Camera parameter:  AcquisitionFrameRateAbs 
+Frame rate, in frames per second. This is applicable when either the FrameStart trigger 
+mode is disabled, or the FrameStart trigger source is FixedRate. Depending on the 
+exposure duration, the camera may not achieve the frame rate set here. 
+Gain 0  
+Camera parameter:  GainRaw 
+Gain value of analog A/D stage. Units are in dB. 
+Height 1024  
+Camera parameter:  Height 
+Height of image, in pixels. 
+Width 1360  
+Camera parameter:  Width 
+Width of image, in pixels. 
+RegionX 0  
+Camera parameter:  OffsetX 
+Starting column of the readout region (relative to the first column of the sensor) in 
+pixels. 
+RegionY 0  
+Camera parameter:  OffsetY 
+Starting row of the readout region (relative to the first row of the sensor) in pixels. 
+ 
+Later version of the ACME DataCam metadata 
+This is an example of the later metadata format from ACME_18269A1.mdipsug.  Little has 
+changed from the earlier format other than the order of the parameters.  Again, the column 
+headings are presented with the values for the first image (i.e., from the file’s second row). 
+Timestamp 20180926_152820.593  
+Filename /sd1/sci/18269A1/20180926_152820.593_ACME_18269A1_00000.hobj 
+DeltaMilliseconds 236 
+CalculatedRate 0 
+BinningX 1 
+BinningY 1 
+BlockId 2 
+BufferIncomplete 0 
+BufferIncompleteTotal 0
+
+--- page 18 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+18 
+ 
+ 
+BuffersNum 5 
+ExposureManual 100000 
+FrameRate 30.0003 
+GainManual 0 
+Height 1024 
+PixelFormat BayerRG12 
+RegionX 0 
+RegionY 0 
+TickTimestamp 5112531190000 
+Width 1360 
+ 
+Regardless of the version, i t is very important to understa nd that the exposure time, in 
+microseconds, trumps the specified framing rate (in fps), i.e., where long exposures will lead 
+to a shorter actual framing rate.  In this example case, the 0.1-s exposure time means that the 
+framing rate (at the test’s sta rt) was nominally 10 fps rather than the 30 indicated by 
+FrameRate.  It is furthermore important to understand that the exposure time (and thus 
+actual framing rate) was often varied during the test, where that could be seldom or often if 
+bracketing was employed, i.e., where a repeated sequence of images was taken at different 
+exposures.  
+ 
+For the DataCam, the exposures times, etc. can also be found in files with names like 
+18073A3_ACME_CAM3_Exposures.txt, where such files are discussed in section 4.A.3 of this 
+document because (despite the file naming) they primarily include pressures, flow rates, and 
+temperatures from the CIR’s Fuel Oxidizer Management Assembly (FOMA). 
+ 
+The parameter files, with names such as 18073A3_VoltageSweep.txt, control the DataCam 
+exposures and much more.  However, these files were not always saved as intended and were 
+sometimes corrected after the fact.  In contrast, the text -file logs, with names such as 2018-
+10-17_12-26ACME.log, are a reliable s ource for the parameters which specified the imaging 
+settings and much more.  There is a single file of this type for each test day (at least normally) 
+and the parameters are a small fraction of the automated log content, but one can search for 
+a test by its number.  Log files like this are discussed in section 4.C.4 of this document. 
+ 
+Due to the use of a turning mirror, the DataCam images should be flipped vertically if upright 
+images are desired, i.e., where the burner is at the bottom and the flame extends upward.  In 
+this regard, note that the DataCam provides images in a ‘landscape’ format with the image’s 
+long dimension orth ogonal to the burner and chamber axis.  This is contrary to a n ACME 
+science requirement specifying that the long dimension be aligned with the experimental axis 
+to provide images in a ‘portrait’ format.   In this regard, the science requirements were not 
+always met, e.g., because of design tradeoffs, etc. 
+ 
+There is some variation in the ACME camera zoom, whe re its setting is not completely 
+reproducible.  Therefore, the scaling of the image data should be established for each day of 
+testing, or each subset of tests if more than one zoom setting was used within a day.  The 
+scaling can typically be carried out using images regularly taken of the ceramic fibers for Thin 
+Filament Pyrometry (TFP), where such imaging is normally made at two fiber array positions.  
+However, the fiber array was not used for the E -FIELD Flames experiment because of the
+
+--- page 19 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+19 
+ 
+ 
+interference of the electric field and electrode mesh.  Therefore, scaling must be carried out 
+using the burner or other visible hardware.  Meanwhile, the other cameras had fixed lenses. 
+ 
+Note that files named for example 20180314_162445.789_ACME_18073A3.next are not 
+useful for data interpretation, where such text files simply indicate the next ACME image 
+number that would have been archived, i.e., until that test’s image archiving came to an end. 
+ 
+3. Cool Flames Investigation (CFI) intensified camera 
+This intensified camera was typically configured with a CH* bandpass filter and was generally 
+archived at 23 fps.  The grayscale image files are in a Tagged Image File Format (TIFF) format 
+and can be opened readily, where brightness/contrast adjustment may again be required. 
+ 
+While it wasn’t an issue for E -FIELD Flames, this camera’s Field of View (FOV) is partially 
+blocked by the arms of the fiber array for Thin Filament Pyrometry (TFP) when it is moved to 
+position the fibers across the flame.  But E-FIELD Flames didn’t use the fiber array because of 
+interference with the electrode mesh and the electric field itself. 
+ 
+As with the ACME DataCam, it might be useful to check the metadata for the CFI intensified 
+camera.  This was similarly revised in early 2018 (between mid-March and early April) when 
+the first round of E-FIELD Flames tests (with the coflow burner) w as being conducted, such 
+that there are two version of this file relevant to the e xperiment.  Although they are largely 
+similar, the latter has two additional parameters , BitShift and CameraSpeed, and some 
+additional changes, e.g., where some parameter names changed  and where the parame ter 
+order has changed.  Therefore, detailed information on both versions will be presented where 
+the parameter descriptions and names of the corresponding camera parameters were 
+provided by ACME software engineer Jeffrey Eggers.  Both versions are in a comma-delimited 
+(CSV) format and can be opened with spreadsheet software or alternately as a text file. 
+ 
+Early version of the CFI intensified camera metadata 
+An example file name is 20180314_162445.789_INTNS_18073A3.metadata where INTNS 
+designates the CFI camera.  Presented below are the column headings and e xample values 
+from the test’s first image (numbered 000000), and the corresponding camera parameter 
+name and a description: 
+Filename /sd0/sci/18073A3/20180314_162445.861_INTNS_18073A3_00000.tiff 
+Camera parameter:  n/a 
+Image path and file name with timestamp of when the image was grabbed from the 
+camera. 
+BufferIncompleteTotal 0 
+Camera parameter:  GtlIncompleteBuffers 
+Current number of incomplete buffers received. 
+BufferIncomplete 0  
+Camera parameter:  GtlIncompleteBuffers 
+Current number of incomplete buffers received (where the Camera Parameter should 
+be GtlBufferIncomplete but is GtlIncompleteBuffers instead). 
+BuffersNum 5  
+Camera parameter:  GtlNumBuffers 
+Number of currently used buffers for the internal ring buffer.
+
+--- page 20 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+20 
+ 
+ 
+BlockId 1  
+Camera parameter:  GtlBlockID 
+ID of the last received block (typically of type image) as reported by the device. If no 
+block has been received, 0 is returned. 
+TickTimestamp 28342240286  
+Camera parameter:  GtlBufferTimestamp 
+Time stamp of the current buffer in ticks. The time in seconds can be calculated via the 
+parameter 'GevTimestampTickFrequency.' 
+Timestamp 20180314_162445.861  
+Camera parameter:  n/a 
+The timestamp portion of the filename, when the image was grabbed from the 
+camera. 
+Milliseconds 72  
+Camera parameter:  n/a 
+Difference between last image timestamp and current image timestamp. 
+CalculatedRate 0  
+Camera parameter:  n/a 
+This is GevTimestampTickFrequency / (GtlBufferTimestamp - GtlBufferTimestamp of 
+last image).  GevTimestampTickFrequency is querried each image. 
+BinningX x1  
+Camera parameter:  BinningHorizontal 
+The number of horizontal photo -sensitive cells that must be combined ( added) 
+together. Note that the user has to set the Width feature accordingly. 
+BinningY x1  
+Camera parameter:  BinningVertical 
+The number of vertical photo-sensitive cells that must be combined (added) together. 
+Note that the user has to set the Height feature accordingly. 
+PixelFormat Mono16  
+Camera parameter:  PixelFormat 
+The format of the pixel to use during the acquisition. 
+ExposureMode 0  
+Camera parameter:  AecEnable 
+Whether or not the Automatic Exposure Control function is enabled. 
+Exposure 32000  
+Camera parameter:  ExposureTimeRaw 
+The Exposure time in units of uSeconds when ExposureMode  is Timed (and AEC is 
+disabled). 
+CurrentAutoExposure 43067  
+Camera parameter:  CurrentAecExposure 
+The current AEC exposure value. 
+FrameRate 23  
+Camera parameter:  CurrentFrameRate 
+The current frame rate in integer units of frames per second. This is a dyna mic value 
+that changes as a function of the camera's mode of operation. 
+GainMode 0  
+Camera parameter:  AgcEnable 
+Whether or not the Automatic Gain Control function is enabled.
+
+--- page 21 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+21 
+ 
+ 
+Gain 143  
+Camera parameter:  GainRaw 
+The selected analog gain as a raw integer value (when AGC is disabled). 
+CurrentAutoGain 143  
+Camera parameter:  CurrentAgcGain 
+The current AGC analog gain value. 
+RegionHeight 1040  
+Camera parameter:  Height 
+The actual image height expelled by the camera of the master AOI (in pixels). 
+RegionWidth 1392  
+Camera parameter:  Width 
+The actual image width expelled by the camera of the master AOI (in pixels). 
+RegionX 0  
+Camera parameter:  OffsetX 
+The horizontal offset from the origin to the master AOI (in pixels). 
+RegionY 0  
+Camera parameter:  OffsetY 
+The vertical offset from the origin to the master AOI (in pixels). 
+ImageHeight 1040  
+Camera parameter:  SensorHeight 
+The effective height of the sensor in pixels. 
+ImageWidth 1392  
+Camera parameter:  SensorWidth 
+The effective width of the sensor in pixels. 
+ 
+Later version of the CFI intensified camera metadata 
+An example file name is INTNS_18269A1.mdipsug where INTNS designates the CFI intensified 
+camera.  Presented below are the column headings and example values from the test’s first 
+image (numbered 000000), and the corresponding camera parameter name and a 
+description: 
+Timestamp 20180926_152820.469 
+Camera parameter: n/a 
+The timestamp portion of the filename, when the image was grabbed from the 
+camera. 
+Filename /sd1/sci/18269A1/20180926_152820.469_INTNS_18269A1_00000.tiff 
+Camera parameter:  
+Image path and file name with timestamp of wh en the image was grabbed from the 
+camera 
+DeltaMilliseconds 112  
+Camera parameter: n/a 
+Difference between last image timestamp and current image timestamp. 
+CalculatedRate 0  
+Camera parameter: n/a 
+This is GevTimestampTickFrequency / (GtlBufferTimestamp - GtlBufferTimestamp of 
+last image).  GevTimestampTickFrequency is querried each image.
+
+--- page 22 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+22 
+ 
+ 
+BinningX x1  
+Camera parameter: BinningHorizontal 
+The number of horizontal photo -sensitive cells that must be combined (added) 
+together. Note that the user has to set the Width feature accordingly. 
+BinningY x1  
+Camera parameter: BinningVertical 
+The number of vertical photo-sensitive cells that must be combined (added) together. 
+Note that the user has to set the Height feature accordingly. 
+BitShift NoShift  
+Camera parameter: BitShift 
+The number of bits to shift in the data output. 
+BlockId 2  
+Camera parameter: GtlBlockID 
+ID of the last received block (typically of type image) as reported by the device. If no 
+block has been received, 0 is returned. 
+BufferIncomplete 0  
+Camera parameter: GtlIncompleteBuffers 
+Current number of incomplete buffers received (where the Camera Parameter should 
+be GtlBufferIncomplete but is GtlIncompleteBuffers instead). 
+BufferIncompleteTotal 0  
+Camera parameter: GtlIncompleteBuffers 
+Current number of incomplete buffers received. 
+BuffersNum 5  
+Camera parameter: GtlNumBuffers 
+Number of currently used buffers for the internal ring buffer. 
+CameraSpeed Normal  
+Camera parameter: CameraSpeed 
+The camera speed. 
+ExposureAuto 43067  
+Camera parameter: CurrentAecExposure 
+The current AEC exposure value. 
+ExposureManual 32000  
+Camera parameter: ExposureTimeRaw 
+The Exposure time in units of uSeconds when ExposureMode is Timed (and AEC is 
+disabled). 
+ExposureMode 0  
+Camera parameter: AecEnable 
+Whether or not the Automatic Exposure Control function is enabled. 
+FrameRate 23  
+Camera parameter: CurrentFrameRate 
+The current frame rate in integer units of frames per second. This is a dynamic value 
+that changes as a function of the camera's mode of operation. 
+GainAuto 143  
+Camera parameter: CurrentAgcGain 
+The current AGC analog gain value.
+
+--- page 23 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+23 
+ 
+ 
+GainManual 143  
+Camera parameter: GainRaw 
+The selected analog gain as a raw integer value (when AGC is disabled). 
+GainMode 0  
+Camera parameter: AgcEnable 
+Whether or not the Automatic Gain Control function is enabled. 
+ImageHeight 1040  
+Camera parameter: SensorHeight 
+The effective height of the sensor in pixels. 
+ImageWidth 1392  
+Camera parameter: SensorWidth 
+The effective width of the sensor in pixels. 
+PixelFormat Mono16  
+Camera parameter: PixelFormat 
+The format of the pixel to use during the acquisition. 
+RegionHeight 1040  
+Camera parameter: Height 
+The actual image height expelled by the camera of the master AOI (in pixels). 
+RegionWidth 1392  
+Camera parameter: Width 
+The actual image width expelled by the camera of the master AOI (in pixels). 
+RegionX 0  
+Camera parameter: OffsetX 
+The horizontal offset from the origin to the master AOI (in pixels). 
+RegionY 0  
+Camera parameter: OffsetY 
+The vertical offset from the origin to the master AOI (in pixels). 
+TickTimestamp 10391712828  
+Camera parameter: GtlBufferTimestamp 
+Time stamp of the current buffer in ticks. The time in seconds can be calculated via the 
+parameter 'GevTimestampTickFrequency'. 
+ 
+Note that ‘next’ files named for example 20180314_162445.789_INTNS_18073A3.next are 
+not useful for data interpretation, where such text files simply indicate the next image 
+number that would have been archived, i.e., until that test’s image archiving came to an end. 
+ 
+4. High Bit-depth Multi-spectral (HiBMs) camera and CIR illumination package 
+The HiBMs camera was used in combination with an opposed backlight, i.e., the CIR ’s 
+collimated illumination package.   The resultant imaging was used in preceding droplet 
+combustion experiments for measuring droplet diameter , but it may also be useful for 
+determining the soot volume fraction via light extinction.  However, the camera’s red filter , 
+corresponding to the red illumination, is broad enough to permit significant soot 
+incandescence to pass through the filter.  As a result, this imaging is unlikely to be useful for 
+soot volume fraction measurements for all conditions.  After post-processing on the ground, 
+the images were made available in the TIFF format  and as such are readily op ened.  The 
+grayscale images were typically archived at 15 fps.
+
+--- page 24 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+24 
+ 
+ 
+It is important to underst and that this camera’s images are  notably of limited value for E-
+FIELD Flames because the bracket for the electrode mesh significantly blocked the 
+illumination.  ACME’s cameras and other optical instruments encircle the burner and made it 
+difficult to avoi d optical interference in all circumstances, where design trade -offs were 
+necessary.  However, the soot volume fraction can also be computed using images from the 
+ACME DataCam as discussed in that camera’s section.  
+ 
+In initial ACME testing with the Coflow Laminar Diffusion Flame (CLD Flame) experiment, the 
+monochrome camera was used without a filter, but that was abandoned because the camera 
+is nearly insensitive to blue.  The red filter was used throughout E-FIELD Flames testing. 
+ 
+ 
+C. Test Parameters and Other Files 
+Files discussed in this section include the following: 
+Test parameter file 
+Notes 
+Test timing 
+Logs 
+ 
+1. Test parameter file 
+Each E-FIELD Flames test was controlled by a software script and corresponding parameter 
+file, named for example 18073A3_VoltageSweep.txt, specifying settings for imaging, ignition, 
+gas flow, and more.    The parameter file and script are discussed extensively in the ACME/E-
+FIELD Flames Experimental Procedure document, which should be referred to for information 
+on this file type.  But note that the ACME.log files should be the best way to verify the as-run 
+test parameters, where the separate parameter file s are unfortunately not completely 
+reliable.  They were not always saved and as a result were sometimes recreated after the fact. 
+ 
+2. Notes 
+Notes of various types are available for test days, where not all types were collected or 
+necessarily prepared for each test day.  It is important to understand that the notes, whether 
+handwritten or typed, may include mistakes.  It is better to rely on automated logs, metadata 
+files, and parameter files or of course the measurements themselves when possible. 
+ 
+The daily test point logs, with names such as ‘18087 daily test point log.pdf,’ chronologically 
+list the tests and the image data acquired which was to be downlinked.  Typically, image data 
+was not downlinked without successful, i.e., sustained, ignition.  As an e xample, image data 
+wasn’t downlinked if the t est aborted prior to ignition.  However, the reverse is not always 
+true.  Image data was sometimes downlinked when ignition was unsuccessful and as a result 
+the test point log is only a clue as to what transpired.  Furthermore, note that image data 
+from certain selected cameras , typically the HiBMs and/or C FI intensified camera (s), was 
+sometimes not downlinked due to the limit of how much data could be reasonabl y 
+downlinked in a subsequent two-shift day. 
+ 
+Notes with names such as ‘18087 efield & velocities traces.pdf’ include preliminary plots of 
+the electrode mesh voltage and flow rates (as seen on a console during testing), typically along 
+with additional information about the tests.
+
+--- page 25 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+25 
+ 
+ 
+The test parameter not es, with names such as ‘18087 test parameter note s.pdf,’ show the 
+parameter values which were planned in advance of the te st day and the changes made on 
+the test day. 
+ 
+The test sheets, with names such as ‘18087 test sheets.pdf ,’ are summary notes about the 
+conduct of each tests conducted that day. 
+ 
+3. Test timing 
+Timing files with names such as 18073A3_TP.txt can be a convenient way to determine the 
+phases of the test in which the images were acquired.  An example E -FIELD Flames file is 
+presented here:  
+Test Point: 18073A3 
+ 
+Script start: 2018-03-14 16:23:54 
+Script paused #1: 2018-03-14 16:24:03 
+Script resumed #1: 2018-03-14 16:24:19 
+Pre-ignition data: 2018-03-14 16:24:36 
+Pre-ignition images: 2018-03-14 16:24:46 
+Preheat igniter: *** 
+MFCs on for priming: 2018-03-14 16:24:58 
+Ignition and retraction: 2018-03-14 16:25:03 
+Flame stabilization #1: *** 
+Dilution of fuel and inert: 2018-03-14 16:25:13 
+Flame stabilization #2: 2018-03-14 16:25:13 
+Ramp coflow to match test cond: 2018-03-14 16:25:13 
+Flame stabilization #3: 2018-03-14 16:25:13 
+Ramp to final velocity: *** 
+Constant flow: *** 
+MFCs off: 2018-03-14 16:26:23 
+Post-flame images: 2018-03-14 16:26:23 
+Post-flame data: 2018-03-14 16:26:26 
+Script complete: 2018-03-14 16:28:16 
+Extinction detected: *** 
+Script paused #2: 2018-03-14 16:26:32 
+Script resumed #2: 2018-03-14 16:27:13 
+ 
+Camera    Archived   Start Image   End Image 
+=======  ========   ==========  ========== 
+IPSU1           1506         737           1,506 
+IPSU2            ***         ***             *** 
+ACME            319         291             319 
+Intensified     2326       1,143           2,326
+
+--- page 26 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+26 
+ 
+ 
+4. Logs 
+There are four primary types of automated logs of which two, with names like the following, 
+may be helpful. 
+ 2018-10-17_12-26ACME.log 
+ 2018-10-17_12-51_IPSUG.log 
+As a reminder, the IPSU -G is the processing and storage uni t for the images from the ACME 
+DataCam and CFI intensified camera. 
+ 
+Meanwhile, the two logs of commands, with names like the following, are unlikely to be useful 
+for interpreting the E-FIELD Flames results. 
+ 2018-10-17_12-59ACMECommands.log 
+ 2018-10-17_12-51_IPSUGCommands.log 
+ 
+Each of the four log files are created for each day of testing, rather than for each test.  They 
+are text files (despite the log suffix) and as such can be readily opened. 
+ 
+The ACME.log files should be the best way to verify the test parameters, where the separate 
+as-run parameter  files are unfortunately not completely reliable.   A portion of the log 
+corresponding to a single test, 18290F1, is presented here, where this can best be interpreted 
+after becoming familiar with the contents of the ACME/E -FIELD Flames Experimental 
+Procedure document.  But the test parameters and timing of the test are obvious in the 
+excerpt. 
+ 
+ACME.log excerpt 
+2018-10-17 290 17:41:58:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:41:58:813~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"testpointName":"18290F1"})" 
+2018-10-17 290 17:42:00:012~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:00:012~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"useBracketedExposures":true})" 
+2018-10-17 290 17:42:00:912~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:00:912~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"bracketingNumberOfExposures":6})" 
+2018-10-17 290 17:42:01:912~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:01:912~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"bracketingExposureStartUsec":75})" 
+2018-10-17 290 17:42:02:912~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:02:912~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"bracketingExposureIncrementUsec":340})" 
+2018-10-17 290 17:42:03:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:03:813~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"igniterPreheatPowerV":0.0})" 
+2018-10-17 290 17:42:04:712~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:04:712~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"pmt1Gain":4.75})" 
+2018-10-17 290 17:42:05:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:05:812~acme~"Received command:
+
+--- page 27 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+27 
+ 
+ 
+ChangeScriptParameter(parameterInfo:{"pmt2Gain":3.25})" 
+2018-10-17 290 17:42:06:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:06:812~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"pmt3Gain":3.50})" 
+2018-10-17 290 17:42:07:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:07:812~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"velocityMixIgnitionMPerSec":0.19})" 
+2018-10-17 290 17:42:08:712~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:08:712~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"velocityMixFinalMPerSec":0.19})" 
+2018-10-17 290 17:42:09:712~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:09:712~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"efieldCycles":1})" 
+2018-10-17 290 17:42:10:712~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:10:712~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"efieldStepVoltage":-350})" 
+2018-10-17 290 17:42:12:412~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:12:412~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"efieldStepDurationSecs":2})" 
+2018-10-17 290 17:42:13:112~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:13:112~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"efieldRampRatePerSec":0})" 
+2018-10-17 290 17:42:13:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:13:812~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"efieldRampDurationSecs":0})" 
+2018-10-17 290 17:42:14:812~zt.script~*****handleScriptParameterChange 
+2018-10-17 290 17:42:14:812~acme~"Received command: 
+ChangeScriptParameter(parameterInfo:{"efieldHoldDurationSecs":0})" 
+2018-10-17 290 17:42:43:311~acme~"Received command: SystemRunScript()" 
+2018-10-17 290 17:42:43:312~zt.script~param: "testpointName":"18290F1" 
+2018-10-17 290 17:42:43:312~zt.script~param: "preIgnitionDataTimeSec":0 
+2018-10-17 290 17:42:43:312~zt.script~param: "postFlameDataTimeSec":5 
+2018-10-17 290 17:42:43:312~zt.script~param: "useIPSUs":true 
+2018-10-17 290 17:42:43:312~zt.script~param: "ipsuTimeoutSec":40 
+2018-10-17 290 17:42:43:312~zt.script~param: "useAcmeCamera":true 
+2018-10-17 290 17:42:43:312~zt.script~param: "useIntensifiedCamera":true 
+2018-10-17 290 17:42:43:312~zt.script~param: "ipsu1ArchiveRate":2 
+2018-10-17 290 17:42:43:312~zt.script~param: 
+"dataCameraPreIgnitionExposureUs":100000 
+2018-10-17 290 17:42:43:312~zt.script~param: "dataCameraTestExposureUs":20000 
+2018-10-17 290 17:42:43:312~zt.script~param: "analogCameraPreIgnitionShutter":2 
+2018-10-17 290 17:42:43:312~zt.script~param: "analogCameraTestShutter":5 
+2018-10-17 290 17:42:43:312~zt.script~param: "intensifierGainAmplitude":25000 
+2018-10-17 290 17:42:43:312~zt.script~param: "preIgnitionImageTimeSec":0 
+2018-10-17 290 17:42:43:312~zt.script~param: "postFlameImagingTimeSec":3 
+2018-10-17 290 17:42:43:313~zt.script~param: "useSideLedBank":true 
+2018-10-17 290 17:42:43:313~zt.script~param: "useEndLedBank":true
+
+--- page 28 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+28 
+ 
+ 
+2018-10-17 290 17:42:43:313~zt.script~param: "useBracketedExposures":true 
+2018-10-17 290 17:42:43:313~zt.script~param: "bracketingImagesPerExposure":1 
+2018-10-17 290 17:42:43:313~zt.script~param: "bracketingNumberOfExposures":6 
+2018-10-17 290 17:42:43:313~zt.script~param: "bracketingExposureStartUsec":75 
+2018-10-17 290 17:42:43:313~zt.script~param: "bracketingExposureIncrementUsec":340 
+2018-10-17 290 17:42:43:313~zt.script~param: "igniterIgnitionPosition":2472 
+2018-10-17 290 17:42:43:313~zt.script~param: "igniterPreheatPowerV":0 
+2018-10-17 290 17:42:43:313~zt.script~param: "igniterPreheatTimeMs":0 
+2018-10-17 290 17:42:43:313~zt.script~param: "igniterIgnitionPowerV":3.75 
+2018-10-17 290 17:42:43:313~zt.script~param: "igniterIgnitionDurationMs":2000 
+2018-10-17 290 17:42:43:313~zt.script~param: "igniterDelayBeforeRetractMs":1500 
+2018-10-17 290 17:42:43:313~zt.script~param: "useIgnitionDetection":true 
+2018-10-17 290 17:42:43:313~zt.script~param: "extinctionDetectionStopsTest":true 
+2018-10-17 290 17:42:43:313~zt.script~param: "pmt1Gain":4.75 
+2018-10-17 290 17:42:43:313~zt.script~param: "pmt2Gain":3.25 
+2018-10-17 290 17:42:43:313~zt.script~param: "pmt3Gain":3.5 
+2018-10-17 290 17:42:43:314~zt.script~param: "useFoma":true 
+2018-10-17 290 17:42:43:314~zt.script~param: "flowTimeoutSec":150 
+2018-10-17 290 17:42:43:314~zt.script~param: "nitrogenPrimingDurationSec":10 
+2018-10-17 290 17:42:43:314~zt.script~param: "primingAndPreIgnitionDurationSec":5 
+2018-10-17 290 17:42:43:314~zt.script~param: "stabilizationTime1Sec":1.5 
+2018-10-17 290 17:42:43:314~zt.script~param: "dilutionTimeSec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "stabilizationTime2Sec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "matchingCoflowRampTimeSec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "stabilizationTime3Sec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "fuelAndCoflowRampTimeSec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "constantFlowTimeSec":5 
+2018-10-17 290 17:42:43:314~zt.script~param: "velocityAirIgnitionMPerSec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "velocityAirFinalMPerSec":0 
+2018-10-17 290 17:42:43:314~zt.script~param: "velocityMixIgnitionMPerSec":0.19 
+2018-10-17 290 17:42:43:314~zt.script~param: "velocityMixFinalMPerSec":0.19 
+2018-10-17 290 17:42:43:314~zt.script~param: "concentrationInitial":0.8 
+2018-10-17 290 17:42:43:314~zt.script~param: "concentrationFinal":0.8 
+2018-10-17 290 17:42:43:314~zt.script~param: "rampCount":0 
+2018-10-17 290 17:42:43:315~zt.script~param: "rampSizeMPerSec":0.05 
+2018-10-17 290 17:42:43:315~zt.script~param: "rampTimeSec":10 
+2018-10-17 290 17:42:43:315~zt.script~param: "rampConstantFlowTimeSec":10 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldCommandManually":false 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldInitializeVolts":-800 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldInitializeTimeSec":2 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldMinVoltage":-10000 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldMaxVoltage":-1000 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldCycles":1 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldStepVoltage":-350 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldStepDurationSecs":2 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldRampRatePerSec":0 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldRampDurationSecs":0
+
+--- page 29 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+29 
+ 
+ 
+2018-10-17 290 17:42:43:315~zt.script~param: "efieldHoldDurationSecs":0 
+2018-10-17 290 17:42:43:315~zt.script~E-Field Voltage Sweep test point 18290F1 STARTED 
+2018-10-17 290 17:42:43:315~zt.script~Setting PMT gains 
+2018-10-17 290 17:42:43:316~zt.script~priming/ignition flow mfca1/coflow = 0 N2 SLPM 
+2018-10-17 290 17:42:43:316~acme.diag~"Received command: 
+PmtSetAllGains(PMT1Gain:4.75,PMT2Gain:3.25,PMT3Gain:3.5)" 
+2018-10-17 290 17:42:43:316~zt.script~priming/ignition flow mfca2/inert = 
+0.007234852958624181 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~priming/ignition flow mfca3/fuel = 
+0.047739049545524145 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~matched flow mfca1/coflow = 0 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~diluted igntion flow mfca2/inert = 
+0.007234852958624181 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~diluted ignition flow mfca3/fuel = 
+0.047739049545524145 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~coflow acceration = 0 m/s2 
+2018-10-17 290 17:42:43:316~zt.script~final flow mfca1/coflow = 0 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~final flow mfca2/inert = 0.007234852958624181 N2 
+SLPM 
+2018-10-17 290 17:42:43:316~zt.script~final flow mfca3/fuel = 0.047739049545524145 N2 
+SLPM 
+2018-10-17 290 17:42:43:316~acme~"Received command: 
+SystemOpenTestPoint(testpointName:18290F1)" 
+2018-10-17 290 17:42:43:316~zt.script~ramp flow mfca1/coflow = 0 N2 SLPM 
+2018-10-17 290 17:42:43:316~zt.script~ramp flow mfca2/inert = 0.0019039086733221532 
+N2 SLPM 
+2018-10-17 290 17:42:43:317~zt.script~ramp flow mfca3/fuel = 0.012562907775137933 N2 
+SLPM 
+2018-10-17 290 17:42:43:317~zt.script~Changing cameras to pre-ignition settings 
+2018-10-17 290 17:42:43:317~zt.script~Intensified camera to safe mode 
+2018-10-17 290 17:42:43:317~acme.image~"Received command: 
+DataCameraSetManualExposure(integrationTimeUs:100000)" 
+2018-10-17 290 17:42:43:318~acme.image~"Received command: 
+AnalogCameraSetShutter(shutter:2)" 
+2018-10-17 290 17:42:43:353~acme.image~Analog command successful. 
+2018-10-17 290 17:42:43:353~acme.image~"Received command: 
+IntensifiedCameraGate(gateType:0,pulsedGateWidthCounts:0)" 
+2018-10-17 290 17:42:43:354~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:42:43:354~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:42:43:427~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:42:43:429~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:42:43:554~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:42:43:793~zt.fcf~Success sending RVC command in rvcThreadWaiting on 
+RVC response in rvcThread 
+2018-10-17 290 17:42:43:794~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:42:43:817~acme.image~"Received command: 
+IntensifiedCameraGainAmplitude(gainAmplitudeCounts:2048)"
+
+--- page 30 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+30 
+ 
+ 
+2018-10-17 290 17:42:43:818~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:42:43:827~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:42:43:829~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:42:45:817~zt.script~Inserting igniter 
+2018-10-17 290 17:42:45:817~acme.image~"Received command: 
+IlluminationConfigure(sideLEDBankState:1,endLEDBankState:1)" 
+2018-10-17 290 17:42:45:818~zt.script~Clearing MFC integrated flow 
+2018-10-17 290 17:42:45:818~acme.igniter~"Received command: 
+IgniterMove(position:2472)" 
+2018-10-17 290 17:42:46:070~acme.diag~"Received command: 
+ExtinctionDetectionSetState(state:0)" 
+2018-10-17 290 17:42:46:071~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*00g31=0)" 
+2018-10-17 290 17:42:46:120~acme.flow~Reply for command:  *00g31=0 
+2018-10-17 290 17:42:46:120~acme.flow~">" 
+2018-10-17 290 17:42:46:818~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*01g31=0)" 
+2018-10-17 290 17:42:47:031~acme.flow~Reply for command:  *01g31=0 
+2018-10-17 290 17:42:47:031~acme.flow~">" 
+2018-10-17 290 17:42:47:818~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*02g31=0)" 
+2018-10-17 290 17:42:48:008~acme.flow~Reply for command:  *02g31=0 
+2018-10-17 290 17:42:48:008~acme.flow~">" 
+2018-10-17 290 17:42:48:818~zt.script~Reporting initial MFC integrated flow 
+2018-10-17 290 17:42:48:819~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*00g31)" 
+2018-10-17 290 17:42:49:010~acme.flow~Reply for command:  *00g31 
+2018-10-17 290 17:42:49:010~acme.flow~"0 
+2018-10-17 290 17:42:49:010~acme.flow~>" 
+2018-10-17 290 17:42:49:819~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*01g31)" 
+2018-10-17 290 17:42:50:011~acme.flow~Reply for command:  *01g31 
+2018-10-17 290 17:42:50:011~acme.flow~"0 
+2018-10-17 290 17:42:50:011~acme.flow~>" 
+2018-10-17 290 17:42:50:819~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*02g31)" 
+2018-10-17 290 17:42:51:010~acme.flow~Reply for command:  *02g31 
+2018-10-17 290 17:42:51:010~acme.flow~"0 
+2018-10-17 290 17:42:51:010~acme.flow~>" 
+2018-10-17 290 17:42:51:819~zt.script~Test point PAUSED to check igniter. 
+SystemResumeScript when ready. 
+2018-10-17 290 17:42:52:820~acme~"Received command: SystemPauseScript()" 
+2018-10-17 290 17:42:52:820~zt.script~Script paused. 
+2018-10-17 290 17:42:59:511~acme~"Received command: SystemResumeScript()" 
+2018-10-17 290 17:42:59:511~zt.script~Script resumed. 
+2018-10-17 290 17:42:59:523~zt.script~Configuring CIR manifolds, except fuel 
+2018-10-17 290 17:42:59:523~acme.flow~"Received command: FlowCloseAll()"
+
+--- page 31 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+31 
+ 
+ 
+2018-10-17 290 17:42:59:524~acme~Sent IopRunScript command to IOP. 
+2018-10-17 290 17:42:59:524~zt.fcf~Sending out a command on the line. 
+2018-10-17 290 17:43:12:262~acme~"Received command: 
+SystemCirFlowState(fuelManifoldState:0,diluentManifoldState:0,oxygenManifoldState:0
+,nitrogenManifoldState:2)" 
+2018-10-17 290 17:43:12:334~zt.script~CIR Manifold State.  Fuel:Closed  Diluent:Closed  
+Oxygen:Closed  Nitrogen:Bypass 
+2018-10-17 290 17:43:12:334~acme.flow~"Received command: 
+FlowSetSolenoidValveState(solenoidValve:7,state:1)" 
+2018-10-17 290 17:43:12:835~zt.script~Priming nitrogen line for 10 sec 
+2018-10-17 290 17:43:12:835~acme.flow~"Received command: 
+FlowSetMfcRate(massFlowController:2,flowSlm:0.00723485)" 
+2018-10-17 290 17:43:22:837~zt.script~Recording pre-ignition data for 0 sec 
+2018-10-17 290 17:43:22:837~zt.script~Starting IPSU(s) archiving.  Waiting up to 40 sec 
+2018-10-17 290 17:43:22:837~acme.diag~"Received command: DataRecordingStart()" 
+2018-10-17 290 17:43:22:837~acme.image~"Received command: 
+IpsuSetArchiveRate(ipsu:1,archiveRate:2)" 
+2018-10-17 290 17:43:22:838~acme.image~"Received command: 
+StartIpsus(testpointName:18290F1,ipsu5NumberCameras:2,ipsu5Camera1:3,ipsu5Came
+ra2:4,ipsu5Camera3:0,ipsu5Camera4:0,ipsu6NumberCameras:0,ipsu6Camera1:0,ipsu6C
+amera2:0,ipsu6Camera3:0,ipsu6Camera4:0)" 
+2018-10-17 290 17:43:22:839~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:43:22:841~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:43:22:847~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:43:22:848~acme.ipsu~Success for IPSU 5 command IpsugTestpointOpen 
+2018-10-17 290 17:43:22:848~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:43:22:850~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:43:22:852~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:43:22:853~acme.ipsu~Success for IPSU 5 command 
+IpsugCamerasStartTestPointArchive 
+2018-10-17 290 17:43:23:837~zt.script~Recording pre-ignition images for 0 sec 
+2018-10-17 290 17:43:23:837~zt.script~Opening CIR fuel manifold 
+2018-10-17 290 17:43:23:837~acme~Sent IopRunScript command to IOP. 
+2018-10-17 290 17:43:23:838~zt.fcf~Sending out a command on the line. 
+2018-10-17 290 17:43:38:923~acme~"Received command: 
+SystemCirFlowState(fuelManifoldState:1,diluentManifoldState:0,oxygenManifoldState:0
+,nitrogenManifoldState:2)" 
+2018-10-17 290 17:43:38:951~zt.script~CIR Manifold State.  Fuel:Open  Diluent:Closed  
+Oxygen:Closed  Nitrogen:Bypass 
+2018-10-17 290 17:43:38:951~zt.script~Intensified camera to continuous mode 
+2018-10-17 290 17:43:38:951~acme.image~"Received command: 
+IlluminationConfigure(sideLEDBankState:0,endLEDBankState:0)" 
+2018-10-17 290 17:43:38:952~acme.image~"Received command: 
+IntensifiedCameraGate(gateType:1,pulsedGateWidthCounts:0)" 
+2018-10-17 290 17:43:38:952~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:43:38:954~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:43:38:956~zt.fcf~Success sending RVC command in rvcThread
+
+--- page 32 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+32 
+ 
+ 
+2018-10-17 290 17:43:39:451~acme.image~"Received command: 
+IntensifiedCameraGainAmplitude(gainAmplitudeCounts:2643)" 
+2018-10-17 290 17:43:39:452~acme.igniter~"Received command: 
+IgnitionDetectionSetState(state:1)" 
+2018-10-17 290 17:43:39:452~acme.igniter~Ignition detection enabled 
+2018-10-17 290 17:43:39:452~acme.igniter~"Received command: 
+IgniterSetupMove(position:0)" 
+2018-10-17 290 17:43:39:594~acme.flow~"Received command: 
+FlowSetAllSolenoidValveStates(SVA1State:0,SVA2State:0,SVA3State:0,SVA4State:0,SVA5
+State:0,SVA6State:0,SVA7State:1,SVA8State:0,SVA9State:1)" 
+2018-10-17 290 17:43:39:644~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:43:39:644~zt.fcf~Waiting on RVC response in rvcThreadSuccess sending 
+RVC command in rvcThread 
+2018-10-17 290 17:43:39:951~zt.script~Flow timeout in 150 sec 
+2018-10-17 290 17:43:39:952~zt.script~Priming gas lines for 5 sec 
+2018-10-17 290 17:43:39:952~acme.flow~"Received command: 
+FlowSetAllMfcRates(MFCA1StaticMixerFlowSlm:0,MFCA2BypassFlowSlm:0.00723485,M
+FCA3FuelFlowSlm:0.0477391)" 
+2018-10-17 290 17:43:44:953~zt.script~Igniting with 3.75V for 2000 Ms 
+2018-10-17 290 17:43:44:953~acme.igniter~"Received command: 
+IgniterPulse(power:3.75,durationMs:2000)" 
+2018-10-17 290 17:43:45:752~acme.igniter~IGNITION DETECTED 
+2018-10-17 290 17:43:45:752~acme.igniter~Powering off igniter and homing 
+2018-10-17 290 17:43:46:453~zt.script~Changing cameras to test settings 
+2018-10-17 290 17:43:46:453~zt.script~Starting bracketed exposures on ACME camera 
+2018-10-17 290 17:43:46:453~zt.script~Waiting stabilization time #1 1.5 sec 
+2018-10-17 290 17:43:46:493~acme.igniter~"Received command: 
+IgniterExecuteSetupMove()" 
+2018-10-17 290 17:43:46:633~acmeIgniterMotion.trace~void 
+IgniterController::startMotion() local _inMotion already true. 
+2018-10-17 290 17:43:46:633~acmeIgniterMotion.trace~void 
+IgniterController::startMotion() Motion timer already active! 
+2018-10-17 290 17:43:46:634~acme.image~"Received command: 
+DataCameraExposureBracketing(enable:1,imagesPerExposure:1,exposures:6,exposureSt
+artUsec:75,exposureIncrementUsec:340)" 
+2018-10-17 290 17:43:46:634~acme.image~"Received command: 
+AnalogCameraSetShutter(shutter:5)" 
+2018-10-17 290 17:43:46:670~acme.image~Analog command successful. 
+2018-10-17 290 17:43:46:761~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:43:46:761~zt.fcf~Waiting on RVC response in rvcThreadSuccess sending 
+RVC command in rvcThread 
+2018-10-17 290 17:43:47:453~zt.script~Enabling and initializing E-Field to -800 volts 
+2018-10-17 290 17:43:47:454~zt.script~Waiting E-Field initialize time 2 sec 
+2018-10-17 290 17:43:47:454~acme.efield~"Received command: EFieldEnable(state:1)" 
+2018-10-17 290 17:43:47:454~acme.efield~"Received command: EFieldSetVoltage(voltage:-
+800)" 
+2018-10-17 290 17:43:49:454~zt.script~Extinction detection enabled
+
+--- page 33 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+33 
+ 
+ 
+2018-10-17 290 17:43:49:454~zt.script~Waiting for dilution time 0 secs 
+2018-10-17 290 17:43:49:454~acme.diag~"Received command: 
+ExtinctionDetectionSetState(state:1)" 
+2018-10-17 290 17:43:49:454~zt.script~Waiting stabilization time #2 0 sec 
+2018-10-17 290 17:43:49:454~zt.script~Waiting for coflow to match test conditions 0 sec 
+2018-10-17 290 17:43:49:455~zt.script~Waiting stabilization time #3 0 sec 
+2018-10-17 290 17:43:49:455~zt.script~Waiting constant flow time 5 sec 
+2018-10-17 290 17:43:54:456~zt.script~Stepping E-Field 
+2018-10-17 290 17:43:54:456~acme.efield~"Received command: 
+EFieldSteppedSignal(minVoltage:-10000,maxVoltage:-1000,stepVoltage:-
+350,stepDurationSecs:2,cycles:1)" 
+2018-10-17 290 17:44:45:463~zt.script~Waveform complete. E-Field disabled 
+2018-10-17 290 17:44:45:463~zt.script~Waiting constant flow time #2 5 sec 
+2018-10-17 290 17:44:45:494~acme.efield~"Received command: EFieldEnable(state:0)" 
+2018-10-17 290 17:44:50:465~zt.script~Turning off gas flow 
+2018-10-17 290 17:44:50:465~zt.script~Waiting post-flame imaging duration of 3 sec 
+2018-10-17 290 17:44:50:493~acme.igniter~"Received command: 
+IgnitionDetectionSetState(state:0)" 
+2018-10-17 290 17:44:50:493~acme.igniter~Ignition detection disabled 
+2018-10-17 290 17:44:50:494~acme.diag~"Received command: 
+ExtinctionDetectionSetState(state:0)" 
+2018-10-17 290 17:44:50:494~acme.flow~"Received command: FlowCloseAll()" 
+2018-10-17 290 17:44:50:495~acme~Sent IopRunScript command to IOP. 
+2018-10-17 290 17:44:50:496~zt.fcf~Sending out a command on the line. 
+2018-10-17 290 17:44:53:466~zt.script~Stopping IPSU(s) 
+2018-10-17 290 17:44:53:466~zt.script~Waiting post-flame data duration of 5 sec 
+2018-10-17 290 17:44:53:495~acme.image~"Received command: StopIpsus()" 
+2018-10-17 290 17:44:53:496~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:44:53:497~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:44:53:653~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:44:53:654~acme.ipsu~Success for IPSU 5 command 
+IpsugCamerasStopTestPointArchive 
+2018-10-17 290 17:44:54:532~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:44:54:532~zt.fcf~Waiting on RVC response in rvcThreadSuccess sending 
+RVC command in rvcThread 
+2018-10-17 290 17:44:54:532~acme.ipsu~Success for IPSU 5 command IpsugTestpointClose 
+2018-10-17 290 17:44:58:467~zt.script~Test point PAUSED prior to leak check 
+measurement. SystemResumeScript when ready. 
+2018-10-17 290 17:44:58:494~acme.diag~"Received command: DataRecordingStop()" 
+2018-10-17 290 17:44:59:495~acme~"Received command: SystemPauseScript()" 
+2018-10-17 290 17:44:59:495~zt.script~Script paused. 
+2018-10-17 290 17:45:06:595~acme~"Received command: SystemResumeScript()" 
+2018-10-17 290 17:45:06:595~zt.script~Script resumed. 
+2018-10-17 290 17:45:06:671~acme.diag~"Received command: DataRecordingStart()" 
+2018-10-17 290 17:45:07:671~zt.script~Measuring leak current 
+2018-10-17 290 17:45:07:671~zt.script~E-field enabled 
+2018-10-17 290 17:45:07:671~zt.script~Initializing E-Field to -800 volts
+
+--- page 34 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+34 
+ 
+ 
+2018-10-17 290 17:45:07:671~acme.efield~"Received command: EFieldEnable(state:1)" 
+2018-10-17 290 17:45:07:671~zt.script~Waiting E-Field initialize time 2 sec 
+2018-10-17 290 17:45:07:672~acme.efield~"Received command: EFieldSetVoltage(voltage:-
+800)" 
+2018-10-17 290 17:45:09:672~zt.script~Stepping E-Field 
+2018-10-17 290 17:45:09:672~acme.efield~"Received command: 
+EFieldSteppedSignal(minVoltage:-10000,maxVoltage:-1000,stepVoltage:-
+350,stepDurationSecs:2,cycles:1)" 
+2018-10-17 290 17:46:00:680~zt.script~Waveform complete. E-Field disabled 
+2018-10-17 290 17:46:00:680~acme.efield~"Received command: EFieldEnable(state:0)" 
+2018-10-17 290 17:46:06:680~zt.script~Intensified camera to safe mode 
+2018-10-17 290 17:46:06:680~acme~"Received command: SystemCloseTestPoint()" 
+2018-10-17 290 17:46:06:680~acme~List of files for test point "18290F1" 
+2018-10-17 290 17:46:06:681~acme~"/payload/sci/18290F1/18290F1_data.csv" 
+2018-10-17 290 17:46:06:681~acme~"/payload/sci/18290F1/18290F1_mfcSetpoints.csv" 
+2018-10-17 290 17:46:06:726~acme~"/payload/logs/2018-10-17_12-26ACME.log" 
+2018-10-17 290 17:46:06:726~acme~"/payload/logs/2018-10-17_12-
+59ACMECommands.log" 
+2018-10-17 290 17:46:06:726~acme.image~"Received command: 
+IntensifiedCameraGate(gateType:0,pulsedGateWidthCounts:0)" 
+2018-10-17 290 17:46:06:727~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:46:06:737~zt.fcf~Waiting on RVC response in rvcThreadSuccess sending 
+RVC command in rvcThread 
+2018-10-17 290 17:46:06:927~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:46:06:929~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:46:07:144~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:46:07:181~zt.script~Setting PMT gains to zero 
+2018-10-17 290 17:46:07:181~acme.image~"Received command: 
+IntensifiedCameraGainAmplitude(gainAmplitudeCounts:2048)" 
+2018-10-17 290 17:46:07:181~zt.script~Reporting final MFC integrated flow 
+2018-10-17 290 17:46:07:181~acme.image~"Received command: 
+DataCameraExposureBracketing(enable:0,imagesPerExposure:1,exposures:6,exposureSt
+artUsec:75,exposureIncrementUsec:340)" 
+2018-10-17 290 17:46:07:182~acme.diag~"Received command: 
+PmtSetAllGains(PMT1Gain:0,PMT2Gain:0,PMT3Gain:0)" 
+2018-10-17 290 17:46:07:183~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*00g31)" 
+2018-10-17 290 17:46:07:183~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:46:07:183~zt.fcf~Sending out an RVC command on the line in rvcThread. 
+2018-10-17 290 17:46:07:185~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:46:07:187~zt.fcf~Waiting on RVC response in rvcThread 
+2018-10-17 290 17:46:07:231~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:46:07:233~zt.fcf~Success sending RVC command in rvcThread 
+2018-10-17 290 17:46:07:514~acme.flow~Reply for command:  *00g31 
+2018-10-17 290 17:46:07:514~acme.flow~"0 
+2018-10-17 290 17:46:07:514~acme.flow~>" 
+2018-10-17 290 17:46:08:181~acme.flow~"Received command:
+
+--- page 35 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+35 
+ 
+ 
+FlowMfcSerialCommand(serialCommand:*01g31)" 
+2018-10-17 290 17:46:08:526~acme.flow~Reply for command:  *01g31 
+2018-10-17 290 17:46:08:526~acme.flow~"0.01123948 
+2018-10-17 290 17:46:08:526~acme.flow~>" 
+2018-10-17 290 17:46:09:181~acme.flow~"Received command: 
+FlowMfcSerialCommand(serialCommand:*02g31)" 
+2018-10-17 290 17:46:09:525~acme.flow~Reply for command:  *02g31 
+2018-10-17 290 17:46:09:525~acme.flow~"0.05557147 
+2018-10-17 290 17:46:09:525~acme.flow~>" 
+2018-10-17 290 17:46:10:181~zt.script~E-Field Voltage Sweep test point 18290F1 
+COMPLETE 
+2018-10-17 290 17:46:21:792~acme.image~"Received command: 
+IlluminationConfigure(sideLEDBankState:1,endLEDBankState:1)" 
+ 
+IPSUG.log excerpt 
+Meanwhile, the IPSUG.log files can provide a check of the exposure time, which can be  
+particularly important when bracketing is employed with the ACME DataCam.  The 
+corresponding excerpt for test 18290F1, in which bracketing is used, is  presented here  
+without the many repetitive rows in the middle.  
+ 
+2018-10-17 290 17:42:28:206~ipsug~CPU operational minutes is now  137855 
+2018-10-17 290 17:42:43:433~ipsug.Halcon~SetExposure( integrationTimeUsecs  100000  ) 
+2018-10-17 290 17:43:22:852~zt.filesys~Set new directory permissions to rwxrwxrwx (777) 
+for:  "/sd1" 
+2018-10-17 290 17:43:22:852~zt.filesys~Set new directory permissions to rwxrwxrwx (777) 
+for:  "/sd1/sci" 
+2018-10-17 290 17:43:22:852~zt.filesys~Set new directory permissions to rwxrwxrwx (777) 
+for:  "/sd1/sci/18290F1" 
+2018-10-17 290 17:43:22:856~ipsug.image~virtual void 
+ImagingController::handleCommand(XGenericMessage*) bCmdComplete camera 3 
+2018-10-17 290 17:43:22:857~ipsug.image~virtual void 
+ImagingController::handleCommand(XGenericMessage*) bCmdComplete camera 4 
+2018-10-17 290 17:43:22:857~ipsug.FGrabber~void HalconFrameGrabber::captureImages() 
+"ACME" start of capture 
+2018-10-17 290 17:43:22:857~ipsug.FGrabber~void HalconFrameGrabber::captureImages() 
+"INTNS" start of capture 
+2018-10-17 290 17:43:28:188~ipsug~CPU operational minutes is now  137856 
+2018-10-17 290 17:43:46:679~ipsug.Halcon~setExposureBracketing(  1 , 6 , 75 , 340 ) 
+2018-10-17 290 17:43:46:680~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:43:46:711~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:43:46:812~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  ) 
+2018-10-17 290 17:43:46:850~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:43:46:880~ipsug.Halcon~SetExposure( integrationTimeUsecs  10019  ) 
+2018-10-17 290 17:43:46:915~ipsug.Halcon~SetExposure( integrationTimeUsecs  34064  ) 
+2018-10-17 290 17:43:46:947~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:43:46:981~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:43:47:014~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  )
+
+--- page 36 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+36 
+ 
+ 
+2018-10-17 290 17:43:47:050~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:43:47:081~ipsug.Halcon~SetExposure( integrationTimeUsecs  10019  ) 
+2018-10-17 290 17:43:47:115~ipsug.Halcon~SetExposure( integrationTimeUsecs  34064  ) 
+2018-10-17 290 17:43:47:145~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:43:47:179~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:43:47:217~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  ) 
+2018-10-17 290 17:43:47:248~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:43:47:282~ipsug.Halcon~SetExposure( integrationTimeUsecs  10019  ) 
+2018-10-17 290 17:43:47:313~ipsug.Halcon~SetExposure( integrationTimeUsecs  34064  ) 
+. 
+. 
+. 
+2018-10-17 290 17:44:52:860~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:44:52:899~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:44:52:932~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  ) 
+2018-10-17 290 17:44:52:967~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:44:53:000~ipsug.Halcon~SetExposure( integrationTimeUsecs  10019  ) 
+2018-10-17 290 17:44:53:163~ipsug.Halcon~SetExposure( integrationTimeUsecs  34064  ) 
+2018-10-17 290 17:44:53:169~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:44:53:175~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:44:53:180~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  ) 
+2018-10-17 290 17:44:53:187~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:44:53:193~ipsug.Halcon~SetExposure( integrationTimeUsecs  10019  ) 
+2018-10-17 290 17:44:53:228~ipsug.Halcon~SetExposure( integrationTimeUsecs  34064  ) 
+2018-10-17 290 17:44:53:261~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:44:53:296~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:44:53:333~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  ) 
+2018-10-17 290 17:44:53:365~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:44:53:397~ipsug.Halcon~SetExposure( integrationTimeUsecs  10019  ) 
+2018-10-17 290 17:44:53:431~ipsug.Halcon~SetExposure( integrationTimeUsecs  34064  ) 
+2018-10-17 290 17:44:53:465~ipsug.Halcon~SetExposure( integrationTimeUsecs  75  ) 
+2018-10-17 290 17:44:53:496~ipsug.Halcon~SetExposure( integrationTimeUsecs  255  ) 
+2018-10-17 290 17:44:53:532~ipsug.Halcon~SetExposure( integrationTimeUsecs  867  ) 
+2018-10-17 290 17:44:53:550~ipsug.FGrabber~"INTNS" saving meta data after archiving 
+2018-10-17 290 17:44:53:557~ipsug.FGrabber~"ACME" saving meta data after archiving 
+2018-10-17 290 17:44:53:558~ipsug.Halcon~SetExposure( integrationTimeUsecs  2947  ) 
+2018-10-17 290 17:44:53:610~ipsug.FGrabber~"ACME" end of capture in captureImages 
+2018-10-17 290 17:44:53:611~ipsug.FGrabber~"INTNS" end of capture in captureImages 
+2018-10-17 290 17:45:28:196~ipsug~CPU operational minutes is now  137858 
+2018-10-17 290 17:46:07:200~ipsug.Halcon~setExposureBracketing(  0 , 0 , 0 , 0 )
+
+--- page 37 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+37 
+ 
+ 
+Appendix A 
+Nomenclature 
+This document’s key abbreviations are listed here. 
+ACME Advanced Combustion via Microgravity Experiments (project including E-FIELD Flames) 
+AOI Area of Interest (e.g., for image acquisition of just a portion of the camera FOV) 
+BRE Burning Rate Emulator (another ACME experiment) 
+CCD Charge-Coupled Device (such as a camera sensor) 
+CIR Combustion Integrated Rack (ISS facility in which ACME experiments are conducted) 
+CFI Cool Flames Investigation (a droplet combustion experiment preceding ACME in the CIR) 
+CLD Flame Coflow Laminar Diffusion Flame (another ACME experiment) 
+CSV comma-separated values 
+DataCam Data Camera (for ACME experiments, characterized for pyrometry, etc.) 
+E-FIELD Flames Electric-Field Effects on Laminar Diffusion Flames 
+Fiji Fiji Is Just ImageJ (a version of ImageJ preloaded with many plug-in features) 
+FOMA Fuel Oxidizer Management Assembly (CIR’s gas management subsystem) 
+FOV Field of View 
+fps frames per second 
+GCIP Gas Chromatograph Instrumentation Package 
+GIPOC Glenn ISS Payload Operations Center 
+GMT Greenwich Mean Time 
+HiBMs High Bit-depth Multi-spectral camera (of the CIR facility) 
+HOBJ Halcon object (binary uncompressed format; used for the DataCam)  
+ImageJ Image Processing and Analysis in Java (open-source image processing software)  
+IPSU Image Processing and Storage Unit (CIR subsystem) 
+IPSU-G IPSU for Gigabit ethernet cameras 
+ISS International Space Station 
+LLL-UV Low Light Level Ultraviolet camera (of the CIR facility) 
+MFC Mass Flow Controller 
+NTSC National Television System Committee 
+OMA2 Optical Multi-channel Analyzer 2 (open-source software for image processing and display) 
+ops operations 
+PaRIS Passive Rack Isolation System 
+PIMS Principal Investigator Microgravity Services 
+PMT Photomultiplier Tube (where ACME is equipped with three PMT modules) 
+PT pressure transducer 
+psia pounds per square inch 
+s-Flame Structure and Response of Spherical Diffusion Flame (another ACME experiment)  
+SAMS Space Acceleration Measurement System 
+slpm standard liters per minute (a measure of the mass or molar flow rate of a gas) 
+TFP Thin-Filament Pyrometry (a technique for making gas-phase temperature measurements) 
+TIFF or TIF Tagged Image File Format (used by the CFI, HiBMs, and LLL-UV cameras) 
+TM thermistor 
+TS Transport Stream (a video format)
+
+--- page 38 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+38 
+ 
+ 
+Appendix B 
+Installation of QtOMA2 on a PC 
+These instructions were provided by Prof. Marshall Long (Yale U.). 
+ 
+These instructions assume you don’t already have Qt installed. If you do, skip to Part B. 
+ 
+Part A: 
+Download the opensource Qt from https://www.qt.io/download. 
+➔ Go open source 
+➔ Download the Qt Online Installer 
+➔ Download 
+➔ Save File 
+ 
+In the downloads folder, open qt-unified-windows-x86-x.x.x-online 
+➔ Sign up for a Qt account or login 
+➔ Accept Open Source obligations 
+➔ Contribute to Qt Development (on not) 
+➔ Accept default install location 
+➔ Install the components as shown in the figure on the next page 
+➔ Agree to terms 
+➔ Add shortcuts 
+➔ Install 
+ 
+ 
+Part B: 
+Download the latest version of QtOma2 from https://github.com/mblong/qtoma2. 
+➔ Code → Download ZIP 
+ 
+Expand the zip file. 
+In the qtoma2-master folder, open QtOma.pro (the Qt Project file) 
+ 
+The first time this opens in Qt Creator, it will ask for the project to be configured. Just choose the 
+defaults. 
+ 
+➔ Configure Project 
+➔ In the lower left corner, click on the green arrow to run QtOma2.
+
+--- page 39 ---
+ACME/E-FIELD Flames Data Interpretation  2 Oct. 2020 
+ 
+39 
+ 
+ 
+Selection of Qt (not OMA2) components to install in part A

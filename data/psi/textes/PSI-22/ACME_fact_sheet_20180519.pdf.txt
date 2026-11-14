@@ -1,0 +1,50 @@
+Source : NASA PSI, PSI-22, Reports, ACME fact sheet 20180519.pdf
+
+--- page 1 ---
+19 May 2018   
+Advanced Combustion via Microgravity Experiments (ACME) 
+ 
+PURPOSE:  ACME is focused on advanced combustion 
+technology via fundamental microgravity research.  The 
+primary goal is to  improve efficiency and reduce pollutant 
+emission in practical terrestrial combustion.  A secondary 
+objective is fire prevention, especially for spacecraft. 
+ 
+RESEARCH:  ACME includes six  independent experiments 
+investigating laminar, gaseous, non -premixed flam es.  They 
+are being conducted with a single set of modular hardware 
+in the Combustion Integrated Rack (CIR) on the International 
+Space Station (ISS). 
+STATUS:  ACME set-up and check-out was carried out by the 
+ISS crew in Sept.-Oct. 2017, where science test ing began in 
+November.  The first round of testing for the Coflow Laminar 
+Diffusion Flame (CLD Flame)  experiment of Marshall B. Long 
+et al.  was completed in Feb. 2018, where 130 methane 
+flames (at a range of concentrations) were ignited.  The first 
+round of testing for the Electric-Field Effects on Laminar 
+Diffusion Flames (E-FIELD Flames)  experiment of Derek 
+Dunn-Rankin et al. was completed on May 18 , where 1 20 
+coflow flames were ignited .  On May 20, b urners and 
+additional hardware for the next three ACME experiments 
+are scheduled to launch .  The ACME hardware should be 
+reconfigured on May 22 by astronaut Ricky Arnold (NASA) 
+for CLD Flame ’s second round , where the ethylene flame 
+testing should begin later in the week. 
+ 
+WEB SITE:  http://spaceflightsystems.grc.nasa.gov/acme/ 
+UPDATES:  www.facebook.com/space.flames  
+PHOTOGRAPHS:  www.flickr.com/photos/space-flames 
+EDUCATION:  https://tinyurl.com/space-flames 
+ 
+Paolo Nespoli (ESA) installing the ACME chamber insert 
+into the Combustion Integrated Rack (CIR) 
+Joe Acaba (NASA) working on the ACME chamber insert 
+Example image of a lifted coflow flame from the CLD Flame 
+experiment of Marshall B, Long et al. 
+Anton Shkaplerov (RSA) and Oleg Artemyev (RSA) 
+exchanging a CIR gas bottle for E-FIELD Flames testing 
+ 
+CONTACT: 
+Dennis Stocker, ACME Project Scientist 
+NASA Glenn Research Center, Cleveland, OH 
+216-433-2166, dennis.p.stocker@nasa.gov

@@ -1,0 +1,890 @@
+Source : NASA PSI, PSI-22, Science Documents, ACME non-imaging data file description.pdf
+
+--- page 1 ---
+1 
+ 
+2017-FEB-17 
+ACME Non-Imaging Data 
+ Notes compiled by Dennis Stocker, 216-433-2166, dennis.p.stocker@nasa.gov 
+ 
+The raw non-imaging data will be made available in a spreadsheet format, specifically in a csv format, i.e., with 
+comma-separated values, which can be opened by software such as Microsoft Excel. 
+ 
+The first row of the spreadsheet includes the experiment configuration 
+… where this is an example from a ground test (presented here in 3 columns rather than 1 long row)
+2016-12-19 354 19:17:01:028  
+Experiment: 1 
+Test Point: Req1.7.9.1_Neg 
+MFCA1 Gas: 0 
+MFCA1 Full Scale: 20.000000 
+MFCA2 Gas: 0 
+MFCA2 Full Scale: 5.000000 
+MFCA3 Gas: 0 
+MFCA3 Full Scale: 2.000000 
+EField: 1 
+EFieldPol: 1 
+Igniter: 0 
+Burner: 4 
+Thermocouple: 0 
+Radiometer: 0 
+IPSU 1: 0 
+IPSU 2: 0 
+IPSU 3: 0 
+IPSU 4: 0 
+IPSU 5: 1 
+IPSU 6: 0 
+PMT 1 Gain: 0.000000 
+PMT 2 Gain: 0.000000 
+PMT 3 Gain: 0.000000 
+ 
+The second row has these column headings for the data (again shown here in 3 columns rather than a long row) 
+… where this example shows standard headings (where there are variants, e.g., for BRE measurements)
+Time 
+MFCA1StaticMixerFlow 
+MFCA2BypassFlow 
+MFCA3FuelFlow 
+IonCurrent 
+PTA1 
+PTA2 
+PTA3 
+EfieldVoltage 
+PMT1 
+PMT2 
+PMT3 
+TCA 
+TCB 
+TCC 
+TCD 
+TC200A 
+TC200B 
+TCBurner 
+Radiometer+60 
+Radiometer+60CJ 
+Radiometer+30 
+Radiometer+30CJ 
+RadiometerCenter 
+RadiometerCenterCJ 
+Radiometer-30 
+Radiometer-30CJ 
+Radiometer-60 
+Radiometer-60CJ 
+RadiometerOffset 
+RadiometerOffsetCJ 
+TCE 
+Ch20 
+Ch21 
+TCCJ 
+EfieldSetpointOut
+
+--- page 2 ---
+2 
+ 
+ 
+The data is generally explained through 2 excerpts from the Software IDD, i.e., 
+Software Interface Design Description, ACME-DOC-010 Rev C (August 2016) 
+  8. Output Files 
+  4. Internal Interfaces (which includes Tables 15-17*) 
+*where Table 17 describes channels A0-4 of the DNx-AO-333 analog output board as discussed in 8.1 below. 
+ 
+8.0 Output FILES 
+8.1 Data Output File 
+Data output files are created using the SystemOpenTestPoint command which creates a file named and stored at 
+/payload/sci/testpointName_x/testpointName_x_data.csv, where testpointName is the parameter received in the 
+SystemOpenTestPoint command and _x is optional to avoid duplicate files, where x = 1,2,3, etc.  
+The file contains a two-line header.  The first line has the date and time, documentation of the setup received in a 
+SystemDefineSetup command, and the PMT gains.  The second line has the column headings for the subsequent rows of data.  The 
+text of the column headings is defined by the Diagnostics/Header registry entry or the Diagnostics/BreHeader entry depending on 
+whether the SystemDefineSetup command experimentType parameter was BRE or not. The column headings should match the data 
+which is the following: 
+- A timestamp in the format HH:MM:SS:mmm, where mmm is milliseconds. 
+- 11 channels of analog input from the cube DNx-AI-207 board in the order shown in Table 1. 
+- 25 channels of analog input from the cube DNx-AI-225 board in the order shown in Table 2.  (The names of 
+many of these values change depending on whether it is a BRE test or not, hence the two options for header.) 
+- Channel AO-4 of the DNx-AO-333 analog output board.  This is the E-Field control voltage. 
+Rows of comma-separated data is added to the file between DataRecordingStart and DataRecordingStop commands at a 
+rate defined by the Diagnostics/SampleTimeMsec registry entry, see Error! Reference source not found., defaulting to 8 
+msec for 125 Hz sampling.
+
+--- page 3 ---
+3 
+ 
+8.2 Message Log File 
+Software messages are logged to files named and stored at /payload/logs/YYYY-MM-DD_hh-mmACME.log, where YYYY 
+is year, MM is month, DD is day of month, hh is hour, and mm is minutes.  The date in the name is when the log file is 
+created, soon after software startup. 
+Each message line in the file begins with a timestamp and a logging category.  The timestamp is of the format YYYY-MM-
+DD DDD hh:mm:ss:mmm, where DDD is day of the year, mmm is milliseconds, and the rest are self-explanatory.  See 
+section Error! Reference source not found. for information about the logging category and how to filter them out if 
+desired. 
+8.3 Command Log File 
+The message log file, section 8.2, includes messages showing commands received and their parameters.  Command log 
+files contain only the details of each command received.  The files are named and stored at /payload/logs/YYYY-MM-
+DD_hh-mmACMECommands.log.  The format is for each command received a timestamped line of text with the 
+command name followed by timestamped lines of text showing each parameter name and parameter value, including 
+header information.
+
+--- page 4 ---
+4 
+ 
+4.0 INTERNAL INTERFACES 
+4.1 DNx-AI-207 Board 
+This analog input layer in the UEI PowerDNA Cube has 16 differential input channels with an input range of +/-10 Volts 
+and 18-bit resolution.  Several gains are available but ACME is using a gain of 1.  
+Table 1  DNx-AI-207 Board Signals 
+DNx-AI-207 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AIN-0 MFCA1_FLOW MFCA1 Flow Rate 0 to 5 V 
+Static mixer/oxygen mass flow controller flow rate. 0 to 
+MFCA1_FULL_SCALE in SLPM.  Flow rate (SLPM) = Voltage / 
+5.0 * MFCA1_FULL_SCALE.  Device is Teledyne Hastings 
+HFC-D-302.  Full scale depends on installed device. 
+AIN-1 MFCA2_FLOW MFCA2 Flow Rate 0 to 5 V 
+Nitrogen bypass/inert mass flow controller flow rate.   0 to 
+MFCA2_FULL_SCALE in SLPM.  Flow rate (SLPM) = Voltage / 
+5.0 * MFCA2_FULL_SCALE.   Device is Teledyne Hastings 
+HFC-D-302.  Full scale depends on installed device. 
+AIN-2 MFCA3_FLOW MFCA3 Flow Rate 0 to 5 V 
+Fuel mass flow controller flow rate. 0 to MFCA2_FULL_SCALE 
+in SLPM.  Flow rate (SLPM) = Voltage / 5.0 * 
+MFCA2_FULL_SCALE.  Device is Teledyne Hastings HFC-D-
+302.  Full scale depends on installed device. 
+AIN-3 ION_CURRENT Ion Current 
+-1.5 to 
+1.5V 
+Measurement of ion current between E-Field grid and burner. 
+Ion Current (A) = Voltage/(Rsense + RDA), where Rsense is 
+resistance of shunt resistor and RDA is the data acquisition 
+resistance.  -25 to 25 µA..
+
+--- page 5 ---
+5 
+ 
+DNx-AI-207 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AIN-4 PTA1_OUT PTA1 Pressure 
+0.5 to 4.5 
+V 
+Outer Coflow pressure.  Converted in flight software to 0 to 145 
+psia using Pressure (psia) = (Voltage – 0.5) * 14.5038 * 10 / 4. 
+Device is Measurement Specialties EPRB-2-VR33-10B-
+/CM1/ATR. 
+AIN-5 PTA2_OUT PTA2 Pressure 
+0.5 to 4.5 
+V 
+Inner Coflow/Burner pressure. Converted in flight software to to 
+0 to 145 psia using Pressure (psia) = (Voltage – 0.5) * 14.5038 
+* 10 / 4. Device is Measurement Specialties EPRB-2-VR33-
+10B-/CM1/ATR. 
+AIN-6 PTA3_OUT PTA3 Pressure 
+0.5 to 4.5 
+V 
+Chamber pressure. Converted in flight software to to 0 to 145 
+psia using Pressure (psia) = (Voltage – 0.5) * 14.5038 * 10 / 4. 
+Device is Measurement Specialties EPRB-2-VR33-10B-
+/CM1/ATR. 
+AIN-7 HV_OUT E-Field Voltage -4 to 4 V 
+Indirect measurement of E-Field high voltage supply. -10000 to 
++10000 V.  E-Field (V) = Voltage * 2486.1795 + 141.9733. 
+(Emperical equation).  
+AIN-8 PMT1_OUT 
+Photomultiplier Tube 
+1 Current 0 to 4 V 
+0 to 4 µA. Current (µA) = Voltage * 1.  Depends on  
+PMT1_GAIN, Table 3.  Device is Hamamatsu H10722-10-
+MOD2. Looks through a 310 nm bandpass interference filter 
+AIN-9 PMT2_OUT 
+Photomultiplier Tube 
+2 Current 0 to 4 V   
+0 to 4 µA. Current (µA) = Voltage * 1.  Depends on  
+PMT2_GAIN, Table 3.  Device is Hamamatsu H10722-10-
+MOD2. Looks through a UV neutral density filter  Broadband 
+with a UV-grade fused silica glass window and a neutral density 
+coating. [Stocker clarification]
+
+--- page 6 ---
+6 
+ 
+DNx-AI-207 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AIN-10 PMT3_OUT 
+Photomultiplier Tube 
+3 Current 0 to 4 V   
+0 to 4 µA. Current (µA) = Voltage * 1.  Depends on  
+PMT3_GAIN, Table 3.  Device is Hamamatsu H10722-10-
+MOD2. Looks through a 430 nm bandpass interference filter. 
+4.2 DNx-AI-225 Board 
+This analog input layer in the UEI PowerDNA Cube has 25 differential input channels with an input range of +/-1.25 Volts 
+and 24-bit resolution.  ° 
+Table 2  DNx-AI-225 Board Signals 
+DNx-AI-225 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AIN-0 
+TC_A Rake Thermocouple A 
+-6.45 to 
+55 mV 
+Near or far array Rake A Type K thermocouple, -200 to 1250 
+C.  
+BRE_CTR_180 
+BRE BRE Center 180 
+-6.45 to 
+55 mV BRE Center 180 (South) Type K thermocouple, 0 to 500 C.  
+AIN-1 
+TC_B Rake Thermocouple B 
+0 to 14 
+mV Near or far array Rake B Type B thermocouple, 0 to 1700 C.  
+BRE_OFF_180 
+BRE BRE Offset 180 
+-6.45 to 
+55 mV BRE Offset 180 (Far South) Type K thermocouple, 0 to 500 C.  
+AIN-2 TC_C Rake Thermocouple C 
+0 to 14 
+mV Near or far array Rake C Type B thermocouple, 0 to 1700 C.
+
+--- page 7 ---
+7 
+ 
+DNx-AI-225 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+BRE_CTR BRE BRE Center 
+-6.45 to 
+55 mV 
+BRE Center Type K thermocouple on Medtherm 8-2.688-
+10SB-0-0-36-21427KSA.  
+AIN-3 
+TC_D Rake Thermocouple D 
+0 to 14 
+mV 
+Near or far array Rake D Type K thermocouple, -200 to 1250 
+C.  
+BRE_OFF BRE BRE Offset 
+-6.45 to 
+55 mV 
+BRE Offset Type K thermocouple on Medtherm 8-2.688-10SB-
+0-0-36-21427KSA.  
+AIN-4 TC_200A 
+200mm Thermocouple 
+A 
+-6.45 to 
+55 mV 
+Igniter side Type K thermocouple, 200 mm from axis. -200 to 
+1250 C.  
+AIN-5 TC_200B 
+200mm Thermocouple 
+B 
+-6.45 to 
+55 mV 
+Relay side Type K thermocouple, 200 mm from axis. -200 to 
+1250 C.  
+AIN-6 TC_BNR Burner Thermocouple 
+-6.45 to 
+55 mV 
+Type K thermocouple on burner. -200 to 1250 C. Not valid 
+when BRE burner is installed.   
+AIN-7 
+RA+60 Radiometer +60 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 1500.  Device is 
+Dexter Research Center (DRC) XP-0055.  
+BRE_OFF+60 
+BRE +60 BRE Offset 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 1000.  Device is DRC 
+XP-0249.  
+AIN-8 
+RA+60_CJ 
+Radiometer +60 Cold 
+Junction 
+0 to 2.5 V 150 to -75 Celcius.  1.57 V at 25C. Device is TI LM20.  
+BRE_OFF+60CJ 
+BRE 
++60 BRE Offset Cold 
+Junction 
+AIN-9 RA+30 Radiometer +30 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 1500.  Device is DRC 
+XP-0055.
+
+--- page 8 ---
+8 
+ 
+DNx-AI-225 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+BRE_OFF+30 
+BRE +30 BRE Offset 0 to 2.5 V 
+Thermopile output (V) = (Voltage-1.25) / 1000.  Device is DRC 
+XP-0249.  
+AIN-10 
+RA+30_CJ 
+Radiometer +30 Cold 
+Junction 
+0 to 2.5 V 150 to -75 Celcius.  1.57 V at 25C. Device is TI LM20.  
+BRE_OFF+30CJ 
+BRE 
++30 BRE Offset Cold 
+Junction 
+AIN-11 
+RA_CTR Radiometer Center 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 500.  Device is DRC 
+XP-0156.  
+BRE_OFF-10 BRE -10 BRE Offset 0 to 2.5 V 
+Thermopile output (V) = (Voltage-1.25) / 1000.  Device is DRC 
+XP-0249.  
+AIN-12 
+RA_CTR_CJ 
+Radiometer Center 
+Cold Junction 
+0 to 2.5 V 150 to -75 Celcius.  1.57 V at 25C. Device is TI LM20.  
+BRE_OFF-10CJ 
+BRE 
+-10 BRE Offset Cold 
+Junction 
+AIN-13 RA-30 Radiometer -30 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 1500.  Device is DRC 
+XP-0055.  
+AIN-14 RA-30_CJ 
+Radiometer -30 Cold 
+Junction 0 to 2.5 V 150 to -75 Celcius.  1.57 V at 25C. Device is TI LM20.  
+AIN-15 RA-60 Radiometer -60 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 1500.  Device is DRC 
+XP-0055.  
+AIN-16 RA-60_CJ 
+Radiometer -60 Cold 
+Junction 0 to 2.5 V 150 to -75 Celcius.  1.57 V at 25C. Device is TI LM20.
+
+--- page 9 ---
+9 
+ 
+DNx-AI-225 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AIN-17 RA_OFF Radiometer Offset 
+1.25 to 5 
+V 
+Thermopile output (V) = (Voltage-1.25) / 1000.  Device is DRC 
+XP-0869. This is located on the downstream relay board. 
+AIN-18 RA_OFF_CJ 
+Radiometer Offset 
+Cold Junction 0 to 2.5 V 
+150 to -75 Celcius.  1.57 V at 25C. Device is Texas 
+Instruments LM20.  
+AIN-19 TC_SPARE Spare Thermocouple N/A 
+To use, an additional thermocouple would need to be hard 
+wired to the Cold Junction Compensation Assembly. This is 
+located on the downstream relay board. 
+AIN-20 
+BRE_FLUX_CTR 
+BRE 
+BRE Heat Flux Sensor 
+- Center 
+0 to 1.25 
+V 
+Heat flux sensor output on Medtherm 8-2.688-10SB-0-0-36-
+21427KSA. Valid only with BRE burner installed. 1mV = 1 
+Btu/ft2 
+AIN-21 
+BRE_FLUX_OFF 
+BRE 
+BRE Heat Flux Sensor 
+- Offset 
+0 to 1.25 
+V 
+Heat flux sensor output on Medtherm 8-2.688-10SB-0-0-36-
+21427KSA. Valid only with BRE burner installed. 1mV = 1 
+Btu/ft2 
+AIN-22 N/A Not Used N/A N/A 
+AIN-23 N/A Not Used N/A N/A 
+AIN-24 TC_CJ 
+Thermocouple Cold 
+Junction 
+0.803 to 
+1.10 V 
+Temperature on the Cold Junction Compensation Assembly.  0 
+to 100 C. Device is Analog Devices AD590. Temperature 
+(Celcius) = (Voltage/0.00295) – 273.15. 
+BRE Valid when the BRE burner is installed. 
+ 
+4.3 DNx-AO-333 Board 
+This analog output layer in the UEI PowerDNA Cube has 32 channels with an output range of +/-10 Volts and 16-bit 
+resolution.
+
+--- page 10 ---
+10 
+ 
+ 
+Table 3  DNx-AO-333 Board 
+DNx-AO-333 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AO-0 MFCA1_CTRL MFCA1  Control 0 to 5 V 
+Static mixer/oxygen mass flow controller setpoint. 0 to 
+MFCA1_FULL_SCALE in SLPM.  Full scale depends on which 
+Teledyne Hastings HFC-D-302 is installed. Output voltage = 
+Setpoint(SLPM) * 5 / MFCA1_FULL_SCALE. Or Setpoint (SLPM) = 
+Output voltage * MFCA1_FULL_SCALE / 5.  See Table 4. 
+AO-1 MFCA2_CTRL MFCA2  Control 0 to 5 V 
+Nitrogen bypass/inert mass flow controller setpoint. 0 to 
+MFCA2_FULL_SCALE in SLPM.  Full scale depends on which 
+Teledyne Hastings HFC-D-302 is installed. Output voltage = 
+Setpoint(SLPM) * 5 / MFCA2_FULL_SCALE. Or Setpoint (SLPM) = 
+Output voltage * MFCA2_FULL_SCALE / 5. See Table 4. 
+AO-2 MFCA3_CTRL MFCA3  Control 0 to 5 V 
+Fuel mass flow controller setpoint. 0 to MFCA3_FULL_SCALE in 
+SLPM.  Full scale depends on which Teledyne Hastings HFC-D-302 
+is installed. Output voltage = Setpoint(SLPM) * 5 / 
+MFCA3_FULL_SCALE. Or Setpoint (SLPM) = Output voltage * 
+MFCA3_FULL_SCALE / 5. See Table 4. 
+AO-3 PMT_PWR PMT Power 0 or 5 V Power to three photomultipler tubes. 0 V = off.  5 V = on. 
+AO-4 HV_CTRL 
+E-Field HV 
+Control 
+0 to 10 
+V 
+Sets E-field HV supply output between about -10000 and 10000 V.   
+EField See EFieldSetVoltage command, section Error! Reference 
+source not found., for equation.. 
+AO-5 HV_EN E-Field HV Enable 0 or 5 V E-Field high voltage supply enable. 0 V = disabled, 5 V = enabled 
+AO-6 N/A Not Used 0 or 5 V N/A
+
+--- page 11 ---
+11 
+ 
+DNx-AO-333 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AO-7 IGN_EN Igniter Enable 0 or 5 V 
+0 V = disabled.  5 V  enabled.  Software sets IGN_CTRL then pulses 
+IGN_EN. 
+AO-8 IGN_CTRL Igniter Control 
+-0.6 to 
++0.8V Sets voltage at the igniter between 0.46 to 12 V. 
+AO-9 MFCA1_PWR MFCA1 Power 0 or 5 V 
+Power to static mixer/oxygen MFC.  0 V = unpowered. 5 V = 
+powered. 
+AO-10 MFCA2_PWR MFCA2 Power 0 or 5 V 
+Power to nitrogen bypass/inert MFC.  0 V = unpowered. 5 V = 
+powered. 
+AO-11 MFCA3_PWR MFCA3 Power 0 or 5 V Power to fuel MFC.  0 V = unpowered.  5 V = powered. 
+AO-12 RB_UP_EN 
+Relay Board 
+Upstream Enable 0 or 5 V 
+0 V = disables signals.  5 V = state of signal output depends on 
+signal value.  Applicable signals:  SV1, SV2, SV3, SV4, SV5, SV6, 
+SV7, SV8, SV9, PMT_PWR, MFCA1_PWR, MFCA2_PWR, 
+MFCA3_PWR 
+AO-13 TFP_MOTOR_RST TFP Motor Reset 0 or 5 V 0 V to rest TFP stepper motor.  5 V to enable motor. 
+AO-14 IGN_MOTOR_RST 
+Igniter Motor 
+Reset 0 or 5 V 0 V to reset igniter stepper motor.  5 V to enable motor. 
+AO-15 SVA4 Solenoid Valve A4 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-16 SVA5 Solenoid Valve A5 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-17 SVA6 Solenoid Valve A6 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve.
+
+--- page 12 ---
+12 
+ 
+DNx-AO-333 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AO-18 SVA7 Solenoid Valve A7 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-19 SVA8 Solenoid Valve A8 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-20 SVA9 Solenoid Valve A9 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-21 SVA1 Solenoid Valve A1 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-22 SVA2 Solenoid Valve A2 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-23 SVA3 Solenoid Valve A3 0 or 5 V 
+0 V = no power to solenoid valve.  5 V = power solenoid valve, 
+opening this normally closed valve. 
+AO-24 N/A Not Used 0 or 5 V N/A 
+AO-25 PMT1_GAIN PMT1 Gain 
+4.63 to 
+10 V 
+For recommended device control voltage of 0.5 to 1.1 V. Gain range 
+is 5x103 to 3.5x106. Gain=2x106 * (Output voltage/9.2645)^8.643856.  
+Or Output voltage = 10^(0.115689 * log(Gain) + 0.23786213).  
+Device is Hamamatsu H10722-10-MOD2. 
+AO-26 PMT2_GAIN PMT2 Gain 
+4.63 to 
+10 V 
+For recommended device control voltage of 0.5 to 1.1 V. Gain range 
+is 5x103 to 3.5x106. Gain=2x106 * (Output voltage/9.2645)^8.643856.  
+Or Output voltage = 10^(0.115689 * log(Gain) + 0.23786213).  
+Device is Hamamatsu H10722-10-MOD2.
+
+--- page 13 ---
+13 
+ 
+DNx-AO-333 Board Signals 
+Channel Mnemonic 
+Name Signal 
+Range Description, Conversion 
+AO-27 PMT3_GAIN PMT3 Gain 
+4.63 to 
+10  
+For recommended device control voltage of 0.5 to 1.1 V. Gain range 
+is 5x103 to 3.5x106. Gain=2x106 * (Output voltage/9.2645)^8.643856.  
+Or Output voltage = 10^(0.115689 * log(Gain) + 0.23786213).  
+Device is Hamamatsu H10722-10-MOD2. 
+AO-28 LED_SIDE LED Side Bank 0 or 5 V 
+Bank of 3 white LEDs to side of analog camera turning mirror.  0 V = 
+off.  5 V = on. 
+AO-29 LED_END LED End Bank 0 or 5 V 
+Bank of 3 white LEDs past the end of the analog camera turning 
+mirror. 0 V = off.  5 V = on. 
+AO-30 RB_DOWN_EN 
+Relay Board 
+Downstream 
+Enable 0 or 5 V 
+0 V = disables signals.  5 V = state of signal output depends on 
+signal value.  Applicable signals:   HV1, HV2, LED1, LED2, 
+TFP_RST, IGN_RST, IGN_EN 
+AO-31 N/A Not Used 0 or 5 V N/A
+
+--- page 14 ---
+14 
+ 
+4.4 Serial Communication 
+Table 4  Serial Communication 
+Serial Communication 
+Source 
+Device 
+Name Mnemonic Signal Range Description 
+Lippert SBC /dev/ttyS0 MFCA1_FULL_SCALE  
+Depends on what MFC is 
+installed. 0.5, 20 SLPM. 
+Full scale flow of static mixer/oxygen 
+mass flow controller in SLPM.  
+Pulled from gas list item 18 in the 
+result of the SFL (System Full List) 
+command to device.   
+Lippert SBC 
+RXD1/TXD1 /dev/ttyS0 MFCA2_FULL_SCALE  
+Depends on what MFC is 
+installed.  0.01, 0.02, 0.05, 0.1, 
+0.5, 2, 5 SLPM. 
+Full scale flow of nitrogen 
+bypass/Inert mass flow controller in 
+SLPM.  Pulled from gas list item 18 
+in the result of the SFL (System Full 
+List) command to device.   
+Lippert SBC 
+RXD1/TXD1 /dev/ttyS0 MFCA3_FULL_SCALE  
+Depends on what MFC is 
+installed.  0.05, 0.1, 0.2, 0.5, 1 
+SLPM. 
+Full scale flow of fuel mass flow 
+controller in SLPM.  Pulled from gas 
+list item 18 in the result of the SFL 
+(System Full List) command to 
+device.   
+Lippert SBC 
+RXD1/TXD1 /dev/ttyS0 MFCA1_STATE 
+0-10. See Error! Reference 
+source not found.. 
+State of the oxygen/static mixer 
+mass flow controller.  Result of a MS 
+(get state) command.  
+Lippert SBC 
+RXD1/TXD1 /dev/ttyS0 MFCA2_STATE 
+0-10. See Error! Reference 
+source not found.. 
+State of the nitrogen bypass mass 
+flow controller.  Result of a MS (get 
+state) command.
+
+--- page 15 ---
+15 
+ 
+Serial Communication 
+Source 
+Device 
+Name Mnemonic Signal Range Description 
+Lippert SBC 
+RXD1/TXD1 /dev/ttyS0 MFCA3_STATE 
+0-10. See Error! Reference 
+source not found.. 
+State of the fuel mass flow 
+controller.  Result of an MS (get 
+state) command.  
+ConnectTech 
+serial card 
+P5 /dev/CTI4 CUBE_SERIAL 
+See DNA-PPCx-1G PowerDNA 
+Gigabit Ethernet I/O Cube User 
+Manual. 
+UEI cube serial connection.  Can be 
+used to retrieve version numbers, 
+set IP addresses, and update 
+firmware. 
+ConnectTech 
+serial card 
+P6 /dev/CTI5 ANALOG_CAM_AGC_MODE On or Off. Turn automatic gain control on or off 
+ConnectTech 
+serial card 
+P6 /dev/CTI5 ANALOG_CAM_GAIN 6, 12, 21, and 31 dB. Set the automatic gain control gain.   
+ConnectTech 
+serial card 
+P6 /dev/CTI5 ANALOG_CAM_SHUTTER 
+1/60, 1/100, 1/250, 1/500, 
+1/1000, 1/2000, 1/4000, 1/10000, 
+1/20000, 1/30000 seconds. Set the shutter speed.   
+ConnectTech 
+serial card 
+P7 
+/dev/CTI6 
+and 
+/dev/ttyS2 IGN_MOTOR_SET_POS 
+In counts.  0 is the retracted 
+position.  Maximum extended 
+position depends on registry 
+values Igniter/IgniterLimits and 
+Igniter/IgniterMaxCount and the 
+burner type last specified by a 
+System Define Setup command.  
+Default maximum is 2500 counts. 
+Axis 1 control of motion control 
+board in AVP controlling igniter 
+motor in CIA.
+
+--- page 16 ---
+16 
+ 
+Serial Communication 
+Source 
+Device 
+Name Mnemonic Signal Range Description 
+ConnectTech 
+serial card 
+P7 
+/dev/CTI6 
+and 
+/dev/ttyS2 IGN_MOTOR_GET_POS 
+See Signal Range for 
+IGN_MOTION_SET_POS 
+Axis 1 position reporting of motion 
+control board in AVP controlling 
+igniter motor in CIA. 
+ConnectTech 
+serial card 
+P7 
+/dev/CTI6 
+and 
+/dev/ttyS2 TFP_ MOTOR _SET_POS 
+In counts.  0=retracted. 
+Maximum=closer to burner. 
+Maximum depends on burner 
+type and registry values 
+TfpMaxCount and 
+TfpToBurnerOffsets.  See Set 
+TFP Position command for 
+calculation of maximum. 
+Axis 2 control of motion control 
+board in AVP controlling TFP (thin 
+filament pyrometry array) motor in 
+CIA. 
+ConnectTech 
+serial card 
+P7 
+/dev/CTI6 
+and 
+/dev/ttyS2 TFP_ MOTOR _GET_POS 
+See Signal Range for 
+TFP_MOTION_SET_POS 
+Axis 2 position reporting of motion 
+control board in AVP controlling TFP 
+motor in CIA. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 ZOOM_ MOTOR _SET_POS 
+0-85000 counts.  0 is zoomed 
+out.  85000 is zoomed in. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 1 
+control of motion control board in 
+digital camera package. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 ZOOM_ MOTOR _GET_POS 
+0-85000 counts.  0 is zoomed 
+out.  85000 is zoomed in. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 1 
+position reporting of motion control 
+board in digital camera package.
+
+--- page 17 ---
+17 
+ 
+Serial Communication 
+Source 
+Device 
+Name Mnemonic Signal Range Description 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 IRIS_ MOTOR _SET_POS 
+0-76000 counts.  0 is open.  
+76000 is closed. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 2 
+control of motion control board in 
+digital camera package. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 IRIS_ MOTOR _GET_POS 
+0-76000 counts.  0 is open.  
+76000 is closed. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 2 
+position reporting of motion control 
+board in digital camera package. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 
+FOCUS_ MOTOR 
+_SET_POS 
+0-101000 counts.  0 is near 
+focus.  101000 is far focus. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 3 
+control of motion control board in 
+digital camera package. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 
+FOCUS_ MOTOR 
+_GET_POS 
+0-101000 counts.  0 is near 
+focus.  101000 is far focus. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 3 
+position reporting of motion control 
+board in digital camera package. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 
+FILTER_ MOTOR 
+_SET_POS 
+0-451000 counts.  Filters at 0, 
+120000, 240000, and 360000 
+counts. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 4 
+control of motion control board in 
+digital camera package. 
+ConnectTech 
+serial card 
+P8 
+/det/CTI7 
+and 
+/dev/ttyS3 
+FILTER_ MOTOR 
+_GET_POS 
+0-451000 counts.  Filters at 0, 
+120000, 240000, and 360000 
+counts. 
+Not valid when digital camera is 
+connected to the IPSU-G.  Axis 4 
+position reporting of motion control 
+board in digital camera package.
+
+--- page 18 ---
+18 
+ 
+ 
+4.5 Internal Ethernet Interfaces 
+See also Error! Reference source not found., External Ethernet Interfaces where the interface to the IOP is listed.  The 
+‘Kernels’ string points to a hardware ethernet interface on the processor.  It is used in /etc/udev/rules.d/90-net.rules to 
+ensure that the device name is always assigned to the same connector. 
+ 
+Table 5  Internal Ethernet Interfaces 
+Source Device Name IP Address Net Mask Kernels Description 
+Lippert SBC eth1 192.168.10.1 255.255.0.0 
+0000:06:00.
+0 
+Interface to data camera 
+when connected directly to 
+ACME and not IPSU-G. 
+Lippert SBC eth2 192.168.100.1 255.255.255.0 
+0000:08:00.
+0 Interface to UEI Cube. 
+ACME 
+Camera 
+Package 
+DeviceIPAddres
+s 192.168.10.100 255.255.0.0  
+Camera IP address.  
+Changeable using the 
+CLIpConfig command line 
+utility included in ACME 
+software install. 
+UEI Cube ip2 
+192.168.100.10
+2 255.255.255.0  
+Cube main ethernet port. 
+Labeled NIC1. (yes, for 
+ip2) 
+UEI Cube ip 192.168.100.2 255.255.255.0  
+Cube secondary/diagnostic 
+ethernet port. Labeled 
+NIC2.  NOT 
+CONNECTED.

@@ -1,0 +1,995 @@
+Source : NASA PSI, PSI-115, Reports, NNX17AF08A_FinalReport.pdf
+
+--- page 1 ---
+Final August 15, 2020
+UTILIZATION OF
+THE SAME DATA
+FOR ADVANCED
+MODELING AND
+SIMULATION OF
+SMOKE
+GENERATION IN
+MICROGRAVITY
+Sean C. Garrick
+NASA Grant NNX17AF08A FinalReport
+
+--- page 2 ---
+Executive Summary 3
+Introduction 4
+Formulation 5
+Fluid dynamics
+Particle ﬁelds
+Nucleation
+Coagulation
+Condensation and evaporation
+DBP vapor balance
+Results 9
+Flow conﬁguration
+Physical conditions
+Numerical speciﬁcations
+Physical Assumptions
+Fluid ﬂow, temperature, and mass fraction
+Particle nucleation, number density, and size
+Effect of particle settling
+Effect of thermophoresis
+Effect of heated vapor source orientation
+Effect of ﬂow speed
+Smoke visualization
+Summary 15
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+2 SEAN C. GARRICK
+
+--- page 3 ---
+1 Executive Summary
+This work examines how microgravity conditions on spacecraft change the development of smoke
+aerosol relative to smoke on Earth. We perform simulations of particle formation and growth with
+the goal of capturing smoke dynamics similar to those realized in experiments performed aboard the
+International Space Station. The simulations provide detailed information about ﬂuid/thermal/particle
+interactions that cannot be acquired experimentally on orbit. A surrogate material, dibutyl pthalate, is
+expelled from a hot surface in a rectangular chamber while ambient air is blown through the domain,
+convecting the developing smoke downstream. The study considers two ﬂow rates, two geometric con-
+ﬁgurations, and the isolated effects of gravitational particle settling and thermophoresis. In Earth gravity,
+buoyancy produces asymmetries in all ﬁelds of interest and ampliﬁes vapor-to-particle conversion near
+room temperature surfaces at the upper boundary of the simulation domain. Gravitational settling re-
+moves large particles from the aerosol, limiting the maximum particle size to ∼ 40 µm and the mode
+particle size to∼ 5µm. Without buoyancy or settling, the microgravity smoke plume is spatially symmet-
+ric and contains very large particles (> 40µm). A bimodal particle size distribution results in microgravity
+when prominent recirculation occurs behind the hot vapor source. The distribution is comprised of large
+particles (> 20µm) associated with long residency time, vapor rich, high temperature recirculation, and
+smaller particles (< 10µm) that originate farther downstream of the hot vapor source. A distinct large
+particle mode does not appear in microgravity ﬂows that do not have prominent high temperature re-
+circulation, although the aerosol still contains large particles. Without recirculation, the mode particle
+diameter in microgravity is∼ 10µm, or approximately twice that of terrestrial smoke. Results show that
+future experiments should carefully consider and quantify surface interactions and the presence of hot,
+recirculating vapor, in order to control geometry-dominated features of the particle size distribution.
+A manuscript based on this work will be submitted to the journal Aerosol Science & Technology. The
+ﬁnal document, when accepted, will be provided to NASA.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+3 SEAN C. GARRICK
+
+--- page 4 ---
+2 Introduction
+Gravity affects the evolution of aerosols by introducing buoyancy and particle settling. Buoyant convec-
+tion modiﬁes the time-temperature history of the aerosol, as well as the spatial distribution of particles,
+condensing vapor, and thermal energy. Gravity also causes the settling of large particles out of the
+aerosol, provided the chemistry and vapor concentrations allow for the generation of large particles
+with appreciable settling velocities. These factors combine to increase particle residency times in high
+temperature, vapor rich regions in microgravity systems relative to terrestrial or Earth gravity systems
+(Urban et al., 1998, 2005). As a result, smoke particles produced in microgravity tend to be larger than
+those produced on Earth (Ku et al., 1995, Urban et al., 1998). Measurements suggest microgravity
+smoke particles to be 2− 8 times larger than terrestrial smoke particles (Urban et al., 2005). Moreover,
+large particles (not only smoke particles) persist in microgravity, with mass concentrations of particles
+with diameter > 100 µm measured at ten-times that of a nominal terrestrial environment (Liu et al.,
+1991). Total particulate mass concentrations are also more than ﬁve times greater in microgravity (Liu
+et al., 1991). Understanding gravitational effects is of practical interest because it assists in the design
+of mission-critical smoke detection systems for use in microgravity environments, including the Interna-
+tional Space Station (Mulholland et al., 2015); systems developed and calibrated for terrestrial use may
+not perform correctly in microgravity because of inappropriate particle size sensitivities (Urban et al.,
+2005).
+The present work uses numerical simulation to explore the inﬂuence of gravity on pyrolysis smoke
+growth from a fundamental perspective. We simulate the formation and growth of dibutyl-phthalate
+(DBP) particles in Earth gravity and microgravity environments. We utilize direct numerical simulation
+via a Navier-Stokes nodal approach. The smoke originates from pyrolysis vapor expelled from a heated
+sample in a geometry similar to that considered in the SAME experiments (Mulholland et al., 2015). The
+intention of this effort is to quantify the differences between microgravity and Earth gravity smoke, and
+to identify the ﬂuid dynamic mechanisms that cause the differences. This study considers two cross-
+ﬂow velocities of sufﬁciently low speed that buoyancy cannot be neglected in the presence of gravity.
+Simulations are presented to assess the dependence of particle size distributions on thermophoresis,
+particle settling, and ﬂow geometry. The paper is organized as follows: we introduce the simulation and
+modeling methodology, followed by a description of the ﬂow geometry and the parameter space under
+consideration; we then examine differences in the wake geometry attributable to buoyancy for the lower
+of two ﬂow speeds; next, we present and discuss instantaneous scalar ﬁelds as a means to describe
+particle accumulation and growth in the buoyant and non-buoyant wakes that form downstream of the
+hot vapor source; after developing an understanding of how the particle ﬁelds interact with the ﬂuid
+dynamics for the low speed cases, we consider the effects of thermophoresis, particle settling, ﬂow
+geometry, and the higher ﬂow speed; we conclude with a discussion of the results, summarize ﬁndings
+relevant to future experimentation, and outline directions for future work.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+4 SEAN C. GARRICK
+
+--- page 5 ---
+3 Formulation
+3.1 FLUID DYNAMICS
+The gaseous systems are described by the compressible mass, momentum, and energy equations,
+considered here in dimensionless form. Conservation of mass is given by
+∂ρ⋆
+∂t⋆ + ∂ρ⋆u⋆i∂x⋆i = 0, (1)
+whereρ⋆ is the density andu⋆i is the velocity (superscript asterisks denote dimensionless variables and
+subscripts denote vector components). Conservation of momentum is given by
+∂ρ⋆u⋆i
+∂t⋆ + ∂ρ⋆u⋆ju⋆i∂x⋆j =−∂P⋆∂x⋆i + 1Re∂τ⋆ij∂x⋆j + 1Fr 2 (ρ⋆− 1), (2)
+where P⋆ is the pressure, Re is the Reynolds number, τ⋆ij is the viscous stress tensor, and Fr is the
+Froude number. The viscous stress tensor is deﬁned by
+τ⋆ij =µ⋆
+(
+∂u⋆j
+∂x⋆i + ∂u⋆i∂x⋆j
+)
+− 2µ⋆
+3
+∂u⋆k
+∂x⋆kδij, (3)
+where µ⋆ is the dynamic viscosity and δij is the Kronecker delta. The ﬂuid is deﬁned as an ideal gas
+with the corresponding equation of state,
+P⋆ =ρ⋆αR⋆αT⋆, (4)
+whereT⋆ is the temperature andR⋆α is the gas constant of speciesα (summation is implied by repeated
+subscript indicies). Conservation of total energy is given by
+∂ρ⋆E⋆
+∂t⋆ + ∂ρ⋆u⋆jH⋆∂x⋆j = µ⋆(γ− 1)M 2RePr ∂q⋆j∂x⋆j + 1Re∂u⋆iτ⋆ij∂x⋆j + ∂∂x⋆j
+(
+ρ⋆h⋆α
+ReSc
+∂Yα
+∂x⋆j
+)
+, (5)
+whereE⋆ is the speciﬁc total energy,H⋆ is the speciﬁc total enthalpy,γ is the ratio of speciﬁc heats,M
+is the Mach number, Pr is the Prandtl number, q⋆j is the heat ﬂux, Sc is the Schmidt number, Yα is the
+mass fraction of speciesα, andh⋆α is the speciﬁc enthalpy of speciesα. The heat ﬂux is computed from
+Fourier’s law,
+q⋆j =−k⋆∂T⋆∂x⋆j, (6)
+where k⋆ is the thermal conductivity and T⋆ is the temperature. The speciﬁc enthalpy is computed
+according to
+h⋆ =Yα(CpαT +hfα)/ho, (7)
+wherehfα is the enthalpy of formation of species α, ho is a reference enthalpy, and Cpα is the speciﬁc
+heat at constant pressure. The speciﬁc total energy is computed from
+E⋆ =
+(1
+2uiui +Yα
+(
+CvαT +efα))/ho, (8)
+whereefα is the energy of formation, and Cvα is the speciﬁc heat at constant volume. The speciﬁc total
+enthalpyH⋆ is analogously deﬁned by
+H⋆ =
+(1
+2uiui +Yα
+(
+CpαT +hfα))/ho, (9)
+whereCpα is the speciﬁc heat at constant pressure. Species transport is given by
+∂ρ⋆Yα
+∂t⋆ + ∂ρ⋆Yαu⋆j∂x⋆j = ∂∂x⋆j
+(
+ρ⋆
+ReSc
+∂Yα
+∂x⋆j
+)
++ ˙ω, (10)
+where ˙ω accounts for the conversion of species α vapor to the particle phase via nucleation and con-
+densation.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+5 SEAN C. GARRICK
+
+--- page 6 ---
+3.2 P ARTICLE FIELDS
+Particles are transported in space by convection, diffusion, thermophoresis, and gravitational settling.
+Their size is affected by nucleation, coagulation, condensation, and evaporation. This work utilizes a
+nodal approximation to the general dynamic equation (Prakash et al., 2003), where the particle size
+distribution is discretized by a set of nodes k, each associated with a particle diameter dk. The spatio-
+temporal transport of each particle size nodek is considered with respect to its mass fractionYk =ρk/ρ,
+∂ρ⋆Yk
+∂t⋆ +
+∂ρ⋆Yk
+(
+u⋆j +utf⋆j,k +uss⋆j,k)
+∂x⋆j = ∂∂x⋆j
+(
+ρ⋆
+ReSck
+∂Yk
+∂x⋆j
+)
++ ˙ωk, (11)
+whereutf⋆j,k is thej component of the thermophoretic velocity of particle nodek,uss⋆j,k is thej component
+of the Stokes settling velocity of particle nodek,Sck is the particle Schmidt number, and ˙ωk is a source
+term that accounts for transport in size space (this term will be deﬁned in Section 2.6). The particle
+diffusivity is deﬁned by
+Dk = KbTCk3πµdk , (12)
+where Kb is Boltzmann’s constant, Ck is the Cunningham correction factor, and dk is the diameter of
+particles in nodek. The Cunningham correction factor is taken as
+Ck = 1 +Knk (1.142 + 0.558exp (−0.999/Knk)) (13)
+whereKnk is the Knudsen number of particles in nodek
+Knk = 2λ/dk. (14)
+The mean free path in airλ is computed from
+λ =λo
+(Patm
+P
+)( T
+T1
+)2(T1 +Ts
+T +Ts
+)
+(15)
+where Patm is the atmospheric pressure and the model parameters are Ts = 110.4K, T1 = 296.15K,
+andλo = 67.3nm (Otto et al., 1999).
+The Talbot equation deﬁnes the thermophoretic velocity,
+utf⋆j,k =−ktf µρUoT ∂T∂xj, (16)
+where
+ktf = 2.294Ck (k/kp + 2.2Knk)(1 + 3.493Knk) (1 + 2k/kp + 4.4Knk), (17)
+andkp is the thermal conductivity of the particulate phase (Pyyk¨onen and Jokiniemi, 2000, Talbot et al.,
+1980). The dimensionless Stokes settling velocity,uss⋆j,k , is deﬁned by
+uss⋆j,k = (ρc−ρ)gjd2k18µUo , (18)
+wheregj is the gravitational acceleration in thej direction.
+The source term ˙ωk controls transport in size space due to nucleation, coagulation, condensation, and
+evaporation,
+˙ωk = (ωNk +ωck +ωsk)× LomkUoρo , (19)
+where mk is the mass of a particle in node k, ωN is the number density change due to nucleation,
+ωc is the number density change due to coagulation, and ωs is the number density change due to the
+combined effects of condensation and evaporation.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+6 SEAN C. GARRICK
+
+--- page 7 ---
+3.3 NUCLEATION
+We consider the classical nucleation expression modiﬁed by a self-consistent correction proposed by
+Girshick and Chiu (1990). The nucleation rate is scaled by a material-speciﬁc enhancement factor,cnuc,
+resulting in a nucleation rateJ deﬁned by
+J =cnuc
+(ρY )2
+ρcmm
+√
+2σ
+πmm
+1
+S exp
+(
+3
+√
+36πv 2mσ
+kBT − πσd 2c3kBT), (20)
+wheredc is the critical diameter of nucleating particles given by
+dc = 4σvmkBT ln(S). (21)
+The nucleation rate depends on the massmm and volumevm of a vapor molecule, the surface tension
+σ, and the saturation ratio S. Particles nucleating with size dc do not correspond exactly to any of the
+discretized size nodes. Following Prakash et al. (2003), the nucleated particles are placed in the nodek
+with a diameterdk that is minimally larger thandc. This procedure results in the nucleation source term
+for nodek,
+ωNk = d3cd3kJ. (22)
+The nucleation source term for all other nodes is zero.
+3.4 COAGULATION
+The rate of change of particles in size classk due to coagulation is deﬁned by
+ωkc = 12
+Ns∑
+i=2
+Ns∑
+j=2
+χijkβijQiQj−Qk
+Ns∑
+i=2
+βikQi (23)
+whereQi is the number density of nodei,βij is the collision frequency function corresponding to nodes
+i andj, andχijk is the mass splitting function deﬁned by (Prakash et al., 2003)
+χijk =
+
+
+
+vk+1−(vi+vj )
+vk+1−vk if vk≤ vi + vj < vk+1
+(vi+vj )−vk−1
+vk−vk−1 if vk−1≤ vi + vj < vk
+0 else.
+(24)
+The Dahneke coefﬁcients are used to extend the near-continuum frequency function βco to all relevant
+values ofKn (Otto et al., 1999). The collision coefﬁcients are given by
+βij =βco
+1 +KnD
+1 + 2KnD + 2Kn 2D, (25)
+whereβco is the near-continuum collision frequency function,
+βco = 2kBT3µ (v1/3i +v1/3j )( Civ1/3i + Cjv1/3j ). (26)
+The enhancement Knudesen numberKnD is deﬁned as
+KnD = 4Dijcijdij, (27)
+whereDij =Di +Dj anddij = di +dj andcij =
+√
+c2i +c2j. The mean molecular speed c is given by
+ck =
+√
+8kBT/πmk.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+7 SEAN C. GARRICK
+
+--- page 8 ---
+3.5 CONDENSATION AND EVAPORATION
+The saturation monomer number density with respect to particles of sizedk is computed according to
+Qs1,k = PskbT exp( 4σMWRTρcdk), (28)
+wherePs is the saturation pressure and MW is the molecular weight of the condensing species. Using
+this saturation concentration, the rate of change of particles in size class k due to condensation and
+evaporation is given by (Prakash et al., 2003)
+ωks =
+
+
+
+vm
+vk−vk−1β1,k−1
+(
+Q1−Qs1,k−1
+)
+Qk−1 ifQ1 >Q s1,k−1
+− vmvk+1−vkβ1,k+1
+(
+Q1−Qs1,k+1
+)
+Qk+1 ifQ1 <Q s1,k+1
+− vmvk+1−vkβ1,k
+(
+Q1−Qs1,k
+)
+Qk ifQ1 >Q s1,k
+vm
+vk−vk−1β1,k
+(
+Q1−Qs1,k
+)
+Qk ifQ1 <Q s1,k
+, (29)
+whereQ1 is the number density of monomers andQk is the number density of particles of size classk.
+3.6 DBP VAPOR BALANCE
+Nucleation, condensation, and evaporation are interactions between the vapor and particle phases. The
+source term in the vapor transport equation, Eqn. (10), is given by
+˙ω =−
+(
+d3c
+d3mJ +
+N∑
+k=2
+vk
+vm
+ωks
+)
+× Lomm
+Uoρo
+(30)
+where the ﬁrst term on the right-hand-side is the sink due to nucleation and the second term on the
+right-hand-side is the source associated with condensation and evaporation (Prakash et al., 2003).
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+8 SEAN C. GARRICK
+
+--- page 9 ---
+4 Results
+4.1 FLOW CONFIGURATION
+We simulate the formation and growth of DBP particles in air ﬂowing over a heated sample that expels
+DBP vapor. The simulation mimics the smoldering or pre-conﬂagration stage of a ﬁre studied in experi-
+ments performed aboard the ISS (Mulholland et al., 2015). A schematic of the computational domain is
+shown in Fig. 1. Room temperature air enters a long chamber and ﬂows over a heated rectangular sam-
+ple. Vapor released from the sample nucleates into particles that grow and are subsequently collected
+downstream for analysis. The ﬂow is laminar and steady, allowing the two-dimensional representation
+to present physical characteristics largely representative of the SAME experiments (Mulholland et al.,
+2015). DBP is used as the surrogate material because its properties are known and its use in modeling
+is well-established (unlike the materials used in the SAME experiments).
+4.2 PHYSICAL CONDITIONS
+Constant ﬂuid properties for air and DBP are provided in Table 1, and variable DBP properties are
+provided in Table 2. The enhancement factor required for the nucleation expression, Eqn. (20), is
+deﬁned for DBP ascnuc = 3.2× 10−4 (Nguyen et al., 1987, Pyyk¨onen and Jokiniemi, 2000).
+The thickness of the heated DBP source serves as the reference length scale,Lo = 0.0044 m (illustrated
+in Fig. 1), which is representative of the length scale in the SAME experiments (Mulholland et al.,
+2015). The air enters from the left with velocity Uo and temperature To = 300 K . We consider two
+inlet velocities: Uo = 0.08 m/s, the velocity considered in the SAME experiments, and a slightly faster
+ﬂow ofUo = 0.10 m/s. The upper and lower boundaries are impermeable, no-slip, iso-thermal surfaces
+(Twall =To). The heated rectangle is also no-slip, has a ﬁxed temperature ofTs = 473.2 K, and releases
+DBP vapor at a constant mass ﬂux ofq′′ = 8.4× 10−5 kg/m2· s. The mass ﬂux has been selected to be
+representative of the mass loss data presented by Mulholland et al. (2015). Zero-derivative conditions
+are imposed for all species and particle ﬁelds at the inlet and outlet. The gravitational acceleration is
+considered at terrestrial (go = 9.81 m/s2) and microgravity (go = 0 m/s2) conditions.
+The inlet velocities and the gravitational accelerations considered represent four cases with varying
+Reynolds and Froude numbers. A summary of the simulations performed at the two ﬂow speeds and
+gravitational levels is given in Table 3. The ﬂags “EG” and “MG” identify the “Earth gravity” and “micro-
+gravity” conditions, while 1 and 2 identify the Uo = 0.08 m/s andUo = 0.1 m/s conditions, respectively.
+Case 1MG is therefore deﬁned to have an inlet velocity of Uo = 0.08 m/s and go = 0 m /s2, corre-
+sponding to a Reynolds number Re = 22.3 and a Froude numberFr =∞. In addition to the four base
+cases listed in Table 3, we examine the aerosol development sensitivity to: (1) particle settling, (2) ther-
+mophoresis, and (3) the ﬂow geometry. For this purpose, a series of additional cases, deﬁned in Table
+3, are constructed by modifying the setup of Case 1MG and/or Case 1EG. Case 1EG-NS (where NS
+stands for “no settling”) is identical to Case 1EG, but the settling mechanism has been neglected. Case
+1MG-NT (where NT stands for “no thermophoresis”) is identical to Case 1MG, but the thermophoresis
+transport mechanism has been neglected. Cases 1MG-R and 1EG-R (where R stands for “rotated”) are
+identical to Cases 1MG and 1EG, except the heated vapor source has been rotated 90◦. In all cases,
+data is collected and presented at a time oft = 7 seconds.
+4.3 NUMERICAL SPECIFICATIONS
+The domain is non-uniformly discretized by 960 grid points in the x direction and 240 grid point in
+the y direction. The governing equations are solved on this computational mesh with a second-order
+MacCormack scheme. The particle size space is discretized by 45 particle nodes, with the volume of
+each successive node increased by a factor of 2.25, i.e.vk = 2.25×vk−1. The volume of the ﬁrst node
+is selected to be the volume of a DBP molecule, v1 =vm = 4.44× 10−28 m3. Boundary conditions are
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+9 SEAN C. GARRICK
+
+--- page 10 ---
+implemented by considering the characteristic relations for the Euler equations accounting for gravity
+(Poinsot and Lele, 1992). The computational tool used for this work has been well-validated and used
+for prior studies of aerosols (Garrick, 2011, 2015, Garrick and Khakpour, 2004, Garrick et al., 2001,
+Khakpour and Garrick, 2003, Modem and Garrick, 2003).
+4.4 PHYSICAL ASSUMPTIONS
+All assumptions utilized in this work are listed below.
+• From the perspective of thermal conductivity and viscosity, the condensing vapor phase is con-
+sidered sufﬁciently dilute such thatµ andk are computed for air as a function of temperature and
+density (Kadoya et al., 1985). Both the air and the condensing vapor are considered calorically
+perfect gases with constant properties deﬁned in Table 1.
+• The Mach number M is only important for ﬂows with M & 0.3. Although the physics are insen-
+sitive to variation in Mach number when the Mach number is small, the ratio of sound speed to
+convective speed imposes a large computational burden. The computational challenge is often
+remedied with a Boussinesq approximation, but this approach is not valid in the presence of large
+density variations. Additionally, an elliptical solve for pressure is computationally intractable for the
+number of iterations required to resolve the particle time scales. We instead use a scaled dynamic
+pressure as the reference pressurePo =ρo (c1Uo)2, such thatP⋆ = ραRαTPo , wherec1 is speciﬁedto reduce the effective speed of sound to 8 m/s. The ﬂow ﬁeld was found to be independent of c1
+for the values used.
+• All particles are assumed to be spherical.
+• Condensed phase DBP properties are deﬁned by their continuum values.
+• There is no momentum exchange between the particles and the ﬂuid (the air/DBP vapor mixture);
+the particle velocity equals the ﬂuid velocity, augmented by the thermophoretic velocity and the
+stokes settling velocity. The stokes settling velocity is assumed to apply for all particles in the
+domain (including the large particles).
+• The ﬂuid and particles are in thermal equilibrium and have the same temperature.
+• Particle diffusion coefﬁcients decrease rapidly with diameter. This poses a numerical challenge
+due to the lack of a physical mechanism for diffusing numerical errors. For this reason, the mini-
+mum diffusion coefﬁcient considered in the particle mass fraction transport equations corresponds
+to the ﬁfth particle size node – any node greater than the ﬁfth node is assigned the particle diffu-
+sion coefﬁcient of the ﬁfth node.
+• The mass ﬂux of DPB from the heated rectangle is spatially uniform and all surfaces have spatially
+uniform temperature.
+• Particles that impact a solid surface “stick” with 100% efﬁciency, and are removed from the ﬂow.
+• The aerosol does not achieve a rigorous steady-state because particle evolution continues (slowly)
+in regions of the ﬂow with recirculation, particularly behind the hot vapor source. The recirculation
+is characterized by high temperatures, long particle residency times, and the continuous intro-
+duction of additional vapor. The hydrodynamic and thermal ﬁelds, conversely, become steady
+after only a few seconds. Although a rigorous steady-state does not exist, all aerosol features
+develop and effectively stabilize shortly after the hydrodynamic ﬁelds. We therefore present all
+results at timet = 7 seconds, which is considered to be the effective steady-state. At his time, all
+ﬁelds are either steady, or changing at a rate that does not affect the conclusions drawn from the
+simulations.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+10 SEAN C. GARRICK
+
+--- page 11 ---
+4.5 FLUID FLOW, TEMPERATURE, AND MASS FRACTION
+The velocity ﬁeld controls the convection of thermal energy, condensible species vapor, and particles.
+Vorticityω, deﬁned as the curl of the velocity vector
+ω =∇× u, (31)
+is positive in regions of the ﬂow where ﬂuid rotates counterclockwise, and is negative in regions where
+the ﬂuid rotates clockwise. The sign and magnitude of vorticity therefore identiﬁes the location, orienta-
+tion, and intensity of vortices and boundary layers.
+Figure 2 shows the steady dimensionless vorticity. Panel (a) shows Case 1MG and panel (b) shows
+Case 1EG. The grey rectangles represent the heated vapor source. Red ﬂuid rotates counterclockwise
+(positive vorticity) and blue ﬂuid rotates clockwise (negative vorticity). Immediately upon entering the
+channel, the ﬂuid at the walls is brought to rest by the no slip condition, signiﬁed by the large vorticity
+gradients in the upper and lower left corners of panels (a) and (b). As the ﬂuid travels downstream
+from left to right, boundary layers develop symmetrically on the upper and lower walls due to viscous
+diffusion. Further downstream, the heated rectangle reduces the cross-sectional ﬂow area, and the
+pressure ﬁeld accelerates the ﬂuid through ﬂow paths above and below the heated vapor source. The
+microgravity case in panel (a) remains symmetric near the heated vapor source, whereas the Earth
+gravity case in panel (b) develops an asymmetry with the majority of ﬂuid passing below the heated
+vapor source (indicated by larger vorticity magnitudes below than above). Comparatively low vorticity
+values on the downstream side of the rectangles indicate the presence of low speed, recirculating
+wakes. The microgravity wake in panel (a) is symmetric, whereas the Earth gravity wake in panel (b) is
+asymmetric. As the ﬂuid continues to ﬂow downstream, the boundary layers thicken in both cases and
+the ﬂuid exits the domain to the right. Variations in density due to heat transfer from the rectangle have
+inﬂuenced the vorticity ﬁelds via baroclinic torque and buoyancy. Because there is no gravity in Case
+1MG in panel (a), density variations due to heating do not disturb the symmetry of the ﬂow ﬁeld. The
+asymmetry apparent in panel (b) is due to buoyancy effects.
+Temperature ﬁelds with overlaid velocity vectors are shown in Fig. 3 at time t = 7 seconds. Panel (a)
+shows Case 1MG and panel (b) shows Case 1EG. The downstream portion of the domain has been
+expanded for clarity. Velocity vectors in panel (a) show a symmetric wake proﬁle with two counter-
+rotating vortices surrounded by dividing streamlines. Panel (b) shows an asymmetric buoyant wake,
+also with two counter rotating vortices: one near the lower right corner of the heated vapor source, and
+another near the upper right corner of the heated vapor source. Both panels show hot ﬂuid in white,
+warm ﬂuid in red, and room temperature ﬂuid in black. Thermal energy diffuses from the heated vapor
+source to the adjacent ﬂuid. Hot ﬂuid convects energy downstream and cools while diffusing energy
+to cooler ﬂuid and the isothermal upper and lower walls. The highest temperatures appear near the
+heated surface and in the wake. In both cases, the gas in the center of the channel exits the domain
+at greater than 350 Kelvin. The microgravity case maintains a symmetric temperature ﬁeld because
+there is no gravity, and therefore no asymmetric coupling between the vorticity and temperature via
+buoyancy. In panel (b), buoyant convection resulting from gravitational forces caries the low density, hot
+ﬂuid towards the upper surface. As the hot ﬂuid encounters the isothermal upper surface, a thin thermal
+boundary layer develops. Hot ﬂuid cools rapidly when in close proximity to the upper surface due to the
+thin thermal boundary layer.
+DBP vapor mass fraction is shown in Fig. 4 at time t = 7 seconds. Panel (a) shows Case 1MG and
+panel (b) shows Case 1EG. Consistent with the vorticity and temperature, the DBP vapor mass fraction
+is symmetric in Case 1MG and asymmetric in Case 1EG. The highest mass fractions of DBP (approx-
+imately 0.05) appear in white on the immediate downstream side of the heated vapor source in both
+panels (a) and (b). The recirculating wakes in both cases contain a small concentration of DBP vapor,
+but are encompassed by streaks of DBP vapor issuing from the upper and lower surfaces of the heated
+vapor source. In Case 1MG, the DBP vapor streaks interact via diffusion at the downstream side of the
+wake and eventually merge. In Case 1EG, merging velocity characteristics, indicated by the merging
+velocity vectors at the downstream side of the wake, rapidly combine the upper and lower vapor streaks.
+In both Case 1MG and Case 1EG, the majority of the vapor is consumed before the domain outlet.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+11 SEAN C. GARRICK
+
+--- page 12 ---
+4.6 P ARTICLE NUCLEATION, NUMBER DENSITY , AND SIZE
+The particle nucleation rate is a function of vapor mass fraction and temperature (and pressure). Figure
+5 shows the DBP nucleation rate at time t = 7 seconds for Case 1MG in panel (a) and Case 1EG in
+panel (b). Panel (a) shows that nucleation occurs exclusively downstream of the heated vapor source in
+Case 1MG, and most rapidly at a rate of∼ 1012 [m3· s]−1 near the periphery of the recirculating wake.
+Nucleation does not occur at a signiﬁcant rate anywhere in the wake. The nucleation rate decreases
+quickly after approximately ten dimensionless length units downstream of the heated vapor source.
+Panel (b) shows two primary zones of nucleation in Case 1EG: downstream of the upper wake vortex
+and in the region downstream and above the upper wake vortex, near the upper surface. Nucleation
+occurs at a higher rate,∼ 1014 [m3· s]−1, in Case 1EG than in Case 1MG.
+Particle number densities at timet = 7 seconds are shown in Fig. 6 for Cases 1EG and 1MG in panels
+(a) and (b), respectively. Panel (a) shows a particle number density of∼ 1010 m−3 at the center of each
+counter-rotating wake vortex. Thermophoretic forces prevent particles from contacting the downstream
+surface of the heated vapor source (this will be demonstrated in Section 4.8), resulting in a void of
+particles between the heated vapor source and the particle-dense wake vortices. Particles are also
+less numerous on the downstream side of the recirculating wake: particles do not nucleate in this
+region, dividing streamlines prevent particles from being convected into this region, and low diffusion
+rates limit particles from rapidly diffusing into this region. Even further downstream, the particle number
+density remains symmetric, with the largest particle number densities of∼ 1011 m−3 appearing slightly
+separated from the symmetry line on top and bottom. No particles appear near the upper and lower
+surfaces. Panel (b) shows the particle number densities for Case 1EG. More particles accumulate in
+the upper wake vortex than in the lower wake vortex. The Case 1EG wake contains fewer particles than
+the Case 1MG wake. In Case 1EG, a high particle concentration of nearly ∼ 1012 m−3 appears over
+a large area near the upper surface due to the high nucleation rate in the region. Signiﬁcantly more
+particles appear in this near-wall region than anywhere in the Case 1MG particle ﬁeld. Unlike Case
+1MG, Case 1EG contains particles throughout the entire vertical span of the ﬂow chamber: particles
+that appear in lower concentrations near the bottom wall have arrived there via the gravitational settling
+mechanism. Particles that settle are sufﬁciently large to be removed from the aerosol via gravity. This
+can be demonstrated by considering the spatial distribution of particle size.
+The diameter of average massdm is deﬁned by
+dm =
+(
+6
+π
+∑Ns
+i=2viQi∑Ns
+i=2Qi
+)1/3
+. (32)
+Figure 7 shows the diameter of average mass at timet = 7 seconds for Case 1MG in panel (a) and Case
+1EG in panel (b). The diameter of average mass is typically 10− 20µm in both cases. The diameter of
+average mass is notably smaller in regions where nucleation rates or particle number densities are large
+(near the upper surface in Case 1EG, for example). The Case 1EG wake contains only isolated regions
+of large particles, including in the upper and lower vorticies, while the entirety of the Case 1MG wake
+contains large particles. A signiﬁcation region downstream and below the heated vapor source contains
+very large particles in Case 1EG: particles sufﬁciently large to rapidly settle out of the ﬂow dominate this
+region. Downstream of the Case 1MG wake, the diameter of average mass depends signiﬁcantly on
+cross-stream position, but not on stream-wise position. The largest particles appear on the symmetry
+line, corresponding to a region of low particle number density.
+The particle size distribution (PSD) provides a quantitative measure of particle number and size. We
+construct the size distribution by numerically “collecting” a volume of the aerosol and counting the
+number of particles in each node k contained in the sample. The sample is collected by computing the
+ﬂux of particles through a vertical plane located at x′, where x′ is the dimensionless distance from the
+downstream surface of the heated element, indicated in Fig. 1. The collected number density ¯Qk[m−3]
+of particles belonging to sizek is therefore
+¯Qk = 1h∫ h/2−h/2u (y)Qk (y)dy, (33)
+where h = 6.82Lo is the height of the domain and u is the x-component of the velocity vector. The
+collected number density ¯Qk is therefore the number of particles collected per unit time and per unit
+volume at the measurement planex′.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+12 SEAN C. GARRICK
+
+--- page 13 ---
+Figure 8 shows the particle number densities for Cases 1MG and 1EG at downstream measurement
+plane x′ = 26 at time t = 7 seconds. Case 1MG is shown in red and Case 1EG is shown in black.
+The Case 1MG distribution contains particle diameters ranging from hundreds of nanometers to tens
+of micrometers, with a small percentage of particles approaching one hundred micrometers. The most
+frequent size is approximately 5µm. The Case 1MG distribution contains two local maximums: one at
+5µm and another at 30µm. The Case 1EG distribution contains only one local maximum at5µm. Case
+1EG contains a larger number density than Case 1MG for all particle sizes < 20 µm, and Case 1EG
+contains no particles> 40µm – these large particle settle out of the system. Case 1EG contains orders
+of magnitude more particles< 5µm than Case 1MG.
+4.7 EFFECT OF P ARTICLE SETTLING
+In order to isolate the effects of particle settling, we modify Case 1EG by neglecting the settling mecha-
+nism (by settinguss⋆j,k = 0). This case is referred to as Case 1EG–NS, where NS stands for “no settling”.
+Figure 9 compares size distributions for Case 1MG, Case 1EG, and Case 1EG–NS at measurement
+planex′ = 26 at timet = 7 seconds. The Case 1EG–NS distribution is considerably wider than the other
+cases. It contains particles ranging in size from nanometers to 100 µm. Case 1EG–NS also contains
+two local maxima in the particle size distribution, much like Case 1MG and unlike Case 1EG. Eliminating
+the settling mechanism has expanded the size distribution to include both smaller and larger particles,
+and has also introduced a new local maximum in the size distribution near 35µm.
+4.8 EFFECT OF THERMOPHORESIS
+Figure 10 shows particle number densities at time t = 7 seconds for Case 1MG in panel (a) and Case
+1MG-NT in panel (b) (where NT stands for “no thermophoresis”). When thermophoresis is active, as in
+panel (a), particles do not appear adjacent to the surface of the heated vapor source; the temperature
+gradient is large normal to the surface, and thermophoresis forces the particles out of this region.
+When thermophoresis is inactive, particles are able to remain near the hot surface. In this region, the
+temperature is sufﬁciently high to cause evaporation. Small particles are able to diffuse out of the wake,
+resulting in lower particle number densities inside the Case 1MG-NT wake than the Case 1MG wake.
+Downstream of the wake, larger particle number densities are present in Case 1MG-NT relative to Case
+1MG, following from the decreased number of particles trapped in the Case 1MG-NT wake vorticies.
+Figure 11 shows particle size distributions for Cases 1MG and 1MG-NT at timet = 7 seconds. Consis-
+tent with Fig. 10, the peak number density in Case 1MG-NT is greater than Case 1MG by approximately
+a factor of ﬁve – the most frequent particle size is∼ 5µm for both cases. A local maximum appears in
+both distributions around dp = 30 µm. This local maximum contains fewer particles in Case 1MG-NT
+than in Case 1MG, potentially because this local maximum is comprised of particles that have inter-
+acted with the wake region. In Case 1MG-NT, some of these particles have undergone evaporation and
+shifted to smaller particle sizes.
+4.9 EFFECT OF HEATED VAPOR SOURCE ORIENTATION
+Figure 12 shows the particle number densities at time t = 7 seconds for Case 1MG-R in panel (a)
+and Case 1EG-R in panel (b) (where R stands for “Rotated”). Cases 1MG-R and 1EG-R are identical
+to Cases 1MG and 1EG, except the heated vapor source has been rotated 90◦. The wake regions
+of Cases 1MG-R and 1EG-R are considerably smaller than Cases 1MG and 1EG, and neither Case
+1MG-R nor Case 1EG-R contain particles in their wakes. The results from Case 1MG-R differ from
+Case 1MG in that they do not prominently display two high particle number density streaks around the
+symmetry line, but instead contain large particle number densities everywhere near the symmetry plane.
+Case 1EG-R presents large particle number densities near the cool upper surface, similar to Case 1EG.
+Unlike Case 1EG, Case 1EG-R does not contain particles inside its comparatively small downstream
+wake region, but instead contains particles in a large recirculation region that appears above the heated
+vapor source. The number density of particles in the recirculation region directly above the heated
+vapor source is lower than the particle number density downstream of the recirculation region. Settling
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+13 SEAN C. GARRICK
+
+--- page 14 ---
+particles are not apparent, as in Case 1EG, which may be attributable to the lack of a wake region.
+Figure 13 shows particle size distributions for Cases 1MG-R and 1EG-R at time t = 7 seconds. Both
+distributions present a single local maximum in particle size – the local maximum prominent at dp =
+30µm for Case 1MG is not present in Case 1MG-R. Consistent with Case 1EG, Case 1EG-R contains
+fewer particles larger than approximately dp = 10 µm, and no particles larger than dp = 40 µm. The
+most frequent particle size for Case 1EG-R is the same as Case 1EG (dp = 5 µm). The most frequent
+particle diameter for Case 1MG-R is dp = 10 µm – approximately two times larger than Cases 1MG,
+1EG, and 1EG-R.
+4.10 EFFECT OF FLOW SPEED
+The Case 1 simulations were performed with an 8 cm/s inlet ﬂow velocity. Case 2MG and Case 2EG
+consider a 10 cm/s inlet ﬂow velocity. Particle number densities and velocity vectors for Case 2MG and
+Case 2EG are shown in Fig. 14 at time t = 7 seconds. Panel (a) shows Case 2MG and panel (b)
+shows Case 2EG. Case 2MG presents many features similar to Case 1MG, including symmetry about
+the center line and high particle number densities in the wake vortices. Case 2MG has an elongated
+wake associated with a higher ﬂow speed. Case 2EG differs from Case 1EG in that particles are not
+prominent near the upper surface until much farther downstream – this is attributable to the decrease in
+Froude number, and corresponding decrease in upward motion due to buoyancy. Although the particle
+ﬁeld remains asymmetric, the increased ﬂow velocity has decreased the inﬂuence of buoyancy, reducing
+interaction with the upper surface. The presence of particles in the lower portion of the domain, as in
+Case 1EG, is attributable to the gravitational settling dynamic.
+Particle size distributions for Case 2MG and Case 2EG computed at x′ = 26 and time t = 7 seconds
+are shown in Fig. 15. The most common particle size is∼ 5µm for both cases. Case 2EG, unlike Case
+1EG, contains particles on the nanometer scale – nucleation begins near the upper surface further
+downstream, and particles resulting from nucleation remain in the ﬂow near the measurement plane
+x′ = 26.
+4.11 SMOKE VISUALIZATION
+The simulated smoke is visualized by computing the particle surface area densityS(x) according to
+S(x) =
+Ns∑
+k=2
+πd2kQk(x). (34)
+The particle surface area density S(x) is shown in Fig. 16 at time t = 7 seconds. Panel (a) shows
+Case 1MG, panel (b) shows Case 1EG, panel (c) shows Case 2MG, and panel (d) shows Case 2EG.
+Darker regions correspond to large smoke concentrations and white areas contain no smoke. High
+concentrations of smoke are apparent in the wake vortices of all cases. The microgravity cases in
+panels (a) and (c) contain larger and darker wake regions than the Earth gravity cases in panels (b) and
+(d). Panel (b), corresponding to Case 1EG, presents high smoke concentrations near the upper wall.
+The visible smoke in Case 1EG also occupies a larger downstream area than the other cases, resulting
+from the high nucleation rates near the upper surface. When gravitational forces dominate, wall effects
+can be signiﬁcant, as demonstrated by case Case 1EG in panel (b). In Earth gravity, the smoke is
+more prominent downstream than in the wake region. Visual inspection also suggests the Earth gravity
+smoke to be more sensitive to small perturbations in ﬂow speed than the microgravity smoke (in the
+conﬁguration tested).
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+14 SEAN C. GARRICK
+
+--- page 15 ---
+5 Summary
+We have simulated smoke formation and growth in microgravity and Earth gravity to examine how
+buoyancy and particle settling affect thermal/ﬂuid/particle interactions and the resultant smoke particle
+size distributions. The simulated geometry emulates the SAME experiments performed aboard the
+International Space Station (Mulholland et al., 2015). Dibutyl pthalate (DBP) vapor is released from a
+heated rectangular sample, which serves as a surrogate for the smoldering material used in the SAME
+experiments.
+Large particles (> 30µm) are present in the wake region downstream of the heated vapor source, and
+large particle number densities (∼ 1010 m−3) occur inside the wake vortices. The wake contains large
+particle number densities because dividing streamlines prevent the particles from being convected away,
+and the particles continue to grow as condensation consumes all available DBP vapor. The particles
+simultaneously grow via coagulation. Downstream of the wake, two parallel particle streams contain
+high number densities of both large and small particles. No particles are present far downstream with
+diameter< 400 nm because nucleation only occurs for a short distance downstream of the heated va-
+por source. The particle size distributions contain local maximums near dp = 5µm and dp = 35µm for
+both ﬂow speeds. The faster ﬂow conditions present a slightly larger wake but this does not manifest
+as a meaningful difference in particle size distribution. Thermophoresis prevents particles from contact-
+ing the heated surface, which has been demonstrated by turning off the thermophoresis mechanism.
+Without thermophoresis, particles contact the heated vapor source and undergo evaporation. With re-
+spect to the particle size distribution, this has the effect of decreasing the number of large particles and
+increasing the number of small particles – this supports an assertion that the wake is responsible for
+producing the largest particles in the system.
+When gravity is present, all ﬁelds become asymmetric due to buoyant convection. Upward convection
+in the faster ﬂow brings DBP vapor into close proximity with the cool upper surface, resulting in locally
+high nucleation rates near the upper wake vortex and the upper surface. Large particle number densi-
+ties (∼ 1011 m−3) are present along the upper surface, and slightly lower number densities are present
+in the upper wake vortex. Comparably few particles are present in the lower wake vortex, where the
+diameter of average mass is maximized. Downstream of the wake vortices, gravitational settling elimi-
+nates all particles with diameter> 35µm. Unlike the microgravity case, the 8 cm/s Earth gravity case is
+not bimodal, with a single local maximum at dp = 5µm. Without particle settling, a bimodal distribution
+results with two local maximums at particle diameters comparable to the microgravity case. Rotating the
+heated vapor source 90◦ dramatically reduces the wake volume, and no particles appear in the small
+wake. Rotating the heated vapor source does not affect the Earth gravity case as signiﬁcantly as the
+microgravity case. Increasing the ﬂow speed from decreases the prominence of buoyancy, delays inter-
+action with the upper surface until further downstream, widens the particle size distribution to include
+particles on the nanometer scale, and introduces a second local maximum to the PSD neardp = 30µm.
+Microgravity smoke presented in this study contains larger particles than terrestrial smoke. When the
+microgravity PSD is bimodal, the larger mode contains particles with dp > 35µm, while the terrestrial
+PSD contains effectively zero particles in this size range. Alternatively, the microgravity PSD can be uni-
+modal with a mode diameter of dp = 10 µm – roughly twice that of the terrestrial case. Results exhibit
+three primary mechanisms that differentiate the microgravity and Earth gravity smoke: (1) different re-
+circulation geometries and volumes modify the time-temperature-concentration history of the aerosol in
+regions of high temperature and high vapor mass fraction; (2) particle settling eliminates large particles
+from Earth gravity smoke, which reduces the maximum particle size and modiﬁes aerosol development
+by changing coagulation and condensation rates of the remaining particles; (3) buoyant convection can
+transport condensible species toward relatively cool surfaces, increasing vapor-to-particle conversion.
+Each of these factors tend to increase the size of particles in microgravity relative to Earth gravity. How-
+ever, each of these factors is also highly material- and geometry-dependent: (1) the wake dynamic
+becomes unimportant if nucleation occurs far downstream of the wake, or if there is a time dependent
+ﬂow without a stable recirculation region; (2) particle settling is irrelevant if the condensing species forms
+particles that are too small to settle (the DBP considered in this work forms large particles); (3) if smoke
+is produced in an open environment, there may not be cool surfaces nearby to increase nucleation
+rates. In these situations, microgravity and Earth gravity smoke are hypothesized to be more similar. In
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+15 SEAN C. GARRICK
+
+--- page 16 ---
+contrast, a quiescent, enclosed system is a relevant case where Earth gravity and microgravity smoke
+are hypothesized to differ signiﬁcantly, and is a consideration of future work.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+16 SEAN C. GARRICK
+
+--- page 17 ---
+References
+S. C. Garrick. Effects of turbulent ﬂuctuations on nanoparticle coagulation in shear ﬂows. Aerosol Sci.
+and T echnol., 45:1271–1285, 2011. doi: 10.1080/02786826.2011.589482.
+S. C. Garrick. Growth mechanisms of nano-structured titania in turbulent reacting ﬂows.J. Nanotechnol.,
+2015:1–10, 2015. doi: 10.1155/2015/642014.
+S. C. Garrick and M. Khakpour. The effects of differential diffusion on nanoparticle coagulation in
+temporal mixing layers. Aerosol Sci. T echnol., 38(8):851–860, August 2004.
+S. C. Garrick, K. E. J. Lehtinen, and M. R. Zachariah. Modeling and simulation of nanoparticle co-
+agulation in high reynolds number incompressible ﬂows. In Proc. Joint US Sections Meeting of the
+Combustion Institute, Oakland, CA, 2001.
+S. L. Girshick and C. Chiu. Kinetic nucleation theory: A new expression for the rate of homogeneous
+nucleation from an ideal supersaturated vapor. J. Chem. Phys., 93(2):1273–1277, 1990.
+K. Kadoya, N. Matsunaga, and A. Nagashima. Viscosity and thermal conductivity of dry air in the
+gaseous phase. J. Phys. Chem. Ref. Data , 14(4):947–970, 1985.
+M. Khakpour and S. C. Garrick. Effects of diffusion on nanoparticle coagulation and growth. In Proc.
+Joint US Sections Meeting of the Combustion Institute , Chicago, IL, 2003.
+J. Ku, D. Grifﬁn, P . Greenberg, and J. Roma. Buoyancy-induced differences in soot morphology.Com-
+bust. Flame, 102:216–218, 1995.
+B. Liu, K. Rubow, P . McMurry, T. Kotz, and D. Russo. Airborne particulate matter and spacecraft in-
+ternal environments. SAE Technical Paper 911476, 21st International Conference on Environmental
+Systems, San Francisco, CA, July 15-18 1991.
+S. Modem and S. C. Garrick. Nanoparticle coagulation in a temporal mixing layer: mean and size-
+selected images. J. Visualization, 6(3):333–342, 2003.
+G. Mulholland, M. Meyer, D. Urban, G. Ruff, Z. Yuan, V.Bryg, T. Cleary, and J. Y ang. Pyrolysis smoke
+generated under low-gravity conditions. Aerosol Sci. T echnol., (49):310–321, 2015.
+H. V. Nguyen, K. Okuyama, T. Mimura, Y . Kousaka, R. Flagan, and S. Seinfeld. Homogeneous and
+heterogeneous nucleation in a laminar ﬂow aerosol generator. J. Colloid Interf. Sci. , 119:491–504,
+1987.
+E. Otto, H. Fissan, S. Park, and K. Lee. The Log-Normal Size Distribution Theory of Brownian Aerosol
+Coagulation for the Entire Particle Size Range: Part II – Analytical Solution Using Dahneke’s Coagu-
+lation Kernel. J. Aerosol Sci., 30(1):17–34, 1999.
+T. Poinsot and S. Lele. Boundary conditions for direct simulations of compressible viscous ﬂows. J.
+Comp. Phys., 101:104–129, 1992.
+A. Prakash, A. Bapat, and M. Zachariah. A simple numerical algorithm and software for solution of
+nucleation, surface growth, and coagulation problems. Aerosol Sci. T echnol., (37):892–898, 2003.
+J. Pyyk ¨onen and J. Jokiniemi. Computational ﬂuid dynamics based sectional aerosol modelling
+schemes. J. Aerosol Sci., 31(5):531–550, 2000.
+L. Talbot, R. Cheng, R. Schefer, and D. Willis. Thermophoresis of particles in a heated boundary layer.
+J. Fluid. Mech., (101):737–758, 1980.
+D. Urban, Z.-G. Yuan, P . Sunderland, G. Linteris, J. Voss, K.-C. Lin, Z. Dai, D. Sun, and G. Faeth. Struc-
+ture and Soot Properties of Nonbuoyant Ethylene/Air Laminar Jet Diffusion Flames.AIAA Journal, 36
+(8):1346–1360, 1998.
+D. Urban, D. Grifﬁn, G. Ruff, T. Cleary, J. Y ang, G. Mulholland, and Z. Yuan. Detection of Smoke from Mi-
+crogravity Fires. In International Conference On Environmental Systems, 11 July . SAE International,
+2005.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+17 SEAN C. GARRICK
+
+--- page 18 ---
+N. Vargaftik, L. Filippov, A. Tarzimanov, and E. Totskii. Handbook of Thermal Conductivity of Liquids
+and Gases. CRC Press, 1993.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+18 SEAN C. GARRICK
+
+--- page 19 ---
+Inlet Outlet
+x0
+Lo
+33Lo
+6.82Lo 2.5Lo
+11Lo
+Uo Patm
+DBP Source
+Isothermal, no-slip wall
+Isothermal, no-slip wall
+40Lo
+Figure 1: Flow geometry (not to scale).
+(a)
+(b)
+-5 0 5
+Figure 2: Dimensionless vorticity ﬁelds for (a) Case 1MG and (b) Case 1EG.
+Table 1: Constant ﬂuid properties.
+Property Air Dibutyl phthalate
+Cp 1007 J/Kg· k 2329 .7 J/Kg· k
+Cv 720 J/Kg· k 2299 .83 J/Kg· k
+MW 28.97 kg/kmol 278 .3435 kg/kmol
+R 287 J/kg· k 29 .87 J/kg· k
+γ 1.4 1 .013
+hf 0 J/kg −2465.7× 103 J/kg
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+19 SEAN C. GARRICK
+
+--- page 20 ---
+(a)
+(b)
+300 387 474
+Figure 3: Temperature ﬁelds in Kelvin for (a) Case 1MG and (b) Case 1EG.
+0 0.025 0.05
+(a)
+(b)
+Figure 4: DBP vapor mass fraction ﬁelds for (a) Case 1MG and (b) Case 1EG.
+Table 2: Variable DBP properties (Nguyen et al., 1987, Vargaftik et al., 1993).
+Property Functional form
+Saturation pressure Ps = 133× exp
+(
+16.27− 5099T−109.51
+)
+[Pa]
+Surface tension σ = 0.0353− 0.0000863× (T− 273.16)
+[
+kg/s2]
+Density ρc = 1063− 0.826× (T− 273.16)
+[
+kg/m3]
+Thermal conductivity kp = 0.16738− 0.00010357×T [W/m· K]
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+20 SEAN C. GARRICK
+
+--- page 21 ---
+0 7 14
+(a)
+(b)
+Figure 5: Log of particle nucleation rate [m−3·s] for (a) Case 1MG and (b) Case 1EG.
+6 9 12
+(a)
+(b)
+Figure 6: Log of particle number density [m−3] for (a) Case 1MG and (b) Case 1EG.
+Table 3: Deﬁnitions of primary test cases.
+Case Uo[m/s] go[m/s2] Re Fr
+1EG 0.08 9.81 22.3 0 .385
+1MG 0.08 0.0 22.3 ∞
+2EG 0.10 9.81 27.7 0 .481
+2MG 0.10 0.0 27.7 ∞
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+21 SEAN C. GARRICK
+
+--- page 22 ---
+0 1.75×10-5 3.5×10-5
+(a)
+(b)
+Figure 7: Diameter of average massdm [m] for (a) Case 1MG and (b) Case 1EG.
+Case 1MG
+Case 1EG
+Q (#/m3)
+102
+104
+106
+108
+1010
+dp (m)
+10−7 10−6 10−5 10−4 10−3
+Figure 8: Particle size distributions for Case 1MG and Case 1EG computed from samples collected at
+x′ = 26.
+Case 1MG
+Case 1EG
+Case 1EG-NS
+Q (#/m3)
+102
+104
+106
+108
+1010
+dp (m)
+10−9 10−8 10−7 10−6 10−5 10−4 10−3
+Figure 9: Particle size distributions for Case 1MG, Case 1EG, and Case 1EG–NS computed from
+samples collected atx′ = 26
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+22 SEAN C. GARRICK
+
+--- page 23 ---
+6 9 12
+(a)
+(b)
+Figure 10: Log of particle number density [m−3] for (a) Case 1MG and (b) Case 1MG-NT.
+Case 1MG
+Case 1MG-NT
+Q (#/m3)
+102
+104
+106
+108
+1010
+dp (m)
+10−7 10−6 10−5 10−4 10−3
+Figure 11: Particle size distributions for Case 1MG and Case 1MG-NT computed from samples collected
+atx′ = 26.
+6 9 12
+(a)
+(b)
+Figure 12: Log of particle number density [m−3] for (a) Case 1MG-R and (b) Case 1EG-R.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+23 SEAN C. GARRICK
+
+--- page 24 ---
+Case 1MG-R
+Case 1EG-R
+Q (#/m3)
+102
+104
+106
+108
+1010
+dp (m)
+10−7 10−6 10−5 10−4 10−3
+Figure 13: Particle size distributions for Case 1MG-R and Case 1EG-R computed from samples col-
+lected atx′ = 26.
+6 9 12
+(a)
+(b)
+Figure 14: Log of particle number density [m−3] for (a) Case 2MG and (b) Case 2EG.
+Case 2MG
+Case 2EG
+Q (#/m3)
+102
+104
+106
+108
+1010
+dp (m)
+10−9 10−8 10−7 10−6 10−5 10−4 10−3
+Figure 15: Particle size distributions for Case 2MG and Case 2EG computed from samples collected at
+x′ = 26.
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+24 SEAN C. GARRICK
+
+--- page 25 ---
+(a)
+(b)
+(c)
+(d)
+Figure 16: Visualization of simulated smoke ﬁelds for (a) Case 1MG, (b) Case 1EG, (c) Case 2MG, and
+(d) Case 2EG.
+Table 4: Deﬁnitions of modiﬁed test cases.
+Case Modiﬁcation type
+1EG-NS Case 1EG with particle settling deactivated
+1MG-NT Case 1MG with thermophoresis deactivated
+1MG-R Case 1MG with heated vapor source rotated 90◦
+1EG-R Case 1EG with heated vapor source rotated 90◦
+UTILIZATION OF THE SAME DATA FOR ADVANCED MODELING AND SIMULATION OF SMOKE GENERATION IN
+MICROGRAVITY
+25 SEAN C. GARRICK

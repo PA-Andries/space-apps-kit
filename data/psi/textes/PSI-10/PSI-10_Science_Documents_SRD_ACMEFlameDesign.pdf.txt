@@ -1,0 +1,2087 @@
+Source : NASA PSI, PSI-10, Science Documents, PSI-10_Science Documents_SRD_ACMEFlameDesign.pdf
+
+--- page 1 ---
+Science Requirements Document 
+ 
+Version 1.3 
+April 1, 2010 
+ 
+ 
+ 
+ for 
+ 
+FLAME DESIGN 
+ 
+a member of the ACME Flight Experiments 
+ 
+ 
+Principal Investigator 
+Richard L. Axelbaum, Washington University 
+ 
+ 
+Co-Investigators 
+David L. Urban, NASA GRC 
+Peter B. Sunderland, University of Maryland 
+Beei-Huan Chao, University of Hawaii 
+ 
+ 
+Project Scientist 
+Dennis P. Stocker, NASA GRC
+
+--- page 2 ---
+2
+EXECUTIVE SUMMARY 
+The majority of practical combustion pr ocesses involve nonpremixed combustion of 
+hydrocarbons. These processes must be efficient and the resulting emissions low. For example, 
+soot production, which can adversely affect effici ency, emissions, and equipment lifetime, must 
+be controlled, and flame extinction must be a voided. Many methods have been considered to 
+reduce soot, such as increasing strain rates and inert concentrations and reducing pressures, but 
+these techniques generally weaken flames, l eading to performance penalties and possible 
+extinction. The proposed study considers a novel me thod of approaching combustion to address 
+these concerns. The approach is termed flame design, as it takes a fundamental understanding of 
+diffusion flames and, within the inherent constraints imposed, designs flames that best optimize 
+efficiency and minimize pollutants. 
+Flame design involves affecting the basic struct ure of the flame in that the relationship 
+between the temperature and concentration fields is varied to accomplish a stated objective. The 
+method involves exchanging nitrogen (or any inert, in cluding carbon dioxide) from the oxidizer 
+stream to the fuel stream such that the stoichiometric mixture fraction, Zst, can be varied with or 
+without affecting adiabatic flame temperature, Tad. The structure of a high Zst flame is 
+substantially different from that of the standard hydrocarbon/air flame, where Zst is relatively 
+low. By varying Zst at constant Tad, flames have been produced that are soot-free at any strain 
+rate (permanently blue) and have extinction scal ar dissipation rates up to 40 times those of their 
+fuel-air counterparts. 
+The nitrogen exchange approach (or some va riant of it) has been the subject of many 
+studies by the PI and Co-Is (Du and Axelbaum, 1995, 1996, Chao et al., 1998, Sunderland et al., 
+2003, 2004, Liu et al., 2005, Chen and Axelbaum, 2005, Kumfer et al., 2006, 2008, Santa et al., 
+2007a, 2007b, Skeen  et al. , 2009) and other investigators (Sung et al. , 1995; Lin and Faeth, 
+1996; Kang et al. , 1997; Hwang and Chung, 2001). Although these studies have been 
+informative, they typically involved normal-grav ity flames, where buoyancy and inherent strain 
+complicated the interpretation of results. For example, these ambiguities have led to different 
+theories to explain the phenomenon of perman ently-blue diffusion flames. It is not known 
+whether this phenomenon is due more to a change in the direction of convection across the flame 
+or to a change in the detailed structure of the flame. This issue can be addressed by performing 
+microgravity experiments because the unique character of nonbuoyant microgravity flames 
+allows the effects of convection direction and flame structure to be independently varied. By 
+ejecting fuel into an oxidizer in a buoyancy free system, the convective flow across the flame is 
+unambiguously from fuel to oxidizer. Alternativel y, by ejecting oxidizer into fuel, the flow is 
+from oxidizer to fuel. Furthermore, the long residence times that can be obtained in the spherical 
+flame geometry will allow for validation of a theory that predicts the sooting limits at the limit of 
+infinite Damköhler number, Da. 
+Studies of the effect of Zst on scalar dissipation rate at extin ction have indicated that there 
+is a unique Zst where the flame is most resistant to extinction. These findings also suggest that by 
+employing inert exchange to vary Zst, the peak temperature can be shifted to coincide with the 
+location of radical production, thus  allowing the flame to burn at much lower temperatures. The 
+optimum minimum temperature at extinction ha s led us to propose the concept of a pseudo-
+flammability limit for nonpremixed flames. Agai n, this fundamental information is most 
+unambiguously demonstrated in quasi-steady, micr ogravity flames wherein the effects of flame 
+structure can be systematically studied.
+
+--- page 3 ---
+3
+The proposed work will also allow, for the first time, a strain-free experimental study of 
+the effects of Zst on soot inception and flame extinction processes. Microgravity experiments will 
+involve gaseous hydrocarbon diffusion flames supported on porous spherical burners and coflow 
+burners.1 Soot inception limits and flame extinction limits will be obtained as functions of Zst, 
+amount of inert, flow direction, and pressure. Extensive analytical and computational modeling 
+will support the experimental investigation. Mode ls will include gas-phase and burner-surface 
+radiation. 
+Specifically, soot-inception limits in spherical  flames will be measured by establishing a 
+flame at a given Zst and allowing peak temperature to decrease with time until the yellow 
+luminosity is eliminated. The effect of flow  direction across the flame will be studied by 
+performing coflow experiments (desired) where th e fuel issues into the oxidizer and oxidizer 
+issues into fuel. Gas temperatures will be measured by thin film pyrometry and thermocouples to 
+identify the soot-inception temperature. 
+In addition, soot volume fraction measurements will be made to evaluate the effects of Zst 
+and flow direction on soot formation and gr owth, and to better understand the phenomena of 
+permanently-blue flames. Flame extinction limits will also be studied in a manner similar to that 
+of soot inception limits, and temperatures near extinction will be measured. 
+The experiments and modeling will yield unique  data that will allow for an understanding 
+of how Zst affects soot-inception and flame extinction and how Zst can be used to design 
+optimum flames. In addition, the effects of flow direction will also be studied and the importance 
+of flow direction and flame structure to perm anently-blue flames will be assessed. Finally, the 
+proposed concept of a pseudo-flammability limit for nonpremixed flames will be evaluated and 
+these limits will be ascertained for the test fuels. These results will be useful for the development 
+of future combustion devices that will take  advantage of oxygen enrichment technology to 
+design more stable and less polluting flames. 
+                                                 
+1 The coflow flame experiments are desired. This means that many critical goals of the 
+experiments can be obtained without these experi ments but they would add great value to the 
+results.
+
+--- page 4 ---
+4
+ 
+ 
+TABLE OF CONTENTS 
+ 
+EXECUTIVE SUMMARY .............................................................................................................2 
+TABLE OF CONTENTS ...............................................................................................................4 
+1 INTRODUCTION ......................................................................................................................6 
+1.1 Overview ........................................................................................................................6 
+1.2 Background on Flame Design: The Effects of Zst ..........................................................8 
+1.3 Ground-based Microgravity Research .........................................................................11 
+1.4 Normal Gravity Coflow Flame Research ....................................................................22 
+2 FLIGHT EXPERIMENT ...........................................................................................................24 
+2.1 Knowledge Lacking and Knowledge to be Gained by Flight Tests ............................24 
+2.2 Experimental Objectives ..............................................................................................25 
+2.3 Summary of Approach .................................................................................................25 
+2.4 Science Data End Products ..........................................................................................26 
+2.5 Justification for Extended-Duration Microgravity ......................................................27 
+3 EXPERIMENT REQUIREMENTS ..........................................................................................30 
+3.1 Requirements Discussion .............................................................................................30 
+3.2 Operational Sequences .................................................................................................33 
+3.3 Test Matrix ...................................................................................................................33 
+3.4 Science Success Criteria ..............................................................................................33 
+3.5 Post Flight Data Analysis Plan ....................................................................................34 
+5 APPENDIX A .............................................................................................................................37 
+Estimate of Required Gravity Environment ......................................................................37
+
+--- page 5 ---
+5
+NOMENCLATURE 
+A pre-exponential factor 
+a acceleration   
+cp specific heat at constant pressure 
+C/O local carbon/oxygen atom ratio 
+D binary diffusion coefficient 
+Da Damköhler number 
+d diameter 
+Ea activation energy 
+fs soot volume fraction 
+g gravitational acceleration 
+h specific enthalpy 
+Kext extinction strain rate 
+L length 
+M molecular weight 
+m burner gas mass flow rate 
+R universal gas constant 
+Ra radiative loss rate 
+Ri Richardson number 
+r radial coordinate   
+T temperature 
+t time 
+Tad  adiabatic flame temperature 
+Text flame temperature at flame-extinction limit  
+u flow velocity 
+V diffusion velocity 
+W molecular weight 
+X mole fraction 
+Y  mass fraction 
+Z mixture fraction 
+Zst stoichiometric mixture fraction 
+ 
+Greek and other symbols  
+ε effective emissivity of the burner  
+κ Planck mean absorption coefficient  
+λ thermal conductivity 
+υ  stoichiometric coefficient  
+ρ density 
+σ Stefan-Boltzmann constant 
+τd  characteristic diffusion time 
+φ porosity of the porous burner 
+ω&   reaction rate 
+ 
+Subscripts 
+0 center of burner
+
+--- page 6 ---
+6
+b burner 
+F fuel 
+f flame 
+g gas species 
+k,j kth, jth species 
+O oxidizer 
+s bulk material used to construct the burner 
+∞ supply gas 
+ 
+1 INTRODUCTION  
+1.1 Overview 
+Most flames found in industrial and residential applications are nonpremixed, i.e., the fuel and 
+oxidizer are not mixed prior to entering the com bustion chamber. There has been considerable 
+effort to understand the fundamentals of this t ype of flame and much progress has been made. 
+This understanding has, in general, led to improvements in combustion efficiencies and pollution 
+reduction. The progress that has been made has been somewhat limited because the parameters 
+that are readily varied in nonpremixed flames are limited. Mixing rates (scalar dissipation rates) 
+and concentrations (typically in the form of fuel  dilution) can be varied. The effects of mixing 
+rate and dilution on reactant leakage (incomplet e combustion), and soot formation have been 
+well documented and improvements in nonpremix ed combustion following these traditional 
+approaches will continue to be made. Nonethele ss, demands for increased combustion efficiency 
+and significant reductions in pollution emissi ons will continue (Goldin, 1997). This study 
+attempts to address the challenges and proposes a set of novel experiments that will demonstrate 
+an approach to combustion that we term fl ame design. As will be shown, the understanding and 
+potential benefits of this approach can only be unambiguously demonstrated by microgravity 
+experiments. 
+What is flame design? It is an approach to  flames that is conceptually similar to 
+engineering design in that we start without pr econceived notions of what constitutes a typical 
+flame. We begin by considering what our objec tives are for our nonpremixed flame and then 
+design around the constraints imposed by a partic ular application. In general, complete 
+combustion and minimal pollution from, for example, soot, unburned hydrocarbons (UHCs), CO, 
+and NOx are required. Flame temperature is a primary factor affecting combustion efficiency and 
+pollutant formation. While higher temperature can ensure complete combustion, it also increases 
+the amount of soot and NO x in nonpremixed systems. Recognizing that the nonpremixed flame 
+has a well-defined structure, and that the regions  in the flame that aff ect radical production and 
+pollutant formation are not necessarily the same, we ask the following question: Can we design a 
+flame that makes the most efficient use of the maximum temperature to ensure complete reaction, 
+while at the same time minimizing po llutants such as soot, CO, UHCs and NO x? Herein we will 
+limit our concerns to soot inception and flame strength (complete reaction), although this should 
+be considered a paradigm study and other pollutants could be considered subsequently. 
+The question can be better appreciated by rec ognizing that the flame location is uniquely 
+defined by stoichiometry in nonpremixed flames. For fuel burning in air the location of 
+maximum temperature is not necessarily where it should be for a desired outcome, but is rather 
+where stoichiometry forces it to be. This aside,  we can now ask where we might want the peak 
+temperature to be if it were possible to vary its  location. To ensure complete reaction the peak 
+temperature should be coincident with the location where radicals (e.g., OH, O and H) are
+
+--- page 7 ---
+7
+produced. This will ensure the most rapid radical  production and the strongest flame for a given 
+flame temperature. On the other hand, if production of soot is of concern, as is the case for gas 
+turbines where the formation of soot can have a deleterious effect on turbine lifetimes, the 
+maximum temperature should be far from the regi on of fuel pyrolysis, but near the region of 
+soot/precursor oxidation. In this way we mini mize the formation and maximize consumption of 
+soot precursors. Are the requirements for a strong and soot-free flame compatible and, if so, can 
+such a flame be designed? Recent studies have shown that the answer to both questions is yes. 
+An important aspect of flame design is that there is no preconception of the composition of 
+the oxidizer mixture. In other words, we do not require the use of air. A justification for this is 
+not required for NASA because the use of oxygen is standard practice in space applications. 
+Nonetheless, a pervasive perspective of the co mbustion community is that any oxidizer other 
+than air is not practical except in extreme situ ations. Is it realistic to suggest oxygen-enriched 
+combustion when air is “free?” The suggestion that air is free for combustion is as erroneous as 
+was the statement in the 1970’s that solar energy is free. The true cost for modern combustion 
+includes high capital and maintenance costs for pollution abatement equipment, which can run 
+from 10-50% of the fuel costs. These cost s are expected to increase steadily as the 
+Environmental Protection Agency (EPA) a nd local governments impose more stringent 
+requirements for air quality. Also, systems are ofte n operated at less than optimum efficiency to 
+minimize pollution or ensure flame stability. Thus, the question as to whether oxygen-enriched 
+air is economical requires considering cradle-to-gr ave economics, which include all benefits that 
+can be realized, e.g., the cost savings in capital equipment and maintenance, as well as the added 
+cost of oxygen enrichment. The cost of oxygen enrichment has limited its applications, but 
+studies as early as 1989 sponsored by the Gas Research Institute (Williams et al., 1989) and the 
+Department of Energy (Chace et al., 1989) anticipated that oxygen-enriched combustion would 
+be a critical combustion technology in the future . Recent progress in separation technologies has 
+reduced the costs of oxygen and increased the viability of oxygen enrichment. Thus, long-range 
+planning for combustion must include the possi bility that oxygen-enriched air will be the 
+oxidizer of the future. 
+Concerns about global warming have also  brought the possibility of oxygen-enriched 
+combustion to the forefront. Carbon dioxide is a greenhouse gas and is considered to be a 
+primary source of global warming. The exhaust gas of air-fired combustors contains only 
+10-20% CO2, the balance being primarily nitrogen. This dilute CO 2 stream is not conducive for 
+capture, storage or reuse, and cost-effective met hods of concentrating the exhaust are needed to 
+make carbon capture and sequestration (CCS) a rea lity. One of the most promising methods of 
+concentrating CO2 in the flue gas is by combustion (e.g., of coal) with oxygen instead of air – 
+oxy-fuel combustion. The oxygen can be diluted with recycled flue gas to control temperature, 
+yielding a flue gas composed of over 95% CO2 (Varagani et. al., 2004; Okazaki and Ando, 1997; 
+Doctor et al., 1997). With these high concentrations of CO 2, its direct recovery or sequestration 
+becomes feasible. Nonetheless, there is a cost  involved in oxygen separation and while oxy-fuel 
+combustion is considered one of the most cost-effective ways of addressing greenhouse 
+emissions, if other benefits are found for em ploying oxy-fuel combustion, implementation of 
+greenhouse gas control will have a lower overall cost. This work will allow us to better 
+understand oxy-fuel combustion and thus recommend alternative approaches to combustion that 
+can reduce emissions, increase efficiencies, and reduce equipment costs.
+
+--- page 8 ---
+8
+Many industrial applications that require ve ry high temperatures, for example, blast 
+furnaces, already employ oxygen-enriched air. Argonne National Laboratories has been studying 
+oxygen-enriched combustion in practical syst ems since the late 1990s. Researchers there 
+proposed burning emulsified fuels in oxygen-enriched  air as a means of reducing particulates in, 
+for example, diesel engines (Callaghan et al., 1998; Assanis et al., 1993; Sekar et al., 1991). As 
+will be shown, the methodology employed in those a pplied studies is very similar to our inert 
+exchange method. Furthermore, an entire book has been published on industrial applications of 
+oxygen-enhanced combustion (Baukal, 1998). Clear ly, the time is right for a fundamental 
+program to evaluate the potential of oxygen enri chment in nonpremixed flames, and as will be 
+shown below, studies in long-duration micrograv ity are required to understand the effects and 
+ultimate potential of oxygen enrichment. The li nk between these applied studies and the 
+proposed study is that oxygen enrichment and fuel dilution have a strong effect on the 
+stoichiometric mixture fraction, Zst. 
+ 
+1.2 Background on Flame Design: The Effects of Zst 
+Sooting Limits 
+Du and Axelbaum (1995) showed experimentally and numerically that Zst can have a profound 
+effect on soot inception. Zst characterizes the flame structure and is given by 
+ Zst = (1+YF,∞WOνO / YO,∞WFνF)-1 ,  (1.1) 
+where Y is mass fraction, W is molecular weight, ν is the stoichiometric coefficient, and the 
+subscript O refers to oxidizer and F to fuel. To understand the isolated effects of flame structure, 
+Zst was varied while maintaining a constant adiabatic flame temperature Tad. This was 
+accomplished by recognizing that diffusion flames ar e constrained to burn stoichiometrically (in 
+the limit of infinite Damköhler number), which imp lies that for an equidiffusional system with a 
+given stoichiometry, Tad is uniquely defined. 
+For example, the stoichiometry of an ethylene diffusion flame yields 
+ C 2H4 + 3O2 + νN2 N2 → products . (1.2) 
+For ethylene burning in air, the stoichiometric coefficient for the inert is νN2 = 11.28 and the 
+adiabatic flame temperature is Tad = 2370 K. Provided that the stoi chiometry in this equation is 
+maintained, the nitrogen can be introduced with the fuel, oxygen or a combination of both, with 
+no impact on Tad. In other words, Tad of a fuel mixture containing 1 mole of C 2H4 and 11.28 
+moles of N2 burning in pure oxygen is the same as that of pure C2H4 burning in air. 
+The effects of flame structure on soot par ticle inception can be strongly dependent on Zst. 
+In Fig. 1.1 the flame-sheet solution is plotted for Zst = 0.064 (a) and Zst = 0.78 (b). Fig. 1.1 
+indicates that in the ethylene/air flame the m ean ethylene concentration is large in the high 
+temperature region, i.e., conditions are favorable for soot inception. However, in the diluted-
+ethylene/oxygen flame, the mean concentration of fuel in the high temperature region is low. 
+Thus, fuel-pyrolysis chemistry is inhibited at high Zst. This implies that the conditions in the 
+ethylene/air flame are more conducive to soot in ception than are those in the diluted ethylene-
+oxygen flame, even though they both have the same adiabatic flame temperature. 
+Experimental results confirm that as Zst is increased, soot inception is suppressed. 
+Significantly, at high Zst the flames remain blue even when strain rates are small in counterflow 
+flames or as heights approach infinity in coflow flames. G.M. Faeth coined the name 
+permanently-blue to describe such flames (Lin and Faeth, 1996).
+
+--- page 9 ---
+9
+While there is clear evidence of 
+the importance of Zst on soot inception, 
+there have been different 
+interpretations of this behavior 
+(Sugiyama, 1994; Du and Axelbaum, 
+1995, Lin and Faeth, 1996). Sugiyama 
+and Faeth both maintained that the 
+effect is primarily hydrodynamic. In 
+the context of Zst and counterflow 
+flames, this argument can be 
+understood as follows: referring to 
+Fig. 1.2a we see that for Zst < 0.5 the 
+streamlines are directed from the 
+oxidizer to the fuel. Thus, soot 
+particles are produced on the fuel side 
+of the flame and are convected into 
+increasingly rich regions. For Zst > 0.5, 
+shown in Fig. 1.2b, the streamlines are 
+directed from fuel to oxidizer so that 
+soot particles can be rapidly oxidized. 
+Axelbaum et al. have argued that 
+while flow direction will certainly 
+impact soot growth, at the sooting limit 
+the process is not one of heterogeneous 
+soot growth, but rather soot inception, 
+which occurs through gas-phase 
+chemistry. For the gas-phase reactions 
+of soot inception, flow direction is less 
+important. A diffusion flame is a 
+diffusive-convective system and this 
+balance allows for changes in the 
+convective direction without 
+substantial changes in the flame 
+response. Furthermore, since the soot 
+inception zone is finite, it is indeed 
+possible to produce soot when Zst > 0.5 
+(Sugiyama, 1994; Du and Axelbaum, 
+1995; Atreya et al. , 1992; Lin and Faeth, 1996). Consequently, Du and Axelbaum (1995) 
+attributed the existence of permanently-blue flames to changes in Zst. Numerical results indicate 
+that inception is dramatically affected by flame st ructure through changes in fuel pyrolysis rates, 
+as well as oxidation rates adjacent to the pyrolysis zone.  
+For small Zst, where changes in Zst are primarily due to changes in fuel concentration, the 
+effect on soot inception is primarily fuel dilution. For large Zst, where oxygen concentrations are 
+appreciably increased (Fig. 1.1), the subsequent shift in the O 2 and OH profiles towards the fuel 
+side of the flame can have a dramatic influence on inception. This effect is illustrated by the 
+numerical results shown in Fig. 1.3 for the two ethylene counterflow flames of Fig. 1.2. For high 
+(a) (b)
+01
+Z
+0
+1
+T/Tad
+YC2H4
+High T Region
+YO2
+T/Tad
+High T Region
+YO2
+01
+Z
+0
+1
+YC2H4 , YO2, T/Tad
+YC2H4
+(a) (b)
+01
+Z
+0
+1
+T/Tad
+YC2H4
+High T Region
+YO2
+T/Tad
+High T Region
+YO2
+01
+Z
+0
+1
+YC2H4 , YO2, T/Tad
+YC2H4
+ 
+ 
+Figure 1.1. Schematic diagram of the flame sheet solution for 
+fuel, oxidizer and temperature pr ofiles in mixture fraction space 
+for (a) an ethylene-a ir diffusion flame, Zst = 0.064, and (b) a 
+diluted-ethylene/oxygen flame, Zst = 0.78. (Du and Axelbaum, 
+1995). 
+C2H4                                                                     C2H4/N2 
+Air                                                  O2 
+                (a)                                                (b) 
+Soot- 
+Inception
+Zone 
+ 
+ 
+ 
+ 
+Flame 
+ 
+ 
+ 
+Figure 1.2. Schematic representation of counterflow flames 
+with (a) Zst < 0.5 such that the flame is on the oxidizer side of 
+the stagnation plane and the flow is from the soot inception 
+region to the fuel source and (b) Zst > 0.5 such that the flame 
+is on the fuel side of the stagnation plane and the flow is from 
+the soot inception region to the oxidizer source. (Sunderland et 
+al., 2003). 
+Figure 1.3. Numerical results for ethylene/air counterflow diffusion flames for (a) Zst = 0.064 and (b) Zst = 0.78, at 
+strain rate of 100 s-1. (Du and Axelbaum, 1995).
+
+--- page 10 ---
+10
+Zst the oxygen has shifted deep into the fuel side of  the peak temperature. This shift narrows the 
+soot formation zone. Du and Axelbaum (1995) s uggested it may be possible to obtain soot-free 
+conditions for many fuels if the structure of th e flame can be adjusted to the extent that 
+significant oxidizer exists on the fuel side of the flame at a low enough temperature. Studies 
+have reported that at temperatures below 1250 K soot does not form (Gomez et al. , 1987, 
+Santoro et al., 1987, Sunderland et al., 1995) and, as seen from Fig. 1.3, at about 1250 K the 
+local C/O ratio is less than unity, suggesting that  soot cannot form in this flame for realistic 
+residence times. Faeth and co-workers applied nitrogen exchange and their data support the 
+above hypothesis in that they were able to obtai n permanently-blue flames at low strain rates 
+(<100 s-1) for acetylene, propylene and butadiene. 
+Resolution of this issue is of significance to our understanding of soot inception in 
+diffusion flames, not only because permanently-blu e flames are of fundamental importance, but 
+also because if the basic structure of the flame has a strong effect on soot particle inception, to 
+date this has not been sufficiently studied. 
+With normal gravity nonpremixed flames, e.g., coflow and counterflow flames, it is not 
+possible to resolve this issue because the direction of the flow field and flame structure cannot be 
+varied independently. Consequently, there is an inherent ambiguity in the mechanism 
+responsible for soot suppression. A key advant age of microgravity is that buoyancy is not 
+present to influence the convective flow field a nd thus the direction of convection in laminar 
+diffusion flames can be unambiguously controlle d. This is true for both spherical coflow 
+diffusion flames. An additional advantage of the spherical diffusion flame is that it is nearly one-
+dimensional and can be easily formed in micr ogravity by ejecting one reactant from a porous 
+sphere into a quiescent environment of the other reactant. Furthermore, the range of residence 
+times for spherical flames can be significantly larger than for normal-gravity flames owing to the 
+lack of buoyancy. No comparable experiments exist in normal gravity. The one-dimensional 
+flame is also the most basic flame. While prem ixed flames can easily be made one-dimensional 
+in normal gravity, nonpremixed flames cannot because the fuel and oxidizer are initially separate 
+and buoyancy does not allow the gases to mix in one dimension. Thus, studies of soot inception 
+and flame extinction in one-dimensional flames are of fundamental importance and the data 
+generated from microgravity experiments will yield a valuable database wherein the interplay of 
+kinetics, transport, radiation heat transfer and thermophoresis are revealed. 
+ 
+Flame Extinction 
+Although Tad is the same for the two flames of Fig. 1.2, their response in terms of flame 
+extinction is very different (Du and Axelbaum, 1996). Extinction strain rate limits at a given Tad 
+tend to increase with Zst. For example, the measured extinction strain rate Kext for methane-air 
+flames ( Zst = 0.055) is 393 s -1 while for the diluted methane-oxygen flame ( Zst = 0.78) it is 
+883 s-1. This increase results from the shift of the O 2 profile into regions of higher temperature. 
+This increases the OH and O production rates in this region, yielding stronger flames. The shift 
+can result in more than a 100 °C difference in the extinction temperature. This contrasts with the 
+data of Ishizuka and Tsuji (1981), which suggested  that there is a single limit temperature that 
+constrains the extent of dilution that a flame can sustain. The results of Du and Axelbaum (1996) 
+suggest that the lowest extinction limit temp erature for stable burning corresponds to the 
+condition where the OH and O production zone s are centered on the location of peak 
+temperature. Thus achieving the lowest temper ature for stable burni ng of a diffusion flame 
+requires the flame to be  redesigned . An undesigned flame does not use the peak temperature
+
+--- page 11 ---
+11
+effectively because the peak temperature must be  high enough to ensure that the temperature at 
+the location of radical production is sufficiently  high. The offset distance between the peak 
+temperature and the peak radical production is directly related to the global structure of the flame 
+(Zst). This is because the critical branching reaction 
+ H + O 2 → OH + O (1.3) 
+has a reaction rate ω&  given by  
+ ω&  = [H][O2] A exp(-Ea/RT) , (1.4) 
+where A is the pre-exponential factor, R the universal gas constant, and Ea the activation energy. 
+As seen in Fig. 1.4a, the maximum reaction rate  does not inherently reside at the location 
+of peak temperature for a methane-air flame ( Zst = 0.55) but rather is displaced to the oxidizer 
+side (Du and Axelbaum, 1996). Good design would dictate that the peak temperature should be 
+at the location of peak radical production and th is is confirmed by the results of Fig. 1.4b for a 
+diluted methane-enriched air flame ( Zst = 0.65). These two flames are at their extinction strain 
+rates. The temperature at extinction for Fig 1.4a is 1840 K while that of Fig. 1.4b is 1740 K. 
+This finding has important imp lications for control of NO x as well because if stable 
+ethylene flames can be sustained at temperatures  100 °C less than that in ordinary flames, the 
+flames can be operated at lower temperatures and with less NO x. Furthermore, while in these 
+experiments the nitrogen was redirected into th e fuel, in practice exhaust gas could be used 
+instead, further reducing NOx formation. 
+ 
+1.3 Ground-based Microgravity Research 
+In the following we summarize ground-based results  in microgravity for several peer-reviewed 
+journal papers by the investigator team. Thes e works were conducted as preliminary studies 
+related to the flight-based experiments. The su mmaries below include experimental details that 
+are related to the flight-based experiments.
+
+--- page 12 ---
+12
+Effects of Structure and Hydrodynamics on the Sooting Behavior of Spherical Microgravity 
+Diffusion Flames (Sunderland et al., 2003) 
+To study the effects of flame st ructure and flow direction on th e sooting behavior of diffusion 
+flames, microgravity spherical flame experiments were conducted in the NASA Glenn 2.2 s drop 
+tower using a general-purpose combustion rig. Th e rig included a windowed pressure vessel and 
+a burner that consisted of a 6.4 mm diameter por ous sphere. The sphere was supported and fed 
+by a 1.6 mm stainless steel tube attached with  epoxy. All tests were conducted in quiescent 
+ambient gas at 0.98 bar. To minimize disturbances , the flames were ignited immediately after 
+release into microgravity using a spring-loaded Nichrome wire. Gas-phase temperatures were 
+measured with an uncoated B-type thermocouple. The thermocouple was held in a fixed position 
+(a)
+(b)
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0.45 0.5 0.55 0.6 0.65
+X (cm)
+Temperature (K)
+-0.002
+0
+0.002
+0.004
+0.006
+0.008
+Reaction Rate (moles/cm 3/s)
+CH4 Flame A 
+Zst = 0.055
+H+O2=OH+O
+T
+H+HO2=2OH2OH=O+H2O
+H+O2+M=HO2+M
+O+H2=OH+H
+OH+H2=H2O+H
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0.4 0.45 0.5 0.55 0.6
+X (cm)
+Temperature (K)
+-0.002
+0
+0.002
+0.004
+0.006
+0.008
+Reaction Rate (moles/cm 3/s)
+CH4 Flame D 
+Zst = 0.65
+H+O2=OH+O
+T
+H+HO2=2OH2OH=O+H2O
+H+O2+M=HO2+M
+O+H2=OH+H
+OH+H2=H2O+H
+ 
+Figure 1.4. Reaction rate profiles for the primary radi cal production reactions and te mperature in the physical 
+coordinate for (a) Zst = 0.55 (methane-air), and (b) Zst = 0.65 (diluted methane-enriched air flame). (Du and 
+Axelbaum, 1996).
+
+--- page 13 ---
+13
+for each test so that the slowly expanding flam e passed the junction approximately 0.2 s before 
+drop termination. 
+The four flames considered are summarized in Table 1.1. The ethylene consumption rate 
+for all flames was held constant at 1.51 mg/s. A ll four flames have the same adiabatic flame 
+temperature of 2370 K. The peak temperatures of the four flames measured near the end of the 
+drop are tabulated in Table 1.1 in both raw and ra diation-corrected forms. Despite the uniform 
+Tad = 2370 K and ethylene consumption rates, the fl ames have disparate peak temperatures, as 
+discussed below. 
+The flames were imaged through the chamber window using a color CCD camera. 
+Figure 1.5 shows color images, captured just prior to drop termination, of representative flames 
+for the four conditions considered. The final di ameters of the present flames are evident in 
+Fig. 1.5. Recalling that the flames have the same ethylene consumption rate, flames (b) and (c) 
+are smaller than the others since they involve diluted burner gas and pure ambient gas. 
+Figure 1.5 reveals that the sootiest flame is flam e (c), with air injecting into ethylene. This 
+is expected since both 
+flame structure (small Zst) 
+and convection direction 
+(towards fuel) promote 
+soot formation and the 
+peak temperature is the 
+highest. Conversely, one 
+would expect the least soot 
+in flame (b) since it has a 
+large Zst, its convection is 
+towards the oxidizer, and 
+its temperature is lower. 
+Indeed, flame (b) is soot 
+free. The effect of 
+convection direction on 
+soot formation at constant 
+Zst is observed in flames (a) 
+and (c). These flames both 
+have Zst = 0.064 (favoring 
+soot formation) but 
+opposite convection 
+TABLE 1.1. Test conditions and measured peak temperatures for the four flames of Sunderland et al. (2003). 
+ 
+ 
+  Prescribed  Measured  
+Flame Ambient XC2H4a XO2a Zst m b, mg/s df, mm Traw, 
+K 
+Tcorrected, K 
+(a) Oxidizer 1 0.21 0.064 1.51 29.3 1302 1399 
+(b) Oxidizer 0.08 1 0.78 18.6 18.8 1760 1923 
+(c) Fuel 1 0.21 0.064 22.2 24.7 1907 2111 
+(d) Fuel 0.08 1 0.78 5.18 31.3 1300 1385 
+  aBalance is N2. 
+(a) (b)
+C2H4→air C2H4/N2 →O2
+d=29.3 mm d=18.8 mm
+air →C2H4 O2 →C2H4/N2
+d=24.7 mm d=31.3 mm
+(c) (d)
+(a) (b)
+C2H4→air C2H4/N2 →O2
+d=29.3 mm d=18.8 mm
+air →C2H4 O2 →C2H4/N2
+d=24.7 mm d=31.3 mm
+(c) (d)
+Figure 1.5. Color images of representativ e flames at the end of the 2 s drop for 
+Flames (a) – (d) of Table 1.1. The scal e is revealed by the 6.4 mm spherical 
+burner. (Sunderland et al., 2003).
+
+--- page 14 ---
+14
+directions. Particles formed in flame (a) are convected towards the oxidizer where they appear to 
+completely oxidize. The presence of yellow luminosity in flame (a) suggests that convection into 
+the oxidizer suppresses soot growth but does not  eliminate soot inception. Flame (c) has a high 
+flame temperature and the soot particles formed  at the flame are convected towards the fuel, 
+allowing for remarkable soot growth. 
+The effect of flame structure ( Zst) on soot formation is most apparent in flame (d), where 
+convection is directed towards the fuel (favoring soot formation). Structure is seen to have a 
+significant effect, yielding a blue flame at Zst = 0.78. Blue flame conditions are realized in flame 
+(d) despite its convection towards the fuel, whic h would suggest favorable conditions for soot 
+growth. Flames (a) and (d) allow for a clear indication of the relative importance of structure and 
+convection direction on the phenomena of permanen tly blue flames. The flames have almost 
+identical peak temperatures, but convection favors soot oxidation in flame (a) and soot formation 
+in flame (d). Flame (a) produces soot while flame (d) does not, indicating that flame structure is 
+responsible for the soot free conditions of flame (d ). These results attest to the dramatic effects 
+of Zst on soot inception. 
+The main conclusion of this paper was that flame structure, quantified by Zst, had a 
+profound effect on soot production. Soot-f ree conditions were observed at high Zst and sooting 
+conditions were observed at low Zst regardless of convection direction. Convection direction was 
+found to have a smaller impact on soot inception, and had a suppressive effect on soot formation 
+when convection at the flame sheet was directed towards the oxidizer. 
+ 
+Sooting Limits of Microgravity Spherical Diffusion Flames in Oxygen-Enriched Air and Diluted  
+Fuel (Sunderland et al., 2004) 
+In this paper the sooting limits of spherical diffusion flames were studied in microgravity as a 
+function of Zst. The importance of flame structure and fl ow direction on the sooting limits were 
+evaluated and this led to a proposal of the fo llowing criteria for soot inception to occur in 
+nonpremixed flames: that there be a region in th e flame where three quantities – C/O atom ratio, 
+temperature, and scalar dissipation rate – are above certain critical values. The key points are 
+summarized below. 
+Preliminary measurements of soot-inception lim its in microgravity were performed in the 
+drop facilities at NASA Glenn in an extension of  our work above. The microgravity tests were 
+conducted as described above. Sooting limit cond itions were defined as conditions for which 
+yellow luminosity was visible at the end of the drop, but for which a small reduction in XC2H4 or 
+XO2 in the supply gases yielded flames devoid of yellow. 
+The characteristic time in this paper was the re sidence time required for a parcel of gas to 
+convect from the burner surface to the flame sheet. In subsequent work from our group, scalar 
+dissipation rates also are considered. Spherical fl ames with short residence times (ca. 10 ms or 
+less) encounter hydrodynamic suppression of soot ak in to that observed in counterflow flames. 
+Flames with long residence times (ca. 0.5 s or more) are unlikely to reach steady conditions 
+within 2.2 s and have large radiative losses. To  evaluate these concerns we introduce here a 
+characteristic residence time, tres, defined as the mass of gas contained between the flame and the 
+burner surface divided by the burner mass flow rate. In subsequent work residence time is taken 
+as the convection time predicted by the numerical model. 
+The general behavior of these flames resembles that described in Sunderland et al. (2003), 
+although here only flames near sooting limits are considered. The diameters and total radiative 
+emissions increased throughout the 2.2 s drops fo r all flames, and when yellow emission was
+
+--- page 15 ---
+15
+observed its intensity decreased 
+with time. Exchanging N 2 from the 
+ambient gas to the burner effluent 
+at constant Tad decreased the flame 
+size, sphericity (owing to flow non-
+uniformity generated by the porous 
+burner), and the characteristic time 
+to reach steady state, and increased 
+the peak brightness. 
+Seventeen sooting limits 
+were identified. Normal and 
+inverse flames were represented, 
+with a wide range of reactant mole 
+fractions, Zst, and Tad. Ethylene 
+consumption rate was 1.5 mg/s for 
+all flames. Four representative 
+flames at or near their sooting 
+limits are shown in Fig. 1.6. These 
+flames represent both convection 
+toward oxidizer (normal flames) 
+and convection toward fuel 
+(inverse flames). The flames of 
+Fig. 1.6b and 1.6d are considered 
+here to be at the experimental 
+sooting limits at 2.2 s because a 
+small reduction in reactant 
+concentration yields blue 
+conditions. Note that soot, when 
+present, appears inside the flame 
+sheet for normal flames and outside 
+for inverse flames. 
+The sooting limits are plotted 
+in Fig. 1.7. These axes are 
+motivated by a simplified model. 
+Under the hypothesis that soot 
+formation requires a region where 
+local C/O ratio and T exceed their 
+critical values (and where strain 
+rate is sufficiently low), and 
+employing the Burke-Schumann 
+assumptions, YC, YO and T are 
+linear in Z. This leads to the 
+prediction of a linear relationship 
+between Zst and Tad at the sooting 
+limits. 
+0 0.2 0.4 0.6 0.8 1
+Zst
+1500
+2000
+2500
+3000
+Tad ( K )
+5
+10
+15
+20
+25
+νN2
+Permanently-Blue Regime
+    Tad(K) = 
+1198 Z st + 1838
+Symbol       Description
+Convection Toward Oxidizer
+Convection Toward Fuel
+Du and Axelbaum (1995)
+Li n and Faeth (1996)
+Hwang and Chung (2001)
+ 
+Figure 1.7. Sooting limit in terms of stoichiometric mixture fraction 
+and adiabatic flame temperature. (Sunderland et al., 2004). 
+(a) 18% C 2H4 → 27% O2 (b) 18% C2H4 → 28% O2
+30 mm
+(c) O2 → 12% C2H4 (d) O2 → 13% C2H4
+(a) 18% C 2H4 → 27% O2 (b) 18% C2H4 → 28% O2
+30 mm30 mm
+(c) O2 → 12% C2H4 (d) O2 → 13% C2H4
+ 
+Figure 1.6. Color images of limit flames and corresponding near-limit 
+flames for fuel-into-oxidizer: (a) a nd (b), and oxidizer-into-fuel: (c) 
+and (d). Experiments performed in the NASA 2.2 s drop tower. 
+(Sunderland et al., 2004).
+
+--- page 16 ---
+16
+The data in Fig. 1.7 define a region of permanently-blue conditions. Error bars are included 
+for the four flames at the lowest Zst and these flames are excluded from the fit shown. Among the 
+present flames these have the longest residen ce times (all in excess of 0.5 s) and the most 
+unsteady diameters. These conditions also are asso ciated with large gas-phase radiative losses, 
+leading to a large reduction of actual peak temperature below Tad. This is confirmed by past 
+measurements (Sunderland et al. , 2003), which found that a similar flame had a peak 
+temperature that was reduced 970 K from its Tad, whereas flames with shorter tres had much 
+smaller reductions. 
+Figure 1.7 shows that convection direction has no measurable effect on the sooting limits 
+of these spherical flames. Although soot forma tion can be suppressed by decreasing residence 
+time (or increasing strain rate), the present flames have residence times that are longer than those 
+of past counterflow flames. Several normal-grav ity sooting limits also are included in Fig. 1.7. 
+Conditions identified as sooting limits in norma l-gravity tests yield yellow flames in the 
+spherical configuration. This is attributed to the intrusion of strain in the normal-gravity tests. 
+In summary, this study found that soot-fr ee conditions were favored at increased Zst and 
+there was no observed effect of  convection direction on the sooting limits. The sooting limits 
+follow a linear relationship between adiabatic flame temperature and Zst, with Zst accounting for 
+a variation of about 700 K in the sooting limit ad iabatic flame temperature. While heat release 
+rate was held constant, the flames had different  sizes and residence times. These flames can be 
+affected by transient size, imperfect spheric ity, burner heating, radiation, and thermophoresis. 
+Unfortunately, these flames are limited by the 2.2 s test times. For flames with characteristic 
+residence times below 0.5 s, effects of transient flame development, including that due to 
+reactant accumulation (King, 1996, Tse et al. , 2001), and gas-phase radiation (Atreya and 
+Agrawal, 1998, Tse et al., 2001) are expected to be small. But for longer residence time flames, 
+the restriction of the existing ground-based facilities precludes unambiguous microgravity 
+results. 
+ 
+Numerical and Experimental Observations of Spherical Diffusion Flames (Santa et al. 2007b) 
+This paper presented a numerical model of the spherical diffusion flames. In the model a gaseous 
+reactant is injected from the porous spherical burner at temperature Tb into an infinite quiescent 
+environment of the other reactant at temperature T∞. The flow field is assumed to be spherically 
+symmetric. The numerical code is a m odification of the PREMIX code (Kee et al. , 1987), 
+adapted to a diffusion flame in a spherical geom etry and allowing for optically thick radiative 
+heat losses. Conservation of mass, energy and gas species are solved, as follows: 
+∂ρ
+∂t + 1r2 ∂(r2ρu)∂r = 0  , (1.5) 
+ 
+ρcp ∂T∂t = 1r2 ∂∂r r2λ ∂T∂r⎛ ⎝ ⎜ ⎞ ⎠ ⎟ − ρuc p ∂T∂r − ρ cp,k Yk Vk ∂T∂r + hk ωk Yk⎛ ⎝ ⎜ ⎞ ⎠ ⎟ k =1K∑− Ra  , (1.6) 
+ 
+ρ∂Yk∂t =− 1r2 ∂∂r r2 ρYk Vk() − ρu ∂Yk∂r + Wk ωk Yk  , k = 1, 2, . . . , K , (1.7) 
+ 
+subject to these boundary conditions: 
+r = rb : T = Tb  ;     Yk (u +Vk ) = uYk,0  , k = 1, 2, . . . , K , (1.8)
+
+--- page 17 ---
+17
+ 
+r →∞  : T → T∞  ; Yk → Yk,∞  , k = 1, 2, . . . , K , (1.9) 
+ 
+Because thermocouple measurements in the 5 s drop facility showed no significant increase 
+in burner surface temperature during the drop, Tb was taken to be constant at 300 K. In addition, 
+the results indicate that after 5 s the thermal field reached a radius of 9 cm from the center of the 
+burner. Thus, while the computations assumed a finite domain ( rwall = 100 cm), it was 
+effectively infinite and the results were not affected by this assumption. 
+Radiation was considered to be optically thick and caused only by the participation of CO2, 
+H2O and CO. The radiative properties of these ga ses were formulated by a statistical narrow-
+band model with a spectral bandwidth of 25 cm –1. The emissivities were extracted from the line-
+by-line values given by the HITRAN database (Rothman et al. , 2003). To account for the 
+angular variation of the radiation intensity, th e discrete ordinates method was employed, with a 
+discrete representation that included 20 different di rections. The rate of radiative heat transfer 
+was then evaluated by integrating over all directions using Gaussian quadrature. 
+Conventional finite difference techniques with non-uniform mesh spacing were adopted for 
+the discretization of the differential equations. The transient terms were expressed by a forward 
+difference formula, the diffusive terms by a central difference formula, and, for better 
+convergence, the convective terms by an upwind di fference formula. The discretized equations 
+were solved by Sandia’s Twopnt package (Grcar , 1992), which uses Newton’s method to solve 
+transient and steady-state boundary value probl ems. The chemical reaction rates, the 
+thermodynamic properties, and the transport properties were evaluated by Chemkin and 
+Transport software (Kee et al., 1988, 1989). The kinetics data were provided by GRI-Mech 3.0, 
+which contains 53 species and 325 reactions (Smith et al. , 2007). The number of grids was 
+varied until the solution did not change with further addition of grids. The time step was adjusted 
+until the solution converged. 
+Following the approach adopted in Tse et al. (2001), the initial (ignition) conditions for the 
+transient cases were prescribed as the steady-stat e solutions of flames without radiation and with 
+the same outer boundary values, but with the outer boundary brought to 1.2 cm from the burner 
+exit. This led to a thin high-temperature ignition source near the burner surface, which is 
+consistent with the conditions that would exist when a diffusion flame is first established after 
+ignition. 
+Computations were performed for ethylene flames (a) – (d) of Sunderland et al.  (2003). 
+While the trends for flames (a), (b), and (d) predicted by the model closely resemble those of the 
+experiments, the model predicts larger flames . The exact source of the discrepancy remains 
+unclear, but it could arise from thermal and ma ss diffusion properties that are too low in the 
+model or from experimental flow rates that are lower than reported. Transport properties are 
+based on the Lennard-Jones potential model (Hirschfelder et al., 1964), which can underpredict 
+transport properties of light species by up to 25% (Paul and Warnatz, 1998, Middha et al., 2002). 
+To evaluate the effect of assumed trans port properties, the thermal and mass diffusion 
+properties in the model were varied. Because bot h transport properties were increased, the Lewis 
+number and the adiabatic flame temperature were unchanged. The results for an increase of 30% 
+for flames (a), (b), and (d) are shown in Fig. 1.8. The flame radius from the model was assumed 
+to be the radius of the peak temperature. Fl ame (c) was not included in Fig. 1.8 owing to soot 
+obscuration. The agreement between model and experiment in Fig. 1.8 is good.
+
+--- page 18 ---
+18
+All four flames initially 
+grew with time, but flames (b) 
+and (c) approached steady state 
+more rapidly than flames (a) and 
+(d) because of their high flow 
+velocities and low residence 
+times. 
+Predictions of transient 
+peak flame temperatures for the 
+four ethylene-fueled flames are 
+shown in Fig. 1.9. Due to 
+gaseous radiative heat loss the 
+peak temperatures decrease with 
+time except near ignition. 
+Although these four flames have 
+the same adiabatic flame 
+temperature (2370 K), the 
+temperatures of flames (a) and 
+(d) are predicted to be markedly 
+lower than those of flames (c) 
+and (b). Flames (a) and (d) have 
+roughly double the radii of the 
+others, which leads to increased 
+radiative losses. 
+Also shown in Fig. 1.9 are 
+peak temperatures for these four 
+flames as measured with 
+thermocouples in the 2.2 s drop 
+tower, followed by radiation 
+corrections. The agreement 
+between modeled and measured 
+temperatures is within 
+experimental uncertainties for 
+flames (b) and (c). The 
+numerical predictions in the 
+other two flames significantly 
+over-predict the measured 
+temperatures and this probably 
+arises from different ignition 
+conditions in the model and the experiment. Such differences are not evident for flames (b) and 
+(c), where effects of ignition are convected outward more rapidly. 
+In summary, this manuscript found that the low flow velocities and long residence times in 
+these diffusion flames lead to enhanced diffusive effects. For example, th e results show that the 
+ambient gas Lewis number can have a strong eff ect on flame temperature – a 10% decrease in 
+Lewis number can increase the steady-state flam e temperature by 200 K. The strong effect of 
+Lewis number is supported by temperature measurements. Furthermore, the large diffusion 
+ 
+ 
+Figure 1.8. Predicted (curves) and measured (symbols) flame radii for 
+ethylene flames (a), (b), and (d).  Measurements were obtained in the 
+5 s drop facility. (Santa et al., 2007b). 
+ 
+ 
+Figure 1.9. Evolution of peak temperature for ethylene flames (a) – (d). 
+The curves are model predictions while the symbols are thermocouple 
+measurements of Sunderland et al. (2003). (Santa et al., 2007b).
+
+--- page 19 ---
+19
+distances associated with these flames can l ead to unusual steady-state compositions near the 
+outer boundary when hydrocarbon fuel is supplied from the ambient, as decomposition products 
+can diffuse to the outer boundary and result in a loss of chemical enthalpy from the system.  
+Transient predictions of flame sizes were significantly larger than those observed in 
+microgravity experiments. Agreement could not  be obtained unless the model’s thermal and 
+mass diffusion properties were increased by 30% . Clearly further study, preferably under long 
+duration microgravity, is needed to determine the exact cause of the discrepancy between 
+experimental and numerical flame sizes. 
+ 
+Radiative Extinction of Gaseous Spherical Diffusion Flames in Microgravity (Santa et al. , 
+2007a) 
+Radiative extinction is unlikely in normal grav ity because buoyancy increases with flame size, 
+and under conditions where radiative extincti on might otherwise occur, buoyancy enhances 
+mixing and reduces residence times. On the other hand, radiative extinction can be important in 
+microgravity and its improved understanding s hould contribute to spacecraft fire safety. 
+Microgravity experiments allowed the first obser vation of radiative extinction, this being for 
+droplet combustion (Dietrich et al., 1996, Nayagam et al., 1998). Santa et al. (2007a) presents 
+observations of radiative extinction in gaseous spherical flames. 
+As described above, the experiments were conducted in microgravity in the NASA Glenn 
+2.2 s drop tower. The present tests involved gase ous fuel (either ethylene or propane), oxygen, 
+and nitrogen. Various levels of nitrogen diluti on were considered to obtain conditions where 
+flames would ignite and then extinguish within the 2.2 s of available microgravity time. 
+Two modes of extinction onset were observed:  base and hole extinction. Base extinction, 
+typically observed at small flowrates, started at the base of the flame near the burner supply tube. 
+Hole extinction, typically observed at high flowrate s, started as a flame hole in the blue flame 
+sheet at a distance away from the burner tube . Such holes grew with time. Base or hole 
+extinction often led to complete extinction, where all blue-flame luminosity disappeared during a 
+drop test. For flames in which base extinction was observed, extinction time is reported as the 
+time when 50% of the previously visible flam e surface (as viewed by the video camera) was no 
+longer visible. For flames in which hole extinc tion was observed, extinction time is reported as 
+the time when a hole was first visible. For some tests a resistively heated wire was placed around 
+the burner tube and was energized (in microgravity) to help prevent base extinction. 
+Approximate relative peak temperatures were  measured using thin-filament pyrometry, a 
+technique pioneered by Villimpoc and Goss (1988) . Four SiC fibers with diameters of 13.9 µm 
+were strung across the flames in the focal pl ane of a Nikon D100 digital single-lens reflex 
+camera. This color camera has 3008 × 2000 pixels and 12 bits per color plane and is similar to 
+the still camera used by (Connelly et al. , 2005) for soot pyrometry. The tests were conducted 
+with a shutter time of 33 ms. This diagnostic was developed and calibrated in the range of 1400 – 
+2200 K using thermocouples in a normal-gravity methane/air flame (Maun et al. , 2007). The 
+measured temperatures have an estimated uncertainty of ±25 K. Fiber radiation corrections were 
+applied to determine peak gas temperatures. The radiative loss from these fibers in the present 
+flames, based on a fiber temperature of 1400 K, is estimated at 0.3 W. 
+Figure 1.10 illustrates base extinction for propane flowing into air at 0.75 mg/s with and 
+without the heating wire. Extinction occurs near  the burner supply tube at about 1.4 s for both 
+cases, indicating that the time to extinction is not significantly influenced by heat loss to the 
+burner supply tube. It was assumed that base extin ction is an appropriate indicator of extinction, 
+t(s) = 0.47 0.77 1.07 1.37 1.67
+30 mm
+(a)
+(b)
+hot wire
+t(s) = 0.47 0.77 1.07 1.37 1.67
+30 mm
+(a)
+(b)
+t(s) = 0.47 0.77 1.07 1.37 1.67
+30 mm
+(a)
+(b)
+hot wire
+ 
+Figure 1.10. Time sequences of color images of extinguishing flames 
+of propane flowing into air at 0.75 mg/s (a) with heating wire and (b) 
+without. (Santa et al., 2007a).
+
+--- page 20 ---
+20
+within the experimental uncertainties, and thus  subsequent tests were performed without the 
+heating wire. 
+Results for extinction time and extinction radi us as a function of flowrate for propane 
+flowing into 17% oxygen are shown in Fig. 1.11. Two extinction times are shown: base 
+extinction and hole extinction. There is satis factory agreement between experiment and 
+computation for the extinction radius. Nonethele ss, the numerical results for extinction time at 
+low flowrates show a trend that does not agr ee with experiments. In Fig. 1.11, except for a 
+narrow range of low flow rates, the extinction time predicted by the computations monotonically 
+decreases and asymptotes to 2 s. 
+Although burner heat loss affects the time to extinction, it cannot trigger extinction for 
+these flames because as the 
+flame expands with time, heat 
+loss decreases. Instead, 
+extinction is triggered by 
+radiative heat loss, which 
+increases with time. For the 
+lower flowrate cases, the 
+enthalpy that is removed from 
+the gas mixture due to burner 
+heat loss causes radiative 
+extinction to occur at shorter 
+times. 
+Thin-filament pyrometry 
+measurements are shown in 
+Fig. 1.12 for oxygen flowing into 
+5% ethylene at various flowrates. 
+Also shown are representative 
+numerical predictions for oxygen 
+flowing into 4% ethylene. The 
+measurements were taken at a 
+slightly higher ethylene concentration to retard  filament-induced extinction. The measurements 
+show that, at any given time, flows greater than  5 mg/s result in peak temperatures that are 
+independent of flowrate, whereas for lower flowrates peak temperatures decrease with 
+decreasing flowrate. This is consistent with the numerical predictions. The inability of the 
+pyrometer to obtain temperatures at 1.9 mg/s after extinction is attributed to temperatures below 
+the 800 K pyrometer threshold. 
+ 
+Figure 1.11. Measured and predicted extinction times and extinction 
+radii for flames of propane flowing into 17% oxygen. (Santa et al. , 
+2007a).
+
+--- page 21 ---
+21
+The present results indicate an 
+extinction temperature of about 
+1100 K for the present flames. This 
+is lower than past measurements of 
+this property in normal-gravity 
+flames (Quintiere 2006). For 
+example, Williams (1981) indicates 
+an extinction temperature of 
+1500 ± 50 K for hydrocarbon 
+combustion in oxygen/nitrogen 
+mixtures. Macek (1976) reports an 
+extinction temperature of 1600 K 
+for both diffusion and premixed 
+flames. The significantly lower 
+temperature at extinction reported 
+here for microgravity diffusion 
+flames is consistent with radiative 
+extinction, as predicted by the 
+analytical study of Chao et al.  
+(1990). 
+The major conclusions of this study were as  follows. Radiative extinction was observed 
+experimentally and numerically. Extinction time, peak temperature, and radiative loss fraction 
+were found to be independent of flow rate except at very low flow rates. Radiative heat loss was 
+dominated by the combustion products downstream of the flame and was found to scale with 
+flame surface area, not volume. For large transient flames the heat release rate also scaled with 
+surface area and thus the radiative loss fraction was largely independent of flow rate. Peak 
+temperatures at extinction onset were about 1100 K,  which is significantly lower than for kinetic 
+extinction. While radiative heat losses can drive transient extinction, this is not only because 
+radiative losses are increasing with time but also b ecause the heat release rate is falling off as the 
+flame expands away from the burner and the reactant supply to the flame decreases. 
+ 
+Numerical Investigation of Spherical Diffusion Flames at their Sooting Limits (Lecoustre et al., 
+2009) 
+This paper presents detailed numerical simulati ons of laminar microgravity spherical diffusion 
+flames at their sooting limits. Seventeen norma l and inverse flames fueled by ethylene are 
+considered (Sunderland et al., 2004). Observed in a drop tower, these flames were initially sooty 
+but reached their sooting limits 2 s after ignition (or slightly before). The flames span broad 
+ranges of stoichiometric mixture fraction ( 0.04 – 069), adiabatic flame temperature (1814 – 
+2670 K), and characteristic flow time (0.12 – 15 s). They were modeled using a one-dimensional, 
+transient diffusion flame code with detailed chem istry (up to pyrene) and transport. Radiative 
+losses from products were modeled using a deta iled absorption/emission statistical narrow-band 
+model coupled with a discrete-ordinates method. Flame structure at the sooting limits was 
+examined, emphasizing profiles of temperatur e, carbon to oxygen atom ratio, and scalar 
+dissipation rate. 
+A summary of the 17 sooting limit flames is given in Table 1.2. A large number of 
+experiments were conducted to identify these sooting limit flames, which initially contained 
+ 
+ 
+Figure 1.12. Pyrometer peak temperatures for flames of oxygen 
+flowing into 5% ethylene (symbols). These are nonextinguishing 
+flames except at 1.9 mg/s. Also shown are two representative 
+numerical predictions for extinguishing flames of oxygen flowing 
+into 4% ethylene (dashed curves). (Santa et al., 2007a). 
+χ
+-1
+0.51 (s)
+T0.51 (K)
+0 5 10 15 200
+500
+1000
+1500
+2000
+Normal
+Inverse
+1410 K
+ 
+Figure 1.13. Predicted relationship between T 0.51 and χ0.51-1 
+for flames 1 – 17 at 2 s after ignition.(Lecoustre et al., 2010). 
+TABLE 1.2. Summary of the 17 experimentally identified sooting 
+limit flames, (Lecoustre et al., 2010) 
+ 
+Flame Environment XC2H4,0 XO2,0 Zst T ad (K) χ0.51-1 (s) 
+1 Oxidizer 1 0.22 0.065 2390 14.56 
+2 Oxidizer 0.6 0.21 0.102 2326 7.09 
+3 Oxidizer 0.31 0.21 0.18 2226 2.74 
+4 Oxidizer 0.25 0.23 0.225 2238 1.72 
+5 Oxidizer 0.18 0.28 0.333 2306 0.86 
+6 Oxidizer 0.17 0.29 0.353 2308 0.78 
+7 Oxidizer 0.11 0.5 0.586 2381 0.37 
+8 Oxidizer 0.11 0.8 0.685 2528 0.23 
+9 Oxidizer 0.15 1 0.661 2740 0.12 
+10 Fuel 1 0.13 0.041 1847 10.16 
+11 Fuel 0.8 0.13 0.051 1835 8.08 
+12 Fuel 0.6 0.13 0.066 1814 6.14 
+13 Fuel 0.21 0.25 0.277 2274 1.95 
+14 Fuel 0.19 0.3 0.336 2370 1.88 
+15 Fuel 0.15 0.5 0.509 2539 2.34 
+16 Fuel 0.12 0.8 0.666 2578 4.55 
+17 Fuel 0.13 1 0.692 2670 5.09
+
+--- page 22 ---
+22
+yellow regions, but became all blue at 
+2 s after ignition (or slightly before). 
+Burner flow rates were selected such 
+that all flames involved a steady-state 
+ethylene consumption rate of 1.51 
+mg/s, generating 71 W for complete 
+combustion. Experiments were 
+conducted with normal or inverse 
+flames correspond to ambients 
+containing either oxidizer or fuel, 
+respectively. The fuel and oxygen 
+mole fractions in the supply gases, 
+XC2H4,0 and XO2,0, were varied widely, 
+which yielded a wide range of Zst as 
+shown. Adiabatic flame temperatures 
+reported in Table 1.2 were calculated 
+using Chemical Equilibrium with 
+Applications, CEA. 
+For sooting limit flames with 
+sufficiently long flow times (i.e., above 
+0.5 s) a common observation observed for all flames , despite their disparate characteristics, was 
+that soot does not exist unless there is a loca tion in the flame where the C/O ratio exceeds 0.51 
+and the temperature exceeds 1410 K. As illustrate d in Fig. 1.13, soot inception in flames with 
+local flow times below 0.5 s required increased local temperatures or C/O ratios. 
+In Fig. 1.14, the temperature and C/O profiles in  Z space for flame 5 at three times are 
+considered to see if these findings can explain why the flames first appear yellow after ignition 
+(i.e., are producing soot) and then become blue at  2 s. At times of 0.1 and 1.0 s, the experiments 
+revealed abundant yellow emission from soot in  the video record. This is supported by the 
+computations, as Fig. 1.14 reveals regions wher e T > 1410 K and C/O > 0.51 at early times. In 
+contrast, at 2 s the experiments reveal a sooting limit (i.e., they have transitioned to blue) and the 
+computations predict the absence of any region with T > 1410 K and C/O > 0.51. 
+ 
+1.4 Normal Gravity Coflow Flame Research 
+Coflow flames in normal gravity can be st rongly influenced by buoyancy because the gas 
+velocities exiting the central tube are usually sm all compared to the velocities attained by the 
+buoyant acceleration of the hot gases. Thus, unlik e for the microgravity spherical flames, it is 
+impossible to rigorously control convection direc tion. For example, in the normal flame, where 
+fuel is ejected into oxidizer, one might expect the flow through the flame to be from fuel to 
+oxidizer. This is not the case in the lower half of  the flame, where the streamlines are from the 
+oxidizer into the fuel owing to buoyant entrainment (Urban et al. , 1998). Sooting limits in 
+normal gravity coflowing diffusion flames has been investigated by the PI in three recent journal 
+papers (Kumfer et al., 2006, 2008, Skeen, et al., 2009). 
+While buoyant coflow flames suffer from ambi guities with respect to convection direction, 
+they are simple to obtain, and with care inform ation about the effects of structure and flow 
+direction on sooting limits can be gleaned. In Kumfer et al. (2006) the criteria for soot inception 
+in oxygen-enriched normal laminar coflow flam es was explored. Methane, ethane, propane, 
+ZCHO
+T( K )
+C/O
+0 0.2 0.4 0.6 0.8 10
+500
+1000
+1500
+2000
+2500
+0
+0.2
+0.4
+0.6
+0.8
+C/O = 0.51
+T = 1410 K
+t=0 . 5s
+t=1 . 0s
+t=2 . 0s
+ 
+Figure 1.14. Temporal evolution of T (solid curves) and C/O 
+(dash-dot curves) in Z space for flame 5. (Lecoustre et al. , 
+2010).
+
+--- page 23 ---
+23
+ethylene, and acetylene were used as fuels. The experimental apparatus included a coflow burner 
+constructed with concentric tubes (with hone ycomb) of diameters 8 mm (fuel) and 51 mm 
+(oxidizer). The flames were overventilated, i.e., an  increase in oxidizer flow rate did not affect 
+the flame height or sooting limit. When possibl e, the inner and outer mass fluxes were held 
+constant to minimize flow-induced strain. Fl ame heights were maintained at 16 ± 1 mm. 
+Adiabatic flame temperatures were calculated using the CEA chemical equilibrium code 
+(McBride and Gordon, 1996). 
+A cathetometer was used in a dim room to measure flame heights and to observe the 
+sooting limit for each flame. Sooting limits were de fined at a given axial height, measured from 
+the flame base. The sooting limit was identified at  which soot luminosity first appears at this 
+predetermined height. The appearance of centerlin e soot occurred at much higher axial locations 
+than that of near-flame soot. Sooting limits were obtained by varying the amount of nitrogen 
+dilution. 
+Photographs of one-quarter, one-half, and three-quarters blue flames are shown in 
+Fig. 1.15. The one-quarter, one-half, and thr ee-quarter heights were 4, 8, and 12 mm, 
+respectively, and the sooting limits 
+were not a function of small changes 
+in total flame height. 
+The sooting limit results for 
+one-half blue ethylene flames are 
+plotted in Fig. 1.16. For a given flame 
+type, e.g., half blue, the adiabatic 
+flame temperature at the sooting limit 
+increased with Zst by about 600 K. 
+These trends are in agreement with 
+previously published sooting limit 
+results for propane coflow flames 
+(Kang et al. , 1997), as well as for 
+ethylene counterflow and spherical 
+flames (Sunderland et al., 2004). The 
+results show good agreement between 
+the two flame geometries, despite the 
+added complexities associated with 
+the coflow flames. 
+The major findings of this work 
+can be summarized as follows. The 
+sooting limit flame temperature was 
+found to increase linearly with 
+stoichiometric mixture fraction, 
+regardless of fuel type. The local C/O 
+atom ratio is a controlling parameter 
+for soot inception in diffusion flames. 
+Soot inception can occur only when 
+the local C/O ratio is above a critical 
+value. The values for critical C/O 
+ratios obtained from the analysis of 
+     (a) (b) (c)  
+ 
+Figure 1.15. Color images of (a) one-quarter blue, (b) one-half 
+blue, and (c) three-quarters blue propane coflow flames. (Kumfer 
+et al., 2006). 
+ 
+Figure 1.16. Comparison between the sooting limits of ethylene 
+spherical diffusion flames and the present half-blue coflow flames. 
+(Kumfer et al., 2006).
+
+--- page 24 ---
+24
+experiments using several fuels are similar in  magnitude to the corresponding C/O ratios for 
+premixed flames. Temperatures and PAH fluores cence were measured to identify regions in 
+these flames most conducive to particle in ception. Results indicate that the peak PAH 
+concentration lies along a critical contour of consta nt C/O, which supports our theory that soot 
+particles first appear along this critical contour, given sufficient temperature. 
+ 
+2 FLIGHT EXPERIMENT 
+2.1 Knowledge Lacking and Knowledge to be Gained by Flight Tests 
+In addition to the fundamental data that will be obtained from the proposed experiments, there is 
+considerable new understanding that will be gained. In particular, the controlling mechanisms for 
+soot inception in nonpremixed flames will be elucidated, with emphasis on understanding how 
+the structure of a nonpremixed flame can be tailored to yield a desired sooting characteristic for a 
+given fuel. In addition, the effects of flame stru cture on flame extinction will be clarified, with 
+emphasis on determining ways in which the struct ure can be affected to yield strong, robust low-
+temperature flames. 
+An important aspect of this work is that  the parameters employed to characterize the 
+laminar nonpremixed flames will be Zst and the amount of inert in the flame (or, equivalently, 
+Tad). These two parameters characterize the basic structure of the flame and thus have a first-
+order effect on flame phenomena such as extinction and soot inception. In some respects they are 
+analogous to equivalence ratio and amount of d ilution for premixed flames. For example, in 
+studying the soot limits of premixed flames, Gla ssman and Takahashi (1984) varied equivalence 
+ratio and Tad. Their work identified competition between formation and oxidation reactions as 
+the controlling feature responsible for the onset of  soot in premixed flames. In the present study 
+of nonpremixed flames, Zst also affects precursor formation and oxidation reactions but from a 
+structural perspective, not a kinetic perspective. This is effectively why we believe high Zst 
+flames do not soot. Soot precurs or oxidation on the fuel side of diffusion flames (not to be 
+confused with soot oxidation that occurs when soot passes into the oxidizer side, for example, in 
+a coflow flame) is generally considered to be negligible. However, this is only the case at low 
+Zst. Thus the findings of this work will open up a new understanding of soot formation in 
+nonpremixed flames. These findings will also have  practical value because as pollution control 
+becomes more stringent and oxygen separation technologies become cheaper, burning at oxygen-
+enriched air conditions (high Zst) will become more prevalent. 
+Just as there is a loose analogy between e quivalence ratio in premixed flames and Zst in 
+nonpremixed flames for soot formation, there ma y be a similar analogy vis-à-vis flammability 
+limits. Flammability limits are fundamental limits of flame propagation in premixed flames and 
+are generally described in terms of equivalen ce ratio. The primary factors influencing these 
+limits are the rates of heat generation and heat lo ss. When heat loss becomes comparable to heat 
+generation, the temperature becomes too low to ge nerate a sufficient radical pool and the flame 
+will not propagate. As we have shown for nonpremix ed flames the radical pool is also affected 
+by Zst and there is a unique value of Zst at which the temperature reaches a minimum before 
+extinction. Identifying this value of Zst in one-dimensional flames, where the only heat loss is the 
+intrinsic radiative heat loss of the flame, will yield a limit that is analogous to a flammability 
+limit – thus the term pseudo-flammability limit. Just as the flammability limits of premixtures 
+represents an important practical limit as it re presents conditions where a given mixture can 
+burn, the pseudo-flammability limit represents the limiting condition where a nonpremixed flame 
+can exist for a given fuel burning with an inert and oxygen.
+
+--- page 25 ---
+25
+ 
+2.2 Experimental Objectives 
+Thus motivated, the primary objectives of this flight experiment are listed here in priority order:  
+A. Obtain soot-inception limits of quasi-steady normal and inverse spherical diffusion flames 
+as functions of flow rate, Zst, amount of inert (N 2 or CO 2**), and pressure ** for C 2H4 and 
+CH4* flames. Identify the corresponding temperatur es in hot regions. Obtain similar limits 
+and temperatures for inverse and normal coflow flames**. 
+B. Obtain detailed measurements in quasi-st eady normal and inverse spherical diffusion 
+flames for C 2H4 and CH 4*. Determine the effects of flow rate, Zst, amount of inert (N 2 or 
+CO2**), and pressure ** on flame temperature, size, co lor, and soot volume fraction. 
+Evaluate the possible existence of steady flam es. Obtain similar measurements for inverse 
+and normal coflow flames**. 
+C. Obtain extinction limits as functions of Zst, amount of inert (N 2 or CO 2**), and pressure ** 
+for normal and inverse spherical C 2H4 and CH 4* flames. Identify the corresponding 
+temperatures in hot regions. Identify the pr esence of radiative or kinetic extinction. 
+Evaluate whether pseudo-flammability limits can be obtained for these flames. Measure 
+blowoff limits for inverse and normal coflow flames**. 
+*desired; **highly desired. 
+ 
+2.3 Summary of Approach 
+This study emphasizes spherical diffusion flames. Th e reaction zone rests near the porous sphere 
+and a large thermal field surrounds the flame. Si nce the flame is effectively one-dimensional, 
+diagnostics along one radial line are sufficient to characterize the flame. 
+Unfortunately, the maximum permissible oxygen mole fraction in the chamber is 50%, 
+which limits the range of Zst that can be obtained. Consequently, microgravity coflow flames are 
+proposed because they allow for higher oxygen c oncentrations and for comparison with normal 
+gravity results of the PI (Kumfer et al., 2006, 2008, Skeen et al., 2009). While coflow flames are 
+two dimensional, they can be used in the ACME (2010) facility to obtain inverse flames by 
+supplying oxidizer to the central jet and fuel to the outer stream. Furthermore, higher oxygen 
+concentrations can be achieved because the com bustion chamber (initially filled with nitrogen) 
+will not encounter high oxygen concentrations. The coflow geometry adds complexity to the 
+interpretations, but it has advantages over the spherical flame in that it is easier to change 
+operating conditions and quicker to reach steady st ate. Thus the coflow flames will compliment 
+the spherical flame studies and are considered an  integral part of this study. Nonetheless, the 
+ability to directly compare normal and inverse co flow flames would be of greater value than 
+comparing inverse coflow flame results and normal spherical flame results. 
+To accomplish the objectives, the flames must be characterized in terms of the existence of 
+a flame (to identify the extinction limit), flame location, temperature field, the onset of soot 
+(soot-inception limit) and, where applicable, the s oot field. In addition, a number of preliminary 
+measurements must be performed to ensure th at the results are accurate and precise. For 
+example, measurements will be performed to en sure the flames have approached quasi-steady 
+state and that, in the case of spherical flames, that the flow rate from the porous sphere is 
+sufficient to minimize heat loss to the sphere. 
+The soot-inception limits of spherical flames  will be obtained by observing flames that 
+grow with time. As they grow, their radiativ e losses increase and their peak temperatures
+
+--- page 26 ---
+26
+decrease. For the present test matrix it is estim ated that sooting limits will be observed within 
+10 - 30 s of ignition. 
+Radiative extinction will be obtained by observi ng flames that grow in size with time until 
+extinction (Santa et al., 2007a). With terrestrial flames, the lack of a visible luminous flame has 
+been assumed to indicate extinction. Nonethele ss, microgravity flames can be significantly 
+weaker than normal gravity flames, and Tse et al.  (2001) have raised concerns that the CH 
+emission may not be sufficient to detect the existence of a flame at the low temperatures at which 
+microgravity flames extinguish. In other word s, a flame may exist even though there is no 
+discernable flame emission. To address this c oncern, the following procedure will be adopted: 
+after the flame emission sensor(s) indicate extinc tion has occurred, the flow rate will be reduced 
+to confirm extinction. If the flame has not extinguished, it is expected to reappear. 
+It is anticipated that the temperature field will be measured with a combination of two-
+color pyrometry from soot (Urban et al., 1998) and thin-filament pyrometry (Maun et al., 2007). 
+Far field temperatures will be measured with  thermocouples. Where applicable, soot volume 
+fraction will be measured with laser extinction. 
+Comprehensive numerical modeling, including de tailed chemistry, transport, and radiative 
+heat loss from the gas phase and burner surface (Santa et al. , 2007a, 2007b), will support the 
+operation of the experiments and will contribut e significantly to understanding and interpreting 
+results. Key experiments will be simulated numerically to ensure that the operating conditions 
+selected are optimum and that the diagnostics are appropriately chosen (e.g., camera field of 
+view) to obtain the desired results. As the detaile d flame structure is fundamental to this work 
+and it will not be possible to obtain concentra tion profiles, it is essential that major and 
+intermediate species be modeled with good accu racy. The PI team has published two journal 
+papers with results of their computational model for spherical diffusion flames (Santa et al. , 
+2007a, 2007b). The PI team also has access to co mputational models that are suitable for 
+analyzing the present coflow flames. 
+The PI team’s spherical flame model computes the transient and steady state solutions of 
+spherically-symmetric diffusion flames (Santa et al. , 2007a, 2007b). The code includes a 
+sectional model to simulate particle dynamics a nd, if needed, this can be used to model soot 
+particle growth. Nonetheless, the primary goals of this research involve soot-inception limits, not 
+soot formation, and thus it should be possible to accomplish the objectives by considering only 
+gas phase species, as has been done for premixed flames (Markatou et al., 1993). 
+Initially this model was used with the GR I-Mech 3.0 mechanism. However a mechanism 
+with larger hydrocarbons has been implemented (Lecoustre et al., 2009). Soot-precursor species 
+up to pyrene are included. A number of mech anisms have been proposed (Markatou et al., 1993, 
+Smooke et al. , 1999) and the sooting limit data will be a critical test of the accuracy of the 
+mechanisms in predicting soot inception. 
+ 
+2.4 Science Data End Products 
+Having defined the objectives of this investigati on, it is now possible to define a group of final 
+data products that is sufficient to fulfill each objective. Final data products are the tables, figures, 
+and analyses that will be reported in the archival literature (not the raw data from the 
+experiment). These final data products are re ferred to as the “Science Data End Products” 
+(SDEP). To facilitate comparison of the planned SDEP with the objectives, they are summarized 
+in Table 2.1. The science requirements and the e xperiment success criteria described below are 
+developed from this list of SDEP.
+
+--- page 27 ---
+27
+ 
+2.5 Justification for Extended-Duration Microgravity 
+Previous ground-based microgravity experiments ha ve demonstrated the value of the spherical, 
+burner-supported nonpremixed flames for flame st udies. The one-dimensional flame offers a 
+simple, fundamental configuration to improve our understanding of nonpremixed flame behavior 
+and to explore such effects as radiation a nd thermophoresis, which are more pronounced under 
+microgravity conditions (Atreya et al., 1992, Law et al., 2001). The burner-supported spherical 
+flame is in some respects similar to droplet burning but it holds the advantages that larger flames 
+are possible and, with sufficiently long time, can approach quasi-steady state. Furthermore, the 
+proposed microgravity coflow flames allow the di rection of convection across the flame to be 
+varied. 
+Although the spherically-symmetric flame geometry has many advantages, it is not 
+practical to produce such a flame at normal gr avity. The reason for this can be understood by 
+considering the Richardson number, Ri, which is the ratio of the buoyancy force to the inertial 
+force and is given by  
+Ri = ⎟⎟⎠⎞⎜⎜⎝⎛ ∆ 2uT LTg  . (2.1) 
+Here g is the acceleration of gravity, T is temperature, L is the characteristic length scale, and u 
+is the characteristic velocity. Taking L as the burner diameter, u as the ejection velocity at the 
+Table 2.1. Objectives and science data end products. 
+ 
+ Objectives Science Data End Products 
+A
+. 
+Obtain soot-inception limits of quasi-steady normal 
+and inverse spherical diffusion flames as functions 
+of flow rate, Zst, amount of inert (N 2 or CO 2**), and 
+pressure** for C 2H4 and CH 4* flames. Identify the 
+corresponding temperatures in hot regions. Obtain 
+similar limits and temperatures for inverse and 
+normal coflow flames**. 
+A1 Color images 
+A2 Temperature profiles 
+A3 Temporal plots of flame diameter (shape) and 
+temperature 
+A4 Plots of soot-inception limits  
+ 
+B
+. 
+Obtain detailed measurements in quasi-steady 
+normal and inverse spherical diffusion flames for 
+C2H4 and CH 4*. Determine the effects of flow rate, 
+Zst, amount of inert (N 2 or CO 2**), and pressure ** on 
+flame temperature, size, color, and soot volume 
+fraction. Evaluate the po ssible existence of steady 
+flames. Obtain similar measurements for inverse and 
+normal coflow flames**. 
+ 
+B1 Color images  
+B2 Temperature profiles  
+B3 Temporal plots of flame diameter (shape) and 
+temperature 
+B4 Soot volume fraction profiles 
+B5 Plots of fs,max, Tf, and soot-inception limits as 
+functions of flow rate 
+B6 Quasi-steady flame diameter (shape) as a 
+function of Zst and flow rate 
+B7 Plots of flame diameter (shape) versus time 
+C Obtain extinction limits as functions of Zst, amount 
+of inert (N2 or CO2**), and pressure** for normal and 
+inverse spherical C2H4 and CH4* flames. Identify the 
+corresponding temperatures in hot regions. Identify 
+the presence of radiative or kinetic extinction. 
+Evaluate whether pseudo-flammability limits can be 
+obtained for these flames. Measure blowoff limits 
+for inverse and normal coflow flames**. 
+C1 Color images  
+C2 Temperature profiles 
+C3 Temporal plots of flame diameter and 
+temperature 
+C4 Plots of extinction limits 
+C5 Effects of flowrate on extinction limits and Tf 
+ 
+* denotes desired; ** denotes highly desired.
+
+--- page 28 ---
+28
+burner surface, and ∆Τ = (Tad – Tb), we find that Ri is on the order of 1000 in normal gravity. In 
+fact, it is much higher than this because the more appropriate length and velocity scales are the 
+flame diameter and the velocity at the flame, respectively. The value of Ri can be reduced by 
+judicious choice of fuels and inert; Law et al. (2001) have shown that nearly spherical flames 
+can be created in normal gravity. However, Ri for these flames is still on the order of unity, 
+implying that while the flames appear spherical, natural convection is still present. Furthermore, 
+hydrogen must be used as a fuel and be supplied in the ambient so such flames are not relevant to 
+this study. A reduction in Ri can be achieved by reducing the flame size, but substantial 
+reduction in L is not practical because our goal is to produce a flame that is sufficiently large that 
+its structure can be characterized. Furthermore, heat loss to the burner would be excessive for 
+small flames. Consequently, for general fuels a nd inerts the only practical method of obtaining 
+Ri << 1 is to reduce g by four orders of magnitude. This  can be accomplished in a number of 
+microgravity environments, including ground-based facilities, e.g., drop towers for short times, 
+as well as flight experiments, e.g., the In ternational Space Station for longer times. A 
+quantitative evaluation of the acceptable g levels for these experiments is given in Appendix A 
+and is discussed below. 
+The drop-tower results detailed in Section 1.3 have demonstrated the value of the 
+spherically-symmetric burner stabilized flame. The ability to reverse flow direction has helped to 
+elucidate the dominant mechanism responsible fo r permanently-blue flames, yet the results are 
+not conclusive because transient effects coul d dominate these observations. Transient effects 
+arise from two sources: the ignition proce ss and the long times required for spherical 
+microgravity flames to reach quasi-steady stat e. The ignition process is not spherically 
+symmetric and thus there is an asymmetry impos ed by ignition that must be damped out. More 
+importantly, soot particles that are created during ignition can be trapped in the interior of the 
+flame due to thermophoresis. The particles are tra pped for the same reasons that a soot shell is 
+produced in microgravity droplet combustion (Choi et al., 1991, Avedisian and Callahan, 2000). 
+Thus, it is possible for soot to exist in flames  after the ignition event even though the flame has 
+ceased producing soot. 
+The reason the spherically-symmetric burner-sta bilized flame takes so long to reach quasi-
+steady state is that the radial velocity scales with 1/r2. Thus, at only a few burner diameters away 
+from the sphere, diffusion is the dominant mechanism of transport. Since the characteristic 
+diffusion time τd is given by r2/D, τd is on the order of tens of seconds a few centimeters from the 
+burner. Decreasing the flame size will decrease th e size of the thermal field and, consequently, 
+the time to reach quasi-steady state, but there are limits to the minimum flame size that is 
+possible. These limits are imposed by the need to avoid heat loss to the burner and ensure flame 
+sphericity. Experiments performed in the 5 s drop facility indicate that for many of the run 
+conditions needed for the proposed experiments th e flame is still growing significantly after 5 s. 
+Analytical (see Appendix A) and numerical calcula tions predict that up to 30 s of jitter-free (less 
+than 10-5 g) microgravity is needed to approach qua si-steady state for these run conditions. No 
+ground-based facilities are available to accomplish this. 
+In some ways, the spherical flame experime nts are the nonpremixed analog to premixed 
+flame balls because in both systems diffusion dominates the development of the far field 
+temperature distribution. Therefore, this work  is subject to the same needs as SOFBALL 
+(Ronney et al., 1998) in that long duration microgravity is needed and g-jitter must be negligible 
+because the thermal field is very large and convection is small, i.e., Ri is large even for small g.
+
+--- page 29 ---
+29
+To provide a quantitative assessment of the 
+acceptable gravity level, an analysis was 
+performed, as detailed in Appendix A. In this 
+analysis, the acceleration induced on a fluid 
+packet by natural convection is formulated by 
+considering a gravitational acceleration given by 
+a sinusoidal function. The resulting acceleration 
+function for the fluid packet  is next integrated to 
+obtain the gravity induced flow velocity. This 
+velocity can be converted to an additional mass 
+flux that transports the flame front and causes 
+distortion of the flame. By specifying the 
+maximum percentage of distortion allowed in the 
+experiment (10% here), the acceptable gravity 
+level is determined, and this result is given in Fig. 
+2.1 for the four flames of Table 1.1. As shown, 
+the required g levels are on the order of 10 µg. 
+This is too for microgravity aircraft, but is 
+consistent with the anticipated environment of the 
+Combustion Integrated Rack (CIR). Finally, it is 
+important to emphasize that the proposed 
+experiments illustrate an important and novel use 
+of microgravity for combustion research. In 
+microgravity we are able to hold Zst fixed and in 
+coflow tests vary the direction of convection 
+through the flame. There are no analogous experiments at 1g that can accomplish this. 
+Experiments have been performed in normal gravity coflow flames to understand the 
+effects of flame structure and flow direction on soot formation (Kumfer et al., 2006, 2008, Skeen 
+et al., 2009). As mentioned previously, owing to th e effects of buoyancy on the flow field, the 
+flow direction cannot be prescrib ed in normal gravity coflow flames as it can in microgravity 
+spherical flames or microgravity coflow flames . For example, it is well known that for fuel 
+issuing into an ambient of air, buoyancy accelerates  the flow field and causes the streamlines to 
+be from oxidizer to fuel in the lower regions of  the flame and from fuel to oxidizer in the upper 
+regions (Santoro et al., 1987). The importance of buoyancy to the flow field will vary with Zst 
+because the velocity and thus Ri are strongly a ffected by dilution. In other words, the relative 
+amount of entrainment will vary with Zst in buoyant flames. Thus, normal gravity flames have 
+ambiguities with respect to flow direction as Zst is varied. Nonetheless, coflow flames have been 
+valuable in confirming the role of Zst on flame structure and the effects of residence time on soot 
+inception (Kumfer et al., 2006, 2008, Skeen et al., 2009). 
+Microgravity gas jet flames in quiescent surroundings have been observed in drop towers 
+and the Space Shuttle and the results have reveal ed significant differences between the two in 
+terms of sooting behavior, suggesting that the drop tower results were far from steady state 
+(Urban et al. , 1998). Velocities in coflow flames are similar to those in gas jet flames in 
+quiescent environments. Therefore the impact of buoyancy on coflow flames is expected to have 
+a similar impact to that reported in Urban et al. (1998). Thus, drop tower coflow experiments are 
+not a viable option for studying quasi-steady mi crogravity coflow flames. The characteristic 
+10 –5
+A/g
+10 –4
+10 –3
+10 –2
+10 –1
+05 2 5 15
+ω (Hz)
+10 20
+a
+b
+c
+d
+Acceptable
+10 –5
+A/g
+10 –4
+10 –3
+10 –2
+10 –1
+10 –510 –5
+A/g
+10 –410 –4
+10 –310 –3
+10 –210 –2
+10 –110 –1
+05 2 5 15
+ω (Hz)
+10 2005 2 5 15
+ω (Hz)ω (Hz)
+10 20
+a
+b
+c
+d
+Acceptable
+ 
+ 
+Figure 2.1. Allowable g-levels as a function of 
+frequency for the four flames  (a) – (d) described in 
+Table 1.1. A/g is the acceleration 
+nondimensionalized with respect to normal gravity.
+
+--- page 30 ---
+30
+times in these flames are long and thus the scal ar fields develop much slower that in normal 
+gravity, indicating that long duration microgravity is needed. 
+ 
+3 EXPERIMENT REQUIREMENTS 
+3.1 Requirements Discussion 
+The Flame Design experiment requirements are included in the ACME (2010) Science 
+Requirements. This discussion below provide s background on many of these requirements and 
+relates them to the experiment objectives. 
+ 
+Spherical Burner 
+The science return of this experiment is predi cated on the ability to produce nearly 1-D spherical 
+flames. Significant deviation from flame spheri city could invalidate our comparisons with 
+analytical and numerical models because those models assume one-dimensional flames. 
+Testing in the 2.2 s drop tower has demonstrated the high impact of burner design on flame 
+sphericity. These tests also have demonstrated the value of the parameter rmin/rmax in quantifying 
+flame sphericity. The ACME (2010) requirements were derived from an analysis of the effects of 
+nonsphericity. 
+In addition to sphericity, the burner must be able to survive high temperatures. Tests that 
+produce excessively hot burners will be avoided ow ing to fuel pyrolysis and excessive radiative 
+loss. Pyrolysis testing within a furnace and cons iderations of radiative emissions led to the 
+guideline that burner temperature should not exceed 450 ºC. This places an upper limit on burner 
+size and a lower limit on flame size. The PI team  will seek operating conditions such that the 
+burner reaches 95% of quasi-steady-state temperature for all flames considered within 30 s. 
+The requirement for sphericity is most easily  met by increasing burner diameter, while that 
+of minimizing burner heating is met by decreas ing burner diameter. Ground-based testing and 
+numerical analysis indicate that a sphere of  6.4 mm in diameter is a good compromise (see 
+Figs. 1.5, 1.6, and 1.10). The feed tube has been found to be critical, both in terms of its 
+disturbance to the flame and its seal with th e porous sphere. Dimensions, materials and method 
+of attachment to sphere are critical to maximi zing sphericity and minimizing disturbance to the 
+flame. 
+ 
+Coflow Burner 
+Flame Design has no requirements for the coflow burner other than those specified by the CLD 
+Flame team. 
+ 
+Burner Gas Delivery 
+The science return of this experiment depends on the ability to control the composition and flow 
+rate of the spherical burner gas and the coflow  gas streams. Requirements in this section 
+generally were established by modeling and observations of spherical flames in the NSA Glenn 
+2.2 and 5 s drop facilities. 
+ 
+Ignition 
+Ignition disturbances should be minimized to allow comparison with the numerical model and 
+with observations in the NASA 2.2 and 5 s drop facilities.
+
+--- page 31 ---
+31
+Ambient Environment 
+The science return of this experiment depends on the ability to control the ambient environment 
+prior to each combustion test. The chamber conten ts initially must be isothermal and quiescent. 
+Flow rates and chamber volume may be limited by the requirement for burn-time variations in 
+ambient composition, temperature and pressure . Suggested methods to decrease bottled gas 
+consumption rates include partial venting and filling, and scrubbing for CO 2 and H2O. Tests with 
+coflow flames will involve a chamber initially filled with N2. 
+ 
+Monitoring Measurements Requirements 
+To ensure repeatability, evaluation of the appr oach to quasi-steady-state conditions, and to 
+provide reference data for the model predictions , these measurements are required. All of these 
+measurements must be initiated before test opera tions begin and continue sufficiently past the 
+flame extinction to allow a baseline measuremen t. Monitoring of the fluent flow rates and 
+temperatures are required. Ambient condition measur ements (pressure and temperature) are also 
+required (while oxygen concentration measurement is  desired), as model results have shown the 
+flames are sensitive to these parameters. 
+ 
+Color Imaging 
+Color imaging will be used to determine flame si ze, shape, color, and sooting limits. In addition, 
+it will provide confirmation of other diagnostics us ed for detecting extinction limits. Flame size 
+will be needed to verify proper operation and to validate numerical models. Flame shape will be 
+used to measure rmin/rmax. 
+Identification of conditions that lead to the onset  of soot particle formation, i.e., the sooting 
+limit, is a critical requirement. Ground based-studies  have shown that the onset of visible yellow 
+luminosity is a good indicator of the onset of  particles for normal gravity flames (Du et al. , 
+1988). The basis for the correlation between the yello w luminosity and the onset of soot is that 
+soot inception occurs in regions of sufficiently high temperature that yellow emission will occur. 
+Nonetheless, the characteristics of the proposed experiments are such that flow direction can 
+force particles into cooler regions and residen ce times are much longer than in normal gravity 
+flames. Thus, the assumption that the onset of vi sible yellow luminosity can be used to identify 
+the soot inception limit for a given run condition w ill need to be supported by measurements that 
+are not dependent on local temperature. 
+Visibly luminous soot will be observed with  color cameras. Because flames can be 
+asymmetric, a second view would minimize ambi guity. The field of view will need to be 
+sufficiently large to observe the entire flame while at the same time be sufficiently small to allow 
+for resolution of the fine scale needed to iden tify the onset of soot inception. For this reason, 
+zooming capability is desired. When yellow luminosity is just barely detectable, this condition is 
+defined as the soot-inception limit. 
+ 
+Temperature 
+Accurate measurement of gas temperature dist ributions is essential to this work. Flame 
+temperature and temperature distri bution are affected by flowrate, Zst and flow direction, and 
+temperature measurements are required to understand the effects of these parameters on soot 
+formation and flame extinction. Furthermore, peak  temperatures at the soot inception limit and 
+near the flame extinction limit are required. These limit temperatures are particularly important 
+because the premise is that flame structure ( Zst), can dramatically affect limit temperatures. For
+
+--- page 32 ---
+32
+example, as described above, judicious variation in Zst should lead to a minimum extinction 
+temperature that is hundreds of Kelvins lower than that of standard Zst flames (hydrocarbon 
+burning in air). Also, soot  inception is affected by Zst because the temperature distribution and 
+concentration distribution are shifted relativ e to each other. Thus, a spatially accurate 
+temperature profile is necessary to validate this theory. 
+Microgravity spherical diffusion flames occur in  weakly convective fields such that the 
+flames are particularly prone to disturban ce by intrusive probes (e.g., thermocouples). In 
+addition, near the extinction limits, heat or radical loss to an intrusive probe can extinguish the 
+flame. Nevertheless, thermocouple probes are accura te and are requested here for the purpose of 
+validating the other temperature diagnostics. Thes e probes may be removed for tests after this 
+validation is complete. 
+Temperature will be measured in such a wa y that radial temperature profiles can be 
+obtained within the specifications given. The rati onale for these specifications is based on the 
+need to sufficiently resolve the anticipated feat ures of the temperature distribution, e.g., peak 
+temperature and location, and to observe temporal variations. The temperature distribution for 
+these flames is anticipated to be much broader than for normal-gravity flames. Thus it is required 
+to measure temperatures from close to the burner to the cool region on the ambient side of the 
+flame. For spherical flame tests, there must be  a measurement of burner surface temperature at a 
+location sufficiently far from the burner feed tube. 
+ 
+Soot Volume Fraction 
+To determine the dominant mechanism responsible  for permanently-blue flames, a measure of 
+the distribution of soot volume fraction is requi red. This information will identify the inception 
+zones and surface growth zones in soot-bearing flames. Soot volume fraction will be measured 
+with laser extinction and deconvolution. This met hod has been used successfully by other flight 
+experiments and in ground-based work by the Flame Design investigators. 
+ 
+Radiant and Chemiluminscent Emissions 
+Flame extinction will be inferred by photomultiplier tubes and imaging. To ensure that extinction 
+has occurred, flow rate will be reduced to a c ondition for which a stable flame had previously 
+been observed. If the flame does not reappear, it can be assumed that the flame had extinguished. 
+UV emission will also be used to indicate the presence of a flame. While it is generally 
+believed that the existence of a hydrocarbon fl ame can be detected by observation of blue 
+emission, this may not be the case with microgravity flames because these flames are extremely 
+weak and we are attempting to produce the lowest  temperature diffusion flames that have been 
+produced. SOFBALL experiments (Ronney et al. , 1998) demonstrated that a UV camera has 
+sufficient sensitivity to detect flame balls, which should be of equivalent strength to our weakest 
+flames. Thus, measurement of broad-field UV em ission should indicate the presence of a weak 
+flame.  
+Just as the flammability limit in premixed flames is a fundamental limit representing 
+conditions where the flame transitions from non-fla mmable to flammable, we believe there is an 
+analogous limit for diffusion flames. This limit is referred to as the pseudo-flammability limit. 
+Whereas in premixed flames the flammability limit is a function of the fuel-type, oxidizer (i.e., 
+the amount of inert) and equivalence ratio, in nonpr emixed flames we expect it to be a function 
+of fuel-type, amount of inert and Zst. By measuring flame extinction under conditions specified 
+in the test matrix, the pseudo-flammability limit can be inferred.
+
+--- page 33 ---
+33
+ 
+3.2 Operational Sequences 
+The Flame Design operational sequences are summarized in ACME (2010). 
+ 
+3.3 Test Matrix 
+A detailed test matrix is given in ACME (2010). A brief discussion is provided below. 
+ 
+Spherical Flames 
+These tests will emphasize measurements of three types of limits: sooting limits, radiative 
+extinction limits, and kinetic extinction limits. Te sts will involve normal and inverse convection 
+directions. A smaller number of tests will consid er long-term burns to evaluate the possible 
+existence of steady flames. These tests support Objectives A – C. 
+ 
+Coflow Flames 
+These tests will emphasize inverse coflow flames  (highly desired), and flames with high oxygen 
+concentrations in the oxidizer. Measurements will emphasize sooting limits, defined here as half-
+blue limits. A half-blue soot limit is a condition where the lowest visible yellow emissions are 
+half way between the burner tip and the visibl e flame tip. These tests support Objectives A 
+and C. 
+ 
+3.4 Science Success Criteria 
+The success of the proposed experiment will be  judged vis-à-vis the stated objectives. The 
+requirements for four levels of success are stated. 
+ 
+Minimal success requires: 
+Obtain color images of a spherical flame of C 2H4 flowing into diluted oxygen that passes its 
+sooting limit, passes its radiative extinction limit, and has a total burn time that exceeds 20 s. 
+Obtain color images of a spherical flame of C2H4 flowing into air as a function of m. 
+ 
+Substantial success additionally requires: 
+Measure peak temperature as a function of m for a spherical flame of C 2H4 flowing into diluted 
+oxygen at quasi-steady conditions. 
+Obtain soot inception limits and extinction limits for spherical C 2H4 flames as functions of 
+Zst and Tad. 
+ 
+Complete success (which requires completion of the required test matrix) additionally requires: 
+Perform tests S1 – 47 or a similar set of spherical flame tests. 
+Obtain temperature distributions at (or near) the sooting and extinction limits of spherical 
+flames. 
+Measure soot volume fraction profiles for spherical diffusion flames at low and high Zst. 
+ 
+Superior success (which includes only desired items) additionally requires: 
+Obtain color images of inverse coflow flames of diluted oxygen flowing into C 2H4 at quasi-
+steady conditions as a function of m. 
+Obtain soot inception limits and extinction lim its for inverse coflow flames of diluted 
+oxygen flowing into C2H4 as functions of Zst and Tad.
+
+--- page 34 ---
+34
+Obtain soot inception limits and extinction limits with CO 2 diluent as functions of Zst and 
+Tad for normal spherical and (coflow) inverse flames. 
+Obtain soot inception limits and extinction limits for C 2H4 as functions of Zst and Tad for 
+normal and (coflow) inverse flames at pressures of 0.2 and 0.5 atm. 
+Obtain soot inception limits and extinction limits for CH 4 as functions of Zst and Tad for 
+normal spherical and (coflow) inverse flames. 
+ 
+3.5 Post Flight Data Analysis Plan  
+The bulk of the test matrix for this investigation is intended to determine the soot-inception and 
+flame-extinction limits as a function of Zst and Tad. The efficient use of consumables in this 
+investigation will allow us to examine the limits for a large number of flames. Due to the fact 
+that the conditions leading to the soot-incep tion and extinction limits are unknown, we will be 
+acquiring extensive image data. The bulk of our analysis will focus on the flame status near the 
+limits, although a number of flames will be studied under more robust conditions to ensure the 
+effectiveness of the model predictions of flame size and temperature.  
+Much of the post-flight data analysis will o ccur in the course of mission operations as the 
+science team evaluates each set of test runs in preparation for subsequent runs. The initial tests 
+with spherical flames are designed to uncover the effects of burner heating, chamber wall effects, 
+flame size and flame radiation on the experimental  results. These tests will also be used to 
+establish an initial understanding of the soot in ception and extinction limit plots. Consequently, 
+these tests will receive substantially more scrutiny than many of the subsequent tests. Analysis of 
+these tests will include: tracking of flame size and concentricity as a function of time for each 
+test; analysis of discrete signals (e.g., radiometers, photomultipliers, and pressure transducers) 
+for evidence of the quasi-steadiness of the flam es; analysis of the temperature profiles (thin 
+filament, soot temperature, and far-field thermo couples) to ensure agreement with the models 
+and to evaluate quasi-steadiness; and deconvolu tion of soot volume fraction measurements to 
+evaluate the effect of flame size on the soot volume fraction. 
+For subsequent tests, the operating conditions at the soot-inception and extinction limits 
+will be tabulated and plotted with Zst, Tad, and Text. Flame temperatures near extinction will be 
+determined either by deconvolution of the soot temperature data or by thin fiber pyrometry. 
+Periodic deconvolution of the soot volume fraction data will be performed to allow evaluation of 
+the effect of flow inversion and flame structure. The deconvolution and fiber pyrometry data will 
+be analyzed primarily near the inception and extinction limits. 
+ 
+4 REFERENCES 
+ACME-SRD-001, Advanced Combustion via Microgr avity Experiments, Science Requirements, 
+NASA Glenn Research Center (2010). 
+Assanis, D.N., Karvounis, E., Sekar, R.R. and Marr, W.W. (1993) ASME Journal of Engineering 
+for Gas Turbines and Power, Vol. 115, pp. 761-768. 
+Atreya, A. and Agrawal, S. (1998) Combust. Flame 115:372-383. 
+Atreya, A., Wichman, I, Guenther, M. Ray, A. and Agrawal, S. (1992) “An Experimental and 
+Theoretical Study of Radiation Extinction of  Diffusion Flames,” Second International 
+Microgravity Combustion Workshop, NASA Lewis Research Center, Cleveland, OH, Sept. 
+15-17. 
+Avedisian, C.T. and Callahan, B.J. (2000) Proc. Combust. Inst. 28(Pt. 1), 991-997. 
+Baukal, C.E. (Ed) (1998) Oxygen Enrichment Enhances Combustion, CRC Press.
+
+--- page 35 ---
+35
+Batchelor, G. K. An Introduction to Fluid Dyna mics. Cambridge University Press, Cambridge, 
+1983, p.454. 
+Callaghan, K., Nemser, S., Poola, R.B., Stork, K.C., Sekar, R.R. and Johnson, B. (1998) SAE 
+Paper 980177. 
+Chace, A.S., Hazard, H.R., Levy, A. Thekdi, A.C. and Ungar, E.W. (1989) Combustion 
+Research Opportunities for Industrial Applicati ons – Phase II, U.S. Department of Energy 
+report DOE/ID-10204-2, Washington, D.C. 
+Chao, B.H., Law, C.K. and T’ien, J.S. (1990) Proc. Combust. Inst. 23, 523-531. 
+Chao, B.H., Liu, S. and Axelbaum, R.L. (1998) Comb. Sci. Tech. 138:105-135. 
+Chen, R. and Axelbaum, R.L. (2005) Combust. Flame 142:62-71. 
+Choi, M.Y., Dryer, F.L. and Haggard, J.B. Jr. (1991) Proc. Combust. Inst. 23 1597-604.  
+Connelly, B.C., Kaiser, S.A., Smooke, M.D. and L ong, M.B. (2005) Fourth Joint Meeting of the 
+U.S. Sections of the Combustion Institute, Philadelphia. 
+DeLombard, R. Compendium of Information for Interpreting the Microgravity Environment of 
+the Orbiter Spacecraft. NASA Technical Memorandum 107032, 1996. 
+Dietrich, D.L., Haggard, J.B., Dryer, F.L., Naya gam, V., Shaw, B.D. and Williams, F.A. (1996) 
+Proc. Combust. Inst. 26, 1201-1207. 
+Doctor, R.D., Molburg, J.C. and Thimmapuram, P.R., (1997) Energy Conv. and Mgmt. , 38:575-
+580. 
+Du, D.X., Axelbaum, R.L. and Law, C.K. (1988) Proc. Combust. Inst. 22, 387-394. 
+Du, J. and Axelbaum, R. L. (1995) Combust. Flame 100:367-375.  
+Du, J. and Axelbaum, R.L. (1996) Proc. Combust. Inst. 26, 1137-1142. 
+Glassman, I. and Takahashi F. (1984) Comb. Sci. Tech. 37:1-19. 
+Goldin, S. (1997) Public Address, NASA Lewis Research Center. 
+Gomez, A., Littman, M.G. and Glassman, I. (1987) Combust. Flame 70:225-241. 
+Grcar, J.F. (1992). The Twopnt Program for Boundary Value Problems, Sandia Report, 
+SAND91-8230, Sandia National Laboratories. 
+Hirschfelder, J.O., Curtiss, C.F. and Bird, R. B., 1964, Molecular Theory of Gases and Liquids 
+(Hoboken: Wiley and Sons).  
+Hwang, J.Y. and Chung, S.H. (2001) Combust. Flame 125:752-762. 
+Ishizuka, S. and Tsuji, H. (1981) Proc. Combust. Inst. 18, 695-703. 
+Kang, K.T., Hwang, J.Y. and Chung, S.H. (1997) Combust. Flame 109:266-281. 
+Kee, R.J., Dixon-Lewis, G., Warnatz, J., Coltr in, M.E. and Miller, J.A. (1988) A Fortran 
+Computer Code Package for the Evaluati on of Gas Phase Multicomponent Transport 
+Properties. Sandia Report, SAND86-8246, Sandia National Laboratories. 
+Kee, R.J., Grcar, J.F., Smooke, M.D., Miller, J.A. and Meeks, E. (1987) A Program for 
+Modeling Steady, Laminar, One-Dimensiona l Premixed Flames. Sandia Report SAND85-
+8240, Sandia National Laboratories. 
+Kee, R.J., Rupley, F.M. and Miller, J.A. ( 1989). Chemkin-II: A Fortran Chemical Kinetics 
+Package for the Analysis of Gas Phase Chemical Kinetics, Sandia Report, SAND89-
+8009B, Sandia National Laboratories. 
+King, M.K. (1996) Proc. Combust. Inst. 26, 1227-1234. 
+Kumfer, B.M., Skeen, S.A. and Axelbaum, R.L. (2008) Combust. Flame, 154:546-556. 
+Kumfer, B.M., Skeen, S.A., Chen, R. and Axelbaum, R.L. (2006) Combust. Flame 147:233-242. 
+Law, C.K., Yoo, W.S., Christiansen, E.W. and Tse, S.D. (2001) Sixth International Microgravity 
+Combustion Workshop, Cleveland, OH, May 22-24.
+
+--- page 36 ---
+36
+V.R. Lecoustre, P.B. Sunderland, B.H. Chao, D.L. Urban, D.P. Stocker, R.L. Axelbaum, 6th U.S. 
+National Combustion Meeting, Ann Arbor (2009) 9 pp. 
+Lin, K.C. and Faeth, G.M. (1996) J. Propulsion Power 12(4):691-698. 
+Liu, S., Chao, B.H. and Axelbaum, R.L. (2005) Combust. Flame 140:1-23. 
+Macek, A. (1976) Flammability Limits: Ther modynamics and Kinetics, NBSIR Report 76-1076, 
+National Bureau of Standards, Gaithersburg, Maryland. 
+Markatou, P. Wang, H. and Frenklach, M. (1993) Combust. Flame 93:467-482. 
+Maun, J.D., Sunderland, P.B. and Urban, D.L., “Thin-Filament Pyrometry with a Digital Still 
+Camera,” Applied Optics 46 (2007) 483-488. 
+McBride, B.J. and Gordon, S. (1996) Computer Program for Calculation of Complex Chemical 
+Equilibrium Compositions and Applica tions. Report No. RP-1311-P2, NASA Lewis 
+Research Center. 
+Middha, P., Yang, B. and Wang, H. (2002) Proc. Combust. Inst., 29, 1361-1369. 
+Nayagam, V., Haggard, J.B., Colantonio, R.O., Marchese, A.J., Dryer, F.L., Zhang, B.L and 
+Williams, F.A. (1998) AIAA J. 36 (8):1369-1378. 
+Okazaki, K. and Ando, T. (1997) Energy, 22:207-215. 
+Paul, P. and Warnatz, J., (1998), Proc. Combust. Inst. 27, 495–504. 
+Quintiere, J.G. (2006) Fundamentals of Fire Phenomena, Wiley, New York, p. 277. 
+Ronney, P.D., Wu, M.-S., Pearlman, H.G. and Weiland, K.J. (1998) AIAA J. 36(8):1361-1368. 
+Rothman, L.S., Rinsland, C.P., Goldman, A., Massi e, S.T., Edwards, D.P., Flaud, J.-M., Perrin, 
+A., Camy-Peyret, C., Dana, V., Mandin, J.-Y., Schroeder, J., Mccann, A., Gamache, R.R., 
+Wattson, R.B., Yoshino, K., Chance, K.V., Juck s, K.W., Brown, L.R., Nemtchinov, V. and 
+Varanasi, P. (2003) J. Quantitative Spectroscopy and Radiative Transfer, 82:5-44. 
+Santa, K.J., Chao, B.H., Sunderland, P.B., Urba n, D.L., Stocker, D.P. and Axelbaum, R.L. 
+(2007a), Combust. Flame 151:665-675. 
+Santa, K.J., Sun, Z., Chao, B.H., Sunderland, P. B., Axelbaum, R.L., Urban, D.L. and Stocker 
+D.P. (2007b), Combust. Theory Model 11:639-652. 
+Santoro, R.J., Yeh, T.T., Horvath, J.J. and Semerjian, H.G. (1987) Comb. Sci. and Tech. 53:89-
+116. 
+Sekar, R.R., Marr, W.W., Assanis, D.N., Cole, R.L., Marciniak, T.J. and Schaus, J.E. (1991) 
+Journal of Engineering for Gas Turbines and Power, 113:365-369. 
+Skeen, S.A., Yablonsky, G., Axelbaum, R.L., (2009), Combust. Flame 156:2145-2152. 
+Smith, G.P., Golden, D.M., Frenklach, M., Mori arty, N.W., Eiteneer, B., Goldenberg, M., 
+Bowman, C.T., Hanson, R.K., Song, S., Gardiner  Jr., W.C., Lissianski, V.V. and Qin, Z. 
+(2007) available at http://www.me.berkeley.edu/gri_mech/. 
+Smooke, M.D., McEnally, C.S., Pfefferle, L. D., Hall, R.J. and Colket, M.B. (1999) Combust. 
+Flame 117:117-139. 
+Sugiyama, G. (1994) Proc. Combust. Inst. 25, 601-608. 
+Sunderland, P.B., Axelbaum, R.L., Urban, D.L., Chao, B.H. and Liu, S. (2003) Combust. Flame 
+132:25-33. 
+Sunderland, P.B., Köylü, Ü.Ö. and Faeth, G.M. (1995) Combust. Flame 100:310-322. 
+Sunderland, P.B., Urban, D.L., Stocker, D.P ., Chao, B.-H. and Axelbaum, R.L. (2004) Comb. 
+Sci. and Tech, 176:2143-2164. 
+Sung, C.J., Liu, J.B. and Law, C.K. (1995) Combust. Flame 102:481-492.  
+Tse S.D., Zhu D.L., Sung C.J. Ju  Y.G. and Law, C.K. (2001) Combust. Flame , 125(4):1265-
+1278.
+
+--- page 37 ---
+37
+Urban, D.L., Yuan, Z.-G, Sunderland, P.B., Linter is, G.T., Voss, J.E., Lin, K.-C., Dai, Z., Sun, 
+K. and Faeth, G.M., (1998) “Structure and Soot Properties of Nonbuoyant Ethylene/Air 
+Laminar Jet Diffusion Flames,” AIAA J., 36(8):1346. 
+Varagani, R., Chatel-Pelage, F., Pranda, P., L u., Y., Chen, S., Rostam-Abadi, M., Farzan, H., 
+Vecci, S.J. and Bose, A.C., (2004) Thir d Annual Conference on Carbon Sequestration, 
+May 3-6, 2004, Alexandria, VA. 
+Villimpoc, V. and Goss, L.P. (1988) Proc. Combust. Inst. 22, 1907-1914. 
+Williams, F.A. (1981) Fire Safety J. 3:163-175. 
+Williams, S.J., Cuervo, L.A., and Chapman, M.A.  (1989) High-Temperature Industrial Process 
+Heating: Oxygen-Gas Combustion and Plasma Heating Systems, Gas Research Institute 
+report GRI-89/0256, Chicago. 
+Yih, C.-S., Fluid Mechanics. McGraw Hill, NY, 1969, p. 107. 
+ 
+5 APPENDIX A 
+Estimate of Required Gravity Environment 
+The acceleration induced on a fluid packet by natural convection is 
+    
+a = 2 ρ − ρ∞
+2ρ + ρ∞
+gs = 2 (ρ/ ρ∞ ) −12( ρ/ ρ∞ ) + 1 gs (A1) 
+where ρ  is the density of the fluid packet, ρ∞  the density of the fluid in the ambient, a the 
+acceleration of the fluid packet, and  gs  the gravitational acceleration (Yi et al., 1969, Batchelor, 
+1983). Considering the flow to be isobaric and applying the ideal gas law,   p = ρR T  where p is 
+the pressure and R the ideal gas constant, we have   ρ/ ρ∞ = T∞ / T . In a laboratory in the space 
+station or a space shuttle, the gravity is caused by vibration so that it is taken to be periodic with 
+amplitude A and frequency ω, given by   gs = A sin ( 2π ω t ), where t is the time. Adopting these 
+assumptions, Eq. (B1) is modified to 
+    
+a= A (T∞ / T ) −1(T∞ / T )+ 0.5 sin ( 2πω t ) . (A2) 
+Integrating Eq. (B2) yields the velocity of the fluid packet induced by gravity, given by 
+    
+u =− A2πω (T∞ / T ) −1(T∞ / T ) + 0. 5cos( 2πω t )+ c  . (A3) 
+If the acceleration starts at t = 0 so that u = 0 at t = 0, Eq. (B3) is changed to 
+    
+u = A2 πω (T∞ / T )−1(T∞ / T ) +0.5 [1 −cos (2 πω t )]  . (A4) 
+This gravity induced flow velocity introdu ces a modification of the mass flux of the 
+reactant supplied from the burner, and conseque ntly, a distortion of the flame shape from 
+spherical symmetric. At the unperturbed flame front located at  r = rf , the normal component of 
+the additional mass flux is 
+    
+(ρf uf )n = ρf A2 πω (T∞ / T f ) −1(T∞ / Tf ) + 0. 5[1 −c o s(2πω t )]( cosθ ) (A5) 
+where the subscript “ f” denotes values at  rf , the subscript “ n” denotes the normal component, 
+and θ the angle with   θ = 0 along the direction of gravity, Sin ce only the magnitude is of concern, 
+the direction to define   θ = 0 or π is not important. The tangential component of the gravity 
+induced flow velocity will not a lter the reactant supply rate (consumption rate) at the flame front
+
+--- page 38 ---
+38
+and will be discarded. 
+For the mass flow rate of m, the mass flux at the flame front is   F = m /( 4 π rf 2 ). Because 
+the actual flame standoff distance depends linear ly on the mass flow rate, if the maximum 
+allowable distortion of the flame geom etry from symmetrical symmetric is     ∆ rf / rf = ε , we 
+require     (ρf uf )n ≤ ε F , or 
+    
+ρf A2πω (T∞ / Tf ) −1(T∞ / T f ) +0.5 [1 − cos (2 πω t )](cos θ ) ≤ ε m4 π rf2  . (A6) 
+Since the maximum distortion occurs at   cos (2 πω t ) = −1 and  cos θ = 1, as well as  T∞ < Tf , 
+the maximum allowable gravity, expressed by A, can be reduced from Eq. (B6) to 
+    
+A ≤ ε ω m
+4ρf rf2
+(T∞ / T f ) +0.5
+1−(T∞ / T f )  . (A7) 
+Considering the fluid be sufficiently close to air, we approximate the fluid density by that 
+of air such that the ideal gas equation of state gives   ρf = p /[ ( R / Ma )Tf ] where  R  is the 
+universal gas constant and   Ma the average molecular weight  of the components (or air). 
+Applying this approximation, Eq. (B7) is re-expressed in its final form by 
+    
+A
+g ≤
+ε ω mR T f
+4 gpM a rf2
+(T∞ / T f ) +0.5
+1 −(T∞ / T f ) = εω m R 4 gpM a rf2 T∞ +0.5 Tf1−(T∞ / T f )  , (A8) 
+where g is the normal gravitational acceleration on earth. Taking   R  = 8.314 J/mole ⋅K, 
+Ma = 28.97 gm/mole (for air) and g = 9.8 m/s2, Eq. (B8) is reduced to 
+    
+A
+g ≤ 0.07225 mm 2 ⋅sec 2⋅atmgm ⋅K⎛ ⎝ ⎜ ⎞ ⎠ ⎟ εω mpr f2 T∞ + 0.5 Tf1−(T∞ / T f )  . (A9) 
+In the space laboratory, the typical freque ncy of vibration is between 1 to 22 Hz 
+(DeLombard, 1996). If the maximum allowable flame distortion is ε = 0.1, p = 1 atm, and 
+adopting the most restrictive frequency of ω = 1 Hz = 1 s-1, Eq. (B9) is further reduced to 
+    
+A
+g ≤ 0.007225 mm 2 ⋅ secgm ⋅ K⎛ ⎝ ⎜ ⎜ ⎞ ⎠ ⎟ ⎟ mrf 2 T∞ + 0.5Tf1− (T∞ / Tf )  . (A10) 
+Equation (B10) will then be applied to estimat e the allowable gravity induced by vibration 
+in the experiments, namely flames (a) – (d). In the following, T∞ will be taken as 300 K while rf 
+and Tf are results of the numerical calculations. 
+(1) Flame (a): m = 0.00151 gm/sec , Tf = 1477 K , rf = 17.72 mm 
+⇒ A/g = 4.53 × 10–5 or A = 4.53 × 10–5 g = 45.3 µg 
+(2) Flame (b): m = 0.01855 gm/sec , Tf = 2021 K , rf = 9.40 mm 
+⇒ A/g = 2.37 × 10–3 or A = 2.37 × 10–3 g 
+(3) Flame (c): m = 0.02222 gm/sec , Tf = 2266 K , rf = 6.22 mm 
+⇒ A/g = 6.85 × 10–3 or A = 6.85 × 10–3 g 
+(4) Flame (d): m = 0.00518 gm/sec , Tf = 1572 K , rf = 16.23 mm 
+⇒ A/g = 1.91 × 10–4 or A = 1.91 × 10–4 g = 191 µg
+
+--- page 39 ---
+39
+Among the 4 limiting cases, the most restrictive case is Flame (a). It is then concluded that for 
+the flame distortion to be within an allowable 10% limit, the gravity level in the space laboratory 
+should be lower than 45 µg. For other conditions, the allowable gravity level can be calculated 
+using Eqs. (B8 or B9).

@@ -1,0 +1,733 @@
+Source : NASA PSI, PSI-22, Science Documents, ACME_Integrated_Science_Requirements_Definition_Review_20100505.pdf
+
+--- page 1 ---
+National Aeronautics and Space Administration
+ACMEACME
+Advanced Combustion via Microgravity Experiments
+Integrated Science Requirements
+Ri t D f i i t i R iRequirements Definition Review
+May 10-11, 2010
+Cleveland OhioCleveland, Ohio
+www.nasa.gov 1
+
+--- page 2 ---
+National Aeronautics and Space Administration
+Integrated Science Requirementsgq
+• Introduction
+– Experimentsp
+– Concept
+• Requirements*
+Hd R i t
+– Hardware Requirements
+• Experiment Configuration
+• Monitoring Measurements
+• Science Diagnostics
+*Non-hardware requirements will be addressed by each experiment
+MDCA insert
+Non hardware requirements will be addressed by each experiment
+– Operational Requirements
+– Test Matrices
+– Success Criteria
+www.nasa.gov
+Success Criteria
+2
+
+--- page 3 ---
+National Aeronautics and Space Administration
+4 ACME Experimentsp
+• CLD Flame
+– Coflow Laminar Diffusion Flame
+PI Mh l l L ( Y l U )
+– PI Marshall Long (Yale U.) 
+– Co-I Mitchell Smooke (Yale U.)
+• E-FIELD Flames
+– Electric Field Effects on Laminar Diffusion Flames
+– PI Derek Dunn-Rankin (UC Irvine)
+– Co-Is Felix Weinberg (Imperial College) 
+Zeng-Guang Yuan (NCSER)
+• Flame Design a novel approach to clean efficient diffusion flames
+• Flame Design - a novel approach to clean, efficient diffusion flames
+– PI Richard L. Axelbaum (Washington U. in St. Louis)
+– Co-Is Beei-Huan Chao (U. Hawaii), 
+Peter B. Sunderland (U. Maryland),
+D id L U b (NASA Gl )
+David L. Urban (NASA Glenn)
+• s-Flame
+– Structure and Response of Spherical Diffusion Flames
+– PI C.K. Law (Princeton U.)
+www.nasa.gov
+PI C.K. Law (Princeton U.)
+– Co-Is Stephen D. Tse (Rutgers U.)
+Kurt R. Sacksteder (NASA Glenn)
+3
+
+--- page 4 ---
+National Aeronautics and Space Administration
+Laminar Gaseous Diffusion Flames
+• 4 previous space experiments
+– LSP: Laminar Soot Processes
+PI: G M Faeth (U Michigan)
+• PI: G.M. Faeth (U. Michigan)
+• Combustion Module
+• STS-83 and STS-94 (1997), STS-107 (2003)
+– TGDF: Turbulent Gas-jet Diffusion Flames
+j
+• PI: M.Y. Bahadori (SAIC)
+• Get Away Special Canister (GAS can)
+• STS-87 (1997)
+ELF: Enclosed Laminar Flames
+– ELF: Enclosed Laminar Flames
+• PI: L.-D. Chen (U. Iowa)
+• Middeck Glovebox (MGBX)
+• STS-87 (1997)
+– SPICE: Smoke Point In Coflow Experiment
+• PI: D.L. Urban (NASA Glenn) - initially G.M. Faeth
+• Microgravity Science Glovebox (MSG)
+• ISS Expeditions 18-19 (2009)
+www.nasa.gov
+ISS Expeditions 18 19 (2009)
+4
+Roger Crouch with CM-1 on STS-83 (top), Michael Barratt with SPICE (bottom)
+
+--- page 5 ---
+National Aeronautics and Space Administration
+ACME Conceptp
+• ACME experiments all use laminar gaseous diffusion flames
+• Conduct them using a single modular insert for the Combustion 
+Integrated Rack (CIR) on the International Space Station (ISS)
+– The only currently existing insert is for droplet combustion experiments
+www.nasa.gov 5
+Koichi Wakata with MDCA in CIR (left), ISS (right)
+
+--- page 6 ---
+National Aeronautics and Space Administration
+ACME Hardware
+• ACME hardware
+– single modular insert
+– avionics box
+avionics box
+– color camera(s) & optics
+– gas bottles, filter cartridges, etc.
+www.nasa.gov 6
+Nicole Stott with MDCA (left), CIR (right)
+
+--- page 7 ---
+National Aeronautics and Space Administration
+ACME Insert Concept
+Mesh electrode or SiC fiber array for TFP 
+(vertically translating) 
+Lamp(s) to 
+illuminate 
+configuration
+Mesh electrode
+Radiometer
+Radiometer
+Radiometer
+PMT
+PMT
+PMT
+Radiometer
+ad o ete
+P
+Igniter (retracting)
+High-voltage 
+power supply 
+with current 
+measurement
+Radiometer
+Fuel MFC
+Inert MFC
+Igniter (retracting)
+Thermocouples
+Mixer
+www.nasa.gov 7
+Oxidizer MFC
+
+--- page 8 ---
+National Aeronautics and Space Administration
+Science Requirements Disallowedq
+• ACME must be done within resource constraints
+• Difficult/costly or desired requirements were not allowedDifficult/costly or desired requirements were not allowed
+– Measurements
+• CH* imaging
+• infrared imaging
+• infrared imaging
+• Schlieren and shadowgraph imaging
+• PAH limit
+soot inception limit by laser scattering
+• soot inception limit by laser scattering
+• soot sampling
+• species concentrations (other than via CIR’s GC)
+b rner gas temperat res
+• burner gas temperatures
+– Testing
+• oxygen concentrations over 40% in the chamber
+f
+www.nasa.gov 8
+• dynamic venting for constant pressure testing
+
+--- page 9 ---
+National Aeronautics and Space Administration
+Nominal Operational Sequencepq
+• Flow > Ignite > Measure > Extinguish 
+– Initiate burner flows at ignition condition g
+– Ignite flame
+• Wait for flame to stabilize
+– If needed adjust flows to initial test condition– If needed, adjust flows to initial test condition 
+• Wait for flame to stabilize
+– If needed:
+ramp burner flow(s)
+• ramp burner flow(s)
+• activate and adjust electric field
+• translate TFP array
+St b fl
+– Stop burner flows
+• per extinction detection or test duration
+www.nasa.gov 9
+Nicole Stott with CIR
+
+--- page 10 ---
+National Aeronautics and Space Administration
+ACME Hardware Requirementsq
+• Experiment Configuration
+– General (1.1)
+()
+– Burners (1.2-1.4)
+– Electric Field (1.5-1.7)
+Gas Delivery (1 8 19 )
+– Gas Delivery (1.8-1.9)
+– Ignition (1.10)
+– Ambient Environment (1.11)
+– Data Acquisition (1.12)
+• Monitoring Measurements
+• Science Diagnostics
+• Science Diagnostics
+www.nasa.gov 10
+Frank DeWinne with CIR
+
+--- page 11 ---
+National Aeronautics and Space Administration
+General Requirements (1.1)q( )
+• Burners all burners accommodated, but only one at a time
+exchangeable during spaceflight
+one duplicate of each provided to Project Scientist
+• Compatibility of burners and gas delivery system
+– fuels H2, CH4, C2H6, C3H8, C2H4, C3H6, and mixes
+– inerts N2, CO2, He, Ne, Ar, Kr, Xe, and mixes
+– fuel/inert mixtures of any fuel(s) and inert(s) above
+– oxygen mix ≤85% oxygen with any fuel(s) and/or inerts above
+• Chamber contents compatible with ≤40% oxygen
+• Simultaneous all configuration requirements apply simultaneously 
+unless otherwise specified
+www.nasa.gov 11
+
+--- page 12 ---
+National Aeronautics and Space Administration
+Burners (1.2-1.4)( )
+• 3 types of exchangeable burners 
+– porous spherical burners (3 sizes)
+pp ( )
+– circular gas-jet burners (6 sizes)
+– axisymmetric, coflow burner (1 size)
+• capable of inverse flames
+• capable of inverse flames
+www.nasa.gov 12
+
+--- page 13 ---
+National Aeronautics and Space Administration
+Spherical Burners (1.2)p( )
+• Porous sphere ODs 6.4, 9.5, 12.7 mm known to ±0.1 mm 
+• Burner tube
+– inner diameter so pressure drop is ≤20% of that across burner
+– outer diameter ≤25% of sphere diameter
+– length ≥100 mm
+– material stainless steel
+• Sphericity 2.2s drop verification of flame with r min/rmax>0.8
+• Positions (1) centered in chamber & windows
+or (2) 30 mm ‘below’ window center
+• Volume (internal) ≤10 cc from last solenoid valves
+• Resistance withstand 0-450 oC
+www.nasa.gov 13
+
+--- page 14 ---
+National Aeronautics and Space Administration
+Gas-Jet Burners (1.3)()
+• Shape straight tube with circular cross section
+• Length ≥40 inner diameters
+• Tube sizes 0.4 ±0.1 mm ID, 0.8±0.1 mm OD
+0.8±0.1 mm ID, 1.2±0.1 mm OD
+1.3±0.1 mm ID, 1.6±0.1 mm OD
+2.1±0.1 mm ID, 2.4±0.1 mm OD
+2.7±0.1 mm ID, 3.1±0.1 mm wall
+3.2±0.1 mm ID, 3.6±0.1 mm wall
+ID and OD known to ±0.05 mm
+• Burner tip smooth, free from burs
+• Position on chamber axis either:
+(1) 10 mm ‘below’ window center
+(2) 30 mm ‘below’ window center
+• Material stainless steel
+www.nasa.gov 14
+• Resistance withstand 0-1000 oC
+Soot volume fraction measurement in LSP experiment on STS-83
+
+--- page 15 ---
+National Aeronautics and Space Administration
+Coflow Burner (1.4)()
+• Concentricity within ±0.3 mm
+• Outlets orthogonal and flat within ±0.1 mm
+• Dimensions
+Honeycomb
+• Dimensions
+– inner tube 2.1 ±0.1 mm ID, 2.4±0.1 mm OD,
+length of ≥40 inner diameters
+≤10 cc volume from last solenoid valves≤10 cc volume from last solenoid valves
+0.5 to 1.0 mm downstream of annular outlet
+stainless steel
+– outer tube 25 ±0.5 mm ID
+0.0 to 0.5 downstream of annular outlet
+• Annular flow axisymmetric, plug flow for velocities of ≤50 cm/s
+no swirl or turbulence
+≤0.75 mm boundary layer at inner tube
+well characterized with cold flow for 10-50 cm/s
+• Axisymmetry flame axisymmetry demonstrated in 1g and 0g
+Position centered 12 mm ‘below’ window center
+www.nasa.gov 15
+• Position centered, 12 mm below  window center
+• Resistance withstand 0-1000 oC range
+
+--- page 16 ---
+National Aeronautics and Space Administration
+Electric Field (1.5-1.7)( )
+Nozzle Insulator
+Mesh Gas supply
+HV
+electrode
+Shunt for current 
+measurement, Rs
+Gas supply 
+tubes
+H.V.
+Ch b
+measurement, Rs
+www.nasa.gov 16
+Chamber Low voltage input, e.g., 0-24VDC
+
+--- page 17 ---
+National Aeronautics and Space Administration
+Electrodes: Burner (1.5) and Mesh (1.6)() ()
+Burner as Electrode (1.5) - doesn’t apply to spherical burners
+• Resistance <1 Ohm along/across burner (i.e., same potential)
+• Insulation burner insulated from the chamber
+Electrode Mesh (1.6)
+• Shape flat circle
+• Material copper (mesh and ring)
+• Mesh 16-22 wires/inch
+0.38-0.64 mm diameter wire
+• Edge 2-3 mm diameter ring
+•S i z e ≥80 mm diameter (ring OD)
+• Orientation orthogonal and on chamber axis
+• Position 25 or 40 mm ‘above’ window centers
+• Removable durin g spaceflight
+www.nasa.gov 17
+gp g
+
+--- page 18 ---
+National Aeronautics and Space Administration
+Electric Field (1.7)()
+• Voltage range -10 to +10 kV set within ±0.1% of set point
+• Step change any polarity and magnitude within range
+≤5 ms rise time
+• Alternating polarity sequence of steps at 0-100 Hz (mimic AC field)
+• Uplink voltage, polarity, step changes, timing
+• No conductive contact mesh and burner (except for temp. measurement)
+• Conductive free zone ≥30 mm more than mesh diameter
+from burner to ≥20 mm downstream of mesh
+• Current leakage <100 nanoamps (at ±10 kV with a 35-mm spacing)
+• Removable high voltage power supplies, associated electronics
+www.nasa.gov 18
+
+--- page 19 ---
+National Aeronautics and Space Administration
+Gas Supply (1.8)pp y ( )
+• For required testing
+– fuels 100% H2, 100% CH4, 100% C2H4 
+H2/CH4 mixes*:5 56 / 4 44 4 44 / 5 56 6 67 / 3 33H2/CH4 mixes : 55.6/44.4, 44.4/55.6, 66.7/33.3
+– oxidizers** O2/N2 mixes*: 85/15, 50/50, 30/70, 21/79
+40/60 O2/He 
+– inerts 100% N2 (available from ISS), 100% He
+• For desired testing
+– fuels none
+– oxidizers** O2/CO2 mixes*: 85/15, 40/60
+– inerts 100% CO2inerts 100% CO2
+www.nasa.gov 19
+*Mixes on a molar (volume) basis
+**CIR gas bottles limited to ≤85% O2
+
+--- page 20 ---
+National Aeronautics and Space Administration
+Burner Gas Delivery (1.9)y( )
+• Capability simultaneous flow of fuel, oxidizer, and inert to burner
+(coflow burner: each gas to inner or outer tube, not both) 
+• Uplink mixture composition, flow rates
+• Composition ±0.01 mole fraction, known as function of time
+• Flow rate control accuracy of ≤5% (plus shut off capability)
+• Flow capacity 60s at maximum flow rates (see below)
+• Gas temperature 300 ±10 K
+• Contaminants ≤0.001 mole fraction, dry
+• Flow ranges see below (slpm on a N2 basis) 
+CLD E-FIELD E-FIELD Flame Flame Flame
+Flame Flames Flames Design Design Design s-Flame
+fl jt fl hi l fl * fl ** hi lcoflow gas jet coflow spherical coflow* coflow** spherical
+fuel 0.2 0.1 0.1 0.3 0.3 2.0 0.5
+oxy 15 n/a 2.0 3.0 20 2.0 n/a
+inert 0.1 0.05 0.05 10 2.0 20 1.0
+www.nasa.gov 20
+inert 0.1 0.05 0.05 10 2.0 20 1.0
+*normal **inverse
+
+--- page 21 ---
+National Aeronautics and Space Administration
+Ignition (1.10)g( )
+• Reliable ignite all initial flow conditions
+verified to ignite within 1 s in 1g at limiting/extreme conditions
+• Disturbance minimize hydrodynamic wakes
+• Insertion ≥30 s before igniton
+• Retraction ≤0.5 s after ignition
+• Energy variable and minimized
+• Duration uplinkable and variable between 0-10 s
+www.nasa.gov 21
+MDCA ignition
+
+--- page 22 ---
+National Aeronautics and Space Administration
+Ambient Environment (1.11)()
+• Composition uplinkable and variable to ±0.01 mole fraction
+• Contaminants ≤0.01 mole fraction and dry, unless waived
+• Atmosphere well mixed
+• Quiescent 300 s hold period before ignition
+• Pressure 0.1 to 3 bar within ±3% of set point
+• Temperature 290-310 K, uniform within ±5 K
+• Free volume ≥80 liters, symmetric as possible
+• Free zone
+– spherical flames ≥200 mm diameter
+– non-spherical ≥150 mm diameter cylinder, ≥200 mm up, etc.
+• Disturbance limit burner flow, combustion, probe motion, g-jitter
+• No test prohibition during thruster firing, docking, or undocking
+• ‘Black’ background no reflection or emission in view of sensor
+• Emissivity ≥0.5 except for burners, probe tips, igniter, etc.
+www.nasa.gov 22
+Req’t for dynamic venting was disallowed because of difficulty & cost!
+
+--- page 23 ---
+National Aeronautics and Space Administration
+Data Synchronization & Recording (1.12)
+• Synchronization common time reference, within 2x response time
+• Data acquisition start & stop times can be uplinked
+imaging ≤1 min before ignition, ≤1 min after extinction
+non-imaging ≤5 min before ignition, ≤5 min after extinction
+• Downlink can downlink from only selected imaging systems
+can downlink image data for selected time period(s)
+• Recording simultaneous for all of the following
+monitoring chamber pressure, gas flow rates, burner pressure 
+diff ti l ( hi l f l )lt il tt i l ( Edifferential (spherical flames), electrical potential (E-
+FIELD Flames only), acceleration
+diagnostics
+imaging color imaging for operations color imaging for dataimaging color imaging for operations, color imaging for data 
+analysis, UV imaging, pyrometry, soot volume fraction
+non-imaging burner & far-field temperatures, radiant emission, 
+chemiluminescent emission, ion current (E-FIELD
+www.nasa.gov 23
+chemiluminescent emission, ion current (E FIELD 
+Flames only)
+
+--- page 24 ---
+National Aeronautics and Space Administration
+ACME Hardware Requirementsq
+• Experiment Configuration
+• Monitoring Measurements
+Monitoring Measurements
+– Chamber Pressure (2.1)
+– Oxygen Concentration (2.2)
+GF l R t( 2 3 )
+– Gas Flow Rates (2.3)
+– Burner Pressure Differential (2.4)
+– Electrical Potential (2.5)
+– Acceleration (2.6)
+• Science Diagnostics
+These measurements are required to 
+verify boundary and initial conditions 
+www.nasa.gov 24
+and thus enable modeling and analysis.
+Michael Barratt with MDCA in CIR
+
+--- page 25 ---
+National Aeronautics and Space Administration
+Gas Monitoring (2.1-2.3)g( )
+Chamber Pressure (2.1)
+• Accuracy ±1% of reading
+• Range 0.1-4.0 bar absolute
+• Frequency ≥1 samples/s
+• Response time ≤0.5 s
+Chamber Oxygen Concentration (2.2)
+• Instrument Gas Chromatograph Instrumentation Package (GCIP)
+• Measure when? prior to each test, after filling, scrubbing (if any), & mixing
+Gas Flow Rates (2.3)()
+• Accuracy ±5% of reading
+• Frequency ≥10 samples/s
+•R e s ponse time ≤1 s
+www.nasa.gov 25
+p
+• Measure all supply lines during testing whether or not in use
+
+--- page 26 ---
+National Aeronautics and Space Administration
+Other Monitoring (2.4-2.6)g( )
+Burner Pressure Differential (2.4) – only required for spherical flames
+• Difference across porous spherical burner (i.e., versus chamber)
+• Accuracy ±2% of reading
+• Range 0.1 to ~1.5x pressure drop at 5 slpm (on N2 basis)
+• Frequency ≥10 samples/s
+• Response time ≤0.5 s
+Electric Potential (2.4) – for E-FIELD Flames only
+• Accuracy ±1% of reading
+• Range matching range of electric field
+• Frequency ≥1 samples/s
+• Response time ≤0.5 s
+Acceleration (2.6)
+www.nasa.gov 26
+• Instrument Space Acceleration Measurement System (SAMS)
+• Sensor location at or near CIR
+
+--- page 27 ---
+National Aeronautics and Space Administration
+ACME Hardware Requirementsq
+• Experiment Configuration
+• Monitoring Measurements
+Monitoring Measurements
+• Science Diagnostics
+– Color Imaging for Ops (3.1)
+– Color Imaging for Data (3.2)
+– Ultraviolet (UV) Imaging (3.3)
+– Temperature (3.4)
+p( 3 )
+– Soot Volume Fraction (3.5)
+– Radiant Emission (3.6)
+Chemiluminescent Emission (3 7)
+– Chemiluminescent Emission (3.7)
+– Ion Current (3.8)
+– Post-Test Gas Composition (3.9)
+www.nasa.gov 27
+MDCA and CIR
+
+--- page 28 ---
+National Aeronautics and Space Administration
+Color Imaging for Operations (3.1)gg p ( )
+• Range, spectral 0.4-0.7 µm
+• Focus chamber axis
+• FOV include ≥90 mm circle
+• Uplink control at least gain or iris
+• Framing rate ≥25 fps
+• Downlink nea r-real time
+• Exchangeable yes (e.g., because of radiation susceptibility)
+• Illumination optional via uplink
+www.nasa.gov 28
+Michael Barratt with MDCA and CIR
+
+--- page 29 ---
+National Aeronautics and Space Administration
+Color Imaging for Data Analysis (3.2)gg y ( )
+• Range, spectral 0.4-0.7 µm
+• Sensitivity ≥ cameras with Sony ICX285 2/3” CCD
+• Lens f-numbe r ≤2.8
+• Spatial resolution ≤0.2% FOV dimension
+• Bit depth ≥3x12 (i.e., 12 bits each for red, green, blue)
+• Focus chamber axis, centered with chamber windows
+• FOV: 1D flames ≥90 mm diameter
+• FOV: 2D flames 35 mm along axis, ≥20 mm wide 
+• Orientation long dimension (if any) with chamber axis
+• Views ≥1
+• Filter option to image with or without BG-7 filter
+• Framing rate ≥20 fps
+• Uplink control ≥ bit depth, gain, iris, exposure time, 
+framing rate, binning, Region Of Interest (ROI)
+www.nasa.gov 29
+• Characterization blackbody with 800-1200 oC, etc., etc., etc.
+• Exchangeable yes, in spaceflight
+
+--- page 30 ---
+National Aeronautics and Space Administration
+Ultraviolet (UV) Imaging (3.3)
+• Specifications generally similar to color imaging
+• Spectral range OH*, 310 nm, 10 nm FWHM*
+•F O V
+– 1D flames ≥75 mm diameter
+– 2D flames 60±5mm along chamber axis, 
+≥30 mm wide
+* Full Width at Half Maximum
+   r - ←→ r +
+www.nasa.gov 30
+Abel deconvolved OH* 
+image from s-Flame
+LLL-UV camera (right)
+
+--- page 31 ---
+National Aeronautics and Space Administration
+Temperature: Burner (3.4.1)p( )
+• Position
+– Spherical burner 20 o to 90o of tube
+not visible in ≥1 color view
+– 2D burners at/near nozzle tip
+• Non-disturbance flame symmetry verified via testing
+• Probe size (if any) ≤250 micron
+• Range
+– Spherical burner 0-700 oC
+– 2D burners 0-300 oC
+• Precision ±2 oC
+• Accuracy ±5 oC
+• Frequency ≥10 samples/s 
+• Response time ≤0.5 s
+www.nasa.gov 31
+Frank DeWinne with CIR
+
+--- page 32 ---
+National Aeronautics and Space Administration
+Temperature: Hot Soot-Containing Regions (3.4.2)
+•F O V
+– Spherical flames ≥85 mm diameter
+– 2D flames 50±5 mm along axis, ≥20 mm wide
+• Characterization required for any new instrumentation
+• Gain variable
+• Frequency ≥0.2 sample/s
+• Response time ≤5 s
+• Uplink gain, start & stop times
+www.nasa.gov 32
+32HiBMs camera
+
+--- page 33 ---
+National Aeronautics and Space Administration
+Temperature: Hot Soot-Free Regions (3.4.3)
+• Where? orthogonal to chamber axis, in plane including axis
+• Multiple lines ≥5 lines spaced 5±0.5 mm apart
+position known to ±1 mmposition known to ±1 mm
+• If fibers… retract to ≥100 mm from burner
+partial retraction to burn off soot
+15 micron oxidized SiC fibers
+≤25o tt h l f d i i i≤25o to orthogonal of corresponding imaging
+removable & exchangeable during spaceflight
+•F O V
+Spherical flames ≥85 mm diameter– Spherical flames ≥85 mm diameter
+– 2D flames 50±5 mm along axis, ≥20 mm wide
+• Characterization required for any new instrumentation
+• Frequency ≥02s a m p l e / s• Frequency ≥0.2 sample/s
+• Response time ≤5 s
+• Uplink gain, start & stop times
+www.nasa.gov 33
+
+--- page 34 ---
+National Aeronautics and Space Administration
+Temperature: Far-Field (3.4.4)p ()
+• Unobstructed open path to burner, avoid ≤20o of burner tube
+• Positions (radial)
+close or 13 25 50 100 200 200 mmclose or 13, 25, 50, 100, 200, 200 mm
+distant 45, 60, 100, 100, 200, 200 mm
+• Range 700-1700 oC for r≤40 mm, otherwise 0-1250 oC
+• Accuracy ±3 oCf o rr≤40 mm ±1 oC for outer positionsAccuracy ±3 C for r≤40 mm, ±1 C for outer positions
+• Frequency ≥10 sample/s
+• Response time ≤0.1 s in air at 1 bar at ≤20 m/s
+• Free zone ≥50 mm dia cylinder from center to position & beyondFree zone ≥50 mm dia. cylinder from center to position & beyond
+• TC probe, if any within ±10 o of parallel to ray from center for r≤100 mm
+• TC size ≤0.2 mm OD within 5 mm of tip
+≤2 mm OD within 20 mm of tip≤2 mm OD within 20 mm of tip
+≤3.5 mm OD within 50 mm of tip
+• Exchangeable during spaceflight
+• E-FIELD Flames not required
+www.nasa.gov 34
+E FIELD Flames not required
+
+--- page 35 ---
+National Aeronautics and Space Administration
+Soot Volume Fraction (3.5)()
+• FOV: 1D flames ≥45 mm along the chamber axis, ≥45 mm wide
+• FOV: 2D flames ≥25 mm along the chamber axis, ≥25 mm wide
+• Images illumination flame illumination plus flame• Images illumination, flame, illumination plus flame
+• Frequency ≥1 samples/s
+• Response time ≤1 s
+• Uplink control start and stop times
+Uplink control start and stop times
+www.nasa.gov 35
+Sandra Magnus with CIR (left), CIR illumination package (right)
+
+--- page 36 ---
+National Aeronautics and Space Administration
+Radiant Emission (3.6)()
+• Accuracy ±10%
+• FOV cone ≥120 mm in diameter at the chamber axis
+• Linear array ≥5 sensors spaced ≤30 mm• Linear array ≥5 sensors spaced ≤30 mm
+orthogonal (±3 degrees) to chamber axis
+centered with chamber windows
+• Angled array ≥1 non-orthogonal sensors extending to ≥60oAngled array ≥1 non orthogonal sensors extending to ≥60
+• Range
+– Spectral 0.2-11 microns 
+– Irradiance 0.0001-0.1 W/cm 2
+• Frequency ≥60 samples/s
+• Response time ≤0.05 s
+www.nasa.gov 36
+Michael Fincke with MDCA
+
+--- page 37 ---
+National Aeronautics and Space Administration
+Chemiluminescent Emission (3.7)()
+• Range, spectral simultaneous for each
+– OH* 310 nm with ≥10 nm or larger FWHM
+CH* 431 nm with ≥10 nm or larger FWHM– CH* 431 nm with ≥10 nm or larger FWHM
+– broadband ≤300 to at least ~600 nm 
+• FOV 120 mm diameter sphere at window center
+• Sensitivity to flame good as human eye verified in 1gSensitivity to flame good as human eye, verified in 1g
+• Frequency ≥120 samples/s
+• Response time ≤5 ms
+• Exchan geable in s paceflight
+g pg
+www.nasa.gov 37
+Koichi Wakata with MDCA in CIR
+
+--- page 38 ---
+National Aeronautics and Space Administration
+Other Science Diagnostics (3.8-3.9)g( )
+Ion Current (3.8) – E-FIELD Flames only
+• Measure between the burner and mesh 
+• Range 0-25 microamps
+• Accuracy ≤ larger of (±5% of reading) or (±0.05 microamps)
+• Frequency ≥120 samples/s
+• Response time ≤1 ms
+Post-Test Gas Composition (3.9)
+• Instrument Gas Chromatograph Instrumentation Package (GCIP)
+• Measure when? (1) immediately after extinction and/or (2) after mixing
+• Species at least CO, CO2, CH4, C2H2, C2H4, N2, O2
+www.nasa.gov 38
+
+--- page 39 ---
+National Aeronautics and Space Administration
+Major Changes since SCRajo C a ges s ce SC
+• Added
+– Inverse spherical flame testing (tentative, assuming safety approval)pg ( ,g y p p )
+– Color imaging for operations (i.e., with near real-time downlink)
+• Eliminated (where most items were desired)
+Dit i– Dynamic venting
+– Oxygen measurement (other than via GCIP)
+– Burner gas temperature measurement
+– CH* imaging
+– IR imaging
+– Schlieren or shadowgraph imagingSchlieren or shadowgraph imaging
+• Other Changes
+– Reduced maximum oxygen in chamber from 50% to 40%
+www.nasa.gov 39
+
+--- page 40 ---
+National Aeronautics and Space Administration
+NASA Science TeamS Sc e ce ea
+• Dennis Stocker, Project Scientist
+• Dr Fumiaki Takahashi Deputy Project Scientist
+Dr. Fumiaki Takahashi, Deputy Project Scientist
+• Jay Owens, Imaging Technology
+www.nasa.gov 40
+Wile E. Coyote ®

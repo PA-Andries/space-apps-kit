@@ -1,0 +1,1230 @@
+Source : NASA PSI, PSI-102, Science Documents, SAME_Operations Manual_007.pdf
+
+--- page 1 ---
+SAME-DOC-007 
+ 
+Smoke Aerosol Measureme nt Experiment (SAME)
+Operations Manual 
+Prepared For: 
+National Aeronautics and Space Administration
+John H. Glenn Research Center at Lewis Field 
+Exploration Systems Division 
+Cleveland, Ohio 44135 
+Prepared By: 
+ZIN Technologies, Incorporated 
+2001 Aerospace Parkway 
+Brook Park, Ohio 44142 
+Under Contract NAS3-99155, 60089-DO-084
+January, 2007
+
+--- page 2 ---
+SAME-DOC-007 
+ 
+ ii
+APPROVALS 
+ 
+Prepared by: /s/ Jeff C. Eggers  Date: 01-12-07 
+ Jeff C. Eggers 
+ZIN Technologies, Inc. 
+SAME Lead Software Engineer 
+   
+     
+Reviewed by: /s/ Amber S. Krauss  Date: 01-16-07 
+ Amber S. Krauss  
+ZIN Technologies, Inc. 
+SAME Mechanical Engineer 
+   
+     
+Reviewed by: /s/ Kimesha Calaway  Date: 01-12-07 
+ Kimesha M. Calaway 
+ZIN Technologies, Inc. 
+SAME Systems Engineer 
+   
+     
+Reviewed by: /s/ Debra R. Lyden  Date: 01-17-07 
+ Debra R. Lyden 
+ZIN Technologies, Inc. 
+SAME Software Quality Engineer 
+   
+     
+Reviewed by: /s/ Nathan Funk  Date: 01-22-07 
+ Nathan W. Funk 
+ZIN Technologies, Inc. 
+SAME Red Team Lead 
+   
+     
+Approved by: /s/ Greg Funk  Date: 01-22-07 
+ Gregory P. Funk 
+ZIN Technologies, Inc. 
+SAME Project Lead
+
+--- page 3 ---
+SAME-DOC-007 
+ 
+ iii
+REVISIONS 
+ 
+Revision Letter Publication Date Change Description Approval 
+-- 1/07 Baseline Release.
+
+--- page 4 ---
+SAME-DOC-007 
+ 
+ iv
+TABLE OF CONTENTS 
+ 
+1.0 INTRODUCTION................................................................................................................... ........ 1 
+1.1 Purpose........................................................................................................................ .................. 1 
+1.2 Scope.......................................................................................................................... ................... 1 
+1.3 Applicable Documents........................................................................................................... ....... 1 
+2.0 IN-FLIGHT FUNCTIONAL CHECKLIST................................................................................. 2 
+3.0 STARTING THE SOFTWARE .................................................................................................... 3 
+3.1 Ground Computer ................................................................................................................ ......... 3 
+3.2 SAME Flight Software........................................................................................................... ....... 3 
+4.0 TEST CHECKLIST................................................................................................................. ....... 4 
+4.1 With Automatic Heater Offset Correction .................................................................................... 4 
+4.2 With Manual Heater Offset Correction......................................................................................... 5 
+5.0 RUNNING A TEST ................................................................................................................. ....... 6 
+5.1 Initialization .................................................................................................................................. 6 
+5.2 Setting parameters............................................................................................................. ............ 6 
+5.3 Registry File Concerns......................................................................................................... ......... 6 
+5.4 Running the Test ........................................................................................................................... 7 
+5.5 Shutdown ...................................................................................................................................... 7 
+5.6 Self-Tests ...................................................................................................................................... 7 
+6.0 PROCESSING FILES .................................................................................................................... 8 
+6.1 Transferring files from DACU to the MLC .................................................................................. 8 
+6.1.1 Using SAMEDisplay and FTP Cmd command. ................................................................... 8 
+6.1.2 Using SAME processor command line to transfer files........................................................ 8 
+6.2 Converting Housekeeping file to engineering units...................................................................... 8 
+7.0 MISCELLANEOUS PROCEDURES AND INFORMATION................................................... 9 
+7.1 Obtaining a directory listing .................................................................................................. ....... 9 
+7.2 Replacing the registry file.................................................................................................... ......... 9 
+7.3 Piston Calibration............................................................................................................. ............. 9 
+7.3.1 Inlet Velocity ................................................................................................................. ....... 9 
+7.3.2 Sample Heating Start Time ................................................................................................. 10 
+7.3.3 Secondary Aging Volume................................................................................................... 11  
+7.3.4 Exhaust Rate ................................................................................................................... .... 11 
+7.4 Changing flight software during flight........................................................................................ 11 
+7.5 Description of HeaterCorrectOffset Utility................................................................................. 12 
+7.6 Transfer and Installation of Crew Interface application.............................................................. 13 
+7.7 Use of tar utility .......................................................................................................................... 13 
+8.0 KNOWN ISSUES................................................................................................................... ....... 14
+
+--- page 5 ---
+SAME-DOC-007 
+ 
+ v
+9.0 ACRONYMNS AND ABBREVIATIONS .................................................................................. 15 
+10.0 APPENDIX A – COMMERCIAL DIAGNOSTICS OPERATION......................................... 16 
+11.0 APPENDIX B – P-TRAK OPERATION.................................................................................... 23
+
+--- page 6 ---
+SAME-DOC-007 
+ 
+ 1
+1.0 INTRODUCTION 
+1.1 Purpose 
+This document will eventually hold most of the info rmation needed to operate the SAME experiment on 
+ISS from the ground from the TSC.  It will also descri be alternate methods of performing tasks when the 
+experiment hardware is not on ISS, but is instead e asily accessible.  For now, however, this document is a 
+place to collect miscellaneous operational information and methods that need to be documented and under 
+configuration control. 
+1.2 Scope 
+TBD. 
+1.3 Applicable Documents 
+[1] SAME-DOC-005 Software Interface Control Document
+
+--- page 7 ---
+SAME-DOC-007 
+ 
+ 2
+2.0 IN-FLIGHT FUNCTIONAL CHECKLIST 
+This is a list of items that should be addressed after the hardware is installed in the MSG and before any 
+samples are tested.  Not currently in any order. 
+- Perform piston calibration and alter registry values as necessary.  See procedure later in this 
+document.  Run a test with heater setpoint below R0 and no use of the thermal precipitors in order 
+to confirm correct calibration. 
+- Figure out good values for STSPumpFailureLowLimit and STSPumpFailureHighLimit registry 
+values.  These depend somewhat on atmospheric pressure and should be adjusted for the ISS 
+environment.  Correctly set, these values help detect failure of the STS pump. 
+- Log some data with the P-Trak and DustTrak and confirm that their settings are correct.  For 
+example: log interval, time constant, and date/time. 
+- Record some video, downlink, and examine. 
+- Experimentally determine the maximum setpoints that the mass flow controller will meet given 
+ISS vacuum and GN2 sources.  Determine if any desired inlet velocities or diagnostic 
+combinations are affected. 
+- The registry value, DisableChecksumCheck, can be set to 1 to avoid the startup delay associated 
+with calculating the checksum each time. 
+- Revisit the decision about whether the heater controller offset correction will be done 
+automatically as part of the test sequence or manually using the HeaterCorrectOffset utility prior 
+to the test sequence.  Adjust the CorrectOffset registry value appropriately.
+
+--- page 8 ---
+SAME-DOC-007 
+ 
+ 3
+3.0 STARTING THE SOFTWARE 
+3.1 Ground Computer 
+On the ground computer you’ll need to first log on.  Then start TReK with SAME configuration files.  
+Also start SAMEDisplay.  More TBD. 
+3.2 SAME Flight Software 
+The software that controls the system starts automa tically upon power on.  Within 30 seconds of turning 
+on 120V power to the system there should be telemetr y data received at the SAMEDisplay application.  
+The GMT will be updating and startup messages will appear in the log window.  The Run Mode will 
+change from Startup to Unitialized.
+
+--- page 9 ---
+SAME-DOC-007 
+ 
+ 4
+4.0 TEST CHECKLIST 
+This is a list of important things to do or confirm pr ior to, during, and after the running of a sample test.  
+Placement of a highly visible printout of this lis t on console is recommended.   Steps depend on whether 
+sample heater offset correction is being done automatically or manually.  Check the CorrectOffset registry 
+value to find out (0=manual, >0=automatic). 
+- Once per carousel open the gate valves and turn on the diagnostics for TBD minutes.  Downlink 
+the data and verify correctness. The purpose is to collect baseline measurements of the MSG work 
+volume required by the science team. 
+4.1 With Automatic Heater Offset Correction 
+- Power on the system, wait for telemetry reception. 
+- Send the Initialize command. 
+- If the desired sample is not engaged, engage it using the Self Test command. 
+- Turn on the 12VDC Heater Power. 
+- Note the sample resistance and compare to ground measured resistance.  If they differ 
+significantly, TBD.  Determine the setpoint. 
+- Look at test parameters and change as necessary.  Use manual positioning option, but carousel and 
+sample number must be correct. 
+- Start the test. 
+- When the test pauses check the following: 
+o A “sample type is confirmed” message appears in the log. 
+o The offset correction returned a value less than 50uV in the log. 
+o The sample resistance is still good.  Within TBD % of before. 
+o The desired diagnostics are powered and readings are nominal. 
+o GN2 regulated pressure and vacuum pressure are good.  Range is TBD. 
+- If the offset correction returned a value greater than 50uV, abort the test and restart.  If the offset is 
+still greater than 50uV, change the CorrectOffset registry value to 0 (manual) and use the manual 
+heater offset correction checklist instead. 
+- Resume the test. 
+- Watch the log for details about when the sample heater will start.  When it does, be ready to send 
+an Abort command. 
+- Watch the sample resistance and compare to the desired setpoint and MaxRt.  The software will 
+too, and will abort heating if the resistance/temperature gets too high.  But watch anyway and send 
+the Abort command in the highly unlikely event of too high resistance/temperature. 
+- After sample aging, during exhaust, watch the output of the diagnostics for unexpected results. 
+- After test is complete, power on any P-Trak or DustTrak that was used and retrieve the latest 
+logged test ids.  Turn back off. 
+- As desired, force a transfer of the current housekeeping and log files to the MLC.  Their transfer 
+during power down has a slight chance of failing.  Doing it here ensures success. 
+- Perform any other desired OS or system maintenance, such as directory listings or self tests. 
+- Disengage the sample. 
+- Send the Shutdown command with Shutdown option and power off system, or proceed to next 
+test.
+
+--- page 10 ---
+SAME-DOC-007 
+ 
+ 5
+4.2 With Manual Heater Offset Correction 
+- Power on the system, wait for telemetry reception. 
+- If the desired sample is engaged, DO NOT send the Initialize command. 
+- If the desired sample is not engaged, send Initialize, engage sample using the Self Test command, 
+and send Shutdown command with Restart option to bring system back to uninitialized state. 
+- Send the OSCommand command with parameter ‘/root/HeaterCorrectOffset_g’.  If this command 
+returns 0 in the log, then proceed, otherwise repeat until it does.  (Look at the value returned, not 
+the details message which always says the same thing.)  See section 7.5 for details about the 
+HeaterCorrectOffset utility. 
+- Send the Initialize command.  
+- Turn on the 12VDC Heater Power. 
+- Note the sample resistance and compare to ground measured resistance.  If they differ 
+significantly, TBD.  Determine the setpoint. 
+- Look at test parameters and change as necessary.  Use manual positioning option, but carousel and 
+sample number must be correct. 
+- Start the test. 
+- When the test pauses check the following: 
+o A “sample type is confirmed” message appears in the log. 
+o The sample resistance is still good.  Within TBD % of before. 
+o The desired diagnostics are powered and readings are nominal. 
+o GN2 regulated pressure and vacuum pressure are good.  Range is TBD. 
+- Resume the test. 
+- Watch the log for details about when the sample heater will start.  When it does, be ready to send 
+an Abort command. 
+- Watch the sample resistance and compare to the desired setpoint and MaxRt.  The software will 
+too, and will abort heating if the resistance/temperature gets too high.  But watch anyway and send 
+the Abort command in the highly unlikely event of too high resistance/temperature. 
+- After sample aging, during exhaust, watch the output of the diagnostics for unexpected results. 
+- After test is complete, power on any P-Trak or DustTrak that was used and retrieve the latest 
+logged test ids.  Turn back off. 
+- As desired, force a transfer of the current housekeeping and log files to the MLC.  Their transfer 
+during power down has a slight chance of failing.  Doing it here ensures success. 
+- Engage the next desired sample using the SelfTest command.  Engaging the next sample here 
+shortens the time for starting the next test. 
+- Perform any other desired OS or system maintenance, such as directory listings or self tests. 
+- Send the Shutdown command with Shutdown option and power off system, or proceed to next 
+test.
+
+--- page 11 ---
+SAME-DOC-007 
+ 
+ 6
+5.0 RUNNING A TEST 
+5.1 Initialization 
+Select the Initialize button on the System tab, sending the Initialize command, and wait until the Run 
+Mode changes from Unitialized to Ready. 
+5.2 Setting parameters 
+From the Testing tab, select Change… to change to the set of test parameters you want to look at.  Create 
+a new test by selecting the CreateNew button.  Select Set anywhere in the window to change the 
+parameter for the selected test. 
+The Test Setup group box is the way to choose which di agnostics to use.  Select the Pri. or Sec. radio 
+button to see the difference in setup between primary and secondary aging.  
+Heater Control Setpoint should be set after knowing the unheated resistance of a sample, a.k.a. R0.  
+Nominal setpoints are a multiple, Rt/R0, of R0 depending on sample type: 
+ 
+Sample Type Setpoint Multiplier, Rt/R0 
+DBP TBD 
+Kapton 1.380 
+Lampwick 1.245 
+Silicone 1.327 
+Teflon 1.440 
+ 
+To find the R0 of a sample, engage the sample to th e inlet tube either by manual blocking or using the 
+SelfTest command with EngageSample option (on Syst em tab).  Then on the Smoke Generation tab turn 
+on the 12 VDC Heater Enable (right click on the ‘ LED’ and select ‘Set On’).  Sample Resistance will 
+settle to a valid measurement within 4 seconds. 
+5.3 Registry File Concerns 
+Assuming you’ve set the test parameters to a specif ic carousel number, sample number, heating setpoint 
+and duration, you may think you are ready to go.  Y ou may not be.  There are a bunch of sample-related 
+limit checks that may cause an error or warning prior to heating.  There are also many timing constants 
+that affect the system behavior.  These can be cha nged by selecting Set Registry… on the System tab.  
+See SAME-DOC-005, Software Interface Control Document  for key names and descriptions. A system 
+timing simulator, currently located in SAMEFluidMode l.xls, will be available on console to help see the 
+effect of registry value changes.  Testing with the engineering unit is also recommended. 
+Alternately, registry values can be changed by editing the registry.txt file on the DACU.  This file is 
+located in the /config directory.  Also in that dir ectory is registry.orig.txt which contains the original 
+registry settings. 
+Important:  Changes to registry values will not take e ffect until you restart the software.  Follow the 
+steps for shutting down, below, but use the restart parameter option.
+
+--- page 12 ---
+SAME-DOC-007 
+ 
+ 7
+5.4 Running the Test 
+From the Testing tab select Start… and enter the test number to run, if it hasn’t already been entered in 
+the field, and select Send. 
+After sample positioning and aging chamber setup has occurred the test will pause so you can examine 
+the log for any warnings or errors.  Then send the Resu me button.  The test should proceed to finish.  You 
+can abort anytime by sending the Abort command.  An abort causes all valves to be turned off as well as 
+all diagnostics. 
+5.5 Shutdown 
+It is recommended that the system be gracefully shut down using the Shutdown button on the System tab, 
+then cut power about 2 minutes later.  Current housek eeping and log files are transferred to the laptop 
+during the first minute.  Use the second minute to ensu re that the system did not restart, looking for the 
+restart of low rate telemetry packets and updating GMT.   If the system restarts, select Shutdown again or 
+send the OS command with parameter, ‘/bin/shutdown –b’.   
+5.6 Self-Tests 
+The flight software has a few operations available through the SelfTest command.  These may be useful 
+for other than self-test purposes, for instance to engage a sample to the inlet tube to check R0.  Parameters 
+depend on the self test: 
+ 
+Self Test Parameter Definition 
+Disengage Carousel no parameters 
+Increment Carousel no parameters, rotates carousel one position 
+Engage Carousel no parameters 
+Dynamic Dilutor Parameter1: setpoint in sccm 
+Parameter2: duration in seconds 
+ISS Detector no parameters 
+Fill Chamber Parameter1>0:  Fill rate is  this parameter divided by 10 in LPM 
+Parameter1=0: Fill rate is ChamberSelfTestFillRate registry value 
+Parameter2 not used. 
+Exhaust Chamber Parameter1>0:  Exhaust rate is this parameter divided by 10 in LPM 
+Parameter1=0: Fill rate is ChamberSelfTestExhaustRate registry 
+value 
+Parameter2>0:  Percentage to exhaust. 
+Parameter2=0:  Exhaust entire chamber. 
+Sample Heater Parameter1>0:  Duration in seconds 
+Parameter1=0:  Get previous run’s data and save to file.  Do not heat 
+sample.  (Useful for aborted heating sequences.) 
+Parameter2:  not used.  Setpoint ratio, Rt/R0, is 
+SampleHeatingSelfTestRatio registry value. 
+STS Detector no parameters 
+Watchdog Timer no parameters.  System will reset in 2 minutes.
+
+--- page 13 ---
+SAME-DOC-007 
+ 
+ 8
+6.0 PROCESSING FILES 
+6.1 Transferring files from DACU to the MLC 
+All files will be automatically transferred from th e DACU to C:\ftp on the MSG laptop.  Housekeeping 
+files (.hkp) are transferred on the hour and upon shut down (with either the shutdown or restart option).  
+The Log file is also transferred upon shutdown.  P- Trak, DustTrak, and heater files are transferred soon 
+after they are created.   P-Trak and DustTrak file s are not automatically created since their data is 
+embedded in the housekeeping data.  To explicitly retrie ve logged data select the Transfer Data button on 
+the DustTrak and P-Trak tabs.  This should be do ne no more frequently than once per minute because the 
+filename is derived from the GMT, including the latest minute, but not the latest second.  
+If you need the data immediately or a file doesn’t get downlinked for some reason you’ll have to do it 
+manually using one of two methods described here: 
+6.1.1 Using SAMEDisplay and FTP Cmd command. 
+You’ll need to identify what file you need and the dir ectory it is in.  Files are stored in a directory named 
+according to GMT year and day.  For instance /data/2006_132/.  The .log file will be named 
+2006_132_00.log in this example.  Housekeeping files will be 2006_132_15.hkp,  2006_132_16.hkp, etc. 
+according to the GMT. 
+With the flight software and SAMEDisplay running (does not need to be Initialized), select the FTP Cmd 
+from the System tab.  Type:  LCD /data/2006_132, for example, to change local directory (on the DACU) 
+and send the command.  Then select FTP Cmd again a nd type:  PUT 2006_132_16.hkp, for example, and 
+send the command.  Watch your letter case – it matters. 
+6.1.2 Using SAME processor command line to transfer files 
+For this to work you’ll need a keyboard and mon itor connected to the GSE port on the SAME DACU.  
+Also, verify that the switch on the SAME DACU is sw itched to Override position.  This is obviously a 
+ground use only method. 
+From the command line on the GSE monitor (if the so ftware is running you can get another console 
+window by typing <CTRL><ALT>n, where n is 1 or 2), na vigate using cd and ls to the directory with the 
+file you want to transfer.  Type:  ftp 192.168.1.1 <Enter>.  Type: anonymous<Enter> for name and just 
+<Enter> for password.  Then at ftp> prompt t ype: bin<Enter>, then t ype: put 2006_ 132_16.hkp, for 
+example.  File should end up in C:\SAME Data on laptop.  After done transferring file(s), type: 
+bye<Enter> on the DACU. 
+You can also use the two above methods to transfer files to the DACU using GET and get instead of puts. 
+6.2 Converting Housekeeping file to engineering units 
+Use SAMEFileConverter.  More instructions TBD.
+
+--- page 14 ---
+SAME-DOC-007 
+ 
+ 9
+7.0 MISCELLANEOUS PROCEDURES AND INFORMATION 
+7.1 Obtaining a directory listing 
+An example: 
+- OSCommand(‘ls –l /data/2006_237 > /data/dir.txt’). 
+- FTPCommand(‘LCD /data’). 
+- FTPCommand(‘PUT dir.txt’). 
+- Have MSG cadre downlink the file dir.txt. 
+7.2 Replacing the registry file 
+Normally you would change individual entries usi ng the SetRegistry command.  This method could be 
+used to set the registry to a known state, perhaps a f ile under source control, using an uplinked file.  And 
+this is the only way I could get the copied-over registry.txt file to ‘take’.  If the system is shut down nicely 
+through the shutdown command then it appears to revert to the old registry file. 
+ - FTPCommand(‘LCD /config’). 
+ - FTPCommand(‘GET registry.new.txt’) 
+ - OSCommand(‘cp /config/registry.txt /config/registry.old.txt’) 
+ - OSCommand(‘cp /config/registry.new.txt /config/registry.txt’) 
+ - Do a hard shutdown: power off 
+ - Power on and the new settings should take effect. 
+7.3 Piston Calibration 
+Piston calibration, a.k.a. piston characterization, is a process of adjusting some registry values so that 
+piston rates and time marks are correct for current  conditions.   This process should be performed 
+whenever there is a change of hardware, especially  the aging chamber and piston itself; a change of 
+environment, such as the move to the ISS; a change of fluid source strength; or a change of hardware 
+condition, perhaps after many tests have been run. 
+7.3.1 Inlet Velocity 
+Actual inlet velocity is required to match desired inle t velocity to within +/- 0.5 cm/sec.  Actual velocity 
+is not a directly measured value.  It is a function of  piston bottom to top travel time, chamber volume, and 
+inlet tube diameter.  The equation is: 
+t
+Vv *60*105.2=  
+where,    v = actual velocity (cm/sec) 
+V = chamber volume (L) = 5.65 
+t = piston travel time (seconds) 
+2.105 = conversion beween LPM and cm/sec 
+Increasing the registry value, FillLeakRateLPM, will in crease the actual velocity.  To determine piston 
+travel time, perform the following steps: 
+- Run a test with the desired inlet velocity and no heating (setpoint set below R0 and/or heater 
+duration set to zero and/or no sample engaged.) 
+- Abort the test during or after the aging period. 
+- Obtain the drive side pressure data during chamber fill and graph it.
+
+--- page 15 ---
+SAME-DOC-007 
+ 
+ 10
+- Pick the points where the piston begins moving, characterized by the start of increasing pressure, 
+and where the piston stops moving, characterized by drastically decreasing pressure. 
+- Subtract the start time from the stop time and calculate velocity.  Adjust FillLeakRateLPM and 
+repeat as necessary. 
+7.3.2 Sample Heating Start Time 
+Ideally, the start of sample heating is calculated so that  the end of sample heating occurs before the piston 
+reaches the top of the chamber.  Actually, even before that, so that most of the smoke in the inlet tube at 
+the end of heating enters the chamber as well.  And really, even before that, so that some clean air follows 
+the ‘last’ of the smoke and more of the smoke enters the chamber.  The amount of the latter clean air is 
+determined by the BackEndCleanAirOffset registry value. 
+Because there is no direct physical measurement of where the piston is in the middle of its stroke, the 
+software must estimate when the stroke begins and how long the stroke will take.  Then it can back off 
+from there to determine sample heating stop and start times.  The registry values, FillWaita.b, where a.b is 
+0.0 to 5.0 by 0.5, help compensate for timing inconsis tencies which are a function of fill rate in LPM.   
+(These values were more drastically a function of f ill rate before the FillLeakRateLPM registry value was 
+increased from 0.0.  See section 7.3.1.).  
+Piston chamber fill movement begins by evacuating the the drive side of the piston at a rate of 3.0 LPM 
+until the drive side pressure reaches 13.2 psia.  These values have been determined to be reliable, but can 
+be changed if necessary by altering the registry values, FillStartRateLPM and FillStartPressurePSIA.  
+Then the software waits for a period determined by th e desired fill rate, a function of inlet velocity, and 
+the FillWait registry values.  For a fill rate of 3.0 the software waits for the value of FillWait3.0.  For rates 
+in between, the wait time is interpolated.  After wai ting this time the software marks the start of piston 
+movement, logging a message for the user.  Sample  heating and other start and stop times are based on 
+this mark.  To determine the best FillWait registry values, 
+- Perform the following steps for each rate, R= 0.5 to 5.0 by 0.5, and then estimate FillWait0.0 
+interpolating by hand on a graph of the other values versus rate. 
+- Fill the chamber using the SelfTest command and the rate. 
+- Note when the drive side pressure reaches 13.2 psia.  The software issues a “x seconds before 
+piston moving mark” message to indicate this point.  The aim of this procedure is to get the ‘x’ 
+right. 
+- Note when the piston reaches the top of the chamber.  Visual confirmation is best, but 
+examination of the drive side pressure also works.  The start of the drastic drop in pressure is the 
+point at which the top is reached.  Do not rely on the “Aging chamber is filled” log message.  
+This comes only after the FillTopPressurePSIA has been reached. 
+- Subtract the two times to get the time between 13.2 psia and the top, tactual. 
+- Registry value for this rate, a.b is, 
+ 
+ 
+ 
+where, 
+60*. teLPMFillLeakRaba Vt chamberideal −=  
+and, 
+chamberV = Chamber volume = 5.65 L 
+FillLeakRateLPM = registry value by this name 
+idealactual ttbFillWaita −=.
+
+--- page 16 ---
+SAME-DOC-007 
+ 
+ 11
+7.3.3 Secondary Aging Volume 
+When a secondary aging period and volume are speci fied, the piston must stop a percentage of the 
+distance between the top and bottom of the chamber.  There is no direct physical measurement of the 
+running distance, therefore it is estimated from th e exhaust rate over time.  The registry value, 
+ExhaustPercentageCorrectionFactor, is applied to the running percentage.  To adjust this value, 
+- Perform a SelfTest to exhaust the chamber to a specific percentage.  For best results use the 
+exhaust rate and secondary volume  that will be used during the actual test.  Or use 5 LPM and 
+50%. 
+- Perform a SelfTest to exhaust the chamber the rest of the way.  Use the same rate and 100%. 
+- Calculate the time taken for each portion using log messages or pressure data and figure the 
+percentage of total time taken by  the second exhaust.  Adjust the registry value and repeat until 
+this percentage is within the desired accuracy of the secondary aging volume percentage. 
+7.3.4 Exhaust Rate 
+It was verified that the system exhausts at a rate sufficient to achieve overpressure of the diagnostic duct 
+for all combinations of diagnostic use except when usi ng the STS detector with both DustTraks.  If this 
+situation changes, the exhaust rate can be increased using the ExhaustOverpressureRate registry value. 
+7.4 Changing flight software during flight 
+Description:  Transfer new version of flight software from MLC to DACU.  Uses crew time, SAME 
+Utility Cable, and HyperTerminal application on MLC to  perform ftp transfer, backup old flight software, 
+and replace it with the new.  Reboots are necessary b ecause the software runs au tomatically on startup 
+and cannot be replaced while running.  Therefore, afte r making a backup, the software is removed so that 
+it cannot autostart.  Then the new version is copied to the autostart name.  Upon reboot, the system finds 
+the autostart name again, the new version of software, and operation proceeds normally. 
+*Note that only the steps marked with an asterisk n eed to be done by the crew.  The others can be 
+accomplished using the ground display and the OSCommand and FTPCommand. 
+- Uplink or transfer from media, SAME_g.new to MLC’s C:/ftp directory. 
+- *Connect SAME Utility Cable between DACU and COM port x of MLC 
+- *On MLC, start HyperTerminal (HT) and configure to Connect using: COMx with 19200 bps, 
+8 data bits, No parity, 1 stop bit, Xon/Xoff flow control.  In Settings tab, Emulation is auto-
+detect.  Or a configuration file can be uplinked and the crew will just double-click that. 
+- Power on SAME.  Wait for 30 seconds. 
+- At HT,  press <Enter> and verify that a prompt, “#”, appears. 
+- At ‘#’ prompt, type ‘cd /root<ENTER>’.  If you like, type ‘ls<ENTER>’ to show listing of the 
+/root directory. 
+- Type ‘ftp 192.168.1.1<ENTER>’.  At prompt for Name enter ‘anonymous’.  At prompt for 
+Password just press <ENTER>.  Verify message saying ‘230 Anonymous user logged in’ and 
+‘ftp>’ prompt. 
+- At ftp> prompt, type ‘bin<ENTER>’. 
+- Type ‘get SAME_g.new<ENTER>’.  Verify progress indication and return of ftp> prompt with 
+no errors. 
+- Type ‘bye<ENTER>’.   ‘#’ prompt appears.
+
+--- page 17 ---
+SAME-DOC-007 
+ 
+ 12
+- At ‘#’ prompt, type ‘chmod 777 *<ENTER>’. 
+- Type ‘cp SAME_g SAME_g.old1<ENTER>’.  Wait for prompt, approx. 20 seconds. 
+- Type ‘rm SAME_g<ENTER>’. 
+- Type ‘shutdown<ENTER>’.  Wait 30 seconds for DACU to reboot.   
+- *At HT, press <Enter> and verify that a prompt, “#”, appears. 
+- *At ‘#’ prompt, type ‘cd /root<ENTER>’.  
+- *Type ‘cp SAME_g.new SAME_g<ENTER>’.  Wait for prompt, approx. 20 seconds. 
+- *Type ‘shutdown<ENTER>’. 
+- *Exit HT. 
+- Ground team will confirm new version is running (or check log messages on Crew Display for 
+report of version number), and then shutdown SAME. 
+- *Remove cable.   
+7.5 Description of HeaterCorrectOffset Utility 
+Sample heater offset correction is a feature of the sample heater microcontroller that reduces 
+measurement error by automatically removing off set voltages from the signal path.  After offset 
+correction is performed, all subsequent resistance me asurements will include the o ffset correction.  Until 
+the system is powered off, that is.  At power up the offset correction is zero.  Offset correction should be 
+run for each sample while the sample is engaged with the inlet tube and sample heater contacts. 
+Occasionally the offset correction circuitry produces a co rrection that is obviously too high.  The result is 
+that subsequent reports of resistance are lower than ac tual.  This can be detected at the time of the test 
+pause by looking at the sample resistance and by lo oking for the log message indicating the value of the 
+offset correction.  It should be approximately 200uV or less. 
+If the offset correction at the time of the test pause is too high, then the test must be aborted and restarted 
+to give the offset correction circuitry a second chan ce.  To avoid this time-consuming detour a utility 
+separate from the flight software has been developed.  It is HeaterCorrectOffset_g in the /root directory of 
+the DACU.  It can be run from the flight software by sending the OSCommand command with a 
+parameter of ‘/root/HeaterCorrectOffset_g’. 
+The HeaterCorrectOffset utility app lies 12VDC to the sample heater , waits a few seconds, and then 
+requests an offset correction from the heater microcontro ller.  If the returned off set is in range then the 
+utility exits, otherwise it requests the offset correction ag ain for several times until it is in range.  Either 
+way, 12VDC is removed from the sample heater befo re the utility exists.  As long as system power (not 
+12VDC) remains applied, the offset correction initiated by  the utility will be used by the flight software.  
+If the utility fails to correct the offset  to within the desired range then it returns a -1 (which is reported in 
+the flight software log as 65280), otherwise it returns a zero to indicate success. 
+There is one caveat to running the HeaterCorrectOffset utility.  The flight software must be either not 
+running, which will not occur during flight, or must be in the uninitialized state.  Once the software is 
+initialized the utility cannot gain serial access to the heater micr ocontroller.  Thus the sequence 
+gymnastics in section 4.0. 
+Additionally, if the HeaterCorrectOffset utility is used, then offset correction prior to the test pause should 
+be disabled.  Otherwise an incorrect correction he re will negate the use of the utility.  Setting the 
+CorrectOffset registry value to zero will disable au tomatic offset correction during the test, allowing the 
+value created by the HeaterCorrectOffset utility to be used.
+
+--- page 18 ---
+SAME-DOC-007 
+ 
+ 13
+For advanced users, the HeaterCorrectOffset uti lity is configurable via its own registry file, 
+/config/HeaterCorrectOffsetRegistry.txt, on the DACU.  Changes on the flight system can be made by 
+uplinking a new file.  Parameters are as follows: 
+ 
+Key Name Description Default 
+Value 
+Units Data 
+Type 
+HCOMaxOffset Maximum allowa ble offset.  If above this 
+value the utility retries the correction. 
+200 microvolts float 
+HCORetries Number of times to retry the correction 
+before returning -1. 
+3 n/a short 
+HCOSleep1Msec This key plus next key is time to wait 
+between turning on the 12VDC and 
+requesting an offset correction. 
+3000 milliseconds ushort 
+HCOSleep2Msec Time to wait between retries. 2000 milliseconds ushort 
+ 
+As stated before, the HeaterCorrectOffset utility report s success or failure back to  the flight software.  
+More details, including the correction factor and resi stance measurement immediately after for each retry 
+can be found in a log file in /data/HeaterCorrectOffset  on the DACU.  Beware that this file will be named 
+the same as the current day’s flight software l og, but it will not be automatically downlinked upon 
+shutdown. 
+7.6 Transfer and Installation of Crew Interface application  
+FTPCommand(‘LCD /crewinterface’) 
+FTPCommand(‘PUT SAMECrewInterfaceX.YInstall.exe’), where X.Y is the version. 
+The transfer takes about 1.5 minutes and the file should end up in c:\ftp on the MLC. 
+An EDLFSerialPort Incorrect Checksum error may appear in the log.  It can be ignored. 
+ 
+At this point the MSG cadre will use their commands to run the install file.  The format is: 
+ 
+   SAMECrewInterfaceX.YInstall.exe /SP- /VERYSILENT 
+ 
+,where X.Y is the version number. 
+ 
+No user interaction is required with these options.  The crew interface and support files will be installed in 
+c:\01 on the laptop.  See SAME-DOC-008, Crew Interface Description; SAME-PRO-002, Software 
+Installation Procedure; and SAME-DOC-011, Flight Software VDD, for more information. 
+ 
+The crew interface and support files are uninstalled by the MSG using the following: 
+ 
+   c:\01\unins000.exe /SILENT 
+ 
+7.7 Use of tar utility 
+The tar utility can be used to assemble or disassemble collections of files on the DACU, much like 
+WinZip does on a PC.  It may be useful to tar a collection of files into one file prior to downlink.  The 
+executable is located in the /root directory on the DACU and therefore should be able to execute from any 
+local directory.  It is not necessary to specify the path to tar.  Use the OSCommand and parameters 
+according to http://www.qnx.com/developers/docs/6.3.0/neutrino/utilities/t/tar.html.
+
+--- page 19 ---
+SAME-DOC-007 
+ 
+ 14
+8.0 KNOWN ISSUES 
+- Aborting a test occasionally causes the software to restart.  If this should happen you’ll need to 
+reissue the Initialize command. 
+- Try to avoid running a test sequence through the change of hour (i.e. 12:45-13:05).  Transfer of 
+the housekeeping file at the top of the hour takes a good bit of processor time and the processor is 
+close to 100% capacity, possibly affecting diagnostic measurement retrieval. 
+- It is recommended that the system be gracefully shut down using the Shutdown button on the 
+System tab, then cut power about 2 minutes later.  However, about 20% of the time the software 
+will hang or restart before completely shutting down.  If it restarts, issue the Shutdown command 
+again or issue the OS command with parameter, ‘/bin/shutdown –b’.   If it hangs (you may only 
+know this if you have a monitor connected to the GSE port) a hard power off will have to suffice.  
+The operating system will clean up any file ‘litter’ on the next power up. 
+- Maximum inlet velocity with the FillLeakRateLPM registry value equal to 0.30 is 9.8 cm/sec.  
+Above this the software does not correctly use the FillWait registry values to time chamber fill 
+operations, including sample heating start time.  10.0 cm/sec can be achieved if FillLeakRateLPM 
+is 0.25 LPM or less.  But timing is affected in other ways and ground testing or flight testing 
+without sample heating is recommended. 
+- Whenever the P-Trak is on, the DACU requests a measurement from it once per second.  
+Occasionally the P-Trak does not respond with a measurement and the DACU substitutes a -999 
+value instead to mark this occurance.  If the P-Trak is logging during this time, that missing data 
+can be recovered by issuing the Transfer Data command to retrieve the logged data. It is 
+recommended that this be done for each test, soon (within days) after the test is complete. 
+- The P-Trak memory can hold approximately 60 20-minute tests.  When all memory is used the 
+unit does not respond with any serial measurements while logging.  In other words, continuous -
+999 readings is one indicator of full memory.  It is suggested that memory be cleared after 50 
+tests to be safe. 
+- Sample heater offset correction occasionally produces an incorrect correction factor.  The result is 
+that reported sample resistance is lower than actual.  For more information see section 7.5. 
+- Using ground support equipment there was insufficient fluid flow during chamber exhaust to 
+maintain overpressure of the diagnostic duct, as required, when the STS detector and both 
+DustTraks are in use.  When the STS detector is used it is recommended that at most one 
+DustTrak is used. 
+- If the heater gives an “Abort on MaxRt” error, the system must be power cycled before 
+proceeding.  Otherwise, as will be apparent, the resistance measurement will be in error. 
+- When specifying inlet velocities below 2 cm/sec, the FillWait registry values may not be 
+accurate.  The registry value, BackEndCleanAirOffset, must be adjusted to ensure correct heater 
+timing.  For 1 cm/sec, a value of 170 seconds is good.  But run a test with no heating to be sure. 
+- During ground testing the connection between the DACU and the MSGSimulator occasionally 
+drops out.  Packet count numbers of the MSGSimulator no longer increment and change from 
+green to blue. To reestablish the connection deactivate it and activate it again.
+
+--- page 20 ---
+SAME-DOC-007 
+ 
+ 15
+9.0 ACRONYMNS AND ABBREVIATIONS 
+ 
+CSV   Comma Separated Variable 
+DACU   Data Acquisition Control Unit 
+DIO   Digital Input/Output 
+ECW   Experiment Control Word 
+EDLF   ESTEC Data Link Format 
+ESTEC   European Space Research & Technology Centre 
+FTP   File Transfer Protocol 
+GRC   Glenn Research Center 
+H&S   Health and Status 
+I/O   Input - Output 
+ISS   International Space Station 
+LAN   Local Area Network 
+LRT   Low Rate Telemetry 
+MDM   Multiplexer/De-Mutiplexer 
+MLC   Microgravity Science Glovebox Laptop Computer 
+MLCS   Microgravity Science Glovebox Laptop Computer Server 
+MSFC   Marshall Space Flight Center 
+MSG   Microgravity Science Glovebox 
+POIC   Payload Operations Integration Center 
+PSRP   Payload Safety Review Panel 
+RC   Rack Controller 
+SAMS   Space Acceleration Measurement System 
+SC   Sample Carousel 
+SAME   Smoke Aerosol Measurement Experiment 
+SPLC   Standard Payload Computer 
+SRD   Science Requirements Document 
+STS   Space Transportation System (eg. Space Shuttle) 
+TCP/IP   Transfer Control Protocol/Internet Protocol 
+TP   Thermal Precipitator Unit 
+TReK   Telescience Resource Kit 
+TSC   Telescience Support Center 
+UIP   Utility Interface Panel 
+VCU   Video Control Unit 
+WV   Work Volume
+
+--- page 21 ---
+SAME-DOC-007 
+ 
+ 16
+10.0  APPENDIX A – COMMERCIAL DIAGNOSTICS OPERATION 
+The following pages shows the many possible appearances of the DustTrak LCD within the Commercial 
+Diagnostics package.   Typical operations using the DustTrak and SAME Commercial Diagnostics 
+commands/buttons are outlined.
+
+--- page 22 ---
+SAME-DOC-007 
+ 
+ 17
+ 
+1 
+ 
+9 
+ 
+2 
+ 
+10 
+ 
+3 
+ 
+11 
+ 
+4 
+ 
+12 
+ 
+5 
+ 
+13 
+ 
+6 
+ 
+14 
+7 
+ 
+15 
+8 
+ 
+16
+
+--- page 23 ---
+SAME-DOC-007 
+ 
+ 18
+ 
+17 
+ 25 
+ 
+18 
+ 26 
+ 
+19 
+ 27 
+ 
+20 
+ 28 
+ 
+21 
+ 29 
+ 
+22 
+ 30 
+ 
+23 
+ 31 
+ 
+24 
+ 32
+
+--- page 24 ---
+SAME-DOC-007 
+ 
+ 19
+ 
+33 
+ 38 
+ 
+34 
+ 39 
+ 
+35 
+ 40 
+ 
+36 
+ 41 
+ 
+37 
+ 42
+
+--- page 25 ---
+SAME-DOC-007 
+ 
+ 20
+Possible operations involving the Commercial Diagnostics LCD: 
+ 
+Turn on and cycle through log modes 
+Display # Description Next Button Press or Reaction 
+1 Off Power On 
+2 LCD Test waits 5 seconds 
+3 Battery Strength (always 100% because it 
+is DC powered) 
+waits 5 seconds 
+4 Time waits 5 seconds 
+5 Survey Mode (real-time measurement) Increment Sampling Mode 
+6 Log Mode 1 Increment Sampling Mode 
+7 Log Mode 2 Increment Sampling Mode 
+8 Log Mode 3 Increment Sampling Mode 
+5 Survey Mode  
+ 
+ 
+ 
+Sample air in Survey Mode 
+Display # Description Next Button Press or Reaction 
+5 Survey Mode Start/Stop Sampling 
+9 Sampling in Survey Mode (as long as 
+you like) 
+Start/Stop Sampling 
+10 Report of statistics – Sample average waits 5 seconds 
+11 Sample minimum waits 5 seconds 
+12 Sample maximum waits 5 seconds 
+13 Sample elapsed time waits 5 seconds 
+5 Survey Mode  
+ 
+ 
+See the statistics from the last Survey Mode sampling period 
+Display # Description Next Button Press or Reaction 
+5 Survey Mode View Statistics 
+10 Average of last Survey Mode 
+sampling period 
+View Statistics 
+11 Minimum of last Survey Mode 
+sampling period 
+View Statistics 
+12 Maximum of last Survey Mode 
+sampling period 
+View Statistics 
+13 Elapsed time of last Survey Mode 
+sampling period 
+View Statistics 
+5 Survey Mode  
+ 
+ 
+View Time Constant for Survey Mode 
+Display # Description Next Button Press or Reaction 
+5 Survey Mode View Time Constant 
+20,21,22,23, 
+or 24 
+Shows current time constant setting waits 5 seconds 
+5 Survey Mode
+
+--- page 26 ---
+SAME-DOC-007 
+ 
+ 21
+ 
+Change Time Constant for Survey Mode 
+Display # Description Next Button Press or Reaction 
+5 Survey Mode Increment Time Constant 
+20,21,22,23, 
+or 24 
+Shows current time constant setting waits 1 second 
+21,22,23,24, 
+or 20 
+Shows new time constant setting waits 5 seconds 
+5 Survey Mode  
+ 
+Change the calibration factor 
+Display # Description Next Button Press or Reaction 
+5 Survey Mode Calibrate 
+14 Countdown from 5 to 0 After 0, goes to next display 
+15 Calibrate or Zero selection screen Calibrate 
+16 Calibration Up 
+17 Calibration increases Down 
+18 Calibration decreases Start/Stop Sampling (exit while 
+saving new calibration factor) or 
+Calibrate (exit without saving) 
+5 Survey Mode  
+  
+Zero the measurement 
+Display # Description Next Button Press or Reaction 
+5 Survey Mode Calibrate 
+14 Countdown from 5 to 0 After 0, goes to next display 
+15 Calibrate or Zero selection screen Start/Stop Sampling 
+19 Countdown from 60 to 0 After 0, goes to next display 
+5 Survey Mode  
+ 
+ 
+View Log Interval for Log Mode 1, 2, or 3 
+Display # Description Next Button Press or Reaction 
+6,7,or 8 Log Mode 1, 2, or 3 View Log Interval 
+25,26,27,28, 
+or 29 
+Shows current log interval setting waits 5 seconds 
+6,7, or 8 Log Mode 1, 2, or 3  
+ 
+ 
+Change the Log Interval in Log Mode 1, 2, or 3 
+Display # Description Next Button Press or Reaction 
+6,7, or 8 Log Mode 1,2,or 3 Increment Log Interval 
+25,26,27,28,or 
+29 
+Shows current log interval setting waits 1 second 
+26,27,28,29 or 
+25 
+Shows new log interval setting waits 5 seconds 
+6,7, or 8 Log Mode 1,2,or 3
+
+--- page 27 ---
+SAME-DOC-007 
+ 
+ 22
+View the Time Constant in Log Mode 1, 2, or 3 
+Display # Description Next Button Press or Reaction 
+6,7,or 8 Log Mode 1,2,or 3 View Time Constant 
+25,26,27,28,or 
+29 
+Current time constant setting waits 5 seconds 
+6,7,or 8 Log Mode 1,2,or 3  
+ 
+ 
+Change the Time Constant in Log Mode 1, 2, or 3 
+Display # Description Next Button Press or Reaction 
+6,7,or 8 Log Mode 1,2,or 3 Increment Time Constant 
+30,31,32,33,or 
+34 
+Current time constant setting waits 1 second 
+31,32,33,34,or 
+30 
+New time constant setting waits 5 seconds 
+6,7,or 8 Log Mode 1,2,or 3  
+ 
+ 
+Sample air in Log Mode 1, 2, or 3 
+Display # Description Next Button Press or Reaction 
+6,7,or 8 Log Mode 1,2,or 3 Start/Stop Sampling 
+35 Display of Test ID waits 5 seconds 
+36 Real-time measurement while recording 
+to Log 1, 2, or 3 (as long as you like) 
+Start/Stop Sampling 
+37 Report of statistics - Average waits 5 seconds 
+38 Minimum waits 5 seconds 
+39 Maxium waits 5 seconds 
+40 Elapsed time waits 5 seconds 
+41 Test ID waits 5 seconds 
+6,7,or 8 Log Mode 1,2,or 3  
+ 
+ 
+See the statistics of last Log Mode 1, 2, or 3 sampling 
+Display # Description Next Button Press or Reaction 
+6,7,or 8 Log Mode 1,2,or 3 View Statistics 
+37 Report of statistics - Average View Statistics 
+38 Minimum View Statistics 
+39 Maxium View Statistics 
+40 Elapsed time View Statistics 
+41 Test ID View Statistics 
+6,7,or 8 Log Mode 1,2,or 3  
+ 
+ 
+Clear Commercial Diagnostics Memory 
+Display # Description Next Button Press or Reaction 
+6,7,or 8 Log Mode 1,2,or 3 Clear Memory (and acknowledge) 
+14 Countdown from 5 to 0 After 0, goes to next display 
+6,7,or 8 Log Mode 1,2,or 3 and showing 100% 
+memory available
+
+--- page 28 ---
+SAME-DOC-007 
+ 
+ 23
+ 
+11.0  APPENDIX B – P-TRAK OPERATION 
+The following pages shows the many possible appearances of the P-Trak LCD.   Typical operations using 
+the P-Trak and SAME P-Trak commands/buttons are outlined. 
+ 
+1 
+ 6 
+2 
+ 7 
+ 
+3 
+ 8 
+4 
+ 9 
+5 
+ 10
+
+--- page 29 ---
+SAME-DOC-007 
+ 
+ 24
+ 
+ 
+11 
+ 
+17
+12 
+ 
+18
+13 
+ 
+19
+14 
+ 
+20
+15 
+ 
+21
+ 
+16 
+ 
+22
+
+--- page 30 ---
+SAME-DOC-007 
+ 
+ 25
+ 
+23 
+ 29
+24 
+ 30
+25 
+ 31
+26 
+ 32
+27 
+ 33
+28 
+ 34
+
+--- page 31 ---
+SAME-DOC-007 
+ 
+ 26
+Possible operations involving the P-Trak LCD: 
+ 
+Turn on and cycle through menu choices 
+Display # Description Next Button Press or Reaction 
+1 Off Power On 
+2 Countdown from 60 to 0 After 0, goes to next display 
+3 Real-time measurement – Sample menu 
+item chosen 
+Up 
+4 Real-time measurement – Log Mode 1 
+menu item chosen 
+Right 
+5 Real-time measurement – Log Mode 2 
+menu item chosen 
+Right 
+6 Real-time measurement – Log Mode 3 
+menu item chosen 
+Up 
+not shown Real-time measurement – Setup menu 
+item chosen 
+Enter 
+7 Setup menu Up or Down to change selection, 
+Enter to enter the selection.  Enter 
+after selecting EXIT returns to 3. 
+ 
+ 
+ 
+View single point statistics 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Enter 
+8 Statistics menu Enter 
+9 or 10 Single point statistics Enter 
+7 Setup menu  
+ 
+ 
+ 
+View logged test statistics 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Enter 
+8 Statistics menu Down, Enter 
+11 or 12 Logged test statistics Enter 
+7 Setup menu  
+ 
+ 
+ 
+View the log interval 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down, Enter 
+13,14,15,16, 
+or 17 
+Current log interval Enter 
+7 Setup menu
+
+--- page 32 ---
+SAME-DOC-007 
+ 
+ 27
+Change the log interval 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down, Enter 
+13,14,15,16, 
+or 17 
+Current log interval Up or Down 
+13,14,15,16, 
+or 17 
+New log interval Enter 
+7 Setup menu  
+ 
+ 
+View or change the audio output options 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down (2X), Enter 
+18 and 19 Audio output menu Up, Down, Left, or Right.  Select 
+Exit and press Enter to return to 7. 
+ 
+ 
+View or change the time and date 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down (3X), Enter 
+20 Time/Date display Up, Down, Left, or Right to change 
+values.  Press Enter to return to 7. 
+ 
+  
+View or change the backlight settings 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down (4X), Enter 
+21,22,23, 
+or 24 
+Current backlight setting Up or Down.  Enter to accept new 
+setting. 
+7 Setup menu  
+ 
+ 
+Clear single point memory 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down (5X), Enter 
+25 Clear memory menu Enter 
+26 Single point memory cleared message Enter 
+25 Clear memory menu Down (2X), Enter 
+7 Setup menu  
+ 
+ 
+Clear logged test memory 
+Display # Description Next Button Press or Reaction 
+7 Setup menu Down (5X), Enter 
+25 Clear memory menu Down, Enter 
+27 Logged test memory cleared message Enter 
+25 Clear memory menu Down, Enter 
+7 Setup menu
+
+--- page 33 ---
+SAME-DOC-007 
+ 
+ 28
+View manufacturer setup 
+Display # Description Next Button Press or Reaction 
+7 Setup menu View Setup 
+28 Manufacturer setup Enter 
+3 Real-time measurement – Sample 
+menu item chosen 
+ 
+ 
+Record data to Log Mode 1 
+Display # Description Next Button Press or Reaction 
+4 Real-time measurement – Log Mode 
+1 menu item chosen 
+Enter 
+29 Recording data to Log Mode 1 (as 
+long as you like) 
+Enter 
+3 Real-time measurement – Sample 
+menu item chosen 
+ 
+ 
+ 
+Record data to Log Mode 2 
+Display # Description Next Button Press or Reaction 
+5 Real-time measurement – Log Mode 
+2 menu item chosen 
+Enter 
+30 Recording data to Log Mode 2 (as 
+long as you like) 
+Enter 
+3 Real-time measurement – Sample 
+menu item chosen 
+ 
+ 
+ 
+Record data to Log Mode 3 
+Display # Description Next Button Press or Reaction 
+6 Real-time measurement – Log Mode 
+3 menu item chosen 
+Enter 
+31 Recording data to Log Mode 3(as 
+long as you like) 
+Enter 
+3 Real-time measurement – Sample 
+menu item chosen 
+ 
+ 
+Record data to single point memory 
+Display # Description Next Button Press or Reaction 
+3 Real-time measurement – Sample 
+menu item chosen 
+Enter 
+34 Countdown from 10 to 0 After 0, goes to next display 
+32 Record to single point memory? Up or Down, and Enter.  If no is 
+selected next display is 3.  If yes is 
+selected, next display is 33. 
+33 Edit location name Right, Left, Up and Down to 
+change name.  Enter when done. 
+3 Real-time measurement – Sample 
+menu item chosen

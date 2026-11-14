@@ -1,0 +1,65 @@
+Source : NASA PSI, PSI-98, Science Documents, SAFFIRE-I and SAFFIRE-III DoD.docx
+
+
+The objectives of the SAFFIRE (Spacecraft Fire Experiment) experiments are to (1) determine how rapidly a large scale fire grows in low-gravity and (2) investigate the low-g flammability limits compared to those obtained in NASA’s normal gravity material flammability screening test. The specific objective of SAFFIRE-I and SAFFIRE-III tests is to determine how rapidly a large-scale fire grows in low-gravity and whether it reaches a steady-state spread rate. 
+
+The sample material for SAFFIRE-I and SAFFIRE-III is a composite fabric consisting of cotton on a fiberglass substrate (75% cotton, 25% fiberglass by weight). It is called SIBAL cloth because it was developed for the Solid Inflammability Boundary at Low-Speeds (SIBAL) spaceflight experiment and has been used in many space experiments because it burns like cotton but maintains structural integrity after the cotton is consumed. SAFFIRE-I will be conducted at an air flow velocity of 20 cm/s while SAFFIRE-III will be run at a flow velocity of 30 cm/s. In addition to the 2 samples, data was also collected for pre-flow and post-flow. These image sets are denoted as F1 for pre-flow and F2 for post-flow.
+
+The experiment data is organized in PSI by sample number and camera number. There were 2 cameras capturing images during the experiment and they are denoted as C1 for camera 1 and C2 for camera 2. There are various documents and associated information located on the different tabs within the SAFFIRE Investigations records in PSI. A very useful document to review first is the “SAFFIRE Objectives, Development and Status.pdf” document located on the “Overview” tab in the Summary Document section. The experiment records are found on the “Data” tab in the SAFFIRE-II Investigations record. Table 1 contains list of experiment records in PSI and a short description of what each record contains.
+
+Table 1. Saffire-I/III Experiment Data in PSI
+Experiment Data Record Name
+Description
+SAFFIRE-I/III F1C1
+Pre-flow, camera 1 image sets
+SAFFIRE-I/III F1C2
+Pre-flow, camera 2 image sets
+SAFFIRE-I/III F2C1
+Post-flow, camera 1 image sets
+SAFFIRE-I/III F2C2
+Post-flow, camera 2 image sets
+SAFFIRE-I/III S1C1
+Sample 1, camera 1 image sets
+SAFFIRE-I/III S1C2
+Sample 1, camera 2 image sets
+SAFFIRE-I/III S2C2
+Sample 2, camera 2 image sets
+
+Each Experiment Data record contains raw data and multiple image sets. Associated raw data documents and individual image sets are located on the “Scientific Data and Information” tab within the Experiment Data record. The raw data is captured from each experimental sensor and presented in excel files. The suite of experimental sensors used is summarized in Table 2. 
+
+Table 2. Saffire, I, II and III Diagnostics
+
+
+Table 3 contains a description of the different SAFFIRE image sets loaded in PSI.
+
+Table 3. SAFFIRE Image Sets in PSI
+Image Set Name
+Description
+BIT
+Built-In Test images were captured immediately after the payload was powered on
+DistortionGrids_Sample_ROI
+Image sets characterize the camera distortion of the system (pre-flight) using a checkerboard pattern grid
+DistortionGrids_Sample_ROI_Mapped
+DistortionGrid images processed post-flight where the distortion of the camera system is corrected, or mapped, to a flat grid
+Jpeg
+Jpeg images created on-board SAFFIRE payload and downlinked by command
+Jpeg_Mapped
+Jpeg images processed post-flight where the distortion of the camera system is corrected, or mapped, to a flat grid
+jpeg2png_icmad
+Jpeg images annotated with ICMAD 'Exposure' and 'Gain' information.  Data is appended to the bottom of each frame using ImageMagick script and re-saved as .png format to minimize additional compression artifacts
+Raw_DistroMaster
+Camera original RAW files recorded on-board and downlinked on command.  Contains 8-byte offset that must be processed prior to color interpolation and distribution
+Raw2TIFF
+TIFF images of the RAW Distribution Master files, color interpolated (demosaiced) using IrfanView Batch Conversion process
+Raw2TIFF_Mapped
+RAW2TIFF images processed post-flight where the distortion of the camera system is corrected, or mapped, to a flat grid
+Raw2TIFF_icmad
+Raw2TIFF files annotated with ICMAD 'Exposure' and 'Gain' information. Data is appended to the bottom of each frame using ImageMagick script and resaved as TIFF
+Raw2TIFF_icmad_Mapped
+RAW2TIFF_icmad images processed post-flight where the distortion of the camera system is corrected, or mapped, to a flat grid
+
+Some image sets are very large. They may contain over 10,000 images which makes it impractical to display as thumbnails in the Image Gallery which appears on the “Image Data and Information” tab of the Videos & Images record of the image set. In the case of very large image sets, all the images are provided in zip files labeled “Original Image Files” on the “Image Data and Information” tab. These files can be downloaded and viewed on the local machine.
+
+
+
+

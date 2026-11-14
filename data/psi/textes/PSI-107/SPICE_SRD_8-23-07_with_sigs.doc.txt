@@ -1,0 +1,214 @@
+Source : NASA PSI, PSI-107, Science Documents, SPICE SRD 8-23-07 with sigs.doc
+
+Science Requirements for 
+
+Smoke Point In Coflow Experiment
+
+“SPICE”
+
+(Laminar Smoke Point Properties of 
+Nonbuoyant Round-Jet Diffusion Flames)
+
+
+
+
+
+
+
+
+
+
+
+
+August 23, 2007
+Dr. David Urban						Date
+NASA Glenn Research Center
+Glovebox Investigator
+Professor Peter Sunderland				Date
+University of Maryland 
+Co-Investigator
+Dr. Zeng-Guang Yuan					Date
+National Center for Space Exploration Research
+Project Scientist
+Robert Hawersaat						Date
+NASA Glenn Research Center
+Glovebox Program Manager
+Background
+
+	Soot formation in hydrocarbon-fueled flames is an important unresolved problem of combustion science that affects the durability and performance of power and propulsion systems, the hazards of unwanted fires, the pollutant emissions of combustors and the potential for developing computational combustion.	The differences between soot processes in buoyant and nonbuoyant laminar jet diffusion flames can be seen by comparing their soot production regions as plotted in Fig. 1.  Soot formation in diffusion flames generally is limited to fuel-equivalence ratios, (, in the range 1-2, which are marked on the plots.  Unlike gases, which both convect and diffuse, soot mainly convects with the flow velocity so that it moves along the streamline.  For buoyant flames, the dividing streamline generally is inside the soot formation region so that most of the soot initially forms near the flame sheet, where (, =1, and then moves radially inward toward cooler regions having higher fuel concentrations.  The soot formation process for nonbuoyant flames is completely different: most of the soot initially forms near the cool core of the flame, where ( is close to 2, and is drawn directly toward the flame sheet.  Recent results from the Laminar Soot Processes (LSP) investigation revealed that the smoke height phenomenon in microgravity can be substantially different form that seen in normal gravity.  The removal of buoyancy induced acceleration can cause the smoke point phenomenon to be dominated by radiative heat losses for conditions of low overall flame velocity.  Under these conditions the flame tip extinguishes allowing soot to be emitted.  In spite of this effect, it is still possible to have flames that either emit soot along all stream lines or do not emit soot anywhere, for conditions where radiation losses do not dominate.
+Figure 1:  Soot path lines through buoyant and non-buoyant flames
+
+
+Objectives
+
+The objective of the proposed experiments is to find the laminar smoke-point properties of nonbuoyant jet diffusion flames (i.e., the properties of the largest laminar jet diffusion flames that do not emit soot) for several fuels under different nozzle diameter/ co-flow velocity configurations.  Luminous flame shape measurements would also be made to verify models of the flame shapes under co-flow conditions. 
+
+The information of smoke-point properties and flame shapes is needed to improve our understanding of heat transfer mechanisms for different flame conditions. Unfortunately, while the laminar smoke-point properties of buoyant jet diffusion flames at normal gravity are well known, corresponding information for nonbuoyant flames is limited and questionable. Thus the results of this experiment will provide insights of soot generation and oxidation process under microgravity conditions, which are critical to devise better fire safety strategy in spacecraft needed for long term space travel and other space exploration activities, 
+ 
+In addition, this information would help support current understanding of soot processes in laminar flames and by analogy in turbulent flames of practical interest.
+
+
+Science Requirements
+
+General requirements:
+	Configuration: Round gas jet diffusion flame in a co-flowing oxidizer stream
+	Pressure:  Shuttle ambient pressure
+	Ignition: Hot wire
+	Fuel Flow Range:  0 to 500 SCCM N2 equivalent flow 
+	Oxidizer Velocity: 5 to 50 cm/s 
+	Nozzle Diameter: (0.4, 0.8, 1.6 mm)
+	Flame Length: 5 to 100 mm
+
+Parameters to be measured: (Accuracy +/- 10% of reading, 4 Hz)
+	Fuel Mass Flow: 25 to 500 SCCM
+	Co-flow Fan Voltage:  0.5 to 12 V
+	Co-flow Velocity:   5 to 50 cm/s
+	Flame Radiation: wavelength visible to near infra-red 
+
+Imaging Requirements:
+	Video record of flame: color (FOV: 10 mm of the nozzle to the end of the duct)
+High resolution color images of flame: 2-3 per test (FOV: 10 mm of the nozzle to the end of the duct; resolution: 3000 by 2000 pixels or greater, 8 bits/pixel in 3 colors or greater).  Images stored in raw (uncompressed) mode.
+		
+Operation requirements:
+Crew sets the co-flow based upon the test matrix and ignites the flame.  Once ignited the fuel flow is adjusted until the smoke height is found.  High resolution digital flame images are taken above and below the smoke height.  The total crew time is estimated to be 20 to 25 hours.
+
+Downlink:  
+Real time video downlink is required for the first few tests and highly desired for 
+subsequent tests. But, it is acceptable for the crew to perform several tests without downlink as long as the video is downlinked before the next series of tests. Video downlink will include fuel flow rate, radiometer readings, and co-flow rate.
+
+Glovebox and Mission Resources: 
+Experiment Power Converter Box, video monitor, late stowage (L-48 hours).	
+
+Test Matrix
+
+Test 
+Point
+	Fuel
+(1 - 6)	Air Coflow rate
+(% Max Coflow 
+Velocity) 	Fuel Flow Rate
+(% Laminar 
+Smoke Point) 	Burner Diameter
+(mm I.D.)		1	1	50%	100%	0.4		2	1	50%	50%	0.4		3	1	100%	100%	0.4		4	1	50%	100%	0.8		5	1	50%	50%	0.8		6	1	100%	100%	0.8		7	1	50%	100%	1.6		8	1	50%	50%	1.6		9	1	100%	100%	1.6		10 ~14*	1	50% - 100%	50% - 100%	0.4, 0.8, 1.6		* Test Points 10 - 14 represent flame tests that will be repeated.  They are not pre-determined.
+
+•	Fuels 1 - 6: methane, propane, ethylene, mixture of 50% propylene and 50% nitrogen, mixture of 75% propylene and 25% nitrogen, and pure propylene.
+•	The test matrix above is representative of a single fuel.  
+•	There are nine (9) specified test points plus 5 selected repeat tests per fuel.
+•	Thus the SPICE test matrix will include 54 predetermined flames plus 30 “repeat” flames.
+
+
+
+
+Success Criteria
+
+•	Minimal Success: 27 flames which are nine specified test points for each of three fuels.
+
+•	Complete Success: 84 flames which are nine specified points plus five “repeat” flames for each of the six fuels, methane, propane, ethylene, mixture of 50% propylene and 50% nitrogen, mixture of 75% propylene and 25% nitrogen, and pure propylene.
+o ïg8npAèV
+ð	Ç7þoÚmìtÝ
+Guu¿cÎÄ Ú
+lÝN/îÜÇpbQ VÉÉf
+Øí ·óåiæòc	æHßyÛ
+eVþç •Êî
+ySýªÎèLnH	!
+pª	üIÆHPÇ
+Úl»EIÖãuÀuVÜ	ï
+QEG4ðÛ yå
+m Õ%qpåW
+ôÍvæïâÄ	ÃIw
+ãØWÖtP	Ì
+ÅP	AEcÚø³ÃwÞ
+ÅP	AEgêzî
+ÅâmnÆ
+BâæY>Ë
+pª	üIÆHPÇ
+îºâþ üFÒ<
+ÐP	YñãÂSx
+v²gdÐH$FÁ á
+Ï pzWÛuò	Æ
+üGâ	çÒµmKLÒÑÈµ¶
+v²gdÐH$FÁ á
+ÞG	ïÓOÓm
+•qÏcÓ¸	Wû7XÛÇàÝZýcÅÔÚ
+çd°ÈÅne n
+,üUyo hÓyÚm
+ÑÆHÈÈ	ÖtWÌ
+ôã­uzoìÙ ÅnËªk
+d é–ïóÈÎrÑ
+ZëViæùYI .Qf
+G r+äMgáo
+xòÚÞÖXlm.ÞdÝ$PÝ h
+òg ny%PìI
+QÒCa	VpÃ
+µºûLf'rþYL;HåÓ	û¬YsßnG
+á¤V qÓ8ëêkìºÃ
+ãMwMÕ ðÍ
+SÏãO
+ÚÜKoqâ]
+xÇUÑYd	kpË
+ÑK_ xïþJ
+¹ WØuñçÁ
+wSëúmïú
+¶Òu
+æ¸lMy rÂIÊ
+qézoìÙ ÅnËªk
+Ñ øÏðúæâ(
+òAxbFäã
+Q
+v²gdÐH$FÁ á
+Iø	ÃSxCÁ
+yÇÓuó	ìãÿ
+û¹Á WØõæñü
+PåÈÚyÀ
+Ñ
+ôjÐ	ÛôQE
+Ý ÒµXþØÈ­ö9Á
+æhóÈ äì9 r
+ôjÐ	ÛôQE
+tåIÆåÎ	Å
+rqÁàã dg°
+âSfÒÉo§Û –òá
+ôjÐ	ÛôQE
+øÛñJùõKï	è×
+àkï	xjîûU
+ØÎTåH ô à‘
+gíFêð^xÃý
+Ö
+kåO	kíáo
+ZIYÙT¶Ö	wBdY
+ü
+«ìYoçÓfyDK
+xGZ¸òãiUt¶X	ËÈçtLWÕ
+õäz/ìë
+ÊMwâÝzîçP
+äþ xòÇÀ>
+um	ZÒàÔôÛo&ÖÚæÞOÞY
+ÌÈ îÉÉÎG
+Ð	ÞtWÈ
+ev•G sµÀ>ùëÖ
+rqÁàã dd
+JÈÊª	9ÎblñÜuíÍü
+¼FxnHè ø
+FOr	zøóþ
+ã|SFÅne íOB
+GUµÖ °ÓospWÉidYØüã
+à åýOµ{G
+`òÆÂÎxÚ
+ÊzñÉã<Øñ
+FÀùTfDÎ	ÁPN
+ó	ÇïìïøZ
+ÊxeÈRG	åà
+uòäÇ%	ïÕIÈêCu
+IhÐäóÇ¹ÏÐuÁü ð¤Þ
+QÓOCÑ0à
+IöÝÜ
+YtIèñ	ÏXe/Ë
+a£I úÁßCêMLõq+Û~h
+tä- sÅÃÏZ-ËEÕy
+ÂkXèf”tïP 
+YhDÿÓ
+Øw toc'v
+Science Requirements for
+David L. Urban
+Microsoft Office Word
+Science Requirements for

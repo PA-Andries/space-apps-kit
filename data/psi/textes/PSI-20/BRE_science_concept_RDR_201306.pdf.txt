@@ -1,0 +1,1136 @@
+Source : NASA PSI, PSI-20, Science Documents, BRE_science_concept_RDR_201306.pdf
+
+--- page 1 ---
+1 
+Burning Rate Emulator (BRE): 
+Material Burning and Extinction in 
+Microgravity 
+ 
+an ACME experiment 
+PI: James G. Quintiere, Univ. of Maryland 
+Co-I: Peter B. Sunderland, Univ. of Maryland 
+BRE Technical Contact: Paul Ferkul 
+ACME Project Scientist: Dennis P . Stocker 
+Acknowledgments: Michael Bustamante, Keenan Dotson, Yi Zhang 
+Science Requirements Review 
+Jun. 19-20, 2013
+
+--- page 2 ---
+1. Goal 
+Determine burning conditions on flat 
+surfaces in quiescent microgravity 
+ 
+2
+
+--- page 3 ---
+In general 
+• The goal of this study is to establish the burning 
+conditions for materials in a quiescent environment.  
+• We seek to define the burning in terms of the heat of 
+gasification L by using a burning rate emulator (BRE), 
+which is a burner with controlled fuel supply.  
+ 
+3
+
+--- page 4 ---
+Operational Objectives 
+Build and operate a gas-fueled 
+burner for studying steady burning 
+• Burning Rate Emulator 
+(BRE) 
+• Demonstrate 
+– Wall fires in 1 g 
+– Pool fires in 1 g  
+• Explore flat surface burning 
+in microgravity 
+• Establish fuel properties 
+able to support burning in 
+microgravity 
+ 
+Examples to be discussed 
+4
+
+--- page 5 ---
+Hypothesis 
+  
+ 
+Matching requirements: 
+ 
+• Same fuel stream (diluent 
+included) flow rate 
+ 
+• Same condensed phase 
+properties 
+ Heat of combustion 
+ Heat of gasification 
+ Vaporization temperature 
+ Smoke point 
+ 
+5
+
+--- page 6 ---
+Output of the Study 
+• BRE has the advantage of efficiency to range 
+through a spectrum of fuels, and ease of operation. 
+  
+ 
+6 
+0
+10
+20
+30
+qrr , kW/m2
+, kJ/g
+, kJ/g
+Flammable
+Blow out
+Extinction
+
+--- page 7 ---
+Framework: Steady Burning Theory 
+7 
+Flame 
+Condensed Fuel 
+rrq
+fq
+f rrm L q q  
+
+--- page 8 ---
+BRE: Burning Rate Emulator 
+8 
+fq
+rrq
+m
+f rrqqL m  
+Heat Flux Sensors 
+Glass Beads 
+Perforated Brass Screen (Ts) 
+Flame
+
+--- page 9 ---
+Relationship to NASA Flammability 
+Tests 1 and 2 
+• The Upward Flame Propagation (Test 1) is the dominant 
+test for material flammability by NASA. 
+ 
+– It tests the flame propagation of a vertical sample 30 × 6.4 – 
+7.5 cm wide, under a small electric source heat flux of 75 
+kW/m2.  
+– The atmospheric conditions are controlled.  
+– Burn length and time are recorded.  
+– It is considered a pass-fail type test. 
+ 
+• The NASA Test 2:  Cone Calorimeter with external heat 
+fluxes of 25 – 75 kW/m2 to supplement information gained 
+from Test 1.  
+9
+
+--- page 10 ---
+2.  Background Microgravity 
+Studies 
+10
+
+--- page 11 ---
+11 
+Background of Combustion in 
+Microgravity 
+• Experiments in Skylab (Ross, 2001; Kimzey, 1974) indicated sustained 
+burning of thin paper and plastics. 
+• More recent experiments indicate flame spread on thin paper and plastic 
+thin cylinders in microgravity (Ross, 2001).  
+• Opposed flow spread in a quiescent atmosphere has been shown to 
+depend on material, thickness, and oxygen concentration (Ross, 2001). 
+• The burning of candle flames on the MIR (Ross, 2001) last for periods 
+ranging from about 100 s to more than 45 minutes. A spherical flame 
+formed around the wick.  
+• Droplet experiments by Kumagai and others (Ross, 2001). 
+• Small diameter jet flames of 0.4 – 2.7 mm yielded spherical flames of 
+durations from 150 – 300 s (Ross, 2001).  
+• Sunderland et al. (1999) recorded flames for port diameters up to 3.3 mm, 
+and Re from about 10 – 1700 in microgravity.  
+• Brahmi et al. (2005) used a gaseous burner to simulate burning in g. They 
+burned ethane over a 60  60 mm sintered bronze plate in O2-N2 flowing 
+at velocities of 10 – 150 mm/s. 
+• Bustamante (2012) aircraft and drop data on flat liquid-fueled wicks.
+
+--- page 12 ---
+12 
+Regions of steady burner flames in microgravity in terms of fuel Vf and oxidizer U∞ velocities from 
+Brahmi et al. (2005). 
+Background of Combustion in 
+Microgravity
+
+--- page 13 ---
+13
+
+--- page 14 ---
+3.  Proof of Concept in Normal 
+Gravity 
+14
+
+--- page 15 ---
+Early BRE Studies 
+• Orloff and deRis (1971), deRis et al. (1975) and Kim et 
+al. (1971)  
+• They successfully simulated burning conditions for a 
+wide range of B numbers.  
+ 
+15 
+/ ( )ox c p vY h r c T TB L   
+Dimensionless burning rate vs B 
+Ceiling Fires
+
+--- page 16 ---
+Inclined Plate 
+ 
+16 
+Methanol flames in top galley at angles +90, 60, 30, 0, -30, -60, and -90. Methane flames in bottom 
+galley at corresponding angles and burning rates.
+
+--- page 17 ---
+17 Trace renditions of the flame standoff position for the burner and methanol.
+
+--- page 18 ---
+Smoke Point 
+hc 
+Pool Fire Simulation 
+18 
+Methanol Pool Fire 
+Burning rate 
+ 
+211 g/mms
+
+--- page 19 ---
+19 
+Pool (methanol) BRE (XCH4=52%, XN2=48%) 
+hc(kJ/g) 19 19 
+Smoke point (mm) / / 
+, 1 ,1 2 ,2c mixture c ch Y h Y h    
+43819 %kJ/g 49.6 kJ/gMethanol CH
+XCH4=52%, XN2=48% 
+Pool Fire Simulation
+
+--- page 20 ---
+Methanol Pool Fire BRE 
+Pool Fire Simulation 
+20
+
+--- page 21 ---
+21
+
+--- page 22 ---
+Results 
+22 
+25.5 kW/mcenterHF 
+221.3 kW/medgeHF 
+215.6 kW/mf averageq HF
+160 averageTC 
+44
+2
+()
+1.5 kW/m
+rr averageq T T  
+
+1.28 kJ/g
+f rrqqL m  
+
+--- page 23 ---
+Results 
+23 
+Methanol Pool Fire BRE 
+Pool (methanol) BRE (XCH4=52%, XN2=48%) 
+Pre-Match hc(kJ/g) 19 19 Ls(mm) / / 
+Measurement & 
+Calculation 
+Ts (°C) 65 160 
+L (kJ/g) 1.2 1.28
+
+--- page 24 ---
+Results 
+24 
+Heptane Pool Fire BRE 
+Pool (heptane) BRE (C2H4) 
+Pre-Match hc(kJ/g) 41.2 41.5 Ls(mm) 139 120 
+Measurement & 
+Calculation 
+Ts (°C) 98 211 
+L (kJ/g) 0.48 0.51
+
+--- page 25 ---
+PMMA Pool Fire BRE 
+Results 
+25 
+Pool (PMMA) BRE (XC3H6=50%, XN2=50%) 
+Pre-Match hc(kJ/g) 24.2 24.3 Ls(mm) 105 116.6 
+Measurement & 
+Calculation 
+Ts (°C) 270 312 
+L (kJ/g) 1.6 1.8
+
+--- page 26 ---
+Flammability Map 
+26 
+𝑳, kJ/g 
+qrr  , kW/m2 
+0
+2
+4
+6 0
+5
+10
+15
+20
+0
+20
+40
+60qrr  , kW/m2 
+𝑳, kJ/g 
+BRE with 
+Methane 
+Extinction 
+BRE with 
+52% 
+Methane, 
+48% 
+Nitrogen 
+Liquid 
+Methanol 
+Heptane 
+Wood Filter Paper PE PS PMMA 
+BRE with 
+Ethylene 
+∆𝒉𝒄, kJ/g
+
+--- page 27 ---
+4. Recent Drop Tests of Burner 
+27
+
+--- page 28 ---
+Takahashi Tests 
+28 
+Heater Off Heater Off 75C 200C
+50 ccm 
+at 21.1C
+Radiometer=1.5V Radiometer = 1.4V Radiometer = 1.6V
+Flame lifts from burner 
+approximately 5mm
+Flame lifts from 
+burner approximately 
+5mm
+Flame lifts from burner 
+approximately 5 mm
+100 
+ccm at 
+21.1C
+Radiometer=3.1V Radiometer = 2.4V Radiometer = 3.3V Radiometer = 3.4V
+t=1.233s, Radiometer 
+signal based on 
+average from t=1.00 
+to t=1.40s
+Flame lifts from 
+burner, then 
+quenches at the top
+Flame is stable at 
+base and increases in 
+height until impact
+Flame is stable at 
+base and increases in 
+height until impact
+120 
+ccm at 
+21.1C
+Radiometer=3.8V Radiometer = 4.4V Radiometer =4.1V Radiometer = 4.2V
+t=1.100s, Radiometer 
+signal based on 
+average from t=0.933 
+to t=1.200s
+Flame lifts from 
+burner, then 
+quenches at the top
+Flame is stable at 
+base and increases in 
+height until impact
+Flame is stable at 
+base and increases in 
+height until impact
+Note: Radiometer signal adjusted for ignitor and flame (i.e. to not include heater)
+          Image brightness and contrast have been altered
+          For images, t=1.9s (unless noted). Radiometer signal based on average from t=1.8667 to t=1.9333
+Methane μg  Ethylene μg
+
+--- page 29 ---
+BRE Drop Tests 
+• 5 second drop facility at NASA Glenn Research Center 
+• Fuel: Ethylene in 1 atm air  
+   Methane in 1 atm air, 2 atm air and 30% XO2   
+• Flame is ignited by the hot wire in microgravity after 
+the drop is started.  
+• Measurements: Heat Flux, Surface Temperature, Mass 
+Flow Rate  
+29
+
+--- page 30 ---
+Drop Result 
+Heat Flux Sensors 
+Hot Wire Igniter 
+Thermocouple 
+0
+10
+20
+30
+40
+50
+60
+0 2 4 6 8
+HF kW/m2
+Time, s
+HF edge
+HF center
+End of 5s Drop 
+30
+
+--- page 31 ---
+Drop Test: Ethylene 
+135 ccm 300 ccm 400 ccm 
+31
+
+--- page 32 ---
+32
+
+--- page 33 ---
+360 ccm 540 ccm  
+(+40% Brightness) 
+360 ccm 
+(30% O2) 
+Drop Test: Methane 
+33
+
+--- page 34 ---
+34
+
+--- page 35 ---
+Drop Test Results 
+35 
+Test No. D9023 D9024 
+(extinguished) 
+D9027 D9028 D9029 D9030 D9031 
+Fuel C2H4 C2H4 C2H4 C2H4 C2H4 C2H4 C2H4 
+Ignition 1g 1g μg μg μg μg μg 
+Fuel Rate (ccm) 180 90 180 135 240 300 400 
+Δhc (kJ/g) 41.5 41.5 41.5 41.5 41.5 41.5 41.5 
+Burning Rate 
+(g/m2-s) 1.76 1.76 1.3 2.32 2.9 3.87 
+HF_Center 
+(kW/m2) 5.68 5.68 6.6 4.27 3.6 3.63 
+HF_Edge (kW/m2) 7.08 10 9.19 6.8 5.65 4.2 
+Average HF 
+(kW/m2) 6.849 9.29 8.76 6.38 5.31 4.11 
+Center Ts (°C) 133 60 66 52 48 48 
+Outter Ts  (°C) 150 55 60 56 54 51 
+Averaged Ts (°C) 147.20 55.825 60.99 55.34 53.01 50.5 
+L (kJ/g) 3.15 5.16 6.55 2.67 1.77 1.02 
+reRadiation 
+(kW/m2) 1.31   0.20 0.25 0.20 0.18 0.16
+
+--- page 36 ---
+Drop Test Result 
+36 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+0 1 2 3 4 5
+Heat of gasification, L kJ/g
+burning flux, g/m2s 
+Δhc =47 kJ/g 
+Heptane 
+Polyethylene
+
+--- page 37 ---
+37 
+Knowledge Lacking and Knowledge 
+to be Gained by Flight Tests 
+• The proposed tests aboard the ISS will establish the 
+range of steady burning conditions for condensed fuels 
+in microgravity. We will identify the associated material 
+properties and the real materials that are represented. 
+ 
+• Once established based on fuel properties, NASA Test 2 
+could be used as a basis for establishing comparable 
+properties for real materials. This could elevate the role 
+of NASA Test 2 over Test 1. This would close the loop of 
+using a ground-based test to assess the true 
+flammability of materials in microgravity.
+
+--- page 38 ---
+Science Data End Products 
+38 
+Objective 
+1. Observe burning behavior in long-duration microgravity 
+for CH4/N2 and C2H4/N2 mixtures on porous circular 
+burners of 25 and 50 mm diameter. Consider O2/N2 
+ambients with various pressures and ambient O2 
+concentrations and pressures. Emphasize conditions that 
+can be related to diverse condensed fuels. 
+  
+2. Consider the conditions of Objective 1 for ambients of 
+O2/CO2 (desired). 
+3. Consider the conditions of Objectives 1 – 2 for extinction 
+limits.
+
+--- page 39 ---
+Science Data End Products 
+39 
+Science Data End Products 
+• Color flame images and shapes. 
+• UV images. 
+• Surface temperatures and incident flame heat flux measurements. 
+• Radiation from the flame to the surroundings to estimate radiative 
+flux. 
+• Flammability mapping of quasi-steady burning as a function of heat 
+of combustion, heat of gasification, and surface temperature. 
+• Quasi-steady burning flux (burning rate per unit area) as a function 
+of significant properties, e.g., heat of gasification, heat of 
+combustion, and smoke point. 
+• Contour plots of soot temperature and filament temperature. 
+• Contour plots of soot volume fraction. 
+• Plots of radiant emissions versus time. 
+• Plots of chemiluminescent emissions versus time. 
+2. Same as for Objective 1.  
+3. Extinction limit map. 
+1.
+
+--- page 40 ---
+40 
+Justification for Extended-
+Duration Microgravity 
+• The proposed tests cannot be performed in parabolic aircraft 
+owing to considerable g-jitter disturbances.  
+ 
+• Testing in NASA 5.2-s drop facility indicated possible approach to 
+steady burning. 
+ 
+• The longer duration testing in the ISS will facilitate the efficient 
+operation of the BRE to exploit a relatively quick record of results 
+over a range of flow rates. This will insure a complete 
+flammability map in microgravity.
+
+--- page 41 ---
+Work conducted since last Aug 
+• Drop test 
+• 25 mm emulation 
+• Extinction limit data 
+• Refine the burners 
+• Heat flux gages without water cooling 
+• Two conference presentations 
+• Inclined paper published in Journal of Fire 
+Sciences 
+41
+
+--- page 42 ---
+Response to panelist recommendation 
+• Recommend proposed ignition tests have a lower 
+priority. Ignition eliminated 
+ 
+• Prioritize the experimental diagnostics, to minimize 
+complications in running the experiment and 
+downloading data. Done 
+ 
+• Focus on small burner designs for multiple reasons. In 
+addition, a burner design with narrow external walls is 
+strongly encouraged. Test matrix emphasizes 25 mm 
+and we have reduced the edge effect. 
+42
+
+--- page 43 ---
+• Some repeated tests are recommended to establish 
+uncertainty bounds and increase scientific credibility. 
+Expect wide range of data points in flight.  
+ 
+• The temperature range for the burner is not defined in the 
+current science requirement documents. Take what we get. 
+In document, the burner surface, temperatures at 2 
+locations with a range of 30 – 500 °C.  
+ 
+• The priority on O2 and pressure conditions ought to be on whatever the preferred conditions are for future space 
+flight. Drop experiments should also help prioritize the test 
+sequence. Included current NASA human flight atmosphere 
+in test matrix 
+43 
+Response to panelist recommendation
+
+--- page 44 ---
+• Heat flux gauges need to be installed into the burner. 
+Engineering plans need to be developed to ensure that the 
+burner/heat flux gauge can be preheated to a minimum of 
+65 °C to avoid condensation. Expect the temperature to be 
+high enough without water cooling and we are recording it. 
+ 
+• Consider a wide angle radiometer for one of the lower 
+radiometers (inconsistent for present ACME plans) and 
+arrange the burner so that the radiometer cannot see the 
+burner surface. Yes we have 
+ 
+• It is strongly encouraged to reconsider the inclusion of this 
+diagnostic (O2 sensor). No but have GC to confirm 
+44 
+Response to panelist recommendation
+
+--- page 45 ---
+• The proposed radiation measurements need to provide 
+a measure of the flame radiation alone. Yes trying to 
+do 
+ 
+• Improve justification for the selected fuel flow rates 
+(use simple calculations of flame surface areas, flame 
+curvature and flame burning rates and confirm in drop 
+experiments). ?? Confirmed by drop test  
+ 
+• Clarity is needed for the test matrix. Some of the ‘tests’ 
+may actually be multiple tests. Revised the test matrix 
+45 
+Response to panelist recommendation
+
+--- page 46 ---
+• Experiments should be performed at nearly the same oxygen 
+level. If tests at constant O2 are not possible, a method to convert experimental results obtained at one 
+O2 concentration to another O2 level needs to be developed. Hope to have a theory for that.  
+ 
+• As discussed above, a careful design of the burner, with a thin, 
+low conducting, outside wall should allow the flame to sit 
+closer to the burner and add stability to the flame tests. 
+Reduce the edge 
+ 
+• Fundamentally, there is no guarantee of achieving quasi-
+steady flames. The PIs should consider how to collect and 
+interpret data sets for which flames are sustained, but 
+unsteady. Hope to have a theory to guide us 
+ 46 
+Response to panelist recommendation
+
+--- page 47 ---
+5.  Experimental Requirements 
+ 
+ 
+47
+
+--- page 48 ---
+Current Burners: Two Sizes 
+• 25 and 50 mm 
+• Reduce the lip effect 
+• No water cooling 
+• Glass beads 
+• Side fuel port 
+• Two heat flux sensors 
+• Two surface temperature TC 
+48
+
+--- page 49 ---
+baseplate_counterbore
+airhousing
+collar
+lip
+screen
+heatfluxgage
+  4x 6.35  
+  88.9  
+  4x  5.59    2x  3.3 THRU  
+  54.77  
+  60.33  
+  69.85  
+  88.9  
+A
+A
+  10.41  
+  41.28  
+  4x  5.59  
+  4x 0.76  
+  23.02    15.88  
+  8.64  
+  4x 25.4  
+  4x 7.37  
+  2x 1  
+  50.01  
+B
+SECTION A-A
+  9.63  
+  0.79    2x  3.18  
+  2x  12.7 NF2A  
+DETAIL B 
+SCALE 1 : 1
+unit mm
+name 50 mm Burner
+date 02/13/2013
+material brass
+designer Philipp Klaess
+49
+
+--- page 50 ---
+baseplate_counterbore
+airhousing
+collar_without_lips
+lip
+screen_small_holes
+  2x  1.57 THRU  
+  27.5  
+  30  
+  36.4  
+  60.8  
+  60.8  
+  4x  5.59  
+  4x 6.35  
+A
+A
+  10.41  
+  33.78  
+  12.7  
+  2x 1  
+  19.24  
+  8.38  
+  4x  5.59  
+  4x 0.76  
+  4x 17.02  
+  4x 4.49  
+B
+SECTION A-A  2x  6.35 -NF2A  
+  2x  1.57  
+  7.62    2.79  
+DETAIL B 
+SCALE 2 : 1
+unit mm
+name 25 mm Burner
+date 02/12/2013
+material brass
+designer Philipp Klaess
+50
+
+--- page 51 ---
+Measurement of incident flame heat 
+flux by sensors 
+• Medtherm sensors 
+• No water cooling 
+• Surface Temperature T type TC 
+• Measurement yields the incident heat flux to 
+the burner 
+• Some analysis is needed  
+51
+
+--- page 52 ---
+1/8th inch heat flux sensor 
+52
+
+--- page 53 ---
+1/16th inch heat flux sensor 
+53
+
+--- page 54 ---
+f rrm L q q  
+-Heat flux transducer is calibrated using 20 C cooling water
+ ?=   
+f measuredqq
+fq
+ is measured by Medtherm heat flux transducer
+-Measurements conducted without cooling water
+Flame heat flux from sensor 
+54
+
+--- page 55 ---
+Flame 
+rq
+measuredq
+44( ) ( )g f gh T T T T    
+Heat Flux Gage Surface 
+Surface Temperature 
+gT
+Brass Screen 
+Surface Temperature 
+sT
+44[] ( ) ( ) ( )measured f g s g g g ffq q h T T h T T T T         
+()r f f sq q h T T   
+()f r f sq q h T T   
+Flame heat flux from sensor 
+55
+
+--- page 56 ---
+44[] ( ) ( ) ( )measured f g s g g g ffq q h T T h T T T T         
+44 1( 1) ( )() gmeasuredf f s g Tqq h T T TT          
+gg  Assume 
+44 1( 1) ( )() gfsg Th T TTT      Correction Term: 
+Flame heat flux from sensor 
+56
+
+--- page 57 ---
+kW/m2 
+, 1/40.43 0.6  c toptop hDNu Ra k
+Constant heat flux on a horizontal plate facing upward
+0.43topNu In microgravity, 
+330 340 2300 0.98g s sT T T    Assume  K,  K,  K and 
+44 1( 1) ( )()         
+ gmeasured
+f f s g
+Tqq h T T TT
+0.94 Medtherm painted the sensor with  paint
+0.98 We painted the sensor with NEXEL velvet-coating: 
+Flame heat flux from sensor 
+57 
+20.081khAssume  W/m-K, 1.62 W/m -K
+220.21 kW/m 0.08 kW/m0.98  
+measured
+f
+qq
+
+--- page 58 ---
+Burner gas delivery 
+• Fuel: 0-1 slpm 
+• Inert: 0-1 slpm 
+• Based on 5 second drop facility experience 
+• Theoretical basis required  
+– CHEMKIN® 
+– Rough estimate currently 
+ 
+58
+
+--- page 59 ---
+Issues for determining flammability in 
+microgravity 
+Estimate the burning flux for a planar material of diameter 50 mm burning in 
+microgravity  based on μg jet flame correlation.  
+ 
+ 
+ 
+ 
+ 
+Compare fuels:  
+Estimate of critical mass flux for burning based on Tf, crit 
+? criticalmm 
+59 
+( / 2)
+rr e
+crit
+c
+qqm hL   
+0rrm L q m h     
+
+--- page 60 ---
+Parameter Liquids Thermoplastics High-temperature Polymer Halogenated Polymer 
+Heat of Combustion, 
+kJ/g 
+30 30 15 8 
+Heat of Gasification, 
+kJ/g 
+0.5 3 5 3 
+Reradiation Heat Flux, 
+kW/m2 
+0.5 10 20 30 
+Burning Flux, g/m2s 2 0.5 0.1 0.2 
+Critical burn flux, g/m2s 0.03 0.8 8 29 
+Estimated Burning conditions in microgravity for 
+a planar material of 50 mm diameter. 
+60
+
+--- page 61 ---
+Igniter 
+• 3 mm from the rim (outer edge) 
+61
+
+--- page 62 ---
+Ambient atmospheres: O2 + N2 (CO2) 
+ 
+• 14.7 psi 21% O2 
+ 
+• 10.2 psi 26% O2 
+ 
+• Spacewalking suits EVA: 8.2 psi 34% O2 
+62
+
+--- page 63 ---
+Burner Temperature 
+• Type-K Bare Wire TC 
+• 0.01” or less in diameter 
+63 
+1.5 cm 
+5 cm burner surface 
+ 2.5 cm burner surface 
+0.5 cm 
+1cm 
+0.5 cm
+
+--- page 64 ---
+Flame Radiation 
+• Look just at the flame  
+64 
+Burner
+
+--- page 65 ---
+Others 
+• Color imaging 
+• Gas Temperature 
+• Chemiluminescent emission 
+65
+
+--- page 66 ---
+BRE Flight Diagnostics Summary 
+Critical diagnostics: 
+Color imaging123 
+Burner heat flux123 
+Burner temperature123 
+Radiant emissions123 
+Thin filament pyrometry123 
+Soot temperature12 
+ 
+Non-critical diagnostics: 
+OH* imaging123 
+Chemiluminescent imaging123 
+Soot volume fraction12 
+Post-test gas composition123 
+ 
+1Objective 1: Burning behavior  
+2Objective 2: CO2 ambients (desired) 
+3Objective 3: Extinction limits 
+66
+
+--- page 67 ---
+6.  Operational Sequence 
+67
+
+--- page 68 ---
+BRE Operational Sequence 
+ Action Approx. 
+Time 
+1. Ensure that the appropriate burner is installed. Preflow the 
+burner fluent gas at the composition of the upcoming test point 
+to flush the plumbing system. 
+2. Establish chamber conditions. These consist of a set point 
+pressure and species compositions, as specified in the test 
+matrix. Conditions are obtained in four ways: from cabin air 
+(desired); from the preceding test; from scrubbing and 
+replenishing; or from a complete evacuation and recharge. 
+3. Allow chamber contents to reach equilibrium. A hold time of 
+5 minutes is required for quiescent, isothermal, and well-mixed 
+conditions. 
+4. Take reference images (if applicable). Establish framing rates for 
+video cameras. Begin color imaging. Begin monitoring 
+measurements and wait 15 s. 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+68
+
+--- page 69 ---
+BRE Operational Sequence 
+ Action Approx. 
+Time 
+5. Commence fluent flow at a value to be uplinked. The initial 
+value should correspond to about 1 g/m2-s of hydrocarbon fuel.  
+Energize igniter to ignite the flame and then retract the igniter. 
+If ignition does not occur within 5 seconds, shut off the flow.  A 
+new value of flow rate will be specified by uplink.  If the flame 
+ignites, proceed to Step 6. Otherwise proceed to Step 7. 
+6. Set the flow rate to the test flow rate.  Anytime during this step, 
+if the flame extinguishes, or either heat flux sensor exceeds a 
+critical temperature, stop the fuel flow.  Continue until the 
+surface burner temperatures become quasi-steady.  Then 
+reduce the flow rate in 10% increments of the test flow rate, 
+hold for 15 s, and continue such reductions until extinction. 
+7. Stop fluent flow.  Record reference images (if applicable). After 
+60 s terminate color imaging and monitoring measurements. 
+Select data for downlink and downlink data. 
+0 s 
+ 
+5 s 
+  
+  
+  
+ 
+ 
+ 
+60 s 
+69
+
+--- page 70 ---
+7. Test Matrix 
+70
+
+--- page 71 ---
+Test 
+  
+Ambient 
+  
+Fluent 
+Pressure, 
+bar 
+Fuel flow 
+rate, sccm 
+N2 
+  
+Notes 
+1 21% O2 in N2 C2H4 1.01 200 Test of system operation, diagnostics, and burning 
+and extinction test. Use cabin air if possible. Use 25 
+mm burner. 
+          Evacuate and recharge chamber. 
+2 40% O2 in N2     200 Burning and extinction test. 
+3       400   
+4   C2H4   100   
+5   75% C2H4 in N2   200   
+6     400   
+7 40% O2 in N2 75% C2H4 in N2 1.01 100 Burning and extinction test. 
+8–13 34% O2 in N2 C2H4 in N2 0.565   Repeat Tests 2–7 for different ambient. 
+14–19 26.5% O2 in N2 0.703   Repeat Tests 2–7 for different ambient. 
+20–25 21% O2 in N2 C2H4 in N2 1.01   Repeat Tests 2–7 for different ambient. 
+26–49   CH4 in N2     Repeat Tests 2–25 for CH4 at the same mole 
+fractions as C2H4. 
+50–73   C2H4 in N2     Repeat Tests 2–25 for 50 mm burner. 
+74–97   CH4 in N2     Repeat Tests 2–25 for CH4 at the same mole 
+fractions as C2H4 and for 50 mm burner (desired). 
+98–103     2.02   Repeat Tests 20–25 at 2.02 bar (desired). 
+104–115 O2 in CO2   1.01   Repeat Tests 2–7 and 20–25 for CO2 ambient at the 
+same mole fractions as N2 (desired). 
+Test Matrix 
+71
+
+--- page 72 ---
+Notes 
+1Different fuel and oxidizer mole fractions may be specified 
+during uplink. 
+2It may be necessary to ignite at different flow rates and/or gas 
+compositions than those specified above. 
+3Assuming scrubbing capability is available, the CO2 and H2O will 
+be scrubbed after some tests, and reactants replenished as 
+needed. 
+4All tests use the 25 mm burner except tests 50 – 97. 
+ 
+72 
+Test Matrix
+
+--- page 73 ---
+8.  Science Success Criteria 
+73
+
+--- page 74 ---
+Science Success Criteria 
+Minimum Success 
+• Obtain color video, burner surface temperature, 
+and burner heat flux for two C2H4 flames that 
+burn for at least 20 s and then extinguish. 
+ 
+High Success 
+All of the above (BRE flight test matrix) plus: 
+• Obtain a flammability map for C2H4. 
+ 
+ 
+74
+
+--- page 75 ---
+Complete Success (i.e., completion of required test matrix) 
+All of the above (BRE flight test matrix) plus: 
+• Obtain a flammability map for CH4. 
+• Measure peak temperatures (using filament and/or soot 
+pyrometry) as a function of time for at least 5 flames. 
+• Measure temperature distributions (using filament and/or 
+soot pyrometry) at or near quasi-steady conditions for at 
+least 5 flames.  
+• Measure temperature distributions (using filament 
+pyrometry) near the extinction limit for at least 5 flames. 
+• Measure soot volume fraction profiles at (or near) quasi-
+steady conditions and near the extinction limit for at least 5 
+flames. 
+75 
+Science Success Criteria
+
+--- page 76 ---
+Superior Success (desired) 
+All of the above plus: 
+• Complete the desired parts of the test matrix. 
+ 
+76 
+Science Success Criteria
+
+--- page 77 ---
+Companion Ground Work 
+• Extinction data 
+• Flammability map 
+• Drop tests 
+• Low pressure testing 
+• Modeling 
+• Paper for  
+    Combustion Symposium 
+ 
+77
+
+--- page 78 ---
+Publications 
+K.T. Dotson, M.J. Bustamante, P.B. Sunderland, J.G. Quintiere, Laminar Burning on Flat 
+Wicks at Various Orientations, 7th U.S. National Combustion Meeting, Atlanta (2011) 5 pp. 
+K.T. Dotson, M.J. Bustamante, P.B. Sunderland, J.G. Quintiere, Laminar Burning on Flat 
+Wicks at Various Orientations, 7th U.S. National Combustion Meeting, Atlanta (2011) 5 pp. 
+M.J. Bustamante, K.T. Dotson, Y. Zhang, P.B. Sunderland, J.G. Quintiere. Laminar Burning 
+on Flat Wicks at Various Orientations Dayton Spring Technical Meeting of the Central 
+States Section of the Combustion Institute April 22–24, 2012. 
+M.J. Bustamante, K.T. Dotson, P.B. Sunderland, J.G. Quintiere, A Tale of Seven Flames, Art 
+Poster, Central States Section of the Combustion Institute, Dayton (2012). 
+M.J. Bustamante, K.T. Dotson, Y. Zhang, P.B. Sunderland, J.G. Quintiere, Laminar Burning of 
+Flat Diffusion Flames at Various Orientations, Central States Section of the Combustion 
+Institute, Dayton (2012) 15 pp. 
+M.J. Bustamante, Experimental Investigation of Liquid and Gas Fueled Flames Towards the 
+Development of a Burning Rate Emulator (BRE) for Microgravity Applications, M.S. Thesis, 
+Dept. of Fire Protection Engineering, 91 pp. 
+M.J. Bustamante, Y. Zhang, K.T. Dotson, P.B. Sunderland, J.G. Quintiere, Burning on Flat 
+Wicks at Various Orientations, Proceedings of the Seventh International Seminar on Fire 
+and Explosion Hazards,  D. Bradley, G. Makhviladze, V. Molkov, P. Sunderland, F. Tamanini, 
+Eds., Providence (2013), 10 pp. 
+78
+
+--- page 79 ---
+Publications 
+Y. Zhang, M.J. Bustamante, K.T. Dotson, P.B. Sunderland, J.G. Quintiere, A Gas Burner to 
+Emulate Condensed-Phase Burning, Proceedings of the Seventh International Seminar on 
+Fire and Explosion Hazards,  D. Bradley, G. Makhviladze, V. Molkov, P. Sunderland, F. 
+Tamanini, Eds., Providence (2013), 9 pp. 
+Y. Zhang, M.J. Bustamante, P.B. Sunderland, J.G. Quintiere, P. Ferkul, A Burning Rate 
+Emulator for Microgravity Fire Safety, Poster, Seventh International Seminar on Fire and 
+Explosion Hazards,  Providence (2013). 
+Y. Zhang, M.J. Bustamante, P.B. Sunderland, J.G. Quintiere, P. Ferkul, A Burning Rate 
+Emulator for Study in Microgravity, Eighth U.S. National Combustion Meeting, Salt Lake 
+City (2013) 14 pp. 
+Y. Zhang, M.J. Bustamante, M.J. Gollner, P.B. Sunderland, J.G. Quintiere, Burning on Flat 
+Wicks at Various Orientations, Journal of Fire Sciences (accepted). 
+79
+
+--- page 80 ---
+BRE Team 
+Investigators 
+J.G. Quintiere 
+P .B. Sunderland 
+ 
+BRE Technical Contact 
+P . Ferkul 
+ 
+ACME Project Scientist 
+D.P . Stocker 
+ 
+Program Manager 
+M.K. King 
+Graduate Students 
+Michael Bustamante 
+Tom Dotson 
+Yi Zhang 
+New Student Matt Kim  
+starting 8/13 
+ 
+Undergraduate Students 
+Philip Klaess 
+Eric Muller 
+Benedict Mutsch 
+80

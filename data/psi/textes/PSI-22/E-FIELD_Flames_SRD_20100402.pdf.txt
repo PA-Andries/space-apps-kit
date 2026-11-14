@@ -1,0 +1,2623 @@
+Source : NASA PSI, PSI-22, Science Documents, E-FIELD_Flames_SRD_20100402.pdf
+
+--- page 1 ---
+1 
+Science Requirements Document 
+SRD Version 2.0 
+March 31, 2010 
+for 
+ 
+ELECTRIC FIELD CONTROL OF FLAMES 
+E-FIELD Flames Experiment 
+ 
+Principal Investigator: 
+ 
+Derek Dunn-Rankin 
+University of California 
+Irvine, California 
+ 
+Co-Investigators: 
+ 
+Felix Weinberg; Imperial College, London 
+Zeng-Guang Yuan, National Center for Space Exploration Research (NCSER) 
+ 
+Project Scientist: 
+ 
+Dennis Stocker, NASA GRC
+
+--- page 2 ---
+2 
+EXECUTIVE SUMMARY 
+ 
+This project utilizes electric fields in microgravity combustion science to establish a fun-
+damental understanding of chemi-ionization and ion-driven convection in flames.  It also 
+uses this understanding to demonstrate electrical manipulation of sooting behavior and 
+stability limits in the absence of buoyancy.  This work is based on prior foundation stud-
+ies that included simulating zero-g combustion of small gas jet diffusion flames in an 
+earth-gravity laboratory, and the electric field control of flame electrodynamics.  The cur-
+rent SRD proposes to use the extended-duration microgravity environment to further de-
+velop an understanding of electric fields in combustion processes and their potential ap-
+plications.   
+The research centers on the fact that electrical forces, acting on charge carriers created 
+through chemi-ionization, can provide for measurement and manipulation of flames in 
+microgravity environments.  For example, using the drag exercised on flame ions, electric 
+fields have demonstrated powerful influences on flame shape, sooting behavior, burning 
+velocity, extinction, and stability.  The source of these influences resides in ion wind ef-
+fects.  In microgravity, where there are no density-driven buoyant effects to contend with, 
+ion winds represent an important (and perhaps the only) body force that can be applied to 
+manipulate combustion systems.  This project includes both academic study of electric 
+field effects and aspects for practical utilization of electrical control of combustion proc-
+esses.   
+Our prior laboratory experiments have shown that electrical properties of flames can be 
+used to produce enhanced combustion performance by: (a) manipulating flame ions in 
+order to change flame chemistry – this is generally considered a minor influence because 
+flame ion concentration is typically small, but it may be critical at near-limit conditions; 
+(b) creating a neutral wind (ion driven convection) locally at the flame front – this proc-
+ess can provide a local actuator for flame convection control; (c) using electric fields to 
+affect soot formation and transport – ions and soot are closely linked because there are 
+shared chemical pathways and because soot particles are charged by the flame ions; and 
+(d) using electrical properties to characterize flames – e.g., there is a relationship between 
+flame temperature, the carbon content of a fuel, and the ion current it can produce at satu-
+ration.   
+In 1-g, the above-mentioned processes are confounded by complex buoyancy interactions 
+that cannot be unraveled.  Hence, to evaluate them in detail, we propose the following 
+experimental objectives for an extended microgravity environment: (A) determine the 
+relationship between electric field voltage and chemi-ion current as functions of total fuel 
+flow rate and the amount of inert (nitrogen) in the fuel; (B) compare the time response of 
+the flame’s chemiluminescence and ion current to rapid changes in electric fields; (C) 
+determine sooting behavior in relation to the electric field influences; and (D) manipulate 
+the limit behavior of lifted flames using electric fields. 
+The experimental approach includes a simple gas jet diffusion flame and a co-flow burner.  
+The basic variations in the tests are in the burner type, the fuel type (nominally non -
+sooting and sooting), and in the level of inert dilution of the fuel to vary the flame 
+strength.  The co-flow or environment gas will have a nominal molar composition of 21% 
+O2 and 79% N2.  The experimental concept is to ground the burner to the test chamber
+
+--- page 3 ---
+3 
+and to install an electrically active planar mesh electrode downstream of the burner 
+mouth.  The potential of the mesh electrode can be either positive or negative, with a 
+steady voltage or with a time varying potential (including a rapid step change) to examine 
+the flame’s steady state response and time response.  The data to be recorded include the 
+applied voltage, the ion current, the flame broadband luminosity, the CH* luminosity, 
+flame images of OH* and visible light showing the flame shape as a function of electric 
+potential and flame shape changes during transients in the electric field.  In addition, a 
+desired measurement of temperature in and near the flame will monitor the thermal field 
+as a function of the electric field conditions.   
+The data from these measurements will allow a chemical and physical understanding of 
+flame ion production and information showing the potential to use these ions to electri-
+cally control the flame both via modification of the local chemistry near extinction limits 
+and through changes in the local convection using the ion driven wind.  For example, a 
+lifted diffusion flame near its blowoff condition is sensitive to mixing at the flame anchor 
+point.  Therefore, electric fields acting on near-limit flames can exert a large influence 
+because they can affect the local mixing behavior.  The role of electric fields on soot 
+formation will be dramatic under conditions where the ion driven wind has a large influ-
+ence on flow residence time (or on ion residence time, if chemical effects are found im-
+portant) in sooting flames.   
+Generally, the convective flows driven by electric fields acting on flame ions and those 
+driven by buoyancy have been found to be of the same order of magnitude in earth grav-
+ity.  In addition, raising the temperature often increases the ion production rate and the 
+response to an electric field, but increasing temperature also increases the buoyancy ef-
+fect, making it difficult, on earth, to separate ion wind effects from those due to buoyancy.  
+In the zero-g environment, it will be possible to eliminate the buoyancy confusion and 
+develop sufficient understanding to predict the response of flames to electric fields under 
+all conditions.  Extended run times are crucial for all of the studies because the timescales 
+of flame property changes (which includes chemi-ionization) are dominated by convec-
+tion (length scale/velocity) and past studies have shown that soot studies require high 
+quality zero gravity timescales longer than is available in aircraft and drop towers.  In ad-
+dition, exploring instabilities and extinction behavior in near-limit flames requires ex-
+periments lasting tens of seconds. 
+Overall, the goal of this zero-gravity study is to understand chemi-ionization behavior 
+and the resulting ion driven winds sufficiently well so that electrical properties of flames 
+can be used to characterize (by monitoring ion current) and control them (via direct 
+chemical or local convective influences).  Electric field effects on flames have been 
+documented for decades (even centuries), but flames in 1-g all include buoyancy influ-
+ences that affect ion generation behavior.  For flames near transitions and limits, buoyant 
+influences always confound any understanding of the role of ion driven winds in using 
+electric fields to characterize and manipulate flames.  The proposed study removes this 
+confounding influence and allows definitive measurement and analysis of the electric 
+field effects on jet diffusion and co-flow flames.
+
+--- page 4 ---
+4 
+TABLE OF CONTENTS 
+ 
+EXECUTIVE SUMMARY.................................................................................................2 
+ 
+TABLE OF CONTENTS.....................................................................................................4 
+ 
+NOMENCLATURE............................................................................................................5 
+ 
+1 INTRODUCTION............................................................................................................6 
+1.1 Background and Overview............................................................................................6 
+1.2 Opportunities in Microgravity for Understanding Electric Field Effects on Flames...10 
+1.3 Results from Earth Gravity Experiments.....................................................................11 
+1.4 Summary of Results and Open Questions...................................................................18 
+ 
+2 FLIGHT EXPERIMENT................................................................................................22 
+2.1 Experimental Objectives..............................................................................................22 
+2.2 Approach......................................................................................................................24 
+2.3 Science Data End Products..........................................................................................27 
+2.4 Knowledge to be Gained..............................................................................................34 
+2.5 Justification for Extended-Duration Microgravity.......................................................36 
+ 
+3 EXPERIMENT REQUIREMENTS...............................................................................38 
+3.1 Requirements Discussion.............................................................................................38 
+3.2 Operational Sequence..................................................................................................41 
+3.3 Text Matrix – Summary...............................................................................................46 
+3.4 Success Criteria............................................................................................................48 
+3.5 Post Flight Data Analysis............................................................................................49 
+ 
+4 REFERENCES...............................................................................................................51 
+ 
+APPENDIX – TEST MATRIX.........................................................................................56
+
+--- page 5 ---
+5 
+oε
+
+--- page 6 ---
+6 
+ 
+Figure 1. 1.  Principal pathways of hydrocarbon flame 
+ion chemistry 
+1 INTRODUCTION 
+ 
+The first subsection provides the fundamentals that link chemi-ionization in flames with 
+convective flows created when electric fields act on the ions generated.  Later subsections 
+describe the variety of 1-g laboratory experiments exemplifying the scientific data we 
+have found valuable in linking flames to their electrical properties.  For the purposes of 
+this SRD, the details of this introductory section are less important than the examples of 
+our preliminary results which inform our proposed selection of objectives and science 
+data end products.  To focus on the proposed flight experiment, it is possible to skip di-
+rectly to Section 1.4 and then refer to background information as needed.  
+ 
+1.1 Background and Overview of Ion Driven Winds in Flames 
+ 
+In addition to being a major liberator of chemical energy, hydrocarbon flames naturally 
+produce charged intermediate species (ions and electrons) during the chemical-to-thermal 
+energy conversion.  Generally speaking, chemi-ions and their associated species in hy-
+drocarbon flames do not participate substantially in the major heat release reaction path-
+ways.  Hence, the chemical kinetics of ion species in hydrocarbon flames has not been 
+studied as extensively as for those species or reaction mechanisms associated with igni-
+tion/extinction phenomena and pollutant formation.  Nevertheless, many of the chemical 
+kinetic pathways are fairly well 
+articulated.  Figure 1.1 shows the 
+chemi-ion pathways from Starik 
+and Titova [1] and Pederson and 
+Brown [2].  The major ions are 
+formed through reactions which 
+involve CH molecules. The CH 
+molecules are formed either from 
+acetylene and other C2 molecules, 
+or via the oxidation of CH3. 
+Green and Sugden [3] proposed 
+that CH is produced in a meth-
+ane/air stoichiometric mixture 
+primarily via the oxidation of 
+CH3 through CH 3+O  
+CH+H2O. Peeters et al. [4] have 
+used this reaction successfully in their computations, and Jones et al. [5] examined modi-
+fying the rate constant of this reaction to result in a better correlation with experimental 
+observations. Pederson and Brown [2] used a 13-step reaction scheme for the determina-
+tion of the ion profiles. Their results indicate that for a stoichiometric mixture, H3O+ is 
+the most important ion; its maximum concentration is more than two orders of magnitude 
+higher than that of C2H3O+ and C3H3+, and three orders of magnitude higher than that of 
+HCO+.  The latter ion is, however, an important component for the production of H3O+.  
+Prager, et al. examined ion chemistry more recently and found H3O+ to be dominant in 
+lean flames [6].  They also identified several areas of uncertainty, primarily the anion 
+(negative ion) chemistry.  Despite these uncertainties, there is general agreement in the
+
+--- page 7 ---
+7 
+literature that the weak plasma nature of flames is relatively unimportant for the heat re-
+lease reactions.  For example, the most populous cations (positive ions) are present in 
+peak concentrations on the order of 1010/cc, or with mole fractions in the range of 10 ppb. 
+ 
+The concentration of electrons (which 
+make up the majority of the negative 
+charge carriers) is even lower than the 
+concentration of positive ions because 
+electron mobility is very high so that 
+relatively few electrons are needed to 
+balance the charge flux carried by the 
+more massive and more populous 
+positive charge carriers.  Nevertheless, 
+the free charges in the flame make the 
+reaction zone a very good conductor 
+(similar to that of a conductive metal).  
+More importantly, if an electric field is 
+applied across the flame, the charges 
+can be separated into unipolar regions, as shown in Figure 1.2.  In the case where the an-
+ode (higher potential electrode) is close to the flame, the electrons can then easily exit the 
+gas phase system, leaving the positive ions to collide with neutral molecules as they mi-
+grate through the unipolar space between the flame and the cathode (lower potential elec-
+trode).  During this migration process, the ions impart momentum to the neutral gas 
+equivalent to the acceleration they have achieved in the electric field between mean-free-
+path collisions.  The collisions are so frequent, that the ions quickly establish a drift ve-
+locity governed by their mobility.  The collisions thereby link the ionization processes to 
+the neutral gas flow.  This phenomenon is referred to as a Chattock wind, an ion-wind, or 
+more accurately an ion-driven wind, and is described in some detail by Lawton and 
+Weinberg [7].   
+ 
+In all of the applications involving electrical generation of convection, a unidirectional 
+gas flow is induced by using a large electric field to act on the charges of a unipolar ion 
+cloud in the region between the ion source and a second, usually earthed, electrode, or set 
+of electrodes.  In these cases, the body force on a unit volume of the gas is equal to that 
+on the charges it contains, provided that they have a constant mobility and do not acceler-
+ate.  In atmospheric pressure systems, the latter condition on acceleration is met easily, 
+but in regions of high temperature gradients or changes in chemical composition, the con-
+stant mobility condition is not.  Fortunately, these regions are often of limited spatial ex-
+tent and so the effects of variable mobility are usually ignored.  As described, for exam-
+ple in references [8,9] isothermal ion driven flow (with constant mobility) is described 
+generally by the coupled equations of fluid continuity and momentum along with an elec-
+trical model, including, Poisson’s equation governing the electric field, 
+ 
+ε
+q−=Φ∇2
+   
+ 
+ Figure 1.2.  Separating charges in a flame using 
+an electric field
+
+--- page 8 ---
+8 
+where Φ is the scalar electric potential, q is the space charge density, and ε is the permit-
+tivity of the ambient gas.  The charge drifts through the ambient gas as described by 
+ 
+, 
+ 
+where 
+ is the current density, K is the ion mobility, D is the ion diffusion coefficient, E 
+is the electric field strength, and 
+ is the gas velocity responsible for charge convection.  
+Charge conservation is governed by, 
+ 
+. 
+   
+After assuming that ion transport is dominated by electrical forces so that ion diffusion 
+and ion convection can be neglected (both good assumptions in high electric fields), the 
+charge conservation equation reduces to [9],  
+ 
+ε
+2qq =Φ∇⋅∇
+. 
+ 
+To fully simulate the system, an ion source model is needed as a boundary condition for 
+the charge conservation equation.  Accurately modeling the details of the flame ion 
+source chemistry is difficult, and providing data to improve such models is one important 
+goal of this project.  Fortunately, in some applications the source region is so small that a 
+constant ion source of sufficient intensity to account for the overall current flow in the 
+system can provide an appropriate charge concentration boundary.   
+ 
+We assume a steady, laminar air flow with constant properties that satisfies the continuity 
+equation, 
+ 
+0=⋅∇V
+
+ 
+ 
+and the momentum equation, 
+ 
+FPVV
+
++⋅∇+−∇=⋅∇ τρ )( , 
+ 
+where Pis the static pressure, τis the stress tensor, and F
+r
+ is the external body force per 
+unit volume that can include buoyancy, gρ and the Coulomb force, Φ∇q .  It is this last 
+term that couples the neutral gas flow to the ion motion. 
+ 
+In order to gain some physical insight into the ion driven wind and its relationship to sys-
+tem parameters, we can describe a theoretical one-dimensional configuration, where a 
+planar ion source at high potential is separated from a planar ground electrode.  Under 
+these conditions, the body force applied to the neutral gas is [8]
+
+--- page 9 ---
+9 
+ )(±±= qEeF  
+ 
+and the local current density, j,  
+ 
+EeqKj ±±=  
+ 
+so that 
+ 
+±±= KjF / , 
+ 
+where e and q represent fundamental charge and number density of charges, respe c-
+tively, and the sign in the subscript denotes the polarity.  This unipolar condition applies 
+so long as the field at the target electrode(s) does not reach magnitudes large enough to 
+cause secondary ionization and electrical breakdown of the neutral gas there.  Beyond 
+breakdown, F decreases because the secondary ions counterflow and neutralize those 
+driving the process.  The space charge causes E to grow in the inter-electrode region and 
+the consequent eventual electrical breakdown generally determines the maximum effects 
+that can be achieved.  Extending the unidimensional concept suggests that the distribution 
+of body force and consequent pressure gradients results in gas flow which can be tailored 
+by appropriate design of the electrode geometry.  Under ideal circumstances, forces can 
+be achieved that are hundreds of times those of buoyancy [10], but in typical combustion 
+situations, the ion driven wind will be on the order of a few m/s and the force achieved 
+will be a few times that of buoyancy.  Although this may not seem substantial, ion driven 
+winds have been used to extinguish flames [11].   
+ 
+The above equations show that an electric field applied to the flame can create a direct 
+body force, or force per unit volume, on the system just as buoyancy does in a gravita-
+tional field.  Because buoyancy can be a dominant characteristic of terrestrial combustion 
+processes, it may seem less than obvious why physics regards gravity as a “weak force.”  
+However, if we consider a small magnet picking up a metal object with the entire earth 
+pulling in the opposite direction, it becomes obvious how much stronger the electromag-
+netic forces are.  It is hardly surprising, therefore, that electrical forces acting on charge 
+carriers can effectively substitute for gravitational influences or, more generally, provide 
+for vigorous combustion control in its absence (i.e., in microgravity).  It is the opportu-
+nity for exploiting the electric force in flames that motivates this research activity.  Al-
+ready, electric fields have demonstrated powerful influences on combustion processes 
+that include flame shape [12,13], sooting behavior [14-16], burning velocity [17,18], ex-
+tinction [11,19], and stability [20,21].  The foundation of many of these results, as dis-
+cussed in Lawton and Weinberg [7], reside in ion wind effects.  In microgravity, where 
+there are no density driven buoyant effects to contend with, ion winds represent an im-
+portant (and perhaps the only) body force that can be applied to manipulate combustion 
+systems.  Hence, the zero gravity environment provides a unique opportunity to probe 
+and exploit the electrical aspects of flames [22].
+
+--- page 10 ---
+10 
+1.2 Opportunities in Microgravity for Understanding Electric Field Effects on Flames  
+ 
+There are at least four ways that detailed measurements of electrical properties of flames 
+in microgravity can be used to improve our understanding of flame electrochemistry and 
+to potentially improve combustion performance: 
+ 
+(1) Extracting flame ions in order to change flame chemistry – we have already described 
+that ion radicals are not considered a large contributor to combustion heat release.  
+However, in the situations of weak flames, as can be represented by diluted diffusion 
+flames in zero gravity and terrestrial flames near extinction limits, their role is likely 
+to be more important.  In addition, in near-limit flames, ion manipulation may be used 
+to extend stability behavior. 
+ 
+(2) Creating a neutral wind (ion driven convection) locally at the flame front; this is one 
+of the rare and important action-at-a-distance effects on flames that can be used as a 
+localized actuator.  A one dimensional estimate of the equation for the forces avail-
+able shows that the typical values for a flame can produce ion winds with flow veloc-
+ity on the order of 1 m/s and forces on the order of one or two times the buoyant force.  
+Although this sounds like a fairly modest wind, it has been shown to be capable of 
+substantial effects, including flame extinction [11,19].  The effect of the wind has 
+been demonstrated with a candle flame in parabolic flight based microgravity [12] 
+and in a spherical cage drop tower [13], but there has been no systematic study of the 
+ion wind effect in the absence of the confounding effects of the approximately equal 
+influence of buoyancy.  The actuation of the flame can be used to control flame per-
+formance despite external fluctuations. 
+ 
+(3) Using electric fields to affect soot formation and transport – ions and soot are closely 
+linked because there are shared chemical pathways [23] and because soot particles are 
+charged by the flame ion attachment or electron ejection.  It is possible, therefore, to 
+modify soot formation and to use charges attached to soot to affect soot transport.  By 
+adjusting the soot trajectory through the reaction zone it is possible to affect the oxi-
+dation of soot to prevent its eventual release or to modify the residence time of soot in 
+different zones of the flame.  It is also possible to use the neutral ion wind to change 
+the mixing behavior of the flame and reduce soot in this way. 
+ 
+(4) Using the electrical properties to characterize the flame – there is a quantifiable rela-
+tionship between the carbon content of a fuel and the ion current it can produce at 
+saturation [24].  This relationship is already exploited in a typical flame ionization de-
+tector (FID) analyzer for hydrocarbon emission where the carbon is burned in a hy-
+drogen flame to create an ion current in proportion to the carbon influx.  In direct 
+flame interrogation, however, there are several confounding variables that can affect 
+the ion current, including flame temperature (which generally affects the O atom con-
+centration) and the reaction zone volume.  Flame temperature can in turn be affected 
+by levels of premixing, diffusion rates, fuel composition, and radiative loss.  It is pos-
+sible, therefore, to determine flame character from the ionization curve response.  
+There are also many opportunities identified for ion sensors as part of a combustion
+
+--- page 11 ---
+11 
+control scheme, where input variables can be tuned to optimal performance as meas-
+ured by ion current.  HCCI engines, for example, would benefit from an in-cylinder 
+diagnostic to determine the combustion quality [6,25]. 
+ 
+Examples of the kinds of methods and phenomena described above are provided in the 
+next subsection. 
+ 
+1.3 Results from Earth Gravity Experiments 
+ 
+A series of 1-g experiments were 
+performed in order to demonstrate 
+some of the phenomena described 
+above.  In the following sections 
+we outline some examples of tai-
+lored ion driven gas  flows.  
+Among applications based on 
+flame ions, we describe el ectric 
+field-controlled flame convection 
+in actual microgravity enviro n-
+ments [11,26], as well as the crea-
+tion of microbuoyancy by the ap-
+plication of electric fields to 
+flames in the laboratory [27,28].  
+The final set of 1-g studies use 
+electric fields to actively control 
+flame luminosity and ion current 
+[29,30].  The basic experimental 
+configuration for nearly all of these studies is shown in Figure 1.3.  It consists of a small 
+diffusion flame burning at the end of a metal capillary (1.7 mm o.d.) between two planar 
+mesh electrodes.  The metal capillary is kept at the same potential as the mesh electrode 
+with which it has contact. One important aspect of this geometry is that when it is 
+charged positively, the capillary acts an electrode that draws away electrons, letting the 
+positive ions produce a uni-polar wind.  Recent tests with a coflow burner use a similar 
+configuration, the only differences being the burner geometry and a non-inverted orienta-
+tion.   
+ 
+Electric field-induced flame convection in microgravity [11,26] 
+        
+While currently, combustion in spacecraft is considered primarily in the context of fire 
+safety, it is possible in the more distant future that combustion may play a role in onboard 
+manufacturing and waste processing.  Perhaps more importantly, however, studying elec-
+tric field-induced convection in microgravity clarifies the fundamentals of this process by 
+eliminating the confounding buoyancy forces.  Under earth gravity, diffusion flames rely 
+on natural or forced convection to replenish reactants and direct the hot products.  In mi-
+crogravity, diffusion flames tend to become spherical and, as the result of blanketing by 
+Figure 1.3.  Experimental apparatus for capillary 
+flame under electric field control.
+
+--- page 12 ---
+12 
+their own products, burn very slowly under diffusion control and become unsuitable for 
+transferring focused heat to any object.  
+ 
+In the course of work carried out in 
+KC135 parabolic flights, a compact, 
+lightweight electro-gas-dynamic duct us-
+ing the drag exercised on flame ions was 
+employed to control the gas flow and fo-
+cus the heat transfer. Figure 1.4 shows im-
+ages of these early experiments.  The posi-
+tive electrode contacted the flame, allow-
+ing for virtually dragless removal of elec-
+trons.  The metal grid cathode at the end 
+of the duct was used to “focus” the hot 
+product stream.  Even with just candle flames, heat fluxes of approximately 300W/cm2 
+could be attained.  Control of heat transfer from flames, by electric fields, had previously 
+been demonstrated in the laboratory [31].  In space environments, this method can pro-
+vide intense heating of small areas, making economic use of the oxygen available, offer-
+ing perhaps the only simple means of allowing combustion of condensed fuels to be used 
+for practical purposes, including for example, stabilizing and reducing waste materials 
+onboard spacecraft.   
+ 
+Similar efforts for heat flux control 
+in a droplet stream flame were un-
+successful because the geometry 
+did not include an electrode in con-
+tact with the flame [32].  In this 
+case, the ion wind produces a mix-
+ing effect that shortens the flame 
+by mixing satellite droplets in un-
+stable streams but has no effect on 
+stable droplet stream flames.  This 
+result indicates the importance of 
+having one electrode close to the 
+reaction zone when creating an ion 
+wind. 
+ 
+Creating microbuoyancy by the 
+application of electric fields to 
+flames [27,28,33] 
+  
+Microgravity is involved in combustion research for eliminating natural convection. To 
+achieve such a condition in the laboratory, natural convection has been counter-balanced 
+against the body force created by flame ions drifting in electric fields.  As shown sche-
+matically in Figure 1.3, small diffusion flames on metal capillary anodes (higher potential 
+electrodes) were exposed to fields drawing positive ions to permeable cathodes (lower 
+ Figure 1.5.  Images of 1.8 mm o.d. capillary flames 
+under electric field influence; bottom images are 
+schlieren; black horizontal lines are electrode mesh. 
+Figure 1.4.  Microgravity candle flame with 
+and without electric field forcing.
+
+--- page 13 ---
+13 
+potential electrodes) placed below them.  
+Such bench-top simulations facilitate the use 
+of many optical and laser diagnostic meth-
+ods that can probe the structure of small diffusion flames.  
+ 
+In preliminary experiments [27], a temporary (of the order of seconds) point of balance 
+was achieved which is, however, inherently unstable and suitable only for instantaneous 
+“snapshot” recording. As shown in Figure 1.5, video recording of shadowgraphy by ar-
+gon ion laser illumination was employed to monitor the flow of hot gas.  The most direct 
+indications of when the point of balance has been reached are that the flame luminosity 
+becomes symmetrical around the burner mouth and 
+that the shadow rapidly vanishes.  The diffusion-
+controlled flame structure causes optical records de-
+pending on refractive index gradients to weaken and 
+eventually to disappear.   
+ 
+In later experiments, the addition of an upper mesh 
+electrode helped stabilize the approximate balance 
+condition for longer periods, and created a localized 
+steady-state balance condition.  This permitted i t e ra-
+tive measurements over extended time periods, which 
+has been achieved by confining the balance to only 
+part of the flame.  The temperature field of a small 
+diffusion flame under electric field control was 
+probed with holographic interferometry [28], N2 co-
+herent anti-Stokes Raman spectroscopy (CARS) 
+[28,33], and oxygen laser induced fluorescence [33].  
+Over a portion of the flame, the temperature distribu-
+tion of such capillary flames closely approximate to 
+the purely diffusive thermal profiles that would be expected under microgravity condi-
+tions.  The schlieren images of Figure 1.5 show the difficulty in balancing the body force 
+and ion wind force everywhere.  The contrast area shows the hot gas which, at balance, 
+should be spherical.  However, even at the nominal balance condition (2850 V) as deter-
+ Figure 1.8.  Theoretical ion wind 
+force balance based on a sym-
+metric thermal profile and War-
+burg ion distribution. 
+ Figure 1.7.  Ion flux at the ground elec-
+trode 
+Figure 1.6.  Refined apparatus showing the 
+ion probe
+
+--- page 14 ---
+14 
+mined by the axial temperature 
+profile and the spherical flame 
+boundary, there remains a dis-
+tinct column of hot gas.  To un-
+derstand the challenge to balance, 
+we measured the ion flux distri-
+bution at the ground plane for the 
+small flame.  The apparatus for 
+this measurement, which is 
+shown in Figure 1.6, is esse n-
+tially the same as is shown in 
+Figure 1.3 except that we added 
+the capability of an ion probe 
+flush with the ground mesh to 
+measure the spatial distribution 
+of the ion current.  Remarkably, 
+as shown in Figure 1.7, the ion 
+flux follows very closely the Warburg distribution (a pr ofile that describes the space 
+charge distribution for ions generated in a point-to-plane corona discharge).  This result 
+indicates that the ion distribution in the unipolar region of the flame system is largely 
+driven by charge repulsion.  Knowing the local current density, and then assu ming a 
+spherical thermal profile, it is possible to compare approximately the local force balance 
+between buoyancy and the ion driven body 
+force.  The comparison is shown in Figure 
+1.8.  From this figure it is clear that balance 
+can only be achieved over a portion of the 
+flame.   
+ 
+Our first attempt to simulate the coupled 
+physics of the problem involved computing 
+the flow field associated with the balance 
+condition shown above.  The simulation 
+solves the equations described in the back-
+ground section but also includes variable 
+temperature and the associated buoyant force.  
+The modeling details are too complex to re-
+peat here but they are provided in the refer-
+ences [9,34].  Briefly, the simulation uses the 
+commercial software FEMLAB (now COM-
+SOL Multiphysics) to solve the rel evant 
+multi-physics equation with boundary conditions consistent with planar electrodes and 
+the flame acting as a spherical ion source.  Figure 1.9 shows the flow field generated by 
+the combination of buoyancy and the ion wind under the capillary flame conditions ap-
+proximating the balance condition.  There are several substantial approximations in this 
+model.  One is that there is no chemistry in the simulation.  The flame is simply a con-
+stant temperature boundary (at the measured flame temperature) and a constant ion 
+ Figure 1.9.  Numerical simulation of the ion wind and 
+resulting body force. 
+ Figure 1.10. Typical voltage-current char-
+acteristic curve for diffusion flame.
+
+--- page 15 ---
+15 
+ Figure 1.11  Voltage-current characteristic curves for the 1-g 
+coflow burner under negative and positive mesh electric fields. 
+source (at the measured total ion flux).  In addition, the flame remains spherical despite 
+any convection from the local ion-driven wind.  This model neglects, therefore, the cou-
+plings between temperature and the ion source strength and the effects of flows on the 
+flame shape that also change the temperature and the ion source.  As mentioned earlier, 
+for these small flames that are space charge dominated, the shape of the flame is unlikely 
+to have a large effect on the shape of the ion flux distribution but it can have a very dra-
+dramatic effect on the 
+total ion concentration 
+and hence the electric 
+body force.  
+ 
+Effects of different fuels 
+and orientation to gravity 
+on the V-I curve 
+ 
+One of the important 
+findings of the earth 
+gravity studies was how 
+the ion current mea s-
+urements (i.e., the 
+voltage-current or VI 
+curve) responded to 
+changes in fuel flow rate, 
+flame shape, and the fuel 
+type.  A typical VI curve 
+for our small diffusion 
+flames is shown in Figure 
+1.10. There are three main regions of the curve.  At low voltage the cu rrent follows a 
+quadratic increase with voltage up to saturation.  At saturation, the current is drawn from 
+the flame as rapidly as it can produce ions so there is no further increase in current at this 
+plateau.  In this figure, the plateau is quite short, but other conditions give a more pro-
+nounced saturation region.  We postulated, and demonstrated numerically [35], that the 
+current rises at higher voltages because the ion-driven wind has changed the character of 
+the nominally diffusion flame to one with air entrainment and premixing, which affects 
+the temperature, flame surface area, and the chemistry. The VI curve shows more fluctua-
+tion at higher voltages indicating flame instability. 
+ 
+Laboratory electric field experiments were also undertaken using a coflow burner to ex-
+plore the possibility of using the same burner being considered for other experiments in 
+the ACME program.  Electric field experiments on a coflowing flame have shown some 
+similar behaviors to those of the jet diffusion flame, but there are also important differ-
+ences.  Figure 1.11 shows the coflow flame ion current response under different flow 
+conditions.  With a negatively charged mesh, low mobility cations drift toward the mesh, 
+entraining additional air in the flame. This additional convective flow causes saturation to 
+occur at different field strengths.  The effects of entrainment are not as dramatic when the
+
+--- page 16 ---
+16 
+mesh is positively charged, and the flame saturates at the same applied electric field 
+strength regardless of flow conditions.  
+ 
+For all coflow burner tests, the 
+flames are slightly lifted above 
+the burner surface.  Regardless 
+of polarity, electric fields 
+stabilize and draw a lifted 
+flame to the burner. Positive 
+field stability results from the 
+movement of low mobility ions 
+and the corresponding ion wind. 
+Changing polarity, a negative 
+field initially destabilizes the 
+flame, until saturation, where 
+the dominant force changes 
+and the flame is drawn toward 
+the burner. During this 
+transition, the flame oscillates 
+before finally stabilizing. The 
+frequency of this oscillation 
+varies with both jet and 
+coflowing air velocity. 
+ 
+Depending on the condition, the applied field can induce transient ion current oscillations 
+or oscillations in the visible flame. Figure 1.12 shows the transient ion current and PMT 
+response of a flame that does not appear to oscillate because the timescales are too fast to 
+create a noticeable visual effect on the flame. The flame body oscillations, mentioned 
+above, likely result from a competition between the upward directed ion-wind and oxy-
+gen-entrained premixing, drawing the flame to the burner. As the flame propagates to-
+ward the burner, the amount of entrained oxygen decreases and the domina ting force 
+shifts to the ion wind. 
+ 
+Recent experiments are aimed at understanding gravity’s influence on the effects of ion-
+driven winds have been performed using the NASA 2.2 Second Drop Tower. The burner 
+used for the Drop Tower is slightly different in geometry from our 1-g studies at UCI. A 
+detailed discussion of the differences can be found in reference [38].  The behavior of 
+voltage-current characteristic (VCC) curves in the converging nozzle co-flow diffusion 
+flame system (without a honeycomb annulus at the jet exit) exhibited features of both the 
+co-flow burner flames (with a honeycomb) and downward facing jet diffusion flames in 
+still air (without a honeycomb). As a result of the relatively high mean fuel jet and co-
+flow air velocities (> 25 cm/s), flame shape and ion current were similar in 1g and µg. 
+This makes clear the gravity effect on global responses of the flame such as the ion cur-
+rent were minimal and unrepresentative at these conditions. These results offered interest-
+ing insights. As the magnitude of the negative field was increased, the flame became 
+slender, soot formation was suppressed, and the flame base gradually lifted from the fuel 
+ Figure 1.12. Transient ion current and PMT signals under 
+the influence of a static field
+
+--- page 17 ---
+17 
+tube as a result of ion-induced flow entrainment toward the flame tip. At applied voltages 
+near the saturation transitions, the flame oscillated significantly as the flame base par-
+tially detached and then reattached to the burner. The variations in the flame shape and 
+the liftoff height during the oscillation are reflected in the ion current signal.  Because of 
+the competition between buoyancy and the ion-driven wind, we expect these oscillation 
+phenomena to be affected significantly by zero-g conditions at low coflow rates.  The 
+ion-induced flow from a negative field in µg acts like the buoyancy-induced flow in 1g to 
+destabilize the flame, while the increased liftoff height allowed enhanced fuel-air mixing, 
+thus stimulating the flame base to propagate back toward the fuel tube. If sufficient fuel-
+air mixing time (≈100 ms) is available, the flame base can propagate through the strati-
+fied mixing layer at the flame speed of a stoichiometric mixture [37].  
+ 
+Testing at lower coflow velocities ranging from 0-5cm/s show dramatic changes in flame 
+shape, as shown in Figure 1.13. Without the influence of large coflow velocities and 
+buoyancy, videos and ion current measurements show the complex interaction between 
+ionization, flame shape, and ion-driven wind. When the field is energized, we can see 
+how the development of the ion wind alters the flow profile, which reshapes flame and 
+intensity of burning, subsequently modifying the strength of the ion wind. In the tests per-
+formed, steady state conditions were not achieved.  
+ 
+Building from previous efforts, our numerical approach now includes the effects of com-
+bustion chemistry under the influence of an electric field using the commercial software 
+PHOENICS. The goal is to provide additional insight to the complex couplings in our 
+experiment. Additional results and details of the model can be found in reference [35]. 
+1g 
+  
+ 
+0g 
+  
+                        0kV                                        -3kV                                      -5kV 
+ 
+Figure 1.13 – Comparison of 1-g and low-g testing. Testing performed at 24 cm/s. A 5 cm/s 
+coflow is applied in the -3kV case. Mesh to electrode distance is 5 cm.
+
+--- page 18 ---
+18 
+ Figure 1.15. Evolution of the velocity field and oxygen distribution and super-
+saturated region around the flame zone.  
+Solving the chemistry and its 
+resulting influence on the electric 
+field helps remove many of the 
+assumptions found in our 
+previous modeling efforts. Based 
+on the geometry in Figure 1.3, 
+we modeled an inverted capillary 
+jet with methane as a fuel, under 
+the influence of an electric field. 
+Figure 1.14 shows a comparison 
+between the experimental ion 
+current measurements and the 
+computed r esponse. The 
+computation recreates the three 
+regions discussed in Figure 1.10, 
+but the lack of quantitative 
+agreement illuminates the sensitivity of kinetic rates and ion mobility. Unde rstanding 
+these coupled parameters will require a system where the chemistry and buoyancy can be 
+decoupled, as in the experiments planned for the ISS. Figure 1.15 shows the computed 
+flowfield at and around saturation, showing its contribution to the change in flame char-
+acter. At higher applied voltages, velocity vectors show the entrainment of oxygen into 
+the flame zone, evidence of its contribution to creating a partially premixed flame, creat-
+ing the enhanced ionization region.  
+ 
+The relationship between the VI curve and the flame behavior is a potentially valuable 
+diagnostic tool.  As shown in Figure 1.16, the VI curve shape remains fairly constant, but 
+its amplitude changes for different flowrates of methane fuel into the gas jet burner.  This 
+result is consistent with the expectation that ion current at saturation scales with total car-
+bon influx into the system [24].  When a different fuel is used, however, the VI curve 
+changes substantially, particularly when the fuel produces soot.  An ethylene flame under 
+the influence of an electric field (as in Figure 1.17) appears much different than the meth-
+ane flame in Figure 1.5.  The same kinds of results are discovered when the capillary 
+flame is oriented horizontally rather than vertically in the 1-g earth gravitational field.  In 
+the horizontal case, there is no approximate force balance condition and so the ion-driven 
+ Figure 1.14. Comparison of experimental ion current 
+measurement to numerical calculations
+
+--- page 19 ---
+19 
+wind simply directs the hot flame gases to different locations on the ground plane.  A de-
+tailed comparison between horizontal 
+and vertical flames and flames of differ-
+ent fuels appeared in [9]. 
+ 
+ 
+1.4 Summary of Findings and Open 
+Questions 
+ 
+The above earth gravity experiments 
+have resolved many questions regarding 
+ion driven winds in small diffusion 
+flames, and all of the important experi-
+mental conditions and procedures have 
+been established.  The ion pathlines and 
+the link between ion driven winds and 
+the flame shape and behavior for small 
+diffusion flames have been identified.  
+Modeling of the electrokinetics along 
+with the fluid dynamics has been successful, thereby providing an analytical tool for un-
+derstanding the ion wind/flow coupling.  The open questions regard the relationship be-
+tween flame character (e.g., level of partial premixing) and the electric response.  In addi-
+tion, uncertainty remains regarding the chemical versus physical role of ions, and the po-
+tential for dynamic manipulation of flames using electric fields.   
+ 
+The 1-g studies to date did not involve any quantitative analysis of soot because carbon 
+particles complicate the interpretation of electrical properties, but this component of 
+combustion is important to include because electric fields can modify soot formation and 
+burnout [14,40,41].   There is no question that flame soot is electrically charged, as 
+shown in Figure 1.18, but there is a long-standing debate in the combustion community 
+regarding the role of ions in the formation of soot.  Essentially, there are the more numer-
+ous adherents to the mechanism of soot growth by the addition of neutral hydrocarbon 
+that is exemplified in the work of [42,43] versus those that believe that the addition of ion 
+radical hydrocarbon species are important, as discussed in [23,44,45].  Although recent 
+numerical work has focused primarily on the neutral species approach, there continues to 
+be strong interest in the possible role of ions because there has been no satisfactory ex-
+ 
+0
+0.5
+1
+1.5
+2
+2.5
+3
+01 2 34 5678 910111213
+Applied Voltage [kV]
+Ion current [microamps]
+Methane 6.0 mg/min
+Methane 13.8 mg/min
+Methane 27.3 mg/min
+Figure 1.16.  Methane VI curves at different 
+flow rates 
+ 
+Ethylene 50 mg/min 
+  Figure 1.17.  Effect of electric field on ethylene flame showing the 
+variation of soot behavior.
+
+--- page 20 ---
+20 
+ Figure 1.19.  Current, CH chemiluminescence, and im-
+age of flame as a function of voltage. 
+planation from the neutral radical perspective for why the addition of metal ions into a 
+flame reduces soot.  If ionic species are important, however, the reason for metal ions 
+suppressing soot is clear since the metal ions will compete for electrons with other spe-
+cies, reducing the formation of potential precursor charged radicals.   
+ 
+The E-FIELD Flames experiment provides an opportunity to explore two potential roles 
+of ions in the control of soot.  The first is the ionic wind, where local mixing of oxidizer 
+driven by the ion wind can change the residence time of precursor species through the 
+reaction zone and modify soot formation.  This mechanism has been demonstrated in 1-g 
+[14], but it has not been quantified because there is a complication of buo yancy.  The 
+second is to actually remove ionic species from the flame zone, modifying their time 
+temperature history.  This action 
+would directly affect the possible 
+ionic soot growth mechanism.  
+Because the ionic wind effect 
+and the direct ion transport 
+effects are coupled, the tests will 
+not be completely unambiguous, 
+but they will eliminate the 
+complication of buoyant driven 
+flow and thereby provide data 
+that can be analyzed in the 
+context of the soot fo rmation 
+mechanisms to provide insight.  
+The tests then include soot 
+volume fraction measurements as 
+a function of ele ctric field 
+strength (voltage and ion current) at the conditions identified as showing the highest sen-
+sitivities to electric field influences.   
+ 
+Under conditions where the ion current is dominated by soot, thermionic emission from 
+soot provides another tool for electrical flame analysis.  Boothman, et al. [24] showed 
+that the thermionic current density (A/cm2) is given by the Dushman equation,  
+ 
+kTeeBTj /2 φ−=  
+ 
+where B is a universal constant with magnitude between 50 and 60 A/K2cm2, the e in the 
+exponent is the elementary charge, φ is the work function for soot (approx. 4.4 V), and k 
+ Figure 1.18 An electric field alters the luminosity of soot in an ethylene flame in a 
+coflow.
+
+--- page 21 ---
+21 
+is Boltzmann’s constant.  Knowing the soot volume fraction, the soot temperature, and 
+the ion current, it is then possible to compute the soot surface area and the Sauter mean 
+diameter particle size.  For example, using 1 ppmv as a typical soot volume fraction for 
+an ethylene-air diffusion flame, and assuming a soot temperature of 1500K, an ion cur-
+rent of 10 microamp from a flame volume of 5 cc would imply a soot d32 (or Sauter Mean 
+Diameter) of 5 nanometers.  The same soot volume fraction, with 100 nm soot particles 
+would produce only 0.5 microamps.  This sensitivity to surface area can be used to gain 
+further insights into the flame soot 
+growth dynamics. 
+ 
+The above open issues form the 
+basis for our proposed ISS experi-
+ment.  In particular, we plan to use 
+two burner configurations (primar-
+ily the jet flame) with a forcing 
+electrode and controllable high-
+voltage circuitry to explore: (a) the 
+voltage/current relationship of 
+small diffusion flames, particularly 
+as correlated with the flame lumi-
+nosity as shown for example in 
+Figure 1.19; (b) the dynamic re-
+sponse of flames to step changes in 
+local electric fields, as shown in Figure 1.20, so that flames can be accurately modeled as 
+electrical elements [29,30,39] for control; (c) changes to flame soot in response to electric 
+fields to determine the relative importance of physical and chemical influences driven by 
+those fields; and (d) the changes in flame behavior near stability limits in response to 
+electric fields to evaluate the potential of local mixing and electrically driven convection 
+to affect those limits.  The experimental objectives and details associated with these top-
+ics are described in the following sections.   
+ 
+ Figure 1.20.  Electrical analog model and step re-
+sponse
+
+--- page 22 ---
+22 
+2.  E-FIELD FLAMES FLIGHT EXPERIMENT 
+ 
+2.1 Experimental Objectives 
+ 
+The ultimate objective of this experiment is to develop an understanding of the mecha-
+nisms of chemi-ionization in flames and to describe the interplay between convective 
+flows driven by those flame ions and their generation rate.  With this information it will 
+then be possible to detect and control flame behavior electrically.   In 1-g, laminar diffu-
+sion flames are often controlled to a large extent by natural convection, and particularly 
+by the rate at which natural convection brings fresh oxidizer to the reaction zone.  Hence, 
+the vigor with which combustion proceeds depends on local convection.  As described in 
+Section 1, an electric field acting on flame ions produces a body force and convection 
+(analogous to buoyancy) which affects the combustion process.  The change in the com-
+bustion process can in turn affect the ion production rate, which is responsible for the 
+body force.  This coupled interaction is very difficult to measure, study, and understand 
+in 1-g because buoyant forces (of approximately equal magnitude) interfere.  In micro-
+gravity, there is no such complication and the body force in the flame is associated en-
+tirely with the ion-driven wind.  1-g experiments have demonstrated clearly that electri-
+cally driven convection can be used to modify the local flow field in a manner that 
+changes combustion behavior.    For example, it can stabilize lifted flames or force them 
+to reattach.  Electric fields have been seen to change soot formation, though whether 
+solely by residence time effects or their combination with chemical alterations has not 
+been confirmed.  In addition, ions can attach to soot particles providing them with e n-
+hanced mobility that can be manipulated.  Furthermore, the electrical properties of flames 
+provide a measure of their character.  For example, non-premixed flames exhibit different 
+relationships between ion production and ion wind forces than do premixed flames.  The 
+hydrocarbon fuel, and in particular, the carbon/hydrogen ratio, also affects these interac-
+tions.  The goal of this project is to clarify and quantify this range of electrical effects and 
+to then demonstrate the electrical manipulation of flame stability and soot in flames using 
+the information obtained.     
+ 
+To accomplish this scientific goal, there are four fundamental experimental objectives, in 
+priority order, using a jet diffusion flame burner and a co-flow diffusion flame burner.  
+The jet flame is the more critical configuration because it has a large 1-g data foundation 
+and it can be more easily modeled as an ion and thermal source.  In zero-g, however, it 
+will be primarily driven by ion wind convection (no buoyant contribution and at its low 
+fuel flow rates, the injection momentum dies rapidly with distance from the i njector) 
+which may limit its operating range.  The co-flow flame allows a forced convection com-
+ponent to provide a wider range of flow conditions (fuel dilution and exit velocity) and a 
+reproducible lifted flame for stability and soot behavior studies: 
+  
+A)  Determine the relationship between electric field voltage and chemi-ion current as 
+functions of total fuel (methane and ethylene) flow rate and the amount of inert (nitro-
+gen) in the fuel.
+
+--- page 23 ---
+23 
+For the above determination, a low-sooting and highly sooting fuel are included, and the 
+inert weakens the flame sufficiently to permit near-limit conditions at moderate flow ve-
+locities, where the effects of electric fields will be most acute.  As shown in Figure 1.10, 
+the resulting voltage-current (VI) curve (also known as the voltage current characteristic -
+- VCC) from these experiments will identify the voltage and current at which the ion cur-
+rent first saturates, the voltage at which the current begins to increase beyond saturation, 
+indicating a change in combustion behavior, and the voltage at which the flame extin-
+guishes.  These data can be analyzed further to provide the ion production per carbon 
+atom of fuel flux which describes the flame character (i.e., diffusion to partially pr e-
+mixed), and the ion wind strength for each condition.  In addition to their direct interpre-
+tative value for calculating ion-driven winds and body forces, these data can also be used 
+in electrokinetic simulations to compute ion mobility values consistent with measured ion 
+currents and to help validate the numerical simulations of other researchers that include 
+ion species and electrical effects in their flame calculations. 
+  
+B) Obtain the time response of the flame chemiluminescence, luminosity, and the ion 
+current to large step changes in voltage, as functions of total fuel (methane and ethyl-
+ene) flow rate and amount of inert (nitrogen) added to the fuel stream.   
+ 
+These data provide the dynamic system behavior of the flame.  This information co m-
+prises the time response of the flame (i.e., its surface area and luminosity) as compared to 
+the time response of the ion current.  These timescales can temporally separate the direct 
+chemical effects of electric fields from ion diffusion and ion wind convective forcing.  In 
+addition, the system response is required to eventually build flame models suitable for 
+active electrical control, assuming linear behavior over small ranges. 
+ 
+C) Evaluate and manipulate sooting behavior (i.e., soot volume fraction and location of 
+luminous soot) in relation to the electric field voltage and chemi-ion current as func-
+tions of total fuel (methane and ethylene) flow rate and amount of inert (nitrogen) 
+added to the fuel stream.   
+ 
+The interaction between soot and electric fields is very complex because it combines the 
+direct influence of electric fields on the chemistry, the ion wind effects on residence time 
+and mixing, and the electric forces on the charged soot particles themselves.  The zero-
+gravity environment, using the combination of the jet diffusion flame and the co -flow 
+flame provides a wide range of conditions where these different influences can be a l-
+lowed to dominate individually.  For example, the forced convection environment of the 
+co-flow burner will minimize the influence of the axial ion-driven wind, which helps to 
+distinguish the direct electrical effects on ion chemistry in soot formation.  In addition to 
+demonstrating the direct control of soot behavior by electric fields, separating the influ-
+ences can help distinguish between neutral molecule addition mechanisms of soot forma-
+tion and those that presume the importance of ionic species.  For example, changing the 
+strength and polarity of the electric field can change the availability of ion precursors, 
+and electric convection can manipulate reactants’ time/temperature history.  In addition, 
+charges will accumulate onto soot, and the electric field can then act directly on the soot 
+particles to change their residence time and path through the flame.
+
+--- page 24 ---
+24 
+ Figure 2.1 Effect of electric field on liftoff in a 
+coflow burner; the positive mesh field produces 
+reattachment. 
+ 
+D) Use the variation of the chemi-ion current as a function of applied voltage to char-
+acterize the combustion behavior of near-limit lifted flames and use the associated ion-
+driven wind to stabilize or reattach these flames. 
+ 
+Because the chemi-ion current per unit flame area can be used as an indicator of flame 
+strength, its measure (both average and fluctuating properties) with low electric field 
+voltage can be used to detect flames approaching their limit condition.  By adjusting the 
+electric field, 1-g studies indicate that an ion driven wind can be used to reduce the lift-
+off height and stabilize the flame.  This is an example of open loop electrical flame sens-
+ing, analysis, and control.    
+ 
+2.2 Approach 
+ 
+The specific experimental objectives of the electric field experiments all examine the po-
+tential for electric fields to distinguish and manipulate combustion behavior of laminar 
+diffusion flames, particularly with regards to stability and extinction limits and soot for-
+mation and burnout.  As described in Section 1, our 1-g studies have shown that small gas 
+jet diffusion flames can be used to study a wide range of electric field/flame ion interac-
+tions, particularly as regards the changes to the flames that result from ion driven winds.  
+These flames are compact (allowing complete optical visualization) and require very low 
+flow rates of fuel (on the order of 30 sccm) which makes them well-suited to the CIR ex-
+periment environment.  The E-FIELD Flames experiment can also take advantage of the 
+co-flow burner that is proposed for the CLD Flame component of the ACME flight ex-
+periments.  Like the gas jet diffusion flame, the co-flow burner uses very small amounts 
+of fuel, but unlike the jet flame, the burner isolates the diffusion flame sheet from the in-
+fluence of the static ambient gas with a co-flowing gas stream.  The co-flow configura-
+tion allows two important aspects of 
+electric field/flame interaction to be 
+studied.  First, the effects of the electric 
+field on the lifted co-flow flame can be 
+examined.  There is evidence in the 
+literature that electric fields increase 
+flame resistance to lifting, though the 
+liftoff height itself may not change 
+substantially [46,47].  It is likely that 
+this effect is related to the ion driven 
+wind because the lifted flames are 
+sufficiently near their combustion limit 
+to respond to relatively small forcing.  
+This influence can be quantified using 
+the co-flow burner.  There is a 
+controversy in the literature regarding the importance of ion driven winds in the liftoff 
+behavior relative to the chemical effects.  The controversy cannot be resolved easily in 1-
+g because buoyancy confounds the flowfield. Recent experiments in our 1-g laboratory 
+confirm that the co-flow burner exhibits some significantly different electric field/flame
+
+--- page 25 ---
+25 
+interactions from the jet diffusion flame. Figure 2.1 shows a typ ical methane co-flow 
+without and with the electric field. 
+ 
+In addition to controlled lifted flame ion current measurements, in the slightly lifted (but 
+not near-limit) flame conditions, the effect of the electric field on sooting behavior can be 
+measured.  As mentioned earlier, there remains some question regarding the role of ionic 
+species in soot formation, and by using the co-flow burner configuration, we will be able 
+to affect the flame electrically without distorting the flame with the ion-driven wind as 
+necessarily occurs in the simple gas jet diffusion flame. 
+ 
+The detailed list of flame conditions to be studied is included in Section 3 and in the Ap-
+pendix (e.g., test matrix of conditions).  The basic variations in the tests, however, are in 
+the burner type (simple gas jet and co-flow), the fuel type (methane and ethylene), and in 
+the level of inert (nitrogen) dilution of the fuel.  The co-flow gas will be air with molar 
+composition of 21% O2 and 79% N2.  If additional fuel gas combinations and oxidizer is 
+available (e.g., CO2 diluted fuel), then additional experiments can be run following the 
+same procedures outlined below.   
+   
+The schematic approach of the E-FIELD Flames experiment is shown in Figure 2.2.  The 
+concept is to ground the burner to the chamber through a safety bleed resistor-capacitor 
+pair, and to install an electrically active mesh electrode downstream of the burner mouth.  
+A tentative electrical configuration is shown in Figure 2.3.  These figures show that the 
+high voltage connection is attached to the mesh, with the ion current measurement being 
+made across a shunt resistor connected between the burner and the low potential (relative 
+to system ground) side of the high voltage source.  This configuration requires that the 
+burner be electrically isolated from the rest of the chamber, but the electrical isolation (in 
+terms of breakdown potential resistance) can be relatively modest since the potential dif-
+ference across the shunt resistor will not be significant during normal operation (e.g., on 
+the order of 1 V for a 100 kΩ shunt resistor and 0.1 microamp chemi-ion current).  The 
+potential of the mesh electrode can be either positive or negative, with a steady voltage or 
+with a time-varying but unipolar voltage (including a step change) to examine the flame’s 
+steady state response and time response to such changes.  The goal of the design is to 
+eliminate any leakage current so that all current flowing through the shunt resistor is the 
+result of chemi-ionization in the flame.  In 1-g studies, there have been cases where soot 
+formed on the burner acts as a weak electron emitter (see, e.g., Figure 1.17).  Even in this 
+situation, the leak current is small (less than 5%), but it is preferable to have a mechanism 
+for removing soot buildup on the burner should it occur.  The removal can be manual, or 
+non-lifted, non-sooting flame conditions can be used to burn the soot from the burner tip 
+in situ.
+
+--- page 26 ---
+26 
+Figure 2.3. Electrical schematic for E-FIELD experiment. 
+Figure 2.2.  Overall schematic of the E-FIELD experiment in the CIR.  Shown is the gas jet 
+burner, but the co-flow configuration would be similar with the substitution of the burner. 
+       
+The data to be recorded include the applied voltage, the ion current, the flame broadband 
+luminosity, the spatially integrated CH* luminosity, flame images of OH* and visible 
+light showing the flame shape as a function of electric potential and flame shape changes 
+during transients in the electric field.  In addition, a measurement of temperature in and 
+near the flame can monitor the thermal field as a function of the electric field conditions.  
+We envision that the 
+measurement could 
+consist of a schlieren 
+image in non-sooting 
+conditions (desired) 
+and soot pyrometry in 
+the sooting regions.  
+A thermal sensor (e.g., 
+thermocouple) near 
+the burner tip could 
+determine if heat 
+from the flame is 
+diffusing back to the 
+burner and possibly 
+affecting the exit gas 
+temperature and 
+flame stability.  This
+
+--- page 27 ---
+27 
+effect has been found to be significant for slightly lifted small co-flow flames, particu-
+larly near their stability limit [48].  Pyrometry on the simple gas jet tube could give simi-
+lar information when the view of the fuel tube is unobstructed. 
+ 
+ 
+2.3 Science Data End Products 
+ 
+Having defined the objectives and the experimental approach of this investigation it is 
+now possible to define a group of final data products that is sufficient to fulfill each ob-
+jective.  Final data products are the graphs, analyses, and figures that will be reported in 
+the archival literature. These final data products are referred to as the “Science Data End 
+Products” (SDEP).  The science requirements and the experiment success criteria d e-
+scribed below are developed from this list of SDEP.  Before defining the SDEP, we re-
+view briefly the independent (or manipulated) variables and the dependent (or respond-
+ing) variables that will form the raw data from the exper iment.  A description of the 
+SDEP then follows. 
+ 
+2.3.1 Independent Variables  
+ 
+Co-flow condition (i.e., burner type) – two types of burners are used.  A simple gas jet 
+burner that has no co-flowing gas and a co-flow burner that includes an annular sheet of 
+oxidizer flow around the inner circular cross-section fuel jet.  The co-flow condition af-
+fects the relative importance of the ion-driven wind relative to the forced convection in 
+controlling flame behavior and can produce a steady lifted flame.   Both burners have a 
+large 1-g data foundation; the former with and without electric fields (e.g., [8,9,33]) and 
+the latter without electrical effects but with comprehensive modeling and detailed diag-
+nostics (e.g., [49-51]).  There are two gas jet flame burners (without coflow) to be used, 
+the only difference being their diameter.  One matches the current 1-g jet flame studies 
+and the other (desired) matches the fuel tube of the co-flow burner so that direct compari-
+sons can be made with regard to any changes in entrainment affected by the co-flow an-
+nulus.  We will also run experiments (desired) using the co-flow burner but without any 
+co-flowing gas because entrainment effects will be different for flames in this 
+configuration compared to the simple gas-jet flames even when the fuel tube has the same 
+diameter.  
+Fuel type – two fuels: methane and ethylene are used.  The former is a low sooting fuel 
+with a low C/H ratio of 0.25.  This fuel is predicted to produce a clean burning flame with 
+relatively low ion production and ion driven wind strength.  It also has the broadest earth 
+gravity data set associated with electrical aspects of flames.  Ethylene is well-known to 
+have high sooting tendencies, with a C/H ratio of 0.5.  Its higher carbon content also pro-
+duces higher ion production and larger potential for ion driven winds.    This fuel will al-
+low broad exploration of the potential for electric fields to control flame soot.  Our earth 
+gravity studies confirm that the two proposed fuels behave differently (e.g., [9]).  These 
+two fuels are also those being proposed for the CLD Flame experiment (with the same 
+coflow of air) allowing comparisons with flames not influenced by electric fields.
+
+--- page 28 ---
+28 
+Total flow rate of fuel (including inert) – the total fuel flow rate sets the exit jet velocity 
+and thereby the relative importance between jet momentum and ion driven convection.  
+The electrical effects will dominate under conditions of low ejection momentum.  How-
+ever, in the co-flow burner, even when the exit jet velocity is fairly high the momentum 
+match between the fuel stream and the co-flow sheath means that the cross flow momen-
+tum can be low, so radial electrical influences may still be important.  This total flow rate 
+parameter also controls the liftoff height of the flame.  
+ 
+Dilution with inert (nitrogen) of fuel – ion production mechanisms predict higher concen-
+trations of chemi-ions under conditions that create higher concentrations of oxygen radi-
+cal.  In a premixed flame, this variable can be manipulated by adjusting the equivalence 
+ratio and reducing the flame temperature.  In a simple non-premixed flame, however, the 
+reaction zone coincides with the stoichiometric condition and so dilution of the fuel with 
+an inert can serve this purpose.  In addition, dilution with an inert can weaken the flame 
+by reducing the heat release rate per unit of fuel inlet flow mass.  At their limit, these 
+flames are most susceptible to the forcing flows and entrainment that can be driven by 
+flame ions. 
+ 
+Voltage (V), polarity, and distance between electrodes – as shown in Section 1, the ion 
+wind body force is a direct function of electric field strength and ion concentration.  The 
+electric field strength is a function of voltage and distance between the electrodes, as well 
+as any space charge effects.  Switching the polarity of the voltage source is important for 
+changing the role of charge carriers during electric field forcing of flames.  The direction 
+of the ion driven wind does not always change dramatically with electric field polarity 
+because the wind generally flows in the direction of the most distant electrode.  This in-
+teresting uni-directionality occurs because the active ion polarity switches to accommo-
+date the change in field.  That is, the ion wind is driven either by negative ions produced 
+by electron attachment to neutrals beyond the flame or H3O+ ions surviving beyond the 
+flame.  Because their distance to the electrode is generally short, the oppositely charged 
+ions or electrons do not create a significant opposing wind.  This behavior may not hold 
+when the flame is lifted a substantial distance from the burner surface.  Even if the wind 
+direction does not change, however, its strength changes substantially because of the rela-
+tive concentration and mobility differences between the ion species responsible.  In addi-
+tion, direct effects on charged species within the reaction zone will be different for differ-
+ent polarities.  We have observed clear indications of these directional wind changes in 
+microgravity from our recent results obtained in the 2.2 s drop tower. 
+ 
+2.3.2 Dependent Variables 
+ 
+Chemi-ion current (I) – the ion current is a primary indicator of chemi-ionization in the 
+flame, and varies depending on flame character, reaction zone size, and combustion in-
+tensity (heat release rate).  This is a global measurement of current flowing through the 
+shunt resistor.  A current measurement without the flame present provides the baseline 
+leak current and ensures that there is no corona discharge or conducting pathway contrib-
+uting to the measured current.  Our 1-g studies show that the experimental configuration
+
+--- page 29 ---
+29 
+described previously has essentially zero leakage current.  Excessive leakage current with 
+no flame may indicate significant soot buildup and be an indicator of cleaning required. 
+ 
+Flame shape and size – in order to determine the effects of ion wind on the reaction zone, 
+images of the flame are needed.  Images of the flame reveal the flame area, provide evi-
+dence of combustion intensity, identify locations of soot formation, and show how the ion 
+wind (local convection) changes the flame shape for the various input flame parameters 
+and electric field strength.  These line-of-sight integrated images will be Abel-inverted to 
+provide the true reaction interface size and location.  Color video images provide infor-
+mation regarding the location of luminous soot and the visible reaction zone interface.  
+UV images with a filter for OH* provide a sharp determination of the reaction zone.  The 
+images of CH* chemiluminescence (desired) can be related to the local rate of heat re-
+lease, which also correlates to chemi-ion production.  This last measurement is “desired” 
+because the combination of the visible images and the OH* images are expected to pro-
+vide approximately equivalent information. 
+ 
+Soot volume fraction – quantitative evaluation of the effects of electric fields on soot 
+formation, transport, and burnout require this information over the flame zone.  We ex-
+pect this measurement to be made by extinction followed by Abel deconvolution.  Soot 
+volume fraction is also needed to estimate mean soot particle size from the Dushman 
+equation as described at the end of Section 1.  
+ 
+Spatially integrated luminosity – Broad spectrum flame luminosity, which includes the 
+chemiluminescence and soot radiation collected over a large solid angle (not imaging) 
+provides a rapid global response variable of how the flame reacts to changes in the elec-
+tric field.  Laboratory studies (see, for example, Figure 1.5 and 1.19) have shown that this 
+luminosity signal can be correlated to flame appearance and ion current.   
+ 
+Spatially integrated  chemiluminescence (CH*) – CH* chemiluminescence can be related 
+to heat release rate and its collection over a broad solid angle (not imaging) provides a 
+rapid response variable of how the flame reacts to changes in the electric field.  Normal 
+gravity studies have shown that this chemiluminescence signal can be correlated to flame 
+appearance and ion current and can be used as a sensor in controlling and monitoring 
+combustion [30]. 
+ 
+Burner temperature (desired) – The temperature of the burner surface, provides the inlet 
+thermal boundary condition of the flow.  This temperature is important to show how 
+much the flame interacts thermally with the burner.  The burner/flame interaction has 
+been shown to affect flame stability for very small jet flames [48] and it can also change 
+the inlet conditions for coflow flames when the lift-off height is very small.  This meas-
+urement is desired because it is likely that the burner temperature effect is much more 
+significant in 1-g where a rising buoyant plume from off the burner can interact at the 
+flame base.  In zero-g, this will not occur and so the effect involves only thermal aspects. 
+ 
+Gas temperature in and near the flame (desired) -- Measuring the temperature field be-
+tween the flame and the electrode shows the shape and structure of the thermal plume.  In
+
+--- page 30 ---
+30 
+the jet diffusion flame, 1-g experiments show that this boundary coincides with that of 
+the ion-driven wind region.  Schlieren imaging (e.g., as in Figure 1.5) provides an indica-
+tion of the boundary and distributed temperatures (such as would be provided by shadow 
+deconvolution and soot pyrometry in sooting regions).  Unfortunately, laboratory studies 
+have shown that silicon-carbide thin filaments in the flame change the electrical behavior 
+substantially, so we cannot use thin filament pyrometry in soot free regions.  The thermal 
+information is valuable however, as it allows the current density, the ion mobility, and 
+thereby the electric body force, to be calculated most accurately.  In laboratory studies, 
+for example, we have seen evidence of substantial differences in ion mobility an d ion 
+wind depending on the thermal field the ions traverse.  In the case of the co-flow flame, 
+the thermal plume is governed by a combination of the ion driven wind and the forced 
+convective flow.  Comparison between the temperature fields with and without the elec-
+tric field can be used to estimate the ion driven wind contribution in this case , which 
+helps resolve the controversy alluded to earlier regarding the relative importance of 
+chemical and physical effects in electric field resistance to liftoff.  These results also al-
+low comparison with 1-g studies of electric control of heat transfer in flames, as di s-
+cussed in 1-g by Sandhu and Weinberg [31]. 
+ 
+Section 1 shows many examples of the kinds of SDEP figures (except that they are at 1-
+g) that will result from this study.  The following subsections outline in more detail some 
+specific data end products associated with each objective, along with the significance of 
+these products.  After the lists, Table 2.1 summarizes the measurements and their role in 
+meeting the experimental objectives. 
+ 
+2.3.3. SDEP (Objective A) – steady state chemi-ionizaton in flames 
+ 
+A typical steady-state voltage-current (VI), also known as the voltage -current-
+characteristic (VCC), curve is shown in Figure 1.10 for a gas jet flame and in Figure 1.11 
+for a co-flow flame.  Our 1-g studies have shown that the important transitions in the VI 
+curve are representative of the flame character (e.g., diffusion flame versus partially pre-
+mixed flame), including the onset of saturation, the saturation current at the first plateau, 
+the length of the saturation plateau, the onset voltage for additional ion production, and 
+the voltage blowout limit.  SDEP include, therefore, typical VI curves for different fuels, 
+flow rates, and dilutions.  A representative set of curves is shown in Figure 1.16, where 
+the VI results shown for different fuel flow rates demonstrate that the saturation current 
+scales approximately with carbon atom influx into the flame, but that a secondary i n-
+crease in current does not occur.  Similar curves will be obtained in the zero-g environ-
+ment.   
+ 
+In addition to typical VI traces, the first plateau for each flame condition provides the 
+saturation current per fuel carbon.  The set of tests then provide saturation current as a 
+function of inert dilution for two fuels and two burner types.  Such results can be com-
+pared with the 1-g findings of Boothman and Weinberg [24], who found little effect of 
+dilution.  Figure 2.4 is from our 1-g efforts and it shows the result of a similar interpreta-
+tive approach for the data.  In this case the jet diffusion flame is being diluted with air, 
+rather than an inert. There is a dramatic transition of saturation current (Js) per fuel car-
+
+--- page 31 ---
+31 
+ Figure 2.4.  Change in saturation current per unit of fuel carbon as a function of 
+dilution of the fuel for various flow rates and burner diameters.  The images 
+show how the flame appearance changes with dilution. 
+bon flux (Qf) behavior with dilution of the fuel.  The transition results, apparently, from 
+fundamental changes in the flame character as the air dilution increases beyond a critical 
+value.  It is interesting to note that standard gas analysis by flame ionization detection 
+relies on the fact that Js/Qf  is nearly constant, as shown for the low dilution regime. 
+ 
+In addition to the saturation current per carbon atom influx, the voltage at which add i-
+tional ion production occurs, as a function of fuel flow rate and inert dilution for the two 
+fuels and two burners, shows when the ion wind induced entrainment of additional oxi-
+dizer into the flame zone breaks down the purely diffusion flame character.  The voltage 
+at which the flame blows out, again as a function of fuel flow rate for different inert dilu-
+tion for the two fuels and two burner types, sets the limit of operation for the electric field 
+manipulation of flames, and also provides the maximum ion current condition achievable. 
+ 
+Flame images, both natural luminosity and filtered CH* (desired) after Abel deconvolu-
+tion, for different fuels, flow rates, and dilutions show the qualitative sooting tendency 
+and the location of the soot relative to the primary reaction zone; CH* (desired) and OH* 
+images also provide the flame surface area and a semi-quantitative measure of combus-
+tion intensity.  Schlieren images (desired, e.g., Figure 1.5) identify the thermal plume and 
+provide information for approximating variation in ion mobility.  The images can also be 
+compared to steady electrokinetic calculations  as shown in Figure 1.9.  The combination 
+of flame images and saturation currents can be plotted as saturation current per unit flame 
+area, which is characteristic of flame robustness. 
+ 
+Specific SDEP associated with this objective will include:  
+ 
+1) Typical plots of voltage versus ion current (VI) for gas-jet and co-flow flames, for 
+ethylene and methane as fuel 
+2) Typical flame images associated with the important transition points in the VI 
+curves
+
+--- page 32 ---
+32 
+3) Empirical model of saturation current as a function of inert concentration in the 
+fuel for different fuels, for gas-jet and co-flow flames 
+4) Voltage (ion-wind) and current at the onset of enhanced ion production as a func-
+tion of the inert concentration in the fuel, for gas-jet and co-flow flames 
+5) Voltage (ion wind) and current at flame blowoff as a function of the inert concen-
+tration in the fuel for gas-jet and co-flow flames  
+6) Saturation ion current per unit fuel carbon as a function of flow rate and inert per-
+centage 
+7) Flame luminosity (mean and RMS for CH* and broadband visible) as a function 
+of voltage and ion current, for gas-jet and co-flow flames 
+8) Saturation current as a function of flame area 
+9) Thermal plume shape as a function of electric field forcing (desired) 
+   
+2.3.4. SDEP (Objective B) – time response of flames to electric forcing 
+ 
+Time resolved measurements after step changes in voltage are necessary to determine the 
+temporal response of flames to electric forcing.  In particular, the time resolved ion cur-
+rent, as shown in Figure 1.20, provides the ion flux timescale given by any time delay 
+beyond that of the natural capacitive decay time for the experimental apparatus.  In 1-g 
+studies, the system electrical response is dominated by the slow capacitive timescale, 
+which may also be the case in microgravity.  Time resolved measurements of spatially 
+integrated luminosity (including soot) and CH* filtered light from the flame in concert 
+with the ion current measurement monitor changes in the flame behavior for comparison 
+with the capacitive timescale.  As shown in Figure 1.19, the steady-state flame luminosity 
+changes with electric field.  The timescale of this change is a combination of any rapid 
+chemi-ion transport effects and the slower convective timescale effects arising from 
+changes in the ion driven wind.  Computational and experimental studies show that at 1-g, 
+the convective effects can require hundreds of milliseconds to first influence the flame 
+and a longer time to reach quasi-steady state (e.g., [52]).  The longer secondary timescale 
+response appears to result from the development of a quasi-steady convective flowfield 
+driven by ions.  Our recent drop tower microgravity tests show that the time response be-
+havior is significantly different in zero-g, with less dependence on the timescales associ-
+ated with buoyant flows. In addition, by comparing the broadband luminosity response to 
+that of the CH*, it will be possible to separate the soot development timescale from the 
+ion flux timescale and from the fluid/chemical timescale in the electrically driven flame.  
+Luminosity timescale comparisons between different flame conditions will characterize 
+these dynamics.  Equally important, the time response results will allow control modeling 
+of flames for eventual use in combustion control. 
+ 
+1) Typical time resolved ion current after step changes in voltage 
+2) Typical time resolved luminosity after step changes in voltage 
+3) Electrical time constant of the flame as a function of inert concentration in the 
+fuel and flow rate, for gas-jet and co-flow flames 
+4) Luminosity time constant (both broadband and CH*) of the flame as a function of 
+inert concentration in the fuel and flow rate, for gas-jet and co-flow flames 
+5) Equivalent RC circuit for gas-jet and co-flow flames
+
+--- page 33 ---
+33 
+ 
+2.3.5. SDEP (Objective C) – electric field influence on sooting behavior 
+ 
+It is well-known that electric fields can have a dramatic effect on soot in flames 
+[14,41,53], but the relative role of direct chemical effects compared with ion driven wind 
+convective effects remains unclear.  The data associated with this objective comprise soot 
+volume fraction, soot temperature, color video flame images, CH* images (desired), and 
+ion currents for steady state conditions over a range of voltages.  In particular, we will be 
+looking for the critical voltage (which can be related to ion driven wind and ion transport) 
+at which sooting is suppressed as a function of inert dilution of the fuel.  The conditions 
+showing substantial changes with electric field will be identified from the data obtained 
+in Objective A and B.  A comparison between the results in the gas jet diffusion flame 
+and the co-flow flame can distinguish the relative roles of ion-driven convection versus 
+chemistry in this process.   
+ 
+1) Average soot volume fraction as a function of ion wind, for different inert levels 
+in fuel, for gas-jet and co-flow flames 
+2) Typical images showing location and temperature of soot for different ion wind 
+conditions (e.g., electric field polarity), for gas-jet and co-flow flames 
+3) Soot mean size based on soot volume fraction and the total ion current from the 
+flame via the Dushman equation 
+4) Spatially resolved soot volume fraction at transition conditions as the ion wind 
+suppresses soot 
+5) Voltage (ion current) at which soot is suppressed for different levels of inert in 
+fuel, for gas-jet and co-flow flames 
+ 
+2.3.6. SDEP (Objective D) – electric field sensing and control of near-limit flames 
+ 
+There are two main elements to this objective.  One is to use the ion current as a sensor 
+for identifying the incipient extinguishment of lifted flames and the other is to increase 
+the flame’s resistance to blowoff.  Diffusion flames near their blowoff limit in 1-g gener-
+ally exhibit an unstable fluctuation just before extinguishing.  The fluctuation appears in 
+the chemiluminescence, in the location of the flame base (liftoff height), and in the 
+chemi-ion current.  The data products are, therefore, the mean and RMS ion current at 
+low voltages as functions of fuel flow rate and inert dilution in the fuel.  Near limit 
+flames are identified from data in Objective A where the fuel flow rate and the inert con-
+centration are increased to flame extinguishment.  Extended time at microgravity is nec-
+essary for these experiments because the blowoff process is stochastic and can involve 
+long periods of fluctuation.  
+ 
+The second element of this objective is open-loop control, using the ion driven wind to 
+restabilize near-limit co-flow flames.  This phenomenon has been observed by Won, et al. 
+[46,47] as manifested by a resistance to flame lifting.  They find, for example, that a 
+higher velocity is needed to maintain a fixed liftoff height when the flame is under the 
+influence of an electric field.  There is a question, however, whether the effect is simply 
+due to an additive ion wind to the jet flow or if there is a more subtle influence of local
+
+--- page 34 ---
+34 
+mixing that changes the flame propagation velocity.  By measuring the liftoff height, the 
+fuel flow rate, and the ion current, it is possible to distinguish these influences.  For ex-
+ample, a substantial change in liftoff height accompanied by a modest ion wind (deter-
+mined from the ion current and flame surface area) relative to the flow rate would suggest 
+a local mixing effect whereas when a larger ion wind is involved we would likely identify 
+a broader mean flowfield influence.  Extended microgravity conditions are necessary to 
+establish the relationship between electric fields and liftoff height behavior because the 
+flame’s liftoff height can oscillate slowly for several cycles before it either blows off or 
+reattaches [54].     
+ 
+1) Typical curves of time resolved ion current and luminosity of near limit flames 
+2) Typical sequence of images of flame from its near limit condition after electric 
+field is activated 
+3) Mean and RMS ion current and luminosity of near limit flames as a function of 
+inert concentration in the fuel, for gas-jet and co-flow flames, with and without 
+electric field 
+4) Liftoff height of flames versus voltage (ion wind) as a function of inert concentra-
+tion in the fuel and fuel flow rate, for co-flow flames (we expect gas jet flames to 
+be too long for useful liftoff height studies in microgravity and so they are not in-
+cluded for this task) 
+5) Ion driven wind velocity in the region of the lifted flame base determined from 
+ion current measurements and estimates of ion mobility based on the temperature 
+field 
+ 
+2.4 Knowledge to be Gained 
+ 
+As is detailed more completely above, the knowledge expectation is to develop a chemi-
+cal and physical understanding of flame ion production and the potential to then use this 
+information to control the flame both via modification of the local chemistry near extinc-
+tion limits and through changes in the local convection using the ion driven wind.  Hence, 
+we begin by mapping the electrical response of a wide range of flames and then concen-
+trate on particular conditions of interest, particularly those near limit and transition condi-
+tions in diffusion flames.  For example, the saturated ion current is a characteristic of the 
+carbon flux into the flame so long as the flame character does not change.  As the ion 
+driven wind begins to influence the reaction zone, the saturation current can change dra-
+matically.  We are interested in the flame condition near this transition.  Similarly, a lifted 
+diffusion flame near its blowoff condition is sensitive to mixing at the flame anchor point.  
+Electric fields acting on such flames can exert large influence because they can affect the 
+local mixing behavior.  We are interested, therefore, in these near-limit flame conditions.  
+Finally, the role of electric fields on soot formation will be most dramatic under condi-
+tions where the ion driven wind has the largest influence on flow residence time (or on 
+ion residence time, if chemical effects are found important) in sooting flames. 
+ 
+The explanation of the knowledge gaps associated with electric field effects in diffusion 
+flames have been described in the foregoing sections.  It is worth making some general 
+statements in this regard, however, to summarize.  The goal of this zero-gravity study is
+
+--- page 35 ---
+35 
+to understand chemi-ionization behavior and the resulting ion driven winds sufficiently 
+well so that electrical properties of flames can be used to characterize (by monitoring ion 
+current) and control them (via direct chemical or local convective influences).  Electric 
+field effects on flames have been documented for decades (even centuries), but flames in 
+1-g all include buoyancy influences.  For flames near transitions and limits, buoyant in-
+fluences always confound any understanding of the role of ion driven winds in using 
+electric fields to characterize and manipulate flames.  The proposed study removes this 
+confounding influence and allows definitive measurement and analysis of the electric 
+field effects on sooting, saturation current, and dilution on coflow and jet diffusion 
+flames.    
+ 
+ 
+ 
+ 
+TABLE 2.1. Summary of Measurements and Value Toward Objectives 
+Measurement Flame properties Analysis Value toward Objectives 
+Ion current Chemi-ion pro-
+duction 
+Objective A – i d e n t i f y  s a t u r a t i o n  c u r r e n t  a n d  o n s e t  o f  e n h a n c e d  
+chemi-ionization in flames; Objective B – measure response time of 
+flame as an electrical element; Objective C – evaluate ion wind ef-
+fect on soot residence time; Objective D – monitor ion current as a 
+sensor for near-limit flame stability. 
+Color video 
+images of the 
+flame 
+Reaction zone 
+location; soot 
+location; flame 
+size and shape; 
+liftoff height 
+Objective A – find ion current per unit flame area and evaluate flame 
+structure when ion current enhancement occurs; Objective B – com-
+pare electric time response to flame shape response time; Objective 
+C – relate electric field condition to soot location in flame; Objective 
+D – measure flame liftoff height and near-limit flame behavior. 
+Unfiltered 
+non-imaged 
+light from 
+flame  
+Qualitative 
+measure of soot 
+and reaction in-
+tensity 
+Objective A – r e l a t e  s t e a d y  s t a t e  i o n  c u r r e n t  t o  f l a m e  l u m i n o s i t y ;  
+Objective B – relate time response of ion current to that for luminos-
+ity; Objective C – m e a s u r e  o v e r a l l  s o o t i n g  l e v e l ;  O b j e ctive D – 
+monitor near limit flame luminosity. 
+Filtered OH* 
+video of the 
+flame 
+Reaction inter-
+face area 
+Same as for color video except improved quantitative result for reac-
+tion location 
+Filtered CH* 
+non-imaged 
+light from 
+flame 
+Measure of reac-
+tion intensity 
+Same as for unfiltered total light except improved results related to 
+heat release rather than overall flame brightness which might be 
+dominated by soot. 
+Spatially re-
+solved soot 
+volume frac-
+tion 
+Location of soot 
+formation, 
+growth, and 
+burnout 
+Objective C – quantitative information regarding the effects of elec-
+tric fields on soot formation; comparing results for co-flow burner 
+and jet diffusion burner provides insight regarding chemical versus 
+physical influences of ion flux 
+Burner tem-
+perature 
+Heat loss from 
+flame to burner 
+Objectives A,B,C,D – m e a s u r e s  t h e  r o l e  o f  h e a t  i n t e r a c t i o n  w i t h  
+burners and on the liftoff height in near-limit flames; provides ther-
+mal boundary condition for numerical analyses 
+Temperature 
+field above 
+burner, non-
+sooting and 
+sooting (de-
+sired) 
+Location of 
+thermal field 
+associated with 
+the heat release 
+region 
+Objectives A,B,C,D – De t e r mi ne s  t he  pa t h of  t he  i on dr i ve n wi nd;  
+allows improved estimates of ion mobility; measures changes in heat 
+transport due to ion driven winds; allows estimate of soot mean size 
+via the Dushman equation.
+
+--- page 36 ---
+36 
+ 
+ 
+ 
+2.5 Justification for Extended-Duration Microgravity 
+ 
+As described in the Background and Overview (Section 1.1), electric field effects and 
+buoyancy effects have been found to be of the same order of magnitude.  In addition, in 
+some cases, raising the flame temperature will increase the O atom concentration, thereby 
+increasing the ion production rate and increasing the response to an electric field.  At the 
+same time, increasing temperature increases the buoyancy effect, making it difficult to 
+separate ion wind effects from buoyancy.  In the zero-g environment, it will be possible 
+to eliminate the buoyancy confusion and develop sufficient understanding to predict the 
+response of flames to electric fields under all conditions.  For electrically driven flames, 
+microgravity is also necessary to create conditions that produce symmetric flames suit-
+able for Abel inversion and steady-state analysis.  While in general natural convection 
+can enhance symmetry relative to non-
+buoyant flames, a flame at 1-g in an 
+electric wind experiences buoyancy as 
+a disruptive influence on symmetry.  
+Even when buoyancy effects can be 
+minimized, we have found that there 
+are periodic disturbances that disrupt 
+the ideal symmetry.  Highly symmetric 
+conditions of extended microgravity are 
+also useful for numerically simulating 
+these various effects by our electroki-
+netic model or more comprehensively 
+by others. 
+ 
+Finally, in order to fully evaluate the 
+potential for control, it is important to examine the effects separately.  An example of the 
+importance of microgravity for the electric field effects studies is shown in Figure 2.6.  
+This figure compares the capillary flame used for 1-g experiments (which has some simi-
+larities to the jet-flame companion study) when it is oriented vertically to when it is ori-
+ented horizontally relative to gravity.  These flames behave differently in shape, size, and 
+ion production demonstrating the substantial influence played by buoyancy even in the 
+relatively small capillary flames.  Gravity effects in the co-flow flames have been de-
+scribed in the SRD for the CLD Flame experiment, and the same influences will be im-
+portant when we apply electric fields.  Only in extended microgravity will it be possible 
+to separate the ion driven wind effects from buoyant wind effects.  
+ 
+Extended run times are crucial for all of the studies because the timescales involved ex-
+tend beyond drop tower capabilities and the microgravity quality required for symmetry 
+and stability exceeds aircraft microgravity.  The electric-field flame interaction tests car-
+ried out in the NASA Glenn 2.2 Second Drop T ower tests by Yuan and Hegde [55] 
+showed that the flame did not appear to reach steady state during the 2.2 sec. drop.  
+Furthermore, their results showed substantial differences in flame shape between cases 
+ Figure 2.6.  Effect of orientation on combustion 
+of 1.8 mm jet diffusion flames in 1-g.
+
+--- page 37 ---
+37 
+thermore, their results showed substantial differences in flame shape between cases 
+where the electric field was activated half-way through the drop and at the beginning of 
+the drop, again suggesting that steady state was not achieved. Although, we varied the 
+range of tests performed at the Drop Tower, our research group encountered similar ob-
+stacles. Drop times were insufficient to achieve a steady flame after voltage changes in 
+one direction. Additionally, we were unable to capture the removal of soot from the igni-
+tion event and the subsequent response of the flame to the electric field. Furthermore, 
+testing has shown path dependence in the response time of the flame when subjected to 
+step voltages of varying polarities. Properly mapping the steady-state ion current as a 
+function of applied voltage requires that the flame stabilize at each applied voltage.  Gen-
+erally speaking, the timescale of flame property changes (which includes chemi -
+ionization) is dominated by convection (length scale/velocity), which is on the order of 
+0.1 second.  In order to ensure quasi-steady conditions of the VI characteristics for a sin-
+gle flame configuration with some fidelity (e.g., 50 steps of 200 V each, with 2 seconds 
+between steps for settling after the change), requires more than 100 seconds of continu-
+ous high quality microgravity.  Each condition and voltage cannot be run individually 
+(i.e, with separate drop tests) because the 2 second settling time requires that the flame 
+begin at a settled initial condition before taking another relatively small voltage step.  If 
+we tried to step to the initial condition, allow settling, take the base measurement, then 
+step the voltage and again wait the required settling time, we would exceed 5 seconds for 
+each test in nearly all cases.  To run a return voltage sweep to examine hysteresis might 
+take a further 100 seconds.  Furthermore, these times are based on 1-g results which un-
+der low ion wind conditions are likely to be faster than occurs in zero-gravity since their 
+the convective timescales can be substantially smaller (under low electric field forcing 
+conditions, for example).   
+ 
+Understanding the electric field effects on soot is another area that requires high quality 
+zero gravity timescales longer than is available in drop towers.  A variety of zero gravity 
+diffusion flame experience has shown that quasi-steady soot formation requires many 
+seconds [22,56,57].  The long duration is necessary since we are exploring the relative 
+importance of residence time modification of these processes in these flames.   In addi-
+tion, as mentioned above, instabilities and extinction behavior in near-limit flames gener-
+ally have a stochastic character so that relatively long observation times are needed to 
+quantify electric field effects.  For example, lifted flames in electric fields can exhibit an 
+oscillatory behavior where they alternately approach and recede from the burner exit until 
+they finally reattach.  Tens of seconds for this process is not unusual.  Extended micro-
+gravity conditions will clarify the role of electric fields (via ion winds) on stability limits 
+of flames.
+
+--- page 38 ---
+38 
+3. EXPERIMENT REQUIREMENTS 
+ 
+3.1 Requirements Discussion 
+ 
+This section does not include any requirements, but instead describes their importance in 
+achieving the experiment objectives. The requirements have been incorporated into the 
+ACME-SRD-001 Integrated Science Requirements. 
+ 
+3.1.1 Ambient Environment 
+ 
+The experiments are to be conducted in the chamber described in the combined ACME 
+science requirements.  The gas fill for the gas jet tests and the coflow gas for the coflow 
+burner tests is nominally nitrogen (79%) and oxygen (21%) by volume.  For the coflow 
+burner tests, the fill gas is as specified in the CLD Flame experiment SRD (as is the com-
+position of the co-flow gas).  Oxygen composition should not fall below 19% during the 
+tests.  Oxygen makeup gas can be added as it is consumed to maintain an appropriate 
+overall oxygen concentration.  The makeup oxygen is based on the assumption of com-
+plete combustion of the fuel flowing into the system.  Because there is no direct oxygen 
+concentration measurement, we expect that the chamber will be flushed and refilled ap-
+proximately every 7-8 tests based on how much uncertainty has developed regarding the 
+ambient oxygen concentration.  We want to ensure that the oxygen level does not leave 
+the window between 19 and 21%. 
+ 
+3.1.2 Burner Material  
+ 
+The gas-jet and coflow burners shall be electrically conductive and able to withstand a 
+constant temperature of 1000 ºC. The burner temperature requirements reflect the maxi-
+mum temperature observed at the burner tips in past laboratory 1-g experiments. The 
+burner material requirement stems from the necessity of the burners to serve as electrodes 
+in the high voltage circuit. Figure 2.4 illustrates how the burners complete the electrical 
+pathway for measuring the flame’s ion current by forcing electric current into a shunt re-
+sistor for measurement. The magnitude of the current is simply determined with Ohm’s 
+law and dividing the voltage drop across the resistor by the known value of the resistor. 
+ 
+ 
+3.1.3 Burners  
+ 
+Two different burner types are to be used.  One is the simple gas jet burner.  The second 
+type is the coflow burner as specified in the CLD Flame experiment SRD.  Two different 
+nozzle diameters are included (one required and one desired) for the gas-jet burner to 
+vary the exit velocity of the fuel mixture without altering the flow rates specified in each 
+experimental test series and to match prior 1-g studies. The precise dimensions of all 
+burner nozzles must be known to ensure accurate velocity computations and conditions 
+for later numerical simulations by others if desired.
+
+--- page 39 ---
+39 
+3.1.4 Electric Field 
+ 
+The electric field shall be produced between a copper mesh electrode and the burner. 
+Copper mesh is an ideal electrode because its open surface area allows combustion gases 
+to flow through preventing interaction with the flame. The range of mesh screen densities 
+in the ACME science requirements have been used successfully in past experiments.   
+ 
+Another desired capability is to place the mesh electrode at a range of axial positions to 
+achieve a desirable charge distribution in the electric field while preventing contact be-
+tween the flame and the mesh. If the flame and mesh come into contact while the electric 
+field is active, a short circuit will result, and the flame will allow electric current to flow 
+between the burner and mesh electrode. Because the flame height and lift-off heights will 
+vary across the two burners and the vast experimental conditions, variable positioning is 
+highly desirable. A preliminary estimate of coflow burner lift-off heights suggests that 
+the mesh be placed approximately 5 cm away from the burner nozzle, preferably at two 
+different heights no less than 1 cm apart. The mesh diameter should be no less than 8 cm 
+to collect sufficient ion current from the flame based on our electrokinetic calculations of 
+ion flow.  The electric field potential should be controllable in 50V or smaller increments 
+and should be able to reach 10kV across the electrode space for both polarities. 
+ 
+3.1.5 Ion Current Measurement 
+ 
+The proposed method of ion current measurement involves measuring the voltage across 
+a shunt resistor connected between the burner and the high voltage ground.  Based on our 
+past experiments, the resistor and data acquisition system should have a resolution better 
+than 0.05 microamperes with an expected maximum current of 25 microamperes.  For 
+example, we suggest that the shunt resistor value shall be 100 kΩ, and will measure cur-
+rents on the order of microamperes. The resulting voltage will be on the order of 0.1 Volt 
+with an expected range of ± 4 Volts to be read by a 12-bit A/D converter. The resistor 
+tolerance should better than or equal to ± 0.1%, and have the lowest possible temperature 
+coefficient for precise measurements. The resistor should also be placed sufficiently far 
+from the burners to prevent changes in the resistance value due to heat conduction 
+through the connecting wire. 
+ 
+To ensure that the total ion current is measured at the shunt resistor, it is required that the 
+mesh electrode and burner be electrically isolated to prevent current leakage.  Current 
+leakage should be less than 25 nanoamps at maximum voltage.  T he mesh electrode 
+should withstand +/- 20kV without breaking down. In addition, it is suggested that a cop-
+per ring with a cross-sectional diameter of 2-3 mm be soldered to the perimeter of the 
+mesh to reduce the likelihood of break down at the tips of the mesh wires at high voltages.
+
+--- page 40 ---
+40 
+3.1.6 Flame Imaging and Chemiluminescence Measurements 
+ 
+Color images of the flame will reveal the flame area, provide evidence of combustion in-
+tensity, identify locations of soot formation, and show how the ion wind (local convec-
+tion) changes the flame shape for the various input flame parameters and electric field 
+strength. UV images with a filter for OH* are required to provide a sharp determination 
+of the reaction zone.  Images of CH* chemiluminescence are desired for observing spatial 
+changes in heat release rate due to electric field actuation, and may also be used as a sen-
+sor for quantifying the electric field control effect.  Density imaging is highly desired as 
+this provides a secondary indication of the reaction zone location but more importantly 
+shows the path of the convected hot gases driven by the ion wind for comparison with our 
+electrokinetic modeling.  It is also possible to extract temperature from density images in 
+the soot-free regions of the flame, which is valuable for ascertaining electrical mobility.  
+Density images should be at no less than 15 Hz. 
+ 
+ 
+3.1.7 Soot Measurements 
+ 
+Soot volume fraction and soot temperature are needed to show the effects of electric 
+fields on the location, mean size, and amount of soot in the flames.  Soot temperature 
+provides information regarding the thermal field in highly sooting regions of the flame.  
+The mean size of the soot is to be determined from assessing the presumed thermionic 
+current from the soot.  The ion current is related to soot surface area and so the mean size 
+can be determined from the ratio of soot volume to soot area.
+
+--- page 41 ---
+41 
+3.2 Operational Sequence 
+ 
+As described in Section 2, the E-FIELD experiment consists of 4 objectives correspond-
+ing to 4 series of tests using 2 different diffusion flame burner configurations.  The first 
+three test series provide the key fundamental information regarding the electrical charac-
+ter of diffusion flames and the influence of electric fields on soot formation; the final se-
+ries focuses on electric field sensing and control of flames. 
+ 
+General Operations -- preparatory actions -- before any of the electric field experiments, 
+the high voltage mesh should be installed (or moved into position). Leak current should 
+be measured by sweeping the voltage from 0 to 10kV and 0 to -10kV with no flame pre-
+sent. A steep rise in current under these conditions indicates corona discharge and sets the 
+upper limit on the potential. The test sequence involves a complete repeat voltage sweep 
+with no flame to provide a point-by-point current leak measurement. A similar sweep 
+should be completed following flame extinguishment at the end of a test set. The leak 
+current allows a baseline for higher precision in the flame ion current determination. In 
+addition, excessive leak current at relatively low voltage may indicate electron emission 
+from carbon buildup on the gas jet flame tip. If the leak current exceeds 10% of the flame 
+ion current, cleaning of the gas jet tip is requested. Cleaning consists of a manual wiping 
+or possibly burning off the carbon with a modified flame condition. We expect this to be 
+a rare request, but the continuous monitor of flameless ion current provides a reliable in-
+situ monitor. We assume that the chamber will be emptied and refilled approximately 
+every 7-8 tests to minimize the oxygen concentration uncertainty in the test chamber. We 
+further assume that our test series will start with the co-flow burner if it is already in-
+stalled to minimize replacement time. After the co-flow experiments, a gas jet burner 
+would be installed. The gas jet flame experiments duplicate our laboratory-based studies. 
+The exact times for settling and voltage steps may vary (they should be reconfigurable 
+from the ground), but a nominal expected operational sequence for one chamber fill and 
+the key measurement data sets are shown below. 
+ 
+(A) Voltage Sweep – collection of VI curves (or VCC curves) -- where the voltage is 
+swept from 0-±4kV (or until flame blowout) and the ion current is monitored and r e-
+corded. The sweep should be a series of discrete steps, where a settling time is allowed 
+after each voltage change. At the same time, color and OH* video records the flame 
+shape and luminosity (both broadband flame and soot luminosity and OH* chemilumi-
+nescence) throughout the sweep.  Discrete steps in the sweep allow a system settling time 
+and higher voltage resolution at some parts of the curve to effectively map the current 
+transition points. A typical step sweep might comprise: 15 second ignition & stabiliza-
+tion; 100 V/step, 0.5 sec settle between steps, and a 0.3 sec. ion current measurement at 
+each point, to ±5kV or blowout. It is important to keep in mind that the short measuring 
+time is only possible because the changes are developing from a prior quasi-steady condi-
+tion. If tests were attempted with a pair of voltage steps from a zero voltage initial condi-
+tion (as in a drop test, for example), the settling time would more than double. Blowout 
+can be detected by a sharp drop in ion current. Expected run times are 60 seconds per 
+sweep (not including a background current sweep with the flame off). An example of this
+
+--- page 42 ---
+42 
+kind of data was shown in Figures 1.10 and 2.2 for the ion current and Figures 1.5, 1.13, 
+and 2.1 for the images. 
+ 
+Table 3.2.1  
+Voltage Sweep Procedure Time 
+A. Prepare Chamber 
+1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet) 
+2.    Select fuel/diluent mixture 
+B.  Initiate Experiment  
+1.    Initiate data acquisition  
+2.    Initiate gas flows 
+3.    Ignite flame and retract igniter 
+4.    Allow 10 seconds settling time 
+5.    Set the desired voltage (initially to 0V) 
+6.    Initiate high voltage power supply 
+C. Measurements 
+1.     Wait 0.3 seconds for flame to settle 
+2.     Collect data over 0.5 seconds   
+D. Step 100V (assuming approx. 5ms ramp)  
+E. Repeat steps C & D until (+/-) 5kV or flame blowout 
+F. Pause in Experiment 
+1.  Stop gas flows/extinguish flame (zero ion current) 
+2. Stop video 
+3. Zero voltage 
+G. Repeat Steps C-E without flame to measure leakage current.  
+      Stop testing if burner current leakage is at unacceptable level 
+H. Reverse high voltage polarity                     
+I.   Repeat sequence steps (B)–(H) 
+ 
+ 
+ 
+0 sec. 
+5 sec.  
+5 sec 
+8 sec. 
+18 sec. 
+19 sec. 
+20 sec. 
+ 
+ 
+ 
+ 
+60.25 sec. 
+ 
+ 
+ 
+ 
+100.5 sec. 
+ 
+ 
+201 sec. 
+ 
+(B) Step Response—where the voltage is changed rapidly from a base level to a much 
+higher (or lower) level and the ion current (and flame luminosity and shape) is monitored 
+in time as it settles to its new steady value. The key measurable is the ion current as a 
+function of time through the voltage step change and the flame’s subsequent settling. As 
+in test set (A), video, luminosity, and chemiluminescence will record these flame behav-
+iors in response to an instantaneous change in the electric field. A typical experiment se-
+quence might comprise a 15 second ignition and stabilization, step changes on the order 
+of hundreds of volts, and recording ion curre nt for 2 seconds between step changes 
+(where steps will not be limited to a single polarity). Settling time for these step changes 
+in zero gravity (particularly, for soot related phenomena) may need to be adjusted via 
+uplink; the test procedures shown are based on a nominal settling time observed in pre-
+liminary testing at 1-g and in the NASA Glenn 2.2 Second Drop Tower. The range of 
+times between voltage steps may vary between 0-100 seconds. The two test series de-
+scribed above are carried out for a broad range of burner conditions (using up to 2 gas jet 
+nozzles and the co-flow burner; fuel type variations between CH4 and C2H4; and nitrogen 
+dilution level of the fuel), and they provide the foundation necessary to create an electro-
+
+--- page 43 ---
+43 
+dynamic model of the flame. The control input signals are flame luminosity (luminosity 
+and CH* chemiluminescence) and ion current. Correlations between these two signals 
+will also be examined. Once the dynamics of the flame has been determined from the 
+VCC curves and the step response data; conditions will be selected for the examination 
+and control of soot luminosity using electric fields will be performed. Finally, we will use 
+electric fields to sense flame character and to control flame liftoff height and extend 
+blowout limits in the co-flow burner. 
+ 
+Table 3.2.2  
+Step Response Procedure Time 
+A. Prepare Chamber 
+1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet)  
+2.    Select fuel/diluent mixture 
+B.  Initate Experiment  
+1.    Initiate data acquisition  
+2.    Start gas flows  
+3.    Ignite flame and retract igniter 
+4.    Allow 10 seconds settling time 
+5.    Set the desired voltage (initially to 0V) 
+6.    Initiate high voltage power supply 
+C. Measurements (if blowout occurs anytime; zero voltage and proceed to 
+Step D) 
+1.     Collect data over 2 seconds 
+      2.     Step voltage  0V to 1000V; Collect data over 2 seconds 
+      3.     Step voltage 1000V to -1000V; Collect data over 2 seconds 
+      4.     Step voltage -1000V to 1000V; Collect data over 2 seconds  
+      5.     Step voltage 1000V to -2000V; Collect data over 2 seconds 
+      6.     Step voltage -2000V to 2000V; Collect data over 2 seconds  
+      7.     Step voltage 2000V to -2000V; Collect data over 2 seconds  
+      8.     Step voltage -2000V to 3000V; Collect data over 2 seconds  
+9.     Step voltage 3000V to -3000V; Collect data over 2 seconds  
+10.   Step voltage -3000V to 4000V; Collect data over 2 seconds 
+11.   Step voltage 4000V to 5000V; Collect data over 2 seconds  
+12.   Step voltage 5000V to 0V; Collect data over 2 seconds 
+13.   Step voltage 0V to -4000V; Collect data over 2 seconds 
+14.   Step voltage -4000V to -5000V; Collect data over 2 seconds 
+15.   Step voltage -5000V to 0V; Collect data over 2 seconds 
+16.   Step voltage 0V to -1000V; Collect data over 2 seconds 
+17.   Step voltage -1000V to 0V; Collect data over 2 seconds 
+18.   Step voltage 0V to -500V; Collect data over 2 seconds 
+19.   Step voltage -500V to 0V; Collect data over 2 seconds 
+20.   Step voltage 0V to 1000V; Collect data over 2 seconds 
+21.   Step voltage 1000V to 500V; Collect data over 2 seconds 
+      22.   Step voltage 500V to 0V; Collect data over 2 seconds 
+D.  Shut off gas flows (extinguish flame) 
+E.  Repeat Step C beginning from 0V without flame to measure  
+ 
+ 
+ 
+ 
+5 sec. 
+5 sec. 
+8 sec. 
+18 sec. 
+19 sec. 
+20 sec. 
+ 
+ 
+22 sec. 
+24 sec. 
+26 sec. 
+28 sec. 
+30 sec. 
+32 sec. 
+34 sec. 
+36 sec. 
+38 sec. 
+40 sec. 
+42 sec. 
+44 sec. 
+46 sec. 
+48 sec. 
+50 sec. 
+52 sec. 
+54 sec. 
+56 sec. 
+58 sec. 
+60 sec. 
+62 sec. 
+64 sec. 
+64 sec. 
+106 sec.
+
+--- page 44 ---
+44 
+      leakage current. Stop testing and report if leakage is at unacceptable level  
+ 
+ 
+(C) Electric Field Effects on Soot – demonstrate effects of the electric field on soot 
+(measured by broadband emission from the flame and soot volume fraction) by slowly 
+increasing the coflow air velocity while comparing the flame structure at each step to a 
+flame affected purely by electric forcing. Conditions will be derived from experiments 
+(A) and (B) above (time details: depends on the burner, but each test will be allowed at 
+least 1 minute). Both broad solid angle collection luminosity and flame images will be 
+used to determine the sooting behavior, along with soot volume fraction and soot p y-
+rometry measurements for quantitative analysis.  
+ 
+Table 3.2.3 
+Electric Field Effects on Soot. Time 
+A. Prepare Chamber 
+1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet)  
+2.    Select fuel/diluent mixture 
+B.  Initiate Experiment  
+1.    Initiate data acquisition  
+2.    Start gas flows        
+3.    Ignite flame and retract igniter 
+4.    Allow 10 seconds settling time     
+C.  Collect reference data for 1 second   
+D.  Measurements 
+1.     Increase coflow velocity to 1cm/s; collect over 3 sec.  
+      2.     Increase coflow velocity to 2cm/s; collect over 3 sec. 
+      3.     Increase coflow velocity to 3cm/s; collect over 3 sec. 
+      4.     Increase coflow velocity to 4cm/s; collect over 3 sec. 
+      5.     Increase coflow velocity to 5cm/s; collect over 3 sec. 
+      6.     Increase coflow velocity to 6cm/s; collect over 3 sec.        
+      7.     Increase coflow velocity to 7cm/s; collect over 3 sec.             
+      8.     Increase coflow velocity to 8cm/s; collect over 3 sec.  
+      9.     Increase coflow velocity to 9cm/s; collect over 3 sec.          
+      10.   Increase coflow velocity to 10cm/s; collect over 3 sec.         
+      11.   Increase coflow velocity to 11cm/s; collect over 3 sec.          
+      12.   Increase coflow velocity to 12cm/s; collect over 3 sec. 
+      13.   Increase coflow velocity to 13cm/s; collect over 3 sec. 
+      14.   Increase coflow velocity to 14cm/s; collect over 3 sec.  
+      15.   Increase coflow velocity to 15cm/s; collect over 3 sec.         
+      16.   Increase coflow velocity to 16cm/s; collect over 3 sec.  
+      17.   Increase coflow velocity to 17cm/s; collect over 3 sec.              
+      18.   Increase coflow velocity to 18cm/s; collect over 3 sec.       
+      19.   Increase coflow velocity to 19cm/s; collect over 3 sec. 
+      20.   Increase coflow velocity to 20cm/s; collect over 3 sec.  
+      21.   Increase coflow velocity to 21cm/s; collect over 3 sec.              
+ 
+ 
+ 
+ 
+5 sec. 
+5 sec. 
+8 sec. 
+18 sec. 
+21 sec. 
+ 
+24 sec. 
+27 sec. 
+30 sec. 
+33 sec. 
+36 sec. 
+39 sec. 
+42 sec. 
+45 sec. 
+48 sec. 
+51 sec. 
+54 sec. 
+57 sec. 
+60 sec. 
+63 sec. 
+66 sec. 
+69 sec. 
+72 sec. 
+75 sec. 
+78 sec. 
+81 sec. 
+84 sec.
+
+--- page 45 ---
+45 
+      22.   Increase coflow velocity to 22cm/s; collect over 3 sec.  
+      23.   Increase coflow velocity to 23cm/s; collect over 3 sec. 
+      24.   Increase coflow velocity to 24cm/s; collect over 3 sec.          
+      25.   Increase coflow velocity to 25cm/s; collect over 3 sec.            
+F.  Stop gas flows/extinguish flame 
+87 sec. 
+90 sec. 
+93 sec. 
+96 sec.  
+ 
+Note: return to step B and reignite as needed if flame fails during experiment 
+ 
+(D) Open Loop Sensing and Control – The experiments associated with control will be 
+defined based on the results of the above baseline mapping experiments (A) and (B) 
+above (time details: depends on the condition, but each test will be allowed at least 1 
+minute).  After completing and evaluating the results, there are two sets of sensing and 
+control experiments to be accomplished.  The first is an open loop attempt to determine 
+the strength of jet diffusion flames and the second is to extend the blowout limits of the 
+co-flow flame and the second is to control formation.  We will use the findings of the first 
+two test series and the CLD Flame experiment to identify the conditions of flame sensi-
+tivity.  The procedure is a series of voltage ramps (or small steps with continuous data 
+collection); just to be sure there is no confusion at the end of the sequence, each step is 
+identified but hopefully the pattern is clear.  Ion current and luminosity (broadband and 
+CH*) fluctuations will be used to determine the flame’s approach to blowoff, and flame 
+images will be used to determine the liftoff height. Note that fuel dilution with an inert 
+may be necessary to allow flames to reach appropriate blowout conditions within experi-
+ment limitations. 
+ 
+Table 3.2.4  
+Open Loop Sensing and Control  Time 
+A. Prepare Chamber 
+1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet)  
+2.    Select fuel/diluent mixture 
+B.  Initiate Experiment  
+1.    Initiate data acquisition  
+2.    Start gas flows 
+3.    Ignite flame and retract igniter 
+4.    Allow 10 seconds settling time 
+5.    Set the desired voltage (initially to 0V) 
+6.    Initiate high voltage power supply 
+C.  Collect reference data for 1 second 
+D.  Set voltage to V*, the initial (lifted or sooting) condition identified in prior 
+tests  
+E.  Measurements 
+1.     Collect data over 1 seconds       
+      2.     Step voltage  -300V to V*-300V; Collect data over 1.0 second  
+      3.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec      
+      4.     Collect data at V*-250V over 1.0 second                                        
+      5.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec      
+      6.     Collect data at V*-200V over 1.0 second    
+      7.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec       
+ 
+ 
+ 
+ 
+5 sec. 
+5 sec. 
+8 sec. 
+18 sec. 
+19 sec. 
+20 sec. 
+21 sec. 
+ 
+ 
+ 
+22 sec. 
+23 sec. 
+23.5 sec. 
+24.5 sec. 
+25 sec. 
+26 sec. 
+26.5 sec.
+
+--- page 46 ---
+46 
+      8.    Collect data at V*-150V over 1.0 second     
+      9.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec       
+      10.     Collect data at V*-100V over 1.0 second  
+      11.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec     
+      12.     Collect data at V*-50V over 1.0 second         
+      13.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec     
+      14.     Collect data at V* over 1.0 second        
+      15.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec     
+      16.     Collect data at V*+50V over 1.0 second  
+      17.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec      
+      18.     Collect data at V*+100V over 1.0 second   
+      19.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec       
+      20.     Collect data at V*+150V over 1.0 second 
+      21.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec       
+      22.     Collect data at V*+200V over 1.0 second 
+      23.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec     
+      24.     Collect data at V*+250V over 1.0 second   
+      25.     Ramp at +100V/s (or step +50V) while collecting data over 0.5 sec 
+      26.     Collect data at V*+300V over 1.0 second     
+      27.     Step to 0; collect data for 2 seconds                                                    
+F.  Stop gas flows/extinguish flame 
+G.  Repeat Steps C-E with no flame to determine current leakage  
+27.5 sec. 
+28 sec. 
+29 sec. 
+29.5 sec. 
+30.5 sec. 
+31 sec. 
+32 sec. 
+32.5 sec. 
+33.5 sec. 
+34 sec. 
+35 sec. 
+35.5 sec. 
+36.5 sec. 
+37 sec. 
+38 sec. 
+38.5 sec. 
+39.5 sec. 
+40 sec. 
+41 sec. 
+43 sec. 
+43 sec. 
+65 sec. 
+ 
+* - Voltage level determined to affect soot or liftoff from previous experiments 
+Note: return to step B and reignite as needed if flame fails during experiment 
+ 
+ 
+The sequence would then repeat Steps B-H for following cases with given fuel/diluent 
+mixture and change mixture as required.  For the gas jet burner, open loop exploration 
+will be allowed five minutes of total run time, and four conditions will be examined for 
+soot control.  For the co-flow burner, open loop exploration will be allowed 10 minutes 
+of total run time, and eight conditions will be examined, four for soot control and four for 
+liftoff/blowout.     
+  
+ 
+3.3 Test Matrix 
+ 
+The two burners to be used are: (a) a simple gas jet nozzle with 2 sizes, 1.3 mm (r e-
+quired) and 2.1 mm diameter (required), and (b) a co-flow burner (same as in the CLD 
+Flame study).  The former jet nozzle size matches our ground-based configuration and 
+the latter size matches the inner fuel tube of the co-flow burner.  Some of the conditions 
+in the co-flow burner test matrix intentionally match those proposed in the CLD Flame 
+experiment to allow for future coordination and comparison.  In all of the studies, the 
+limiting commodity is oxygen for the system because the fuel use is very low in virtually 
+all cases. There are four basic experimental activities involving electric field effects (VI 
+curves, voltage step changes, soot response, and stability behavior response).  The condi-
+tions for the latter two depend on the findings in the former two, and so the test matrix is
+
+--- page 47 ---
+47 
+not definitive for these.  Below is a table briefly summarizing the tests and the purpose of 
+each.  More details in this regard are in Section 2 under the description of the science data 
+end products.  Nominal and itemized test conditions planned for the co-flow burner and 
+gas jet flames are in the table at the end of this document (E-FIELD Flames SRD).  Spe-
+cific test conditions may be altered, based on additional 1-g experiments.  
+ 
+ 
+ 
+Test type Test Purpose 
+Voltage Sweep:  
+1.35 mm gas jet; 2.13 mm gas jet; 
+co-flow burner; two fuels; 3 dilution 
+conditions; 3 flow rates. 
+Identify flame shape changes, ion current per unit 
+flame area, saturation current for fuel and dilution 
+conditions, relationship between luminosity and 
+electric field strength 
+Step Response:  
+1.35 mm gas jet; 2.13 mm gas jet; 
+co-flow burner; two fuels; 3 dilution 
+conditions; 3 flow rates. 
+Determine time response of the flame to sudden 
+changes in electric field; provides the dynamic 
+model for the flame to be used in control loops. 
+Electric field effects on soot: 
+One gas jet and co-flow burner; 2 
+fuels; 3 dilution conditions 
+Determine response of soot to electric fields; distin-
+guish ion wind effects from direct chemi-ion influ-
+ences; evaluate soot contribution to ion current; 
+demonstrate the ability of electric fields to control 
+soot. 
+Open Loop Sensing and Control: 
+co-flow burner; 2 fuels; 2 dilution 
+conditions 
+Identify sensitive regions with the operating map 
+where the electric field can change liftoff and stabil-
+ity behavior.
+
+--- page 48 ---
+48 
+3.4 Success Criteria 
+ 
+ 
+Minimum Success: 
+• Obtain V-I curve in quasi-steady conditions for undiluted methane fuel on either 
+diameter of the gas jet burner or the co-flow burner 
+• Simultaneously capture color images of flame responding to electric field during 
+V-I sweep 
+ 
+Complete Success: 
+All of the above plus: 
+• Obtain V-I curve in quasi-steady conditions for both fuels (methane and ethylene) 
+on one gas jet burner and the co-flow burner with a range of inert dilution of fuel 
+• Simultaneously capture flame images during voltage sweeps to allow measure-
+ment of liftoff height has a function of applied voltage 
+• Measure soot luminosity (radiometer measurement) as a function of applied volt-
+age during VI sweeps and step changes 
+• Capture color images and soot luminosity (radiometer measurement) as a function 
+of coflow velocity during Electric Field Effects on Soot experiment. 
+ 
+Superior Success: 
+All of the above plus: 
+• Demonstrate open loop control of flame near sooting and stability limits using ion 
+current and luminosity as sensors by determining the decrease (or increa se) in 
+soot luminosity and by evaluating the extent to which stability limits can be ex-
+tended using an electric field  
+• (Desired) Obtain thermal field information for the gas jet or coflow flame to visu-
+alize ion driven wind
+
+--- page 49 ---
+49 
+ 
+ 
+3.5 Post-Flight Data Analysis 
+ 
+The post-flight data analysis will use many of the tools and follow many of the proc e-
+dures established in our 1-g experiments, as shown in Section 1.  In particular, we will 
+employ electrokinetic modeling based on measured flame shapes and total ion currents, 
+along with established relationships between flame area and ion flux to evaluate the links 
+between flame behavior and chemi-ionization.  Analysis of test results will be conducted 
+both concurrently and at the conclusion of the flight experiment. Concurrent analysis is 
+required at key points in the E-FIELD Flames test matrix to determine the specific test 
+conditions and parameters necessary for a following set of related tests. Specifically, an 
+analysis of ion current saturation, luminosity, and blowout will be conducted at the con-
+clusion of the voltage sweep test sets (described in Section 3.2) to determine the best flow 
+rate and nominal voltage range for soot effect tests and open-loop control tests. An analy-
+sis of step response experiments is also required to determine time constants for modeling 
+the flame and designing the control parameters for open-loop experiments. Finally, an 
+analysis of the near-limit test results in the E-FIELD Flames test matrix (and, desirably, 
+the results of CLD Flame near-limit experiments) is required to determine the flow rate 
+and mixtures that are most suitable for the stability experiments.  It is important to note 
+that while tentative conditions for soot effects and control tests have already been identi-
+fied in the test matrix, the ability to select conditions based on analysis of previous tests 
+will enhance the probability of success, and will ultimately maximize the value of the 
+science product.  
+ 
+The final analysis of all experimental data will be conducted at th e conclusion of the 
+flight experiment until each objective (listed in Section 2.1) is achieved. Video, imagery 
+(luminosity), thermal field information, and ion current data will be analyzed together to 
+evaluate the ion wind strength, ion flux, ion production rate per unit carbon, and effects 
+of electric fields on soot—completing Objectives A and C.  Ion concentration will be de-
+termined from the saturation ion current: the point where ion collection and production 
+are equal. The mobility can be determined from numerical methods previously discussed 
+in Section 1 (see, for example, Figure 1.9) and in reference [52].  Once mobility is deter-
+mined, we can ascertain the convective effects on the flame due to electricity.   
+ 
+One feature of the co-flow burner which makes this test unique is that axial convection 
+on the flame is dominated by the forced flow (buoyant convection is removed).  Hence, 
+by reducing exit flow velocity and adjusting the magnitude of the electric potential at the 
+mesh, it is possible to create an equivalent local flow velocity with different electrical 
+effects. Adjustable flow configurations such as these would enable us to determine 
+whether the electrical effects on soot are residence time based or chemical in nature.  
+ 
+Open loop control measurements allow us to understand the dominant factor in flame re-
+attachment and extended blowout limits: is it the mean ion wind or mixing effects at the 
+base? Analysis of the variation in ion current and luminosity time response in the step 
+voltage experiments will be conducted to distinguish chemical effects of the electric field
+
+--- page 50 ---
+50 
+from diffusion and ion wind since their timescales are sufficiently well separated.  This 
+analysis will fulfill Objective B. Objective D will be achieved by analyzing the effective-
+ness of the electric field to vary soot luminosity, vary lift-off heights, and delay extinction 
+of a near-limit flame. All analyses completed during and after the flight experiment will 
+be documented in anticipation for future disclosure.
+
+--- page 51 ---
+51 
+4.  REFERENCES 
+ 
+1. A.M. Starik and N.S. Titova. Kinetics of ion formation in the volumetric reaction of 
+methane with air. Combustion, Explosion, and Shock Waves, 38(3):253–268, 2002. 
+ 
+2. Pedersen, T. and Brown, R.C. (1993) “Simulation of electric field effects in premixed 
+methane flames.  Combust. Flame, 94, 433–448.	   
+ 
+3. J.A. Green, T.M. Sugden, Some observations on the mechanism of ionization in flames 
+containing hydrocarbons, in: Ninth Symposium (International) on Combustion, Academic 
+Press, New York, 1963, pp. 607±621. 
+ 
+4. Peeters, J., Vinkier, C., and Van Tiggelen, A., Formation and Behaviour of Chemi-Ions 
+in Flames, Oxidat. Combust. Rev., vol. 4, 93-132 (1969).  
+ 
+5. F.L. Jones, P.M. Becker, R.J. Heinsohn, A mathematical model of the opposed-jet dif-
+fusion flame: effect of an electric field on concentration and temperature profiles, Com-
+bust. Flame 19, (1972) 351-362. 
+ 
+6. J. Prager, U. Riedel, J. Warnatz, “Modeling ion chemistry and charged species diffu-
+sion in lean methane–oxygen flames,” Proceedings of the Combustion Institute 31 (2007) 
+1129–1137. 
+ 
+7. Lawton J. and Weinberg F.J. 1969. Electrical Aspects of Combustion. Clarendon Press. 
+Oxford. 
+ 
+8. Dunn-Rankin, D. and Weinberg, F.J. “Using Large Electric Fields to Control Transport 
+in Microgravity,” Annals of the New York Academy of Sciences, Vol. 1077, 570—584, 
+2006. 
+ 
+9. Papac, M.J. and Dunn-Rankin, D. “Canceling Buoyancy of Gaseous Fuel Flames in a 
+Gravitational Environment Using an Ion-Driven Wind,” Annals of the New York Acad-
+emy of Sciences, Vol. 1077, 585—601, 2006. 
+ 
+10. Lawton, J. and Weinberg F.J. 1964. Maximum ion currents from flames and the 
+maximum practical effects of applied electric fields. Proc. Roy. Soc. London. A, 
+277(1371): 468-497. 
+ 
+11. Sher, E., Pinhasi, G., Pokryvailo, A., and Bar-on, R., 1993, “Extinction of Pool 
+Flames by Means of a DC Electric Field,” Combust. Flame, 94, 244–252. 
+ 
+12. Carleton, F.B. and Weinberg, F.J., “Electric Field-Induced Flame Convection in the 
+Absence of Gravity,” Nature, 330, 635 (1987). 
+ 
+13. Hu, J., Riven, B. and Sher, E. (2000) “The effect of an electric field on the shape of 
+co-flowing and candle-type methane-air flames,” Exp. Therm Fluid Sci., 21, 124–133.
+
+--- page 52 ---
+52 
+14. Mayo, P.J., and Weinberg, F.J. “On the Size, Charge and Number-Rate of Formation 
+of Carbon Particles in Flames Subjected to Electric Fields,” Proceedings of the Royal So-
+ciety of London. Series A, Mathematical and Physical Sciences, Vol. 319, No. 1538, 
+351—371, 1970. 
+ 
+15. Kono, M., Carleton, F.B., Jones, A.R., and Weinberg, F.J. “The effect of nonsteady 
+electric-fields on sooting flames.”  Combustion and Flame, 78:357--364, 1989. 
+ 
+16. Saito, M., Sato, M., and Sawada, K. Variation of flame shape and soot emission by 
+applying electric field. Journal of Electrostatics, 39:305–311, 1997. 
+ 
+17. H.C. Jaggers, A. von Engel, The effect of electric fields on the burning velocity of 
+various flames, Combust. Flame 16 (1971) 275-285. 
+ 
+18. H.C. Jaggers, R.J. Boeser, F.J. Weinberg, The effect of electric fields on burning ve-
+locity, Combust. Flame 19 (1972), 135-136. 
+ 
+19. Sher, E., Pokryvailo, A., Jacobson, E., and Mond, M. “Extinction of Flames in a 
+Nonuniform Electric-Field,” Combustion Science and Technology, vol. 87 (1-6): 59—67, 
+1993. 
+ 
+20. Calcote, H.F. and Pease, R.N. “Electrical Properties of Flames – Burner Flames in 
+Longitudinal Electric Fields,” Industrial and Engineering Chemistry, vol. 43 (12): 2726—
+2731, 1951. 
+ 
+21. Panteleev, A.F., Popkov, G.A., Shebko, Y.N., and Tsarichenko, S.G., “Effect of AC 
+Field on the Limiting Blow-Off Flow-Rate Value for a Diffusion Propane Hydrogen 
+Flame,” Combustion Explosion and Shock Waves, vol. 29 (1): 32—33, 1993. 
+ 
+22. Yuan ZG, Hegde U, Faeth GM “Effects of electric fields on non-buoyant spherical 
+diffusion flames,” Combustion and Flame 124 (4): 712-716, 2001. 
+ 
+23. H.F. Calcote and D.G. Keil. The role of ions in soot formation. Pure Appl. Chem., 
+62(5):815–824, 1990. 
+ 
+24. Boothman, D., Lawton, J., Melinek, S.J., and Weinberg, F.J. 1969. Rates of ion gen-
+eration in flames. In 12th Symposium (International) on Combustion. 969-977. The 
+Combustion Institute. 
+ 
+25. Mehresh P, Souder J, Flowers D, Riedel, U., and Dibble, R.W. “Combustion timing 
+in HCCI engines determined by ion-sensor: experimental and kinetic modeling,” Pro-
+ceedings of the Combustion Institute 30: 2701-2709 Part 2 2005. 
+ 
+26. Weinberg, F.J., “Electrically Driven Convection,” Proc. 1st International Symposium 
+on Fluids in Space, (Ajaccio, November, 1991), ESA SP-353, 123 (1992).
+
+--- page 53 ---
+53 
+27. Carleton, F.B. and Weinberg, F.J., “Simulation of microgravity by the application of 
+electric fields to flames,” Joint meeting of the Portuguese, British, Spanish, and Swedish 
+Sections of The Combustion Institute, Madeira, 8.5.1 (1996) 
+ 
+28. Strayer B.A , Posner, J.D., Dunn-Rankin D., and Weinberg F.J., “Simulating micro-
+gravity in small diffusion flames by using electric fields to counterbalance natural con-
+vection” 
+ 
+29. Strayer, B.A. and Dunn-Rankin, D. (2001) “Response of a Non-Premixed Flame to 
+Electric Field Forcing,” 18th International Colloquium on the Dynamics of Explosions 
+and Reactive Systems, Seattle, Washington, July 29--August 3. 
+ 
+30. Borgatelli, F. and Dunn-Rankin, D. (2006) “Feedback Control of Ion Current from a 
+Small Diffusion Flame,” Paper 06S-44, Western States Section/The Combustion Institute 
+Spring Meeting, University of Idaho, Boise, March 27--28. 
+ 
+31. Sandhu, S.S. and Weinberg, F.J “Laser Interferometric Studies of the Control of Heat 
+Transfer from Flame Gases by Electric Fields,” Combustion and Flame, Vol. 25, 321—
+334, 1975. 
+ 
+32. Strayer, B.A. and Dunn-Rankin, D. “Control of the Vaporization Rate in a Droplet 
+Stream Flame using Electric Fields,” Proceedings of NHTC’01, the 35th ASME National 
+Heat Transfer Conference, Anaheim, California, June (2001). 
+ 
+33. Papac, M.J., Dunn-Rankin, D., Stipe, C.B., and Lucas, D. “N2 CARS thermometry 
+and O2 LIF concentration measurements in a flame under electrically induced micro-
+buoyancy,” Combustion and Flame, Vol. 133, 241—254, 2003. 
+ 
+34. Papac, M.J. “Effects of Electric Fields on Convection in Combustion Plasmas and 
+Surrounding Gases,” Paper AIAA-2005-4784 of the 36th  AIAA Plasmadynamics and 
+Lasers Conference, Toronto, June (2005). 
+ 
+35. Yamashita, K, Karnani, S., and Dunn-Rankin, D. (2009) “Numerical Prediction of Ion 
+Current from a Small Methane Jet Flame,” Combustion and Flame, 156: 1227-1233. 
+ 
+36. Karnani, S. and Dunn-Rankin, D.. Electric field effects on a small co-flow diffusion 
+flame. In Proceedings of the 6th U.S. National Combustion Meeting, Ann Arbor, MI, 
+May 17-20, 2009 2009. 
+ 
+37. Takahashi, F. and Katta, V.. Structure of propagating edge diffusion flames in hydro-
+carbon fuel jets. Proceedings of the Combustion Institute, 30:375–382, 2005. 
+ 
+38. Karnani, S., Schoen, M., Coffin, P., Dunn-Rankin, D., Takahashi, F., Yuan, Z.-G., 
+and Stocker, D.. Exploring the effects of gravity on a coflow diffusion flame in an elec-
+tric field. Fall Technical Meeting of the Western States Section of the Combustion Insti-
+tute at University of California, Irvine, Oct 26-27 2009.
+
+--- page 54 ---
+54 
+39. Bennett, M., Borgatelli, F. and Dunn-Rankin, D. (2007) “Behavior of Non-Premixed 
+Flames as Electrically Active Components in a High-Voltage Circuit,” 21st International 
+Colloquium on Dynamics of Explosions and Reactive Systems, Poitiers, France, July 23--
+27. 
+ 
+40. Place, E.R. and Weinberg, F.J. “Electrical Control of Flame Carbon,” Proceedings of 
+the Royal Society of London. Series A, Mathematical and Physical Sciences, Vol. 289, No. 
+1417, 192—205, 1966. 
+ 
+41. Saito, M., Arai, T., and Arai, M. Control of soot emitted from acetylene diffusion 
+flames by applying an electric field. Combustion and Flame, 119:356–366, 1999. 
+ 
+42. Unterreiner, B.V., Sierka, M., and Ahlrichs, R. (2004) “Reaction pathways for growth 
+of polycyclic aromatic hydrocarbons under combustion conditions, a DFT study,” Phys. 
+Chem. Chem. Phys., 6, 4377—4384. 
+ 
+43. P. Pandey, B.P. Pundir, P.K. Panigrahi (2007) “Hydrogen addition to acetylene–air 
+laminar diffusion flames: Studies on soot formation under different flow arrangements,” 
+Combustion and Flame, 148, 249—262. 
+  
+44. Weilmunster, P., Keller, A., Homann, K.-H. (1999) “Large Molecules, Radicals, Ions, 
+and Small Soot Particles in Fuel-Rich Hydrocarbon Flames, Part I: Positive Ions of Poly-
+cyclic Aromatic Hydrocarbons (PAH) in Low-Pressure Premixed Flames of Acetylene 
+and Oxygen, Combustion and Flame, 116: 62—83. 
+ 
+45. Leszczynski, J., Wiseman, F., and Zerner, M.C. (1988) “Toward an Ionic Mechanism 
+of Soot Particle Formation: Reactions Between Acetylene and Tautomeric Forms of the 
+C3H3+ Ions, International Journal of Quantum Chemistry: Quantum Chemistry Sympo-
+sium, 22, 117—125. 
+ 
+46. Won, S.H., Cha, M.S., Park, C.S., and Chung, S.H. “Effect of electric fields on reat-
+tachment and propagation speed of tribrachial flames in laminar coflow jets,” Proceed-
+ings of the Combustion Institute, 31, 963—970, 2007. 
+ 
+47. Won, S.H., Ryu, S.K., Cha, M.S., Kim, J.S., and Chung, S.H. “Propagation of Tribra-
+chial Flames in Electric Fields,” 21st ICDERS Conference, Poitiers, France, July 23—27, 
+2007. 
+ 
+48. Cheng, T.S., Cheng, C.P., Chen, C.S., Li, Y.H., Wu, C.Y., and Chao, Y.C. “Charac-
+teristics of microjet methane diffusion flames,” Combustion Theory and Modelling, Vol. 
+10, No. 5, 861—881, 2006. 
+ 
+49. Smooke, M.D., Long, M.B., Connelly, B.C., Colket, M.B., and Hall, R.J. “Soot for-
+mation in laminar diffusion flames,” Combustion and Flame, Vol. 143, 613—628, 2005. 
+ 
+50. Smooke, M.D., Hall, R.J., Colket, M.B., Fielding, J., Long, M.B., McEnally, C.S., 
+and Pfefferle, L.D., “Investigation of the transition from lightly sooting towards heavily
+
+--- page 55 ---
+55 
+sooting co-flow ethylene diffusion flames,” Combustion Theory and Modelling, Vol. 8, 
+593—606, 2004. 
+ 
+51. Walsh, K.T., Fielding, J., Smooke, M.D., Long, M.B., and Linan, A. “A comparison 
+of computational and experimental lift-off heights of coflow laminar diffusion flames,” 
+Proceedings of the Combustion Institute, Vol. 30, 357—365, 2005. 
+ 
+52. Papac, M.J. and Dunn-Rankin, D. “Modelling Electric Field Driven Convection in 
+Small Combustion Plasmas and Surrounding Gases,” Combustion Theory and Modelling, 
+in press, 2007. 
+ 
+53. Payne, K.G. and Weinberg, F.J. “A Preliminary Investigation of Field-Induced Ion 
+Movement in Flame Gases and Its Applications,” Proceedings of the Royal Society of 
+London. Series A, Mathematical and Physical Sciences, Vol. 250, No. 1262, 316—336, 
+1959. 
+ 
+54. Ryu, S.K., Kim, Y.K., and Chung, S.H. “Effect of Electric Fields on Reattachment of 
+Lifted Flame at Low AC Frequency,” Paper A38, 5th US Combustion Meeting, San Di-
+ego, CA, March 25—28, 2007. 
+ 
+55. Yuan, Z.G. and Hegde, U. “Recent Advances in Electric Field Effects on Diffusion 
+Flames in a Spherically Symmetric System,” AIAA Aerospace Sciences Meeting Paper 
+AIAA-2003-0812, 2003. 
+ 
+56. Sunderland, P.B., Axelbaum, R.L., Urban, D.L., Chao, B.H., and Liu, S. Effects 
+of structure and hydrodynamics on the sooting behavior of spherical microgravity 
+diffusion flames. Combustion and Flame, 132:25–33, 2003. 
+ 
+57. Bahadori, M.Y., Stocker, D.P., Zhou, L., and Hegde, U. (2001) “Radiative loss from 
+non-premixed flames in reduced-gravity environments,” Combustion Science and Tech-
+nology, 167: 169-186.

@@ -1,0 +1,6212 @@
+Source : NASA PSI, PSI-101, Reports, SAMER_Final 0602 2014.pdf
+
+--- page 1 ---
+Smoke Aerosol Measurement Experiment Re-flight (SAMER) 
+ 
+by 
+ 
+David L. Urban1, Gary A. Ruff2 and William Sheredy3, Marit Meyer, 
+NASA Glenn Research Center, Cleveland, Ohio 44135 
+Thomas Cleary4 and Jiann Yang5 
+National Institute of Standards and Technology, Gaithersburg, Maryland 20899 
+George Mulholland6 
+The University of Maryland, College Park, Maryland 20742 
+and 
+Zeng-Guang Yuan7 
+National Center for Space Exploration Research, Cleveland, Ohio 44135 
+01 November 2000 – June 2, 2014 
+ 
+Final Report 
+ 
+ 
+ 
+ 
+ 
+June 2, 2014 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+----------------------------------------- 
+1 Branch Chief, Combustion and Reacting Systems Branch, 21000 Brookpark Road, MS 77-5, Senior Member. 
+2 Advanced Capabilities Project Office, 21000 Brookpark Road, MS 77-7, Associate Fellow. 
+3 ISS Projects Office, 21000 Brookpark Road, MS 77-5. 
+4 Engineered Fire Safety Group, 100 Bureau Drive, Stop 8664. 
+5 Fire Measurements Group Leader, 100 Bureau Drive, Stop 8662. 
+6 Visiting Professor of Mechanical Engineering, Glenn L. Martin Hall. 
+7 Staff Scientist, 21000 Brookpark Road, MS 110-3.
+
+--- page 2 ---
+Smoke Aerosol Measurement Experiment Re-flight (SAMER) 
+ 
+ 
+Abstract 
+ 
+Smoke Aerosol Measurement Experiment Re-flight (SAMER) is an extension or continuation of Smoke Aerosol 
+Measurement Experiment (SAME), conducted in space from  September 9 to October 5, 2007. On the success of 
+SAME, SAMER included the following modifications: 1) a new test sample material Pyrell ®, an intumescent fire-
+retardant foam by Foamex was introduced to replace DBP samples, 2) test condition ranges was extended to include 
+higher heating temperature and no-flow conditions, and 3) a new instrument, M-pass, developed in-house GRC, was 
+used to replace one of the two Commercial Diagnostic Enclosures used in SAME. SAMER flight tests were 
+conducted from July 16, to September 9, 2010, successfully completing 66 test  points. As a part of SAMER effort, 
+three major post–flight ground tests were performed: the SAMER apparatus flow tests to obtain accurate dilution 
+ratio data, the TEM tests to obtain the 1-g counterpart of TEM samples and a batch of SMPS tests to examine the 
+validity of the lognormal distribution assumption of aerosol  particle size for the tested materials. Based on the 
+results of both SAMER flight and ground-based tests, it is concluded that the moment method in conjunction the 
+lognormal distribution assumption is a valid and effective approach to characterization of the aerosol encountered in 
+space vehicles. Particle size distributio ns of aerosol produced from 5 tested materials commonly found in space 
+crafts were identified.  
+ 
+Introduction 
+ 
+Smoke Aerosol Measurement Experiment Re-flight (SAMER) is one of the awarded Rapid Turn Around (RTA) 
+projects, solicited by NASA Headquarters in June 2009. SAMER is an extension or continuation of Smoke Aerosol 
+Measurement Experiment (SAME), which was conducted in the Microgravity Science Glovebox (MSG) onboard 
+the International Space Station (ISS) from September 9 to October 5, 2007. 
+ 
+Generally speaking, SAME experiments were completed successfully in that the apparatus developed for the 
+experiments functioned well and desired data from instruments were obtained. However, there was a major problem 
+of the SAME experiments. After the thermal precipitators returned to the ground, it was found that all the TEM grids 
+were severely contaminated with some unidentified foreign particles, making these grids unusable although some of 
+them showed shapes of certain types of smoke particles.  
+ 
+Based on the experience gained from SAME, SAMER included the following modifications: 1) a new test material, 
+Pyrell®, an intumescent fire-retardant foam  by Foamex, was introduced to repl ace DBP samples, 2) test conditions 
+were broadened including higher heating temperatures and no-flow during sample heating time, and 3) a new 
+instrument, M-pass, developed in-house GRC, was used to replace one of the two Commercial Diagnostic 
+Enclosures that includes a DustTrak and an ionization detector used in SAME. SAMER flight tests were conducted 
+from July 16, to September 9, 2010, successfully completing 66 test points. 
+ 
+After SAMER flight tests, three major post–flight ground tests were performed to improve data reduction process 
+and to validate the lognormal distribution assumption, the key to the moment method employed by SAME and 
+SAMER. The first ground-based test is the SAMER apparatu s flow tests. The objective of the test is to obtain 
+accurate dilution ratio data of the P-trak and Dusttrak so that the accuracy of aerosol concentration can be improved. 
+The second batch of ground tests was the TEM tests which were conducted under exactly the same conditions as 
+those for the SAMER flight tests so that the gravity effects on the TEM samples can be identified. The third batch of 
+ground tests was to a SMPS apparatus to obtain the actual particle size distribution under the same condition as the 
+SAMER flight tests. The objective of these tests is to ex amine the validity of lognormal particle size distribution 
+assumption.  
+ 
+Besides these ground tests, there were two improvements in the data reduction procedures. One is to derive sample 
+heating temperatures from the logged engineering data so th at each test can be characterized by the sample heating 
+temperature instead of R t/R0 as has always been used. It was reali zed that even two tests use the same R t/R0, the 
+sample heating temperatures can be quite different. Charac terizing a test with sample heating temperature makes it
+
+--- page 3 ---
+easier to understand the particle generation from the view point of material pyrolysis. The second improvement is to 
+device a method of calculating the percentage of cumulative moment detected by an instrument that has a limited 
+particle size detection range. This development allows us to improve uncertainty analysis of the results we obtained. 
+ 
+Since the apparatus used in SAMER is mostly unchanged from that of SAME and the basic approach – the moment 
+method – used by the two experiments are the same, in this report, these two parts – the apparatus and the moment 
+methods – will not be repeated. What w ill be included in this final report are the newly added part, the improved 
+data reduction methods and the new results of particle distributions.  
+ 
+Flight Operation 
+ 
+SAME-R utilized the SAME hardware already on  orbit with reloaded sample carousels, 30  extra loose samples, 
+rebuilt thermal precipitators and refilled alcohol cartridge fo r P-trak use. Table  below lists sample locations in 
+carousels.  
+ Position 1 Position 2 Position 3 Position 4 Position 5 Position 6 
+Carousel #1 Silicone Lamp wick Teflon Kapton Pyrell Silicone 
+Carousel #2 Silicone Silicone Lamp wick Lamp wick Teflon Teflon 
+Carousel #3 Kapton Kapton Pyrell Pyrell Silicone Silicone 
+Carousel #4 Lamp wick Lamp wi ck Lamp wick Teflon Teflon Teflon 
+Carousel #5 Kapton Kapton Kapton Pyrell Pyrell Pyrell (bad) 
+Carousel #6 Silicone Lamp wick Teflon Kapton Pyrell Silicone 
+The Pyrell sample installed in position 6 of carousel 5 was found unusable during the test, which was probably 
+shacked loose during the launch. 
+ 
+In addition to those preloaded carousels, thirty loose samples were also uploaded to ISS. These loose samples 
+included 6 Pyrell, 6 silicone rubber, 9 Kapton, 5 lamp wick and 4 Teflon samples. These samples were later installed 
+in carousel #4, six a group, to replace us ed ones for more runs. Although physically only car ousel #4 is repeatedly 
+used to load these loose samples, in data logging sheet, nominated carousel numbers, i.e. carousel # 7(4) to carousel 
+# 11(4) were used in order to distinguish those additional runs from actual carousel # 4. Sample number of each 
+additional carousel loading is listed in Table below.   
+ 
+ Pyrell Silicone Kapton Lamp wick Teflon 
+Carousel #7 (4) 2 1 1 1 1 
+Carousel #8 (4) 1 1 3 1  
+Carousel #9 (4) 1 1 2 1 1 
+Carousel #10(4) 1 2 1 1 1 
+Carousel #11(4) 1 1 2 1 1 
+Total 6 6 9 5 4 
+ 
+Six re-assembled Thermal Precipitators, each having 12 TEM grids in it, were uploaded to ISS for SAMER. 
+ 
+Since the SAMER project is a re-flight of SAME, the ha rdware, the project approach, the principle of moment 
+method, post flight data analysis and uncertainty analysis will not be repeated  in this report. Information in these 
+areas can be found in the final report of the original SAME project. This re port emphasizes information unique for 
+SAMER only and new development made in SAMER project.    
+ 
+The SAME-R flight operation was carried out from July 16, 2010 to September 9, 2010 in 7 time periods: July 16, 
+July 19-22, July 29-30, August 2, August 23-27, August 30 and September 7-9. Totally 67 runs were conducted 
+including two runs using reused samples. The test conditions of each run can be found in Appendix A, where the 
+secondary aging runs are listed as separate entities, making th e total run number to 109. In the SAMER flight tests, 
+70 TEM samples were collected totally. 
+ 
+During the tests, SAMER engineer team and science team  were in the Tele-Science Center in GRC, where they 
+could communicate with the astronaut who is conducting the test and have a real time video of the apparatus when
+
+--- page 4 ---
+space to ground signal transmission is available. The engineering hous ekeeping data files generated during the tests 
+were downlinked shortly after tests were completed each da y. The entire flight test op eration was quite smooth and 
+as planned. The hardware worked fine without any unexpected events. 
+ 
+After entire SAMER tests were completed, the six carousel s, all tested samples and the six thermal precipitators 
+were shipped to the GRC for measuring sample weight losses and TEM grid analysis.  
+ 
+ 
+SAMER results 
+The preliminary results of SAMER experiments are best summarized in a paper titled “Particle Morphology and 
+Size results from the Smoke Aerosol M easurement Experiment-2” [ref. xx]. Be low are excerpts fr om the relevant 
+part of the paper. The referenced materials that are beyond the text of excerpts can be found in the original paper. 
+ 
+Over 100 sample materials were tested.  These were comprised of samples of 6 materials: Teflon™, Kapton™, 
+Pyrell™, silicone rubber, cellulose (lamp wick), and dibutyl-phthalate deposited on a porous wick. The test 
+conditions included multiple sample temperatures and air flow rates.  The baseline air flow rate was 8 cm/s with 
+runs conducted at rates down to 2 cm/s with a limited set conducted with no airflow while the sample was heated.  
+The sample temperatures were based on the pyrolysis properties of the material and were thus material specific.  The 
+baseline temperature was selected to produce 1 to 2 mg of weight loss in 60 seconds and have reasonable signal on 
+each of the moment instruments.  To examine the effect of sample temper ature, additional higher temperature 
+conditions were also selected that would not saturate th e moment instruments. The TEM girds recovered from the 
+thermal precipitators on SAME-1 were unfortunately cont aminated with extraneous particles whose origin is 
+currently under investigation. For SAME-2 more rigorous assembly controls were followed and numerous good 
+particle images were obtained.  For typical runs, the partic le concentrations were a few million particles / cc and the 
+mass concentrations were 2 to 15 mg/m 3 however there were runs with fewer particles.  For these conditions, the 
+typical numbers of particles sampled by the instruments were in the billions although for the test with the lowest 
+particle concentrations the sample sizes were of the order of several million particles. 
+ 
+A. Moment Instrument Results 
+Geometric mean, count mean, and average mass diameter re sults from the moment instruments for baseline runs 
+are presented in Table 1.  As desc ribed above, the count mean diameter  and the diameter of average mass 
+measurements are independent of the nature of the size distribution however, the calculation of the geometric mean 
+diameter and the geometric standard deviation ( σg) depend on the assumption of a log-normal distribution.  This 
+assumption cannot be directly tested with the available da ta since this would require a device that can separate the 
+particles into size bins.  However, there are two indications that the distribution can be approximated by a log-
+normal distribution.  In the cases listed below, the count mean diameter is less than the diameter of average mass 
+which is a necessary condition for a log-normal distribution (See Fig. 1).  The second indication is that the geometric 
+standard deviations are all physically reasonable (i.e. greater than 1 (see Eq. 3) and less than approximately 3.5 
+which is the practical limit on the magnitude of aerosol ge ometric standard deviation).  The aging results show a 
+substantial increase in the observed diam eters.  As expected the increase in th e count mean diameter is greater than 
+the corresponding increase in th e diameter of average mass.  This can be understood since coagulation consists of 
+particle collisions joining two particles.  For a polydisper se aerosol, these collisions usually involve the collision of 
+one of the smallest (high mobility) particles with the larg est (high cross-section) par ticles. This collision has little 
+effect on the size of the large particle but it removes the smaller particles from the size distribution.  This has a 
+larger effect on the count mean diameter since it is linear in diameter while the diameter of average mass varies with 
+the cube root of the diameter. Theoretical predictions suggest that this process will produce a near lognormal 
+distribution and that the standard deviation will tend toward a self-preserving distribution with a value of 1.32.14   
+ 
+ 
+   Geometric Mean 
+Diameter (Dg) 
+(µm)  
+Count Mean 
+Diameter 
+(M1/M0)  
+(µm) 
+Diameter of Average 
+Mass 
+(M3/M0)1/3 
+(µm)   
+σg
+Kapton  Unaged  0.047 0.062 0.106  2.072Aged 720 s  0.102 0.121 0.169  1.790
+
+--- page 5 ---
+Lampwick  Unaged  0.103 0.142 0.271  2.232Aged 720 s  0.269 0.308 0.401  1.673
+Silicone  Unaged  0.152 0.221 0.468  2.382Aged 720 s  0.320 0.400 0.628  1.956
+Teflon  Unaged  0.093 0.111 0.173  2.081Aged 720 s  0.080 0.115 0.237  2.342
+Pyrell  Unaged  0.177 0.227 0.377  2.032Aged 720 s  0.348 0.400 0.529  1.697
+ 
+Table 1: Diameter results for baseline runs for each material (Diameters are in micrometers).  
+ 
+Overall, the Teflon and Kapton particles were very small.  The lamp wick and silicone results exhibited 
+substantially larger diameters of average mass, partic ularly for the aged cases.  As reported previously 10, the Dust 
+Trak results for lamp wick and silicone demonstrated s ubstantial portions of the particle distribution possessed 
+aerodynamic diameters larger than 1 micrometer.  The compara tively much smaller diameters for the Kapton and 
+Teflon will make detection of this smoke challenging for light scattering devices, on the other hand the large sizes 
+seen with the lamp wick and silicone would generate very large signals on a light scattering system.  As discussed 
+by Urban et al.13, to have a system that would have the signal gain sensitive enough to trigger an alarm for the lower 
+signal from small particles such as Teflon and Kapton without excessive nuisance alarms from large dust particles is 
+difficult without some level of particle size discrimination.  This suggests that detection of these particles against the 
+background environment will require a detection system capable of measuring more than one moment of the particle 
+size distribution.   
+The results for Teflon, Kapton and lampwick are plotted versus duct velocity in figures 6, 7 and 8.  These figures 
+show a strong trend of increased particle size at low flow ra tes.  This indicates that sm oke trapped in an avionics 
+enclosure can be expected to be substantially larger than smoke released in ventilated areas. 
+ 
+ 
+Figure 6: Particle diameters as a function of air velocity for lampwick. The lines are linear (least square) fits.  
+The repeatability of the diameter measurements is estimated to be +/- 15%. 
+0
+1
+2
+3
+4
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+02468 1 0
+Particle Diameter, m
+Air Velocity, cm/s
+Arithmetic  mean diameter
+Diameter  of  average mass
+Geometric  mean diameter
+Geometric  Std. deviation
+Linear  (Arithmetic mean 
+diameter)
+Linear  (Diameter of  average 
+mass)
+Linear  (Geometric mean 
+diameter)
+Linear  (Geometric Std. 
+deviation)
+g
+
+--- page 6 ---
+B. MPASS Results 
+The MPASS was included in SAME-2 to demonstrate the effectiveness of a two-moment smoke detector. 
+Because of how they are used, a smoke  detector is not calibrated for speci fic materials and instead has a single 
+calibration for all conditions. The objective is to maintain a flat sensor response, regardless of the type of smoke or 
+the particle size so the signal is proportional only to a se lected moment (e.g. mass or number concentration).  The 
+approach used was to derive correlations to predict the smoke number concentration and mass concentration from 
+the MPASS output.  This correlation was made using the other SAME measurements (number and mass 
+concentration) as a reference.  A least-squares, third-order, correlation was computed on all test points with a signal 
+to noise ratio greater than 2 independent of all other parameters (e.g. material, heating rate, and aging time).  
+ 
+The results are shown in figures 9 and 10, for prediction of the mass concentration and the number 
+concentration, respectively.  Ideally th ese response graphs should be horizont al lines.  The norm alized output is 
+plotted along with the normalized correlation result as  a function of geometric m ean diameter. Ideally the 
+ 
+Figure 7: Particle diameters as a function of air velocity for Kapton. The lines are linear (least square) fits. 
+The repeatability of the diameter measurements is estimated to be +/- 15%. 
+0
+1
+2
+3
+4
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0.30
+02468 1 0
+Particle Diameter, m
+Air Velocity, cm/s
+Arithmetic  mean diameter
+Diameter  of average mass
+Geometric  mean diameter
+Geometric  Std. deviation
+Linear  (Arithmetic mean 
+diameter)
+Linear  (Diameter of average 
+mass)
+Linear  (Geometric mean 
+diameter)
+Linear  (Geometric Std. 
+deviation)
+g
+ 
+Figure 8: Particle diameters as a function of air velocity for Teflon. The lines are linear (least square) fits. 
+The repeatability of the diameter measurements is estimated to be +/- 15%. 
+0
+1
+2
+3
+4
+0.0
+0.1
+0.2
+0.3
+0.4
+02468 1 0
+Particle Diameters, m
+Air velocity,  cm/s
+Arithmetic  mean diameter
+Diameter  of average mass
+Geometric  mean diameter
+Geometric  Std. deviation
+Linear  (Arithmetic mean 
+diameter)
+Linear  (Diameter of average 
+mass)
+Linear  (Geometric mean 
+diameter)
+Linear  (Geometric Std. 
+deviation)
+g
+
+--- page 7 ---
+normalized result should be horizontal lines. The uniformity of response (scatter) is expressed by the least squares 
+variance relative to the mean ( Δ) and is shown in the legend.  Both figures show that the correlation decreases the 
+relative variance by roughly a factor of at least 2 relative to that provided by a conventional single-output sensor.  
+The resulting variance for the mass response is substantially  lower than for the number concentration.  This is 
+consistent with the fact that the original optimizati on of the MPASS was to mass concentration not to number 
+concentration.  Thus with appropriate processing, the MPASS output can be proportional to either the number 
+concentration or the mass concentration over a wide range of particle sizes and material compositions.  This 
+independence demonstrates that by combining 2 moments the MPASS is able to scale its response to the particle 
+size being sampled giving a more accurate indication of the amount of smoke present than a single moment detector. 
+The MPASS therefore has the ability to discern the difference between a strong signal from a high smoke 
+concentration and a strong signal from a lower concentration of very large dust particles, a feature which can 
+minimize false smoke detector alarms.   
+ 
+ 
+ 
+ 
+C. TEM Results 
+Overall, 72 particle samples were taken on Transmission Electron Microscope (TEM) grids using the thermal 
+precipitator.  These samples were imaged with a TEM to evaluate the particle morphology as a function of flow 
+conditions, material and heating level.  Overall, silicone rubber presented no particles that were visible via TEM, 
+presumably because the particles were condensed liquid that evaporated before they coul d be imaged in the TEM.  
+Figure 11 presents typical images for the major materials. 
+ 
+ 
+As seen in Table 1, aging did increase the average partic le size, however this level of change is not readily 
+visible in the TEM images, instead the mo st visible change is the disappearance of  the smallest particles.  (Fig 12)  
+Figure 9: Mass normalized signal channel output 
+voltage and correlated MPASS output voltage versus 
+geometric mean diameter. 
+ 
+  Length scale 2 μm 
+Figure 11: TEM images for Teflon (Run 56), Pyrell (Run 63), Lampwick (Run 54) and Kapton (Run 62).   
+Figure 10: Count normalized output voltage and 
+correlated MPASS output voltage versus geometric 
+mean diameter.
+
+--- page 8 ---
+As described in the discussion of Table 1, this is consistent with expectations since the smaller particles have the 
+highest mobility and consequently are readily incorporated in to the larger particles. Particularly for the semi-liquid 
+particles, this absorption of the smallest particles into larger  particles is expected to have little or no apparent effect 
+on the size of the larger particles b ecause the diameter is the cube root of  the volume. In th e case of non-liquid 
+particles, the smallest particles will ne vertheless be unlikely to be visible via TEM when they are attached to larger 
+particles.   
+ 
+ 
+D. Impact of flow on particle morphology 
+As the samples are heated by the wire, chemical bonds are broken and gaseous products are released via pyrolysis.  
+These products may include partially oxidized species resulting from the reaction with oxygen. As the gases move 
+from the wire, the temperature and species concentration will decrease as a result of conduction/diffusion and 
+convection.  With the decrease in temperature, the super saturation ratio of the pyrolysis gas will pass a critical stage 
+and nucleation of smoke particles will occur.  These smoke nuclei grow rapidly from the condensation of the 
+pyrolysis gases.  The time scale for the nucleation and condensation is on the order of miliseconds or less.  Over a 
+longer time scale, the growing smoke particles undergoing Brownian motion collide and stick together in a process 
+known as coagulation.  This process may continue for time scales of up to thousand seconds.  If the particles are 
+liquid, the colliding particles will coalesce and form larger droplets.  This is the case for the lampwick, silicone 
+rubber, and Kapton smokes (Fig. 11).  If the particles are solid, they will retain their structure as they stick resulting 
+in an agglomerate structure composed of many primary particles connected in a low density fractal-like structure.  
+This is the case for the Teflon and Pyrell smokes (Fig. 11). 
+ 
+Key parameters affecting the smoke properties of the smoke produced here are the low-gravity condition, the 
+convective flow past the heated wire, the wire temperature, and the aging time.  As the wire temperature increases, 
+more of the sample will be pyrolyzed and these gases will subsequently condense on the nuclei leading to a larger 
+mass concentration of the aerosol and a larger diameter of average mass.   
+ 
+An increase in the convective flow for a fixed wire temperature is expected to result in an increase in the pyrolysis 
+rate and thus an increase in the mass concentration of the aerosol.  Some results follow this trend with silicone 
+rubber, lampwick, and Pyrell increasing slightly with flow while Teflon and Kapton decrease.  A possible 
+explanation is that holding the wire temperature fixed does not necessarily mean that the sample surface temperature 
+distribution is precisely the same at different air flow speeds.  Although these are expected to be small variations, 
+given the exponential dependence of the pyrolysis kinetics on temperature, changes in the heat transport 
+environment could change the sample surface temperature between the wire coils.   
+ 
+A case of special interest is the case of zero-flow.  The transport for the zero-flow case in μ-g is controlled by 
+molecular diffusion and thermal expansion.  Over a period of 60 seconds, the gases would diffuse a distance on the 
+order of 4 cm.  Assuming a cubical geometry this would correspond to the smoke being confined to a volume of 
+about 64 cm3 rather than being diluted in the 6000 cm3 piston.  If the same number of particles is generated as for 
+the flow case, the initial concentration will be on the order of 50 times higher for the zero-flow case.    This is 
+   Length scale 2 μm  
+Figure 12: TEM images showing the effect of aging for Kapton (Run 62) and Pyrell (Run 63).  From Left to right, 
+unaged Kapton, aged Kapton, unaged Pyrell, aged Pyrell. The notable change is the elimination of the smallest 
+particles.
+
+--- page 9 ---
+expected to lead to more coagulation and a larger particle size.  It is found for all of the materials the diameter of 
+average mass is 30 % to 40 % larger for the zero-flow tests compared to the flow tests.   
+ 
+The zero flow condition was not in the original design of the SAME hardware but was examined for 11 tests by 
+modifying the valve operation in the SAME hardware.  This resulted in a very high concentration of particulate 
+where the aging process was accelerated compared to that in the aging chamber at dilute conditions.  An unfortunate 
+side effect was that approximately half the smoke was lost from the system because it diffused out of the inlet into 
+the MSG volume.  As a result the total particle counts were lower than normal and the TEM grids had few particles.  
+It is important to recognize that this condition is unique to low-gravity scenarios.  If one performed the same 
+experiment at 1-g, the buoyancy of the rising gases would greatly increase the mixing zone.  So the larger particle 
+diameters observed in these zero-flow conditions are important to consider in the development of improved fire 
+detection equipment for space vehicles.    
+ 
+For the zero-flow case, the heat is transported primarily by conduction rather than convection.  This is likely to 
+result in a significant increase in the gas temperature relative to the case with 8 cm/s air flow.  A striking effect of 
+this temperature change is the change in the morphology of the Pyrell smoke from fractal-like clusters with up to 30 
+primary spheres for the case with a flow of 8 cm/s to spherical particles for the zero-flow condition (Fig 13). 
+ 
+    
+ 
+SAME Smoke-in-Drums Ground-Based Experiment  
+In order to assess whether the size distribution of the smoke is lognormal, detailed particle size distributions 
+were measured with a reference instrument.  This cannot be accomplished in low gravity, so this investigation was 
+performed with the ground-based engineering SAME hard ware which is identical to the setup on the ISS, 
+incorporating the flight aerosol instruments which had been returned to earth.  A Scanning Mobility Particle Sizer 
+(SMPS) Spectrometer (3936, TSI, Shoreview, MN, USA) was used as the reference instrument in validation 
+experiment.  The SMPS requires a two minute scan through a range of voltages to acquire a high resolution particle 
+size distribution; however, the duration of smoke supplied from the SAME aging chamber is at most 30 seconds.  
+Therefore, the smoke was collected in an intermediate container which served two purposes.  The first purpose was 
+to sufficiently dilute the smoke from the SAME chamber in order to effectively stop coagulation (aging) of the 
+smoke particles during the SMPS scans.  The second purpos e was to have a large enough quantity of dilute smoke 
+for multiple SMPS scans.  A 55 gallon drum was chosen for this purpose and the SAME smoke-in-drums setup was 
+developed to enable SMPS measurements on a portion of the smoke output from the SAME piston chamber.  The 
+configuration is shown in Figure 14, which shows the or iginal SAME hardware inside the dashed outline.  One 
+DustTrak™ was removed from the original SAME configuration and its portion of the smoke sample was diverted 
+from the setup to one of two drums which hold the diluted smoke during multiple 2-minute SMPS measurements.  
+One drum collected fresh smoke from the heated sample material and the other drum was filled after a controlled 
+aging period in the piston chamber.  Thus both aged and unaged smoke could be measured with the SMPS. 
+  Pyrell 8 cm/s air flow (Run 63)      Pyrell no air flow (Run 95)              Lampwick 8 cm/s air flow (Run 80)     Lampwick no air 
+flow (Run 80) 
+ 
+Length scale: 5 μm  
+ 
+Figure 13: TEM images showing the effect of flow for Pyrell and lampwick under 8 cm/s air flow and quiescent 
+conditions.
+
+--- page 10 ---
+Figure 14: SAMER drum testing schematic.  Some sm oke is diverted from the setup to fill 
+one of two drums which hold the dilu ted smoke during three 2-minute SMPS 
+measurements.  Two drums were needed to contain and measure both un-aged and aged 
+smoke.  
+ 
+ 
+Drum Hardware and Experimental Process 
+The two 55 gallon drums were minimally modified for use in the experiment as follows: A muffin fan was bolted 
+to the circular drum floor opposite the removable lid.  All other modifications were made to the lid, including feed-
+through adapters for tubing and the electrical fan cord, and mounted HEPA filters through which clean air was 
+provided for purging.  A four-way crossover valve enable d the drum to be either filled with smoke via a vacuum 
+pump preceded by a flow-controlling orifice, or bypassed by the smoke, which effectively isolated the SAME 
+hardware from high pressure during the drum purging process.  Transfer of un-aged smoke into the drum began 
+when the SAME software commanded the valve opening and lowered the piston in the aging chamber causing half 
+of the chamber volume to be expelled (3 liters), with the remainder of the smoke retained in the chamber and 
+allowed to age for 12 minutes.  The flow rate into the drum was 1.7 L/min, matching the flow rate of the DustTrak™  
+instrument that the drums replaced.  It took less than 2 minut es to transfer the smoke sample into the drum.  Tubing 
+from the SAME hardware to the drums was less than one meter in order to minimize transport losses of smoke 
+particles.  Initial calculations from previous SAME data indi cated that for all materials, the aerosol concentration in 
+the drum would be less than 2 × 10 4 particles/cm3, which is below the rule-of-thumb threshold concentration of 
+106 particles/cm3.  Below this level, coagulation can be neglected since it will occur at a very slow rate. 15  Thus it 
+could be assumed that very little aging took place in th e drum during the SMPS measurements of un-aged smoke.  
+The drum concentration was well within the counting range of the SMPS so no additional dilution was required for
+
+--- page 11 ---
+the measurements.  During each SMPS sample, the volume of air removed was between 0.5 % and 1.5 % of the 
+drum volume and a correspondingly small number of particles were removed so the drum aerosol concentration was 
+relatively constant during the measurements.  Any make-up air needed during the sampling was drawn in through 
+the HEPA filters on the drum lid.  The fan in the drum was used to mix the smoke and prevent stratification which 
+could skew the SMPS measurements.  First, a 10:1 sheath -to-aerosol flow ratio was used for three consecutive 
+measurements with high fidelity giving particle sizes up to 660 nm.  Three subsequent samples were taken with a 
+flow rate ratio of 5:1, in order to reach the largest meas urable SMPS particle size of 1000 nm.  Considering that 
+aging increases particle size, the high er flow rate ratio (smaller range) give s results for only a portion of the true 
+aged size distribution for most materials in this experiment.  Therefore the larger range is important for 
+measurements in spite of the low resolution.  After six SMPS scans at two different flow rates, the drum was purged 
+with a continuous flow of HEPA-filtered house air at appr oximately 309 kPa-g (45 psig), which was exhausted into 
+a fume hood.  An additional P-Trak™ was used to indicate when the drum concentration was below 30 
+particles/cm3, which was considered ‘clean’.  One set of SMPS measurements for one smoke sample (both aged and 
+unaged) was accomplished in approximately 30 minutes.   
+ 
+SMPS Results for Spherical Smoke Aerosols 
+ Five SAME materials were tested in the dr um configuration at two temperature levels, 
+baseline and high temperature.  Typical particle size distributions from the ground testing 
+validation experiments of the un-aged and aged smoke for the more spherical aerosols are plotted 
+in Figs. 6 through 8.  Pyrell® and Teflon® are not spherical aerosols and thus are not relevant to 
+the moment method approach.  The mean particle size distributions are shown in the upper plots 
+which have open plot marker symbols for unaged smoke and solid symbols for aged smoke.  The 
+plotted lines represent a lognormal curve-fit with the MATLAB Statistics Toolbox function 
+‘nlinfit’ which performs non-linear least squares regression with the Levenberg-Marquardt 
+algorithm (MATLAB version R2012a, The MathWorks, Inc.).  Residual plots, shown also in the 
+lower portion of Figs. 15 through 17 are aligned with the corresponding size distribution plots 
+above, showing the deviations from the lognormal fits.  This visual test for ‘goodness-of-fit’ 
+would result in randomly scattered residual points both above and below zero, for a good 
+lognormal fit.  It is common to observe a wedge-shaped spread of residuals, as in Kapton (Fig. 
+15), where the tails of the distribution have mostly small residual values, with a wider spread of 
+residuals around the peak diameter.  In general, the spread of the residuals is more compact for 
+Kapton and lamp wick, indicating a better lognormal fit for these materials.  Note that the 
+Kapton residuals are mostly positive up to 70 nm, which indicates that the data are less steep 
+than the lognormal fit.  The lamp wick residual plot (Fig. 16) also shows a small but systematic 
+deviation from the lognormal fit, which is evident by the change in sign of the unaged data 
+residuals between 500 and 600 nm.  Silicone residual plots (Fig. 17) show the least randomness, 
+which indicates that the lognormal fit is less valid.  The residuals change signs on both sides of 
+the peak, indicating  a shoulder in the small sizes (residuals go from positive to negative), the 
+peak is offset from the fit (positive residuals around 400 nm) and the data is steeper than the 
+lognormal fit in the large sizes (negative residuals).  Some samples have an initial uptick in the 
+small diameter tail, which is believed to be a sampling anomaly in the SMPS, possibly an artifact 
+from the previous sample, as the scans were performed in rapid succession.  This anomaly did 
+not have a significant effect on the parameters obtained in the fitting of the SMPS data.
+
+--- page 12 ---
+FIG. 15: Smoke particle size distributions from SMPS measurements for Kapton® baseline 
+temperature (left) and high temperature (right) with open plot markers for unaged smoke 
+and solid symbols for aged smoke.  The solid curves represent the non-linear least square 
+fits.  Residual plots showing the deviations from the lognormal fits are aligned below the 
+respective size distributions.  
+0
+1000
+2000
+3000
+4000
+5000
+6000
+10 100 1000
+dN/dlnd, cm-3
+D, nm
+-1500
+-1000
+-500
+0
+500
+1000
+10 100 1000
+residuals693u
+resid-693a
+Residuals, 693
+d, nm
+0
+625
+1250
+1875
+2500
+10 100 1000
+dN/dlnd, cm-3
+D, nm
+-600
+-400
+-200
+0
+200
+400
+600
+10 100 1000
+residuals688u
+resid-688a
+Residuals, 694
+d, nm
+
+--- page 13 ---
+Figure 16: Un-aged smoke particle size  distributions from SMPS  measurements for lamp 
+wick baseline temperature (left) and high te mperature (right) with open plot markers for 
+unaged smoke and solid symbols for aged smoke.  The solid curves represent the non-linear 
+least square fits.  Residual plots showing the de viations from the lognormal fits are aligned 
+below the respective size distributions.   
+0
+1000
+2000
+3000
+4000
+10 100 1000
+dN/dlnd, cm-3
+D, nm
+-800
+-600
+-400
+-200
+0
+200
+400
+600
+800
+10 100 1000
+residuals694u
+resid-694a
+Residuals, 694
+d, nm
+0
+2000
+4000
+6000
+8000
+10 100 1000
+dN/dlnd, cm-3
+D, nm
+-1500
+-1000
+-500
+0
+500
+1000
+1500
+10 100 1000
+residuals689u
+resid-689a
+Residuals, 694
+d, nm
+
+--- page 14 ---
+FIG. 17: Un-aged smoke particle size distributions  from SMPS measurements for Silicone 
+baseline temperature (left) and high temperat ure (right) with open plot markers for 
+unaged smoke and solid symbols for aged smoke.  The solid curves represent the non-linear 
+least square fits.  Residual plots showing the de viations from the lognormal fits are aligned 
+below the respective size distributions.   
+ 
+Ground TEM test:  Comparison with drum test results 
+A TEM lamp wick particle size distribution of particles collected during ground testing is 
+compared with SMPS results in Fig. 18.  Two different smoke tests are compared but the heating 
+temperatures are within 0.6 C so the pyrolysis can be considered to be similar.  For the TEM 
+analysis, 17 images containing 4668 particles were processed.  TEM images displayed two types 
+of particles: dark, high contrast particles and smaller lower contrast particles.  The faint particles 
+could be an artifact on the TEM grid or be the result of poor image quality.  Another explanation 
+could be a secondary particle formation event from the pyrolysis products.  For this size 
+distribution analysis, all particles were counted without thresholding, so the small faint particles 
+were included in the totals, which reduced the geometric mean diameter and caused σgn to be 
+quite a bit larger than the SMPS results.  The SMPS and TEM volume distributions have a 
+similar spread but do not agree well in the peak location.  The largest size bin of this TEM 
+analysis had twelve particles which is considered a statistically significant quantity for this type 
+of analysis (Hinds 1999).  The SMPS size distribution ends at 1000 nm, but there is no upper size 
+limit for particles in the TEM size distribution.  Results of the ISS flight TEM size distribution 
+analyses and moment method calculations appear in Table 2.  
+ 
+0
+2000
+4000
+6000
+8000
+10 100 1000
+dN/dlnd, cm-3
+D, nm
+-1500
+-1000
+-500
+0
+500
+1000
+1500
+2000
+2500
+10 100 1000
+residuals695u
+resid-695a
+Residuals, 694
+d, nm
+0
+2000
+4000
+6000
+8000
+10 100 1000
+dN/dlnd, cm-3
+D, nm
+-1500
+-1000
+-500
+0
+500
+1000
+1500
+2000
+10 100 1000
+residuals690u
+resid-690a
+Residuals, 694
+d, nm
+
+--- page 15 ---
+Fig. 18:  Number and volume distribution for LW aged test (285.8 °C) 689 from SMPS 
+(circle symbols) and aged test 669 (286.4 °C) from TEM (square symbols).  The open 
+symbols correspond to the number distribution and the closed to the volume distribution.  
+The best fit parameters for SMPS are dgn = 248 nm, dgv=548 nm , σgn = 1.75 and  σgv=1.59 
+and for TEM are dgn = 131 nm, dgv=812 nm , σgn = 2.70 and  σgv=1.65. 
+ 
+Table 2: Flight Data Comparison of TEM and Moment Method Distribution Parameters 
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+100 1000
+Reduced dN/dlndp and dV/dlndp 
+dp, nm
+
+--- page 16 ---
+TEM Particle Morphology Results from Flight Tests 
+The TEM grids were examined with a Philips™ CM20 Transmission Electron Microscope at 
+200KV and images were collected using an Olympus™ Veleta camera. The digital camera was 
+calibrated using a MagiCal® calibration reference which is NIST certified standard.  
+ 
+Kapton particles are smaller but rarely agglomerated.  The spherical shape and uniform density 
+indicate growth by condensation in the saturated vapor of the pyrolysis products.  Figure 19 
+shows the effect of aging, with the unaged (left) having a much higher population of very small 
+particles, and the aged particles (right) appearing only slightly larger.   
+ 
+ 
+TEM Mom-ent TEM Mom-ent M1/M0 TEMDgn Mom-ent TEMσgn Mom-ent
+Dav 
+Hatch 
+Choate 
+from 
+TEM 
+sigma 
+and Dg
+Dm 
+Hatch 
+Choate 
+from 
+TEM 
+sigma 
+and Dg
+Lampwick 
+#54 (ISS) 
+Unaged
+Low Temp 
+264.7 511 0.403 0.253 0.304 0.11 0.255 0.072 1.84 2.493 0.307 0.445
+Lampwick 
+#55 (ISS) 
+Aged
+Low Temp 
+262.9 196 0.499 0.320 0.359 0.149 0.284 0.102 2.070 2.400 0.370 0.628
+Kapton #94 
+(ISS) Aged
+Low Temp 
+527.3 1353 0.159 0.176 0.120 0.136 0.103 0.119 1.720 1.669 0.119 0.160
+Kapton #62 
+(ISS) 
+Unaged
+High Temp 
+574.3 1320 0.226 0.251 0.180 0.148 0.158 0.114 1.680 2.066 0.181 0.237
+Kapton #62 
+(ISS) Aged
+High Temp 
+574.3 796 0.289 0.383 0.235 0.243 0.210 0.194 1.630 1.962 0.237 0.300
+Pyrell #63 
+(ISS) 
+Unaged
+Low Temp 
+225.3 3436 0.394 0.392 0.290 0.207 0.244 0.151 1.810 2.222 0.291 0.414
+Pyrell #63 
+(ISS) Aged 
+Low Temp 
+225.3 2658 0.468 0.539 0.354 0.359 0.292 0.293 1.920 1.892 0.361 0.553
+Pyrell #64 
+(ISS) 
+Unaged
+High Temp 
+242.1 1888 0.411 0.445 0.298 0.254 0.249 0.192 1.840 2.115 0.300 0.435
+Pyrell #64 
+(ISS) Aged
+High Temp 
+242.1 1560 0.540 0.616 0.403 0.450 0.328 0.385 1.980 1.750 0.414 0.660
+Silicone #60 
+(ISS) Unaged
+High Temp 
+379.9 557 0.153 0.533 0.120 0.241 0.107 0.162 1.590 2.440 0.119 0.148
+Hatch-Choate 
+Diameters
+Temperature
+, °CSample
+# parti-
+cles 
+counted
+Dm m Dave m Dg m Sigma g
+
+--- page 17 ---
+FIG. 19:
+unaged o
+ 
+Lamp wi
+that grow
+seen but 
+dense or 
+images d
+FIG. 20:
+Pyrell, 2
+ 
+Pyrell sm
+to 100 nm
+are agglo
+indicate t
+Addition
+be observ
+ 
+Silicone 
+pyrolysis
+as seen in
+particle i
+ TEM imag
+on the left, a
+ick smoke ae
+w by condens
+most are una
+lighter in th
+display additi
+ TEM imag
+42.1 °C (mi
+moke particle
+m.  The non-
+omerates wit
+that the faint
+nally, some p
+ved as the fo
+particles we
+s products.  O
+n Figure 21. 
+mages show
+ges of Kapto
+aged on the 
+erosols (Fig.
+sation of pyr
+agglomerate
+e center sug
+ional faint p
+ges of unage
+iddle) and T
+es consist of 
+-uniform prim
+th a fractal st
+ter particles 
+particles wer
+orce of the el
+re not wholl
+Only very sm
+ Note that th
+wn.  SMPS gr
+on particle m
+right.  Sam
+ 20) are kno
+rolysis gases
+ed.  Two dist
+gesting they
+articles that 
+ed smoke fro
+Teflon, 516.3
+f agglomerate
+mary particl
+tructure.  Th
+may have pa
+e not comple
+lectron beam
+ly preserved 
+mall and fain
+he magnifica
+round test da
+morphology
+mple heating
+own to be pri
+s (Mulhollan
+tinct large pa
+y arrive at the
+covered onl
+om flight te
+3 °C (right)
+es made up o
+le size Teflon
+he darker agg
+artially evap
+etely adhere
+m influenced 
+on the TEM
+nt particles re
+ation in this 
+ata indicates
+y from ISS h
+g temperatu
+imarily sphe
+nd et al, 2005
+article types 
+e carbon film
+ly one or two
+ests-- Lamp 
+, bars are 5
+of primary p
+n primary pa
+glomerates a
+porated in the
+ed to the TEM
+d the loose en
+M grids owin
+emained afte
+figure is nea
+s that fresh s
+ 
+high temper
+ure was 574 
+erical droplet
+5).  Occasion
+are observe
+m as a liquid
+o pixels.   
+wick, 264.7
+ μm. 
+particles rang
+articles are m
+are more elec
+e electron be
+M grid and m
+nds of the ag
+ng to the vola
+er the return
+arly double t
+ilicone parti
+rature testin
+°C, bar is 5
+t type particl
+nal doublets
+ed: uniformly
+d.  Some TEM
+ 
+7 °C (left) an
+ging from 30
+much smalle
+ctron-dense 
+eam.  
+movement co
+gglomerates.
+atile nature o
+n flight to ear
+that of the ot
+icles are muc
+ng, 
+5 μm.  
+les 
+ are 
+y 
+M 
+nd 
+0 nm 
+er and 
+and 
+ould 
+   
+of the 
+rth, 
+ther 
+ch
+
+--- page 18 ---
+larger, as
+of spheri
+explanati
+ 
+Morphol
+better sui
+spherical
+Meaning
+calibratio
+method v
+equations
+ 
+FIG. 21:
+approxim
+μm. 
+ 
+TEM Pa
+Particle s
+grids as 
+construct
+were then
+to the oth
+were pr o
+threshold
+The T
+processin
+Maryland
+was co m
+spherical
+ T
+particles 
+lamp wic
+Kapton te
+12 minut
+on Figure
+diameter
+s seen in Fig
+cal droplets 
+ion for the fo
+ogy results s
+ited to the m
+l morphology
+gful values of
+on of the Du
+values of dm 
+s (3) and (4)
+ TEM imag
+mately twice
+article Size D
+size distribu
+an indepe n
+ted by first l
+n taken by t
+her. This pro
+ocessed to r
+d. Particles w
+TEM particl e
+ng progam 
+d, USA, http
+mputed for e
+l particles.  
+The limitation
+preclude the
+ck and Pyrell
+est are show
+tes of aging, 
+e 15, which 
+s.  TEM size
+. 4.  Previou
+(Mulholland
+ormation of 
+show that on
+moment meth
+y, it is consi
+f dav can be c
+stTrak with 
+which are v
+)). 
+ges of residu
+e the magni
+Distribution
+utions were c
+ndent verifi c
+locating the 
+traversing th
+otocol was re
+remove an y
+were measure
+e size analy
+(Rasband, W
+p://imagej.nih
+each particl e
+ns of Silicon
+e creation of
+l were analy
+wn in Figure 
+dg increases
+shows aged 
+e distribution
+us to this wor
+d, 2005).  In 
+the agglome
+nly Kapton a
+hod.  Althoug
+dered a sphe
+calculated re
+fundamenta
+alid for the n
+ual Silicone 
+ification.  Sa
+n Results 
+created by a
+cation of p a
+downstream
+he grid in a l
+epeated unti
+y backgrou n
+ed as the pro
+sis method u
+W.S., Imag e
+h.gov/ij/, 19
+e and the v o
+ne TEM imag
+f a reliable si
+yzed.  Repres
+22.  The una
+s to 210 nm a
+particles wi
+ns for nonsp
+rk, it was tho
+the compan
+erates is pres
+and lamp wic
+gh the TEM 
+erical smoke
+egardless of 
+al aerosol ma
+nonspherical
+smoke part
+ample heati
+an image an
+article meas u
+m edge of th e
+line moving 
+il a large num
+nd and adj u
+ojected area,
+used ImageJ
+eJ, U. S. N
+997-2012).  T
+olume distri b
+ges outlined
+ize distributi
+sentative siz
+aged smoke h
+and σg shrink
+th a narrowe
+herical Pyre
+ought that py
+nion paper (M
+sented.   
+ck are spheri
+images of S
+e aerosol as i
+shape, and t
+ass measurem
+l materials P
+ 
+ticles from S
+ing tempera
+nalysis of th e
+urements.  
+e particle d e
+from one ed
+mber of part
+usted to hi g
+, even when 
+J, an open s
+National Ins t
+The diameter
+bution was 
+d above and t
+ion by micro
+e distributio
+has dg = 158
+ks to 1.63.  T
+er size range
+ell appear in 
+yrolysis smo
+Mulholland e
+ical aerosols
+Silicone do n
+it consists of
+the material-
+ments provid
+Pyrell and Te
+SAME pyro
+ature was 38
+e particles c
+The size d
+eposition.  S
+dge of the a
+ticles were c
+gh contrast 
+in elongated
+source, publ
+titutes of H
+r of the area
+based on t h
+the fractal na
+oscopy.  The
+ons of a high 
+8 nm and σg 
+This support
+e and uniform
+Figure 22, w
+oke was mad
+et al. 2014) a
+s so they are 
+not reflect 
+f liquid drop
+-specific 
+de moment 
+eflon (by 
+olysis at 
+80 °C, bar =
+captured on 
+istributions 
+Sequential im
+erosol depos
+captured.  Im
+before sett i
+d agglomerat
+lic domain i m
+Health, Bet h
+a equivalent c
+he assumpti o
+ature of Tefl
+erefore, Kapt
+temperature
+=1.68 and a
+ts observatio
+mly larger 
+with the unag
+de up 
+an 
+plets.  
+= 2 
+TEM 
+were 
+mages 
+sition 
+mages 
+ing a 
+tes. 
+mage 
+hesda, 
+circle 
+on of 
+lon 
+ton, 
+e 
+fter 
+ons 
+ged
+
+--- page 19 ---
+smoke having dg = 249 nm and σg =1.84 and after 14 minutes of aging, dg increases to 328 nm 
+and σg increases slightly to 1.98.  Considering that Pyrell is not a spherical material, yet a 
+spherical assumption was made in this image analysis, these results are quite reasonable. 
+ 
+ 
+FIG. 22: Kapton particle size distribution (left) from TEM image analysis of ISS high 
+temperature testing.  Sample heating temperature was 574 °C.  Pyrell particle size 
+distribution (right) from TEM image analysis of ISS high temperature testing.  Sample 
+heating temperature was 242 °C. 
+ 
+ 
+ 
+ 
+ 
+Limitations of Aerosol Instrument Measurement Ranges  
+Calibration of SAME instruments was intended to empirically account for differences in the 
+ranges of the instruments.  In the ground valida tion tests, however, the truncated distribution 
+formula (equation 13) can shed light on th e limitations and unce rtainty of the SMPS 
+measurement range for the fuels te sted.  Particularly when the particle size distributions are 
+converted to surface area or volume distributions, the percentage of the distribution that is 
+lacking can be significant.  Furthermore,  the upper end of the SMPS size distribution 
+measurement may not be as reliable because it can be affected by poor counting statistics and 
+these bins are more susceptible to multiple charge  correction errors.  Therefore it is prudent to 
+compare a more conservative upper SMPS limit of 700 nm along with the full recorded range to 
+1000 nm, to see the effect of the SMPS measuremen t range.  Thus, if we were to consider the 
+SMPS data most reliable (least uncertainty) in  the range from 23 to 700 nm, the truncated 
+distribution formula for Mp,rel can indicate what percentage of the distribution would be captured 
+with this limitation.  Figure 10 shows the percentage of the distributions captured by the SMPS 
+for two example materials.  Kapton is the be st candidate for SMPS va lidation, as the highest 
+percentages of each type of distribution are w ithin the SMPS measurement range. For example, 
+considering both the conservative  700 nm limit and the 1000 nm limit, the bar graph indicates 
+that 98% to 100% of the distribution has been measured.  Silicone smoke is not a good candidate 
+for SMPS validation because of th e lack of measurement range, pa rticularly when converting to 
+surface and volume size distributions.  Particularly  in the volume distribution in Fig. 23 (right
+
+--- page 20 ---
+graph), the black bar representing a 1000 nm upper size limit is only at 40%, indicating that 60% 
+of the distribution is missed by the instrument, but when losses are considered and a range of 700 
+nm is relied upon, approximately 20% of the distribution is captured (the white bar).   
+ 
+FIG. 23: The percentage of the particle size dist ributions captured by the SMPS for low 
+temperature (510.5 °C) unaged Kapton smoke (left) and high temperature (369.2 °C) 
+unaged Silicone smoke (right).  Black bars represent an SMPS upper limit of 1000 nm (as 
+measured) and white bars represent a more conservative upper limit of 700 nm 
+ 
+Thus, the truncated distribution formula for Mp,rel can be a useful indicator of the suitability of an 
+aerosol reference instrument and the level of uncer tainty in measurments.  If enough of the size 
+distribution is known to get parame ters of a lognormal fit from curve-fitting software, one can 
+determine how comprehensive the size distributi on measurement is and whether conversion of 
+the distribution will produce reliable results.    
+ 
+Log-probability Plot 
+The log-probability plot is a graphical technique used to assess lognormality of an aerosol.  
+Discrete data from the SMPS size bins and TEM size distributions are plotted on the probability 
+scale.  Lognormal distributions will be a straight line, and volume and number size distributions 
+should be parallel, indicating that σg is the same for both distributions but with different means.  
+Extremes on the graphs can be neglected in the log probability plots for number distributions 
+when they deviate from the straight line fit for 5% or less of the extremes of the probability scale 
+(Hinds, 1999).  For the SMPS data, these deviations are the result of poor counting statistics in 
+the large diameter tail and lack of measurement range (for lamp wick and silicone), which 
+particularly affects the volume distribution plots.  Thus the volume distribution plot will display 
+a line that is slightly curved at the large sizes, which corresponds to a lack of linearity of the 
+number distribution line beyond 95% of the distribution.  Figures 24 and 25 show log-probability 
+plots for Kapton®, silicone and lamp wick at high temperature.  The plotted cumulative 
+frequencies are quite linear for Kapton® and the number and volume distribution lines are nearly 
+parallel.  The log probability plot for silicone is not linear and thus fits a lognormal distribution 
+poorly.  The lognormal fit and the residual plot in Fig. 17 reflect the same result, where the data 
+are steeper than the fit curve for large diameters and less steep than the fit results for smaller 
+diameters, thus the log probability plot on the right side in Fig. 24 has deviations from the 
+straight line fits at both the smallest and largest percentages of the distributions.   
+The lamp wick volume distribution has a smaller σg which is evident by the shallower slope.  
+This is caused by the limited SMPS measurement range, which misses a portion of the high 
+Number Dist SurfA Dist Vol Dist
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Percentage of Distribution Captured by SMPS for Kapton BL 693u
+ 
+ 
+SMPS range to 1000 nm
+SMPS range to 700 nm
+Number Dist SurfA Dist Vol Dist
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+Percentage of Distribution Captured by SMPS for Sil HT 690u
+ 
+ 
+SMPS range to 1000 nm
+SMPS range to 700 nm
+
+--- page 21 ---
+temperature lamp wick large diameter tail, a deficiency which is emphasized in the conversion to 
+volume concentration.  Both aged and unaged log probability plots are shown for lamp wick (left 
+and right graphs in Fig. 25) to demonstrate the flattening of the slope with aging, which 
+corresponds to the narrowing of the distribution as coagulation takes place.  
+  
+FIG. 24: Log-probability graphs for Kapton® high temperature sample, unaged (left) and 
+high temperature Silicone aged (right), based on discrete SMPS bin data.  Number 
+distributions are grey and volume distributions are black.  
+ 
+  
+ 
+FIG. 25: Log-probability graphs for high temperature lamp wick unaged (left) and aged 
+(right), based on discrete SMPS bin data.  Number distributions are grey and volume 
+distributions are black.  
+ 
+ 
+Comparison of SMPS Data, Discretely Calc ulated Moment Diameters vs. Hatch-Choate 
+Diameters based on Lognormal Fit Parameters 
+The above graphs provide an overall qualitative measure whether the size distributions can be 
+assumed lognormal.  A useful quantitative measure of the validity of the lognormal assumption 
+is the comparison between the SMPS measured moment, particle size, or σg and the 
+corresponding value obtained by the moment method dg and σg converted with the Hatch-Choate 
+equations.   
+ 
+10
+1
+10
+2
+10
+3
+5 10 25 50 75 90 95
+Particle diameter, nm
+Percent less than indicated size
+ 
+ 
+10
+1
+10
+2
+10
+3
+5 10 25 50 75 90 95
+Particle diameter, nm
+Percent less than indicated size
+ 
+ 
+10
+1
+10
+2
+10
+3
+5 10 25 50 75 90 95
+Particle diameter, nm
+Percent less than indicated size
+ 
+ 
+10
+1
+10
+2
+10
+3
+5 10 25 50 75 90 95
+Particle diameter, nm
+Percent less than indicated size
+
+--- page 22 ---
+The SMPS bin data (based on a 64-channel histogram) can be used in equation (14) formulas to 
+calculate diameters of average properties, which can then be compared with diameters calculated 
+from equation (9) using the geometric mean diameter and σg from the lognormal fit of the SMPS 
+particle size distribution.  This is equivalent to calculating Ntot, Ltot and Mtot from SMPS binned 
+data to obtain dav, dm, by equations (3) and (4).  Thus, the continuous distribution parameters 
+used in the conversion equations will be compared to the grouped data, and the expectation is 
+that these diameters will be equal if the lognormal assumption is valid.  Two examples of these 
+comparisons are shown in Figure 26, which compares the count mean (number average, or d50 of 
+the number distribution) diameter, surface area diameter, diameter of average mass, mass median 
+diameter (d50 of the volume distribution), and the count median diameter (which is the geometric 
+mean diameter if the distribution is lognormal).  As can be seen, there is good agreement in all 
+diameters for Kapton but not as good agreement for Silicone.  The diameters with the largest 
+deviations are those having to do with the mass.  This is not surprising, since these are heavily 
+influenced by the large diameter particles and the often the SMPS raw counts in the upper bins of 
+the tail have fewer than 10 particles so there is the potential for discrepancies in the discrete bin 
+calculations due to insufficient statistics.   
+ 
+    
+FIG. 26: Comparison of diameters calculated from SMPS data in two ways: 1) Converted 
+by Hatch-Choate conversion equations using SMPS dg and g and 2)  Calculated using 
+discrete SMPS bin data.  Low temperature unaged Kapton smoke (left) and low 
+temperature unaged silicone smoke (right). 
+ 
+Figure 27 shows the results of these bar graphs from all three spherical aerosols on one plot 
+(including unaged and aged diameters, at all temperatures tested).  Data falling on the 1:1 
+reference line meet the lognormal assumption, whereas those that differ significantly do not.  
+While some information is lost in this scatter plot vs. the bar graphs (eg. which data marker 
+represents which moment diameter), the graph shows that for Kapton and lamp wick, the 
+diameters calculated by both methods coincide and thus can be considered lognormal.  It is 
+evident that diameters above 500 nm, which are the higher moment diameters, and mostly 
+Silicone, do not coincide.  Overall, the qualitative comparison of these diameters strongly 
+suggests that the smoke particle size distributions for Kapton® and lamp wick can be considered 
+lognormal and silicone should not. 
+cmedian_d cmean_d surfA_d avgmass_d massmedian_d
+0
+50
+100
+150
+200
+250
+300
+Diameter Comparison for Kap_BL_1_5u693 (nm)
+ 
+ 
+Diameters from discrete DMA data
+Hatch-Choate diameters
+
+--- page 23 ---
+FIG. 27: Comparison of diameters calculated from SMPS data in two ways: 1) Converted 
+by Hatch-Choate conversion equations using SMPS dg and g and 2)  Calculated using 
+discrete SMPS bin data.  All diameters as represented in Fig. 14 are combined here for all 
+materials and test conditions: open markers are unaged, solid are aged; grey represents 
+baseline temperature and black represents high temperature tests, and marker shapes are 
+Kapton – circle, lamp wick – square, Silicone – triangle. 
+ 
+Comparison Between Size Distribution Parameters from TEM and Moment Method 
+Measurements from Flight Data 
+The TEM particle size analysis involved determination of dg and σg of the distribution as well as 
+dm and dav.  These values can be compared with the moment method results measured 
+simultaneously during the smoke particle collection on the TEM grids.  As has been discussed, 
+Kapton and lamp wick are the most lognormal smoke aerosols tested.  Unfortunately, the flight 
+lamp wick TEM data was not comprehensive, so complete comparisons cannot be made.   The 
+Kapton TEM data was much more complete and thus can be compared systematically against the 
+moment method data.  Figure 28 shows the comparisons for high and low temperature Kapton 
+tests, with the TEM values in the patterned bars and moment method values in the solid colored 
+bars.   
+0 100 200 300 400 500 600 700 800 900 1000
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1000
+Diameter Comparison for Spherical SAME Materials
+Diameters from Hatch-Choate Conversions with Count Median Diameter & g
+Diameters from Discrete SMPS Data
+
+--- page 24 ---
+FIG. 28: Diameter Comparison for Kapton smoke from flight data.  TEM particle size 
+distribution diameters are compared to converted diameters calculated from the Hatch-
+Choate conversion equations using the TEM analysis dg and g and also compared with 
+diameters from the moment method.  
+ 
+Error bars on Figure 28 apply to moment method quantities and are based on the error analysis 
+using the uncertainties from Cleary, et al. (2009), which quantify the first moment instrument 
+error at ± 12 %, the third moment instrument error at ± 25 %.  The zeroth moment instrument 
+error was estimated to be ± 30 %.  
+ 
+As expected, Kapton has good agreement with most moment method diameters, as it has a 
+lognormal size distribution.  The TEM diameters from the size analysis and the converted values 
+are very consistent as well.  Thus, it can be concluded that Kapton smoke at these temperatures is 
+very well suited to measurement by the moment method.   
+ 
+Although meticulous calibrations were performed, many smoke aerosols exceeded the 
+calibration range for the ionization detector which measures the first moment.  As evident in 
+equations (12) and (13), error in the first moment measurement has the largest influence on the 
+resulting calculations.  Kapton consists of smaller particles and was not affected by this 
+shortcoming, so these tests provided the most reliable moment method results.  Since the first 
+0.00
+0.10
+0.20
+0.30
+0.40
+0.50
+Dg TEM
+Dg Moment Method
+Dav TEM
+HC Dav from TEM σ & Dg
+Dav Moment Method
+Dm TEM
+HC Dm from TEM σ & Dg
+Dm Moment Method
+Dg Dav
+Dm Dg
+Dg
+Dav
+Dav
+Dm
+Dm
+
+--- page 25 ---
+moment measurement is not used in the calculation of dm, this quantity can be compared for the 
+other materials.   
+ 
+ 
+FIG. 29: Comparison of TEM analysis and moment method diameter of average mass for 
+smoke from flight data.   
+ 
+Figure 29 shows the comparison of the flight TEM diameter of average mass with the value 
+calculated from the moment instrument data using equation (4).  Error bars for the moment 
+method values of diameter of average mass were calculated as in Figure 28.  Since the third 
+moment instrument was calibrated for each smoke type with a direct-reading reference 
+instrument, the measurements are assumed to be relatively shape-independent.   For the three 
+materials in this graph, the moment method provides a reasonably good measurement for the 
+diameter of average mass.  Thus it can be concluded that the zeroth and third moment 
+instruments maintained their calibration sufficiently to quantify one of the moment average 
+diameters from flight data. 
+ 
+ 
+Flow test –verification of dilution ratio  
+In SAME/SAMER apparatus, to ensure the concentration of  aerosol stream entering the P-trak and Dusttrak were 
+within the ranges of the instruments, the aerosol stream was diluted with the N2 gas provided by the ISS. For P-trak, 
+this was done through a custom-designed device called dynamic diluter in which a valve controls the diluting N2 in 
+such manner that the ration between the N2 flow and that of the incoming aerosol stre am meets the specified value 
+while the total flow rate is maintained as a constant.  When performing data reduction, the commanded dilution ratio 
+is always used. For DustTraks, the dilution flow can be controlled as on/off two statuses. For each run, whether the 
+dilution needs to be on or not is specified in the commend sheet, i.e., predetermined. Once the dilution is turned on, 
+the N2 flow is controlled by an orifice, meant to be op erated under critical flow regi me. The total flow through a 
+DustTrak is controlled by an orifice operating under critical flow regime. Thus, in normal condition, the flow rate of 
+incoming stream is the difference between these two consta nt flow rates and the dilution ratio can be calculated 
+accordingly.  
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0 0.1 0.2 0.3 0.4 0.5 0.6 0.7
+Moment Method Diameter, μm
+TEM Diameter, μm
+Lamp wick Dm
+Kapton Dm
+Pyrell Dm
+
+--- page 26 ---
+In order to make sure the dilution ratio used in the data reduction procedures are accurate, a series flow tests were 
+conducted by inserting mass flow meters in different location to measure the actual flow rates.  
+ 
+The test results about P-Trak dilution show that  
+a) The correlation between actual sample flow and commanded flow to LFE for the Flight Dynamic diluter is: 
+actual flow (ccm) =  0.9474*command value (ccm) -1.2395 (ccm). 
+b) There are no valid test results to give such a correlation for the Engineering Dynamic diluter. Thus the 
+above correlation will be used for the engineering Dynamic diluter if needed. 
+c) The total air flow the Engineering P-trak is, in average, 703.96 ccm. 
+d) The total air flow the Flight P-trak is, in average, 705.64 ccm. 
+e) The column “Aerosol Concentration to P-Trak” in the SAMER Combined .xlsx file is the sample gas flow 
+to LFE over the total air flow to the P-Trak. 
+ 
+The results about DustTrak dilution are more complicated. Firs t of all, it was realized that the orifice that controls 
+the diluting N2 flow was not working under the critical flow regime as original designed. From the logged data in 
+the engineering data file, the N2 pressure  upstream the orifice, which is a regulated pressure, is not high enough to 
+maintain a critical flow. This pressure varied much more than it was supposed to, indicating that the regulator is 
+undersized.  Thus, the actual diluting N2 flow rate depends on both upstream and downstream pressure of the orifice 
+and the size of the orifice and the temperature as well, although the temperature dependency is weak. The total flow 
+rate going through a DustTrak is contro lled by the orifice in each CDE, which is truly working under critical flow 
+regime. Thus for the two DustTraks in the SAME apparatu s, there are totally 4 orifices, two for the diluting N2 
+flows installed in the fluid control unit and two for the tota l flows installed with each Du stTrak in its CDE. These 4 
+orifices are of the same model from th e same manufacture. Unfortunately, thes e for orifices were not calibrated at 
+procurement. Thus we only have the generic characteristic curve for that model of orifice provided by the 
+manufacture, which is as follows 
+  
+ N2 flow (SLPM) = 0.308*(Regulated N2 pressure)^0.5283 
+  
+This equation is used to calculate the actual N2 diluting flow rate based on logged upstream and downstream N2 
+pressures.  
+ 
+After the flight CDE units were shipped to the ground, the actual total flow rate though the Dusttrak and the MPASS 
+were measured. 
+ 
+The total flow rate of Flight unit DustTrak B (used in SAMER) is later found to be 1.69076 LPM. 
+ 
+The total flow rate of Flight unit Mpass  (used in SAMER) is later found to be 1.68576 LPM. 
+ 
+ 
+Sample heating temperature derivation 
+Sample heating temperature is one of the key parameters that dictate the properties of generated smoke particles. 
+When studying effects of gravity on the smoke properties, we want to compare smokes generated at the same 
+temperature. For SAME and SAMER, during a test, the so ftware controls the temperature via the resistance of 
+heating wire. It is true that for the same wire coil, co nstant wire resistance means constant wire temperature.  
+Traditionally, test conditions are specified by Rt/R0, the ratio between the resistance of heated wire over the 
+resistance of the wire at room temper ature. Thus, before each run, the samp le wire resistance is measured, then 
+multiplied by this parameter to get the target resistance for the control circuitry. Although, Rt/R0 can uniquely 
+define the temperature, it is not clear what actual sample  temperature is. Since the wire resistance is one of the 
+parameters that are logged in the en gineering data sheet which makes it possible to derive actual temperature from 
+the logged resistances. However, when deriving wire temperatures, one has to take the fact into account that the wire 
+length varies from sample to sample and so called room temperature varies too. After the heating temperatures were 
+obtained, it is surprising that for the same R t/R0, the actual heating temperature di fference can be as large as 30 
+degrees Celsius. The following is how this is carried out.  
+ 
+ 
+SAME heater temperature modeling.
+
+--- page 27 ---
+Objective: 
+ 
+It was identified that each sample has a significant length of leading section of the resistive wire. This section does not touch the 
+sample material and is exposed in air flow. Thus the temperature of this leading section is different from the portion of the wire 
+that contacts the sample material. The control circuitry only controls the total resistance of the heating wire, not individual 
+portion of the wire. 
+ 
+Our goal is to find the temperature of the wire that is in contact with the sample material. 
+ 
+Formulation: 
+Hypothesis:  the temperature difference between the two portions of the wire is caused by different convection heat transfer from 
+the two. The wire that is in contact with the sample has less heat loss from the convection heat transfer because about half of its 
+surface area is covered by the sample material. 
+ 
+Assumptions and simplifications: 
+1) Assume the entire wire consists of two distinct portions, one is in air (portion 1) and the other (portion 2) is in touch 
+with the sample so that only half of the wire area is exposed to air.    
+2) Uniform cross section area of the wire, so the resistance is proportional to the length and the resistivity of the wire. 
+3) Resistivity is a known function of temperature. 
+4) Temperature distribution inside wire is uniform. 
+5) Newton convective heat transfer equation applies to both sections but with different coefficients.  Although the port 2 is 
+half exposed in air where convective equation works and half in contact with sample where transient conduction heat 
+transfer should be used, for the sake of simplicity, we lump the two mechanisms together and use convection only with 
+a modified heat transfer coefficient.  
+ 
+Notation: 
+Rt – total resistance, Ohm 
+R1 – resistance of part 1, Ohm 
+R2 – resistance of part 2, Ohm 
+h – heat transfer coefficient of air, w/oC/mm2 
+T1 – temperature of part 1, oC 
+T2 – temperature of part 2, oC 
+L1 – length of part 1, mm 
+L2 – length of part 2, mm 
+R – radius of the heating wire, mm 
+I --  electric current, amp 
+m – a parameter within 0.5 and 1. 
+(T) – resistivity as a known function of temperature, in a form of polynomial, Ohm*mm 
+ 
+ 
+Equations: 
+Total measured resistance equals the sum of the resistances of part 1 and part 2 of the wire 
+ 
+(1)                        Rt = (L1(T1) + L2(T2))/(r2 ) 
+ 
+This Rt can be obtained from the engineering data file. 
+ 
+In steady state, the heat generated in the wire and heat loss from the wire should be the same.  
+For the part 1, the heat loss is via convective heat transfer to the air. 
+ 
+(2)             I2(T1)L1/(r2)= 2rL1h(T1 – T0) 
+ 
+For part 2, only about the half of the wire surface is exposed to air. The other half is in contact with the solid sample. 
+Thus, 
+ 
+(3)    I2(T2)L2/(r2)= h rL2(T2 – T0) + conduction to the sample 
+ 
+Since the conduction part is also proportional to the surface area and (T2-T0), Eq. 3 can be rewritten as 
+ 
+(4)  I2(T2)L2/(r2)= (h+k) rL2(T2 – T0)
+
+--- page 28 ---
+where k is a coefficient for conduction part. This “handwavy” because the conduction part is much more complicated and the 
+coefficient k won’t be a constant. It should vary with time. It is probably safe to assume k, as such defined, is smaller than h, i.e., 
+0<k<h.  Then Eq. 4 can further be reduced to 
+ 
+(5) I2(T2)L2/(r2)= 2rL2h(T2 – T0) 
+ 
+where m is an unknown, but bounded coefficient: 0.5 <  < 1. 
+ 
+Dividing Eq. (5) by Eq. (2), we got 
+ 
+(6) (T2)/(T1) = (T2-T0)/(T1-T0) 
+ 
+Eq. 1 can be rewritten as 
+ 
+(7) Rt = [L1 + L2(T2)/(T1)](T1)/(r2) 
+ 
+Substituting (6) into (7), we got 
+ 
+(8) Rt = [L1 + L2 )]( T1)/(r2) 
+ 
+Now Eq. 6 and Eq.8 are two independent equations for two unknowns T1 and T2, with m being a parameter within 0.5 and 1.0. 
+For each test run, we can get Rt, T0, L1, L2 and r from engineering data files, then assume a number of s to solve for T1 and T2 to 
+see how the temperatures are sensitive to . 
+ 
+ 
+Cumulative moments for limited particle size range 
+Theoretically, a lognormal distribution is defined in the particle size from zero to infinity, whereas any instrument 
+used to measure certain moment of an aerosol inevitably has a limited particle size range. In some cases, an impacter 
+is inserted in the inlet of an instrument to eliminate particles larger than certain size. In these cases, the instrument 
+cannot sense the entire range of the distribution as the theory describes. Thus, one would like to know how much 
+signal is lost due to the limited effective particle size range, or what the percentage of the total signal the instrument 
+receives. This piece of information is useful to assess errors induced by omitting particles in a certain size range. It 
+was found this question can be answered conveniently using the error function calculations, which is available in the 
+Excel spread sheet or some other computational software or even in the tables of most mathematical handbooks. The 
+following is the detailed discussion of how to do this. 
+ 
+Derivation of an equation to calculate the cumulative moment function in a limited range for the lognormal distribution function 
+via the error function.  
+We will mostly use the same notation that is used in the Hinds’ book except using d instead of dp for the particle size for the sake 
+of convenience. Thus d can be either particle size or the differentiation operator depending on the context.   
+ 
+The p moment cumulative function of a lognormal distribution with dg and g is defined as: 
+ 
+ܯ௣(=)ܦ ଵ√ଶగ௟௡ఙ೒ ݀׬ ௣ିଵ݌ݔ݁ ൬−൫௟௡ௗି௟௡ௗ೒൯
+మ
+ଶ൫௟௡ఙ೒൯
+మ ൰
+஽
+଴ ݀݀(     1 )  
+ 
+Using the following new variables, we can simplify the derivation. 
+ 
+ =ܣ 
+ଵ
+√ଶగ௟௡ఙ೒
+,   =ܤ 2൫ߪ݈݊௚൯
+ଶ
+,  ݈݀݊=ܥ ௚  and ݈݀݊=ܮ (    . 2) 
+ 
+Thus we have a simplified form of (1): 
+ 
+ܯ௣(݌ݔ݁׬ ܣ=)ܦ ቀܮ݌ −
+(௅ି஼)మ
+஻ ቁ
+௟௡஽
+ିஶ ܮ݀(      3 )  
+ 
+It can be shown that  
+ 
+ܮ݌ −
+(௅ି஼)మ
+஻ = +ܥ݌ 0.25݌ଶܤ− ଵ஻ (ܮ−ܥ−0 . 5 )ܤ݌ ଶ     (4)
+
+--- page 29 ---
+Let’s define two new variables to simplify the derivation. 
+ 
++ܥ݌=ߦ 0.25݌ଶܤ  and  =ߟ ௅ି஼ି଴.ହ௣஻√஻       ( 5 )  
+ 
+From (5), we have that =ܮ݀ √ܤߟ݀  
+ 
+Now,  (3) can be rewritten as 
+ 
+ܯ௣(ܣ=)ܦ √ܤ׬ exp(ߦ−ߟ ଶ) ߟ݀ఎವିஶ =ܣ √ܤexp (׬)ߦ exp(−ߟଶ) ߟ݀ఎವିஶ     (6) 
+ 
+or, in terms of the error function, we have  
+ 
+ܯ௣(=)ܦ √గଶ ܣ√ܤ)ߦ(݌ݔ݁ሾ1+ߟ(݂ݎ݁ ஽)ሿ     ( 7 )  
+ 
+where ߟ஽ =
+௟௡஽ି஼ି଴.ହ௣஻
+√஻ =
+௟௡൬ ವ೏೒൰
+√ଶ௟௡ఙ೒
+−
+ଵ
+√ଶ ߪ݈݊݌௚     ( 8 )  
+ 
+Now let’s eliminate all intermediate variables to express Mp(D) in terms of dg, g and p.  
+Equation (7) can be rewritten as: 
+ 
+ܯ௣(=)ܦ ଵଶ ݀௚௣݌ݔ݁ ቀ0.5൫ߪ݈݊݌௚൯ଶቁ ሾ1+ߟ(݂ݎ݁ ஽)ሿ     (9) 
+ 
+It is interesting to see when D approaches infinity, what the total p moment is. As D approaches infinity, D approaches infinity 
+too and error function approaches 1. Thus, the total p moment of the lognormal distribution is 
+ 
+ܯ௣ =ܯ ௣(∞) =݀ ௚௣݌ݔ݁ ቂ0.5൫ߪ݈݊݌௚൯ଶቃ       ( 1 0 )  
+ 
+Both equations (9) and (10) are very useful, if we haven’t seen them in some other places. These two equations give absolute 
+value of the p-th moment, partial or total. The dimension of the p-th moment is [Lp]. However, in many cases, we are interested 
+in the relative value to the total moment or the moment value normalized by the total p-th moment value. There relative values 
+can tell us how much present signal is lost because of the limited detection range of an instrument. Now let’s move further to see 
+what this relative cumulative p-th moment is. Dividing Eq. (9) by Eq. (10), we have 
+ 
+ܯ௣௥ =
+ଵ
+ଶ ሾ1+ߟ(݂ݎ݁ ஽)ሿ        ( 1 1 )  
+ 
+We can see (11) is amazingly simple and useful. Note that in equation (8) D is normalized by dg. Thus Mpr, the relative 
+cumulative value only depends on 3 parameters, normalized D, g and p. 
+ 
+Implementation 
+If we want to know how much percentage of the signal an instrument for the p-th moment receives, which cannot detect particles 
+larger than diameter D, assuming a lognormal distribution with dg and g.  
+ 
+This can be done as follows. 
+1) Calculate D using (8) for given dg, g, p and D. 
+2) Find erf(D) from any source that is available. 
+3) Using (11) to calculate Mpr(D), which corresponds to the percentage of the signal received. 
+ 
+Sometimes an instrument has a lower and upper limits of its particle size detection range. We can make a miner change of Eq. (9) 
+and (11) to find out how much signal the instrument actually detects.  
+ 
+Let’s introduce the following notations. 
+Dl and Du - the lower and upper limits, respectively, of particle diameters the instrument can detect. 
+dl and du – d corresponding to Dl and Du, respectively, using equation (8). 
+Mpi – the pth moment signal the instrument detects. 
+Mpri – the pth moment signal the  instrument detects in percentage. 
+ 
+From Eq. (9), we have
+
+--- page 30 ---
+ܯ௣௜ =ܯ ௣(ܦ௨) −ܯ ௣(ܦ௟) = ଵଶ ݀௚௣݌ݔ݁ ቀ0.5൫ߪ݈݊݌௚൯ଶቁ ሾߟ(݂ݎ݁ௗ௨) −ߟ(݂ݎ݁ ௗ௟)ሿ    (12) 
+ 
+Dividing Eq (12) by Eq (10), we get 
+ 
+ܯ௣௥௜ =
+ଵ
+ଶ ሾߟ(݂ݎ݁ௗ௨) −ߟ(݂ݎ݁ ௗ௟)ሿ         ( 1 3 )  
+ 
+We can use eqs. (12) and (13) to find how much an instrument can see if its lower and upper detection limit are Dl and Du.
+
+--- page 31 ---
+Appendix A: Test matrix 
+ 
+Smoke  Generation 
+Carousel 1 1 1 1 1 1 1 
+Sample Type Silicone Lampwick Teflon Kapton Kapton Pyrell Silicone 
+Sample ID S03 L13 T01 K01 K02 P02 S04 
+Test ID Number 1S 2L 3T 4K 4K 5P 6S 
+Position in Carousel 1 2 3 4 4 5 6 
+SAME Test # 48 49 50 51 51a 52 53 
+Description 
+Low 
+Temp 
+B.L. High 
+RT/R0 
+B.L. 
+High 
+RT/R0 
+B.L. 
+new 
+formula 
+B.L. 
+new 
+formula Baseline HighTemp 
+Date (mm/dd/2010) 7/16 7/19 7/ 20 7/21 7/22 7/22 7/22 
+Inlet Velocity (cm/sec) 8 8 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.304 1.251 1.452 1.380 1.380 1.220 1.350 
+Duration (sec) 60 60 60 60 60 60 60 
+Primary Aging time (sec) 11 11 11 11   11 1 
+Primary Mixing time (sec) 8 8 8 8   8 8 
+Net Aging  time (sec) 62 51 33 38 261 n/a 52 
+Primary Diagnostics 
+Prim. Aging Therm Precip y y y y   y y 
+Prim. Aging Therm Precip 
+time 60 90 75 ?   60 ? 
+Use STS Detector n n n n   n n 
+Use Comm Diag A 
+(MPASS) y y y y   y y 
+Use Comm Diag B y y y y   y y 
+Diluting A (MPASS) y y n n n y y 
+Diluting B y y n n n y y 
+Cyclone Inlet on CDA 
+(MPASS) y y y y   y y 
+Impactor Inlet on CDB 10 10 10 10   10 10 
+Use P-Trak y y y y   y y 
+Aerosol Concentration To 
+P-Trak 0.0318 0.0385 0.0520 0.0385 0.0385 0.0385 0.0318 
+Secondary Diagnostics Volume 
+Secondary Diagnostics 
+Volume %                
+Secondary Aging Duration 
+(sec)       180       
+STS Detector       n       
+Comm Diag A (MPASS)       y       
+Comm Diag B       y       
+Diluting A (MPASS)       n       
+Diluting B       n       
+Ues PTrak       y       
+Aerosol Concentration To 
+P-Trak       0.0385       
+2nd agign therml precip 
+duration       0
+
+--- page 32 ---
+Smoke  Generation 
+Carousel 2 2 2 2 2 2 
+Sample Type Lampwick Lampwick Lampwick Teflon Lampwick Teflon 
+Sample ID L14 L15 L15 T02 L14 T03 
+Test ID Number 7L 8L 8La 9T 10L 11T 
+Position in Carousel 3 4 4 5 3 6 
+SAME Test # 54 55 55a 56 57 58 
+Description Baseline 
+High 
+RT/R0 test 
+aging aged Baseline 
+High 
+RT/R0 
+reburn 
+sample 
+Baseline 
+aging 
+Date (mm/dd/2010) 7/29 7/29 7/29 7/29 7/29 7/30 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.245 1.245 1.245 1.445 1.253 1.445 
+Duration (sec) 60 60   60 60 60 
+Primary Aging time (sec) 11 11   11 11 11 
+Primary Mixing time (sec) 8 8   8 8 8 
+Net Aging  time (sec) 57 47 218 41 n/a 34 
+Primary Diagnostics 
+Prim. Aging Therm Precip y y   y   y 
+Prim. Aging Therm Precip time 120 60   75   75 
+Use STS Detector n n   n n n 
+Use Comm Diag A (MPASS) n n   y n y 
+Use Comm Diag B y y   y y y 
+Diluting A (MPASS) n n n n n n 
+Diluting B y y y n y n 
+Cyclone Inlet on CDA (MPASS) y y   y y y 
+Impactor Inlet on CDB 10 10   10 10 10 
+Use P-Trak y y   y y y 
+Aerosol Concentration To P-Trak 0.0385 0.0385 0.0385 0.0520 0.0385 0.0520 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%              
+Secondary Aging Duration (sec)             
+STS Detector             
+Comm Diag A (MPASS)             
+Comm Diag B             
+Diluting A (MPASS)             
+Diluting B             
+Ues PTrak             
+Aerosol Concentration To P-Trak             
+secondary agign therml precip 
+duration
+
+--- page 33 ---
+Smoke  Generation 
+Carousel 2 2 2 2 2 
+Sample Type Teflon Silicone Silicone Silicone Silicone 
+Sample ID T03 S07 S07 S09 S09 
+Test ID Number 11Ta 12S 12Sa 13S 13Sa 
+Position in Carousel 6 1 1 2 2 
+SAME Test # 58a 59 59a 60 60a 
+Description aged 
+Baseline 
+aging aged 
+Htemp 
+aging aged 
+Date (mm/dd/2010) 7/30 7/ 30 7/30 7/30 7/30 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.445 1.327 1.327 1.350 1.350 
+Duration (sec)   60   60   
+Primary Aging time (sec)   11   11   
+Primary Mixing time (sec)   8   8   
+Net Aging  time (sec) 805 24 856 49 856 
+Primary Diagnostics 
+Prim. Aging Therm Precip       y   
+Prim. Aging Therm Precip time       720   
+Use STS Detector   n   n   
+Use Comm Diag A (MPASS)   y   y   
+Use Comm Diag B   y   y   
+Diluting A (MPASS) n y y y y 
+Diluting B n y y y y 
+Cyclone Inlet on CDA (MPASS)   y   y   
+Impactor Inlet on CDB   10   10   
+Use P-Trak   y   y   
+Aerosol Concentration To P-Trak 0.0520 0.0318 0.0318 0.0318 0.0318 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  50   70   70 
+Secondary Aging Duration (sec) 720   720   720 
+STS Detector n   n   n 
+Comm Diag A (MPASS) y   y   y 
+Comm Diag B y   y   y 
+Diluting A (MPASS) n   y   y 
+Diluting B n   y   y 
+Ues PTrak y   y   y 
+Aerosol Concentration To P-Trak 0.0520   0.0318   0.0318 
+secondary agign therml precip 
+duration      ??
+
+--- page 34 ---
+Smoke  Generation 
+Carousel 3 3 3 3 3 3 
+Sample Type Kapton Kapton Kapton Kapton Pyrell Pyrell 
+Sample ID K02 K0 2 K03 K03 P03 P03 
+Test ID Number 14K 14Ka 15K 15Ka 16P 16Pa 
+Position in Carousel 1 1 2 2 3 3 
+SAME Test # 61 61a 62 62a 63 63a 
+Description 
+Baseline 
+Aging aged 
+High 
+Temp 
+aging aged 
+Baseline 
+Aging aged 
+Date (mm/dd/2010) 8/2 8/ 2 8/2 8/2 8/23 8/23 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.380 1.380 1.480  1.480 1.220 1.220 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 38 807 39 808 56 840 
+Primary Diagnostics 
+Prim. Aging Therm Precip n   Y   y   
+Prim. Aging Therm Precip 
+time     60   60   
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) n n n n y y 
+Diluting B n n n n y y 
+Cyclone Inlet on CDA 
+(MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-
+Trak 0.0385 0.0385 0.03 85 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics 
+Volume %        50   70 
+Secondary Aging Duration 
+(sec) 720     720   720 
+STS Detector       n   n 
+Comm Diag A (MPASS)       y   y 
+Comm Diag B       y   y 
+Diluting A (MPASS)       n   y 
+Diluting B       n   y 
+Ues PTrak       y   y 
+Aerosol Concentration To P-
+Trak       0.0385   0.0385 
+secondary agign therml 
+precip duration       60   60
+
+--- page 35 ---
+Smoke  Generation 
+Carousel 3 3 3 3 3 3 
+Sample Type Pyrell Pyrell Silicone Silicone Silicone Silicone 
+Sample ID P04 P0 4 S12 S12 S13 S13 
+Test ID Number 17P 17Pa 18S 18Sa 19S 19Sa 
+Position in Carousel 4 4 5 5 6 6 
+SAME Test # 64 64a 65 65a 66 66a 
+Description 
+High 
+Temp 
+aging aged 
+Baseline 
+long 
+Aging aged 
+High 
+Temp 
+aging aged 
+Date (mm/dd/2010) 8/23 8/23  8/23 8/23 8/23 8/23 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.230 1.230 1.327  1.327 1.360 1.360 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 47 842 50 1923 42 837 
+Primary Diagnostics 
+Prim. Aging Therm Precip y           
+Prim. Aging Therm Precip time 45           
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) y y y y y y 
+Diluting B y y y y y y 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0385 0.0385 0.0318 0.0318 0.0318 0.0318 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%    70   70   70 
+Secondary Aging Duration (sec)   720   1800   720 
+STS Detector   n   n   n 
+Comm Diag A (MPASS)   y   y   y 
+Comm Diag B   y   y   y 
+Diluting A (MPASS)   y   y   y 
+Diluting B   y   y   y 
+Ues PTrak   y   y   y 
+Aerosol Concentration To P-Trak   0.0385   0.0318   0.0318 
+secondary agign therml precip 
+duration   45
+
+--- page 36 ---
+Smoke  Generation 
+Carousel 6 6 6 6 6 6 
+Sample Type Silicone Lampwick Teflon Kapton Pyrell Silicone 
+Sample ID S02 L25  T07 K07 P08 S05 
+Test ID Number 20S 21L 22T 23K 24P 25S 
+Position in Carousel 1 2 3 4 5 6 
+SAME Test # 67 68 69 70 71 72 
+Description 
+High 
+temp 
+aged 
+STS det 
+High 
+temp 
+aged STS 
+det 
+High 
+temp 
+aged 
+STS det 
+High 
+temp 
+aged 
+STS det 
+High 
+temp 
+aged 
+STS det 
+Baseline 
+STS det 
+Date (mm/dd/2010) 8/24 8/24  8/24 8/24 8/24 8/25 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.350 1.280 1.450  1.480 1.230 1.327 
+Duration (sec) 60 60 60 60 60 60 
+Primary Aging time (sec) 720 720 720 720 720 11 
+Primary Mixing time (sec) 8 8 8 8 8 8 
+Net Aging  time (sec) 751 747 745 747 750 42 
+Primary Diagnostics 
+Prim. Aging Therm Precip y y y y y y 
+Prim. Aging Therm Precip time 300 90 45 60 45 60 
+Use STS Detector y y y y y y 
+Use Comm Diag A (MPASS) y y y y y n 
+Use Comm Diag B y y y y y y 
+Diluting A (MPASS) y n n n y n 
+Diluting B y y n n y y 
+Cyclone Inlet on CDA (MPASS) y y y y y y 
+Impactor Inlet on CDB 10 10 10 10 10 10 
+Use P-Trak y y y y y y 
+Aerosol Concentration To P-Trak 0. 0318 0.0385 0.0520 0.0385 0.0385 0.0318 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume %              
+Secondary Aging Duration (sec)             
+STS Detector             
+Comm Diag A (MPASS)             
+Comm Diag B             
+Diluting A (MPASS)             
+Diluting B             
+Ues PTrak             
+Aerosol Concentration To P-Trak             
+secondary agign therml precip 
+duration
+
+--- page 37 ---
+Smoke  Generation 
+Carousel 5 5 5 5 5 
+Sample Type Kapton Kapton Pyrell Pyrell Kapton 
+Sample ID K04 K04 P05 P05 K05 
+Test ID Number 26K 26Ka 27P 27Pa 28K 
+Position in Carousel 1 1 4 4 3 
+SAME Test # 73 73a 74 74a 75 
+Description 
+Baseline 
+Aging aged 
+Baseline 
+Aging aged 
+Mid Temp 
+aging (no 
+Ptrak) 
+Date (mm/dd/2010) 8/26 8/ 26 8/26 8/26 8/26 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.380 1.380 1.220 1.220 1.430 
+Duration (sec) 60   60   60 
+Primary Aging time (sec) 11   11   11 
+Primary Mixing time (sec) 8   8   8 
+Net Aging  time (sec) 33 560 48 623 32 
+Primary Diagnostics 
+Prim. Aging Therm Precip y   y   y 
+Prim. Aging Therm Precip time 60   60   60 
+Use STS Detector n   n   n 
+Use Comm Diag A (MPASS) y   y   y 
+Use Comm Diag B y   y   y 
+Diluting A (MPASS) n n y y n 
+Diluting B n n y y n 
+Cyclone Inlet on CDA (MPASS) y   y   y 
+Impactor Inlet on CDB 10   10   10 
+Use P-Trak y   y   y 
+Aerosol Concentration To P-Trak 0.0385 0.0385 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume %  58   58   58 
+Secondary Aging Duration (sec) 480   480   480 
+STS Detector n   n   n 
+Comm Diag A (MPASS) y   y   y 
+Comm Diag B y   y   y 
+Diluting A (MPASS) n   y   n 
+Diluting B n   y   n 
+Ues PTrak y   y   y 
+Aerosol Concentration To P-Trak 0.0385   0.0385   0.0385 
+secondary agign therml precip 
+duration   60   60
+
+--- page 38 ---
+Smoke  Generation 
+Carousel 5 5 5 5 5 
+Sample Type Kapton Pyrell Pyrell Kapton Kapton 
+Sample ID K05 P06 P06 K06 K06 
+Test ID Number 28Ka 29P 29Pa 30K 30Ka 
+Position in Carousel 3 5 5 2 2 
+SAME Test # 75a 76 76a 77 77a 
+Description aged 
+High Temp 
+aging aged 
+High Temp 
+aging aged 
+Date (mm/dd/2010) 8/26 8/ 26 8/26 8/26 8/26 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.430 1.230 1.230 1.480 1.480 
+Duration (sec)   60   60   
+Primary Aging time (sec)   11   11   
+Primary Mixing time (sec)   8   8   
+Net Aging  time (sec) 563 51 625 31 559 
+Primary Diagnostics 
+Prim. Aging Therm Precip   y   y   
+Prim. Aging Therm Precip time   45   60   
+Use STS Detector   n   n   
+Use Comm Diag A (MPASS)   y   y   
+Use Comm Diag B   y   y   
+Diluting A (MPASS) n y y n n 
+Diluting B n y y n n 
+Cyclone Inlet on CDA (MPASS)   y   y   
+Impactor Inlet on CDB   10   10   
+Use P-Trak   y   y   
+Aerosol Concentration To P-Trak 0.0385 0.0385 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%    58   58   
+Secondary Aging Duration (sec)   480   480   
+STS Detector   n   n   
+Comm Diag A (MPASS)   y   y   
+Comm Diag B   y   y   
+Diluting A (MPASS)   y   n   
+Diluting B   y   n   
+Ues PTrak   y   y   
+Aerosol Concentration To P-Trak   0.0385   0.0385   
+secondary agign therml precip 
+duration 60   45   60
+
+--- page 39 ---
+Smoke  Generation 
+Carousel 4 4 4 4 4 4 
+Sample Type Lampwick Lampwick Teflon Teflon Lampwick Lampwick 
+Sample ID L16 L16 T04 T04 L18 L18 
+Test ID Number 32L 32La 33T 33Ta 34L 34La 
+Position in Carousel 1 1 4 4 3 3 
+SAME Test # 78 78a 79 79a 80 80a 
+Description 
+Baseline 
+aging aged 
+Baseline 
+aging aged 
+High 
+temp  
+aging aged 
+Date (mm/dd/2010) 8/26 8/26  8/26 8/26 8/26 8/26 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.245 1.245 1.445  1.445 1.280 1.280 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 37 581 33 560 40 580 
+Primary Diagnostics 
+Prim. Aging Therm Precip y   y   y   
+Prim. Aging Therm Precip time 90   75   90   
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) n n n n n n 
+Diluting B y y n n y y 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-
+Trak 0.0385 0.0385 0.05 20 0.0520 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) n   n   n   
+Diluting B y   n   y   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-
+Trak 0.0385   0.0520   0.0385   
+secondary agign therml precip 
+duration   90   75   90
+
+--- page 40 ---
+Smoke  Generation 
+Carousel 4 4 4 4 4 4 
+Sample Type Teflon Teflon Lampwick Lampwick Teflon Teflon 
+Sample ID T06 T06 L17 L17 T05 T05 
+Test ID Number 35T 35Ta 36L 36La 37T 37Ta 
+Position in Carousel 6 6 2 2 5 5 
+SAME Test # 81 81a 82 82a 83 83a 
+Description 
+High 
+temp  
+aging aged 
+Mid temp 
+aging aged 
+Mid temp 
+aging aged 
+Date (mm/dd/2010) 8/26 8/27  8/26 8/27 8/26 8/27 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.450 1.450 1.265  1.265 1.448 1.448 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 30 559 39 579 30 557 
+Primary Diagnostics 
+Prim. Aging Therm Precip y   y   y   
+Prim. Aging Therm Precip time 45   90   60   
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) n n n n n n 
+Diluting B n n y y n n 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0520 0.0520 0.0385 0.0385 0.0520 0.0520 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) n   n   n   
+Diluting B n   y   n   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-Trak 0.0520   0.0385   0.0520   
+secondary agign therml precip 
+duration   45   90   60
+
+--- page 41 ---
+Smoke  Generation 
+Carousel 7(4) 7(4) 7(4) 7(4) 7(4) 7(4) 
+Sample Type Pyrell Pyrell Kapton Kapton Silicone Silicone 
+Sample ID P P K K S S 
+Test ID Number 37P 37Pa 38K 38Ka 39S 39Sa 
+Position in Carousel             
+SAME Test # 84 84a 85 85a 86 86a 
+Description 
+Mid Temp 
+aging 
+retry aged 
+Mid Temp 
+aging run.  
+Repeat 
+75.  aged 
+Mid temp 
+aging aged 
+Date (mm/dd/2010) 8/30 8/30  8/30 8/30 8/30 8/30 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.225 1.225 1.430  1.430 1.345 1.345 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 53 632 33 563 50 628 
+Primary Diagnostics 
+Prim. Aging Therm Precip y   y       
+Prim. Aging Therm Precip time 60   60       
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) y y n n y y 
+Diluting B y y n n y y 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0385 0.0385 0.0385 0.0385 0.0318 0.0318 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) y   n   y   
+Diluting B y   n   y   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-Trak 0.0385 0.0385 0.0385 0.0385 0.0318   
+secondary agign therml precip 
+duration   60
+
+--- page 42 ---
+Smoke  Generation 
+Carousel 7(4) 7(4) 7(4) 7(4) 7(4) 
+Sample Type Pyrell Lampwick Teflon Kapton Kapton 
+Sample ID P L T K K 
+Test ID Number 40P 41L 42T 43K 43Ka 
+Position in Carousel           
+SAME Test # 87 88 89 90 90a 
+Description 
+Baseline 
+STS det 
+Baseline 
+STS det 
+Baseline 
+STS det 
+Mid Temp 
+aging reburn 
+85 aged 
+Date (mm/dd/2010) 8/30 8/ 30 8/30 8/30 8/30 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.220 1.245 1.445 1.430 1.430 
+Duration (sec) 60 60 60 60   
+Primary Aging time (sec) 11 11 11 11   
+Primary Mixing time (sec) 8 8 8 8   
+Net Aging  time (sec) 45 n/a 31 38 569 
+Primary Diagnostics 
+Prim. Aging Therm Precip y   y     
+Prim. Aging Therm Precip time 60 90 75 60   
+Use STS Detector y y y n   
+Use Comm Diag A (MPASS) n n n y   
+Use Comm Diag B y y y y   
+Diluting A (MPASS) y n n n n 
+Diluting B y y n n n 
+Cyclone Inlet on CDA (MPASS) y y y y   
+Impactor Inlet on CDB 10 10 10 10   
+Use P-Trak y y y y   
+Aerosol Concentration To P-Trak 0.0385 0.0385 0.0520 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume %  0 0 0 58   
+Secondary Aging Duration (sec) 0 0 0 480   
+STS Detector       n   
+Comm Diag A (MPASS)       y   
+Comm Diag B       y   
+Diluting A (MPASS)       n   
+Diluting B       n   
+Ues PTrak       y   
+Aerosol Concentration To P-Trak       0.0385 0.0385 
+secondary agign therml precip 
+duration
+
+--- page 43 ---
+Smoke  Generation 
+Carousel 8(4) 8(4) 8(4) 8(4) 8(4) 
+Sample Type Silicone Kapton  Kapton Kapton Kapton 
+Sample ID S K K K K 
+Test ID Number 44S 45K 46K 46Ka 47K 
+Position in Carousel           
+SAME Test # 91 92 93 93a 94 
+Description 
+Baseline 
+STS det 
+Baseline 
+STS det 
+Mid Temp 
+aging run 
+75 repeat aged 
+Mid Temp 
+aging run 
+mid high 
+Date (mm/dd/2010) 9/ 7 9/7 9/7 9/7 9/7 
+Inlet Velocity (cm/sec) 8.1 8.1 8.1 8.1 8.1 
+Rt/R0 1.327 1.380 1.430 1.430 1.450 
+Duration (sec) 60 60 60   60 
+Primary Aging time (sec) 11 11 11   11 
+Primary Mixing time (sec) 8 8 8   8 
+Net Aging  time (sec) 46 35 36 568 42 
+Primary Diagnostics 
+Prim. Aging Therm Precip     y   y 
+Prim. Aging Therm Precip time     60   60 
+Use STS Detector y y n   n 
+Use Comm Diag A (MPASS) n n y   y 
+Use Comm Diag B y y y   y 
+Diluting A (MPASS) n n n n n 
+Diluting B y n n n n 
+Cyclone Inlet on CDA (MPASS) y y y   y 
+Impactor Inlet on CDB 10 10 10   10 
+Use P-Trak y y y   y 
+Aerosol Concentration To P-Trak 0.0318 0.0385 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  0 0 58   58 
+Secondary Aging Duration (sec) 0 0 480   480 
+STS Detector     n   n 
+Comm Diag A (MPASS)     y   y 
+Comm Diag B     y   y 
+Diluting A (MPASS)     n   n 
+Diluting B     n   n 
+Ues PTrak     y   y 
+Aerosol Concentration To P-Trak     0.0385   0.0385 
+secondary agign therml precip 
+duration       60
+
+--- page 44 ---
+Smoke  Generation 
+Carousel 8(4) 8(4) 8(4) 8(4) 8(4) 
+Sample Type Kapton Pyrell Pyrell Lampwick Lampwick 
+Sample ID K P P L L 
+Test ID Number 47Ka 48P 48Pa 49L 49La 
+Position in Carousel           
+SAME Test # 94a 95 95a 96 96a 
+Description aged 
+No flow run 
+w/ aging aged 
+No flow run 
+w/aging aged 
+Date (mm/dd/2010) 9/ 7 9/7 9/7 9/7 9/7 
+Inlet Velocity (cm/sec) 8.1 0 0 0 0 
+Rt/R0 1.450 1.220 1.220 1.245 1.245 
+Duration (sec)   60   60   
+Primary Aging time (sec)   11   11   
+Primary Mixing time (sec)   8   8   
+Net Aging  time (sec) 567 38 n/a 34 582 
+Primary Diagnostics 
+Prim. Aging Therm Precip   y   y   
+Prim. Aging Therm Precip time   60   90   
+Use STS Detector   n   n   
+Use Comm Diag A (MPASS)   y   y   
+Use Comm Diag B   y   y   
+Diluting A (MPASS) n y y n n 
+Diluting B n y y y y 
+Cyclone Inlet on CDA (MPASS)   y   y   
+Impactor Inlet on CDB   10   10   
+Use P-Trak   y   y   
+Aerosol Concentration To P-Trak 0.0385 0.0385 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume %    58   58   
+Secondary Aging Duration (sec)   480   480   
+STS Detector   n   n   
+Comm Diag A (MPASS)   y   y   
+Comm Diag B   y   y   
+Diluting A (MPASS)   y   n   
+Diluting B   y   y   
+Ues PTrak   y   y   
+Aerosol Concentration To P-Trak   0.0385   0.0385   
+secondary agign therml precip 
+duration 60
+
+--- page 45 ---
+Smoke  Generation 
+Carousel 9(4) 9(4) 9(4) 9(4) 9(4) 9(4) 
+Sample Type Pyrell Pyrell Lampwick Lampwick Silicone Silicone 
+Sample ID P P L L S S 
+Test ID Number 50P 50Pa 51L 51La 52S 52Sa 
+Position in Carousel             
+SAME Test # 97 97a 98 98a 99 99a 
+Description 
+No flow 
+run w/ 
+aging aged 
+No flow 
+run w/ 
+aging aged 
+No flow 
+run w/ 
+aging aged 
+Date (mm/dd/2010) 9/8 9/8 9/8 9/8 9/8 9/8 
+Inlet Velocity (cm/sec) 0 0 0 0 0 0 
+Rt/R0 1.230 1.230 1.280  1.280 1.350 1.350 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 48 624 37 585 48 627 
+Primary Diagnostics 
+Prim. Aging Therm Precip Y   Y       
+Prim. Aging Therm Precip time 60   90       
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) y y n n y y 
+Diluting B y y y y y y 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0385 0.0385 0.0385 0.0385 0.0318 0.0318 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) y   n   y   
+Diluting B y   y   y   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-Trak 0.0385   0.0385   0.0318   
+secondary agign therml precip 
+duration       90
+
+--- page 46 ---
+Smoke  Generation 
+Carousel 9(4) 9(4) 9(4) 9(4) 9(4) 9(4) 
+Sample Type Teflon Teflon Kapton Kapton Kapton Kapton 
+Sample ID T T K K K K 
+Test ID Number 53T 53Ta 54K 54Ka 55K 55Ka 
+Position in Carousel             
+SAME Test # 100 100a 101 101a 102 102a 
+Description 
+No flow 
+run w/ 
+aging aged 
+No flow 
+run w/ 
+aging aged 
+No flow 
+run w/ 
+aging aged 
+Date (mm/dd/2010) 9/8 9/8 9/8 9/8 9/8 9/8 
+Inlet Velocity (cm/sec) 0 0 0 0 0 0 
+Rt/R0 1.450 1.450 1.480  1.480 1.480 1.480 
+Duration (sec) 60   60   120   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 29 560 29 561 28 563 
+Primary Diagnostics 
+Prim. Aging Therm Precip Y   Y       
+Prim. Aging Therm Precip time 75   90       
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) n n n n n n 
+Diluting B n n n n n n 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0520 0.0520 0.0385 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) n   n   n   
+Diluting B n   n   n   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-Trak 0.0520   0.0385   0.0385   
+secondary agign therml precip 
+duration       90
+
+--- page 47 ---
+Smoke  Generation 
+Carousel 10(4) 10(4) 10(4) 10(4) 10(4) 10(4) 
+Sample Type Silicone Silicone Silicone Silicone Teflon Teflon 
+Sample ID S S S S T T 
+Test ID Number 56S 56Sa 57S 57Sa 58T 58Ta 
+Position in Carousel             
+SAME Test # 103 103a 104 104a 105 105a 
+Description 
+low flow 
+run w/ 
+aging aged 
+No flow 
+run w/ 
+aging aged 
+No flow 
+run w/ 
+aging aged 
+Date (mm/dd/2010) 9/9 9/9 9/9 9/9 9/9 9/9 
+Inlet Velocity (cm/sec) 1 1 0 0 0 0 
+Rt/R0 1.350 1.350 1.350  1.350 1.450 1.450 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 48 619 51 636 24 559 
+Primary Diagnostics 
+Prim. Aging Therm Precip         Y   
+Prim. Aging Therm Precip time         75   
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) y y y y n n 
+Diluting B y y y y n n 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0318 0.0318 0.0788 0.0788 0.0788 0.0788 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume %  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) y   y   n   
+Diluting B y   y   n   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-Trak 0.0318   0.0788   0.0788   
+secondary agign therml precip 
+duration           75
+
+--- page 48 ---
+Smoke  Generation 
+Carousel 10(4) 10(4) 10(4) 10(4) 10(4) 10(4) 
+Sample Type Lampwick Lampwick Pyrell Pyrell Kapton Kapton 
+Sample ID L L P P K K 
+Test ID Number 59L 59La 60P 60Pa 61K 61Ka 
+Position in Carousel             
+SAME Test # 106 106a 107 107a 108 108a 
+Description 
+No flow 
+run w/ 
+aging aged 
+Low flow 
+run w/ 
+aging aged 
+Low flow 
+run w/ 
+aging aged 
+Date (mm/dd/2010) 9/9 9/9 9/9 9/9 9/9 9/9 
+Inlet Velocity (cm/sec) 0 0 1 1 1 1 
+Rt/R0 1.280 1.280 1.230  1.230 1.480 1.480 
+Duration (sec) 60   60   60   
+Primary Aging time (sec) 11   11   11   
+Primary Mixing time (sec) 8   8   8   
+Net Aging  time (sec) 30 558 32 559 30 560 
+Primary Diagnostics 
+Prim. Aging Therm Precip y   Y   Y   
+Prim. Aging Therm Precip time 90   60   90   
+Use STS Detector n   n   n   
+Use Comm Diag A (MPASS) y   y   y   
+Use Comm Diag B y   y   y   
+Diluting A (MPASS) n n y y n n 
+Diluting B n n y y n n 
+Cyclone Inlet on CDA (MPASS) y   y   y   
+Impactor Inlet on CDB 10   10   10   
+Use P-Trak y   y   y   
+Aerosol Concentration To P-Trak 0. 0788 0.0788 0.0385 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%  58   58   58   
+Secondary Aging Duration (sec) 480   480   480   
+STS Detector n   n   n   
+Comm Diag A (MPASS) y   y   y   
+Comm Diag B y   y   y   
+Diluting A (MPASS) n   y   n   
+Diluting B n   y   n   
+Ues PTrak y   y   y   
+Aerosol Concentration To P-Trak 0.0788   0.0385   0.0385   
+secondary agign therml precip 
+duration       60   90
+
+--- page 49 ---
+Smoke  Generation 
+Carousel 11(4) 11(4) 11(4) 11(4) 11(4) 11(4) 
+Sample Type Silicone Lampwick Teflon Kapton Pyrell Kapton 
+Sample ID S L T K P K 
+Test ID Number 62S 63L 64T 65K 66P 67K 
+Position in Carousel             
+SAME Test # 109 110 111 112 113 114 
+Description 
+low flow 
+run w 
+STS 
+low flow 
+run w 
+STS 
+low flow 
+run w 
+STS 
+low flow 
+run w 
+STS 
+low flow 
+run w 
+STS 
+low flow 
+run w 
+STS no 
+Ptrak 
+Date (mm/dd/2010) 9/9 9/9 9/9 9/9 9/9 9/9 
+Inlet Velocity (cm/sec) 2 2 2 2 2 2 
+Rt/R0 1.350 1.280 1.450  1.480 1.230 1.430 
+Duration (sec) 60 60 60 60 60 60 
+Primary Aging time (sec) 11 11 11 11 11 11 
+Primary Mixing time (sec) 8 8 8 8 8 8 
+Net Aging  time (sec) 28 21 43 22 31 28 
+Primary Diagnostics 
+Prim. Aging Therm Precip             
+Prim. Aging Therm Precip time             
+Use STS Detector y y y y y y 
+Use Comm Diag A (MPASS) n n n n n n 
+Use Comm Diag B y y y y y y 
+Diluting A (MPASS) n n n n n n 
+Diluting B y y n n y n 
+Cyclone Inlet on CDA (MPASS) y y y y y y 
+Impactor Inlet on CDB 10 10 10 10 10 10 
+Use P-Trak y y y y y y 
+Aerosol Concentration To P-
+Trak 0.0318 0.0385 0.05 20 0.0385 0.0385 0.0385 
+Secondary Diagnostics Volume 
+Secondary Diagnostics Volume 
+%              
+Secondary Aging Duration (sec)             
+STS Detector             
+Comm Diag A (MPASS)             
+Comm Diag B             
+Diluting A (MPASS)             
+Diluting B             
+Ues PTrak             
+Aerosol Concentration To P-
+Trak             
+secondary agign therml precip 
+duration
+
+--- page 50 ---
+Appendix B:
+
+--- page 51 ---
+Appendix C: Sample mass loss of each test run 
+Sample Number  Preflight Average  Postflight Average  Mass Loss (mg)  Test Number  GMT 
+S01  0.69639  0.69391  2.48  SAMERFLT 39S  242 
+S02  0.68742  Carousel 6 Not Tested  SAMERFLT20S 
+S03  0.72567  0.72157  4.10 
+SAMERFLT 1S   
+SAMERFLT20S 
+197        
+236 
+S04  0.74688  0.74241  4.47 
+SAMERFLT 6S    
+SAMERFLT 25S 
+203       
+238 
+S05  0.71125  Carousel 6 Not Tested  SAMERFLT 25S 
+S06  0.6882  0.68603  2.17  SAMERFLT 44S  250 
+S07  0.74098  0.73976  1.22  SAMERFLT 12S  211 
+S08  0.7221  0.71877  3.33  SAMERFLT 52S  251 
+S09  0.72037  0.71691  3.46  SAMERFLT 13S  211 
+S10  0.72187  0.71790  3.97  SAMERFLT 57S  252 
+S11  0.72313  0.72027  2.86  SAMERFLT 56S  252 
+S12  0.72895  0.72744  1.51  SAMERFLT 18S  235 
+S13  0.72085  0.71612  4.73  SAMERFLT 19S  235 
+S14  0.7353  0.73242  2.88  SAMERFLT 62S  253 
+T01  1.01266  0.98870  23.96 
+SAMERFLT 3T   
+SAMERFLT 22T 
+201         
+236 
+T02  0.99826  0.99326  5.00  SAMERFLT 9T  210 
+T03  1.00397  1.00306  0.91  SAMERFLT 11T  211 
+T04  1.10712  1.01097  96.15  SAMERFLT 32T  239 
+T05  1.02093  1.01122  9.71  SAMERFLT 34T  239 
+T06  1.00887  1.00080  8.07  SAMERFLT 36T  239 
+T07  1.01455  Carousel 6 Not Tested  SAMERFLT 22T 
+T08  0.99927  0.99794  1.33  SAMERFLT 42T  242 
+T09  1.01454  1.01009  4.45  SAMERFLT 53T  251 
+T10  0.98925  0.98850  0.75  SAMERFLT 58T  252 
+T11  1.00898  0.99903  9.95  SAMERFLT 64T  253 
+K01  0.54711  0.54605  1.06 
+SAMERFLT 4K    
+SAMERFLT 23K 
+202        
+237 
+K02  0.55177  0.55089  0.88  SAMERFLT 14K  214 
+K03  0.55777  0.55402  3.75  SAMERFLT 15K  214 
+K04  0.55083  0.54975  1.08  SAMERFLT 26K  238 
+K05  0.54795  0.54754  0.41  SAMERFLT 28K  238 
+K06  0.54909  0.54850  0.59  SAMERFLT 30K  238 
+K07  0.54642  Carousel 6 Not Tested  SAMERFLT 23K 
+K08  0.54119  0.54084  0.35 
+SAMERFLT 38K   
+SAMERFLT 43K  242 
+K09  0.55698  0.55692  0.06  SAMERFLT 45K  250
+
+--- page 52 ---
+Sample Number  Preflight Average 
+Postflight 
+Average  Mass Loss (mg)  Test Number  GMT 
+K10  0.54  0.53964  0.36  SAMERFLT 46K  250 
+K11  0.55059  0.55002  0.57  SAMERFLT 47K  250 
+K12  0.53874  0.53744  1.30  SAMERFLT 54K  251 
+K13  0.53809  0.53665  1.44  SAMERFLT 55K  251 
+K14  0.5393  0.53791  1.39  SAMERFLT 61K  252 
+K15  0.53997  0.53755  2.42  SAMERFLT 65K  253 
+K16  0.55493  0.55443  0.50  SAMERFLT 67K  253 
+P01  0.46979  0.46929  0.50  SAMERFLT 37P  242 
+P02  0.4849  0.48422  0.68 
+SAMERFLT 5P    
+SAMERFLT 24P 
+203         
+237 
+P03  0.48571  0.48515  0.56  SAMERFLT 16P  235 
+P04  0.4843  0.48363  0.67  SAMERFLT 17P  235 
+P05  0.47617  0.47560  0.57  SAMERFLT 27P  238 
+P06  0.46931  Not run ‐ bad sample  SAMERFLT 31P 
+P07  0.47816  0.47750  0.66  SAMERFLT 29P  238 
+P08  0.48425  Carousel 6 Not Tested  SAMERFLT 24P 
+P09  0.47746  0.47697  0.49  SAMERFLT 40P  242 
+P10  0.48293  0.48251  0.42  SAMERFLT 48P  250 
+P11  0.47584  0.47541  0.43  SAMERFLT 50P  251 
+P12  0.4659  0.46538  0.52  SAMERFLT 60P  252 
+P13  0.48357  0.48270  0.87  SAMERFLT 66P  253 
+L02  0.58364  0.58264  1.00  SAMERFLT 41L  242 
+L03  0.61397  0.61259  1.38  SAMERFLT 49L  250 
+L04  0.60396  0.60019  3.77  SAMERFLT 51L  251 
+L05  0.55782  0.58989  2.93  SAMERFLT 59L  252 
+L06  0.59582  0.59011  5.71  SAMERFLT 63L  253 
+L13  0.60437  0.60135  3.02 
+SAMERFLT 2L    
+SAMERFLT 21L  236 
+L14  0.60061  0.59915  1.46 
+SAMERFLT 7L   
+SAMERFLT 10L  210 
+L15  0.60374  0.60251  1.23  SAMERFLT 8L  210 
+L16  0.60329  0.60204  1.25  SAMERFLT 31L  239 
+L17  0.59287  0.58944  3.43  SAMERFLT 33L  239 
+L18  0.60209  0.60051  1.58  SAMERFLT 35L  239 
+L25  0.60465  Carousel 6 Not Tested  SAMERFLT 21L 
+Red text indicates a repeated test due to the astronaut's error 
+Red highlighting signifies tests that were not 
+conducted
+
+--- page 53 ---
+Appendix D: TEM grids map 
+ 
+SAME‐R Thermal Precipitator 
+Usage could  measure
+ubiquitous ‐ tiny or some particles, 
+possible measure
+Not measureable
+Thermal Precipitator 1 Thermal Precipitator 4
+Date viewed ‐ 
+comments A
+Date viewed ‐ 
+comments B
+Date viewed ‐ 
+comments A
+Date viewed ‐ 
+comments B
+1
+8/24  ‐ no particles ‐
+No images 48 (SAMERFLT 1S)
+2/22 ‐ few 
+particles, mostly 
+debris 67  (SAMERFLT 20S) 1
+12/9  & 4/23  ‐ no 
+particles 78  preage (SAMERFLT 31L) 12/9  ‐ no particles 78  postage (SAMERFLT 31L)
+2
+8/24 ‐ no particles 
+Ubiquitous 
+particles 49  (SAMERFLT 2L) 9/12  ‐ no particles 68  (SAMERFLT 21L) 2 10/5  ‐ no particles 79  preage (SAMERFLT 32T) 12/9  ‐ no particles 79  postage (SAMERFLT 32T)
+3 9/1 no particles 50  (SAMERFLT 3T)
+2/22 ‐ few 
+particles, some 
+background 
+particles 69  (SAMERFLT 22T) 3 12/9  ‐ No particles 80  preage (SAMERFLT 33L) 12/9  ‐ no particles 80  postage (SAMERFLT 33L)
+4
+8/31  ‐ no particles ‐
+tinies/ chains 51  (SAMERFLT 4K) 9/13  ‐ no particles 70  (SAMERFLT 23K) 4 10/5  ‐ no particles 81  preage (SAMERFLT 34T) 10/6  ‐ no particles 81  postage (SAMERFLT 34T)
+5 9/12  no particles 52  (SAMERFLT 5P)
+2/22 ‐ few 
+particles, mostly 
+debris 71  (SAMERFLT 24P) 5 12/9  ‐ No particles 82  preage (SAMERFLT 35L)
+12/9  & 4/23 ‐  no 
+particles 82  postage (SAMERFLT 35L)
+6
+2/22  ‐ few 
+particles, mostly 
+debris 53  (SAMERFLT 6S)
+2/22  ‐  few 
+particles, mostly 
+debris 72  (SAMERFLT 25S) 6
+10/5  ‐ no 
+measurable 
+particles 83  preage (SAMERFLT 36T) 10/6  ‐ no particles 83  postage (SAMERFLT 36T)
+Thermal Precipitator 2 Thermal Precipitator 3
+Date viewed ‐ 
+comments A
+Date viewed ‐ 
+comments B
+Date viewed ‐ 
+comments A
+Date viewed ‐ 
+comments B
+1
+9/16  & 4/23 ‐ 
+particles present 54  (SAMERFLT 7L)
+9/16  ‐  particles 
+present 62  preage (SAMERFLT 15K) 1
+10/5  ‐ particles 
+noted 84  preage (SAMERFLT 37P)
+10/5 ‐  particles 
+noted 84  postage (SAMERFLT 37P)
+2
+9/28 ‐ particles 
+present 55  (SAMERFLT 8L)
+2/17  ‐ particles 
+present 62  postage (SAMERFLT 15K) 2
+2/6/12  ‐ no 
+measureable 
+particles 85  (SAMERFLT 38K)
+2/6/12  ‐ particles 
+present 87  (SAMERFLT 40P)
+3
+9/21 ‐ particles 
+present 56  (SAMERFLT 9T)
+2/17  ‐ particles 
+present 63  preage (SAMERFLT 16P) 3
+3/19  ‐ particles 
+mixed in with 
+extraneous bkg. 106  (SAMERFLT 59L)
+3/19  ‐ particles 
+present 89  (SAMERFLT 42T)
+4
+9/21  ‐ no 
+measureable 
+particles #58  Preage (SAMERFLT 11T)
+2/17  ‐ particles 
+present 63  postage (SAMERFLT 16P) 4
+2/6/12  ‐ Particles 
+but not enough to 
+measure ‐ no 
+images 105 preage (SAMERFLT 58T)
+2/6/12  ‐ very 
+small particles ‐ 
+not measureable. 105  postage (SAMERFLT 58T)
+5
+2/17 ‐ particles 
+present #58  Postage (SAMERFLT 11T)
+9/21  ‐ particles 
+present 64  preage (SAMERFLT 17P) 5
+3/29/12  ‐ particles 
+present 107  preage (SAMERFLT 60P)
+2/22  ‐ particles 
+present 107  postage (SAMERFLT 60P)
+6
+9/28 & 4/23 
+particles present 60  (SAMERFLT 13S)
+2/22  ‐ Particles 
+present 64  postage (SAMERFLT 17P) 6
+3/29/12  ‐ very 
+small particles 
+present 108  preage (SAMERFLT 61K)
+3/29/12  ‐ very 
+small particles 108  postage (SAMERFLT 61K)
+Thermal Precipitator 5 Thermal Precipitator 6
+Date 
+viewed/comments A
+Date viewed ‐ 
+comments B
+Date viewed ‐ 
+comments A
+Date viewed ‐ 
+comments B
+1
+10/28  ‐ no 
+particles 73  preage (SAMERFLT 26K)
+11/9  ‐ no particles 
+extremely clean 73  postage (SAMERFLT 26K) 1 3/19  ‐ no particles 93  preage (SAMERFLT 46K) 2/13  ‐ no particles 93  postage (SAMERFLT 46K)
+2 11/3 ‐ no particles 74  preage (SAMERFLT 27P)
+11/9  ‐  particles 
+found upstream at ‐
+3y. 74  postage (SAMERFLT 27P) 2 3/8  ‐ very tiny 94  preage (SAMERFLT 47K) 2/13  ‐ Yes, few 94  postage (SAMERFLT 47K)
+3
+10/28  ‐ no 
+particles 75  preage (SAMERFLT 28K)
+11/9  ‐ possible 
+population of very 
+tiny particles 75  postage (SAMERFLT 28K) 3 2/13  ‐ yes, few 95  (SAMERFLT 48P)
+2/13  ‐  yes, 
+various 96  (SAMERFLT 49L)
+4
+11/3  ‐ many 
+agglomerated 
+particles 76  preage (SAMERFLT 29P)
+11/3  ‐ particles 
+found not as far 
+upstream 76  postage (SAMERFLT 29P) 4 3/8  ‐ yes, few 97  (SAMERFLT 50P) 2/13  ‐ yes, few  100 (SAMERFLT 53T)
+5
+11/3  ‐ very tiny 
+particles 77  preage (SAMERFLT 30K)
+11/3  ‐  more very 
+tiny particles 77  postage (SAMERFLT 30K) 5 3/8  ‐ yes, tiny 98  preage (SAMERFLT 51L)
+2/13 ‐ yes, few 
+large & tiny spots 98  postage (SAMERFLT 51L)
+6 empty empty 6
+3/8 ‐ yes, small & 
+large 101  preage (SAMERFLT 54K) 2/13  ‐ yes, few 101  postage (SAMERFLT 54K)
+
+--- page 54 ---
+Age
+d? 
+ 
+Da
+te 
+TE
+M 
+Descri
+ption 
+Age
+d 
+8/2
+4 
+Low 
+Temp 
+Una
+ged 
+8/2
+4 
+Baselin
+e High 
+RT/RO 
+Una
+ged 
+9/1 Baselin
+e High 
+RT/RO 
+Rt/
+R0 
+Morp
+1.3
+04 
+No particles 
+images 
+1.2
+51 
+No aerosol p
+– debris and
+particles 
+present .Par
+in diameter v
+higher magn
+1.4
+52 
+No aerosol p
+– debris and
+particles pre
+particles exh
+particle size 
+ 
+hology  I m
+noted. No  
+particles noted 
+ random 
+rticles <50nm 
+visible at 
+nifications. 
+particles noted 
+ random 
+sent; denser 
+hibit a primary 
+of <200nm. 
+mage 1 I m
+ 
+mage 2 
+ 
+M0 
+Best 
+Diame
+ter 
+2,523,
+939 
+2,819,
+891 
+3,654,
+789 
+M1/M0 
+(m) 
+AMD 
+Diame
+ter of 
+Avera
+ge 
+Mass 
+(m) 
+0.244 0.450 
+0.149 0.286 
+65.14 0.148 
+Hatc
+h 
+Cho
+ate 
+sigm
+a-g 
+2.188 
+2.239 
+2.079
+
+--- page 55 ---
+1 
+#5
+1 
+ 
+Ka
+1 
+#5
+2 
+ 
+Py
+1 
+#5
+3 
+ 
+Sil
+1 
+#6
+7 
+Sil
+apto
+n 
+ 
+ 
+? 8/3
+1 
+yrell n/a 9/1
+2 
+licon
+e 
+Una
+ged 
+2/2
+2 
+licon
+e 
+Age
+d 
+2/2
+2 
+Baselin
+e new 
+formula 
+1.3
+80 
+Baselin
+e 
+1.2
+20 
+High 
+Temp 
+1.3
+50 
+High 
+temp 
+aged 
+STS det 
+1.3
+50 
+No particles note
+population of cha
+particles similar t
+primary particles
+measure ~40-15
+No significant nu
+particles noted. I
+exhibit a few par
+downstream. No
+to  
+No significant  pa
+noted – some de
+particles present
+presence of back
+particles <50nm 
+diameter. 
+Few particles no
+downstream – m
+noted upstream; 
+ubiquitous partic
+<50nm noted. 
+ed – small 
+ained 
+to Teflon; 
+s in chains 
+0nm. 
+umber of 
+mages 
+rticles 
+t enough 
+ 
+articles 
+ebris 
+t plus the 
+kground 
+in 
+ted – 
+many 
+les 
+ 
+1,
+5
+3,
+9
+3,
+0
+1,
+0
+,825,
+597 
+0.056 
+,110,
+971 
+0.208 
+,889,
+059 
+0.250 
+,352,
+021 
+0.385 
+0.097 2.091 
+0.405 2.262 
+0.547 2.422 
+0.668 2.100
+
+--- page 56 ---
+1 
+#6
+8 
+La
+w
+1 
+#6
+9 
+Te
+1 
+#7
+0 
+Ka
+1 
+#7
+1 
+Py
+amp
+wick 
+Age
+d 
+9/1
+2 
+eflon Age
+d 
+2/2
+2 
+apto
+n 
+Age
+d 
+9/1
+3 
+yrell Age
+d 
+2/2
+2 
+High 
+temp 
+aged 
+STS det 
+1.2
+80 
+High 
+temp 
+aged 
+STS det 
+1.4
+50 
+High 
+temp 
+aged 
+STS det 
+1.4
+80 
+High 
+temp 
+aged 
+STS det 
+1.2
+30 
+No particles note
+exhibits small po
+of debris and  ch
+particles similar t
+Very few particle
+some debris part
+present. 
+No significant nu
+particles noted –
+population of deb
+chained clusters
+No significant pa
+some debris. 
+ed – 
+opulation 
+hained 
+to Teflon. 
+es noted – 
+ticles 
+umber of 
+– small 
+bris and 
+. 
+articles – 
+1,
+7
+84
+1,
+4
+1,
+3
+,251,
+719 
+0.230 
+40,33
+6 
+0.446 
+,112,
+405 
+0.161 
+,352,
+317 
+0.321 
+0.377 2.020 
+0.0  
+0.208 1.660 
+0.434 1.731
+
+--- page 57 ---
+1 
+#7
+2 
+Sil
+2 
+ 
+#5
+4 
+La
+w
+2 
+#5
+5 
+La
+w
+2 
+#5
+6 
+Te
+licon
+e 
+Una
+ged 
+2/2
+2 
+amp
+wick 
+ 
+Una
+ged 
+9/1
+6 
+& 
+4/2
+3 
+amp
+wick 
+? 9/2
+8 
+eflon Una
+ged 
+9/2
+1 
+Baselin
+e STS 
+det 
+1.3
+27 
+High 
+RT/RO 
+1.2
+60 
+High 
+RT/RO 
+test 
+aging 
+1.2
+53 
+Baselin
+e 
+1.4
+45 
+No significant pa
+some debris 
+Particle depositio
+upstream at grid 
+y-3. Particles are
+spherical and us
+occur singly; par
+range in size from
+1400nm.  
+Possibly a bit sm
+smaller than #54
+~240-1200nm (a
+areas taken for im
+analysis).  
+Particle depositio
+upstream at y-3; 
+primary particles
+200nm in diamet
+Density differenc
+be due to age or 
+that Teflon is ele
+beam sensitive. 
+articles – 
+on starts 
+opening 
+e large, 
+ually 
+rticles 
+m 200-
+mall 
+4; ranging 
+adjacent 
+mage 
+on – 
+dense 
+s <50-
+ter . 
+ces could 
+r the fact 
+ectron 
+2,
+8
+3,
+7
+3,
+8
+3,
+0
+,987,
+870 
+0.182 
+,197,
+762 
+0.110 
+,373,
+889 
+0.116 
+,037,
+044 
+0.132 
+0.419 2.491 
+0.253 2.493 
+0.275 2.528 
+0.185 1.786
+
+--- page 58 ---
+2 
+#5
+8 
+Te
+2 
+#5
+8 
+Te
+2 
+#6
+0 
+Sil
+2 
+#6
+2 
+Ka
+eflon Age
+d 
+9/2
+1 
+eflon Age
+d 
+2/1
+7 
+licon
+e 
+ 9/2
+8 & 
+4/2
+3 
+apto
+n 
+Una
+ged 
+9/1
+6 
+Baselin
+e aging 
+1.4
+45 
+Baselin
+e aging 
+ 
+H Temp 
+aging 
+1.3
+50 
+ 1.4
+80 
+Extremely few pa
+observed; faint c
+clusters noted. 
+Few particles ob
+Teflon aggregate
+very faint, not de
+Particles noted o
+observation. Sma
+faint. 
+Particle depositio
+upstream at y-3; 
+generally range i
+~90-430nm. Muc
+size than Lampw
+articles 
+chained 
+served – 
+es are 
+ense. 
+on second 
+all and 
+on – 
+particles 
+in size 
+ch smaller 
+wick. 
+2,
+2
+55
+4,
+2
+5,
+3
+,105,
+295 
+0.053 
+57,92
+0 
+0.105 
+,278,
+213 
+0.241 
+,850,
+382 
+0.148 
+0.149 2.764 
+0.232 2.442 
+0.533 2.440 
+0.251 20.66
+
+--- page 59 ---
+2 
+#6
+2 
+Ka
+2 
+#6
+3 
+Py
+2 
+#6
+3 
+Py
+2 
+#6
+4 
+Py
+apto
+n 
+Age
+d 
+2/1
+7 
+yrell Una
+ged 
+2/1
+7 
+yrell Age
+d 
+2/1
+7 
+yrell Una
+ged 
+9/2
+1 
+High 
+Temp 
+aging 
+ 
+Baselin
+e aging 
+1.2
+20 
+Baselin
+e aging 
+ 
+ 1.2
+30 
+Particle depositio
+upstream at y-4; 
+particles, most le
+1.0m. 
+Particle depositio
+upstream at y-4; 
+coverage with sp
+particles and 
+agglomerates. P
+particles general
+measure >130nm
+1450nm. 
+Particle depositio
+upstream at y-4; 
+heavy coverage;
+appear a bit sma
+preage, <100nm
+Particle depositio
+upstream at y-5; 
+chained Teflon-ty
+particles; primary
+in chains range i
+from ~90-270nm
+single particles o
+measure >700nm
+on 
+spherical 
+ess than 
+on 
+heavy 
+pherical 
+rimary 
+ly 
+m – 
+on 
+again 
+ particles 
+aller than 
+-600nm. 
+on – 
+some 
+ype 
+y particles 
+n size 
+m. Larger 
+often 
+m. 
+1,
+8
+3,
+6
+1,
+7
+3,
+,797,
+876 
+0.243 
+,862,
+679 
+0.207 
+,414,
+788 
+0.359 
+,881,
+194 
+0.254 
+0.383 1.962 
+0.392 2.222 
+0.539 1.892 
+0.445 2.115
+
+--- page 60 ---
+2 
+#6
+4 
+Py
+3 
+#8
+4 
+Py
+3 
+#8
+4 
+Py
+3 
+#8
+5 
+Ka
+yrell Age
+d 
+2/2
+2 
+yrell Una
+ged 
+10/
+5 
+yrell Age
+d 
+10/
+5 
+apto
+n 
+ 2/6 
+High 
+Temp 
+aging 
+ 
+Mid 
+temp 
+aging 
+retry 
+1.2
+25 
+Mid 
+temp 
+aging 
+retry 
+ 
+Mid 
+temp 
+aging 
+run 75 
+repeat, 
+low 
+ptrack 
+on peak 
+one 
+1.4
+30 
+Particle depositio
+particles are mor
+aggregated with 
+measuring ~85-8
+Particle depositio
+upstream at y-6; 
+range from ~60-6
+Particles agglom
+like Run #64 – ad
+areas taken for im
+analysis. 
+Particle depositio
+upstream at y-4-
+particles range in
+~60-1250nm. Pa
+highly agglomera
+adjacent areas ta
+image analysis.
+Exhibits very tiny
+– not enough for 
+analysis particle 
+exhibits a few de
+particles ~100-20
+also exhibits extr
+material. 
+on at y-4; 
+re highly 
+primaries 
+850nm. 
+on – 
+particles 
+630nm. 
+merated 
+djacent 
+mage 
+on – 
+5; 
+n size 
+articles 
+ated - 
+aken for 
+y particles 
+r image 
+size, 
+enser 
+00nm;  
+raneous 
+1,
+5
+3,
+9
+1,
+2
+95
+,417,
+571 
+0.450 
+,721,
+977 
+0.233 
+,683,
+215 
+0.355 
+54,55
+3 
+0.112 
+0.616 1.750 
+0.412 2.131 
+0.533 1.893 
+0.174 1.936
+
+--- page 61 ---
+3 
+#8
+7 
+Py
+3 
+#1
+06 
+La
+w
+3 
+#8
+9 
+Te
+3 
+#1
+05 
+Te
+yrell Una
+ged 
+3/1
+9 
+amp
+wick 
+ 3/1
+9 
+eflon Una
+ged 
+3/2
+9 
+eflon Una
+ged 
+2/6 
+Baselin
+e STS 
+det 
+1.2
+20 
+No flow 
+run w/ 
+aging 
+1.2
+80 
+Baselin
+e STS 
+det 
+1.4
+45 
+No flow 
+run 
+1.4
+50 
+Heavy particle de
+– at y-5; small pa
+range in size from
+– 200nm but cou
+to~1000nm. 
+Deposition at y-4
+amount of backg
+deposits, very fa
+particles ~200-50
+Occasional extre
+large particles us
+~0.67-3.67m. 
+Small agglomera
+5 with tiny (<70n
+background part
+Small needle-like
+noted.  
+Particle depositio
+upstream; not en
+particles to meas
+images. 
+eposition 
+articles, 
+m <50nm 
+uld be up 
+4; large 
+ground 
+int 
+00nm. 
+emely 
+sually are 
+ates at ~y-
+m) 
+icles. 
+e crystals 
+on 
+nough 
+sure. No 
+ 
+  
+2,
+8
+10
+2,
+3
+19
+,924,
+886 
+0.220 
+05,51
+7 
+0.442 
+,774,
+308 
+0.055 
+95,39
+7 
+0.172 
+0.421 2.241 
+0.600 1.736 
+0.151 2.733 
+0.306 2.132
+
+--- page 62 ---
+3 
+#1
+05 
+Te
+3 
+#1
+07 
+Py
+3 
+#1
+07 
+Py
+3 
+#1
+08 
+Ka
+eflon Age
+d 
+2/6 
+yrell  2/6 
+yrell Age
+d 
+2/2
+2 
+apto
+n 
+Una
+ged 
+3/2
+9 
+No flow 
+run w/ 
+aging 
+ 
+Low 
+flow run 
+w/ 
+aging 
+1.2
+30 
+No flow 
+run w/ 
+aging 
+ 
+Low 
+flow run 
+1.4
+80 
+Not enough parti
+measure; tiny 
+agglomerates of 
+particles with prim
+particles measur
+~<100nm.  
+Deposition at y-3
+larger particles m
+~200- 
+ 
+Very few large sp
+particles (~0.2-3.
+present spread o
+grid. 
+Upstream ~y-7; c
+observe at lower
+magnifications; p
+very small. Smal
+more visible at 1
+primary particles
+Many particles ~
+600nm in diamet
+icles to 
+chained 
+mary 
+ring 
+3, -4; 
+measure 
+pherical 
+.3m)  
+out over 
+couldn’t 
+r 
+particles 
+l chains 
+0KX with 
+s ~90nm. 
+200-
+ter. 
+14
+20
+19
+49
+46,57
+8 
+0.162 
+06,01
+9 
+0.259 
+92,86
+6 
+0.282 
+95,06
+8 
+0.135 
+0.324 2.298 
+0.922 3.084 
+0.933 2.985 
+0.343 2.632
+
+--- page 63 ---
+3 
+#1
+08 
+Ka
+4 
+#7
+8 
+La
+w
+4 
+#7
+8 
+La
+w
+4 
+#7
+9 
+Te
+apto
+n 
+Age
+d 
+3/2
+9 
+amp
+wick 
+Una
+ged 
+12/
+9 
+amp
+wick 
+Age
+d 
+12/
+9 
+eflon Una
+ged 
+10/
+5 
+No flow 
+run w/ 
+aging 
+ 
+Baselin
+e aging 
+1.2
+45 
+Baselin
+e aging 
+ 
+Baselin
+e aging 
+1.4
+45 
+Deposited upstre
+5; like preage sa
+No particles pres
+Carbon film is cle
+exhibiting little to
+deposited materi
+Some ‘junk’ pres
+particles. 
+Torn films plus a
+debris. 
+eam at y-
+ample.  
+sent. 
+ean 
+o no 
+ial.  
+sent – no 
+a lot of 
+ 
+ 
+ 
+45
+2,
+2
+1,
+6
+2,
+51,72
+3 
+0.145 
+,987,
+215 
+0.130 
+,158,
+632 
+0.224 
+,596,
+154 
+0.163 
+0.351 2.561 
+0.265 2.324 
+0.355 1.975 
+0.193 1.511
+
+--- page 64 ---
+4 
+#7
+9 
+Teflon Age
+d 
+12/
+9 
+Baselin
+e aging 
+ Some debris on film – no 
+particles. 
+Non-aerosol deposit. 
+ 974,48
+5 
+0.267 0.263 # 
+4 
+#8
+0 
+Lamp
+wick 
+Una
+ged 
+12/
+9 
+High 
+temp 
+1.2
+80 
+No particles. Feathery or 
+wispy deposit found in 
+some areas along with 
+other deposited material. 
+Higher magnification of 
+this material indicates a 
+non-aerosol particle. 
+4,995,
+553 
+0.124 0.289 2.508 
+4 
+#8
+0 
+Lamp
+wick 
+Age
+d 
+12/
+9 
+High 
+Temp 
+aging 
+ No particles.  1,482,
+906 
+0.254 0.141 2.012 
+4 
+#8
+1 
+Teflon Una
+ged 
+10/
+5 
+High 
+temp 
+1.4
+50 
+No typical Teflon particles 
+exhibited. Some alien-like 
+junk present. 
+2,654,
+994 
+0.208 0.251 1.542
+
+--- page 65 ---
+4 
+#8
+1 
+Te
+4 
+#8
+2 
+La
+w
+4 
+#8
+2 
+La
+w
+4 
+#8
+3 
+Te
+eflon Age
+d 
+10/
+6 
+amp
+wick 
+Una
+ged 
+12/
+9 
+amp
+wick 
+Age
+d 
+12/
+9 & 
+4/2
+3 
+eflon Una
+ged 
+10/
+5 
+High 
+Temp 
+aging 
+ 
+Mid 
+temp 
+1.2
+65 
+Mid 
+temp 
+aging 
+ 
+Mid 
+temp 
+aging 
+1.4
+48 
+Torn carbon film 
+deposits. 
+No particles. 
+No particles. Som
+ubiquitous tiny pa
+noted downstrea
+y+10. 
+Very faint particle
+plus 
+me 
+articles 
+am at 
+es.  
+ 
+ 
+ 
+92
+3,
+6
+1,
+4
+3,
+8
+20,60
+0 
+0.385 
+,463,
+686 
+0.139 
+,343,
+413 
+0.230 
+,535,
+854 
+0.140 
+0.348 # 
+0.290 2.357 
+0.385 2.051 
+0.211 1.901
+
+--- page 66 ---
+4 
+#8
+3 
+Te
+5 
+ 
+#7
+3 
+Ka
+5 
+#7
+3 
+Ka
+5 
+#7
+4 
+Py
+eflon Age
+d 
+10/
+6 
+apto
+n 
+Una
+ged 
+10/
+28 
+apto
+n 
+Age
+d 
+11/
+9 
+yrell Una
+ged 
+11/
+3 
+Mid 
+temp 
+aging 
+ 
+Baselin
+e aging 
+1.3
+80 
+Baselin
+e aging 
+ 
+Baselin
+e aging 
+1.2
+20 
+No particles – fai
+deposits. 
+No particles – so
+debris and depos
+Again, no particle
+carbon film is ext
+clean. 
+No particles -  
+int 
+ome 
+sits. 
+es – 
+tremely 
+ 
+ 
+90
+2,
+6
+1,
+9
+4,
+3
+09,24
+3 
+0.337 
+,604,
+648 
+0.059 
+,053,
+906 
+0.096 
+,953,
+334 
+0.198 
+0.325 # 
+0.089 1.900 
+0.124 1.669 
+0.355 2.149
+
+--- page 67 ---
+5 
+#7
+4 
+Py
+5 
+#7
+5 
+Ka
+5 
+#7
+5 
+Ka
+5 
+#7
+6 
+Py
+yrell Age
+d 
+11/
+9 
+apto
+n 
+Una
+ged 
+10/
+28 
+apto
+n 
+Age
+d 
+11/
+9 
+yrell Una
+ged 
+11/
+3 
+Baselin
+e aging 
+ 
+Mid 
+temp 
+aging 
+1.4
+30 
+Mid 
+temp 
+aging 
+ 
+High 
+temp 
+aging 
+1.2
+30 
+Many particles d
+upstream at -3y; 
+~100-400nm.  Si
+morphology to pr
+examined Pyrell 
+84P). 
+No particles – so
+debris and depos
+Small population
+extremely tiny pa
+~100-200nm; sim
+#77K Kapton. 
+Lots of particles 
+upstream at -7y. 
+range of primary 
+~60-500nm with 
+larger; exhibits s
+chained agglome
+Morphology simi
+Pyrell. 
+epositing 
+particles 
+imilar 
+reviously 
+(63P, 
+ome 
+sits. 
+n of 
+articles, 
+milar to 
+starting 
+Size 
+particles 
+a few 
+mall 
+erates. 
+lar to #63 
+1,
+8
+1,
+6
+3,
+6
+,662,
+805 
+0.379 
+  
+,041,
+692 
+0.118 
+,275,
+642 
+0.354 
+0.512 1.731 
+  
+0.152 1.657 
+0.515 1.843
+
+--- page 68 ---
+5 
+#7
+6 
+Py
+5 
+#7
+7 
+Ka
+5 
+#7
+7 
+Ka
+6 
+#9
+3 
+Ka
+yrell Age
+d 
+11/
+3 
+apto
+n 
+Una
+ged 
+11/
+3 
+apto
+n 
+Age
+d 
+11/
+3 
+apto
+n 
+Una
+ged 
+3/1
+9 
+High 
+Temp 
+aging 
+ 
+High 
+temp 
+aging 
+1.4
+80 
+High 
+Temp 
+aging 
+ 
+Mid 
+temp 
+aging 
+run 75 
+repeat 
+1.4
+30 
+Particles start up
+-2y; particles gen
+between 60nm a
+600nm. Slightly l
+than preage sam
+Very tiny particle
+scattering of fain
+background part
+measuring ~100n
+Some chained 
+agglomerates; pr
+particles ~100-80
+Higher populatio
+extremely tiny (~
+200nm) particles
+few larger particl
+No particles exce
+background part
+~90nm in diamet
+pstream at 
+nerally 
+and 
+arger 
+mples. 
+es, with a 
+t 
+icles 
+nm. 
+rimary 
+00nm. 
+n of 
+~100-
+s with a 
+es.  
+ept faint 
+icles 
+ter. 
+1,
+3,
+3
+1,
+7
+2,
+6
+,632,
+140 
+0.445 
+,460,
+328 
+0.088 
+,237,
+768 
+0.138 
+,951,
+666 
+0.064 
+0.643 1.835 
+0.107 1.541 
+0.165 1.527 
+0.100 1.937
+
+--- page 69 ---
+6 
+#9
+3 
+Ka
+6 
+#9
+4 
+Ka
+6 
+#9
+4 
+Ka
+6 
+#9
+5 
+Py
+apto
+n 
+Age
+d 
+2/1
+3 
+apto
+n 
+Una
+ged 
+3/8 
+apto
+n 
+Age
+d 
+2/1
+3 
+yrell  2/1
+3 
+Mid 
+temp 
+aging 
+75 
+repeat 
+ 
+Mid 
+temp 
+aging 
+run mid 
+high 
+1.4
+50 
+Mid 
+temp 
+aging 
+mid 
+high 
+ 
+No flow 
+run w/ 
+aging 
+1.2
+20 
+No particles (2 im
+like preage. 
+Extremely tiny pa
+both upstream a
+downstream; bac
+particles measur
+75nm; extremely
+number of larger
+~400nm. 
+Small faint partic
+<200nm. 
+A very few dense
+particles, most <
+mages) 
+articles, 
+nd 
+ckground 
+re <50-
+y limited 
+r particles 
+cles, most 
+e 
+2000nm. 
+ 
+99
+3,
+8
+1,
+4
+71
+90,23
+4 
+0.105 
+,018,
+896 
+0.092 
+,151,
+405 
+0.136 
+1,388 0.140 
+0.155 1.864 
+0.116 1.626 
+0.176 1.669 
+0.683 3.521
+
+--- page 70 ---
+6 
+#9
+6 
+La
+w
+6 
+#9
+7 
+Py
+6 
+#1
+00 
+Te
+6 
+#9
+8 
+La
+w
+amp
+wick 
+ 2/1
+3 
+yrell  3/8 
+eflon  2/1
+3 
+amp
+wick 
+Una
+ged 
+3/8 
+No flow 
+run w/ 
+aging 
+1.2
+45 
+No flow 
+run w/ 
+aging 
+1.2
+30 
+No flow 
+run w/ 
+aging 
+1.4
+50 
+No flow 
+run 
+1.2
+80 
+Exhibits particles
+upstream and 
+downstream; typ
+spheres (~400-1
+aerosol deposits 
+in areas. Tiny pa
+are <100nm; also
+outlines of crysta
+materials visible 
+magnifications. 
+Particle depositio
+upstream at y-4,-
+spherical particle
+measure ~400nm
+2.7m; faint bac
+particles ~50-100
+Typical Teflon ag
+with primary part
+measuring ~100-
+Extremely large 
+(up to ~7m) de
+upstream at y-2; 
+small (~25-50nm
+background part
+visible at higher 
+magnifications. 
+s both 
+pical dark 
+200nm); 
+as a film 
+articles 
+o faint 
+alline 
+at lower 
+on 
+-5; dense 
+es 
+m – 
+ckground 
+0nm. 
+ggregates 
+ticles 
+-300nm;  
+particles 
+eposited 
+very 
+m) 
+icles 
+43
+  
+  
+  
+38,72
+9 
+0.168 
+  
+  
+  
+0.403 2.546
+
+--- page 71 ---
+6 
+#9
+8 
+La
+w
+6 
+#1
+01 
+Ka
+6 
+#1
+01 
+Ka
+amp
+wick 
+Age
+d 
+2/1
+3 
+apto
+n 
+Una
+ged 
+3/8 
+apto
+n 
+Age
+d 
+2/1
+3 
+No flow 
+run w/ 
+aging 
+ 
+No flow 
+run w/ 
+aging 
+1.4
+80 
+No flow 
+run w/ 
+aging 
+ 
+Like preage with 
+large particles; e
+significant amoun
+background mate
+very tiny particles
+Particle depositio
+upstream at y-4, 
+typical small part
+present (~200-12
+along with ‘junk’ 
+Exhibits a small 
+population of sm
+particles usually 
+1000nm. 
+ 
+fewer 
+exhibits 
+nt of 
+erial and 
+s. 
+on 
+-5; 
+ticles 
+200nm) 
+or debris. 
+aller 
+less than 
+32
+27
+25
+29,08
+4 
+0.186 
+77,64
+6 
+0.223 
+53,11
+0 
+0.234 
+0.431 2.503 
+0.346 1.936 
+0.351 1.893
+
+--- page 72 ---
+Appendix F: 
+Particle Morphology and Size Results from the Smoke 
+Aerosol Measurement Experiment-2 
+David L. Urban1, Gary A. Ruff2, Paul S. Greenberg3, David Fischer4, Marit Meyer5 
+NASA Glenn Research Center, Cleveland, Ohio 44135 
+George Mulholland6 
+The University of Maryland, College Park, Maryland 20742 
+ 
+Zeng-guang Yuan7, Victoria Bryg8 
+National Center for Space Exploration Research, Cleveland, Ohio 44135 
+and 
+Thomas Cleary9 and Jiann Yang10 
+National Institute of Standards and Technology, Gaithersburg, Maryland 20899 
+Results are presented from the Reflight of the Smoke Aerosol Measurement Experiment 
+(SAME-2) which was conducted during Expedition 24 (July- September 2010).  The reflight 
+experiment built upon the results of the origin al flight during Expedition 15 by adding 
+diagnostic measurements and expanding the test matrix.  Five  different materials 
+representative of those found in spacecraft (Teflo n, Kapton, cotton, silicone rubber and 
+Pyrell) were heated to temperatures below the ignition point with conditions controlled to 
+provide repeatable sample surface temperatures and air flow.  The air flow past the sample 
+during the heating period ranged from quiescent to 8 cm/s. The smoke was initially collected 
+in an aging chamber to simulate the transport time from the smoke source to the detector. 
+This effective transport time was varied by holding the smoke in the aging chamber for 
+times ranging from 11 to 1800  s.  Smoke particle samples were collected on Transmission 
+Electron Microscope (TEM) grids for post-flight analysis.  Th e TEM grids were analyzed to 
+observe the particle morphology and size pa rameters. The diagnostics included a prototype 
+two-moment smoke detector and three different me asures of moments of the particle size 
+distribution.  These moment diagnostics w ere used to determine the particle number 
+concentration (zeroth moment), the diamet er concentration (first moment), and the mass 
+concentration (third moment).  These statistics  were combined to determine the diameter of 
+average mass and the count mean diameter and, by  assuming a log-normal distribution, the 
+geometric mean diameter and the geometric stan dard deviations can also be calculated.  
+Overall the majority of the avera ge smoke particle sizes were fo und to be in the 200 nm to 
+400 nm range with the quiescent cases pro ducing some cases with substantially larger 
+particles.    
+                                                 
+1 Branch Chief, Combustion and Reacting Systems Branch, 21000 Brookpark Road, MS 77-5, Senior Member. 
+2 Advanced Capabilities Project Office, 21000 Brookpark Road, MS 77-7, Associate Fellow. 
+3 Combustion and Reacting Systems Branch, 21000 Brookpark Road, MS 77-5. 
+4 Combustion Branch, 21000 Brookpark Road, MS 77-5 
+5 Combustion and Reacting Systems Branch, 21000 Brookpark Road, MS 77-5. 
+6 Visiting Professor of Mechanical Engineering, Glenn L. Martin Hall. 
+7 Staff Scientist, 21000 Brookpark Road, MS 77-5. 
+8 Staff Scientist, 21000 Brookpark Road, MS 77-5. 
+9 Engineered Fire Safety Group, 100 Bureau Drive, Stop 8664. 
+10 National Fire Research Laboratory, 100 Bureau Drive, Stop 8662.
+
+--- page 73 ---
+I. Introduction 
+ppropriate design of fire detection systems requires knowledge of both the expected signature of the events to 
+be detected and the background levels of the measured parameters.  Terrestrial fire detection systems have been 
+developed based on extensive study of terrestrial fires. 1, 2  Unfortunately there is no corresponding data set for 
+spacecraft fires and consequently the fire detectors in current spacecraft were developed based upon terrestrial 
+designs.  There are a number of factors that can be expected to affect the particle size distribution of the smoke from 
+spacecraft fires. The absence of buoyant flow in low-gravit y increases the residence time in microgravity fires and 
+increases the transit time from the reaction zone to the detector. 3 Microgravity fires have been found to have 
+radically different structure from their normal-gravity (a.k.a. 1-g) counterparts.  The limited options available to 
+respond to a spacecraft fire increase the importance of early detection.  Finally the materials used in spacecraft are 
+different from typical terrestrial applications where smoke properties were previously evaluated.  All of these effects 
+can be expected to change the smoke particle size distribution.  The objective of this work was to make sufficient 
+measurements of smoke from spacecraft fires to enable improved design of future detectors.  
+Smoke Background 
+Smoke is a general term that encompasses aerosol materials produced by a number of processes.  In particular it 
+can include unburned, recondensed, original polymer or pyrolysis products that can be either liquid or solid, 
+hydrocarbon soot, condensed water vapor, and ash particles.  Soot particles dominate the smoke particulate in 
+established flaming fires while unburned pyrolysis produc ts and recondensed polymer fragments are produced by 
+smoldering and pyrolysis in the early stage of fire growth.  Given the constrained space on any spacecraft, the target 
+for the fire detection system  is necessarily the early phase and not es tablished flaming fires; consequently, the 
+primary target for detection is the pyrolysis products and not the soot.   
+Prior spacecraft systems are summarized in more  detail in papers by Friedman and Urban. 4, 5  In the Mercury, 
+Gemini and Apollo missions, the crew quarters were limited and mission durations were short, consequently it was 
+considered reasonable that the astronauts would rapidly detect any fire. The Skylab module, however, included 
+approximately 30 UV-sensing fire detectors. 4 These devices were limited to line-of-sight and were reported to have 
+difficulties with false alarms.  The Space Shuttle Detectors were based upon ioni zation fire detector technology, the 
+most advanced technology available at the time and used an inertial separator designed to eliminate particles larger 
+than 1-2 micrometers. The International Space Station (ISS) smoke de tectors use near-IR forward scattering, 
+rendering them most sensitive to particles larger than a mi crometer, outside of the range of sensitivity of the shuttle 
+detector. As described by Friedman4 there have been six overheat and failed component events in the NASA Orbiter 
+fleet in addition to several similar incidents that have occurr ed on the ISS. None of these events spread into a real 
+fire but as mission durations increase, the likelihood of failures increases. The experience on Mir in 1997 has shown 
+that failure of oxygen generation systems can have significant consequences. As a result, improved understanding of 
+spacecraft fire detection is critically needed.6  
+Previous work on smoke particles from low-gravity sources by Urban et al. 5 found that the particulate produced 
+by low-gravity flames (soot or unburned fuel particles) tends to have larger size particles than in normal gravity.  
+Results from the CSD (Comparative Soot Diagnostics) Experiment 5 which studied smoke properties in low-gravity 
+from several spacecraft materials suggested  that liquid smoke particles could achieve sizes larger than 1 µm while 
+solid particulate remained in the sub-micrometer range.  However, the CSD experiment did not produce sufficient 
+data concerning the size of the liquid smoke particles to guide detector design. The combined impact of these limited 
+results and theoretical predictions is that, as opposed to  extrapolation from 1-g data, direct knowledge of low-g 
+combustion particulate is needed for more confident design of smoke detectors for spacecraft.   
+II. SAME Experiment 
+To address the limited data from the CSD experiment concerning the likely size of spacecraft smoke particulate, 
+another experiment was developed: the Smoke Aerosol Measurement Experiment (SAME).  The SAME experiment 
+sought to avoid the problems experienced by the CSD experiment by obtaining the particulate size statistics on-orbit 
+with a reduced dependence upon sample return to Earth.  This is a challenging endeavor because existing aerosol 
+instrumentation is typically large, incompatible with spacecraft experiment constraints, and some systems require 
+substantial sample return to Earth.  As will be described below, an alternative approach was employed that used 
+three discrete instruments to measure separate moments of the size distribution.  When combined, these moments 
+provide useful aggregate statistics of the size distribution.  The measurements were made using smoke generated by 
+overheated spacecraft materials in much the same manner as the CSD experiment however the sample temperature, 
+flow field, and particle aging time were more rigorously controlled in the SAME experiment.  The experiment flew 
+A
+
+--- page 74 ---
+twice the first time in 2007 (SAME-1) and the second (SAME-2) in 2010.  When discussion applies to both flights, 
+this paper will refer to “SAME.” If the discussion is specific to a particular flight, the flight number will be 
+identified e.g. “SAME-2.” 
+E. Moment Method 
+The approach used by the SAME experiment is  termed the ‘moment method’ for convenience. 7  As will be 
+described below, the approach consists of measuring three moments of the size distribution (zeroth, first and third) 
+and using the properties of the log-normal distribution to estimate the geometric mean diameter and the standard 
+deviation. 
+The average particle size and an estimate of the width of the size distribution will be estimated from various 
+moments of the size distribution. The number distribution, fN(D), is defined as 
+ 
+dD
+dNDfN )(   (1) 
+where dN is the number of particles per cm 3 with diameter between D and D + dD . The moments of interest consist 
+of the number concentration, M 0, the first moment M 1, and the volume or mass concentration moment, M 3 and are 
+defined as 
+         dDDfDM Nii )(    3,1,0i   (2) 
+When i=0, the zeroth moment of the distribution, M 0, equation (2) is simply the number of particles per unit 
+volume. In the SAME experiment, this was measured using a condensation nuclei counter. The first moment, i=1, 
+can also be thought of as th e “diameter concentration” or integrated di ameter per unit volume and is approximately 
+proportional to the ionization detector moment (signal).  Fo r particles in the Mie scattering regime, particles sizes 
+from 0.3 to about 3 (~0.2 μm to 2.0 μm for a red laser), the light scattering signal is approximately proportional to 
+the third moment, i=3. From these moments, and a measurement of M 0 using a condensation nuclei counter, two 
+mean diameters can be computed: the count (arithmetic) mean diameter D 0.5 or D, which is equal to M 1/M0 and the 
+diameter of average mass D 1.5 or mD , which is equal to (M 3/M0)1/3 . These calculations do not depend on the 
+assumption of log-normal behavior. The basis for the subscript naming convention for D 0.5 and D 1.5 will be 
+discussed later). The log-normal size distribution is widely used for describing the size distribution of aerosols 
+including non-flaming smoke because for most aerosols; the bulk of  the number concentration is associated with 
+smaller particles.8, 9 The number distribution fN(D) for the lognormal distribution is expressed as follows: 
+      g ggtN DDDNDf  2 22/1 ln2 lnlnexpln)2()(   (3) 
+where Nt is the total number concentration of the aerosol (=M0), and Dg and g are the geometric mean diameter and 
+geometric standard deviation defined by 
+  
+
+
+00
+/)(lnln dDfdDDDfD NNg  (4) 
+   (5) 
+For the log-normal distribution, one finds that the various diameter definitions given above are related to the 
+geometric mean diameter, Dg, via the equation:8 9 
+2/1
+00
+2 )(/)()ln(lnln 
+
+
+
+
+   dDDfdDDfDD NNgg
+
+--- page 75 ---
+For the
+and 1.5. F
+correspond
+the ratio of
+ 
+By com
+geometric 
+approach 
+Mulholland
+design of s
+F. Instrum
+These m
+of three 
+hygiene in
+modified r
+discussion 
+earlier pap
+The z e
+nuclei co u
+operates b
+through a r
+then into a
+onto the pa
+instrument
+dilution is 
+dilution wa
+Trak. Ther
+mitigate t h
+conductanc
+good result
+The fir
+alpha-parti
+results in a
+to the parti
+electrode. 
+required.  
+The thi
+light scatte
+with the m
+employed 
+device’s op
+impactor a
+DustTraks™
+devices pro
+required ow
+A sche
+Glovebox 
+uplink com
+for approx
+e count mean d
+Fig. 1 shows 
+ding values of D
+f D1.5 and D0.5 v
+mbining these t
+standard de v
+is discusse d
+d.7 These statis
+spacecraft smok
+ments  
+measurements 
+separate inst r
+nstruments man
+residential sm o
+of the SAM E
+er10. 
+eroth-moment 
+unter P-Trak ™
+y passing the 
+region saturate
+a cooler regio
+articles increas
+t is very robus
+required, sin c
+as accomplishe
+re was also a c
+his issue, the 
+ce of the con d
+ts indicating th
+rst-moment ins
+icle emitter to g
+a current.  The 
+iculate.  The m
+The required 
+ird-moment in
+ering signal to 
+mass concentrati
+to account fo r
+perating range
+at the inlet w h
+™ one with a 
+ovided a measu
+wing to the hig
+matic of the as
+ (MSG), an I
+mmanding. Sm
+ximately 60 se c
+diameter, D0.5, 
+a typical log -
+D0.5 and D1.5 ar
+via the equatio
+three moments 
+viation.  Val
+d in Cleary, 
+stics provide a
+ke detectors. 
+were made us
+ruments. Tw o
+nufactured by T
+oke detector.  
+E hardware is 
+instrument is 
+™ (TSI Inc.) .
+aerosol-laden 
+ed with isopro p
+n where the v
+sing their diam
+t and operates 
+ce the smoke 
+ed by controlle
+concern that t h
+condensing s
+densate back t o
+he modified dev
+strument is th e
+generate ions i
+presence of ae
+mobility of the 
+particle conc e
+strument is a l
+quantify the ae
+ion, however, a
+r the range of 
+e is from 0.00 1
+hich captures p
+1 μm impactor
+ure of the frac
+gh smoke conce
+ssembled hardw
+SS facility th a
+oke was gener
+conds.  Durin g
+ p DD 
+and the diamet
+-normal distri b
+re1.17 m and
+on: 
+expg 
+it is possible t
+idation of t h
+Weinert a n
+a strong basis fo
+ing an assemb
+o are industr i
+TSI and one i s
+More compl e
+available in a
+a condensati o
+.  This devi c
+particle stre a
+panol vapor a n
+vapor condens e
+meter such that 
+over a range 
+concentration 
+ed addition of 
+he isopropanol
+section of the 
+o the wick.  T h
+vice could be u
+e ionization c h
+in a region with
+erosol particula
+charged aeros
+ntrations are o
+light scattering
+erosol mass de
+as described in
+materials an d
+1 mg/m3 to 1 0
+particles larger
+r and one with 
+tion of the par
+entration level
+ware appears in
+at provides m a
+rated by overhe
+g this interval, 
+lnexp( 2g pD 
+ter of average 
+bution for a D
+d 1.39 m, resp
+ .05.1 /ln(p DD
+o compute thre
+his 
+nd 
+for 
+ly 
+ial 
+s a 
+ete 
+an 
+on 
+ce 
+m 
+nd 
+es 
+they can be r e
+of 0 to 10 5 pa
+ranges from a
+filtered nitroge
+l condensate w
+device was m
+hese changes w
+used successfu
+hamber from a 
+hin a DC elect
+ate reduces the
+sol is too smal l
+on the order o
+g device Dust T
+ensity.  For terr
+n the calibration
+particle sizes 
+00 mg / m3.  T h
+r than the sele c
+a 10 μm impac
+rticulate that w
+s. 
+n Fig. 2.  The s
+any resources 
+eating a small 
+controlled flo
+ 
+Figure
+distribu
+)g  
+mass, D1.5, the
+Dg=1.0 and 
+pectively. Usin
+
+2/1
+5. )
+ee mean diame
+eadily counted
+articles/cm3 and
+about 0.5 × 1 0
+en to the aero s
+would not retu r
+modified wit h
+were tested i n
+ully in low grav
+residential sm
+tric field. The d
+e current as a r
+l for it to be c o
+of 10 5 particles
+Trak™ (TSI I n
+restrial dust pa
+n discussion be
+ tha t were se e
+hese devices a
+cted size.  Th
+ctor.  The diffe
+was larger than 
+system was ins
+including: co n
+sample of mat
+ow was induce d
+e 1:  Diamete
+ution with D
+e correspondin
+g= 1.6. For t
+ng equation (6)
+eters of the size
+d by a light sca
+d 20 nm to 1 
+06 to 5 × 10 6 
+sol sample bein
+rn to the wic k
+h very small g
+n a separate sp
+vity.5 
+moke detector. 
+drift of the ion
+result of the at
+ollected on the
+s/cm3 and no 
+nc.).  The dev i
+articulate this s
+elow, additiona
+en in the SA M
+are equipped w
+e SAME-1 ex
+ference in the s
+1 μm.  In so m
+stalled in the M
+ntainment, po w
+terial in the s m
+d by a movin g
+ers for a log-
+Dg=1.0 and 
+ng values of p a
+this distributio
+, one can relate
+e distribution a
+attering device
+μm diameter.  
+particles / c m
+ng directed to
+k in low-gravi t
+grooves to i m
+ace experimen
+This device u
+ns in the electri
+ttachment of th
+e ionization ch
+sample diluti o
+ice uses a 90 d
+signal correlate
+al compensatio
+ME experiment
+with an aerod y
+xperiment inclu
+ignal from the
+me cases dilutio
+Microgravity S
+wer, data, vid e
+moke generatio
+g piston in the
+-normal 
+g= 1.6.  
+(6) 
+are 0.5 
+on, the 
+e g to 
+(7) 
+and the 
+.  This 
+Some 
+m3. The 
+the P-
+ty.5 To 
+mprove 
+nt with 
+uses an 
+ic field 
+he ions 
+hamber 
+on was 
+degree 
+es well 
+on was 
+t.  The 
+ynamic 
+uded 2 
+se two 
+on was 
+cience 
+eo and 
+on duct 
+e aging
+
+--- page 76 ---
+chamber which drew the smoke into the chamber.  The sm oke was held in the chamber for a predetermined time, 
+allowing the particles to coagulate.  After a specified aging time, the smoke was then pushed by the piston into the 
+diagnostics duct where the moment instruments 
+made their measurements. Also installed in the 
+diagnostics duct were space shuttle and ISS 
+smoke detectors.  As the smoke was monitored 
+by the moment instruments, a sample of the 
+smoke particles was deposited on Transmission 
+Electron Microscope (TEM) grid via a Thermal 
+Precipitator (Fig 3) which uses thermophoresis 
+to deposit the particles on the grids. Inside the 
+precipitator, the aerosol passed between a 
+Transmission Electron Microscope grid and a 
+heated wire.  After the mission the grids were 
+removed from the assembly and examined in a 
+TEM to obtain an independent determination of 
+the particle size and morphology. 
+ 
+ 
+Calibration of the moment instruments was essential to properly interpret the flight data and was performed on 
+the ground before the flight. Calibration was accomplished using two different aerosol generators one using mono-
+disperse particle generation using dioctyl phthalate (DOP) according to the appro ach by Mulholland and Liu 11 and 
+the other using polystyrene spheres.  The monodisperse droplet generator functioned by producing a spray of DOP 
+diluted with isopropanol which is then evaporated and recondensed producing monodisperse droplets.  The droplet 
+size is controlled by the DOP dilution level. The generator will operate stably for tens of minutes.  The aerosol from 
+the generator was sampled simultaneously by the SAME instrument under test and a reference instrument. For the 
+number count, the reference instrument was a TSI 3022A pa rticle counter, for the mass concentration, a Tapered 
+Element Oscillating Microbalance and for the first moment a TSI Electrical Aerosol Detector was used. The results 
+for the P-Trak are shown in Fig. 4.  As the number concentration increased, the effect of the particle diameter 
+became more evident.  Separate correlations were devel oped for each particle size and the closest correlation was 
+used to analyze the flight data based on the initial estimates of the average particle size.  
+The first moment device, the ion chamber showed little effect  of particle size as seen in Fig 5. Consequently a 
+single correlation was used for all particle sizes.  The third moment device (TSI- DustTrak®) is theoretically 
+predicted to show non-monotonic behavior as particle size is increased and the response varies with the particle 
+refractive index. This issue was addressed by calibrating the DustTrak for the smoke particulate from each material.  
+Although the average particulate size is expected to cha nge, the refractive properties ar e expected to remain the 
+same.  In the results reported here, the DustTrak® respon se was directly calibrated, for each smoke source, against 
+ 
+ 
+Figure 3: Photograph of a partially disassembled Thermal Precipitator Module with the inlet 
+manifold exposed on the left, the hot wire leads in the red Vespel block in the middle and the 
+outlet valves on the right.  The drawing on the right displays the position of the hot wire above 
+the TEM grid with the air flow passing over both The heated wire drives aerosol particles onto
+Heated Wire 
+TEM Grid Air Flow 
+ 
+Figure 2. Schematic of the SAME hardware.
+
+--- page 77 ---
+mass concentration measurements using a tapered elemen t oscillating microbalance.  Using estimated material 
+densities, the diameter of average mass was computed for each sample.        
+ 
+For SAME-2, one of the DustTrak devices was replace d by a new device the MPASS (Multi-Parameter Aerosol 
+Scattering Sensor) which is an optical scattering sensor , employing two detectors pl aced at fixed angles.  The 
+underlying design and performance have been reported previously. 12 The basic configuration is similar to the 
+DustTrak, however, the MPASS has two angles of detection and it can measure two moment approximate moment 
+quantities specifically the 3 rd and 2 nd moments.  Further, the optical geomet ry is optimized using a Mie-scattering 
+model for aerosols with light scattering properties typical of smoke: i) geometric mean diameters from 0.1 – 1.0 
+microns; ii) geometric standard deviations of 1.6 – 1.9; iii) the aerosols have lognormal size distributions and vi) a 
+fixed, real value for refractive index of 1.6.  This device was included as a technology demonstration of an aerosol 
+sensor that measures two moments simultaneously.  The underlying assumption is that by measuring two moments 
+of the aerosol it is possible to correct  the smoke detector signal for the pa rticle size, unlike previous spacecraft 
+smoke detectors which are limited to a single moment measurement10.  This will enable the alarm to be less sensitive 
+to larger particles that are typical of dust. The relative advantage of this approach was discussed in more detail in a 
+prior paper13. 
+ 
+ 
+ 
+ 
+ 
+Figure 4: P-Trak Calibration results with Mono disperse 
+DOP droplets. 
+0
+100000
+200000
+300000
+400000
+500000
+600000
+0 50000 100000 150000 200000 250000 300000 350000
+Ptrak output (number count/cc)
+TSI 3022A reference (number count/ cc)
+100 nm
+600 nm
+1200 nm
+ 
+Figure 5: Ion Chamber Calibration results with Mono 
+disperse DOP droplets.
+0
+50
+100
+150
+200
+250
+300
+350
+400
+450
+500
+4.5 5 5.5 6 6.5 7
+Ionization Chamber output (volts)
+EAD Output (first moment)
+100 nm
+150 nm
+300 nm
+600 nm
+750 nm
+1200 nm
+
+--- page 78 ---
+G. Experimental Results 
+Over 100 sample materials were tested.  These were comprised of samples of 6 materials: Teflon™, Kapton™, 
+Pyrell™, silicone rubber, cellulose (lamp wick), and dibutyl-phthalate deposited on a porous wick. The test 
+conditions included multiple sample temperatures and air flow rates.  The baseline air flow rate was 8 cm/s with 
+runs conducted at rates down to 2 cm/s with a limited set conducted with no airflow while the sample was heated.  
+The sample temperatures were based on the pyrolysis properties of the material and were thus material specific.  The 
+baseline temperature was selected to produce 1 to 2 mg of weight loss in 60 seconds and have reasonable signal on 
+each of the moment instruments.  To examine the effect of sample temper ature, additional higher temperature 
+conditions were also selected that would not saturate th e moment instruments. The TEM girds recovered from the 
+thermal precipitators on SAME-1 were unfortunately cont aminated with extraneous particles whose origin is 
+currently under investigation. For SAME-2 more rigorous assembly controls were followed and numerous good 
+particle images were obtained.  For typical runs, the partic le concentrations were a few million particles / cc and the 
+mass concentrations were 2 to 15 mg/m 3 however there were runs with fewer particles.  For these conditions, the 
+typical numbers of particles sampled by the instruments were in the billions although for the test with the lowest 
+particle concentrations the sample sizes were of the order of several million particles. 
+1. Moment Instrument Results 
+Geometric mean, count mean, and average mass diameter re sults from the moment instruments for baseline runs 
+are presented in Table 1.  As desc ribed above, the count mean diameter  and the diameter of average mass 
+measurements are independent of the nature of the size distribution however, the calculation of the geometric mean 
+diameter and the geometric standard deviation ( σg) depend on the assumption of a log-normal distribution.  This 
+assumption cannot be directly tested with the available da ta since this would require a device that can separate the 
+particles into size bins,  However, there are two indications that the distribution can be approximated by a log-
+normal distribution.  In the cases listed below, the count mean diameter is less than the diameter of average mass 
+which is a necessary condition for a log-normal distribution (See Fig. 1).  The second indication is that the geometric 
+standard deviations are all physically reasonable (i.e. greater than 1 (see Eq. 3) and less than approximately 3.5 
+which is the practical limit on the magnitude of aerosol ge ometric standard deviation).  The aging results show a 
+substantial increase in the observed diam eters.  As expected the increase in th e count mean diameter is greater than 
+the corresponding increase in th e diameter of average mass.  This can be understood since coagulation consists of 
+particle collisions joining two particles.  For a polydisper se aerosol, these collisions usually involve the collision of 
+one of the smallest (high mobility) particles with the larg est (high cross-section) par ticles. This collision has little 
+effect on the size of the large particle but it removes the smaller particles from the size distribution.  This has a 
+larger effect on the count mean diameter since it is linear in diameter while the diameter of average mass varies with 
+the cube root of the diameter. Theoretical predictions suggest that this process will produce a near lognormal 
+distribution and that the standard deviation will tend toward a self-preserving distribution with a value of 1.32.14   
+ 
+ 
+   Geometric Mean 
+Diameter (Dg) 
+(µm)  
+Count Mean 
+Diameter 
+(M1/M0)  
+(µm) 
+Diameter of Average 
+Mass 
+(M3/M0) 
+(µm)   
+σg 
+Kapton  Unaged 0.042 0.056 0.101  2.154Aged 720 s 0.089 0.109 0.161  1.872
+Lampwick  Unaged 0.090 0.128 0.258  2.312Aged 720 s 0.229 0.276 0.398  1.834
+Silicone  Unaged 0.128 0.196 0.465  2.530Aged 720 s 0.269 0.355 0.619  2.108
+Teflon  Unaged 0.081 0.101 0.170  2.198Aged 720 s 0.070 0.105 0.232  2.442
+Pyrell  Unaged 0.149 0.204 0.384  2.211Aged 720 s 0.293 0.359 0.539  1.892
+ 
+Table 1: Diameter results for baseline runs for each material (Diameters are in micrometers).
+
+--- page 79 ---
+Overall, the Teflon and Kapton particles were very small.  The lamp wick and silicone results exhibited 
+substantially larger diameters of average mass, partic ularly for the aged cases.  As reported previously 10, the Dust 
+Trak results for lamp wick and silicone demonstrated s ubstantial portions of the particle distribution possessed 
+aerodynamic diameters larger than 1 micrometer.  The compara tively much smaller diameters for the Kapton and 
+Teflon will make detection of this smoke challenging for light scattering devices, on the other hand the large sizes 
+seen with the lamp wick and silicone would generate very large signals on a light scattering system.  As discussed 
+by Urban et al.13, to have a system that would have the signal gain sensitive enough to trigger an alarm for the lower 
+signal from small particles such as Teflon and Kapton without excessive nuisance alarms from large dust particles is 
+difficult without some level of particle size discrimination.  This suggests that detection of these particles against the 
+background environment will require a detection system capable of measuring more than one moment of the particle 
+size distribution.   
+The results for Teflon, Kapton and lampwick are plotted versus duct velocity in figures 6, 7 and 8.  These figures 
+show a strong trend of increased particle size at low flow ra tes.  This indicates that sm oke trapped in an avionics 
+enclosure can be expected to be substantially larger than smoke released in ventilated areas. 
+ 
+ 
+ 
+Figure 6: Particle diameters as a function of air velocity for lampwick. The lines are linear 
+(least square) fits.  The repeatability of the diameter measurements is estimated to be +/- 
+15%
+0
+1
+2
+3
+4
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+02468 1 0
+Particle Diameter, m
+Air Velocity, cm/s
+Arithmetic  mean diameter
+Diameter  of  average mass
+Geometric  mean diameter
+Geometric  Std. deviation
+Linear  (Arithmetic mean 
+diameter)
+Linear  (Diameter of  average 
+mass)
+Linear  (Geometric mean 
+diameter)
+Linear  (Geometric Std. 
+deviation)
+g
+ 
+Figure 7: Particle diameters as a function of air velocity for Kapton. The lines are linear 
+(least square) fits. The repeatability of the diameter measurements is estimated to be +/- 
+15%. 
+0
+1
+2
+3
+4
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0.30
+02468 1 0
+Particle Diameter, m
+Air Velocity, cm/s
+Arithmetic  mean diameter
+Diameter  of average mass
+Geometric  mean diameter
+Geometric  Std. deviation
+Linear  (Arithmetic mean 
+diameter)
+Linear  (Diameter of average 
+mass)
+Linear  (Geometric mean 
+diameter)
+Linear  (Geometric Std. 
+deviation)
+g
+
+--- page 80 ---
+2. MPASS Results 
+The MPASS was included in SAME-2 to demonstrate the effectiveness of a two-moment smoke detector. 
+Because of how they are used, a smoke  detector is not calibrated for speci fic materials and instead has a single 
+calibration for all conditions. The objective is to maintain a flat sensor response, regardless of the type of smoke or 
+the particle size so the signal is proportional only to a se lected moment (e.g. mass or number concentration).  The 
+approach used was to derive correlations to predict the smoke number concentration and mass concentration from 
+the MPASS output.  This correlation was made using the other SAME measurements (number and mass 
+concentration) as a reference.  A least-squares, third-order, correlation was computed on all test points with a signal 
+to noise ratio greater than 2 independent of all other parameters (e.g. material, heating rate, and aging time). 
+ 
+The results are shown in figures 9 and 10, for prediction of the mass concentration and the number 
+concentration, respectively.  Ideally th ese response graphs should be horizont al lines.  The norm alized output is 
+plotted along with the normalized correlation result as  a function of geometric m ean diameter. Ideally the 
+normalized result should be horizontal lines. The uniformity of response (scatter) is expressed by the least squares 
+variance relative to the mean ( Δ) and is shown in the legend.  Both figures show that the correlation decreases the 
+relative variance by roughly a factor of at least 2 relative to that provided by a conventional single-output sensor.  
+The resulting variance for the mass response is substantially  lower than for the number concentration.  This is 
+consistent with the fact that the original optimizati on of the MPASS was to mass concentration not to number 
+concentration.  Thus with appropriate processing, the MPASS output can be proportional to either the number 
+concentration or the mass concentration over a wide range of particle sizes and material compositions.  This 
+independence demonstrates that by combining 2 moments the MPASS is able to scale its response to the particle 
+size being sampled giving a more accurate indication of the amount of smoke present than a single moment detector. 
+The MPASS therefore has the ability to discern the difference between a strong signal from a high smoke 
+concentration and a strong signal from a lower concentration of very large dust particles, a feature which can 
+minimize false smoke detector alarms.   
+ 
+ 
+ 
+Figure 8: Particle diameters as a function of air velocity for Teflon. The lines are linear 
+(least square) fits. The repeatability of the diameter measurements is estimated to be +/- 
+15%. 
+0
+1
+2
+3
+4
+0.0
+0.1
+0.2
+0.3
+0.4
+02468 1 0
+Particle Diameters, m
+Air velocity,  cm/s
+Arithmetic  mean diameter
+Diameter  of average mass
+Geometric  mean diameter
+Geometric  Std. deviation
+Linear  (Arithmetic mean 
+diameter)
+Linear  (Diameter of average 
+mass)
+Linear  (Geometric mean 
+diameter)
+Linear  (Geometric Std. 
+deviation)
+g
+
+--- page 81 ---
+3. TEM Results 
+Overall, 72 particle samples were taken on Transmission Electron Microscope (TEM) grids using the thermal 
+precipitator.  These samples were imaged with a TEM to evaluate the particle morphology as a function of flow 
+conditions, material and heating level.  Overall, silicone rubber and DBP presented no particles that were visible via 
+TEM, presumably because the particles were condensed liquid that evaporated before they could be imaged in the 
+TEM.  Figure 11 presents typical images for the major materials. 
+ 
+ 
+As seen in Table 1, aging did increase the average partic le size, however this level of change is not readily 
+visible in the TEM images, instead the mo st visible change is the disappearance of  the smallest particles.  (Fig 12)  
+As described in the discussion of Table 1, this is consistent with expectations since the smaller particles have the 
+highest mobility and consequently are readily incorporated in to the larger particles. Particularly for the semi-liquid 
+particles, this absorption of the smallest particles into larger  particles is expected to have little or no apparent effect 
+on the size of the larger particles b ecause the diameter is the cube root of  the volume. In th e case of non-liquid 
+particles, the smallest particles will ne vertheless be unlikely to be visible via TEM when they are attached to larger 
+particles.   
+Figure 9: Mass normalized signal channel 
+output voltage and correlated MPASS output 
+voltage versus geometric mean diameter. 
+ 
+  Length scale 2 μm 
+Figure 11: TEM images for Teflon (Run 56), Pyrell (Run 63), Lampwick (Run 54) and Kapton
+Figure 10: Count normalized output voltage 
+and correlated MPASS output voltage versus 
+geometric mean diameter.
+
+--- page 82 ---
+4. Impact of flow on particle morphology 
+As the samples are heated by the wire, chemical bonds are broken and gaseous products are 
+released via pyrolysis.  These products may include partially oxidized species resulting from the 
+reaction with oxygen. As the gases move from the wire, the temperature and species 
+concentration will decrease as a result of conduction/diffusion and convection.  With the 
+decrease in temperature, the super saturation ratio of the pyrolysis gas will pass a critical stage 
+and nucleation of smoke particles will occur.  These smoke nuclei grow rapidly from the 
+condensation of the pyrolysis gases.  The time scale for the nucleation and condensation is on the 
+order of ms or less.  Over a longer time scale, the growing smoke particles undergoing Brownian 
+motion collide and stick together in a process known as coagulation.  This process may continue 
+for time scales of up to 103 s.  If the particles are liquid, the colliding particles will coalesce and 
+form larger droplets.  This is the case for the lampwick, silicone rubber, and Kapton smokes (Fig. 
+11).  If the particles are solid, they will retain their structure as they stick resulting in an 
+agglomerate structure composed of many primary particles connected in a low density fractal-
+like structure.  This is the case for the Teflon and Pyrell smokes (Fig. 11). 
+ 
+Key parameters affecting the smoke properties of the smoke produced here are the low-gravity 
+condition, the convective flow past the heated wire, the wire temperature, and the aging time.  As 
+the wire temperature increases, more of the sample will be pyrolyzed and these gases will 
+subsequently condense on the nuclei leading to a larger mass concentration of the aerosol and a 
+larger diameter of average mass.   
+ 
+An increase in the convective flow for a fixed wire temperature is expected to result in an 
+increase in the pyrolysis rate and thus an increase in the mass concentration of the aerosol.  Some 
+results follow this trend with silicone rubber, lampwick, and Pyrell increasing slightly with flow 
+while Teflon and Kapton decrease.  A possible explanation is that holding the wire temperature 
+fixed does not necessarily mean that the sample surface temperature distribution is precisely the 
+same at different air flow speeds.  Although these are expected to be small variations, given the 
+exponential dependence of the pyrolysis kinetics on temperature, changes in the heat transport 
+environment could change the sample surface temperature between the wire coils.   
+ 
+ 
+  Length scale 2 μm  
+Figure 12: TEM images showing the effect of aging for Kapton (Run 62) and Pyrell (Run 63).  
+From Left to right, unaged Kapton, aged Kapton, unaged Pyrell, aged Pyrell. The notable 
+change is the elimination of the smallest particles.
+
+--- page 83 ---
+A case of special interest is the case of zero-flow.  The transport for the zero-flow case in μ-g is 
+controlled by molecular diffusion and thermal expansion.  Over a period of 60 seconds, the gases 
+would diffuse a distance on the order of 4 cm.  Assuming a cubical geometry this would 
+correspond to the smoke being confined to a volume of about 64 cm3 rather than being diluted in 
+the 6000 cm3 piston.  If the same number of particles is generated as for the flow case, the initial 
+concentration will be on the order of 50 times higher for the zero-flow case.    This is expected to 
+lead to more coagulation and a larger particle size.  It is found for all of the materials the 
+diameter of average mass is 30 % to 40 % larger for the zero-flow tests compared to the flow 
+tests.   
+ 
+The zero flow condition was not in the original design of the SAME hardware but was examined 
+for 11 tests by modifying the valve operation in the SAME hardware.  This resulted in a very 
+high concentration of particulate where the aging process was accelerated compared to that in the 
+aging chamber at dilute conditions.  An unfortunate side effect was that approximately half the 
+smoke was lost from the system because it diffused out of the inlet into the MSG volume.  As a 
+result the total particle counts were lower than normal and the TEM grids had few particles.  It is 
+important to recognize that this condition is unique to low-gravity scenarios.  If one performed 
+the same experiment at 1-g, the buoyancy of the rising gases would greatly increase the mixing 
+zone.  So the larger particle diameters observed in these zero-flow conditions are important to 
+consider in the development of improved fire detection equipment for space vehicles.    
+ 
+For the zero-flow case, the heat is transported primarily by conduction rather than convection.  
+This is likely to result in a significant increase in the gas temperature relative to the case with 8 
+cm/s air flow.  A striking effect of this temperature change is the change in the morphology of 
+the Pyrell smoke from fractal-like clusters with up to 30 primary spheres for the case with a flow 
+of 8 cm/s to spherical particles for the zero-flow condition (Fig 13). 
+ 
+    
+ 
+III. Conclusions 
+ 
+  Pyrell 8 cm/s air flow (Run 63)      Pyrell no air flow (Run 95)              Lampwick 8 cm/s air flow (Run 80)     Lampwick no air 
+flow (Run 80) 
+ 
+  Length scale: 5 μm  
+ 
+Figure 13: TEM images showing the effect of flow for Pyrell and lampwick under 8 cm/s air
+
+--- page 84 ---
+The results from the SAME experiment  indicate that su bstantial differences in the size distributions of the 
+smoke particles are evident for the five spacecraft material s that were tested.  For the conditions of the SAME 
+experiment, all samples produced significant numbers of sub-micron particulate that are readily detected using an 
+ionization smoke detector. However, the aging results sugg est that some materials such as silicone rubber can 
+produce smoke that can reach sizes better detected by light scattering techniques. The zero flow conditions produced 
+smoke particles that were 2 to 3 times larger than those produced at the nominal 8 cm/s  flow rate. Since spacecraft 
+fire conditions include an even wider array of materials than those tested here and a broader range of flow and 
+temperature conditions, broad smoke aerosol size distributions can be expected from credible pre-fire overheat 
+events. These results suggest that detection methods that can measure more than one moment of the size distribution 
+may show more successful detection and false alarm rejec tion than single moment detectors. The results from the 
+prototype 2-moment detector (MPASS) were very encouraging in this respect with the technique showing real 
+potential as a means to respond to a broad particle range while avoiding excessive false alarms from nuisance 
+sources.  The TEM result demonstrated that fire particulate can be expected to have  a broad range of morphologies 
+influenced by heating rate, material and flow conditions.  
+IV. Acknowledgments 
+The support of the SAME experiment team and the crews of ISS increments 10, 13, 15, and 24 are gratefully 
+acknowledged. The SAME project was conducted through the ISS Exploration Research Project of the Exploration 
+Technology Development Program. The support of this program is also acknowledged. 
+Certain commercial entities, equipment, or materials may be identified in this document in order to describe an 
+experimental procedure or concept adequately. Such identification is not intended to imply recommendation or 
+endorsement by the National Aeronau tics and Space Administration or the Na tional Institute of Standards and 
+Technology, nor is it intended to imply that the entities, materials, or equipment are necessarily the best available for 
+the purpose. 
+V. References 
+1Bukowski, R.W. and G.W. Mulholland, “Smoke Detector Design and Smoke Properties,” NBS Technical Note 973, 1978. 
+2Bukowski, R. W, R. D. Peacock, J. D. Averill,  T. G. Clear y, N. P. Bryner, W. D. Walt on, P. A. Reneke, and E. D. 
+Kuligowski, “Performance of Home Smoke Al arms, Analysis of the Response of Severa l Available Technologies in Residential 
+Fire Settings,” NIST Technical Note 1455, December 2003. 
+3Brooker, J. E., Urban, D.L., Ruff,  G.A., “ISS Destiny Laboratory Sm oke Detection Model”, 07ICES-113, 2007 
+International Conference on Environmental Systems, Chicago, Ill. July 2007. 
+4Friedman, R., “Fire Safety Practices and Needs in Human-Crew Spacecraft,” Journal of Applied Fire Science, Vol. 2, 1992, 
+pp. 243-259. 
+5Urban, D.L., Griffin D., Ruff, G.A., Cleary, T., Yang, J., Mulholland, G.,  Yuan,  Z.G.,  “Detection of Smoke from 
+Microgravity Fires”, 2005 International Conference on Environmental Systems,  Rome Italy, Paper # 2005-01-2930 July 2005, 
+SAE Transactions, pp 375-384. 
+6Ruff, G.A., D.L. Urban, and M.K. Ki ng, “A Research Plan for Fire Prev ention Detection and Suppression,” AIAA-2005-
+0341, 43rd Aerospace Sciences Meeting and Exhibit, Reno, NV, January 9-12, 2005. 
+7Cleary, T.G., D W. Weinert, and G.W.  Mulholland, ”Moment Method for Obtain ing Particle Size Measures of Test 
+Smokes", Natl. Inst. Stand. Technol., NISTIR 7050, 2003. 
+8Raabe, O.G., J. Aerosol Sci., Vol. 2, 1971, p. 289. 
+9Reist, P.C., Introduction to Aerosol Science, Macmillan Pub. Co., NY, NY, 1984. 
+10 Urban, D.L.  Ruff, G.A., Mulholland, G.W., Cleary, T.G., Yang, J.C., Yuan, Z.G., “Measurement of Smoke Particle Size 
+under Low-Gravity Conditions,” 2008 International Conference on Environmental Systems, Chicago, IL, Paper 2008-01-2089. 
+11Mulholland, G.W. and Liu, B.Y.H., 1980. Response of Smoke Detectors to Monodisperse Aerosols, J. Research of the 
+National Bureau of Standards, 85:223-238. 
+12 Greenberg, P.S., and Fischer, D. G., “A dvanced Particulate Sensors for Early Warning Fire Detection,” 40th International 
+Conference on Environmental Systems, American Institute of Aeronautics and Astronautics (AI AA), Barcelona, Spain, 11-15 
+July, 2010. 
+13Urban, D.L.  Ruff, G.A., Mulholland, G.W., Cleary, T.G., Yang, J.C., Yuan, Z.G., Bryg, V., “Smoke Particle Sizes in Low-
+Gravity and Implications for the Desi gn of Spacecraft Smoke Detectors,” , 39 th International Conference on Environmental 
+Systems, Savannah, GA, July 2009, SAE Paper 2009-01-2468. 
+14 Hinds, W. C. 1999. Aerosol Technology, Second Edition, Wiley
+
+--- page 85 ---
+SAMER flowdiagram
+
+--- page 86 ---
+References 
+ 
+1. Bukowski, R.W. and G.W. Mulholland, “Smoke Detector Design and Smoke Properties,” 
+NBS Technical Note 973, 1978. 
+2. Bukowski, R. W, R. D. Peacock, J. D. Averill,  T. G. Cleary, N. P. Bryner, W. D. Walton, 
+P. A. Reneke, and E. D. Kuligowski, “Perfo rmance of Home Smoke Alarms, Analysis of 
+the Response of Several Available Technologi es in Residential Fire Settings,” NIST 
+Technical Note 1455, December 2003. 
+3. Brooker, J. E., Urban, D.L., Ruff, G.A., “ISS Destiny Laboratory Smoke Detection 
+Model”, 07ICES-113, 2007 International C onference on Environmental Systems, 
+Chicago, Ill. July 2007. 
+4. Friedman, R., “Fire Safety Practices and N eeds in Human-Crew Spacecraft,” Journal of 
+Applied Fire Science, Vol. 2, 1992, pp. 243-259. 
+5. Urban, D.L., Griffin D., Ruff, G.A., Cleary, T., Yang, J., Mulholland, G.,  Yuan,  Z.G.,  
+“Detection of Smoke from Microgravity Fires”, 2005 Internati onal Conference on 
+Environmental Systems, Rome It aly, Paper # 2005-01-2930 July 2005, SAE 
+Transactions, pp 375-384. 
+6. Steisslinger, H. R., D. M. Hoy, J. A. McLi n and E. C. Thomas., “Comparison Testing of 
+the Space Shuttle Orbiter and Space Stati on Freedom Smoke Detectors,”  SAE Paper 
+932291, 1993. 
+7. Ruff, G.A., D.L. Urban, and M.K. King, “A Research Plan for Fire Prevention Detection 
+and Suppression,” AIAA-2005-0341, 43rd Aerospace Sciences Meeting and Exhibit, 
+Reno, NV, January 9-12, 2005. 
+8. Cleary, T.G., D W. Weinert, and G.W. Mu lholland, ”Moment Method for Obtaining 
+Particle Size Measures of Test Smokes", Natl. Inst. Stand. Technol., NISTIR 7050, 2003. 
+9. Raabe, O.G., J. Aerosol Sci., Vol. 2, 1971, p. 289. 
+10. Reist, P.C., Introduction to Aerosol Science, Macmillan Pub. Co., NY, NY, 1984. 
+11. Urban, D.L.  Ruff, G.A., Mulholland, G.W., Cleary, T.G., Yang, J.C., Yuan, Z.G., 
+“Measurement of Smoke Particle Size  under Low-Gravity Conditions,” 2008 
+International Conference on Environmental Systems, Chicago, IL, Paper 2008-01-2089. 
+12. Urban, D.L.  Ruff, G.A., Cleary, T.G., Yang, J.C., Mu lholland, G.W., Yuan, Z.G., 
+Sheredy, W., ”Properties of Smoke from overheated Spacecraft Materials in Low-
+Gravity”, 47th Aerospace Sciences Meeting, Orlando, Fl Paper AIAA-2009-956, 2009. 
+13. Gockel, F., “Fire Sensor Modelling and Simulation,” 12th Int. Conference on Automatic 
+Fire Detection, AUBE 2001, 26-28 March 2001, Maryland, USA 
+14. Litton, C.D., Smith, K.R., Edwards, R., and Allen, T., “Combined Optical and Ionization 
+Measurement Techniques for Inexpensive Characterization of Micrometer and 
+Submicrometer Aerosols,” Aerosol Science and Technology, Vole 38, 1054-1062, 2004.
+
+--- page 87 ---
+Acknowledgments 
+ 
+The authors wish to gratefully acknowledge the contributions and supports of the SAME 
+experiment team and the crews of ISS incr ements 10, 13, and 15. The SAME project was 
+conducted through the ISS Explor ation Research Project of  the Exploration Technology 
+Development Program. The support of this program is also acknowledged. 
+ 
+Certain commercial entities, equipment, or materi als may be identified in this document in order 
+to describe an experimental pr ocedure or concept adequately. Such identification is neither 
+intended to imply recommendation or endorseme nt by the National Ae ronautics and Space 
+Administration or the National Institute of Standards and Technology, nor intended to imply that 
+the entities, materials, or equipment are necessarily the best available for the purpose. 
+Publication list 
+Awards 
+SAE 2008 Arch T. Colwell Merit Award, , “Measurement of Smoke Particle Size under Low-
+Gravity Conditions,”, David L. Urban, Gary Ruff, George Mulholland, Thomas Cleary, Jiann 
+Yang, Zeng guang Yuan, 2008 SAE ICES, 08ICES-2089 
+Refereed Publications 
+ 
+1. Detection of Smoke from Microgravity Fires, David Urban, DeVon Griffin, Gary Ruff, 
+Thomas Cleary, Jiann Yang, George Mulholland , Zeng-guang Yuan, 2005 International 
+Conference on Environmental Systems, Rome Italy, Paper # 2005-01-2930 July 2005, 
+SAE Transactions, pp 375-384. 
+2. Pyrolysis Smoke Generated Under Low-Gravity Conditions, George W. Mulholland, 
+Marit Meyer, David L. Urban, Gary A. Ruff, Zeng-guang Yuan, Victoria Bryg, Thomas 
+Cleary, and  Jiann Yang, in preparation for Aerosol Science and Technology. 
+3. Smoke Characterization and Feasibility of the Moment Method for Spacecraft Fire 
+Detection, Marit Meyer, George W. Mulholland, Victoria Bryg, David L. Urban, Zeng-
+guang Yuan, Gary A. Ruff, Thomas Cleary, and Jiann Yang, in preparation for Aerosol 
+Science and Technology. 
+4. Evaluation of Low-Gravity Smoke Particulate for Spacecraft Fire Detection, David 
+Urban, Gary Ruff, George Mulholland, Marit Meyer, Zeng guang Yuan, Thomas Cleary, 
+Jiann Yang, Paul Greenberg, David Fisher, Victoria Bryg, in preparation for Fire Safety 
+Journal 
+ 
+Articles Published in Unrefereed Journals; Unrefereed Reports, Papers Delivered at 
+Meetings; Miscellaneous Publications 
+ 
+1. Meyer, M.E., D.L. Urban, G.A. Ruff, G.W. Mulholland, Z.G. Yuan, V. Bryg, T.G. 
+Cleary, and J. Yang.” Smoke Aerosol Measurement Experiment-2: Comparison of Flight
+
+--- page 88 ---
+Experiment Results with Ground Test Results” 43rd International Conference on 
+Environmental Systems (ICES), Vail, CO, July, 14-18, 2013. 
+ 
+2. Evaluation of Low-Gravity Smoke Particulate for Spacecraft Fire Detection,  David 
+Urban, Gary Ruff, George Mulholland, Marit Meyer, Zeng guang Yuan, Thomas Cleary, 
+Jiann Yang, Paul Greenberg, Victoria Bryg, 8th U. S. National Combustion Meeting, 
+Park City Utah, May 19-22, 2013. 
+ 
+3. “Particle Morphology and Size Results from the Smoke Aerosol Measurement 
+Experiment-Reflight ,” D. Urban, G. Ruff, P. Greenberg,; G. Mulholland, T. Cleary, J. 
+Yang, Z. Yuan, V. Bryg, 42nd International Conference on Environmental Systems 
+(ICES), San Diego, CA, July 16-19, 2012. 
+ 
+4. “Particle Morphology Results from the Smoke Aerosol Measurement Experiment-
+Reflight “, David Urban, Gary Ruff, Paul Greenberg, George Mulholland, Thomas 
+Cleary, Jiann Yang, Zengguang Yuan, Victoria Bryg,  presented at the 50th AIAA 
+Aerospace Sciences Meeting, Nashville, TN 2012 
+ 
+5. Preliminary Results from the Smoke Aerosol Measurement Experiment – Reflight, David 
+Urban, Gary Ruff, Marit Meyer, Thomas Cleary, Jiann Yang, George Mulholland, Zeng-
+guang Yuan, Victoria Bryg, 5th International Association for the Advancement of Space 
+Safety– Versailles, France. October 17–19, 2011 
+ 
+6. Preliminary Results from the Smoke Aerosol Measurement Experiment Reflight, David 
+Urban, Gary Ruff, Paul Greenberg, Thomas Cleary, Jiann Yang, George Mulholland,  
+Zeng-guang Yuan, Victoria Bryg, 49th AIAA Aerospace Sciences Meeting, Orlando, FL 
+2011. 
+ 
+7. V. M. Bryg, Z.-G. Yuan, D. L. Urban, G. A. Ruff, G. Mulholland, J. Agui,  
+Characterization of Nuisance Particulates in the ISS: Space Smoke Aerosols and Lunar 
+Dust Abatement, M&M National Conference, August 1-5 2010, Portland OR.  
+ 
+8. Smoke Particle Sizes in Low-Gravity and Implications for the Design of Spacecraft 
+Smoke Detectors, David Urban, Gary A. Ruff, George Mulholland, Thomas Cleary, Jiann 
+Yang, Zeng-guang Yuan, Victoria Bryg, 2009 International Conference on 
+Environmental Systems, Savannah, GA, July 2009, 2009-01-2468. 
+ 
+9. Properties of Smoke from overheated Spacecraft Materials in Low-Gravity, David L. 
+Urban , Gary A. Ruff, Thomas Cleary, Jiann Yang, George Mulholland, Zeng-guang 
+Yuan, William Sheredy, 47th Aerospace Sciences Meeting, Orlando, Fl. Paper AIAA-
+2009-956 (Jan, 2009). 
+ 
+10. Measurement of Smoke Particle Size under Low-Gravity Conditions, David L. Urban, 
+Gary Ruff, George Mulholland, Thomas Cleary, Jiann Yang, Zengguang Yuan, 2008 
+SAE ICES, 08ICES-2089
+
+--- page 89 ---
+11. Spacecraft Fire Detection: Smoke Properties and Transport in Low-Gravity, David L. 
+Urban , Gary A. Ruff, John E. Brooker , Thomas Cleary, Jiann Yang, George 
+Mulholland, and Zeng-guang Yuan 46th Aerospace Sciences Meeting, Reno, NV Paper 
+AIAA-2008-0806 (Jan 7-10, 2008). 
+ 
+12. George W. Mulholland, David Urban, Gary Ruff, Bill Sheredy, Greg Funk, Jiann Yang, 
+Thomas Cleary Detection of Smoke from Microgravity Fires, Presentation at TSI August 
+20, 2007.  
+ 
+13. Particle and Smoke Detection on ISS for Next Generation Smoke Detectors David Urban, 
+Gary Ruff, William Sheredy, Greg Funk, International Space Development Conference 
+2007 Dallas, TX May 25, 2007 
+ 
+14. John E. Brooker, David L. Urban, and Gary A. Ruff ISS Destiny Laboratory Smoke 
+Detection Model 07ICES-113, 2007 International Conference on Environmental Systems, 
+Chicago, Ill. July 2007. 
+ 
+15. Moment Method for Estimating Micro-gravity Smoke Particle Size Parameters Thomas 
+Cleary, Claudia Rexfort, George Mulholland, David Urban, Jiann Yang, and Zen-guang 
+Yuan AAAR meting Sept 10 2006 St Paul Minn. 
+ 
+16. D. L. Urban, G. A. Ruff, P. S. Greenberg, G. W. Hunter, Detection of Spacecraft Fires in 
+Reduced Gravity: Habitation 2006, Orlando (February 2006) 
+ 
+17. David L. Urban, George W. Mulholland, Jiann Yang, Thomas G. Cleary, and Zeng-
+guang Yuan, “Smoke”: Characterization Of Smoke Particulate For Spacecraft Fire 
+Detection, Seventh International Microgravity Combustion Workshop, Cleveland, NASA 
+CP-2003-212376, pp 269-272, (June 2003). 
+ 
+18. D.L. Urban, G.W. Mulholland, J.Yang, T.G. Cleary, Z.G. Yuan, “Smoke”: 
+Characterization of Smoke Particulate for Spacecraft Fire Detection,  Sixth International 
+Microgravity Combustion Workshop, Cleveland, NASA CP-2001-210826, pp. 401-404 
+(2001)

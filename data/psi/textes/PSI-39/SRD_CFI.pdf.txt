@@ -1,0 +1,2108 @@
+Source : NASA PSI, PSI-39, Science Documents, SRD_CFI.pdf
+
+--- page 1 ---
+Cool Flame Combustion Experiment
+(Cool Combustion , CFI)
+A Science Requirements Document (SRD) submitted to
+The National Aeronautics and Space Administration
+November 7, 2014
+1
+
+--- page 2 ---
+Forman A. Williams
+University of California, San Diego
+Signature
+Date
+Frederick L. Dryer
+Princeton University
+Signature
+Date
+Tanvir Farouk
+University of South Carolina
+Signature
+Date
+Vedha Nayagam
+Case Western Reserve University
+Signature
+Date
+Daniel L. Dietrich
+NASA Glenn Research Center
+Signature
+Date
+Andrew C. Suttles, Project Manager
+NASA Glenn Research Center
+Signature
+Date
+Francis P. Chiaramonte, Program Scientist
+NASA Headquarters
+Signature
+Date
+2
+
+--- page 3 ---
+Contents
+1 Introduction 8
+2 Background 10
+2.1 Low Temperature Chemical Kinetics . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2.2 Microgravity Droplet Combustion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+2.3 The FLEX Experiments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+2.3.1 Experiment Hardware . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+2.3.2 Experiment Diagnostics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+2.3.3 Data Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+2.3.4 Cool Flame Burning Mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.4 Summary of FLEX Cool Flame Experiments to Date . . . . . . . . . . . . . . . . . . 20
+2.4.1 Cool ﬂames are prevalent . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+2.4.2 Signiﬁcant eﬀect of ambient pressure . . . . . . . . . . . . . . . . . . . . . . . 23
+2.4.3 The eﬀect of ambient gas composition . . . . . . . . . . . . . . . . . . . . . . 25
+2.4.4 The eﬀect of fuel composition . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+2.5 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+3 Experiment Objectives 30
+3.1 Objectives of the proposed eﬀort . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+3.2 Fuel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+3.2.1 Baseline Fuel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+3.2.2 Isomeric Fuels and Surrogate Fuel Blends . . . . . . . . . . . . . . . . . . . . 31
+3.2.3 Fuel Additive . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+3.3 Ambient Conditions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+4 Microgravity Justiﬁcation 33
+5 Science Requirements 35
+5.1 Experiment Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+5.1.1 Test Fuels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+5.1.2 Droplet Deployment and Ignition . . . . . . . . . . . . . . . . . . . . . . . . . 37
+5.1.3 Initial Pressure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+5.1.4 Initial Ambient . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+5.1.5 Misc. Ambient Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+5.1.6 Operational Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+5.1.7 Microgravity Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+5.2 Diagnostic Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+5.2.1 Droplet Imaging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+5.2.2 OH∗ or CH Hot-Flame Imaging . . . . . . . . . . . . . . . . . . . . . . . . . 41
+5.2.3 CH2O Cool-Flame Imaging . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+5.2.4 Secondary Color Flame Imaging . . . . . . . . . . . . . . . . . . . . . . . . . 43
+5.2.5 Flame Radiation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+5.2.6 Fiber/Flame Temperature . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+5.2.7 Ambient Temperature and Pressure Measurement . . . . . . . . . . . . . . . 44
+5.2.8 Synchronization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+3
+
+--- page 4 ---
+6 Test Matrix and Experiment Procedure 45
+6.1 Flight Experiment Test Procedures . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+6.2 FLEX Test Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+7 Success Criteria 47
+7.1 Minimal Success . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+7.2 Complete Success . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+8 Data Requirements 48
+8.1 Temporal Droplet History . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+8.2 Flame Shape and Structure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+8.3 Flame Radiation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+9 Principal Deliverables 49
+4
+
+--- page 5 ---
+List of Figures
+1 Schematic of the Multi-user Droplet Combustion Apparatus (MDCA). This is altered
+for clarity and is not the exact layout of the MDCA. . . . . . . . . . . . . . . . . . . 13
+2 FLEX image sequence for a heptane droplet from the three cameras corresponding
+to the times denoted by the dashed lines in the subsequent ﬁgure. The left column
+is from the HiBMS camera, the center column from the LLUV camera and the right
+column from the color camera. The ambient oxygen and nitrogen mole fractions
+were 0.18 and 0.72, respectively and the ambient pressure was 1.0 atm. . . . . . . . . 15
+3 Droplet and ﬂame histories for the heptane droplet in Fig. 2, initially 3.41 mm in
+diameter. The ambient environment had oxygen and nitrogen mole fractions of 0.18
+and 0.72, respectively and a pressure of 1.0 atm. The gap in the droplet history at
+t/D20∼ 1.5 is when the droplet drifted out of the ﬁeld of view of the HiBMS camera
+(the drift velocity was on the order of 1 - 2 mm/s). The thin vertical lines with
+letters correspond to the diﬀerent times of the image sequence in Fig. 2. The thick
+dashed vertical line (coincident to when the ﬂame diameter and standoﬀ decrease
+quickly) is when visible ﬂame extinction occurred. . . . . . . . . . . . . . . . . . . . 16
+4 Droplet and ﬂame histories for two heptane droplets ( D0 = 2.1, 3.0mm) burning in
+a 0.20/0.75/0.05O2/N2/CO2, 1.0atm ambient environment. The ﬂame is that mea-
+sured by the LLUV. The smaller droplet drifted out of the ﬁeld of view before the
+end of the test. The vertical dashed lines indicate the time where ﬂame extinction
+occurred; the dashed line at 20+ s marks the approximate time of the second extinc-
+tion. For clarity, the graphs show a subset (one of every ﬁve) of the experimental
+data. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+5 Experimental (FLEX) and predicted (Farouk and Dryer, 2014) droplet and ﬂame
+histories for a heptane droplet (D0 = 3.9mm) burning in a nominally air (0.21 oxy-
+gen mole fraction, balance nitrogen), 1.0 atm ambient environment. The numerical
+predictions contain both high and low temperature chemistry. For clarity, the graphs
+show a subset (one of every ten for the droplet, one of every ﬁve for the ﬂame) of
+the experimental data. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+6 The droplet, ﬂame and radiometer histories for a heptane droplet ( D0 = 3.61mm)
+burning in a nominally air (0.21 oxygen mole fraction, balance nitrogen), 1.0 atm
+ambient environment. The droplet diameter and time are both normalized by the
+initial droplet diameter squared. The narrowband ﬂame radiance is scaled by a factor
+of 10 to put it on the same scale as the wideband ﬂame radiance. . . . . . . . . . . . 22
+7 The droplet, ﬂame and radiometer histories for two decane droplets burning in a 0.21
+ambient oxygen mole fraction (balance nitrogen) environment and 0.50 and 1.0 atm
+pressure. The droplet diameter and time are both normalized by the initial droplet
+diameter squared. The narrowband ﬂame radiance is scaled by a factor of 10 to put
+it on the same scale as the wideband ﬂame radiance. . . . . . . . . . . . . . . . . . . 24
+8 The droplet, ﬂame and radiometer histories for a heptane droplets burning in a 0.21
+ambient oxygen mole fraction (0.30 nitrogen and 0.50 carbon dioxide) environment
+and 3.0 atm pressure. The droplet diameter and time are both normalized by the
+initial droplet diameter squared. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+5
+
+--- page 6 ---
+9 The droplet, ﬂame and radiometer histories for n-octane droplets burning in a 0.21
+ambient oxygen mole fraction at 1.0atm pressure. The diluent gases in the two tests
+were nitrogen/helium mixtures with helium mole fractions (balance nitrogen) of 0.15
+and 0.50. The narrowband radiometer is scaled by a factor of 10 so it can appear on
+the same scale as the wideband data. . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+10 The droplet, ﬂame and radiometer histories for heptane/ethanol droplet burning
+in a nominally air 0.21/0.79 oxygen/nitrogen, 1.0 atm) ambient environment. The
+narrowband radiometer is scaled by a factor of 10 so it can appear on the same scale
+as the wideband data. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+11 Chemiluminescence spectra from excited formaldehyde (Sheinson and Williams, 1973). 42
+6
+
+--- page 7 ---
+List of Tables
+1 Hardware requirements tabulation. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+2 Diagnostic requirements tabulation. . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+3 Nominal test matrix for n-dodecane. The droplet size range for the tests is 2 - 6 mm. 46
+4 Nominal test matrix for the other fuels and fuel mixtures. The droplet size range for
+the tests is 2 - 6 mm. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+7
+
+--- page 8 ---
+1 Introduction
+Understanding the combustion characteristics of liquid hydrocarbon fuels is of practical and funda-
+mental importance. The United States alone consumes approximately 19 million barrels of liquid
+fuels per day which averages out to an astonishing 2.5 gallons per day per person (Reitz, 2013). The
+primary reasons for such a high reliance on hydrocarbon fuels as the single most important energy
+source, not only in the US but globally, is their high energy density, ease of handling, and portability
+compared to many other forms of energy. With the emergence of newer internal combustion engine
+technologies such as Homogeneous Charge Compression Ignition (HCCI) and Reactivity-Controlled
+Compression Ignition (RCCI) engines, understanding the autoignition and heat release chemistry
+and kinetics of hydrocarbon fuels is more important that ever. These new technologies coupled
+with the emergence of major sources of renewable fuels for both gasoline and diesel applications,
+including butanols and heavier alcohols, bio-diesel, farnesane and high carbon number synthetics,
+further emphasize the need to understand the kinetic eﬀects of blending renewables with petroleum
+derived fuels.
+Commercially available transportation fuels, such as gasoline, diesel, and jet fuel, are comprised
+of many hydrocarbon compounds, normal alkanes and branched alkanes being the major compo-
+nents. The combustion characteristics of these alkanes are quite complex and follow branched chain
+reaction pathways involving many (hundreds) intermediate radicals. The chemical pathways vary
+depending on temperature and to a lesser extent on pressure. Researchers typically identify a low
+temperature reaction mechanism and a high temperature mechanism, as well as a region of tran-
+sition between the two (intermediate or transition). Many hydrocarbons exhibit a unique feature
+in the transition region where the reaction rate ﬁrst decreases with increasing temperature (the
+negative temperature coeﬃcient, NTC region). The NTC region precedes a region in which the re-
+action auto-accelerates to the high temperature region. Cool ﬂames and the associated multi-stage
+ignition phenomenon occur as a result of the low, NTC, and hot ignition behavior of the fuels. In
+spark ignition engines, these chemistries are responsible for engine knock. The resistance of the fuel
+to knock is frequently characterized by the fuel’s octane Number (ON); the higher the ON the less
+prone the engine is to knock.
+The same low temperature chemistry controls the autoignition process in Compression Ignition
+(e.g., diesel) engines. The two stage autoignition process deﬁnes when combustion occurs and is
+typically characterized by a fuel’s cetane number (CN); the more prone the fuel to autoignite, the
+higher the CN.
+Researchers have applied a number of experimental techniques to investigate the chemical ki-
+netic mechanisms that result in cool ﬂame phenomena and thus control a fuel’s ON/CN. These
+facilities include stirred reactors, ﬂow reactors, shock tubes, rapid compression machines, and
+burner-stabilized two stage laminar ﬂames. All these studies primarily involve premixed gases and
+attempt to understand the ignition process and transition from the low temperature region, through
+the intermediate temperature region to the high temperature, explosively branched region.
+Droplet combustion experiments conducted onboard the International Space Station (ISS), as
+part of the Flame Extinguishment Experiment (FLEX) revealed conclusively for the ﬁrst time
+that the combustion of large alkane droplets can exhibit a lengthy unique burning behavior as a
+result of this complex chemistry. After ignition, and high temperature burning and radiative ﬂame
+extinction, large n-alkane droplets burn quasi-steadily in the low-temperature regime, characterized
+by NTC chemistry (Nayagam et al., 2012). This cool ﬂame combustion ends abruptly at a ﬁnite
+droplet diameter, leaving the unvaporized droplet in the hot ambient. These observations provide
+a new, exciting and unique experimental conﬁguration to further explore these chemical kinetic
+transitions, especially the low temperature chemistry of liquid fuels. Though this type of burning
+8
+
+--- page 9 ---
+behavior is likely to have been present (but not observed or reported) in prior droplet combustion
+research, the conditions of the FLEX experiments are such that the data have provided a wealth
+of detail with regard to this phenomena. The cool ﬂame droplet burning rates provide a measure
+of the chemical heat release rate, the ﬂame diameter (both hot and cool ﬂame diameter) evolution
+provides insight into the eﬀects of diﬀusive/convective/radiative heat loss, and the transitions in
+droplet high/low temperature burning/extinction provide stringent characterization of chemical
+kinetic behavior through their associated characteristic times.
+The overall objective of this proposed research is to conduct further systematic experimental
+measurements of large droplets that exhibit the cool ﬂame mode of combustion using the Multiuser
+Droplet Combustion Apparatus (MDCA) currently installed in the Combustion Integrated Rack
+(CIR) on the International Space Station (ISS). The experiments will examine the hot/cool ﬂame
+behavior of a range of fuels in varied ambient environments (diluent/oxidizer composition and
+ambient pressure). Numerical simulations with detailed chemical kinetic models and theoretical
+analyses with reduced kinetics will complement the experiments with the ultimate goal to improve
+and validate the chemical kinetic models.
+The science team anticipates that these studies will directly impact many potential applications
+on earth. The next generation piston engine technologies will beneﬁt from the improved under-
+standing of the chemical reactivity of fuels, as these properties are essential in controlling HCCI
+engines. RCCI engines eﬃciencies are as much as 40% greater than today’s spark ignition and
+diesel designs. They have already been demonstrated in the laboratory, with such low NO x and
+particulate emissions that no emissions after-treatment is necessary. Achieving a more appropriate
+means of varying the reactivity behavior of the fuels is necessary to realize the true potential of
+these discoveries. Detonation engines, an innovative means of generating high propulsive thrust, can
+also be improved and better controlled by understanding the same complex chemistries described
+above. Other terrestrial applications include fuel reformulation and production of hydrogen from
+gasoline for use in fuel cells (Naidja et al., 2003). Another area of application is ﬁre safety in space
+vehicles. Since the cool ﬂame mode of droplet combustion can persist after hot-ﬂame extinction
+(and may even transition back to hot ﬂaming under certain conditions), safety procedures based
+only on considerations of hot ﬂame properties or sensing may be inadequate for assuring safety
+under all conditions.
+9
+
+--- page 10 ---
+2 Background
+2.1 Low Temperature Chemical Kinetics
+Traditionally cool ﬂames are associated with premixed combustion that lead to multi-stage ignition
+of some fuels under certain pressure and temperature conditions. Though the existence of cool
+ﬂames has been known since the days of Sir Humphry Davy (1817), Perkin (1882) was the ﬁrst to
+conduct systematic studies and classiﬁed a range of organic compounds including alcohol, aldehydes,
+acids, oils, and waxes that can support cool ﬂames. The study of cool ﬂames, however, remained
+more of a scientiﬁc curiosity, because of its unusual oscillatory characteristics in a homogeneous
+medium, rather than of any practical interest. Researchers proposed non-linear theoretical models
+based on “isothermal” kinetics to explain the periodic cool ﬂame oscillations; including the one by
+Frank-Kamenetskii and Thon (1955) based on the Lotka-Volterra equation. Salnikoﬀ was the ﬁrst
+to propose a “thermo-kinetic” theory where thermal feedback played a role in intermediate species
+production rate with a simple scheme:
+A k1−→X k2−→B. (1)
+Salnikoﬀ’s theory, however, failed to explain many aspects of cool ﬂame phenomenon including
+the negative temperature coeﬃcient region. Yang and Gray (1969) proposed a more satisfactory
+thermokinetic scheme.
+A k1−→X (initiation) (2)
+X kb−→2X (branching) (3)
+X kt1−−→stable products (low-temperature termination) (4)
+X kt2−−→stable products (high-temperature termination) (5)
+They showed that for this scheme the NTC region is possible when the activation energies obey
+the following condition:
+Et1<E b<E t2. (6)
+With a set of assumed rate constants they were able to demonstrate many features of hydrocarbon
+oxidation including explosion limits, cool ﬂame oscillation limits, oscillation amplitude and period,
+and the NTC region. Wang and Mou (1985) proposed improvements to the Gray-Yang model that
+includes an additional intermediate species that accounts for fuel consumption. Recently, Foster
+and Pearlman (2012) used this scheme to model unstirred static reactors with coupled species and
+thermal diﬀusion as well as buoyancy induced ﬂows. Their numerical predictions compare quali-
+tatively with experiments carried out microgravity and normal gravity for cool ﬂame oscillations
+and ignition times (Pearlman, 2000; Fairlie et al., 2005). While these simpliﬁed reaction schemes
+provide a conceptual framework to understand the complex hydrocarbon oxidation processes, they
+are not very useful for quantitative prediction of the combustion characteristics of practical liquid
+fuels.
+Modern studies of hydrocarbon oxidation involve developing detailed multi-step chemical kinetic
+schemes based on large number of elementary reactions that vary with pressure and temperature.
+The rate parameters associated with these elementary reactions are either from experiments or cal-
+culated from fundamental quantum mechanical theories such as transition state theory. Obtaining
+accurate rate parameters, however, is often diﬃcult as they can contain large uncertainties. Over
+the past several decades a number of detailed chemical kinetic mechanisms have become avail-
+able, notably those for n-alkanes (Curran et al., 1998, 2002; Ranzi et al., 1995, 2005; Biet et al.,
+10
+
+--- page 11 ---
+2008). The construction of the detailed mechanisms is based on the authors’ long experience in the
+ﬁeld, the systematic classiﬁcation of possible reaction types and similarity to simpler submodels for
+smaller molecules (C0−C4) for which the number of elementary reactions are minimal (e.g., Cur-
+ran et al., 1998). In some cases the detailed chemical mechanisms have been, in part, constructed
+using automation software (e.g. EXGAS, Buda et al., 2005), Rapid Mechanism Generator (RMG,
+Harper et al., 2011) or other software based methods to apply parameter generation based upon
+families of reaction types.
+While the detailed mechanisms provide information on many aspects of the reacting system
+such as product speciation, temperature, ignition times, ﬂame propagation speeds, etc., they are
+not directly applicable for incorporation into computer models of practical combustion systems
+that involve complex ﬂow geometries, time dependence and turbulence. Researchers in the past
+have developed techniques to systematically reduce the number of reaction steps and species needed
+from the detailed mechanisms to capture the salient features of the combustion processes both in
+the low temperature and high temperature regimes (Griﬃths, 1995; Peters et al., 2002; Prince and
+Williams, 2012). In some instances semi-empirical methods have been used to generate one or
+two step global reaction models applicable to high temperature combustion (Westbrook and Dryer,
+1981).
+Detailed chemical kinetic mechanisms are typically validated using a variety of experimental
+techniques including shock tubes (Smith et al., 2005; Davidson et al., 2008), rapid compression en-
+gines (Tanaka et al., 2003), stirred and ﬂow reactors (Held et al., 1997), premixed ﬂames (El Bakali
+et al., 1999), diﬀusion ﬂames (Seiser et al., 2000), and to a lesser extent with droplet ﬂames
+(Nayagam et al., 1998; Marchese et al., 1999b; Tanabe et al., 1996). Each of these experimen-
+tal techniques has their own limitations and advantages. In terrestrial laboratories, virtually all
+of the experimental techniques are inﬂuenced, to some extent, by multi-dimensional spatial and
+time dependent nature of the combustion process (e.g., ignition) itself. Such experiments are very
+diﬃcult to model time dependently in terms of fully detailed chemical kinetics that include low,
+intermediate and high temperature kinetics, including fundamental diﬀusive/convective coupling
+and energy balance (Chaos and Dryer, 2008). Spherical symmetric single droplet burning of an
+isolated fuel droplet in microgravity provides a unique experimental means of testing and validating
+detailed and reduced chemical kinetic schemes in a simpliﬁed geometric conﬁguration that includes
+detailed eﬀects of diﬀusion, convection, chemical reaction, and heat coupling with the surrounding
+environment..
+2.2 Microgravity Droplet Combustion
+For over 50 years, scientists have been studying droplet combustion in microgravity, beginning with
+the modest one-second drop-tower experiments by (Kumagai, 1956) and including space experi-
+ments conducted onboard the NASA’s Space Shuttle (Dietrich et al., 1996; Nayagam et al., 1998).
+Researchers exploit the spherically symmetric, one-dimensional burning of liquid fuel droplets in
+microgravity as a means to study the combustion characteristics of liquid fuels in a controlled fash-
+ion that is amenable to detailed numerical modeling and theoretical analyses. Past studies include
+many aspects of liquid fuel combustion including burning rates, ﬂame dynamics, soot formation,
+multi-component eﬀects, and ignition and extinction characteristics under various ambient condi-
+tions using microgravity droplet combustion experiments (e.g., Faeth, 1977; Law, 1982; Sirignano,
+1983; Choi and Dryer, 2001)).
+The conventional wisdom until recently has been that small hydrocarbon fuel droplets, once
+ignited, either burn to completion, extinguish in a ﬂash as consequence of impurity or product
+accumulation, or extinguish diﬀusively (Law, 1975) at a ﬁnite droplet diameter. This diﬀusive ex-
+11
+
+--- page 12 ---
+tinction occurs when the diﬀusion time, which decreases with decreasing droplet diameter, becomes
+less than the chemical time required to complete the heat release in the gas phase. In microgravity
+where the buoyancy-induced ﬂow is absent, larger droplets can extinguish as a result of the ex-
+cessive radiant heat loss from the ﬂame zone (Chao et al., 1991). This radiative extinction occurs
+because as the droplet diameter increases, the rate of radiant loss (proportional to the ﬂame vol-
+ume) increases faster than the rate of heat release (proportional to the droplet diameter). Following
+either one of these two modes of extinction, the droplet simply evaporates in the hot environment,
+without any chemical heat release in the gas phase. Theoretical models (e.g., Chao et al., 1991;
+Card and Williams, 1992b,a) and numerical simulations (e.g., Marchese et al., 1999a) with detailed
+high temperature chemical kinetics support this understanding.
+2.3 The FLEX Experiments
+2.3.1 Experiment Hardware
+The ISS provides almost limitless microgravity time for combustion science research. The Flame
+Extinguishment Experiment (FLEX) is the ﬁrst experiment in the multi-purpose combustion facility
+developed at the NASA Glenn Research Center (GRC). The Combustion Integrated Rack (CIR)
+provides the combustion chamber, most of the diagnostics, gas mixing system and the primary
+interface between the ISS and the ground controllers at NASA GRC. The Multi-User Droplet
+Combustion Apparatus (MDCA), inserted into the CIR, is the hardware that deploys and ignites
+the liquid fuel droplets. It communicates through the CIR to ground controllers at NASA GRC.
+The CIR facility, occupying a large rack in the Destiny module of the ISS and described in
+detail elsewhere (Banu, 2008), consists of a 90 l combustion chamber that is capable of operating
+pressures of approximately 0 - 9 atm. The maximum pressure for a given experiment is frequently
+much less than 9 atm depending on a rigorous (and very conservative) safety analysis. For the
+FLEX experiments, this analysis reduced the maximum working pressures to approximately 3atm.
+The interior of the CIR chamber contains the mechanical, ﬂuid and electrical interfaces necessary
+to mount experiment-speciﬁc hardware inside the chamber.
+The CIR facility provides the capability to accurately control the ambient environment inside
+the chamber. This capability is provided by the Fuel and Oxidizer Mixing Apparatus (FOMA).
+The FOMA consists of gas bottles, pressure transducers and mass ﬂow controllers connected to the
+combustion chamber. The contents of the chamber can be evacuated by a vacuum pump connected
+to the ISS overboard vent.
+The hardware for the FLEX experiments is the Multi-User Droplet Combustion Apparatus
+(MDCA, Figure 1). The MDCA facility (Robbins and Shinn, 2010) is based on the design of the
+Space Shuttle Droplet Combustion Experiment (Nayagam et al., 1998). The MDCA is capable
+of deploying both free and ﬁber-supported droplets in a quiescent microgravity environment. The
+hardware for the deployment is 250 µm outside diameter stainless-steel tubes with polished and
+ﬂuted ends. The ﬂuid is dispensed between the axially opposed needles and then slowly stretched
+to a distance slightly smaller than the distance where the ﬂuid would become detached from one
+of the needles. This stretch of the droplet between the needles minimizes the post-deployment
+drift velocity and internal circulation in the liquid. Just before ignition the needles rapidly retract,
+ideally leaving a motionless droplet ﬂoating in the middle of the CIR combustion chamber.
+Once the needles retract, the control computer energizes two hot-wire igniters located 180
+degrees to each other and in the same plane as the deployment needle assembly. After a preset
+time, the control computer de-energizes the igniters and activates the linear motors to retract them
+away from the droplet. For ﬁber-supported tests, the procedure is exactly the same except that
+12
+
+--- page 13 ---
+Figure 1: Schematic of the Multi-user Droplet Combustion Apparatus (MDCA). This is altered for
+clarity and is not the exact layout of the MDCA.
+the droplets are deployed onto a small 80 µm Silicon-Carbide (SiC) support ﬁber.
+Each needle is connected by ﬂexible Teﬂon tubing to a fuel reservoir or cartridge. The fuel
+cartridges in the MDCA consist of a gas-tight syringe connected to a remotely actuated, gas-tight
+solenoid valve. The two reservoirs mounted in the MDCA are easily replaceable by the crew during
+nominal operations. For the experiments reported herein, each reservoir contained one of the test
+fuels. For the FLEX experiments the fuels were heptane and methanol. The on-going FLEX-2
+experiments use octane and decane as well as several binary fuel mixtures and additional pure
+fuels. The FLEX-Italian Combustion Experiment for Green Air (FLEX-ICE-GA) used binary fuel
+mixtures of heptane and ethanol and decane and hexanol.
+2.3.2 Experiment Diagnostics
+The primary diagnostics for the FLEX experiment are provided by the CIR facility and described in
+detail elsewhere (Banu, 2008). They include a backlit view of the droplet and an orthogonal view of
+the ﬂame. The illumination for the backlit view is a red laser diode source and a collimating optical
+system. They provide monochromatic illumination with a center wavelength between 650 - 660nm.
+The laser diode operates below the lasing threshold current and thus acts as a non-coherent illumi-
+nation source. The image system for the backlit view is the High Bit-Depth Multispectral (HiBMs)
+Package. The HiBMs Package has a telecentric imaging optical system and a high resolution 12-bit
+output digital camera. The HiBMS package is modular and can be conﬁgured on the ground and
+on-orbit with diﬀerent lenses, ﬁlters, image conﬁgurations, etc.
+Nearly all of the tests reported herein used the full 1024 x 1024 array with a ﬁxed ﬁeld of view
+of approximately 30 mm on a side. The images used the full 12 bits, and the framing rate was
+13
+
+--- page 14 ---
+30 fps. The HiBMS package, when used in conjunction with the illumination package, provided
+the capability of measuring the droplet size as a function of time and the soot volume fraction for
+soot-producing ﬂames.
+The CIR also provides a Low Light Level Ultra-Violet (LLLUV) package to image the chemilu-
+minescence fromOH∗ of the burning droplet. The LLLUV package has a 1024 x 1024 monochrome
+frame transfer CCD array with 12 bit digital imaging capability. The CCD array is directly cou-
+pled to an 18 mm Gen-II-UV Micro-channel Plate Intensiﬁer to provide maximum response at
+short wavelengths. The LLUV package includes intensiﬁer and gating control that allows varied
+exposure times depending on the expected brightness of the ﬂames. The LLLUV also has a spec-
+tral bandpass ﬁlter to image the chemiluminescence at 310 nm (the ﬁlter has a 10 nm FWHM
+bandwidth). Ground control of the LLLUV enabled pre-test setting of the gain, pixel binning and
+gate to optimally image the ﬂames surrounding the droplets. All of the tests reported herein used
+the 2 x 2 binned (512 x 512 array) with a ﬁxed ﬁeld of view approximately 50 mm on a side. The
+framing rate for the majority of the tests was 30 fps, with a smaller number at 15 fps to attempt
+to improve ﬂame contrast for very dim ﬂames. The intensiﬁer gain did vary somewhat over the
+tests in this report.
+The ﬁnal image view of the burning droplet is from a color camera. This camera view is
+augmented with illumination from a white LED located on the MDCA inside the CIR chamber.
+This camera has a zoom lens that provides the operators with a close-up view of the needles and
+droplet during droplet formation and stretch (providing near real-time feedback to maximize the
+success rate of the experiment). Immediately prior to droplet deployment and ignition the camera
+zooms out and the white LED turns oﬀ to provide an overview of the combustion process. The
+FOV of this camera is approximately 93 mm x 70 mm. This view provides ﬂame size, shape and
+color information. This view is downlinked to the ground during nominal test point operations.
+The entire CIR rack was mounted to the ISS through the Passive Rack Isolation System (PaRIS).
+The PaRIS isolated the CIR from any high frequency vibration or g-jitter that would disturb the
+experiment. The rack also had several Space Acceleration Measurement System (SAMS) heads
+mounted to it to monitor the acceleration level during the experiments. Examination of the SAMS
+data showed that the g-levels (across the frequency spectrum) were typically less than 10−5g0 where
+g0 is the acceleration due to gravity at sea level on earth.
+2.3.3 Data Analysis
+The data from the CIR cameras are stored digitally on the ISS until downlinked to the ground
+(typically within the same week of operation). The digital data, after de-compression, comes in the
+form of individual image ﬁles along with a ﬁle that contains the relevant timing information for all
+of the images.
+Figure 2 shows a sequence of images for a burning heptane droplet from all of the CIR cameras,
+the left column being from the backlit image of the droplet, the center column from the LLUV,
+and the right from the color camera. The ﬁrst row shows the droplet before deployment and the
+second row shows the powered ignitor coils (note the glow) prior to withdraw. Rows 3 and 4 in
+Figure 2 show the droplet and ﬂame midway through the burn and just before ﬂame extinction,
+respectively. The other rows show the droplet and ﬂame images after visible ﬂame extinction, the
+meaning of which will be clear later.
+The backlight in the droplet images makes the discrimination between the droplet and back-
+ground relatively easy (except when excessive soot formation obstructs the visibility of the droplet
+boundary (Dembia et al., 2012)). After deﬁning a suitable threshold level, the droplet diameter
+is the size that results from equating the measured area of the droplet to that of an equivalent
+14
+
+--- page 15 ---
+B:  t = 0.12 sec after ignition
+C:  t = 2.3 sec after ignition
+D:  t = 4.0 sec after ignition
+Just prior to visible flame extinction
+E:  t = 5.1 sec after ignition
+Immediately after visible flame extinction
+F:  t = 23.1 sec after ignition
+Just prior to plateau in droplet history
+G:  t = 27.7 sec after ignition
+After plateau in droplet history
+A:  t = 0.10 sec before ignition
+30 mm 40 mm 80 mm
+Figure 2: FLEX image sequence for a heptane droplet from the three cameras corresponding to the
+times denoted by the dashed lines in the subsequent ﬁgure. The left column is from the HiBMS
+camera, the center column from the LLUV camera and the right column from the color camera.
+The ambient oxygen and nitrogen mole fractions were 0.18 and 0.72, respectively and the ambient
+pressure was 1.0 atm.
+15
+
+--- page 16 ---
+circle (Struk et al., 1998). The average burning rate constant ( ¯k) comes from a linear ﬁt of the
+droplet-squared history between approximately t = 0.1τb and 0.9τb, where τb is the total burn time
+(igniter withdraw to extinction or burnout).
+The ﬂame size (both from the LLUV and color camera) is much more diﬃcult to measure than
+the droplet size. Many of the ﬂames were near the detectable limit in both cameras, and as a result
+quite dim. The ﬂame luminosity also changed throughout the test, typically being brighter early in
+the burn and very dim near ﬂame extinction. Using a single threshold value to discriminate between
+the ﬂame and the background was problematic. A value relevant near ﬂame extinction overestimates
+the ﬂame diameter earlier, and a value relevant early in the ﬂame lifetime does not detect a dim
+ﬂame near extinction. For most of the tests reported herein the ﬂame diameter is that which
+results from equating the measured area of the ﬂame to that of an equivalent circle. The computer
+determined the threshold level to discriminate the ﬂame from the background automatically using
+an iterative selection method (Ridler and Calvard, 1978). We found that this provided the best
+representation of the ﬂame throughout the lifetime and represented the outer edge of the ﬂame. For
+tests in which the ﬂame area was too diﬃcult to determine, the ﬂame diameter was simply taken
+as the maximum dimension of the ﬂame in the direction that exhibited the least noise throughout
+the test.
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.52.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+35
+30
+25
+20
+15
+10
+5
+Df  ( 
+mm
+ ) ,  
+Df / D
+d
+B C DE F G
+Figure 3: Droplet and ﬂame histories for the heptane droplet in Fig. 2, initially 3.41 mm in
+diameter. The ambient environment had oxygen and nitrogen mole fractions of 0.18 and 0.72,
+respectively and a pressure of 1.0 atm. The gap in the droplet history at t/D20∼ 1.5 is when the
+droplet drifted out of the ﬁeld of view of the HiBMS camera (the drift velocity was on the order
+of 1 - 2 mm/s). The thin vertical lines with letters correspond to the diﬀerent times of the image
+sequence in Fig. 2. The thick dashed vertical line (coincident to when the ﬂame diameter and
+standoﬀ decrease quickly) is when visible ﬂame extinction occurred.
+Figure 3 contains the results of the analysis of the droplet and ﬂame histories for the test in
+Figure 2. The plot shows the droplet diameter squared normalized by the initial diameter squared,
+ﬂame diameter (upper curves) and ﬂame standoﬀ ratio (FSR),that is, the ﬂame diameter normalized
+by the droplet diameter at the same time, all three variables as functions of the time normalized
+by the initial droplet diameter squared. The graph shows the ﬂame size results for both the LLUV
+and color camera. The vertical line in Figure 3, where the ﬂame size decreases rapidly, indicates
+when visible ﬂame extinction occurs. The value of ¯k is approximately 0.38 mms/s in this test.
+16
+
+--- page 17 ---
+After visible ﬂame extinction the droplet drifts out of the ﬁeld of view for a short period of time
+and then drifts back into the ﬁeld of view. The reason why Figure 3 shows the droplet history
+beyond the visible ﬂame extinction will be discussed in the following section.
+2.3.4 Cool Flame Burning Mode
+The early FLEX experiments showed that following the radiative extinction of large heptane
+droplets, the vaporization rate (slope of droplet diameter squared versus time) remained essen-
+tially constant for a long period of time (between E and F in Figure 3) after which the slope
+abruptly decreased (time G in Figure 3); this decrease corresponding to the appearance of a large
+vapor cloud in the color camera (the bottom row in Figure 2). This behavior is very diﬀerent than
+that for smaller heptane droplets. Figure 4 shows two tests in the same ambient environment (air
+at 1.0 atm diluted with 5% CO 2). The plot in this instance is of the dimensional droplet diameter
+squared, ﬂame diameter and FSR as functions of time.
+The smaller droplet was slightly larger than 2 mm and the larger droplet slightly larger than
+3 mm. The burning behavior was very diﬀerent for the two droplets. The smaller droplet had
+an initially luminous yellow ﬂame that quickly became a relatively bright blue. The ﬂame size
+increased, reached a maximum midway through the burn and then decreased until the droplet
+disrupted at a very small size. Even though the ﬂame size decreased through much of the ﬂame
+lifetime, the ﬂame standoﬀ ratio (FSR) increased continuously for the most of the test before falling
+oﬀ rapidly just before extinction (the smaller droplet drifts out of the HiBMS ﬁeld of view before
+extinction). The ¯k for this test was approximately 0.53 mm2/s.
+The larger droplet had a slightly smaller ¯k (0.49 mm2/s) but very diﬀerent ﬂame behavior.
+The ﬂame size grew continuously throughout the visible ﬂame lifetime. In addition, after the
+initial ignition transient (where the ﬂame is very luminous), the ﬂame became very dim blue and
+the luminosity decreased continuously until ﬂame extinction. The FSR increased continuously
+throughout the test although the rate of increase for the larger droplet was smaller. The total
+duration of the visible ﬂame for the two droplets was nearly the same.
+The linear vaporization behavior in this ‘cool ﬂame’ region occurs as a result of low-temperature
+chemical reactions that somehow are initiated by the visible hot-ﬂame extinction (Nayagam et al.,
+2012). Examining Figure 4 in more detail shows that the droplet diameter during this cool-ﬂame
+regime is in the same range as that during the smaller droplet test. This means that for a given size
+range a droplet can burn with either a hot ﬂame or a cool ﬂame, the initial condition determining
+which mode the droplet burns in. A deﬁning feature of this ‘cool ﬂame’ mode is that it only occurs
+after radiative extinction of the hot ﬂame. Its occurrence is also marked by vapor-cloud formation
+after cool-ﬂame extinction. The heat release during this second-stage burning is approximately half
+of what is normally associated with n-heptane combustion and the activation energy associated
+with the chemical processes is similar to that of low-temperature ignition chemistry Nayagam et al.
+(2012).
+Motivated by the FLEX experimental results, Farouk and Dryer (2014) carried out an exhaustive
+numerical study of n-heptane droplets burning in O2/N2, O2/CO2, and O2/He environments.
+Figure 5 shows a comparison of a heptane burn that exhibited a cool ﬂame with a numerical
+simulation (Farouk and Dryer, 2014). They used the n-heptane chemical kinetic model developed
+by Curran et al. (1998) consisting of 1038 species and 2739 reactions reduced using path ﬂux
+analysis method to a manageable 128 species and 565 elementary reaction steps. The inclusion
+of low temperature chemistry 1 enabled them to qualitatively predict the second-stage burning of
+1Earlier modeling eﬀorts used only high temperature kinetics, since this permitted a signiﬁcant reduction in
+computational time as there was no experimental evidence or suspicion of low temperature kinetic signiﬁcance.
+17
+
+--- page 18 ---
+10
+8
+6
+4
+2
+0
+D2  ( 
+mm
+2 )
+20151050
+Time  ( s )
+25
+20
+15
+10
+5
+Flame Diameter  ( 
+mm
+ ) ,  FSR
+D0 = 3.0 mm 2.1 mm
+ 
+Droplet
+Flame
+FSR
+Figure 4: Droplet and ﬂame histories for two heptane droplets ( D0 = 2.1, 3.0mm) burning in
+a 0.20/0.75/0.05 O2/N2/CO2, 1.0atm ambient environment. The ﬂame is that measured by the
+LLUV. The smaller droplet drifted out of the ﬁeld of view before the end of the test. The vertical
+dashed lines indicate the time where ﬂame extinction occurred; the dashed line at 20+ s marks the
+approximate time of the second extinction. For clarity, the graphs show a subset (one of every ﬁve)
+of the experimental data.
+18
+
+--- page 19 ---
+n-heptane droplet in air at atmospheric pressure shown in Figures 3 and 4.
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.52.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+30
+20
+10
+0
+Flame Diameter  ( 
+mm
+ )
+Droplet Flame 
+FLEX
+Farouk and
+Dryer, 2013
+Figure 5: Experimental (FLEX) and predicted (Farouk and Dryer, 2014) droplet and ﬂame histories
+for a heptane droplet (D0 = 3.9mm) burning in a nominally air (0.21 oxygen mole fraction, balance
+nitrogen), 1.0 atm ambient environment. The numerical predictions contain both high and low
+temperature chemistry. For clarity, the graphs show a subset (one of every ten for the droplet, one
+of every ﬁve for the ﬂame) of the experimental data.
+Figure 5 shows that the detailed model with the kinetic mechanism developed from Curran et al.
+(1998) over-predicted the second-stage burning rate and under-predicted the droplet extinction di-
+ameter by almost a factor of 3.5. Farouk and Dryer (2014) identiﬁed two low temperature reactions
+that had the most inﬂuence on the second stage burning, isomerization of QOOHO 2 to ketohy-
+droperoxide (QOOH2→Ketohydroperoxide +OH) and dissociation of QOOHO 2 (QOOHO 2→
+QOOH +O2). When the reaction rates of the ﬁrst reaction was decreased by a factor of 2 and the
+second reaction increased by a factor of two the agreement between the predictions and the exper-
+iments improved. They also point out the need for further improvements in terms of mechanistic
+structure and rate uncertainties for the low temperature reactions, as is also evidenced in other
+alkane oxidation studies by Dryer’s group (Jahangirian et al., 2012). The study further shows that
+the same modiﬁcations that improve the agreement with the FLEX experiment results also lead to
+improved predictions with published ignition delay times and oxidation speciation for n-heptane.
+The numerical predictions utilize a detailed chemical kinetics model containing both high and
+low temperature chemistry in a spherically-symmetric droplet combustion model. The predictions
+from the model for the droplet history capture the two stage combustion behavior; the visible
+extinction of the ﬂame, transition to the second stage and self sustaining continuous combustion
+in the second stage. The numerical predictions show the peak gas temperature during the second
+stage to be approximately 700 K denoting the presence of low temperature chemistry. The nu-
+merical predictions (Farouk and Dryer, 2014) identify the radiative heat loss as being responsible
+for initiating the ‘cool ﬂame’, consistent with the experimental observation (Nayagam et al., 2012).
+Ambient hot wire ignition led to high temperature burning, essentially to extinction. The high temperature kinetic
+model of Chaos et al. (2007) eliminated consideration of low temperature behavior such that the second-stage low
+temperature burning eﬀects were never considered.
+19
+
+--- page 20 ---
+The model also predicts the presence of gaseous pure fuel vapor in addition to larger alkenes, ke-
+tohydroperoxides and cyclic ethers after ‘cool ﬂame’ extinction that could condense to form the
+vapor cloud observed in the experiments.
+Prior to the FLEX results, Cuoci et al. (2005) simulated microgravity vaporization, autoignition
+and combustion of n-heptane and n-decane droplets using the detailed chemical kinetic scheme of
+Ranzi et al. (1995) with approximately 200 species and more than 5000 reactions and including gas-
+phase radiative heat loss. They were able to successfully predict multi-stage ignition and radiative
+ﬂame extinction. They did not, however, report the cool ﬂame supported quasi-steady burning
+observed in the FLEX experiments. This is likely because the authors limited their large droplet
+simulations to n-heptane droplets burning in oxygen-helium mixtures at atmospheric pressure for
+which experimental measurements were available (Nayagam et al., 1998; Choi and Dryer, 2001).
+Recent analyses of these experiments by Farouk and Dryer (2014) predicted that two stage burning
+behavior may have been present, but that the second stage characteristic burning time was too
+short to be resolved in the analysis of the experimental data. More recently, Cuoci et al. (2013)
+updated their analysis and compared their numerical predictions with second-stage burning results
+of Nayagam et al. (2012) and arrived at similar conclusions.
+2.4 Summary of FLEX Cool Flame Experiments to Date
+The original objectives of the FLEX experiments were to examine ﬂammability limits of isolated
+pure fuel droplets (heptane and methanol) and inert gas ﬁre suppressant eﬃcacy. The follow-on
+FLEX-2 investigation was more fundamental investigating the burning of single droplets of a range
+of fuels, fuel mixtures and even binary arrays of droplets. The focus in both experiments was on the
+hot ﬂame burning and extinction; the cool ﬂame regime a serendipitous discovery. The experimental
+data in Figures 3, 4 and 5 represent ideal tests, free droplets that exhibited minimal drift and stayed
+in the imaging systems ﬁelds of view, prolonged cool ﬂame burning and an identiﬁable cool ﬂame
+extinction.
+These tests represent a subset of the total tests where cool ﬂame burning was observed or
+known to occur. Observation of the complete burning history of a droplet during both the hot
+and cool ﬂame regimes requires it to remain in a very small ﬁeld of view (30 mm x 30 mm) for,
+in some cases, over 60 seconds. Since the droplet is deployed in the center of the ﬁeld of view,
+this means combined residual velocities (due to deployment, ignition, and g-jitter) of 0.25 mm/s
+or less. Fiber support provides a means of ﬁxing the droplet in space. The support ﬁber for the
+FLEX experiments is an 80 µm silicon-carbide (SiC) ﬁber, selected for its strength and durability.
+The FLEX experiments show that the ﬁber can ’ﬁx‘ the droplet in space and capture the hot ﬂame
+(even providing an estimate of the hot-ﬂame temperature with one of the CIR cameras), hot ﬂame
+extinction and quasi-steady cool ﬂame burning. Near cool ﬂame extinction, however, the ﬁber-
+supported experiments show signiﬁcant droplet oscillations and disruptions on the ﬁber making the
+accurate determination of the cool ﬂame extinction diameter almost impossible.
+The original FLEX experiments had diagnostics that were selected and optimized to view the
+hot ﬂame and hot ﬂame extinction. The cool ﬂames are much lower in temperature, have diﬀerent
+spectral emission characteristics and much lower heat release rates than the corresponding hot
+ﬂames. As a result, the cool ﬂames are essentially invisible to the CIR imaging systems on FLEX.
+The radiometer package originally installed on the MDCA did not function properly (unacceptably
+low signal to noise ratio) and was replaced for FLEX and FLEX-2 experiments starting in 2012.
+The new radiometer package consisted of a wideband radiometer that is sensitive over the visible
+into the far infrared and a narrowband radiometer that is ﬁltered around a strong water vapor
+emission band centered at approximately 6 µm. The new radiometer package had much better
+20
+
+--- page 21 ---
+signal to noise characteristics with the ﬁxed gain on the wideband optimized to be sensitive to the
+hot ﬂame and the ﬁxed gain on the narrowband optimized to be sensitive to the cool ﬂame.
+The FLEX experiments burning heptane showed that cool ﬂames can occur in a wide range of
+experimental conditions. The experiments to date show the cool ﬂame requires radiative extinction
+of a hot ﬂame to exist. Between the start of the FLEX tests in 2009 and the end of 2011 there were
+approximately 53 heptane tests where the ﬂame radiatively extinguished. These experiments had
+the original MDCA radiometers and thus it is diﬃcult to know in some cases whether there was a
+cool ﬂame stage; its presence implied by the linear d-squared regression and the vapor cloud.
+In January 2012 FLEX-2 testing started. This included (with tests on-going) tests with pure
+normal octane, decane and propylbenzene and mixtures (50/50 by weight) of decane and propyl-
+benzene as well as continued tests with pure heptane. More recently, NASA collaborated with the
+Italian Space Agency and Istituto Motori, C.N.R. - Naples on the FLEX Italian Combustion Ex-
+periment for Green Air (FLEX-ICE-GA). The tests for this series of experiments involved mixtures
+(50/50 by weight) of heptane and ethanol and also decane and hexanol. Cool ﬂames existed for
+many of the fuels and ambient conditions during the FLEX-2 and FLEX-ICE-GA tests, the results
+of which will be summarized in the subsequent subsections.
+Nearly coincident with the start of the FLEX-2 tests was the installation of the new radiometer
+package. The new radiometers, particularly the narrowband radiometer, were sensitive to the cool
+ﬂame and could detect both the cool ﬂame burning and, most importantly, the cool ﬂame extinction.
+Through calibration with a blackbody source on the ground and then subtraction of the igniter
+radiance, the radiometers provide a measure of the the total ﬂame radiance (wideband) and total
+ﬂame radiance at approximately 6 µm (narrowband).
+Figure 6 shows the results of a particularly good test with heptane burning in a nominally air
+ambient. After ignition, the initially 3.6 mm droplet burns with a hot ﬂame that extinguishes at a
+diameter of 2.84 mm. The wideband radiometer tracks the hot ﬂame diameter very closely during
+this period with a peak ﬂame radiance of approximately 20 W . During the hot ﬂame and early
+in the cool ﬂame, the narrowband radiometer saturates (ﬁxed gain) and is not displayed in Figure
+6. The hot ﬂame is followed by a long period of cool ﬂame burning. At a normalized time of
+approximately 2.2 s/mm2 the narrowband radiometer shows a distinct inﬂection point where the
+slope of ﬂame radiance with time abruptly decreases. This point is coincident with the beginning of
+the plateau in the droplet history and the formation of the vapor cloud and is thus in all likelihood
+the extinction of the cool ﬂame. The total ﬂame radiance during the cool ﬂame is more than an
+order of magnitude smaller than the ﬂame radiance during the hot ﬂame.
+The following subsections highlight some of the major observations from the FLEX, FLEX-2
+and FLEX-ICE-GA tests.
+2.4.1 Cool ﬂames are prevalent
+The cool ﬂame phenomena is not limited to a single fuel or narrow range of ambient conditions.
+They occur with all of the normal alkane fuels over a wide range of pressure, ambient oxygen
+mole fraction and ambient gas composition. They occur almost exclusively as a result of radiative
+extinction of the hot ﬂame. There are a few tests where after the igniters withdraw there is not hot
+ﬂame. These tests are likely ones in which the heat release from combustion and delivered ignition
+energy were only suﬃcient to produce the low temperature kinetic activity driving the combustion
+into the negative temperature coeﬃcient kinetic regime, but not through hot ignition. Outside
+of these few tests, however, cool ﬂames only occur after radiative extinction of the hot ﬂame.
+Moreover, the period of cool ﬂame burning is inﬂuenced by the initial experimental conditions and
+drop size, sometimes producing such short characteristic burning times as to clearly identify cool
+21
+
+--- page 22 ---
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.52.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+30
+25
+20
+15
+10
+5
+Df  ( 
+mm
+ ) ,  
+Df / D
+d
+20Watts
+15
+10
+5
+0
+Flame Radiance  ( 
+W
+ )
+Thu, Mar 14, 2013
+FLEX-500
+P = 767.836 mmHg
+YO2 = 0.210
+YN2 = 0.790
+Heptane
+D0 = 3.610 mm
+Dext = 2.838 mm
+kavg = 0.485 mm2/sec
+kavg, cool = 0.366 mm2/sec
+Dext, cool = 1.146 mm
+ Droplet history
+ LLUV flame history
+ LLUV flame standoff
+ Wideband Radiometer
+ Narrowband Power*10 
+Figure 6: The droplet, ﬂame and radiometer histories for a heptane droplet (D0 = 3.61mm) burning
+in a nominally air (0.21 oxygen mole fraction, balance nitrogen), 1.0 atm ambient environment.
+The droplet diameter and time are both normalized by the initial droplet diameter squared. The
+narrowband ﬂame radiance is scaled by a factor of 10 to put it on the same scale as the wideband
+ﬂame radiance.
+22
+
+--- page 23 ---
+ﬂame behavior.
+The prevalence of cool ﬂames raises the question as to why their presence had not been observed
+in previous microgravity experiments. Schnaubelt et al. (2000) and Tanabe et al. (1995) did observe
+a cool ﬂame brieﬂy during ignition experiments with heptane. Cuoci et al. (2005) predicted the
+occurrence of a cool ﬂame during heptane auto-ignition and further asserted that the presence of
+cool ﬂames explained the unique experimental observations of Xu et al. (2003). Despite the intense
+work in microgravity droplet combustion by NASA, ESA and JAXA, however, cool ﬂames were
+not observed or predicted after hot ﬂame extinction.
+Much of this is due to limitations in the available test time. The FLEX experiments show
+that the quasi-steady cool ﬂame occurs primarily after radiative extinction of the hot ﬂame, espe-
+cially under the application of strong ignition energy conditions.. To achieve radiative extinction
+requires test times greater than that typically available in drop towers 2 primarily because droplets
+of suﬃcient diameter to achieve radiative extinction cannot be produced in the available test time..
+Dietrich et al. (2005) performed experiments with decane in the Japan Microgravity Center 10
+second drop tower. The experiments involved radiative extinction in ambient conditions where cool
+ﬂames were likely. The cameras, however, lacked the low light sensitivity to see the cool ﬂame and
+the duration of cool ﬂame burning before the test concluded (impact at the bottom of the drop
+tower) precluded observing the prolonged linear regression of droplet diameter squared and the
+formation of the vapor cloud.
+The NASA Droplet Combustion Experiment (DCE, Nayagam et al., 1998) studied heptane
+droplet combustion in helium-diluted ambient environments. The test matrix included, based on
+the current FLEX experiments, conditions where radiative extinction occurred and also support
+cool ﬂames. Again, however, the camera systems, selected to visualize the hot ﬂame, lacked the
+low-light sensitivity to image the cool ﬂame. Further, Farouk and Dryer (2014) recently showed
+that cool ﬂames likely existed but the predicted cool ﬂame extinction droplet diameters were very
+close to the experimentally-measured hot ﬂame extinction diameters. This means the time of cool
+ﬂame burning was very short and again there was insuﬃcient time to observe the linear regression
+of droplet diameter squared with time and the vapor cloud, if it formed at all, would have been
+unremarkable.
+The NASA Fiber Supported Droplet Combustion (FSDC, Dietrich et al., 1996) and FSDC-2
+experiments included studies of alkane fuels in nominally air, one atm pressure ambient environ-
+ments. These small-scale experiments glovebox experiments used facility-provided video cameras
+that lacked the low-light sensitivity to observe even the dim hot ﬂames. In retrospect the re-
+ported observations of these experiments (Dietrich et al., 1996; Shaw et al., 2001) suggest that cool
+ﬂames were indeed present, but the limited diagnostics made deﬁnitive conclusions regarding their
+existence problematic.
+2.4.2 Signiﬁcant eﬀect of ambient pressure
+The ambient pressure has a large inﬂuence on both cool ﬂame formation and cool ﬂame extinction.
+Without any diagnostics to detect cool ﬂames, the early FLEX tests used the unusual observation
+of linear d-squared behavior after hot ﬂame extinction and vapor cloud formation as the indicators
+of cool ﬂame burning. The early FLEX tests showed that at sub-atmospheric pressure ambients it
+was almost impossible to infer the existence of the cool ﬂames with heptane from the experimental
+data (using the original radiometer package). This means that there was a very short or no linear
+2While aircraft ﬂying parabolic trajectories have test times where cool ﬂames could be observed, the gravitation
+levels create buoyant ﬂows that destroy the spherical symmetry and make radiative extinction almost impossible to
+observe (e.g., Struk et al., 1997).
+23
+
+--- page 24 ---
+portion of the d-squared history after hot ﬂame extinction and no (or very small) vapor cloud
+formation. Evidently the cool ﬂame burning, if it existed at all, was for a very short time.
+This is somewhat borne out by examining the decane data which included sub-atmospheric tests
+and had the new radiometer package available. Figure 7 shows two decane droplets (both freely
+deployed) at 1.0 and 0.5 atm. The ambient oxygen mole fraction was 0.21 (balance nitrogen) for
+both tests. The initial droplet sizes for the two tests were very close. Figure 7 clearly shows that the
+hot ﬂame behavior for both tests was nearly identical; the droplet histories (normalized by the initial
+diameter squared) overlapping and hot ﬂame extinction occurring at nearly the same normalized
+time. After hot ﬂame extinction, however, the cool ﬂame behavior is signiﬁcantly diﬀerent. The
+cool ﬂame burning rate for the 1.0 atm test is much higher and the cool ﬂame extinction droplet
+diameter much smaller. Examination of the wideband radiometer shows a hot ﬂame radiance the
+is very similar for both tests, but the cool ﬂame radiance for the 1 atm test is much larger than
+that of the 0.50 atm test. The narrowband radiometer data shows that the cool ﬂame extinguishes
+at nearly the same value of the ﬂame radiance, but that radiance occurs at a much smaller droplet
+diameter for the 1.0 atm test.
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.52.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+50
+40
+30
+20
+10
+20
+15
+10
+5
+0
+Watts
+P  ( atm )   1.0    0.5
+D0  ( mm )   3.8    4.0
+Droplet   
+Flame   
+Standoff   
+Wideband   
+Narrowband     
+Figure 7: The droplet, ﬂame and radiometer histories for two decane droplets burning in a 0.21
+ambient oxygen mole fraction (balance nitrogen) environment and 0.50 and 1.0 atm pressure.
+The droplet diameter and time are both normalized by the initial droplet diameter squared. The
+narrowband ﬂame radiance is scaled by a factor of 10 to put it on the same scale as the wideband
+ﬂame radiance.
+The hyperbaric behavior of the cool ﬂames is signiﬁcant as well (Farouk et al., 2014). Figure
+8 shows the result of a ﬁber-supported (free deployment was problematic at the high pressure
+conditions) heptane droplet burning in a 3.0 atm ambient environment. Unlike in the atmospheric
+and sub-atmospheric pressure tests, the hot ﬂame extinction extinction is not discernible in the
+24
+
+--- page 25 ---
+wideband radiometer. It was, however, evident from the OH∗ chemiluminescence and the glow of
+the SiC ﬁber. The burning rate during the hot ﬂame is quite high, approaching 0.9 mm2/s and
+remains high during the cool ﬂame burning following hot ﬂame extinction. There is signiﬁcant
+noise in the droplet history that is a result of the signiﬁcant droplet motion and mini-disruptions
+on the ﬁber (that complicates the droplet size measurement). Some time after hot ﬂame extinction
+the cool ﬂame brieﬂy re-ignites the hot ﬂame as evident in the wideband radiometer trace on the
+graph as well as in the ﬂame images. The ﬂame radiance during this reignation is much higher
+than the ﬂame radiance during the hot ﬂame, actually saturating the wideband radiometer. This
+suggests that the reignited hot ﬂame is either a pre-mixed or partially pre-mixed ﬂame propagating
+through the fuel vapor/air mixture that results from the unconsumed fuel during the cool ﬂame
+period mixing with ambient air. The narrowband radiometer, so useful in identifying cool ﬂame
+extinction in the atmospheric and sub-atmospheric pressure tests, is saturated until well after the
+droplet disappears and the test is complete. Farouk et al. (2014) demonstrated the the ability to
+predict the qualitative re-ignition behavior in addition to quantitatively predicting many of the
+experimental observations.
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+30
+25
+20
+15
+10
+5
+0
+Df  ( 
+mm
+ ) ,  
+Df / D
+d
+50Watts
+40
+30
+20
+10
+0
+Radiometer Irradiance  ( 
+W
+ )
+Fri, Feb 8, 2013
+FLEX-476
+C039H03
+P = 2257.198 mmHg
+YO2 = 0.212
+YN2 = 0.293
+YCO2 = 0.494
+YHe = 0.000
+Heptane
+D0 = 4.078 mm
+Dext = 3.378 mm
+kavg = 0.877 mm2/sec
+Figure 8: The droplet, ﬂame and radiometer histories for a heptane droplets burning in a 0.21
+ambient oxygen mole fraction (0.30 nitrogen and 0.50 carbon dioxide) environment and 3.0 atm
+pressure. The droplet diameter and time are both normalized by the initial droplet diameter
+squared.
+2.4.3 The eﬀect of ambient gas composition
+One of the original objectives of the FLEX experiments was to provide fundamental information
+on the eﬃcacy of inert gas ﬁre suppressants. By leveraging the spherical symmetric combustion of
+25
+
+--- page 26 ---
+isolated liquid fuel droplets, the experiments sought to systematically vary the inert gas concentra-
+tion in nominally air (0.21/0.79 oxygen/nitrogen mole fraction, 1.0 atm) and pre-EVA (0.30/0.70
+oxygen/nitrogen, 0.70atm) ambient environments for a range of inert gases including nitrogen, car-
+bon dioxide, helium and xenon, and determine the ﬂammability limits. The tests involved varying
+the initial diameter to examine both the diﬀusive extinction (or burnout) and radiative extinction
+limits in ambients with increasing inert gas concentrations. Cool ﬂames occurred in almost all
+ambient environments after radiative extinction of the hot ﬂame. The cool ﬂame burning behavior,
+however, was a strong function of both the ambient oxygen mole fraction and diluent gas.
+Figure 9 shows how replacing some of the nitrogen with helium inﬂuenced both the hot ﬂame
+and cool ﬂame burning for n-octane droplets. The two droplets in the plot burned in 1.0 atm, 0.21
+oxygen mole fraction ambient environments where some of the nitrogen gets replaced with helium.
+The helium mole fractions (balance nitrogen) for the two tests were 0.15 and 0.50. Increasing
+the helium concentration inﬂuences both the hot and cool ﬂame burning behavior. The average
+burning rate constant for both the hot and cool ﬂame regimes was higher for test with the higher
+helium ambient mole fraction. The hot ﬂame extinguished quickly for the higher ambient helium
+mole fraction test and the cool ﬂame burning period was also short with the cool ﬂame extinction
+droplet diameter larger than the hot ﬂame extinction droplet diameter for the test with the smaller
+ambient helium mole fraction. Interestingly, while the test in the higher ambient helium mole
+fraction atmosphere had a higher burning rate constant, the ﬂame radiance was actually lower.
+2.4.4 The eﬀect of fuel composition
+The FLEX tests to date show that the cool ﬂame burning regime is prevalent for the n-alkane
+fuels studied (heptane, n-octane and decane). The FLEX tests with methanol, as expected, did
+not show a cool ﬂame burning regime. The FLEX-ICE-GA series of tests involved mixtures of
+heptane/ethanol and decane/hexanol (50/50 by weight for both). Figure 10 shows the result of a
+large heptane/ethanol droplet burning in a nominally air ambient (0.21/0.79 oxygen/nitrogen, 1.0
+atm). Comparing this test to the pure heptane test in Figure 6 shows how fuel composition can
+inﬂuence the cool ﬂame regime. The pure heptane droplet radiatively extinguishes and then has
+a prolonged period of cool ﬂame burning with the cool ﬂame extinguishing at a droplet diameter
+slightly larger than 1mm. The cool ﬂame burning is characterized by the linear d-squared behavior
+and the cool ﬂame extinction by the formation of the fuel vapor cloud and the abrupt change in
+the slope of the narrowband radiometer. The heptane/ethanol mixture droplet, however, does not
+exhibit the linear d-squared behavior after visible ﬂame extinction. Nor is there a vapor cloud
+or the abrupt change in the slope of the narrowband radiometer. All of this implies that the
+addition of ethanol to the heptane inhibits the cool ﬂame burning. These results are consistent
+with experimental and modeling studies in ﬂow reactors (Haas et al., 2009, 2011).
+The decane/hexanol mixture droplets did exhibit cool ﬂame behavior, including multiple re-
+ignitions of the hot ﬂame at hyperbaric pressures.
+2.5 Summary
+The objectives of the FLEX, FLEX-2 and FLEX-ICE-GA experiments were to study various as-
+pects of isolated fuel droplet hot-ﬂame burning and extinction. In addition to providing insights
+into the combustion of liquid fuel droplets, they were very successful in identifying the cool ﬂame
+burning regime; something originally thought could not exist. The experiments showed that cool
+ﬂame burning is prevalent and that ambient pressure, oxygen mole fraction, diluent gas and compo-
+sition and fuel composition strongly inﬂuence the cool ﬂame burning behavior. These experiments,
+26
+
+--- page 27 ---
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+20Watts
+15
+10
+5
+0
+Flame Radiance  ( 
+Watts
+ )
+35
+30
+25
+20
+15
+10
+5
+Flame Diameter  ( 
+mm
+ ) ,  Flame Standoff Ratio
+Helium   0.15 0.50
+D0  ( mm )    3.4  3.7
+Dext, hot ( mm )   2.8  3.4
+Dext, cool ( mm )   1.3  2.9
+khot ( mm2/s )  0.54 0.63
+kcool ( mm2/s )  0.43 0.53
+Droplet             
+Flame             
+Standoff             
+Wideband   
+Narrowband  
+Figure 9: The droplet, ﬂame and radiometer histories for n-octane droplets burning in a 0.21
+ambient oxygen mole fraction at 1.0 atm pressure. The diluent gases in the two tests were nitro-
+gen/helium mixtures with helium mole fractions (balance nitrogen) of 0.15 and 0.50. The narrow-
+band radiometer is scaled by a factor of 10 so it can appear on the same scale as the wideband
+data.
+27
+
+--- page 28 ---
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+( D / D
+0 )2
+2.01.51.00.50.0
+t / D0
+2
+  ( s / mm2 )
+30
+25
+20
+15
+10
+5
+Df  ( 
+mm
+ ) ,  
+Df / D
+d
+25Watts
+20
+15
+10
+5
+0
+Radiometer Irradiance  ( 
+W
+ )
+Mon, Aug 5, 2013
+FLEX-606
+G217E02
+P = 768.352 mmHg
+YO2 = 0.210
+YN2 = 0.790
+YCO2 = 0.000
+YHe = 0.000
+Heptane/Ethanol
+D0 = 4.278 mm
+Dext = 3.723 mm
+kavg = 0.402 mm2/sec
+Figure 10: The droplet, ﬂame and radiometer histories for heptane/ethanol droplet burning in
+a nominally air 0.21/0.79 oxygen/nitrogen, 1.0 atm) ambient environment. The narrowband ra-
+diometer is scaled by a factor of 10 so it can appear on the same scale as the wideband data.
+28
+
+--- page 29 ---
+however, were not intended and the test matrix not designed for the purposes of explicitly studying
+low temperature chemistry. The diagnostics were designed and optimized to be sensitive to the hot
+ﬂames and, with the notable exception, of the new radiometer package, were not sensitive to the
+cool ﬂame. As a result, there is no experimental data regarding the structure of the cool ﬂame or
+its behavior as a function of time.
+The experiments proposed in the next section seek to improve our understanding of low temper-
+ature chemistry by leveraging the spherically symmetric geometry of isolated fuel droplets burning
+in microgravity. The new experiments will study fuels, fuel mixtures and additives that will both
+promote and inhibit cool ﬂame burning. The new experiments will be augmented with diagnostics
+that will provide information regarding the structure and temporal behavior of the cool ﬂames.
+29
+
+--- page 30 ---
+3 Experiment Objectives
+As described in the previous section, cool ﬂame phenomena are inﬂuenced by a number of factors,
+including the fuel molecular structure (for pure fuel cases), the ambient environment (pressure,
+temperature, oxygen and diluent concentrations), and the fuel composition (the mixture of fuel
+structures and perhaps fuel additives such as those used to change octane or cetane behavior).
+The overall goal of the proposed experiments is to improve our understanding of low temperature
+chemistry by studying the cool ﬂame burning and, most importantly, cool ﬂame extinction of droplet
+burning with spherical symmetry in a long-duration microgravity environment. The experiments
+to date show that prolonged cool ﬂame burning (in some cases up to 60 seconds) is possible. The
+quasi-steady cool ﬂame burning regime abruptly ends at cool ﬂame extinction at a ﬁnite droplet
+size, something easily identiﬁed in the proposed experiments. By varying the fuels and ambient
+conditions, the experiments to date show that we can eﬀectively, and over a wide range, vary the
+cool ﬂame extinction diameter which allows for the varying the characteristic time scales of the
+cool ﬂame chemistry. This in turn will provide experimental data that can be used to both validate
+and improve simpliﬁed and detailed low temperature chemical kinetic models.
+3.1 Objectives of the proposed eﬀort
+The primary objectives of the proposed experiments are as follows:
+1. Further understanding of the combustion characteristics of normal alkanes, particularly in
+the low temperature region by conducting droplet combustion experiments in low gravity with
+fuels that supports cool ﬂame burning and extinction.
+2. Investigate the low temperature burning behavior of droplets consisting of pure fuels and bio-
+fuel constituents (and mixtures of them), as well as surrogate reference fuels to determine the
+relationship between the cool ﬂame burning characteristics in microgravity droplet combustion
+and the octane/cetane behavior of the fuel.
+3. Explore the low temperature chemistry of alkanes further by mixing additives to the fuel that
+disrupt the low temperature chemical pathways.
+3.2 Fuel
+3.2.1 Baseline Fuel
+The molecular composition of a fuel has a profound eﬀect on the relative importance of low,
+negative temperature coeﬃcient (NTC), intermediate, and high temperature kinetic behavior. The
+low temperature, NTC and hot ignition kinetic behavior and associated heat release are key features
+relating to premixed cool ﬂames and microgravity droplet combustion cool ﬂame behavior as well
+as engine knock and compression ignition phenomena. Ground based kinetic experiments with C7
+through C16 n-alkanes show increasingly more low and NTC behavior up to about C12. FLEX
+experiments to date have also shown that cool ﬂame behavior will occur with n-heptane, n-octane,
+and n-decane. And it is expected that n-dodecane will be even further active than these species.
+Therefore in this study we propose to extend normal alkane experiments to include pure n-
+dodecane. The molecular weight of n-dodecane is near the average of that found for petroleum jet
+fuels and somewhat less than what is found for diesel fuels. The study of larger n-alkanes is not
+necessary as it was noted above that carbon chain length, the production of ketohydroperoxides
+and the resulting degenerate chain branching is no longer limited by the statistical probability
+30
+
+--- page 31 ---
+of O2QOOH isomerization through ﬁve and six membered ring formation. Though considerable
+ground based work has recently been produced on n-dodecane combustion kinetics, cool droplet
+burning research will add to improving our understanding of its low temperature and NTC behavior.
+3.2.2 Isomeric Fuels and Surrogate Fuel Blends
+Alkane isomeric structure can signiﬁcantly reduce low temperature and negative temperature kinetic
+behavior of a pure alkane relative to an n-alkane of equal carbon number. The reduced activity
+is caused by reducing the probabilities of ﬁve and six member ring formation. For example, two
+recently produced renewable fuel components, farnesane (2,6,10 trimethyldodecane), and 2,2,4,6,6
+pentamethylheptane of carbon number similar to n-dodecane have derived cetane numbers of 58 and
+15 in comparison to n-dodecane and its derived cetane number of 78 (the higher the cetane number,
+the more active low temperature and NTC chemical behavior. We propose to study these two new
+alternate fuels in pure form to compare both their high temperature and cool droplet burning
+behavior in relationship to n-dodecane. Mixtures of n-dodecane with each of these renewable
+alternative fuels are also proposed to be studied, in order to understand the interactive inﬂuence
+of their chemistries on cool droplet burning behavior.
+Finally, the blending of two or more molecular structures can also be used as a means of varying
+low temperature and NTC kinetic behavior. The Primary Reference Fuel (PRF) mixtures of n-
+heptane and 2,2,4 trimethylpentane (iso-octane) are used to emulate the behavior of real gasolines
+and deﬁne the Octane number of a gasoline. Another mixture used for this purpose are termed
+Toluene Reference Fuel (TRF) mixtures. We propose to study PRF and TRF mixtures that produce
+octane values of 50, 70, and 90.
+Moreover, experiments on gas turbine fuels in drop towers and in other ground based facilities
+have been studying surrogate fuel mixtures of n-dodecane, iso-octane, n-propyl benzene, and 1,3,5
+trimethyl benzene to emulate real gas turbine fuel behaviors, which also manifest cool ﬂame kinetic
+phenomena. We propose to utilize one speciﬁc mixture that has been formulated and studied
+previously to emulate a global Jet A real fuel.
+All of the above investigations contribute signiﬁcant, new fundamental science that has strong
+potential for contributing to methodologies to controle the autoignition behavior of future petroleum
+derived and renewable derived fuels and their blends (Santana et al.).
+3.2.3 Fuel Additive
+Certain additives such as nitrates and peroxides when mixed with fuels alter their combustion
+chemistry and reaction pathways by disrupting the availability of radicals in the oxidation chain
+reactions. In some cases they are known to improve performance of diesel and other bio-fuel ﬁred
+engines. In this study we choose di-tertiary-butyl-peroxide (C8H18O2) as an additive to be blended
+with n-dodecane. Earlier studies in rapid compression machines has shown substantial reduction
+in ignition delay times when small amounts of DTBP is added to the fuel Tanaka et al. (2003).
+3.3 Ambient Conditions
+The ambient gas in the proposed study is a mixture of oxygen and nitrogen. The oxygen mole
+fraction will be varied in the range 0.18 to 0.35. The total pressure of the combustion chamber
+will be varied in the range 0.5 to 5.0 atm. The initial combustion chamber temperature will be
+maintained around 25 0 C and the relative humidity maintained at less than 10%.
+Helium dilution studies will provide us with the ability to control cool ﬂame extinction diameters
+over a larger range than simply using oxygen/nitrogen mixtures. The FLEX tests to date show
+31
+
+--- page 32 ---
+that large variations in cool ﬂame extinction diameter can be aﬀected by relatively small changes
+in the ambient helium concentration.
+The FLEX experiments show that xenon dilution will lead to long cool ﬂame burning and
+burning at lower ambient oxygen mole fractions than in with either nitrogen or helium dilution.
+This will greatly change the characteristic time and length scales and provide a wide parameter
+space with which to compare against theory/modeling.
+32
+
+--- page 33 ---
+4 Microgravity Justiﬁcation
+The objective of this experiment is to use the spherically-symmetric combustion of an isolated
+fuel droplet as a model geometry for cool ﬂame formation and extinction. In order to completely
+leverage the droplet geometry, it is critically important to maintain spherical symmetry throughout
+the test. This can only occur if the diﬀusive residence times (i.e., mass ( τm) and thermal (τk) are
+much lower than the buoyancy-controlled residence time (τb). Using the droplet diameter (D) as the
+characteristic length the expressions for the ratio of these two characteristic times to the buoyancy
+controlled residence time are
+τk
+τb
+=
+√
+gD 3
+αg
+(7)
+and
+τm
+τb
+=
+√
+gD 3
+Dg
+(8)
+whereαg andDg are the thermal and mass diﬀusivies of the gas phase. In order to justify neglecting
+buoyant eﬀects the above ratios must be much lower than unity. This is only accomplished by
+changing at least one of the three independent variables, droplet diameter, pressure or gravity level
+(or some combination of the three).
+Experiments in 1-g environments, performed in pressures of 1 atmosphere, require droplet di-
+ameters substantially smaller than 1 mm, smaller than the cool ﬂame extinction droplet diameters.
+In addition, the FLEX experiments show the importance of radiative hot-ﬂame extinction in es-
+tablishing the cool ﬂame. This can only be achieved in true microgravity experiments. Aircraft
+experiments (g-levels on the order of 10−2− 10−3g0) cannot reliably produce radiative extinction
+and neither drop tower nor aircraft experiments have the reduced-gravity times necessary to observe
+hot-ﬂame extinction, quasi-steady cool ﬂame burning and cool ﬂame extinction.
+Since diﬀusivities are inversely proportional to pressure the residence time ratios could alterna-
+tively be reduced by reducing test pressures. Chung and Law (1986) used this approach to measure
+extinction droplet diameters and from that determine single step chemical kinetic constants for
+decane in normal gravity. The range of oxygen concentrations and pressures was, however, very
+limited and the authors could only study diﬀusive extinction, not radiative extinction. Studying
+such a small range of droplet diameters, pressures and oxygen concentrations would severely limit
+the ability to achieve the stated objectives of the present study. Furthermore, Easton (1998) showed
+that the conditions that yielded ﬁnite extinction diameters in the work of Chung and Law (1986)
+burned to completion (no ﬂame extinction) in microgravity. The author attributed this to a small
+residual buoyant-ﬂow that is large enough in the vicinity of the ﬂame to inﬂuence the extinction
+process (Struk et al., 1997).
+The need for extended duration microgravity facilities is predicated on the fact that the burn-to-
+completion time for large droplets is longer than the time available in the ground-based facilities.
+Typically the droplet life-time ( τl) can be estimated from the initial droplet size ( D0) and the
+average burning rate constant (k) asτl = D20k . The values of τl for n-heptane, and methanol droplets
+burning in air at one atmospheric pressure range from 18 to 72 s for initial droplet diameters
+in the range 3 to 6 mm assuming an average burning rate constant of 0 .5mm2/s. Moreover,
+high ﬁdelity experiments demand additional microgravity time for droplet deployment, droplet
+quiescence, and ignition. Experiments involving radiative extinction require that the droplets be
+ignited in microgravity. Both Dietrich et al. (2005) and Easton (1998) studied extinction of single
+33
+
+--- page 34 ---
+droplets in drop towers. Dietrich et al. (2005) used the Japan Microgravity Center 10 s drop tower,
+a facility no longer available, and even then could only study a limited parameter space because
+of the limited microgravity time. It is quite likely that cool ﬂames were present in some of the
+experiments. Their presence was likely only momentary as the test ended shortly after hot-ﬂame
+extinction, so only a very short period ( 1 sec) of cool ﬂame burning and no cool ﬂame extinction
+could be observed. Therefore, the only facility which will enable data of suﬃcient quality over a
+wide parameter space is the microgravity environment available in extended-duration microgravity
+facilities (i.e. the ISS).
+34
+
+--- page 35 ---
+5 Science Requirements
+5.1 Experiment Requirements
+This section describes the experimental requirements and the rationale behind the requirements.
+A summary of all the requirements is provided in tabular form is ﬁrst, followed by a more detailed
+explanation about the rationale behind the requirement.
+Table 1: Hardware requirements tabulation.
+Section Description Requirements
+5.1.1 Test Fuels - see list below
+- research grade, dry, degassed, highest purity commercially
+available
+- fuel temperature at the start of the test shall be in the
+range of 18 - 27 C
+5.1.2 Droplet
+Deployment and
+Ignition
+- 2 mm to 6 mm± 0.25 mm and reproducible to within ±
+10%
+- support ﬁber diameter ≤ 40µm
+- hotwire ignition with selectable power and duration
+- igniter positioning shall be approximately 1-5 droplet radii
+away from surface, command controllable to within 0.5mm,
+and removable from the ﬁeld of view
+- a spherical zone of exclusion at least 10 D0 with the center
+located at the deployment site
+5.1.3 Initial Pressure - test pressures at 0.5 - 3.0 (5.0, desired) atm ± 0.05 atm
+- chamber pressure to be maintained within ± 10% of initial
+conditions throughout each test.
+5.1.4 Initial Gas
+Composition
+- mole fractions of O2 from 0.10 to 0.40
+- mole fractions of N2, CO 2, He and Xe from 0 to 0.9
+- tolerance on initial charge is ± 0.005 for O2,± 0.01 for N2,
+He, Xe and CO2.
+5.1.5 Misc. Ambient
+Requirements
+- initial gas temperature at 18 - 27 C
+- humidity < 10%
+- quiescent atmosphere prior to ignition
+- well-mixed gases prior to ignition.
+5.1.6 Operational
+Requirements
+- allow at least 2 minutes after ﬁlling chamber to ensure gas
+temperature and pressure has stabilized
+- allow a ‘droplet dwell time’ of at least 10 sec to ensure all
+droplet motion imparted by droplet deployment and needle
+retraction has subsided
+- a ‘near real time’ downlink of the color camera video and
+the chamber gas pressure and temperature shall be provided
+- fuel vapor mole fraction of < 0.005 in the atmosphere
+- for chamber atmospheres that do not use CO 2 as a diluent
+the atmosphere shall consist of < 0.02 mole fraction (for
+each species) CO, CO2 , and other products
+35
+
+--- page 36 ---
+5.1.7 Microgravity
+Requirements
+-acceleration levels are required to be 2 x10−6− 2x10−4 on
+three axes depending on the size of the droplet
+- measurement accuracy shall be 1x10−6
+- frequency range shall be 0.01− 125Hz
+- sampling rate shall be 2 − 5 times the frequency
+5.1.1 Test Fuels
+In order to further our understanding of the low temperature burning regime (Objective 1), we
+propose an extensive study of n-dodecane.
+To study the eﬀect of isomeric structure and fuel composition (Objective 2), we propose to
+study practical fuel additives and components 2,6,10 trimethyldodecane (farnescane) and 2,2,4,6,6
+pentamethylheptane both as pure liquid droplets and mixtures of these fuels with n-dodecane.
+To study the relationship between the cool ﬂame droplet burning characteristics and fuel Octane
+and Cetane numbers we propose to study Primary Reference Fuel mixtures (PRF) of n-heptane and
+2,2,4 trimethylpentane (iso-octane) and Toluene Reference Fuel (TRF) mixtures that have octane
+numbers of 50, 70 and 90.
+As a ﬁnal study related to Objective 2, we propose to study a Jet A surrogate mixture fuel that
+is a mixture of n-dodecane, iso-octane, n-propyl benzene and 1,3,5 trimethyl benzene.
+To study the eﬀect that fuel additives have on suppressing the low temperature burning behav-
+ior of droplets (Objective 3), we propose to study mixtures of n-dodecane and di-tertiary-butyl-
+peroxide.
+The complete fuel list in order of priority follows.
+Fuel Type:
+1. n-dodecane
+2. 2,6,10 trimethyldodecane (farnesane)
+3. n-dodecane/2,6,10 trimethyldodecane mixtures (3 mixtures ea.)
+4. n-dodecane/2,2,4,6,6 pentamethylheptane mixtures (3 mixtures ea.)
+5. n-dodecane/iso-octane/n-propyl benzene/1,3,5 trimethyl benzene (2 mixtures ea.)
+6. n-heptane/2,2,4 trimethylpentane mixtures
+7. 2,2,4,6,6 pentamethylheptane (this fuel is for ground-based testing only)
+8. n-dodecane/di-tertiary-butyl-peroxide mixtures (this mixture is for ground-based testing only)
+Fuel Purity: purity levels shall be the highest purity level that is commercially available (research
+grade). Liquids shall be degassed and contain the lowest water content commercially available.
+Quality Assurance: certiﬁcation of test samples shall be provided prior to ﬂight
+Fuel Temperature: in the range of 18 - 27 C prior to the start of any test.
+36
+
+--- page 37 ---
+5.1.2 Droplet Deployment and Ignition
+Droplet size during the experiments will vary between 2 mm and 6 mm. The droplets will either
+be free-deployed (no support) or supported on a thin ﬁber to minimize droplet motion. Hot-wire
+igniters positioned at the proper location before deployment ignite the droplet. Following deploy-
+ment, after a preset dwell time (to allow droplet surface oscillations to decay to acceptable levels),
+the hot-wire igniters ignite the droplet (using a minimal amount of energy) and then de-energize
+and withdraw a minimum of 10 droplet diameters away from the droplet.
+Droplet size: droplet diameter shall vary from 2 mm to 6mm± 0.25mm
+Droplet reproducibility: droplet size shall be reproducible to within ± 10%
+Support ﬁber: support ﬁber diameter shall be less than or equal to 40 µm
+Droplet Ignition: hot-wire ignition
+Igniter Positioning: igniter tip shall be positioned within 0 .5− 2.5D0 away from the anticipated
+droplet surface. The position of igniter tip shall be controllable by command to within 0 .5mm.
+The igniter tip shall be removed from viewing area upon ignition.
+Igniter operation: the power level and duration of igniter operation shall be controllable by com-
+mand in order to provide the ability to ignite droplet with the minimum ignition energy necessary
+to sustain combustion.
+Zone of exclusion : a spherical zone of exclusion centered at the droplet deployment and extending
+a minimum of 10 droplet diameters (initial) will be free from any solid objects except for the ﬁber
+when it is in use.
+5.1.3 Initial Pressure
+The ambient pressure strongly inﬂuences the low temperature burning behavior of the droplet.
+Ambient pressure: initial ambient absolute pressure shall be set to 0 .5 − 3.0atm (necessary),
+0.5− 5.0atm (desired)± 0.05atm.
+Pressure transient:: chamber pressure shall be ± 10% of the initial ambient pressure throughout
+each test.
+5.1.4 Initial Ambient
+The ambient oxygen mole fraction inﬂuences the burning rate, extinction diameter, ﬂame chem-
+istry and ﬂame characteristics (size, temperature). This parameter will vary from 0.4 down to the
+limit where no ﬂame can be sustained at any droplet diameter. The ambient inert gases vary the
+thermo-physical properties of the ambient and thus vary the characteristic chemical times of both
+the hot and cool ﬂames. This enables variation of the hot and cool ﬂame extinction diameters over
+a wide range to better test and validate theoretical and numerical models.
+Oxygen Mole Fraction: oxygen mole fraction shall range from 0.1− 0.4± 0.005.
+Ambient Gas Type: N2, CO 2, He, Xe, and mixtures thereof.
+Ambient Gas Composition : the exact ambient gas composition will be determined prior to each
+test day (not to exceed the ambient oxygen mole fractions in the range above), but will involve
+binary (oxidizer plus one inert) and possibly ternary (oxidizer plus two inerts) mixtures.
+37
+
+--- page 38 ---
+5.1.5 Misc. Ambient Requirements
+Ambient Quiescience: gases shall be well-mixed and quiescent prior to ignition.
+Ambient temperature: initial chamber gas temperature shall be 18 − 27C.
+Relative humidity: chamber relative humidity shall be less than 10%.
+5.1.6 Operational Requirements
+The chamber shall be ﬁlled with the appropriate atmosphere, which depending on the test point,
+will vary in pressure from 0.5 atm to 5.0 atm, and vary in O 2 concentration from 0.1 to 0.4 mole
+fraction, with diﬀerent inert gases and gas mixtures. A settling time of approximately 2 minutes
+will elapse prior to initiating the test in order to ensure that the temperature and pressure of the
+chamber gases have stabilized. A test proceeds by dispensing a pre-determined amount of fuel
+slowly ‘stretching’ the droplet and then rapidly retracting the needles to ‘deploy’ the droplet (ei-
+ther into the quiescent gas mixture or onto the ﬁber). The igniters, which are positioned close to
+the droplet, will then energize and ignite the droplet after which they will retract away from the
+droplet. All of the parameters (the igniter and needle position, fuel volume dispensed, dwell and
+ignition times) should be adjustable from the ground in near real-time during a test.
+Gas stabilization time : allow at least 2 minutes after ﬁlling chamber to ensure that the chamber
+gas temperature and pressure has stabilized.
+Real time downlink: a ‘near real time’ downlink of the color camera video and the chamber gas,
+pressure and temperature shall be provided.
+Chamber Purity: fuel vapor mole fraction of < 0.005 in the atmosphere; < 0.02 mole fraction
+(each species) of CO, CO 2 and other products (except for CO2 for tests in ambient environments
+with enriched CO 2 ). Droplet dwell time : the hardware shall allow a ground-controllable time
+between dispense and deployment and between deployment and ignition of up to 10 sec.
+5.1.7 Microgravity Requirements
+In order to compare the experimental data with theoretical results obtained under the conditions
+Re ∼ O(1) we need to minimize the eﬀects of buoyancy on the ﬂow ﬁeld. The dimensionless
+parameter that compares the buoyancy eﬀects to forced ﬂow eﬀects is the ratio of two dimensionless
+groups, the Gr/Re2, where Gr is the Grashof number, and Re is the Reynolds number. The
+magnitude of this dimensionless group indicates the relative eﬀect of buoyancy compared to forced
+convection and we need Gr/Re2 << 1 in our experiments. This criterion can be translated into a
+requirement on the g-level as follows:
+Gr
+Re2 = gβ ∆T DU 2∞ << 1 (9)
+whereg is the gravitational acceleration, β is the coeﬃcient of thermal expansion, ∆T is the char-
+acteristic temperature diﬀerence, D is the characteristic length scale and U∞ is the free-stream
+velocity. For the worst case scenario ∆T ∼ 5, D ∼ 1cm and U∞ ∼ 1cm/s which yields a g/g0
+value of 1x10−5 as the required g-level (g0 is the earth normal gravity).
+Micro-gravity levels: accelerations are required to be less than 10−5m/s2 in order to ensure buoy-
+ant forces are negligible.
+38
+
+--- page 39 ---
+5.2 Diagnostic Requirements
+This section describes the diagnostic requirements and the rationale behind the requirements. A
+summary of all the requirements is provided in tabular form is ﬁrst, followed by a more detailed
+explanation about the rationale behind the requirement.
+39
+
+--- page 40 ---
+Table 2: Diagnostic requirements tabulation.
+Section Description Requirements
+5.2.1 Droplet Imaging - focal plane parallel to support ﬁber
+- FOV at least 3.0 cm (5.0cm, preferred) centered on
+droplet (center of FOV)
+- resolution of 50 µm for smallest droplet size over entire
+FOV
+- frame rate at least 30 fps
+- depth of view at least 3 .0cm
+- ability to backlight the droplet
+5.2.2 OH∗ or CH
+Flame Imaging
+- FOV at least 8.0cm (10.0 cm, preferred) centered on
+droplet (center of FOV)
+- color detection for wavelengths of 310 nm± 5nm or
+430nm± 5nm
+- resolution of 100 µm
+- frame rate at least 30fps
+- depth of view at least 8 .0cm
+- adjustable gain
+5.2.3 CH2O Cool-Flame
+Imaging
+- FOV at least 10.0cm centered on droplet (center of FOV)
+- resolution of 100 µm
+- wavelength between 390 and 490 nm
+- frame rate at least 30 fps
+- depth of view at least 5 .0cm
+- adjustable gain, sensitivity to image cool ﬂame
+5.2.4 Color Flame
+Imaging
+(Experiment
+Monitoring
+Camera)
+- FOV at least 5.0cm and positioned such that entire ﬂame
+is imaged
+- resolution of 100 µm
+- frame rate at least 30 fps
+- depth of view at least 5 .0cm
+- zoom capability requested
+- near real-time downlink
+5.2.5 Flame Radiation - radiometer used to detect water vapor radiation shall be
+ﬁltered to detect wavelengths in within the spectral range of
+6.0− 6.5µm
+- radiometer used for broad-band radiation shall detect
+wavelengths within a band from 0.6− 5.0µm
+- sample rate shall be at a frequency of 20 Hz
+- radiometers shall be positioned at least 15 cm from the
+droplet to enable detection of all incident radiation from the
+ﬂame.
+- accuracy 5% of full scale incident radiation
+- response time constant to be < 50ms
+- detect ﬂame radiance in the 0.10 - 100 W range
+- ﬁeld of view shall be at least 90 mm diameter centered
+around the deployment site
+40
+
+--- page 41 ---
+5.2.6 Fiber
+Temperature
+(desired)
+- FOV at least 5cm about the center of the deployed droplet
+- at least 2 fps
+- resolution of 100 µm over the entire FOV
+- detect ﬁber temperatures in the range 600 - 1500 K
+5.2.7 Ambient Pressure
+and Temperature
+Measurement
+- minimum sample rate shall be at 10 Hz
+- temperature accuracy shall be at least ± 0.5C in the
+range of 18− 27C
+- pressure accuracy shall be at least ± 0.01atm in the range
+of 0.5− 3atm
+5.2.8 Time
+Synchronization
+- all measurements shall be referenced to GMT with a
+minimum accuracy of± 0.03sec
+5.2.1 Droplet Imaging
+A back-lit view of the droplet shall be provided that will allow accurate measurements of the droplet
+size as a function of time. This is necessary to obtain droplet burning rates and extinction droplet
+diameters. This view also yields quantitative regarding the soot shell and soot shell dynamics.
+The time resolution is necessary to accurately measure the burning rate constant and it’s temporal
+variation as well as accurate measurements of the extinction droplet diameter. Experience during
+the FLEX experiments shows that the approximately 3.0cm ﬁeld-of-view (FOV) is acceptable. For
+freely deployed droplets, however, the success rate increases with increasing FOV size (the droplet
+does not drift out of the FOV). The CFI team therefore desires a larger FOV (but at the same
+spatial resolution.
+Field of view : minimum of 3.0 cm centered about the droplet, 5.0 cm preferred
+Resolution: 50µm over the entire FOV.
+Minimum frame rate: 30fps over the duration of the test.
+Focal Plane: the focal plane shall be parallel to the ﬁber.
+Depth of Field : a depth-of-ﬁeld of at least 3.0 cm.
+Backlight: the ability to backlight the droplet image
+5.2.2 OH∗ or CH Hot-Flame Imaging
+The ﬂame structure and its dynamic response shall be obtained from ﬂame imaging oriented per-
+pendicular to the stream-wise ﬂow direction. The ﬂame image shall be derived from the ultraviolet
+OH-radical chemiluminescence orCH -radical emission intensity. This technique is well understood
+and has been implemented in a previous ﬂight experiment (DCE) and the current FLEX experi-
+ments.
+Field of view : minimum of 8.0cm, 10.0 cm (desired)
+Depth of view : minimum 3.0cm, 5.0 cm (desired)
+Color: shall detect wavelengths of 310nm± 5nm or 430nm± 5nm using an intensiﬁed camera
+in order to detect OH∗ or CH radical emission, respectively.
+Resolution: 100µm (i.e. > 5lp/mm) over the entire FOV.
+Minimum frame rate: 30fps over the duration of the test.
+41
+
+--- page 42 ---
+Gain setting: shall be adjustable prior to each test.
+5.2.3 CH2O Cool-Flame Imaging
+The biggest weakness of the FLEX testing to date involving cool ﬂames is, with the notable excep-
+tion of the narrowband radiometer on later tests, the absence of any to detect the cool ﬂame. The
+cool ﬂame is signiﬁcantly less luminous than the hot ﬂame which near extinction is near the lower
+limit of detectability with the existing camera systems. The proposed tests require the ability to
+image the cool ﬂame. The theoretical and numerical analyses of the FLEX tests, in addition to
+ground-based work on cool ﬂames, indicates that the cool ﬂames have a relatively strong chemilu-
+minescence from excited formaldehyde ( CH2O). Sheinson and Williams (1973) showed that cool
+ﬂames emit visible light in the range of 350 - 500 nm (Figure 11).
+10
+8
+6
+4
+2
+0
+Relative Chemiluminescence Intensity ( 
+a.u.
+ )
+50004800460044004200400038003600
+Wavelength ( angstroms )
+Figure 11: Chemiluminescence spectra from excited formaldehyde (Sheinson and Williams, 1973).
+Field of view : minimum of 8.0cm, 10.0 cm (desired)
+Depth of view : minimum 3.0cm, 5.0 cm (desired)
+Color: shall detect wavelengths between approximately 390 nm and 490 nm using an intensiﬁed
+camera in order to detect CH2O emission.
+Resolution: 100µm (i.e. > 5lp/mm) over the entire FOV.
+Minimum frame rate: 30fps over the duration of the test.
+Gain setting: shall be adjustable prior to each test. Must have suﬃcient sensitivity to detect the
+42
+
+--- page 43 ---
+cool ﬂames. 3
+5.2.4 Secondary Color Flame Imaging
+A color CCD camera viewing the droplet at a speciﬁed angle will provide ﬂame color information
+during combustion. Based on earlier ﬂight experiments, it is also desired that this camera serve
+as the experiment’s monitor camera to facilitate experiment operation/monitoring from the ground.
+Orientation: the camera shall provide viewing of the droplet dispensing and deployment sequence
+in addition to providing a color camera view of the burning droplet.
+Field of view : minimum of 5.0cm
+Depth of view : minimum of 5.0cm
+Resolution: 100µm (i.e. > 5lp/mm) over the entire FOV.
+Minimum frame rate: 30fps over the duration of the test.
+Downlink: image shall be down-linked in near real-time during each test.
+Zoom: request the capability to ‘zoom’ (decreased FOV) this view for a more detailed view of the
+droplet formation and deployment processes during PI-selected tests.
+5.2.5 Flame Radiation
+The FLEX experiments to date have established the utility of ﬂame radiometric measurements. The
+FLEX broadband radiometer captures the total ﬂame radiation during the hot and cool ﬂame. The
+gain on the radiometer, however, is ﬁxed and set to capture the hot ﬂame. While the radiometer
+does detect the cool ﬂame, the cool ﬂame radiance is very close to the lower limit of detection. As
+a result, the reading has a lower signal to noise ratio (accuracy less than the requirement in the
+original SRD in the cool ﬂame region) than desired and cannot reliably detect cool ﬂame extinction.
+For this program we require a broadband ﬂame radiance measurement for both the hot ﬂame and
+the cool ﬂame. These measurements will be used to obtain the total radiant energy loss as well
+as to establish the exact moment of both cool and hot ﬂame extinction and to supplement other
+imaging data in determining transient ﬂame behavior.
+Thermopile radiometers, positioned at distances far enough from the droplet to allow full view
+of the ﬂame, can measure broad-band radiation and water-vapor radiation from the ﬂame zone.
+Water vapor: radiometer used to detect water vapor radiation shall be ﬁltered to detect wave-
+lengths within the spectral range of 6 .0− 6.5µm)
+Broad-band spectrum: radiometer used for broad-band radiation shall detect wavelengths within
+a band from 0.6µm− 5µm.
+Sample rate: data sampled from the radiometer shall be at a frequency of at least 20 Hz.
+Positioning: radiometers shall be positioned at least 10 cm from the droplet to enable detection
+of all incident radiation from the ﬂame.
+Flame Radiance: detect ﬂame radiancce between 0.10 and 100 W
+Field of view : at least 90 mm centered on the deployment site
+Response Time: The time constant of both the narrow band and broad band radiometers shall
+be less than 100 ms
+Accuracy: 5% of full scale incident radiation
+3The science team will work with the engineering team to verify this requirement.
+43
+
+--- page 44 ---
+5.2.6 Fiber/Flame Temperature
+We desire to quantify the hot and cool ﬂame temperature by measuring the broadband temperature
+of the SiC support ﬁber. Using the HiBMS-2 equipped with the Liquid Crystal Tunable Filter
+(LCTF) the FLEX experiments demonstrated the capability to estimate the hot-ﬂame temperature
+from SiC emission during ﬁber supported tests. Ideally this was supposed to involve two color
+pyrometry using the HiBMS-2 with the LCTF cycling between two diﬀerent wavelength bands. In
+practice, however, the cycling rate of the LCTF coupled with the poor transmission of the LCTF and
+the quantum eﬃciency (QE) of the detector precluded estimating ﬁber/ﬂame temperature using
+this method. Using the HiBMS-2 and LCTF at a ﬁxed wavelength (optimizing the QE/LCTF
+response) allowed an estimate of the ﬂame temperature during the hot ﬂame.
+The HiBMS-2/LCTF combination, however, cannot measure the ﬁber/ﬂame temperature dur-
+ing the cool ﬂame. If the LCTF is replaced by a ﬁxed ﬁlter and the HiBMS-2 signal can be
+integrated over a longer period of time, it may be possible to get a signal suﬃcient to estimate the
+ﬁber/ﬂame temperature during the cool ﬂame. An estimate of the cool ﬂame temperature would
+be invaluable.
+Orientation: camera shall provide full view of the droplet and the ﬂame.
+Frame Rate: frame rate shall be at least 2 fps
+Field of View : the FOV shall be at least 5.0cmx 5.0cm about the center of the deployed droplet
+Temperature Range: the camera shall estimate the ﬁber temperature in the 600 - 1500 K range
+(not necessarily over the entire range within the same test, but user selectable)
+Resolution: 100µm (i.e. > 5lp/mm) over the entire FOV.
+5.2.7 Ambient Temperature and Pressure Measurement
+During each test the chamber gas temperature and pressure measurements shall be required. The
+following are the speciﬁcations for this data.
+Sample rate: minimum sample rate shall be at 10 Hz
+Temperature: accuracy shall be at least ± 0.5C in the range of 18 - 27 C.
+Pressure: accuracy shall be at least ± 0.01atm in the range of 0.50 - 5.0 atm.
+5.2.8 Synchronization
+Experiment objectives require all data to be time-synchronized to a reference time. This will allow
+accurate interpretation of the data and evaluate droplet regression rate, ﬂame structure, and ﬂame
+extinction as a function of time.
+Time synchronization: all measurements shall be referenced to GMT with a minimum accuracy
+of± 0.03sec.
+44
+
+--- page 45 ---
+6 Test Matrix and Experiment Procedure
+6.1 Flight Experiment Test Procedures
+The proposed CFI experiments involve igniting and observing the burning behavior of relatively
+large droplets. The experiments seek to observe the ignition, hot-ﬂame burning and ﬂame extinc-
+tion, cool ﬂame initiation and burning and ﬁnally, cool ﬂame extinction of primarily free-ﬂoated
+fuel droplets in q quiescent ambient envrionment. The Science Deﬁnition Team will work with
+the engineering team to determine the optimal order for the experiments. The order is based
+partially on experiment priority (e.g., it may be important to perform some tests ﬁrst), hardware
+considerations (e.g., the fuel system operates better if the tests run in increasing ambient pressure)
+and resource optimization. Based on the experience with the FLEX experiments, the experiment
+sequence on a given test day proceeds as follows:
+1. Select the ambient environment for the tests. This will be done several months before testing
+and changes can be made up to 72 hours before the test day (changes to diluent may require
+additional lead time for on-orbit bottle change-outs).
+2. Perform the Fuel-Oxidizer Mixing Apparatus (FOMA) operations to set the test ambient.
+This will be done immediately prior to testing.
+3. Perform a droplet combustion test by completing the following operations in approximate
+order.
+(a) Position the igniters, ﬁber and needles and prepare the diagnostics for data acquisition.
+(b) Open the fuel valve and begin dispensing fuel.
+(c) Dispense the appropriate fuel volume for a given droplet size (this can be changed in
+near real-time) using the downlink video view to guide the test.
+(d) Zoom the downlink video view out to observe droplet combustion test.
+(e) Run the automated sequence which consists of the following steps.
+i. Turn the chamber lights oﬀ.
+ii. Start data recording on all cameras and radiometers.
+iii. Rapidly retract the needles to deploy the droplet.
+iv. Power the igniters (they will turn oﬀ and retract after a preset period of time).
+v. Observe the droplet burning on the real-time video (recording locally at the Tele-
+science Support Center, TSC) until the test is complete and on-orbit video recording
+stops after a preset period of time.
+vi. Run the circulation fan for approximately 15 seconds to mix the contents of the
+chamber.
+4. Determine the success of the test and whether to save the on-orbit video ﬁles. On-orbit
+storage is limited and unsuccessful tests (e.g., no ignition) need to be deleted to save storage
+space.
+5. Repeat step 3 TBD times (typically 5 - 10) for a range of droplet sizes.
+After completing the tests on a given test day, the on-orbit will be downlinked to the ground
+and transferred to the TSC. There the data is de-compressed and provided to the SDT for detailed
+analysis. This process typically takes 3 to 7 days. This process is then repeated for each desired
+test atmosphere.
+45
+
+--- page 46 ---
+6.2 FLEX Test Matrix
+The proposed test matrix is fashioned so as to meet the stated science objectives and at the
+same time meet the constraints imposed by the hardware as well as the safety requirements of
+space experiments. The tables below detail the proposed tests. These test matrices, however, are
+primarily intended to be a guide to overview the proposed testing and allow the engineering team
+to make the appropriate resource estimates. The exact test matrix will evolve as we perform more
+detailed analyses of the FLEX data and perform additional FLEX-2 tests. The SDT also expects
+to make changes to the test matrices as CFI testing proceeds and the results from downlinked tests
+gets analyzed (i.e. using previous tests to guide future tests rather than marching to a rigid test
+matrix).
+Table 3 provides the envelope conditions for n-dodecane. This is the base fuel and has the most
+extensive test matrix. The ambient environment for these tests will include nitrogen, helium and
+xenon-diluted ambient environments at a range of ambient oxygen mole fractions and pressures.
+Table 4 provides the envelope conditions for the other fuels and fuel mixtures. The ambient
+environment for these tests will be oxygen and nitrogen mixtures over a range of ambient oxygen
+mole fractions and pressures.
+Table 3: Nominal test matrix for n-dodecane. The droplet size range for the tests is 2 - 6 mm.
+n-dodecane
+P (atm) YO2 Diluent Tests
+1.0
+0.21
+N2 10 0.18
+0.15
+0.50
+0.21 N2
+5
+0.75 5
+1.5 5
+2.0 10
+3.0 5
+4.0 10
+5.0 10
+1.0
+0.21
+He
+5
+0.25 5
+0.30 5
+0.75
+0.21 He
+5
+3.0 5
+5.0 5
+1.0
+0.21
+Xe
+5
+0.18 5
+0.15 5
+0.50
+0.21 Xe
+5
+2.0 5
+3.0 5
+46
+
+--- page 47 ---
+Table 4: Nominal test matrix for the other fuels and fuel mixtures. The droplet size range for the
+tests is 2 - 6 mm.
+2,6,10 trimethyldodecane
+n-dodecane/2,6,10 trimethyldodecane - 3 mixtures
+n-dodecane/2,2,4,6,6 pentamethylheptane - 3 mixtures
+n-dodecane/iso-octane/n-propyl benzene/1,3,5 trimethyl benzene - 2 mixtures
+n-heptane/2,2,4 trimethylpentane mixtures - 3 mixtures
+P (atm) YO2 Diluent Tests
+1.0
+0.21
+N2 10 0.18
+0.15
+0.50
+0.21 N2
+5
+0.75 5
+1.5 5
+2.0 10
+3.0 5
+4.0 10
+5.0 10
+7 Success Criteria
+7.1 Minimal Success
+• Obtain droplet diameter and either OH∗/CH color video hot-ﬂame measurements as func-
+tion of time for n-dodecane over a range of pressures spanning 0.5 - 3.0atm (minimum of four
+pressure conditions) and at least two ambient oxygen mole fractions and two diluent gases
+for a range of droplets that exhibit cool ﬂame burning and cool-ﬂame extinction.
+• Acquire droplet diameter and either OH∗/CH or color video ﬂame measurements for four
+additional pure fuels and/or fuel mixtures identiﬁed in Table 4 over a range of pressures
+spanning 0.5 - 3.0 atm (minimum of four pressure conditions) and at least two ambient
+oxygen mole fractions for a range of droplets that exhibit cool ﬂame burning and cool ﬂame
+extinction.
+• For the tests described above obtain hot-ﬂame and cool-ﬂame radiometric measurements.
+• For the tests described above obtain a measure of the cool ﬂame diameter.
+7.2 Complete Success
+• Obtain droplet diameter and either OH∗/CH color video hot-ﬂame measurements as func-
+tion of time for n-dodecane over a range of pressures spanning 0.5 - 5.0 atm (minimum of
+seven pressure conditions) and at least three ambient oxygen mole fractions and three diluent
+47
+
+--- page 48 ---
+gases for a range of droplets that exhibit cool ﬂame burning and cool-ﬂame extinction.
+• Acquire droplet diameter and either OH∗/CH or color video ﬂame measurements for seven
+additional pure fuels and/or fuel mixtures identiﬁed in Table 4 over a range of pressures
+spanning 0.5 - 5.0 atm (minimum of seven pressure conditions) and at least three ambient
+oxygen mole fractions for a range of droplets that exhibit cool ﬂame burning and cool ﬂame
+extinction.
+• For the tests described above obtain hot-ﬂame and cool-ﬂame radiometric measurements.
+• For the tests described above obtain a measure of the cool ﬂame diameter.
+8 Data Requirements
+The primary scientiﬁc data obtained during these experiments will be the time histories of droplet
+diameter, ﬂame shape, and radiant energy output by the ﬂame. All of the data from the ﬂight
+experiment will be stored and archived electronically in an open-source format and be publicly
+available. This includes scientiﬁc image and radiometric data as well as housekeeping data such as
+chamber temperature, pressure, etc. The GRC investigators will be responsible for archiving the
+raw and analyzed experimental data.
+In addition, pending available resources, the Science Deﬁnition Team expects to analyze the
+ﬂight data as detailed below both during and after the completion of the experiment. That data
+will also be in an open source data format and be made publicly available.
+8.1 Temporal Droplet History
+The measurement of the droplet history comes from the recorded backlit image data by measuring
+the size of the droplet as a function of time before and after ignition. The droplet burning rate
+and extinction droplet diameter are derived from this data. The archived data will include the
+raw images from the CIR camera along with the camera settings, illumination package details and
+scale factors. Additional archived data will include, at a minimum, analyzed data of the equivalent
+droplet size as a function of time, the initial and extinction droplet sizes, droplet shape (for ﬁber
+supported droplets).
+8.2 Flame Shape and Structure
+Two cameras provide ﬂame images as a function of time, theOH∗/CH andCH2O images and the
+view from a color CCD camera. There is a large amount of data derived from these views including,
+but not limited to ﬂame size and shape as a function of time, radial OH∗ proﬁles (Marchese et al.,
+1996), ﬂame luminosity and color (qualitative measures of soot formation/destruction) as functions
+of time, and the time of ﬂame extinction. Accurate measurements require that the ﬂame be in focus
+and that appropriate scale factors are available. The archived data will include the raw images from
+all of the cameras along with all of the camera settings and calibrations, and scale factors.
+48
+
+--- page 49 ---
+8.3 Flame Radiation
+Data obtained from both the wide and narrow band radiometers will be used to measure the non-
+luminous ﬂame radiation. Accurate measurements require calibrated radiometers with well-deﬁned
+spectral characteristics. In order to be useful in extracting extinction information and obtain ratios
+of radiative heat loss to combustion heat release, the data must be accurately time stamped and
+correlated with the ﬂame, droplet and soot image data. The archived data will include the raw
+radiometer data, the calibration factors and view factor information (geometry of the radiometer
+relative to the droplet). Analyzed data will include, at a minimum, the ﬂame radiance as a function
+of time (time-stamped to the video data).
+9 Principal Deliverables
+The science team at GRC, under the direction of the SDT will process and archive all of the
+downloaded data mentioned in the previous section.
+49
+
+--- page 50 ---
+References
+Banu, B. (2008). Fluids and combustion facility (FCF) and combustion integrated rack (CIR). Pay-
+load Accomodations Handbook CIR-DOC-4064, NASA John H. Glenn Research Center, Cleve-
+land, Ohio.
+Biet, J., Hakka, M. H., Warth, V., Glaude, P.-A., and Battin-Leclerc, F. (2008). Experimental and
+modeling study of the low-temperature oxidation of large alkanes. Energy & Fuels, 22(4):2258–
+2269.
+Buda, F., Bounaceur, R., Warth, V., Glaude, P.-A., Fournet, R., and Battin-Leclerc, F.
+(2005). Progress toward a uniﬁed detailed kinetic model for the autoignition of alkanes from
+c4toc 10between 600 and 1200 k. Combustion and ﬂame , 142(1):170–186.
+Card, J. and Williams, F. (1992a). Asymptotic analysis of the structure and extinction of spherically
+symmetrical n-heptane diﬀusion ﬂames. Combustion science and technology , 84(1-6):91–119.
+Card, J. and Williams, F. (1992b). Asymptotic analysis with reduced chemistry for the burning of
+n-heptane droplets. Combustion and ﬂame , 91(2):187–199.
+Chao, B., Law, C., and T’ien, J. (1991). Structure and extinction of diﬀusion ﬂames with ﬂame
+radiation. volume 23, pages 523–531. Elsevier.
+Chaos, M. and Dryer, F. L. (2008). Syngas combustion kinetics and applications. Combustion
+Science and Technology, 180(6):1053 – 1096.
+Chaos, M., Kazakov, A., Zhao, Z., and Dryer, F. L. (2007). A high-temperature chemical kinetic
+model for primary reference fuels. International Journal of Chemical Kinetics , 39(7):399–414.
+Choi, M. Y. and Dryer, F. L. (2001). Microgravity droplet combustion. Microgravity Combustion:
+Fire in Free Fall, Combustion Treatise, pages 183–297.
+Chung, S. H. and Law, C. K. (1986). An experimental study of droplet extinction in the absence
+of external convection. Combustion and Flame , 64:237–241.
+Cuoci, A., Frassoldati, A., Faravelli, T., and Ranzi, E. (2013). Cool ﬂames in droplet combustion.
+XXXVI Meeting of the Italian Section of the Combustion Institute .
+Cuoci, A., Mehl, M., Buzzi-Ferraris, G., Faravelli, T., Manca, D., and Ranzi, E. (2005). Autoigni-
+tion and burning rates of fuel droplets under microgravity. Combustion and Flame , 143(3):211 –
+226.
+Curran, H., Gaﬀuri, P., Pitz, W., and Westbrook, C. (1998). A comprehensive modeling study of
+n-heptane oxidation. Combustion and Flame , 114(1–2):149 – 177.
+Curran, H. J., Gaﬀuri, P., Pitz, W., and Westbrook, C. (2002). A comprehensive modeling study
+of iso-octane oxidation. Combustion and ﬂame , 129(3):253–280.
+Davidson, D., Haylett, D., and Hanson, R. (2008). Development of an aerosol shock tube for kinetic
+studies of low-vapor-pressure fuels. Combustion and Flame , 155(1):108–117.
+Dembia, C. L., Liu, Y. C., and Avedisian, C. T. (2012). Automated data analysis for consecutive
+images from droplet combustion experiments. Image Analysis and Stereology, 31:137 – 148.
+50
+
+--- page 51 ---
+Dietrich, D. L., Haggard Jr, J. B., Dryer, F. L., Nayagam, V., Shaw, B. D., and Williams, F. A.
+(1996). Droplet combustion experiments in spacelab. In Symposium (International) on Combus-
+tion, volume 26, pages 1201–1207. Elsevier.
+Dietrich, D. L., Struk, P. M., Ikegami, M., and Xu, G. (2005). Single droplet combustion of
+decane in microgravity: Experiments and numerical modeling. Combustion Theory and Modeling,
+9(4):569–585.
+Easton, J. W. (1998). Large diameter, radiative extinction experiments with decane droplets in
+microgravity. Master’s thesis, Case Western Reserve University, Cleveland, Ohio 44106.
+El Bakali, A., Delfau, J.-L., and Vovelle, C. (1999). Kinetic modeling of a rich, atmospheric
+pressure, premixed n-heptane/o¡ sub¿ 2¡/sub¿/n¡ sub¿ 2¡/sub¿ ﬂame. Combustion and ﬂame ,
+118(3):381–398.
+Faeth, G. (1977). Current status of droplet and liquid combustion. Progress in Energy and Com-
+bustion Science, 3(4):191–224.
+Fairlie, R., Griﬃths, J., Hughes, K., and Pearlman, H. (2005). Cool ﬂames in space: experi-
+mental and numerical studies of propane combustion. Proceedings of the Combustion Institute ,
+30(1):1057–1064.
+Farouk, T. I. and Dryer, F. L. (2014). Isolated n-heptane droplet combustion in microgravity:
+“Cool Flames - Two-stage combustion ”. Combustion and Flame , 161(2):565 – 581.
+Farouk, T. I., Hicks, M. C., and Dryer, F. L. (2014). Multistage oscillatory “cool ﬂame” behavior
+for isolated alkane droplet combustion in elevated pressure microgravity condition. Proceedings
+of the Combustion Institute , 35:to appear.
+Foster, M. R. and Pearlman, H. (2012). Non-isothermal cool ﬂames in unstirred static reactors: A
+compressible model with global kinetics. Microgravity Science and Technology, 24(2):113–125.
+Frank-Kamenetskii, D. A. and Thon, N. (1955). Diﬀusion and heat exchange in chemical kinetics .
+Princeton University Press Princeton.
+Griﬃths, J. (1995). Reduced kinetic models and their application to practical combustion systems.
+Progress in Energy and Combustion Science , 21(1):25–107.
+Haas, F. M., Chaos, M., and Dryer, F. L. (2009). Low and intermediate temperature oxidation of
+ethanol and ethanol-PRF blends: An experimental and modeling study. Combustion and Flame ,
+156:2346 – 2350.
+Haas, F. M., Ramcharan, A., and Dryer, F. L. (2011). Relative reactivities of the isomeric butanols
+and ethanol in an ignition qualitty tester. Energy and Fuels, 25:3909 – 3916.
+Harper, M. R., Geem, K. M. V., Pyl, S. P., Marin, G. B., and Green, W. H. (2011). Comprehensive
+reaction mechanism for n-butanol pyrolysis and combustion. Combustion and Flame , 158:16 –
+41.
+Held, T., Marchese, A., and Dryer, F. (1997). A semi-empirical reaction mechanism for n-heptane
+oxidation and pyrolysis. Combustion Science and Technology, 123(1-6):107–146.
+51
+
+--- page 52 ---
+Jahangirian, S., Dooley, S., Haas, F. M., and Dryer, F. L. (2012). A detailed experimental and
+kinetic modeling study of n-decane oxidation at elevated pressures. Combustion and Flame ,
+159(1):30 – 43.
+Kumagai, S. (1956). Combustion of fuel droplets in a falling chamber with special reference to the
+eﬀects of natural convection. Jet Propulsion, 26(9):786–790.
+Law, C. (1975). Aymptotic theory for ignition and extinction in droplet burning. Combustion and
+Flame, 24:89–98.
+Law, C. K. (1982). Recent advances in droplet vaporization and combustion. Progress in Energy
+and Combustion Science , 8(3):171–201.
+Marchese, A., Dryer, F., and Nayagam, V. (1999a). Numerical modeling of isolated n-alkane droplet
+ﬂames: initial comparisons with ground and space-based microgravity experiments. Combustion
+and Flame, 116(3):432–459.
+Marchese, A. J., Dryer, F. L., and Nayagam, V. (1999b). Numerical modeling of isolated n-alkane
+droplet ﬂames: initial comparisons with ground and space-based microgravity experiments. Com-
+bustion and Flame , 116(3):432 – 459.
+Marchese, A. J., Dryer, F. L., Nayagam, V., and Colantonio, R. O. (1996). Hydroxyl radical
+chemiluminescence imaging and the structure of microgravity droplet ﬂames. Proceedings of the
+Combustion Institute, 26:1219–1226.
+Naidja, A., Krishna, C., Butcher, T., and Mahajan, D. (2003). Cool ﬂame partial oxidation and its
+role in combustion and reforming of fuels for fuel cell systems. Progress in energy and combustion
+science, 29(2):155–191.
+Nayagam, V., Dietrich, D. L., Ferkul, P. V., Hicks, M. C., and Williams, F. A. (2012). Can cool
+ﬂames support quasi-steady alkane droplet burning? Combustion and Flame , 159(12):3583 –
+3588.
+Nayagam, V., Haggard, J., Colantonio, R., Marchese, A., Dryer, F., Zhang, B., and Williams, F.
+(1998). Microgravity n-heptane droplet combustion in oxygen-helium mixtures at atmospheric
+pressure. AIAA journal, 36(8):1369–1378.
+Pearlman, H. (2000). Low-temperature oxidation reactions and cool ﬂames at earth and reduced
+gravity. Combustion and ﬂame , 121(1):390–393.
+Perkin, W. H. (1882). Some observations on the luminous incomplete combustion of ether and
+other organic bodies. J. Chem. Soc., Trans., 41:363–367.
+Peters, N., Paczko, G., Seiser, R., and Seshadri, K. (2002). Temperature cross-over and non-thermal
+runaway at two-stage ignition of n-heptane. Combustion and Flame , 128(1–2):38 – 59.
+Prince, J. C. and Williams, F. A. (2012). Short chemical-kinetic mechanisms for low-temperature
+ignition of propane and ethane. Combustion and Flame , 159(7):2336–2344.
+Ranzi, E., Frassoldati, A., Granata, S., and Faravelli, T. (2005). Wide-range kinetic modeling study
+of the pyrolysis, partial oxidation, and combustion of heavy n-alkanes. Industrial & engineering
+chemistry research, 44(14):5170–5183.
+52
+
+--- page 53 ---
+Ranzi, E., Gaﬀuri, P., Faravelli, T., and Dagaut, P. (1995). A wide-range modeling study of
+n-heptane oxidation. Combustion and Flame , 103(1):91–106.
+Reitz, R. D. (2013). Directions in internal combustion engine research. Combustion and Flame ,
+160(1):1 – 8.
+Ridler, T. W. and Calvard, S. (1978). Picture thresholding using an iterative selection method.
+IEEE Transactions on Systems, Man, and Cybernetics , SMC-8(8):230 – 232.
+Robbins, J. and Shinn, C. (2010). Multi-user droplet combustion apparatus ﬂex2. Reﬂight Safety
+Data Package MDC-DOC-1790A, NASA John H. Glenn Research Center, Cleveland, Ohio.
+Schnaubelt, S., Moriue, O., Coordes, T., Eigenbrod, C., and Rath, H. J. (2000). Detailed numerical
+simulations of the multistage self-igniiton process of n-heptane isolated droplets and their veri-
+ﬁcation by comparison with microgravity experiments. Proceedings of the Combustion Institute ,
+28:953–960.
+Seiser, R., Pitsch, H., Seshadri, K., Pitz, W., and Gurran, H. (2000). Extinction and autoigni-
+tion of¡ i¿ n¡/i¿-heptane in counterﬂow conﬁguration. Proceedings of the Combustion Institute ,
+28(2):2029–2037.
+Shaw, B. D., Clark, B. D., and Wang, D. (2001). Spacelab experiments on combustion of hep-
+tane/hexadecane droplets. AIAA Journal, 39(12):2327 – 2336.
+Sheinson, R. S. and Williams, F. W. (1973). Chemiluminescence spectra from cool and blue ﬂames:
+Electrnically excited formaldehyde. Combustion and Flame , 21:221 – 230.
+Sirignano, W. A. (1983). Fuel droplet vaporization and spray combustion theory. Progress in
+Energy and Combustion Science , 9(4):291–322.
+Smith, J. M., Simmie, J. M., and Curran, H. J. (2005). Autoignition of heptanes; experiments and
+modeling. International journal of chemical kinetics , 37(12):728–736.
+Struk, P. M., Ackerman, M., Nayagam, V., and Dietrich, D. L. (1998). On calculating burning rates
+during ﬁber supported droplet combustion. Microgravity Science and Technology, XI/4:144–151.
+Struk, P. M., T’ien, J. S., Dietrich, D. L., and d B Lenhert (1997). Experimental studies of ﬂame
+shape around droplets in diﬀerent buoyant environments. 35th Aerospace Sciences Meeting and
+Exhibit AIAA-97-1001, American Institute of Aeronautics and Astronautics.
+Tanabe, M., Bolik, T., Eigenbrod, C., Rath, H., Sato, J., and Kono, M. (1996). Spontaneous
+ignition of liquid droplets from a view of non-homogeneous mixture formation and transient
+chemical reactions. In Symposium (International) on Combustion , volume 26, pages 1637–1643.
+Elsevier.
+Tanabe, M., Kono, M., Sato, J., Koenig, J., Eigenbrod, C., Dinkelacker, F., and Rath, J. J. (1995).
+Two stage ignition of n-heptane isolated droplets. Combustion Science and Technology, 108:103–
+119.
+Tanaka, S., Ayala, F., Keck, J. C., and Heywood, J. B. (2003). Two-stage ignition in hcci combus-
+tion and hcci control by fuels and additives. Combustion and ﬂame , 132(1):219–239.
+Wang, X.-j. and Mou, C. Y. (1985). A thermokinetic model of complex oscillations in gaseous
+hydrocarbon oxidation. The Journal of chemical physics , 83:4554.
+53
+
+--- page 54 ---
+Westbrook, C. K. and Dryer, F. L. (1981). Simpliﬁed reaction mechanisms for the oxidation of
+hydrocarbon fuels in ﬂames. Combustion science and technology , 27(1-2):31–43.
+Xu, G., Ikegami, M., Honma, S., Ikeda, K., Ma, X., Nagaishi, H., Dietrich, D. L., and Struk, P. M.
+(2003). Inverse inﬂuence of initial diameter on droplet burning rate in cold and hot ambiences:
+A themal action of ﬂame in balance with heat loss. International Journal of Heat and Mass
+Transfer, 46:1155–1169.
+Yang, C.-H. and Gray, B. F. (1969). Slow oxidation of hydrocarbons and cool ﬂames. The Journal
+of Physical Chemistry , 73(10):3395–3406.
+54

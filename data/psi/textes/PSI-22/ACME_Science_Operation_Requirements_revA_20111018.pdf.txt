@@ -1,0 +1,2026 @@
+Source : NASA PSI, PSI-22, Science Documents, ACME_Science_Operation_Requirements_revA_20111018.pdf
+
+--- page 1 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+1 
+ 
+ACME  
+Advanced Combustion via Microgravity Experiments 
+SCIENCE OPERATIONS REQUIREMENTS 
+Derived from ACME’s Integrated Science Requirements Document (ISRD) 
+Revision A 
+2011-OCT-18 
+ 
+Four fundamental investigations using gas-fueled laminar diffusion flames 
+ 
+Coflow Laminar Diffusion Flame (CLD Flame) 
+ PI Prof. Marshall B. Long, Yale University 
+ Co-I Prof. Mitchell D. Smooke, Yale University 
+Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) 
+PI  Prof. Derek Dunn-Rankin, University of California, Irvine 
+Co-I  Prof. Felix Weinberg, Imperial College, London 
+Co-I  Dr. Zeng-Guang Yuan, National Center for Space Exploration Research (NCSER)  
+Flame Design 
+PI  Prof. Richard L. Axelbaum, Washington University in St. Louis 
+Co-I  Prof. Beei-Huan Chao, University of Hawaii 
+Co-I  Prof. Peter B. Sunderland, University of Maryland 
+Co-I  Dr. David L. Urban, NASA Glenn Research Center 
+Structure and Response of Spherical Diffusion Flames (s-Flame) 
+ PI  Prof. Chung K. Law, Princeton University 
+ Co-I  Prof. Stephen D. Tse, Rutgers University 
+Co-I  Dr. Kurt R. Sacksteder, NASA Glenn Research Center 
+ 
+ 
+ 
+PREPARATION     CONCURRENCE 
+ 
+ 
+ 
+___________________________________  ___________________________________ 
+Dennis P. Stocker, Project Scientist  J. Mark Hickman, Project Manager 
+dennis.p.stocker@nasa.gov 
+216-433-2166 
+ 
+Tracked changes in this document (in MS Word) are relative to the baseline 2011-05-16 version.
+
+--- page 2 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+2 
+ 
+Page is intentionally blank.
+
+--- page 3 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+3 
+ 
+ 
+OUTLINE        Page 
+Nomenclature         3 
+Science Summary         4 
+Introduction          6 
+Functional Requirements        8 
+1. General Requirements       8 
+2. Pause Functions         9 
+3. Hardware Set Up Functions      9 
+4. Chamber Ops Functions     10 
+5. Initiation & Shut Down Functions    10 
+6. Chamber Illumination Functions    11 
+7. Illumination Package Functions    12 
+8. Ignition Functions      12 
+9. Gas Flow Functions      13 
+10. TFP Pyrometry Functions     16 
+11. Electric Field Functions     17 
+12. Extinction Functions      19 
+Appendices         23 
+A. Variation Examples      23 
+B. CLD Flame (2 example sequences)   27 
+C. E-FIELD Flames (3 example sequences)  32 
+D. Flame Design (1 example sequence)   41 
+E. s-Flame (1 example sequence)    43 
+ 
+ 
+NOMENCLATURE 
+ACME Advanced Combustion via Microgravity Experiments 
+CIR Combustion Integrated Rack 
+GCIP Gas Chromatograph Instrumentation Package (which is a CIR instrument) 
+IPSU Image Processing and Storage Unit (for CIR cameras) 
+ISS International Space Station 
+ISRD Integrated Science Requirements Document (for all 4 ACME experiments) 
+MFC Mass Flow Controller (which are found in both ACME and CIR hardware) 
+mm millimeter 
+ops operational / operations 
+PMT Photomultiplier Tube (instrument for measuring chemiluminescent emission) 
+s second 
+SAMS Space Acceleration Measurement System 
+TFP Thin Filament Pyrometry (technique for measuring the temperature distribution)
+
+--- page 4 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+4 
+ 
+Science Summary 
+The Advanced Combustion via Microgravity Experiments (ACME) project is now under 
+development with a set of four independent experiments which are each focused on 
+advancing combustion technology through fundamental research.  The current ACME 
+experiments are specifically directed at addressing energy and environmental concerns.  
+The overall goals are to improve our understanding of (1) combustion at fuel lean 
+conditions where both optimum performance and low emissions can be achieved, (2) 
+combustion of fuels with increased hydrogen content which could enable reduced 
+greenhouse emission, (3) soot control and reduction, (4) oxygen enriched combustion 
+which could enable practical carbon sequestration, and (5) use of electric fields for 
+combustion control.  Unlike the Flame Extinguishment Experiment (FLEX), ACME is not 
+focused on the advancement of spacecraft fire safety technology, although it is likely 
+that some ACME findings will be relevant.  While distinct, the experiments share several 
+significant traits.   The principal unifying feature of the ACME experiments is their use of 
+gaseous fuels (e.g., methane and ethylene) rather than liquid or solid fuels.  With this in 
+common, the experiments will be conducted within the Combustion Integrated Rack 
+(CIR) through the use of a single modular insert.  In addition to the fuel state, the current 
+set of ACME experiments all use laminar, non-premixed (i.e., diffusion) flames for their 
+studies.  To simplify analysis, these flames are either one or two dimensional, 
+depending upon the experiment. 
+ 
+A general goal of the current ACME experiments is to gain fundamental understanding 
+that can enable improved efficiency and reduced emissions in practical combustion 
+processes, for example through the development and verification of models for chemical 
+kinetics and transport processes in computational simulations.  In addition to enhanced 
+performance, improved modeling capability can lead to reductions in the time and cost 
+for combustor design.  In summary, microgravity investigations of non-premixed flames 
+could lead to eco-friendly combustion systems providing our nation with green power for 
+the future. 
+ 
+Coflow Laminar Diffusion Flame (CLD Flame) 
+Research, especially including that already conducted in microgravity, has revealed that 
+our current predictive ability is significantly lacking for flames at the extremes of fuel 
+dilution, namely for sooty pure-fuel flames and dilute flames that are near extinction.  
+The general goal of the Coflow Laminar Diffusion Flame (CLD Flame) experiment is to 
+extend the range of flame conditions that can be accurately predicted by developing and 
+experimentally verifying chemical kinetic and soot formation submodels.  The 
+dependence of normal coflow flames on injection velocity and fuel dilution will be 
+carefully examined for flames at both very dilute and highly sooting conditions.
+
+--- page 5 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+5 
+ 
+Measurements will be made of the structure of diluted methane and ethylene flames in 
+an air coflow.  Lifted flames will be used as the basis for the research to avoid flame 
+dependence on heat loss to the burner.  The results of this experiment will be directly 
+applicable to practical combustion issues such as turbulent combustion, ignition, flame 
+stability, and more. 
+ 
+Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) 
+An electric field can strongly influence flames because of its effect on the ions present 
+as a result of the combustion reactions.  The direct ion transport and the induced ion 
+wind can modify the flame shape, alter the soot or flammability limits, direct heat 
+transfer, and reduce pollutant emission.   The purpose of the Electric-Field Effects on 
+Laminar Diffusion Flames (E-FIELD Flames) experiment is to gain an improved 
+understanding of flame ion production and investigate how the ions can be used to 
+control non-premixed flames.  Outside reviewers concluded that the experiment “… will 
+contribute to our critical understanding to our knowledge of combustion processes in the 
+presence of electric fields.”  The experiment will be conducted with a simple gas-jet 
+flame, where an electric field will be generated by creating a high voltage (up to 10 kV) 
+differential between the burner and a flat circular mesh above (i.e., downstream of) the 
+burner.  Measurements, as a function of field strength and fuel dilution, will be made of 
+the ion current through the flame and the flame’s response time to electric forcing. 
+ 
+Flame Design 
+The primary goal of the Flame Design experiment is to improve our understanding of 
+soot inception and control in order to enable the optimization of oxygen enriched 
+combustion and the “design” of non-premixed flames that are both robust and soot free.  
+An outside review panel declared that Flame Design “… could lead to greatly improved 
+burner designs that are efficient and less polluting than current designs."  Flame Design 
+will investigate the soot inception and extinction limits of spherical microgravity flames, 
+created in the same manner as for the s-Flame experiment.  Tests will be conducted 
+with various concentrations of both the fuel (i.e., ethylene or methane) and oxygen in 
+order to determine the role of the flame structure on the soot inception.  The effect of 
+the flow direction on soot formation will be assessed by studying both normal flames 
+and inverse flames, where in the latter case an oxygen/inert mixture flows from the 
+spherical burner into a fuel/inert atmosphere.  The Flame Design experiment will 
+explore whether the stoichiometric mixture fraction can characterize soot and 
+flammability limits for non-premixed flames like the equivalence ratio serves as an 
+indicator of those limits for premixed flames.
+
+--- page 6 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+6 
+ 
+Structure and Response of Spherical Flames (s-Flame) 
+The purpose of the Structure and Response of Spherical Flames (s-Flame) experiment 
+is to advance our ability to predict the structure and dynamics, including extinction, of 
+both soot-free and sooty flames.  The spherical flame, which is only possible in 
+microgravity, will be created through use of a porous spherical burner from which a 
+fuel/inert gas mixture will issue into the CIR chamber.  Flames will be ignited at non-
+steady conditions and allowed to transition naturally toward extinction.  Tests will be 
+conducted with various inert diluents, in both the fuel and chamber atmosphere.  The 
+fuel gases include hydrogen and methane for soot-free flames, and ethylene for sooty 
+flames.  One experiment objective is to identify the extinction limits for both radiative 
+and convective extinction (i.e., at high and low system Damkohler numbers, 
+respectively).  Another objective is to determine the existence, onset, and nature of 
+pulsating instabilities that have been theoretically predicted to occur in such flames with 
+fuel/diluent mixtures that are above a critical Lewis number. 
+ 
+ 
+INTRODUCTION 
+The ACME project currently includes four distinct experiments and will tentatively include 
+even more in the future.  Therefore, it is critical that the project adopt a flexible approach 
+to experiment control.  This flexibility can be achieved through a set of explicit, and 
+generally predefined and verified, functions which can be selected, repeated as needed, 
+and ordered to create a variety of overall experiment sequences.  Functions can include 
+variable parameters, e.g., flow rate(s), providing additional flexibility.  Furthermore, 
+experiments can be run via either operator or software control.  This approach to 
+operational (ops) control is similar to the ordered stringing of beads to make a necklace, 
+where each bead represents a function, and where each bead’s characteristics (e.g., 
+color, shape, size) represent its function and the associated variable parameters.  The 
+approach is further explained in section 1 of this document, i.e., General Requirements.  
+ 
+As defined herein, the control functions almost always occur in a serial fashion, but 
+multiple operations may occur simultaneously.  For example, sequential functions may 
+in turn activate non-imaging and imaging data acquisition, the CIR illumination package, 
+and fuel flow such that all are active at the same time.  While these are operating, a 
+timed function can also occur, e.g., translating the TFP fiber array.  Normally, only a 
+single timed function will be operative at a time, given their serial arrangement.  
+However, there is at least one critical exception, namely the automated detection of 
+extinction, where that function should normally always be active following ignition when 
+the burner reactant(s) are flowing.   Note that extinction detection requires
+
+--- page 7 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+7 
+ 
+measurement filtering over time (e.g., time averaging) to avoid the false detection that 
+could result from signal noise. 
+ 
+The following requirements provide a great deal of operational control, allowing for  
+stepped, stair-cased, ramped, rectangular-wave, and triangular-wave changes in the 
+flow or electric field potential (i.e., voltage), and ramped or triangular-wave translation of 
+the TFP fiber array.  Examples of such control are shown graphically in Appendix A.  
+Provisions are included for operator control to allow for determination of, or operation at 
+(or near), limit conditions such as soot inception, lifting, and extinction. 
+ 
+While operational sequences specific to each experiment are described in section 4 of 
+the ACME ISRD, these should be considered as specific examples of possible 
+sequences.  Furthermore, it should be understood that important operational 
+requirements can be found in at least the following additional sections of the ISRD. 
+1.7 Electric Field 
+1.9 Burner Gas Delivery 
+1.0 Ignition 
+1.11 Ambient Environment 
+1.12 Data Synchronization and Recording 
+2.3 Gas Flow Rates 
+3.1 Color Imaging for Operations 
+3.2 Color Imaging for Data Analysis 
+3.4.3 Temperature: Hot Soot-Free Regions 
+3.5 Soot Volume Fraction 
+3.7 Chemiluminescent Emission 
+3.9 Post-Test Gas Composition
+
+--- page 8 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+8 
+ 
+Any text in italics is a comment and not a requirement. 
+ 
+FUNCTIONAL REQUIREMENTS 
+The functions are tentatively identified as being instant or timed (or sometimes general) 
+and are categorically associated with either CIR or ACME operati ons.  K ey associated 
+requirements from ISRD sections 1 -3 are also cited at the end of each functional 
+requirement, but specific citations are not provided for ISRD section 4. 
+ 
+1. [CIR & ACME] General Requirements 
+1.1. [general] ACME shall provide flexible experiment control based on explicit 
+functions which can be selected, repeated as needed, and ordered ( like colored 
+beads on a string) to create a variety of overall experiment sequences.  Where 
+possible, flexibility shall be provided within the individual functions by allowing 
+the specification of relevant parameters ( like the flow rate, or by analog the size 
+of the bead).   Flexibility is critical for avoiding limitations that could hinder 
+operations or limit ACME science.  For example, the SOFBALL experiment 
+(STS-83, STS-94, and STS -107) initially had a hard shutoff at 5 minutes 
+because it was fully expected that the flames would extinguish by that time.  
+However, that assumption was found to be faulty and the tests terminated while  
+flames were still burning diminishing the scientific return.  The test duration could 
+not be extended until a subsequent spaceflight .  Flexible experiment control will 
+also enable future ACME experiments which differ operationally from the current 
+set of ACME experiments. 
+1.2. [general] During at least combustion, ACME shall be capable of operations by 
+either automated software control  or operator control.  ACME shall furthermore 
+be capable of both automated and operat or control within a single test, but 
+where automated and operator control are not required simultaneously.   
+Software control allows for a higher fidelity of time control (e.g., as can be 
+important for some experiments or tests) , while operator control all ows a human 
+response to downlinked measurements, which can be especially valuable when 
+trying to either identify or test at (or near) limit conditions, e.g., for soot inception, 
+lifting, or extinction. 
+1.3. [general] ACME shall provide for automated software control through sequences 
+of functions that are each either instant (i.e., without a duration) or timed, i.e., 
+with a variable duration that is a parameter of that function. 
+1.4. [general] ACME shall be capable of software upgrades, i.e., capable of 
+developing and using new operational functions, for ISS operations after the 
+ACME hardware has already been delivered to the ISS.  The purpose for this 
+requirement is to support future, and as of yet undefined, ACME experiments. 
+1.5. [general] ACME shall not prevent the pos sible implementation of future closed-
+loop software functions, where control of some parameter (s) (e.g., gas flow) is 
+based on one or more non-imaging measurements, e.g., temperature, thermal 
+radiation, chemiluminescent emission.  This requirement only applies to control 
+parameters and measurements for the ACME chamber insert and does not
+
+--- page 9 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+9 
+ 
+apply to parameters or measurements associated with other hardware, such as 
+CIR and SAMS.  The purpose for this requirement is to support future, and as of 
+yet undefined, ACME experiments. 
+1.6. [general] Unless otherwise specified, ACME shall be capable of carrying out 
+operational functions while simultaneously doing any specified subset  or all of 
+the following in a time-constant manner: (1) acquiring imaging and non- imaging 
+data, (2) flowing gas, (3) illuminating the chamber, (4) projecting light from the 
+CIR illumination package, (5) energizing the electric field, and (6) sensing for 
+flame extinction .  For operational reasons (e.g., to conserve fuel or protect 
+hardware), there could also be simultaneous monitoring for out -of-range 
+measurements (e.g., chamber pressure or temperature) that could initiate an 
+alert or automatically shut down the test.  
+1.7. [general] ACME shall provide a detailed time log of commands issued (i.e., 
+functions enacted) for each test conducted.  This will aid in the analysis of 
+results, e.g., to determine whether a flame naturally extinguished ( where 
+extinction detection would lead to automated termination of the burner flow) or 
+whether it extinguished as the direct result of commanded flow termination (e.g., 
+because the flow time duration was reached). 
+2. [CIR & ACME] Pause Functions 
+2.1. [timed] ACME shall be capable of pausing for a specified duration between 
+functions, where it shall be possible to specify a durat ion in the range of  at least 
+0.01 to 99 9.99 s, with a precision of 0.01 s or less, where a precision smaller 
+than 0.0001 s is probably more than adequate.   Pauses of specified duration, 
+especially when short, can or should be controlled by software.   This function 
+has a single parameter: the specified duration. 
+2.2. [general] ACME shall be capable of pausing for a specified duration between 
+functions, where it shall be possible to specify a duration in the range of at least 
+10 s to 99 minutes, with an uncertaint y of no more than the larger of (a) 5 s or 
+(b) 10% of the specified duration.  Long pauses can be operator controlled, 
+where the operator initiates the start and end through separate instant functions.  
+This function has a single parameter: the specified duration. 
+3. [CIR & ACME] Hardware Set Up Functions 
+3.1. [general] ACME shall be capable of installing and removing specified CIR or 
+ACME hardware at  specified positions external to the CIR chamber , where the 
+hardware shall include (at a minimum) all of the following or any specified subset 
+thereof: ACME avionics package, the GCIP, CIR and ACME imaging packages, 
+IPSUs, the CIR illumination package, gas bottles, and a filter cartridge. 
+3.2. [general] ACME shall be capable of installing and removing specified ACME 
+hardware at specified positions on the ACME chamber insert assembly, where 
+the hardware shall include (at a minimum) all of the following  or any specified 
+subset thereof : burner, igniter tip (associated with the burner), electric field 
+components (including the el ectrode mesh, high- voltage power supplies, and 
+associated electronics), mass flow controllers, Thin Filament Pyrometry (TFP) 
+fiber array, f ar-field thermocouple array , and the Photomultiplier Tube (PMT) 
+array.
+
+--- page 10 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+10 
+ 
+3.3. [general] ACME shall be capable of cleaning the soot off of gas-jet burners  
+where this could be necessary if an unacceptabl y high leak current is measured 
+for the tests with an electric field.  The cleaning should be a rare event and 
+could be done by manually wiping off the burner tip or perhaps by igniting a 
+flame with certain flow conditions. 
+4. [CIR] Chamber Ops Functions 
+4.1. [general] ACME shall be capable of venting the CIR chamber atmosphere to a 
+specified pressure within a range of at least 0.01 to 3 bar, with an uncertainty of 
+no more than the greater  of 0.01 bar or 1% of the specified pressure, where a 
+precision smaller than 0.1% of the specified pressure is probably more than 
+adequate.  This functi on has a single parameter:  the specified pressure.  [ISRD 
+1.11.1] 
+4.2. [instant] ACME shall be capable of act ivating and deactivating the scrubbing of 
+the CIR chamber atmosphere , i.e., circulating it through a specified filter 
+cartridge without venting .  Such scrubbing will allow for reuse of the chamber 
+atmosphere, where the upmass requirement for gas bottles is  dominated by the 
+gas used to fill the chamber. Furthermore, only a very small fraction of the 
+reactant in the atmosphere (i.e., oxygen for normal flame testing) is consumed in 
+a test.  [ISRD 1.11.1]  
+4.3. [general] ACME shall be capable of verifying that the C IR chamber is sealed, 
+i.e., gas tight.  This is important for safety following any operation in which the 
+chamber is opened. 
+4.4. [general] ACME shall be capable of adding specified gas to  the CIR chamber to 
+a specified pressure with a precision that shall  meet the composition and 
+pressure requirements (e.g., when the atmosphere is filled by partial pressure 
+mixing) documented in ISRD 1.11.1 and 1.11.4 .  This allows for filling of the 
+chamber after partial or complete venting.  It also allows for replenishment o f 
+reactant (ideally enriched relative to the chamber composition), potentially 
+without initial venting, but normally followed by venting to return to the specified 
+pressure.  Per the baselined ACME requirements, the initial total pressure (not 
+partial pressure) can range from 0.1 to 3 bar, and the composition is to be within 
+±0.01 mole fraction.  [ISRD 1.11.1, 1.11.4] 
+4.5. [instant] ACME shall be capable of activating and deactivating the CIR chamber 
+fan.  The duration for the chamber mixing (via the chamber fan) is not explicitly 
+specified in the ISRD, but the current plan is to run the fan for a duration that is 
+at least 100 times the chamber volume divided by the fan’s volumetric flow  rate.  
+[ISRD 1.11.2, 1.11.3] 
+4.6. [general] If the GCIP is available, ACME shall be capable of operations providing 
+species concentration measurements of the chamber atmosphere using the 
+GCIP.  Assuming availability of the GCIP, the measurements will be made 
+before and/or after tests and wi th and/or without mixing of the atmosphere via 
+the chamber fan.  [ISRD 3.9.1] 
+5. [CIR & ACME] Initiation & Shut Down Functions 
+5.1. [instant] ACME shall be capable of powering and de- powering all CIR and 
+ACME components that are electrically powered or any specified subset thereof.
+
+--- page 11 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+11 
+ 
+All such devices sh all be powered up in advance of operation, including data 
+acquisition, by at least the minimum warm-up durations recommended by their 
+manufacturers so that they function properly  and provide accurate 
+measurements, if any .  For ACME, the warm- up of the Mass Flow C ontrollers 
+(MFCs) is particularly important.  [ISRD 1.9.3, 1.9.4, 2.3.1] 
+5.2. [instant] ACME shall be capable of inserting and rem oving optical filters (e.g., 
+BG7) from the ACME data analysis camera unless there are multiple data 
+analysis cameras providing each required configuration .  Per the baselined 
+requirements, the data analysis imaging is required both with and without a BG7 
+filter, where that requirement could be met by two cameras (i.e., one with the 
+filter and one with no filter) and without this function.  [ISRD 3.2.11] 
+5.3. [instant] ACME shall be capable of  configuring the CIR and ACME camera 
+settings, e.g., as specified in ISRD 3.1.4 and 3.2.1.3.  [ISRD 3.1.4, 3.2.13] 
+5.4. [instant] ACME shall be capable of starting and stopping non- imaging data 
+acquisition (i.e., recording) for instruments specified in 1.12.7 .  The data 
+acquisition could be initiated in advance of ignition by as much as the value 
+specified in ISRD 1.12.2, and stopped after extinction by as much the value 
+specified in ISRD 1.12.2 .  Per the baselined requirements, each of th ose 
+durations could be as much as 5 minutes.   It should also be understood that 
+some experiments or specific tests may not use the full suite of possible 
+instruments.  For example, the ion current measurement is only applicable to 
+experiments using the electric field.  In contrast, the removable thermocouple 
+rake will not be used in tests with the electric field because of the resulting 
+interference.  However, it is anticipated that the acquisition for all measurements 
+from th e ACME chamber insert  would begin and end together, but 
+measurements from other hardware, e.g., CIR or SAMS, could begin or end at 
+different times.  As such, it is envisioned that multiple copies of the function 
+might be used.  [ISRD 1.12.2, 1.12.7] 
+5.5. [instant] ACME shall be capable of starting and stopping imaging data 
+acquisition (i.e., recording) for all cameras  specified in 1.12.7  or any specified 
+subset thereof.  The data acquisition could be initiated in advance of ignition by 
+as much as the value speci fied in ISRD 1.12. 3, and stopped after extinction by 
+as much the value specified in ISRD 1.12.3 .  Per the baselined requirements, 
+each of those durations could be as much as 1 minute.   Note that t he pre-
+ignition and post -extinction durations may vary between cameras  (i.e., through 
+multiple uses of this function) .  Furthermore, it should be understood that some 
+experiments or specific tests may not use the full suite of cameras.   [ISRD 
+1.12.3, 1.12.7]  
+6. [ACME] Chamber Illumination Functions 
+6.1. [instant] ACME sh all be capable of activating and deactivating any specified 
+bank(s) of chamber lights .  While not explicitly required, a specific variation of 
+this function could be used to turn off all chamber light banks (where that 
+variation would require no parameters ). This function’s parameters are the 
+independent specification (i.e., on or off) of each bank of chamber lights, i.e.,
+
+--- page 12 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+12 
+ 
+where the number of parameters is equal to the number of light banks.   [ISRD 
+3.1.8] 
+6.2. [timed] ACME shall be capable of activating any specified bank(s) of chamber 
+lights for a specified duration ( where it shall be possible to specify a duration in 
+the range of at least 0.03 s to 999.99 s with a precision of 0.01 s or less, where a 
+precision smaller than 0.001 s is probably more than adequate), and then 
+deactivating those same bank(s) of chamber lights  which had been activated .  
+This function’s parameters include the duration (for all specified lights) plus 
+independent specification of each bank of chamber lights .  Therefore, the 
+number of par ameters is one greater than the number of light banks .   [ISRD 
+3.1.8] 
+6.3. [timed] ACME shall be capable of activating any specified bank (s) of chamber 
+lights for a specified lights -on duration ( where it shall be possible to specify a  
+duration in the range of at least 0. 03 s to 999.99 s with a precision of 0. 01 s or 
+less) and then deactivating those same bank(s) of chamber lights (i.e., which 
+had been activated) for a specified lights -off duration (where it shall be possible 
+to specify a duration in the range of at least 0.03 s to 999.99 s with a precision of 
+0.01 s or less) for a specified number of cycles (ranging from at least 1 to 9,999).  
+For the two specified durations, a precision smaller than 0.001 s is probably 
+more than adequate.  This flashing on-off illumination is useful for alternating 
+imaging of both the flame and a  solid fuel, i.e., to see the char pattern, as might 
+be required in future ACME experiment(s).  Function 6.3 is a repeated sequence 
+of coupled 6.2 and 2.1 (pause) commands.  This function’s parameters include 
+two durations (for all specified lights) , the specified number of cycles,  plus 
+independent specification of each bank of chamber lights.   Therefore, the 
+number of parameters is three greater than the number of light banks.   [ISRD 
+3.1.8] 
+7. [CIR] Illumination Package Functions 
+7.1. [instant] ACME shall be capable of activating the CIR illumination package at a 
+specified intensity (within its full operational range).   This function has a single 
+parameter: the specified intensity.  [ISRD 3.5.4, 3.5.6] 
+7.2. [instant] ACME shall be capable of adjusting the intensity of the illumination 
+(within its full operational range) while the illumination package is activated, i.e., 
+without deactivating and reactivating it.   This function has a single parameter: 
+the specified new intensity.  [ISRD 3.5.4, 3.5.6]  
+7.3. [instant] ACME shall be capable of deactivating the CIR illumination package.  
+No parameters are required for this function.  [ISRD 3.5.4, 3.5.6] 
+8.  [ACME] Ignition Functions 
+8.1. [timed] ACME shall be capable of translating the igniter  at a specified rate 
+(where it sh all be possible to specify a rate in the range of at least 0.0 to 50 .0 
+mm/s with an uncertainty of no more than 0.1 mm/s, where a precision smaller 
+than 0.001 mm/s is probably more than adequate) , neglecting the initial 
+acceleration, to a specified position (with a precision of 1 mm or less and over a 
+range extending nominally from the burner tip to at least beyond the free area 
+specified in ISRD 1.11.8 or 1.11.9 corresponding to the burner in use).  Per the
+
+--- page 13 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+13 
+ 
+baselined requirements, the igniter insertion is to be at least 30 s prior to ignition 
+and the retraction is to be within 0.5 s of ignition detection, although such 
+detection is currently not planned.   Note that specification of the end position 
+and travel time is functionally equivalent to specifying th e translation speed.   
+This function has two parameters:  the translation speed (or duration) and the 
+end position.  [ISRD 1.10.2, 1.11.8, 1.11.9] 
+8.2. [timed] ACME shall be capable of energizing the igniter at a specified voltage 
+(with a precision of 2 % or less, where a precision smaller than 0.2% is probably 
+more than adequate,  and within a range of at least 50 % to 100% of the 
+maximum power ), for a specified duration ( with a precision of 0.1 s or less , 
+where a precision smaller than 0.01 s is probably more than adequate,  and 
+within a range that is at least that specified in 1.11.4)  and de- energizing the 
+igniter.  Per the baselined requirements, the igniter is to be energized from 0 to 
+10 s.  This command could be repeated in (near) immediate succession using 
+two different voltages to allow for igniter pre- heating, e.g., before the initiation of 
+fuel flow in order to short en the ignition time.  This function has two parameters , 
+i.e., the voltage and the duration.  [ISRD 1.10.2, 1.10.3, 1.10.4, 1.11.8, 1.11.9] 
+9.  [CIR & ACME] Flow Control Functions 
+9.1. [instant] ACME shall be capable of zeroing all ACME MFCs  or any specified 
+subset thereof  to improve the accuracy of the flow control and measurement .  
+This function has three parameters for the independent specification (i.e., to zero 
+or not) of the three ACME MFCs (for fuel, oxidizer, and inert).   [ISRD 1.9.3, 
+1.9.4, 2.3.1] 
+9.2. [general] ACME shall be capable of venting all gas delivery lines or any specified 
+subset thereof. 
+9.3. [general] ACME shall be capable of  purging all gas del ivery lines  or any 
+specified subset thereof with the gas(es) with which those lines are currently 
+connected. 
+9.4. [instant] ACME shall be capable of setting all CIR MFCs or any specified subset 
+thereof for specified steady flow rate(s) (within a range of 0 to 1 00% and a 
+precision of 0.1% or less but where it is understood that the resulting flow 
+accuracy is a function of the specified value, gas, calibration, MFC response 
+time, etc.).  A gas flow rate precision smaller than 0.01% is probably more than 
+adequate.  Note that the specified flows may have different values and some 
+flows may be zero (i.e., no flow).   This function can be used to start flows, stop 
+flows (by setting them to zero), or make a single step in flows.   This function has 
+five parameters which are the flow rates for each of the five CIR MFCs (where 
+one is for fuel, three are for oxidizers and diluents, and one is for venting).   
+[ISRD 1.9.4] 
+9.5. [instant] ACME shall be capable of setting all ACME MFC s or any specified 
+subset thereof for specified steady flow rate(s) (within a range of 0 to 100% and 
+a precision of 0.1% or less but where it is understood that the resulting flow 
+accuracy is a function of the specified value, gas, calibration, MFC response 
+time, etc.).  A gas flow rate precision smaller than 0.01% is probably more than 
+adequate.  Note that the specified flows may have different values and some
+
+--- page 14 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+14 
+ 
+flows may be zero (i.e., no flow).  This function can be used to start flows, stop 
+flows (by setting them to zero), or make a single step in flows.   This function has 
+three parameters which are the flow rates for each of the three ACME MFCs 
+(where there is one each for fuel, oxidizer, and inert).  [ISRD 1.9.4] 
+9.6. [timed] ACME shall be capable of setting all ACME flows or any specified subset 
+thereof to step upward and/or downward by specified value( s) (within a range of 
+0 to 100% and a precision of 0.1% or less  but where it is understood that the 
+resulting flow accuracy is a function of the specified value, gas, calibration, MFC 
+response time, etc. ) and pausing to hold all flows steady for a specified wait 
+duration (with a precision of 0.1 s or less , where a precision smaller than 0.01 s 
+is probably more than adequate, and within a range of at least 0.1 to 999.9 s) for 
+a specified number of cycles (ranging from at least 1 to 9 99).  A gas flow rate 
+precision smaller than 0.01% is probably more than adequate.  This function 
+approximately allows for either a single step or a staircase of repeated steps , as 
+shown in Appendix A.  Of course, the flow rates are limited and will remain within 
+the operational range of the assoc iated MFCs. Note that some flows may be 
+steady or even zero while others are stepped, and the step deltas (i.e., heights) 
+may be different for each gas flow.  Furthermore, some flow(s) may step upward 
+while other(s) step downward, e.g., to maintain a total  flow rate while varying the 
+composition.  This function’s five parameters include the step size for each of 
+the three ACME MFCs (where any step might be positive, negative, or zero), the 
+wait duration (for all flows), and the number of cycles.  [ISRD 1.9.4] 
+9.7. [timed] ACME shall be capable of setting all ACME flows or any specified subset 
+thereof to linearly ramp upward and/or downward by specified value( s) (within a 
+range of 0 to 100% and a precision of 0.1% or less but where it is understood 
+that the result ing flow accuracy is a function of the specified value, gas, 
+calibration, MFC response time, etc.) for a specified ramp duration ( with a 
+precision of 0.1 s or less, where a precision smaller than 0.01 s is probably more 
+than adequate, and within a range of  at least 0.1 to 999.9 s ), and pausing with 
+all flows held steady for a specified wait duration ( with a precision of 0.1 s or 
+less, where a precision smaller than 0.01 s is probably more than adequate,  and 
+within a range of at least 0.0  to 999.9 s ) for a s pecified number of cycles 
+(ranging from at least 1 to 99 9).  A gas flow rate precision smaller than 0.01% is 
+probably more than adequate.  This function allows (approximately) for either a 
+single ramped step or a staircase of repeated ramp steps, as shown in Appendix 
+A.  Of course, the flow  rates are limited and will remain within the operational 
+range of the associated MFCs. Note that some flows may be steady or even 
+zero while others are ramped, and the ramp deltas (i.e., heights) may be 
+different for eac h gas flow .  Furthermore, some flow (s) may ramp upward while 
+other(s) ramp downward, e.g., to maintain a total flow  rate while varying the 
+composition.  This function’s six parameters include the step size for each of the 
+three ACME MFCs (where any  step might be positive, negative, or zero), the 
+ramp and wait durations (where both are for all flows), and the number of cycles.  
+[ISRD 1.9.4]
+
+--- page 15 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+15 
+ 
+9.8. [timed] ACME shall be capable of setting all ACME flows or any specified subset 
+thereof to step upward and/or downward by specified step- A value(s) (within a 
+range of 0 to 100% and a precision of 0.1% or less but where it is understood 
+that the resulting flow accuracy is a function of the specified value, gas, 
+calibration, etc. ), pausing with all flows held steady for spec ified “A” duration 
+(with a precision of 0. 1 s or less , where a precision smaller than 0.01 s is 
+probably more than adequate,  and within a range of at least 0.1 to 999.9 s ), 
+stepping the flow(s) downward and/or upward by specified step- B value(s) 
+(within a range of 0 to 100% and a precision of 0.1% or less but where it is 
+understood that the resulting flow accuracy is a function of the specified value, 
+gas, calibration, MFC response time, etc. ), pausing with all flows held steady for 
+a specified ”B” duration (with a precision of 0. 1 s or less , where a precision 
+smaller than 0.01 s is probably more than adequate,  and within a range of at 
+least 0.1 to 999.9 s ) for a specified number of cycles (ranging from at least 1 to 
+999).  A gas flow rate precision smaller than 0.01% is probably more than 
+adequate.  Examples of such flow control are depicted in Appendix A.  The step-
+A and step- B values should be equal in magnitude but of opposite sign to 
+approximately create a rectangular wave with a constant average.   And t he A 
+and B durations should also be equal if a ‘ square’ wave form is desired.   Of 
+course, the flow rates are limited and will remain within the operational range of 
+the associated MFCs. Note that s ome flows may be steady or even zero while 
+others are stepped , and the step deltas (i.e., heights) may be different for each 
+gas flow .  Furthermore, some flow(s) may step upward while other(s) step 
+downward, e.g., to maintain a total flow rate while varying the composition.   It 
+should be understood that functions 9.6  and 9.8 are quite similar, where 9.6  
+steps in one direction (for each specified gas flow) while 9.8  can step back and 
+forth.  As such, function 9.8  could be accomplished via a repeated sequence of 
+alternating 9.6 commands, with a pair  for each “wave” in the flow(s).   However, 
+9.8 can also be used to create a staircase with alternating steps of different 
+heights in the same direction (where this possibility is not shown in Appendix A) . 
+This function’s nine parameters include the step A and step B sizes for each of 
+the three ACME MFCs (where any step might be positive, negative, or zero), the 
+wait duration (for all flows)  for both step A and B , and the number of cycles.   
+[ISRD 1.9.4] 
+9.9. [timed] ACME shall be capable of setting all ACME flows or any specified subset 
+thereof to ramp upward and/or downward by specified ramp-A value(s) (within a 
+range of 0 to 100% and a precision of 0.1% or less but where it is understood 
+that the resulting flow accuracy is a function of the specified value, g as, 
+calibration, MFC response time, etc.) for a specified ramp- A duration (with a 
+precision of 0.1 s or less and within a range of at least 0.1 to 999.9 s) , pausing 
+with all flows held steady for specified hold-A duration (with a precision of 0. 1 s 
+or less and within a range of at least 0.0 to 999.9 s ), ramping the flow downward 
+and/or upward by specified ramp- B value(s) (within a range of 0 to 100% and a 
+precision of 0.1% or less but where it is understood that the resulting flow 
+accuracy is a function of the specified value, gas, calibration, MFC response
+
+--- page 16 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+16 
+ 
+time, etc.) for a specified ramp- B duration (with a precision of 0.1 s or less and 
+within a range of at least 0.1 to 999.9 s) , pausing with all flows held steady for a 
+specified hold-B duration (with a precision of 0.1 s or less and within a range of 
+at least 0.0 to 999.9 s ) for a specified number of cycles (ranging from at least 1 
+to 99 9).  A gas flow rate precision smaller than 0.01% is probably more than 
+adequate.  For the durations, a precision smaller than 0.0001 s is probably more 
+than adequate.  To approximately create a triangular wave with a constant 
+average, (1) the hold-A and hold-B durations should be zero, and (2) the ramp-A 
+and ramp-B values should be equal  in magnitude but of opposite sign.  By 
+setting appropriate durations to zero, the flow can be set in a sawtooth pattern. 
+Of course, the flow rates are limited and will remain within the operational range 
+of the associated MFCs. Note that some flows may be steady or even zero while 
+others are ramped, and the ramp deltas (i.e., heights) may be different for each 
+gas flow .  Furthermore, some flow(s) may ramp upward while other(s) ramp 
+downward, e.g., to maintain a total flow rate while varying the composition.   It 
+should be understood that funct ions 9.7 and 9.9 are quite similar, where 9.7  
+ramps in one direction (for each specified gas flow) while 9.9 can ramp back and 
+forth.  As such, function 9.9  could be accomplished via a repeated sequence of 
+alternating 9.7 commands, with a pair for each “wave” in the flow(s).   However, 
+9.9 can also be used to create a ramped staircase with alternating steps of 
+different heights in the same direction (where this possibility is not shown in 
+Appendix A).  This function’s eleven parameters include the step A and step B 
+sizes for each of the three ACME MFCs (where any step might be positive, 
+negative, or zero), the ramp and hold durations (for all flows) for both step A and 
+B, and the number of cycles.  [ISRD 1.9.4] 
+9.10. [instant] ACME shall be  capable of opening and closing all CIR solenoid 
+valves or any specified subset thereof.  [ISRD 1.9.4] 
+9.11. [instant] ACME shall be capable of opening and closing all ACME solenoid 
+valves or any specified subset thereof.   This function’s ten parameters 
+correspond to the ten solenoid values on the ACME chamber insert , i.e., so that 
+the open/close state of each valve can be specified.  [ISRD 1.9.4] 
+10.  [ACME] TFP Pyrometry Functions 
+10.1. [timed] ACME shall be capable of translating the TFP fiber array at a specified 
+rate (as high as at least 100 mm/s with an uncertainty of no more than 0.1 mm/s, 
+where an uncertainty smaller than 0.0001 mm/s is probably more than 
+adequate) to a position within its operational range which shall extend from at 
+least the center of the CIR chamber window axes (except that it shall not tou ch 
+the burner) to the edge of the free zone as specified in ISRD 1.11.8- 1.11.9.  It 
+should be understood that translation to a specified position at a specified rate is 
+equivalent to translation to that position in a specified duration.  Of course, the 
+TFP fiber array position must remain within its operational range, where it is 
+critical that it not be moved into the burner.   This function’s two parameters 
+include the translation rate (or duration) and the final TFP array position.   [ISRD 
+1.11.8, 1.11.9, 3.4.3.3, 3.4.3.4]
+
+--- page 17 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+17 
+ 
+10.2. [timed] ACME shall be capable of translating the TFP fiber array upward 
+and/or downward (i.e., downstream from or upstream toward the burner , 
+respectively) at a specified rate ( as high as at least 100 mm/s with an 
+uncertainty of no more than 0.1 mm/s, where an uncertainty smaller than 0.0001 
+mm/s is probably more than adequate) to a position within its operational range 
+which shall extend from at least the center of the CIR chamber window axes 
+(except that it shall not touch the burner) to the edge of the free zone as 
+specified in ISRD 1.11.8-1.11.9) and pausing for a specified wait duration (with a 
+precision of 0.01 s or less , where a precision smaller than 0.0 01 s is probably 
+more than adequate,  and within a range of at least 0. 00 to 999.99 s ) for a 
+specified number of cycles (ranging from at least 1 to 9 99).  This function allows 
+for either a single ramped step or a staircase of repeated ramp steps, as shown 
+in Appendix A.  It should be understood that translation to a specified position a t 
+a specified rate is equivalent to translation to that position in a specified duration.  
+Of course, the TFP fiber array position must remain within its operational range, 
+where it is critical that it not be moved into the burner.   Function 10.2 is a 
+repeated sequence of coupled 10.1 and 2.1 (pause) commands.  This function’s 
+four parameters include the translation rate and direction (or change in position), 
+the translation and hold durations, and the number of cycles.   [ISRD 1.11.8, 
+1.11.9, 3.4.3.3] 
+10.3. [timed] ACME shall be capable of translating the TFP fiber array  upward (i.e., 
+downstream from the burner)  at a specified ramp-up value ( as high as at least 
+100 mm/s with an uncertainty of no more than 0.1 mm/s), pausing for a specified 
+high-position duration (with a precision of 0.01 s or less, and within a range of at 
+least 0.00 to 99.9 s ), ramping the TFP fiber array downward (i.e., upstream 
+toward the burner)  by a specified ramp-down values as high as 100 mm/s with 
+an uncertainty of no more than 0.1  mm/s), pausing for a specified low-position 
+duration (with a precision of 0. 01 s or less, and within a range of at least 0 .00 to 
+99.99 s) for a specified number of cycles (ranging from at least 1 to 9 99).  For 
+the translation of the TFP fiber array and hold durations, uncertainties smaller 
+than 0.0001 mm/s and 0.001 s, respectively, are probably more than adequate.  
+Examples of such control are depicted in Appendix A.  To approximately create 
+a triangular wave with a constant average, (1) the  high-position and low-position 
+durations should be zero, and (2) the ramp -up and ramp-down values should be 
+equal.  It should be understood that translation to a specified position at a 
+specified rate is equivalent to translation to that position in a specified duration.   
+Of course, the TFP fiber array position must remain within its operational range, 
+where it is critical that it not be moved into the burner.   Function 10.3 is a 
+repeated sequence of a pair of 10.2  commands, i.e., to achieve the back and 
+forth translation.  This function’s seven parameters include the translation rate 
+(or change in position) for both up and down ramps, the translation and hold 
+durations for both up and down ramps, and the number of cycles.  [ISRD 3.4.3.3] 
+11. [ACME] Electric Field Functions 
+11.1. [instant] ACME shall be capable of activating the electric field at the specified 
+polarity (positive or negative) and voltage with a precision and range at least
+
+--- page 18 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+18 
+ 
+meeting ISRD 1.7.1.   Per the baselined ACME requirements, the electric field 
+shall have a range of (at least)  -10 kV to +10 kV with an accuracy of ±0.1% of 
+the set point .  This function’s single parameter is the specified voltage (which 
+may be positive, negative, or zero).  [ISRD 1.7.1, 1.7.4] 
+11.2. [instant] ACME shall be capable of resetting the electric field potential , by a 
+step change, adjusting the polarity (positive or negative) and/or voltage of the 
+electric field (with a precision and range at least meeting ISRD 1.7.1), while the 
+electric field is activated, i.e., without deactivating and reactivating it.  Of course, 
+the electric field voltage is limited and must remain within its operational range.   
+Per the baselined ACME requirements, the electric field shall have a range of (at 
+least) -10 kV to +10 kV with an accuracy of ±0.1% of the se t point .  This 
+function’s single parameter is the specified voltage (which may be positive, 
+negative, or zero).  [ISRD 1.7.1, 1.7.4] 
+11.3. [instant] ACME shall be capable of deactivating the electric field.   No 
+parameters are required for this function.  [ISRD 1.7.2, 1.7.4] 
+11.4.  [timed] ACME shall be capable of stepping the electric field voltage upward 
+and/or downward by a specified value ( corresponding to as much as the total 
+range and the precision specified in ISRD 1.7.1) and pausing with the voltage 
+held steady for a specified wait duration (with a precision of  0.005 s or less , 
+where a precision smaller than 0.0001 s is probably more than adequate,  and 
+within a range of at least 0.0 00 to 999.99 9 s) for a specified number of cycles 
+(ranging from at least 1 to 9,999).  This function allows for either a single step or 
+a staircase of repeated steps, as shown in Appendix A.  The electric field polarity 
+might or might not change as a result of the stepping.  Of course, the electric 
+field voltage is limited and must remain within its operational range.   Function 
+11.4 is a repeated sequence of coupled 11.2 and 2.1 (pause) commands.  This 
+function’s three parameters include the step size (which can be positive or 
+negative), the hold duration, and the number of cycles.  [ISRD 1.7.1, 1.7.2, 1.7.4] 
+11.5. [timed] ACME shall be capable of ramping the electric field voltage upward 
+and/or downward at a specified step size (or rate, with a precision and range at 
+least meeting ISRD 1.7.1) for a specified ramp duration ( with a precision of 0.01 
+s or less and within a range of at least 0.005 to 999.999 s), and pausing with the 
+voltage held steady for a specified wait duration (with a precision of 0.01 s or 
+less and within a range of at least 0.000  to 999.999 s) for a specified number of 
+cycles (ranging from at least 1 to 9,999).  For the durations, a precision smaller 
+than 0.0001 s is probably more than adequate.  This functio n allows for either a 
+single ramped step or a staircase of repeated steps , as shown in Appendix A .  
+The electric field polarity might or might not change as a result of the ramped 
+stepping.  Of course, the electric field voltage is limited and must remain within 
+its operational range.  This function’s four parameters include the ramp rate step 
+size (or rate , where either can be positive or negative), the ramp and hold 
+durations, and the number of cycles.  [ISRD 1.7.1, 1.7.2, 1.7.4] 
+11.6. [timed] ACME shall be capable of stepping the electric field voltage upward by 
+specified step- up values ( with a precision and range at least meeting ISRD 
+1.7.1), pausing with the voltage held steady for a specified high-voltage duration
+
+--- page 19 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+19 
+ 
+(with a precision of 0.005 s or less and wit hin a range of at least 0.005  to 
+999.999 s), stepping the voltage downward by a specified step-down value (with 
+a precision and range at least meeting ISRD 1.7.1), pausing with the voltage 
+held steady for a specified low-voltage duration (with a precision of 0.005 s or 
+less and within a range of at least 0.0 05 to 999.999 s) for a specified number of 
+cycles (ranging from at least 1 to 9,999).  For the durations, a precision smaller 
+than 0.0001 s is probably more than adequate.  Examples of such control are 
+depicted in Appendix A.  The step- up and step-down values should be equal to 
+create a rectangular wave with a constant average.   And the high- voltage and 
+low-voltage durations should also be equal if a ‘square’ wave form is desired.   
+The electric field polarity might or might not change as a result of the stepping.   
+Per the baselined ACME requirements, ACME shall be capable of operating with 
+the polarity alternating at frequencies of up to 100 Hz.  Of course, the electric 
+field voltage is limited and must re main within its operational range.   Function 
+11.6 is a repeated sequence of a pair of 11.4 (step) commands, i.e., to achieve 
+the voltage increase and decrease .  This function’s five parameters include the 
+step-up and step- down sizes, the high- voltage and low -voltage durations, and 
+the number of cycles.  [ISRD 1.7.1, 1.7.2, 1.7.3, 1.7.4] 
+11.7. [timed] ACME shall be capable of ramping the electric field voltage upward by 
+a specified ramp- up step size ( or rate, with a precision and range at least 
+meeting ISRD 1.7.1) for a specified ramp-up duration (with a precision of 0.005 s 
+or less and within a range of at least 0.00 0 to 999.99 9 s), pausing with the 
+voltage held steady for specified high- voltage duration with a precision of 0.0 05 
+s or less and within a range of at least 0.00 0 to 999.999 s), ramping the electric 
+field voltage downward by a specified ramp- down step size (or rate, with a 
+precision and range at least meeting ISRD 1.7.1) for a specified ramp- down 
+duration (with a precision of 0.0 05 s or less and  within a range of at least 0. 000 
+to 999.999  s), pausing with the voltage held steady for specified low -voltage 
+duration (with a precision of 0.0 05 s or less and within a range of at least 0.00 0 
+to 999.999 s) for a specified number of cycles (ranging from at least 1 to 9, 999).  
+Examples of such control are depicted in Appendix A.  For the durations, a  
+precision smaller than 0.0001 s is probably more than adequate.  To create a 
+triangular wave with a constant average , (1) the  high-voltage and lo w-voltage 
+durations should be zero, and (2) the step -up and step- down values should be 
+equal.  The electric field polarity might or might not change as a result of the 
+ramped stepping.  Of course, ramp-up and ramp-down durations should not both 
+be zero.  Furthermore, the electric field voltage is limited and must remain within 
+its operational range.   Function 11.7 is a repeated sequence of a pair of 11.5  
+(ramp) commands, i.e., to achieve the voltage increase and decrease.   This 
+function’s seven parameters include the ramp- up and ramp-down step sizes (or 
+rates), the ramp-up and ramp-down durations, the high- voltage and low -voltage 
+hold durations, and the number of cycles.  [ISRD 1.7.1, 1.7.3, 1.7.4] 
+12. [ACME] Extinction Functions 
+12.1. [timed] ACME shall be capable of detecting flame extinction after ignition, by 
+monitoring one or more specified non-imaging instruments and verifying  that
+
+--- page 20 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+20 
+ 
+time-filtered (e.g., averaged)  measurement(s) over a specified duration (with a 
+precision of 0.1 s or less, where a precision smaller than 0.01 s is probably more 
+than adequate,  and within a range of 0.0 to 99.9 s ) are beyond ( e.g., below) 
+specified value(s), and responding to that event.  This requirement only applies 
+to measurements from the ACME chamber insert and does not apply to 
+measurements associated with other hardware, such as CIR and SAMS.   When 
+multiple instruments are specified for extinction detection, it shall be possible (at 
+least) to further specify whether that detection is based on when (1) any 
+specified measurement indicates extinction, (2) a t least half of the specified 
+measurements indicate extinction, or (3) all specified measurements indicate 
+extinction.  It is expected that extinction detection will normally be based on 
+optical measurements, i.e., chemiluminescent emission and/or thermal radiation, 
+because of their rapid response time compared to other measurements.  While 
+the PhotoMultiplier Tubes (PMTs) that will tentatively be used for the 
+chemiluminescent emission measurements have an especially rapid response 
+time, it is possible that they may be either inoperable or removed for some tests 
+(e.g., because of spatial interference with especially large spherical flames ), so 
+the capability to detect extinction through other instrumentation (e.g., thermopile 
+detectors) is required.  Other instrumentation could be effective, e.g., the ion 
+current in the E -FIELD Flames tests, and this is especially true if longer 
+detection times are acceptable, where for example the burner or far -field 
+temperature(s) might be appropriate.  E xtinction detection is not required during 
+ignition, but will generally be operative whenever there is fuel flow.  As such, this 
+function occurs simultaneously with other functions.   Extinction detection should 
+be monitored and verified over a short time t o avoid false detection as could 
+result from measurement noise.  This function’s parameters include the specified 
+duration, the possible non-imaging measurements on the ACME chamber insert, 
+and the detection method (where three options are described above) .  There 
+could be a large number of parameters  for this function  given the 
+instrumentation that will be available on the ACME chamber insert, e.g., where 
+there are at least nine optical instruments alone, i.e., six radiometers and three 
+PMTs (or alternate devices for measuring chemiluminescent emission) .  [ISRD 
+3.7.1] 
+12.2. [timed] In response to extinction detection, ACME shall be capable of setting 
+all gas flows to zero after a specified duration (with a precision of 0.1 s or less , 
+where a precision smaller than 0.01 s is probably more than adequate,  and 
+within a range of at least 0.0 to 99.99 s)  following extinction detection, where the 
+specified duration could be zero.   This function’s single parameter is the 
+specified duration.   [ISRD 1.9.4, 3.7.1] 
+12.3. [instant] In response to extinction detection, ACME shall be capable of setting 
+all flows or any specified subset thereof  to step upward and/or downward by 
+specified value(s) (within a range of 0 to 100% and a precision of 0.1% or less  
+but where it is understood that the resulting flow accuracy is a function of the 
+specified value, gas, calibration, etc. ).  A gas flow rate precision smaller than 
+0.01% is probably more than adequate.  Note that some flows may be zero (i.e.,
+
+--- page 21 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+21 
+ 
+no flow), and the step deltas (i.e., height s) may be different for each gas flow .  
+Furthermore, some flow(s) may step upward while other(s) step downward, e.g., 
+to maintain a total flow rate while varying the composition.   Function 9.4 allows 
+the operator to subsequently set the flows to zero and t erminate the test .  This 
+function’s three parameters correspond to the three MFCs on the ACME 
+chamber insert, i.e., to specify the step size for each flow  (where any step might 
+be positive, negative, or zero).  [ISRD 1.9.4, 3.7.1] 
+12.4. [timed] In response to ex tinction detection, ACME shall be capable of setting 
+any flows by specified value(s) (within a range of 0 to 100% and a precision of 
+0.1% or less  but where it is understood that the resulting flow accuracy is a 
+function of the specified value, gas, calibration, etc .) for a specified ramp 
+duration (with a precision of 0.1 s or less, where a precision smaller than 0.01 s 
+is probably more than adequate,  and within a range of at least 0.1 to 999.9 s) 
+and holding the flows at their new values.   Of course, the fl ow(s) are limited and 
+will remain within the operational range of the associated MFC(s). Note that 
+some flows may be steady or even zero while others are ramped, and the ramp 
+deltas (i.e., heights)  may be different for each gas flow .  Furthermore, some 
+flow(s) may ramp upward while other(s) ramp downward, e.g., to maintain a total 
+flow rate while varying the composition.   Function 9.4 allows the operator to 
+subsequently set the flows to zero and terminate the test .  This function’s four 
+parameters include the ramp step for each of the three ACME MFCs  (where any 
+step might be positive, negative, or zero) , and the ramp duration (for all flows).   
+[ISRD 1.9.4, 3.7.1] 
+12.5. [timed] In response to extinction detection, ACME shall be capable of setting 
+all ACME flows or any specified subset thereof to step upward and/or downward 
+by specified values (within a range of 0 to 100% and a precision of 0.1% or less ) 
+and pausing with all flows held steady for specified wait duration (with a 
+precision of 0.1 s or less, where a precision smaller than 0.01 s is probably more 
+than adequate, and within a range of at least 0.0 to 99.9 s), and setting all gas 
+flows to zero.   A gas flow rate precision smaller than 0.01% is probably more 
+than adequate.  Of course, the flow time for the lim iting reactant (normally fuel) 
+is ultimately limited by the safety timers.  Note that some flows may be steady or 
+even zero while others are stepped, and the step deltas  (i.e., heights) may be 
+different for each gas flow .  Furthermore, some flow(s) may step upward while 
+other(s) step downward, e.g., to maintain a total flow rate while varying the 
+composition.  Function 12.5 is quite similar to 12.3 but has the additional feature 
+of terminating all gas flows after a specified duration (as in 12.2), whereas 12.3 
+is reliant on additional command(s) to terminate the gas flows . This function’s 
+four parameters include the step size for the three ACME MFCs (where any step 
+might be positive, negative, or zero)  and the wait duration (for all flows).   [ISRD 
+1.9.4, 3.7.1]  
+12.6. [timed] In response to extinction detection, ACME shall be capable of setting 
+all ACME flows  or any specified subset thereof  to ramp upward and/or 
+downward by a specified value (within a range of 0 to 100% and a precision of 
+0.1% or less ) over a speci fied ramp duration (with a precision of 0.1 s or less
+
+--- page 22 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+22 
+ 
+and within a range of at least 0 to 99.9 s) and pausing with all flows held steady 
+for specified wait duration (with a precision of 0.1 s  or less and within a range of 
+at least 0  to 99.9 s), and then setting all gas flows to zero.  G as flow rate and 
+duration precisions smaller than 0.01% and 0.01 s, respectively, are probably 
+more than adequate.  Of course, the flow time for the limiting reactant (normally 
+fuel) is ultimately limited by the safety timers .  Note that some flows may be 
+steady or even zero while others are stepped, and the ramp deltas  (i.e., heights) 
+may be different for each gas flow .  Furthermore, some flow(s) may ramp 
+upward while other(s) ramp downward, e.g., to maintain a total flow rat e while 
+varying the composition.  Function 12.6 is quite similar to 12.4 but has the 
+additional feature of terminating all gas flows after a specified duration  (as in 
+12.2), whereas 12.4 is reliant on additional command(s) to terminate the gas 
+flows.  This function’s five parameters include the ramped step size (or rate) for 
+each of the three ACME MFCs  (where any step might be positive, negative, or 
+zero), and the ramp duration and wait durations (where both are for all flows).   
+[ISRD 1.9.4, 3.7.1] 
+12.7. [instant] ACME shall be capable of deactivating extinction detection.   No 
+parameters are required for this function.  [ISRD 3.7.1]
+
+--- page 23 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+23 
+ 
+APPENDICES 
+There are no requirements in the appendices; they are only provided for design 
+reference. 
+A. Variation Examples 
+B. CLD Flame (2 example sequences) 
+C. E-FIELD Flames (3 example sequences) 
+D. Flame Design (1 example sequence) 
+E. s-Flame (1 example sequence) 
+ 
+The sequences in Appendices B-E are based on the baselined ISRD and are not meant 
+to be a complete list, but are simply examples of possible likely operations for each 
+experiment.  Even neglecting pre-ignition and post-extinction operations, each 
+experiment may have several different operational sequences, and at least one 
+example is provided here for each experiment. 
+ 
+The provided examples are quite similar, especially in the pre-ignition and post-
+extinction operations.  In other words, the principal differences are typically related to 
+the control of the flow, TFP fiber array, or the electric field.  However, other operations 
+are certainly possible in any section of the operations. 
+ 
+ 
+ 
+Appendix A: Variation Examples 
+This section provides depictions of major ways in which the three ACME gas flows, TFP 
+array position, and electric field potential can be varied.  Note that the TFP array cannot 
+be moved instantaneously so the stepped and rectangular wave functions are not 
+applicable.  And while relatively abrupt changes in flow are possible (at least in the gas-
+jet burners), it should be understood that the control will not be accurate during rapid 
+transitions because of the limited response time of the Mass Flow Controllers.  Finally, 
+note that while time durations are generally shown as either 0 or 10 seconds in the 
+presented examples, this was done as a convenience and the functions allow for 
+durations of varying values. Finally, it should be emphasized that these are just 
+examples, where a careful review of the function requirements will reveal additional 
+details.
+
+--- page 24 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+24 
+ 
+  
+Functions 9.6 (flow) and 11.4 (electric field) - Stepped changes, where there can be 
+one step or repeated steps.  While upward steps are shown in the plot above, 
+downward steps are also possible. 
+ 
+ 
+Function 9.7 (flow), 10.2 (TFP array), and 11.5 (electric field) - Ramped changes, 
+where there can be one ramp or repeated ramps.  While upward ramps are shown in 
+the plot above, downward ramps are also possible.
+
+--- page 25 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+25 
+ 
+ 
+Functions 9.8 (flow) and 11.6 (electric field) – Rectangular wave, which can be 
+steady or changing when time averaged.  Although not shown, the variation can also be 
+just a single wave.  And while this plot shows up/down examples (i.e., after wave 
+initiation at 10 s), down/up control is also possible.  Furthermore, both can be done 
+together in function 9.8, e.g., with fuel and nitrogen flow to vary the dilution while 
+keeping the total burner flow constant.  Function 6.3 (chamber illumination) is similar. 
+ 
+ 
+Functions 9.9 (flow), 10.3 (TFP array), and 11.7 (electric field) – Ramped wave, 
+which can be steady or changing when time averaged.  Note that this same function can 
+produce triangular-wave or sawtooth patterns; see the next image.  Although not shown, 
+the variation can also be just a single wave.  And while this plot shows up/down 
+examples (i.e., after wave initiation at 10 s), down/up control is also possible.
+
+--- page 26 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+26 
+ 
+  
+Functions 9.9 (flow), 10.3 (TFP array), and 11.7 (electric field) – Triangular wave, 
+which can be steady or changing when time averaged.  It can also be set in a sawtooth 
+pattern, where two examples are shown.  The sawtooth examples shown above are 
+both steady when time-averaged, but it is also possible to create a sawtooth pattern 
+where the time average increases or decreases with time.  And while not shown, any of 
+these patterns can be established for just a single wave.  And while this plot shows 
+up/down examples (i.e., after wave initiation at 10 s), down/up control is also possible.  
+Furthermore, both can be done together, e.g., with fuel and nitrogen flow to vary the 
+dilution while keeping the total burner flow constant.
+
+--- page 27 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+27 
+ 
+Appendix B: CLD Flame 
+CLD Flame: ISRD Table 4.1.1 
+Exploratory test procedures to determine final test limits. 
+ 
+Extinction Limit Test 
+Approx. 
+Start 
+Time 
+1. Prepare chamber atmosphere 
+2. Start coflow and fuel/inert flow at uplinked ignition condition 
+(e.g., a 40% CH4 flame or a 20% C2H4 flame) 
+3. Ignite flame and retract igniter 
+4. Slowly ramp flow (0.5 cm/s2) to starting velocity, if needed 
+5. Begin scan for a specific dilution: Increase velocity at a rate of 0.5 cm/s2 
+6. Stop test when extinction is detected by PMT or 50 cm/s is reached 
+7. Extinguish flame and vent the chamber to 1 bar 
+8. Reduce fuel concentration by 5% and repeat steps 2-7 for the next 
+dilution 
+9. Keep reducing fuel concentration by 5% and repeating steps 2-7 until 
+minimum fuel concentration (see test matrix in Tables 4 and 5) is reached 
+10. Reset apparatus 
+ 
+0 sec. 
+ 
+10 sec. 
+20 sec. 
+30 sec. 
+110 sec. 
+ 
+Sooting Limit Test (for smoke point of ethylene flames)  
+1. Prepare chamber atmosphere 
+2. Start coflow and fuel/inert flow at uplinked ignition condition (e.g., a 40% 
+C2H4 flame) 
+3. Ignite flame and retract igniter 
+4. Ramp flow velocity (at uplinked value) to 40% C2H4, 10 cm/s 
+5. Begin scan of 40% C2H4: Increase velocity at a rate of 0.5 cm/s2 
+6. Stop test when 35 cm/s is reached 
+7. Extinguish the flame and vent chamber to 1 bar 
+8. Ignite flame, retract igniter, and ramp flow velocity (at uplinked value) to 
+45% C2H4, 10 cm/s 
+9. Begin scan of 45% C2H4: 
+ Increase velocity at a rate of 0.5 cm/s2 
+10. Stop test when the velocity reaches the smoke point determined in the 
+previous run, or 35 cm/s 
+11. Extinguish the flame and vent chamber to 1 bar 
+12. Repeat steps 8-11for 50% C2H4 
+13. Repeat steps 8-11 for 50% C2H4, double fuel velocity 
+14. Reset apparatus 
+ 
+0 sec. 
+ 
+10 sec. 
+20 sec. 
+30 sec. 
+80 sec.
+
+--- page 28 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+28 
+ 
+Sample Sequence of Functions:  CLD Flame: Limit Test (extinction or sooting) 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2). 
+ 
+Pre-Ignition Operations (including action 1) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate)   
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+10.1  position TFP fiber array 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including actions 2-6 and part of action 7) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5 set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+12.1 initiate extinction detection 
+12.2  set flow(s) to zero if extinction is detected 
+10.1 reposition TFP fiber array, if needed after ignition 
+9.7 ramp gas flows to initial test condition (with built-in pause for flame duration) 
+7.1 activate illumination package 
+9.7 ramp gas flows 
+9.5 set ACME gas flow(s) to zero (after completion of ramp or extinction detection) 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves
+
+--- page 29 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+29 
+ 
+9.10 close CIR valves 
+12.7 stop extinction detection 
+Post-Flame Operations (including part of action 7 and actions 8-10) 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+10.1 return TFP fiber array to retracted position 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+… 
+conduct additional tests 
+… 
+turn off hardware 
+ 
+ 
+CLD Flame: ISRD Table 4.1.2 
+Coflow Laminar Diffusion Flame Overall Operational Sequence. 
+ 
+ 
+Action 
+Approx. 
+Start 
+Time 
+1. Take reference images 
+2. Fill/scrub/vent chamber to 1 bar 
+3. Start coflow and fuel/inert flow at ignition condition 
+4. Ignite flame and retract igniter 
+5. Ramp flow velocity (at uplinked value) to initial test condition, if needed 
+6. Wait for flame to stabilize 
+7. Run data acquisition 
+8. Extinguish flame  
+9. Repeat 2 to 8 until (10 cases each run): 
+      a) the extinction limit 
+      b) the sooting extreme 
+      Limits determined from exploratory tests. 
+      Continue at next dilution for test duration 
+10. Take reference images, if applicable 
+11. Downlink data 
+12. Reset apparatus 
+-5 min. 
+ 
+0 sec. 
+ 
+10 sec. 
+20 sec. 
+ 
+30 sec.
+
+--- page 30 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+30 
+ 
+Sample Sequence of Functions:  CLD Flame (standard test) 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2). 
+ 
+Pre-Ignition Operations (including actions 1-3) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate)   
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+10.1  position TFP fiber array 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including actions 4-8) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5  set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+12.1 initiate extinction detection 
+12.2  set flow(s) to zero if extinction is detected 
+10.1 reposition TFP fiber array, if needed after ignition 
+9.7 ramp gas flows to test condition (with built-in pause for flame duration) 
+10.3 translate TFP fiber array up and down in a triangular wave pattern, if desired 
+7.1 activate illumination package 
+9.5 set ACME gas flow(s) to zero (after completion of post-ramp duration) 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves
+
+--- page 31 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+31 
+ 
+9.10 close CIR valves 
+12.7 stop extinction detection 
+Post-Flame Operations (including actions 9-12) 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+10.1 return TFP fiber array to retracted position 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+… 
+conduct additional tests 
+… 
+turn off hardware
+
+--- page 32 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+32 
+ 
+Appendix C: E-FIELD Flames 
+E-FIELD Flames: ISRD Table 4.2.1 
+Voltage Sweep Procedure Time  
+A. Prepare Chamber 
+     1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet) 
+     2.    Select fuel/diluent mixture 
+B.  Initiate Experiment  
+     1.    Initiate data acquisition  
+     2.    Initiate gas flows 
+     3.    Ignite flame and retract igniter 
+     4.    Allow 10 seconds settling time 
+     5.    Set the desired voltage (initially to 0V) 
+     6.    Initiate high voltage power supply 
+C.  Measurements1 
+     1.     Wait 0.3 seconds for flame to settle 
+     2.     Collect data over 0.5 seconds   
+D. Step 100V (assuming approx. 5ms ramp)  
+E. Repeat steps C & D until (+/-) 5kV or flame blowout 
+F. Pause in Experiment 
+     1.  Stop gas flows/extinguish flame (zero ion current) 
+     2. Stop video 
+     3. Zero voltage 
+G. Repeat Steps C-E without flame to measure leakage current.  
+      Stop testing if burner current leakage is at unacceptable level 
+H. Reverse high voltage polarity                     
+I.   Repeat sequence steps (B)–(H) 
+ 
+ 
+ 
+0 sec. 
+5 sec.  
+5 sec 
+8 sec. 
+18 sec. 
+19 sec. 
+20 sec. 
+ 
+ 
+ 
+ 
+60.25 sec. 
+ 
+ 
+ 
+ 
+100.5 sec. 
+ 
+ 
+201 sec. 
+1The time between voltage steps for flame adjustment and data collection shall be 
+adjustable via uplink between the values of 0-10 seconds.
+
+--- page 33 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+33 
+ 
+Sample Sequence of Functions:  E-FIELD Flames: Voltage Sweep Procedure 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2). 
+ 
+Pre-Ignition Operations (including action A and part of action B) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate)   
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including part of action B, actions C-E, and part of F) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5 set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+12.1 initiate extinction detection 
+12.2  set flow(s) to zero if extinction is detected 
+7.1 activate illumination package 
+2.1 pause 
+11.1 initiate the electric field 
+11.4 voltage sweep, i.e., staircase steps in voltage 
+11.2 set voltage to zero 
+9.5 set ACME gas flow(s) to zero 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves
+
+--- page 34 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+34 
+ 
+9.10 close CIR valves 
+12.7 stop extinction detection 
+Post-Flame Operations (including part of action F and actions G-I) 
+11.2 set voltage at initial value (e.g., 0) for voltage sweep to measure the leak current  
+11.4 voltage sweep to measure leak current, i.e., staircase steps in voltage 
+11.3 deactivate the electric field 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+…  
+conduct additional tests 
+…  
+turn off hardware
+
+--- page 35 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+35 
+ 
+E-FIELD Flames: ISRD Table 4.2.2 
+Step Response Procedure Time  
+A.  Prepare Chamber 
+   1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet)  
+   2.    Select fuel/diluent mixture 
+B.  Initiate Experiment  
+   1.    Initiate data acquisition  
+   2.    Start gas flows  
+   3.    Ignite flame and retract igniter 
+   4.    Allow 10 seconds settling time 
+   5.    Set the desired voltage (initially to 0V) 
+   6.    Initiate high voltage power supply 
+C.  Measurements (if blowout occurs anytime; zero voltage and proceed to Step D) 
+   1.     Collect data over 2 seconds1 
+   2.     Step voltage 0V to 1000V; Collect data over 2 seconds1 
+   3.     Step voltage 1000V to -1000V; Collect data over 2 seconds1 
+   4.     Step voltage -1000V to 1000V; Collect data over 2 seconds1  
+   5.     Step voltage 1000V to -2000V; Collect data over 2 seconds1 
+   6.     Step voltage -2000V to 2000V; Collect data over 2 seconds1  
+   7.     Step voltage 2000V to -2000V; Collect data over 2 seconds1  
+   8.     Step voltage -2000V to 3000V; Collect data over 2 seconds1  
+   9.     Step voltage 3000V to -3000V; Collect data over 2 seconds1  
+   10.   Step voltage -3000V to 4000V; Collect data over 2 seconds1 
+   11.   Step voltage 4000V to 5000V; Collect data over 2 seconds1  
+   12.   Step voltage 5000V to 0V; Collect data over 2 seconds1 
+   13.   Step voltage 0V to -4000V; Collect data over 2 seconds1 
+   14.   Step voltage -4000V to -5000V; Collect data over 2 seconds1 
+   15.   Step voltage -5000V to 0V; Collect data over 2 seconds1 
+   16.   Step voltage 0V to -1000V; Collect data over 2 seconds1 
+   17.   Step voltage -1000V to 0V; Collect data over 2 seconds1 
+   18.   Step voltage 0V to -500V; Collect data over 2 seconds1 
+   19.   Step voltage -500V to 0V; Collect data over 2 seconds1 
+   20.   Step voltage 0V to 1000V; Collect data over 2 seconds1 
+   21.   Step voltage 1000V to 500V; Collect data over 2 second1 
+   22.   Step voltage 500V to 0V; Collect data over 2 seconds1 
+D.  Shut off gas flows (extinguish flame) 
+E.  Repeat Step C beginning from 0V without flame to measure  
+      leakage current. Stop testing and report if leakage is at unacceptable  
+      level 
+ 
+ 
+ 
+0 sec. 
+5 sec. 
+5 sec. 
+8 sec. 
+18 sec. 
+19 sec. 
+20 sec. 
+ 
+22 sec. 
+24 sec. 
+26 sec. 
+28 sec. 
+30 sec. 
+32 sec. 
+34 sec. 
+36 sec. 
+38 sec. 
+40 sec. 
+42 sec. 
+44 sec. 
+46 sec. 
+48 sec. 
+50 sec. 
+52 sec. 
+54 sec. 
+56 sec. 
+58 sec. 
+60 sec. 
+62 sec. 
+64 sec. 
+64 sec. 
+106 sec. 
+ 
+1The time between voltage steps for flame adjustment and data collection shall be adjustable via 
+uplink between the values of 0-10 seconds.  
+ 
+Sample Sequence of Functions:  E-FIELD Flames: Step Response Procedure
+
+--- page 36 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+36 
+ 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2). 
+ 
+Pre-Ignition Operations (including action A and part of action B) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate)   
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including part of action B and actions C-D) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5 set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+12.1 initiate extinction detection 
+12.2  set flow(s) to zero if extinction is detected 
+7.1 activate illumination package 
+2.1 pause 
+11.1 initiate the electric field 
+11.2 reset the voltage 
+2.1 pause 
+Repeat 11.2 and 2.1 as often as desired to step the voltage in an irregular pattern 
+9.5 set ACME gas flow(s) to zero 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves
+
+--- page 37 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+37 
+ 
+9.10 close CIR valves 
+12.7 stop extinction detection 
+Post-Flame Operations (including action E) 
+11.2 set voltage at initial value (e.g., 0) for voltage sweep to measure the leak current  
+11.2 reset the voltage 
+2.1 pause 
+Repeat 11.2 and 2.1 as often as desired to step the voltage in an irregular pattern 
+11.3 deactivate the electric field 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+…  
+conduct additional tests 
+… 
+turn off hardware
+
+--- page 38 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+38 
+ 
+E-FIELD Flames: ISRD Table 4.2.3 
+Electric Field Effects on Soot Time 
+A.  Prepare Chamber 
+   1.    Fill chamber (with N2 for coflow; O2/N2 for gas jet)  
+   2.    Select fuel/diluent mixture 
+B.  Initiate Experiment  
+   1.    Initiate data acquisition  
+   2.    Start gas flows (with coflow at 0 cm/s)       
+   3.    Ignite flame and retract igniter 
+   4.    Allow 10 seconds settling time 
+   5.    Set the desired voltage (initially to 0V) 
+   6.    Initiate high voltage power supply     
+C.  Collect reference data for 1 second   
+D.  Measurements 
+   1.     Increase coflow velocity to 1cm/s; collect over 3 sec. 1  
+   2.     Increase coflow velocity to 2cm/s; collect over 3 sec. 1 
+   3.     Increase coflow velocity to 3cm/s; collect over 3 sec. 1 
+   4.     Increase coflow velocity to 4cm/s; collect over 3 sec. 1 
+   5.     Increase coflow velocity to 5cm/s; collect over 3 sec. 1 
+   6.     Increase coflow velocity to 6cm/s; collect over 3 sec. 1        
+   7.     Increase coflow velocity to 7cm/s; collect over 3 sec. 1             
+   8.     Increase coflow velocity to 8cm/s; collect over 3 sec. 1  
+   9.     Increase coflow velocity to 9cm/s; collect over 3 sec. 1          
+   10.   Increase coflow velocity to 10cm/s; collect over 3 sec. 1         
+   11.   Increase coflow velocity to 11cm/s; collect over 3 sec. 1          
+   12.   Increase coflow velocity to 12cm/s; collect over 3 sec. 1 
+   13.   Increase coflow velocity to 13cm/s; collect over 3 sec. 1 
+   14.   Increase coflow velocity to 14cm/s; collect over 3 sec. 1  
+   15.   Increase coflow velocity to 15cm/s; collect over 3 sec. 1         
+   16.   Increase coflow velocity to 16cm/s; collect over 3 sec. 1  
+   17.   Increase coflow velocity to 17cm/s; collect over 3 sec. 1              
+   18.   Increase coflow velocity to 18cm/s; collect over 3 sec. 1       
+   19.   Increase coflow velocity to 19cm/s; collect over 3 sec. 1 
+   20.   Increase coflow velocity to 20cm/s; collect over 3 sec. 1  
+   21.   Increase coflow velocity to 21cm/s; collect over 3 sec. 1              
+   22.   Increase coflow velocity to 22cm/s; collect over 3 sec. 1  
+   23.   Increase coflow velocity to 23cm/s; collect over 3 sec. 1 
+   24.   Increase coflow velocity to 24cm/s; collect over 3 sec. 1          
+   25.   Increase coflow velocity to 25cm/s; collect over 3 sec. 1            
+F.  Stop gas flows/extinguish flame 
+ 
+ 
+ 
+0 sec. 
+5 sec. 
+5 sec. 
+8 sec. 
+18 sec. 
+19 sec. 
+20 sec. 
+21 sec. 
+ 
+24 sec. 
+27 sec. 
+30 sec. 
+33 sec. 
+36 sec. 
+39 sec. 
+42 sec. 
+45 sec. 
+48 sec. 
+51 sec. 
+54 sec. 
+57 sec. 
+60 sec. 
+63 sec. 
+66 sec. 
+69 sec. 
+72 sec. 
+75 sec. 
+78 sec. 
+81 sec. 
+84 sec. 
+87 sec. 
+90 sec. 
+93 sec. 
+96 sec.  
+1The time between voltage steps for flame adjustment and data collection shall be adjustable via uplink 
+between the values of 0-10 seconds.  
+Note: return to step B and reignite as needed if flame fails during experiment
+
+--- page 39 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+39 
+ 
+Sample Sequence of Functions:  E-FIELD Flames: Electric Field Effects on Soot 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2).  This example is notably different from the other E-FIELD Flames procedures 
+in that there is absolutely no use of an electric field. 
+ 
+Pre-Ignition Operations (including action A and part of action B) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate)   
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including part of action B and actions C-F) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5 set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+12.1 initiate extinction detection 
+12.2  set flow(s) to zero if extinction is detected 
+7.1 activate illumination package 
+9.6 increase gas flow(s) in a staircase pattern 
+9.5 set ACME gas flow(s) to zero 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves 
+9.10 close CIR valves  
+12.7 stop extinction detection
+
+--- page 40 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+40 
+ 
+Post-Flame Operations 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+…  
+conduct additional tests 
+… 
+turn off hardware
+
+--- page 41 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+41 
+ 
+Appendix D: Flame Design 
+Flame Design: ISRD Table 4.3.1 
+Operational Sequence for Flame Design Spherical Flame Tests 
+ 
+Action 
+Approx. 
+Time 
+1. Ensure that 6.4 mm spherical burner is installed. Preflow the burner fluent g as 
+at the composition of the upcoming test point to flush the plumbing system. 
+2. Establish chamber conditions. These consist of a set point pressure and 
+species compositions, as specified in the test matrix. Conditions are obtained in 
+four ways: from cabi n air (desired); from the preceding test; from scrubbing and 
+replenishing; or from a complete evacuation and recharge. 
+3. Allow chamber contents to reach equilibrium. A hold time of 5 minutes is 
+required for quiescent, isothermal, and well-mixed conditions. 
+4. Take reference images (if applicable). Establish framing rates for video 
+cameras. Begin color imaging. Begin monitoring measurements. After 15 s, 
+commence fluent flow, ignite flame, and retract ignitor. 
+Perform either Steps 5, 6, and 8 OR Steps 7 and 8. 
+5. Soot inception limit.  Allow the flame to pass its soot -inception limit. 
+Continuously record temperature distributions. 
+6. Radiative extinction. Detect radiative extinction with a PMT or with near real -
+time video. Continuously record temperature distr ibutions. At uplinkable time 
+(estimated 3 s) after extinction, reduce flow rate by uplinkable amount (estimated 
+50%) for uplinkable time (estimated 5  s) to confirm extinction. If the flame 
+reappears, return to the initial flow rate and return to the beginning of Step 6. 
+Otherwise terminate the fluent flow. 
+7. Kinetic extinction.  After an uplinkable time (estimated 10 s), decrease fluent 
+flow rate linearly in time such that flow rate becomes zero at uplinkable time 
+(estimated 30 s) after ignition. Detect kinetic extinction with a PMT or with near 
+real-time video. Continuously record temperature distributions. At uplinkable time 
+(estimated 3 s) after extinction detection, increase flow rate by uplinkable amount 
+(estimated 100%) for uplinkable time (estimated 5 s) to confirm extinction. If the 
+flame reappears, return to the initial flow rate and return to the beginning of Step 7. 
+Otherwise terminate the fluent flow. 
+8. Record reference images (if applicable). After 60 s terminate color imaging and 
+monitoring measurements. Select data for downlink and downlink data. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+-15 s 
+ 
+0 s 
+ 
+15 s 
+ 
+30 s 
+ 
+ 
+ 
+ 
+ 
+10 s 
+ 
+30 s 
+ 
+ 
+ 
+ 
+ 
+30 s
+
+--- page 42 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+42 
+ 
+Sample Sequence of Functions:  Flame Design 
+with a spherical flame and radiative extinction (i.e., actions 5-6 instead of 7) 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2). 
+ 
+Pre-Ignition Operations (including actions 1-3 plus part of 4) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate)   
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+10.1  position TFP fiber array 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including some of action 4 plus actions 5-6) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5 set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+7.1 activate illumination package 
+12.1 initiate extinction detection 
+12.5  step flow(s) after extinction detection 
+9.5 set ACME gas flow(s) to zero 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves 
+9.10 close CIR valves  
+12.7 stop extinction detection
+
+--- page 43 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+43 
+ 
+Post-Flame Operations (including action 8) 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+10.1 return TFP fiber array to retracted position 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+… 
+conduct additional tests 
+… 
+turn off hardware 
+ 
+ 
+ 
+Appendix E: s-Flame 
+s-Flame: ISRD Table 4.4.1 
+Action 
+Approx. 
+Start 
+Time 
+I. Establish chamber at constant pressure and species concentration. 
+II. Discharge fuel mixture through porous burner at the initial flow rate. 
+III. Ignite fuel mixture with hot wire coil and retract upon successful ignition. 
+IV. Allow for spherical diffusion flame to evolve. 
+V. Apply one of the following: 
+a. Maintain flow rate with same initial mixture for duration of test (25 s) 
+or until extinction. 
+b. Single step decrease in flow rate with same initial mixture at specified 
+time, maintaining new flow rate for duration of test (25 s) or until 
+extinction. 
+VI. Terminate fuel supply to the burner after 25s. 
+0 s 
+ 
+0 s 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+25 s
+
+--- page 44 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+44 
+ 
+Sample Sequence of Functions: s-Flame (for case V.b. with a flow step) 
+This sample sequence generally does not include the many pause functions (i.e., 2.1 
+and 2.2). 
+ 
+Pre-Ignition Operations (including action I.) 
+3.1 set up hardware external to the CIR chamber, if needed 
+3.2 set up burner, MFCs, and other hardware on ACME chamber insert, if needed 
+5.1  energize hardware and warm up MFCs, etc. 
+9.1 zero MFCs 
+4.1  vent chamber 
+4.4  fill chamber (repeated for each gas) 
+4.5  mix chamber atmosphere (activate chamber fan, pause, deactivate) 
+9.3 purge burner lines (i.e., open valves, set MFC(s), pause, close valves) 
+5.2  set up BG-7 filter, if needed 
+5.3  set up cameras 
+6.1  activate chamber illumination 
+10.1  position TFP fiber array 
+8.1  insert igniter 
+5.4  start non-imaging data acquisition 
+5.5  start imaging data acquisition 
+6.1  deactivate chamber illumination 
+7.1  activate the CIR illumination package for reference imaging 
+7.3  deactivate the CIR illumination package 
+Flame Operations (including actions II. to VI.) 
+8.2 preheat igniter, if needed 
+9.10 open CIR gas delivery valves 
+9.11 open ACME gas delivery valves 
+9.4  set CIR gas flows (e.g., at 100%) 
+9.5 set ACME gas flows at ignition values 
+8.2  ignite flame 
+8.1 retract igniter 
+7.1 activate illumination package 
+12.2  initiate extinction detection – which continues to flow shut down 
+2.1  pause 
+9.6 step flow (which includes a pause) 
+9.5 set ACME gas flow(s) to zero 
+9.4 set CIR gas flow(s) to zero 
+9.11 close ACME valves 
+9.10 close CIR valves  
+12.7 stop extinction detection
+
+--- page 45 ---
+ACME-SORD-001.A Science Ops Requirements Document   2011-10-18 
+Any text in italics is a comment and not a requirement. 
+ 
+45 
+ 
+Post-Flame Operations 
+5.5  stop imaging data acquisition 
+7.3 deactivate illumination package 
+5.4 stop non-imaging data acquisition 
+10.1 return TFP fiber array to retracted position 
+4.6 gas chromatography of unmixed chamber 
+4.5 (activate, pause, deactivate) mix chamber atmosphere 
+4.6  gas chromatography of mixed chamber 
+4.2 scrub chamber atmosphere to prepare for next test 
+… 
+conduct additional tests 
+… 
+turn off hardware

@@ -1,0 +1,47 @@
+Source : NASA PSI, PSI-115, Science Documents, Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity DoD.pdf
+
+--- page 1 ---
+PSI Data Organization Document 
+Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation 
+of Smoke Generation in Micro-Gravity 
+ 
+To gain an initial understanding of this experiment, refer to the Final Report, located on “Pub and Docs” 
+tab of this Investigation Record. The simulation data is organized in PSI in “Experiment Data” on the 
+“Data” tab, in two high level categories: 
+ 
+• Earth Gravity Figure Data 
+• Microgravity Figure Data 
+ 
+The simulation data is further categorized into specific cases: 
+ 
+• Case 1 with inlet velocity: Uo = 0:08 m/s  
+• Case 2 with inlet velocity: Uo = 0:1 m/s 
+ 
+Additional test parameters and conditions are located in Table 3 of the Final Report: 
+ 
+  
+ 
+Where EG = Earth Gravity; MG = Microgravity; Uo = Inlet Velocity; go = Gravitational Acceleration; Re = 
+Reynolds number; Fr = Froude number. 
+ 
+In addition to the four base cases listed in Table 3 of the Final Report, and as shown above, the data is 
+further categorized as the researcher examines the aerosol development sensitivity to: 
+ 
+• Particle settling 
+• Thermophoresis 
+• The flow geometry 
+ 
+ 
+For this purpose, a series of additional cases, defined in Table 3 of the Final Report, and as shown 
+above, are constructed by modifying the setup of Case 1MG and/or Case 1EG. 
+  
+• Case1-Earth Gravity-NS: (where NS stands for “no settling”) is identical to Case1-Earth Gravity 
+except the settling mechanism has been neglected. 
+• Case1-Earth Gravity-R: (where R stands for “rotated”) is identical to Case1-Earth Gravity except 
+the heated vapor source has been rotated 90o. 
+• Case1-Microgravity-NT: (where NT stands for “no thermophoresis”) is identical to Case1-
+Microgrativy except the thermophoresis transport mechanism has been neglected.  
+• Cases1Microgravity-R: (where R stands for “rotated”) is identical to Case1-Microgrativy except 
+the heated vapor source has been rotated 90o.  
+ 
+In all cases, data is collected and presented at a time of t = 7 seconds.

@@ -1,0 +1,13 @@
+Source : NASA PSI, PSI-68, Science Documents, FLEX-2 DoD.docx
+
+
+FLEX-2 (The Flame Extinguishment - 2) experiment is the second experiment to fly on the ISS which uses small droplets of fuel to study the special spherical characteristics of burning fuel droplets in space. The investigation has 40 Experiment Data records which are based on the Test Matrix (Binary Array, Condensed Phase, LCTFCalibration, LCTFWavelengths, Quiescent, RadiometerCalibration, SurrotgateFuel), Fuel Composition, and/or Year. 
+
+These Experiment Data records are located on the “Data” tab within the FLEX-2 investigation in PSI. When an experiment data record is selected, the “Scientific Data and Information” tab is opened. The Experiment Data record’s “Raw Data” and “Images” are organized by test point. 
+
+The “Raw Data” links display records for the Raw & Analyzed Data within the specific test point.  When a Raw & Analyzed Data record is selected, there will be the following tabs: “General”, “Raw Data and Information”, and “Comments”. The “Raw Data and Information” will contain .txt files of the experiment’s raw data. 
+
+The “Images” links displays records for each Videos & Images record within the specific test point.  An “Image Data” tab within this record provides an Image Gallery with thumbnail images, a .zip file provides the original images, and an image document with more information on the images.  
+ 
+
+
