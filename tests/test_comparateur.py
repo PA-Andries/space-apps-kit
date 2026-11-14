@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import pandas as pd
+import pytest
 from streamlit.testing.v1 import AppTest
 
 from flame.commun import INCONNU, charger_fiches, charger_tests
@@ -15,15 +16,20 @@ from flame.comparateur import (
     comparer,
     cote_a_cote,
     explication_carte,
+    graphique_conditions,
     instruments_communs,
     mesures,
     plages,
+    plages_du_scenario,
     points,
     portrait,
     resume,
     separer,
     variables_communes,
 )
+
+# Importée sous un autre nom : pytest prendrait une fonction nommée `tests_...` pour un test.
+from flame.comparateur import tests_correspondants as correspondants_du_scenario  # noqa: E402, I001
 
 APP = str(Path(__file__).parents[1] / "app.py")
 
@@ -226,6 +232,98 @@ def test_carte_refuse_une_seule_condition_commune():
         }
     )
     assert carte(tests, ["A", "B"]) is None
+
+
+DONNEES_REELLES = Path(__file__).parents[1] / "data"
+LUNE = {"habitat": "Base lunaire"}
+MARS = {"habitat": "Base martienne"}
+
+
+def _vraies_donnees() -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Les vraies fiches et les vrais tests de NASA (les autres tests tournent sur les données d'exemple)."""
+    if not (DONNEES_REELLES / "tests.csv").exists():
+        pytest.skip("pas encore de vraies données")
+    return pd.read_csv(DONNEES_REELLES / "investigations.csv"), pd.read_csv(DONNEES_REELLES / "tests.csv")
+
+
+def _traces(figure) -> dict[str, int]:
+    return {trace.name: len(trace.x) for trace in figure.data}
+
+
+def test_les_plages_viennent_du_scenario_ou_de_son_habitat():
+    assert plages_du_scenario(LUNE)["oxygene_pct"] == (30, None)
+    assert plages_du_scenario(LUNE)["pression_kpa"] == (None, 70.3)
+    assert plages_du_scenario(MARS)["oxygene_pct"] == (None, None)  # l'énoncé ne donne rien pour Mars
+    etendu = {"habitat": "Base lunaire", "oxygene_pct": (25.0, 40.0), "type_combustible": ["solide"]}
+    assert plages_du_scenario(etendu)["oxygene_pct"] == (25.0, 40.0)  # le scénario étendu passe avant le repli
+    assert plages_du_scenario(etendu)["type_combustible"] == ["solide"]
+
+
+def test_tests_correspondants_sur_les_exemples():
+    fiches, tests = charger_fiches(), charger_tests()
+    lune = correspondants_du_scenario(tests, fiches, LUNE)
+    assert list(lune["test_id"]) == ["C-03"]  # 40 % d'oxygène à 70 kPa
+    liquides = correspondants_du_scenario(tests, fiches, {"habitat": "Station", "type_combustible": ["liquide"]})
+    assert liquides.empty  # le seul test d'exemple à 21 % et 101 kPa est un solide
+    assert len(correspondants_du_scenario(tests, fiches, MARS)) == len(tests)  # sans plage, rien n'est écarté
+
+
+def test_une_pression_absente_n_ecarte_pas_le_test_mais_se_voit():
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "A"],
+            "oxygene_pct": [35.0, 35.0, None],
+            "pression_kpa": [60.0, None, 60.0],
+            "debit_air_cm_s": [None, None, None],
+        }
+    )
+    resultat = correspondants_du_scenario(tests, _fiches(("A", "gaz", "CIR")), LUNE)
+    assert list(resultat["pression_notee"]) == [True, False]  # la ligne sans oxygène est écartée
+
+
+def test_la_zone_lunaire_contient_66_tests_de_2_investigations():
+    fiches, tests = _vraies_donnees()
+    correspondants = correspondants_du_scenario(tests, fiches, LUNE)
+    surs = correspondants[correspondants["pression_notee"]]
+    assert len(surs) == 66
+    assert set(surs["investigation_id"]) == {"PSI-10", "PSI-159"}  # ACME Flame Design et ACME CFI-G
+    traces = _traces(graphique_conditions(tests, fiches, LUNE, vue="pression"))
+    assert sum(nombre for nom, nombre in traces.items() if nom.endswith("(matches)")) == 66
+    assert traces["Other tests"] == 1022 - 66
+
+
+def test_la_vue_du_debit_montre_les_131_tests_de_solides():
+    fiches, tests = _vraies_donnees()
+    traces = _traces(graphique_conditions(tests, fiches, LUNE, vue="debit"))
+    assert traces["Other tests"] == 131  # aucun solide n'a été testé à 30 % d'oxygène ou plus
+
+
+def test_le_graphique_n_a_aucune_zone_pour_mars():
+    fiches, tests = charger_fiches(), charger_tests()
+    for vue in ("pression", "debit"):
+        for scenario in (LUNE, MARS):
+            assert not [nom for nom in _traces(graphique_conditions(tests, fiches, scenario, vue)) if "Mars" in nom]
+    sans_plage = _traces(graphique_conditions(tests, fiches, MARS))
+    assert not [nom for nom in sans_plage if nom.endswith("(matches)")]  # rien à surligner sans plage
+
+
+def test_les_zones_disent_d_ou_viennent_leurs_chiffres():
+    traces = _traces(graphique_conditions(charger_tests(), charger_fiches(), LUNE))
+    assert "Moon base and rover (statement)" in traces
+    assert "Earth and ISS (to be sourced)" in traces
+    assert "Spacesuit (statement)" in traces
+
+
+def test_resume_compte_les_tests_dans_l_environnement():
+    themes = resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], scenario=LUNE)
+    phrases = themes["For your environment"]
+    assert phrases[0] == "Your environment: oxygen at least 30 %, pressure at most 70.3 kPa."
+    assert "has no test row inside it." in phrases[1]
+    assert "has 1 test row(s) inside it." in phrases[2]
+    mars = resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], scenario=MARS)
+    assert mars["For your environment"] == [
+        "Your environment gives no oxygen, pressure or air flow range, so no test can be matched to it."
+    ]
 
 
 def _page(identifiant: str | None = None) -> AppTest:
