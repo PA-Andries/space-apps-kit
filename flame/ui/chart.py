@@ -1,0 +1,59 @@
+"""Page 1's look for role D's conditions chart: dotted reference zones, and the user's selection as a coloured box.
+
+The chart itself comes from `flame.comparateur.graphique_conditions` (role D); only its look changes here.
+"""
+
+import plotly.graph_objects as go
+
+SELECTION_COLOR = "22, 163, 74"  # green: distinct from the Earth (blue) and Moon (orange) zones
+SELECTION_NAME = "Your selection"
+
+
+def _edges(bounds: tuple | None, axis: tuple) -> tuple:
+    """A range whose missing bounds are replaced by the edges of the axis."""
+    low, high = bounds or (None, None)
+    return (axis[0] if low is None else low, axis[1] if high is None else high)
+
+
+def _extent(values: list) -> tuple:
+    """The smallest and largest of `values`."""
+    return (min(values), max(values))
+
+
+def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.Figure:
+    """Draw the Earth and Moon zones as dotted outlines, and the scenario's ranges as a filled coloured box.
+
+    `view`: "pression" (oxygen × pressure) or "debit" (oxygen × air flow), as in `graphique_conditions`.
+    No box is drawn when the scenario gives no bound at all.
+    """
+    # The reference zones are the only filled shapes of the chart (Earth and ISS, Moon base and rover).
+    zones = [trace for trace in figure.data if trace.fill == "toself"]
+    for trace in zones:
+        color = (trace.line.color or "").replace("0.55", "0.9")
+        trace.update(fill="none", line={"dash": "dot", "width": 2, "color": color})
+
+    key = "pression_kpa" if view == "pression" else "debit_air_cm_s"
+    oxygen = scenario.get("oxygene_pct") or (None, None)
+    other = scenario.get(key) or (None, None)
+    if all(bound is None for bound in (*oxygen, *other)):
+        return figure
+
+    # The axis edges: set by the chart, else the extent of the zones (they reach the edges where unbounded).
+    x_axis = tuple(figure.layout.xaxis.range or _extent([x for trace in zones for x in trace.x]))
+    y_axis = tuple(figure.layout.yaxis.range or _extent([y for trace in zones for y in trace.y]))
+    x0, x1 = _edges(oxygen, x_axis)
+    y0, y1 = _edges(other, y_axis)
+    box = go.Scatter(
+        x=[x0, x1, x1, x0, x0],
+        y=[y0, y0, y1, y1, y0],
+        mode="lines",
+        fill="toself",
+        fillcolor=f"rgba({SELECTION_COLOR}, 0.18)",
+        line={"color": f"rgba({SELECTION_COLOR}, 0.9)", "width": 2},
+        name=SELECTION_NAME,
+        hoverinfo="name",
+    )
+    # Drawn first, so that the test points stay on top of the box.
+    figure.add_trace(box)
+    figure.data = (figure.data[-1], *figure.data[:-1])
+    return figure
