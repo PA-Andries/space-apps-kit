@@ -433,3 +433,21 @@ def test_the_how_to_card_folds_away_and_comes_back():
     assert "Choose your environment" not in " ".join(str(block.value) for block in site.get("html"))
     site.button(key="ui_intro_show").click().run()
     assert [b.key for b in site.button if b.key == "ui_intro_hide"] == ["ui_intro_hide"]
+
+
+def test_analyse_explains_each_of_the_three_investigations():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_analyse_button").click().run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert shown.count("What the experiment studied") == 3
+    assert shown.count("Why it matters for Moon base") == 3
+    assert "Atmosphere:" in shown and "Gravity:" in shown
+
+
+def test_the_ranking_explains_every_investigation():
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    site.switch_page("pages/recherche.py").run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert shown.count("Why it matters for Moon base") >= 3

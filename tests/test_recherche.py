@@ -13,6 +13,7 @@ from flame.commun import INCONNU, charger_fiches, charger_tests
 from flame.recherche import (
     ce_quon_ne_sait_pas,
     champs_inconnus,
+    descriptif,
     detail_du_score,
     filtrer,
     les_plus_pertinentes,
@@ -279,3 +280,59 @@ def test_filtrer_sans_choix_ne_retire_rien():
 
 def test_valeurs_possibles_separe_les_valeurs_multiples():
     assert valeurs_possibles(charger_fiches(), "pilier") == ["Détecter", "Prévenir", "Éteindre"]
+
+
+# --- Le descriptif d'une investigation : ce qu'elle a étudié, et pourquoi elle compte ---
+
+
+@pytest.fixture
+def investigations_psi():
+    """Une petite table `investigations` fictive, au format du rôle B."""
+    ligne = {
+        "investigation_id": "EXEMPLE-A",
+        "title": "Example Burning of Solids",
+        "project_type": "Microgravity Investigation",
+        "flight_platform": "International Space Station (ISS)",
+        "start_date": "01-01-2010",
+        "end_date": "12-31-2012",
+        "objectives": "First sentence of the objectives. " + "A much longer second sentence. " * 30,
+        "approach": "How the tests were run.",
+        "hypothesis": None,
+        "impacts_earth_benefits": "",
+        "n_publications": 3,
+        "cited_in_statement_as_fire_safety": 1,
+    }
+    return pd.DataFrame([ligne])
+
+
+def test_le_descriptif_reprend_les_textes_de_nasa_sans_les_changer(investigations_psi, pertinence):
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), investigations_psi, pertinence)
+    assert detail["titre"] == "Example Burning of Solids"
+    assert detail["cadre"] == "Microgravity investigation · International Space Station (ISS) · 2010–2012"
+    assert "3 publications" in detail["chiffres"]
+    assert detail["textes"]["Objectives"] == investigations_psi.iloc[0]["objectives"].strip()
+    assert detail["textes"]["Approach"] == "How the tests were run."
+    assert set(detail["textes"]) == {"Objectives", "Approach"}  # un texte absent n'est pas inventé
+    assert detail["citee"]
+
+
+def test_le_descriptif_coupe_les_objectifs_en_fin_de_phrase(investigations_psi, pertinence):
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), investigations_psi, pertinence)
+    court = detail["objectif_court"]
+    assert len(court) <= 385 and court.endswith(". …")
+    assert court.startswith("First sentence of the objectives.")
+
+
+def test_le_descriptif_donne_les_raisons_du_classement_sans_les_points(investigations_psi, pertinence):
+    tests = charger_tests()
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, tests, investigations_psi, pertinence)
+    attendu = detail_du_score(fiche("EXEMPLE-A"), LUNE, pertinence, tests)
+    assert detail["raisons"] == list(zip(attendu["critere"], attendu["explication"], strict=True))
+    assert [critere for critere, _ in detail["raisons"]] == ["Atmosphere", "Fuel", "Gravity", "Data"]
+
+
+def test_le_descriptif_marche_sans_la_table_de_nasa(pertinence):
+    detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), pd.DataFrame(), pertinence)
+    assert detail["titre"] == "" and detail["cadre"] == "" and not detail["citee"]
+    assert detail["en_bref"] == fiche("EXEMPLE-A")["resume"]
+    assert len(detail["raisons"]) == 4

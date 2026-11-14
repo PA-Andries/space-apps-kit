@@ -14,11 +14,11 @@ from flame.commun import charger_fiches, charger_tests, get_scenario
 from flame.recherche import (
     ce_quon_ne_sait_pas,
     champs_inconnus,
-    detail_du_score,
+    descriptif,
     les_plus_pertinentes,
     tests_dans_les_plages,
 )
-from flame.ui import carte_fiche, label
+from flame.ui import carte_fiche, investigation_details, label
 
 TITRES_TESTS = {
     "investigation_id": "Investigation",
@@ -68,13 +68,10 @@ with onglet_classement:
         f"The {len(classement)} investigations most related to your environment, the closest first: "
         "the tests nearest your oxygen and pressure, your fuels and your gravity."
     )
-    for _, fiche in classement.iterrows():
-        carte_fiche(fiche)
-        # Les raisons du classement, critère par critère, sans les points.
-        with st.expander("Why this investigation is relevant"):
-            for _, raison in detail_du_score(fiche, scenario, tests=tests).iterrows():
-                st.markdown(f"- **{raison['critere']}:** {raison['explication']}")
-        st.page_link("pages/comparateur.py", label="Compare", query_params={"id": fiche["id"]})
+    # Chaque investigation avec ce que l'expérience a étudié (textes de NASA) et les raisons de son rang,
+    # critère par critère, sans les points.
+    for rang, (_, fiche) in enumerate(classement.iterrows(), start=1):
+        investigation_details(fiche, descriptif(fiche, scenario, tests), rang, label(habitat))
 
 with onglet_fiche:
     noms = dict(zip(classement["id"], classement["nom"], strict=True))
