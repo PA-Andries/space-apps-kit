@@ -16,9 +16,10 @@ dependencies = [
 [project.scripts]
 check-submission = "space_apps_kit.submission:main"
 verifier = "space_apps_kit.verifier:main"
+regles = "space_apps_kit.regles:main"
 
 [dependency-groups]
-# Installed by default with `uv sync`: what CI runs.
+# Installed by default with `uv sync`: what `uv run verifier` needs.
 dev = [
     "pytest>=8",
     "ruff>=0.14",
