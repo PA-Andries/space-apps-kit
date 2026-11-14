@@ -31,8 +31,8 @@ Tant que `data/investigations.csv` n'existe pas, le site tourne sur les données
 | A. Intégration et pitch | Clément (`cbatonnier-wq`) | Fusionne le travail, garde le site en ligne, valide les fiches, prépare la vidéo et la page projet | `app.py`, `flame/commun/`, `tests/test_app.py`, `tests/test_contrat.py`, `pyproject.toml`, `uv.lock`, `.github/`, `pitch/`, les fichiers `.md` de la racine | B |
 | B. Données | PA (`PA-Andries`) | Interroge l'API NTRS, structure les données PSI, produit les trois CSV | `flame/pipeline/`, `data/`, `tests/test_pipeline.py` | A |
 | C. Recherche | Martin (`martinleducq`) | Moteur de recherche et classement selon le scénario | `flame/recherche/`, `pages/recherche.py`, `tests/test_recherche.py` | E |
-| D. Comparateur | Hugo (`hugovlst`) | Comparaison de deux ou trois investigations | `flame/comparateur/`, `pages/comparateur.py`, `tests/test_comparateur.py` | F |
-| E. Assistant | Ethan (`Ethan-111`) | Chatbot d'aide qui répond à partir des fiches | `flame/assistant/`, `pages/assistant.py`, `tests/test_assistant.py` | C |
+| D. Comparateur | Hugo (`hugovlst`) | Comparaison de deux ou trois investigations | `flame/comparateur/`, `pages/comparateur.py`, `pages/donnees.py`, `tests/test_comparateur.py` | F |
+| E. Assistant | Ethan (`Ethan-111`) | Chatbot d'aide qui répond à partir des fiches | `flame/assistant/`, `pages/assistant.py`, `pages/equipements.py`, `tests/test_assistant.py` | C |
 | F. Interface et 3D | Mathéo (`matheocail4`) | Habillage Streamlit, composants partagés, scène three.js, page d'accueil | `flame/ui/`, `pages/accueil.py`, `.streamlit/config.toml`, `tests/test_ui.py` | D |
 
 Entre parenthèses, le pseudo GitHub de chacun. Le binôme teste votre page cinq minutes à chaque point d'étape et vous remplace en cas de blocage.
