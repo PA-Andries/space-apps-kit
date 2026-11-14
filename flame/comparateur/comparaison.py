@@ -94,7 +94,7 @@ def plages(tests: pd.DataFrame, ids: list[str]) -> pd.DataFrame:
 
 
 def _plage(valeurs: pd.Series) -> str:
-    return INCONNU if valeurs.empty else _ecrire(valeurs.min(), valeurs.max())
+    return INCONNU if valeurs.empty else ecrire_plage(valeurs.min(), valeurs.max())
 
 
 def separer(tableau: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -113,11 +113,11 @@ def points(tests: pd.DataFrame, ids: list[str], variables: list[str]) -> pd.Data
 
 def instruments_communs(fiches: pd.DataFrame, ids: list[str]) -> list[str]:
     """Les instruments de mesure cités dans la fiche de toutes les investigations de `ids`."""
-    listes = [_instruments(capteurs) for capteurs in fiches.set_index("id").loc[ids, "capteurs"]]
+    listes = [instruments_de(capteurs) for capteurs in fiches.set_index("id").loc[ids, "capteurs"]]
     return sorted(set.intersection(*listes))
 
 
-def _instruments(capteurs: object) -> set[str]:
+def instruments_de(capteurs: object) -> set[str]:
     if pd.isna(capteurs):
         return set()
     return {instrument.strip() for instrument in str(capteurs).split(";") if instrument.strip()}
@@ -138,57 +138,7 @@ def carte(tests: pd.DataFrame, ids: list[str]) -> tuple[list[str], pd.DataFrame]
     return axes, a_tracer
 
 
-def resume(
-    fiches: pd.DataFrame,
-    tests: pd.DataFrame,
-    ids: list[str],
-    oxygene_habitat: float | None = None,
-    habitat: str = "",
-) -> list[str]:
-    """Les phrases qui disent ce qui ressort de la comparaison ; `ids[0]` est l'investigation de départ.
-
-    `oxygene_habitat` est le taux d'oxygène de l'habitat quand l'énoncé le donne, sinon None.
-    """
-    noms = fiches.set_index("id")["nom"]
-    depart = fiches[fiches["id"] == ids[0]].iloc[0]
-    phrases = []
-    for autre in ids[1:]:
-        niveau, raison = niveau_et_raison(depart, fiches[fiches["id"] == autre].iloc[0])
-        phrases.append(f"{noms[autre]} is {NIVEAUX[niveau].lower()} to {noms[ids[0]]}: {raison.lower()}.")
-
-    oxygene = _etendues(tests, ids, "oxygene_pct")
-    if oxygene_habitat is not None and oxygene:
-        atteint = [noms[i] for i, (_, maxi) in oxygene.items() if maxi >= oxygene_habitat]
-        niveau_habitat = f"the {habitat} oxygen level ({oxygene_habitat:g} %)"
-        if atteint:
-            phrases.append(f"Tested at or above {niveau_habitat}: {', '.join(atteint)}.")
-        else:
-            plus_haut = max(maxi for _, maxi in oxygene.values())
-            phrases.append(f"None was tested at {niveau_habitat}: the highest is {plus_haut:g} %.")
-
-    absentes = []
-    for variable in VARIABLES:
-        nom, unite = NOMS_VARIABLES[variable]
-        etendues = _etendues(tests, ids, variable)
-        if not etendues:
-            absentes.append(nom)
-        elif len(etendues) < len(ids):
-            connues = ", ".join(f"{noms[i]} ({_ecrire(mini, maxi)} {unite})" for i, (mini, maxi) in etendues.items())
-            phrases.append(f"{nom.capitalize()} is only recorded for {connues}.")
-        else:
-            bas = max(mini for mini, _ in etendues.values())
-            haut = min(maxi for _, maxi in etendues.values())
-            if bas <= haut:
-                phrases.append(f"{nom.capitalize()} ranges overlap at {_ecrire(bas, haut)} {unite}.")
-            else:
-                detail = ", ".join(f"{noms[i]} {_ecrire(mini, maxi)}" for i, (mini, maxi) in etendues.items())
-                phrases.append(f"{nom.capitalize()} ranges do not overlap ({unite}): {detail}.")
-    if absentes:
-        phrases.append(f"Not recorded in NASA's tables for any of them: {', '.join(absentes)}.")
-    return phrases
-
-
-def _etendues(tests: pd.DataFrame, ids: list[str], variable: str) -> dict[str, tuple[float, float]]:
+def etendues(tests: pd.DataFrame, ids: list[str], variable: str) -> dict[str, tuple[float, float]]:
     """Le minimum et le maximum de `variable` pour chaque investigation qui a des valeurs."""
     etendues = {}
     for investigation in ids:
@@ -198,5 +148,5 @@ def _etendues(tests: pd.DataFrame, ids: list[str], variable: str) -> dict[str, t
     return etendues
 
 
-def _ecrire(mini: float, maxi: float) -> str:
+def ecrire_plage(mini: float, maxi: float) -> str:
     return f"{mini:g}" if mini == maxi else f"{mini:g} to {maxi:g}"
