@@ -31,7 +31,6 @@ from flame.ui import label
 
 LIBELLES = {
     "same": "Same?",
-    "pilier": "Pillar",
     "type_combustible": "Fuel type",
     "oxygene_pct": "Oxygen (%)",
     "pression_kpa": "Pressure (kPa)",
@@ -61,11 +60,9 @@ def en_anglais(valeur: object) -> str:
 
 def tableau_lisible(tableau: pd.DataFrame) -> pd.DataFrame:
     lisible = tableau.copy()
-    for critere in ("pilier", "type_combustible"):
-        if critere in lisible.index:
-            lisible.loc[critere, lisible.columns != "same"] = lisible.loc[critere, lisible.columns != "same"].map(
-                en_anglais
-            )
+    if "type_combustible" in lisible.index:
+        valeurs = lisible.columns != "same"
+        lisible.loc["type_combustible", valeurs] = lisible.loc["type_combustible", valeurs].map(en_anglais)
     colonnes = {identifiant: nom_affiche(identifiant) for identifiant in noms}
     return lisible.rename(index=LIBELLES, columns={**colonnes, **LIBELLES}).rename_axis("Criterion")
 
@@ -138,7 +135,7 @@ for colonne, identifiant in zip(st.columns(len(ids)), ids, strict=True):
         if psi is not None and pd.notna(psi.get("title")):
             st.caption(str(psi["title"]))
         st.write(fiche["resume"])
-        st.caption(f"{en_anglais(fiche['pilier'])} · {en_anglais(fiche['type_combustible'])}")
+        st.caption(f"Fuel type: {en_anglais(fiche['type_combustible'])}")
         for libelle, valeur in portrait(fiche, tests, psi).items():
             st.markdown(f"**{libelle}:** {valeur}")
         if pd.notna(fiche["objectif"]):
@@ -220,4 +217,4 @@ with onglet_mesures:
             st.markdown(f"**Only listed for {noms[identifiant]}** ({len(propres[identifiant])})")
             liste(propres[identifiant], "None.")
 
-st.caption("Pillar and fuel type are the team's classification, not NASA's. Everything else comes from NASA PSI.")
+st.caption("Fuel type is the team's classification, not NASA's. Everything else comes from NASA PSI.")
