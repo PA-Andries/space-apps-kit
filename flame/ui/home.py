@@ -1,4 +1,4 @@
-"""Text blocks of the home page: the opening, section titles, key figures, footer (styles in style.py)."""
+"""Text blocks of the dashboard: header, card titles, key figures, mascot, footer (styles in style.py)."""
 
 from html import escape
 
@@ -36,8 +36,26 @@ def section(title: str, subtitle: str = "", step: str = "", anchor: str = "") ->
     st.html(f'<div class="ff-section"{target}>{above}<h2>{escape(title)}</h2>{below}</div>')
 
 
-def stat_tiles(tiles: list[tuple[str | None, str]], note: str = "") -> None:
-    """A row of key figures: [(value, caption), ...]. A value of None shows "Not given", never a guess."""
+def dashboard_header(title: str, subtitle: str, chips: list[str]) -> None:
+    """The dashboard's top line: the name with a flame mark, a grey subtitle, and small figure chips on the right."""
+    badges = "".join(f'<span class="ff-chip">{escape(chip)}</span>' for chip in chips)
+    st.html(
+        f'<div class="ff-header"><div><h1><span class="ff-mark"></span>{escape(title)}</h1>'
+        f'<p>{escape(subtitle)}</p></div><div class="ff-chips">{badges}</div></div>'
+    )
+
+
+def card_title(title: str, subtitle: str = "") -> None:
+    """The title line of a dashboard card, with an optional grey hint."""
+    below = f"<p>{escape(subtitle)}</p>" if subtitle else ""
+    st.html(f'<div class="ff-card-title"><h3>{escape(title)}</h3>{below}</div>')
+
+
+def stat_tiles(tiles: list[tuple[str | None, str]], note: str = "", compact: bool = False) -> None:
+    """A row of key figures: [(value, caption), ...]. A value of None shows "Not given", never a guess.
+
+    `compact`: smaller tiles, for a dashboard card.
+    """
     cells = []
     for value, caption in tiles:
         if value is None:
@@ -45,7 +63,8 @@ def stat_tiles(tiles: list[tuple[str | None, str]], note: str = "") -> None:
         else:
             figure = f"<strong>{escape(value)}</strong>"
         cells.append(f'<div class="ff-stat"><span>{escape(caption)}</span>{figure}</div>')
-    st.html(f'<div class="ff-stats">{"".join(cells)}</div>')
+    size = " ff-compact" if compact else ""
+    st.html(f'<div class="ff-stats{size}">{"".join(cells)}</div>')
     if note:
         st.html(f'<p class="ff-note">{escape(note)}</p>')
 
@@ -62,9 +81,9 @@ def mascot(message: str, link: tuple[str, str] | None = None) -> None:
     `link`: an optional (page, text) shown under the bubble. Any page may use it, the Assistant page first.
     """
     with st.container(key="ui_mascot"):
-        figure, words = st.columns([1, 1.5], vertical_alignment="center")
+        figure, words = st.columns([1, 2.2], vertical_alignment="center")
         with figure:
-            mascot_scene(height=280)
+            mascot_scene(height=170)
         with words:
             st.html(f'<div class="ff-bubble">{escape(message)}</div>')
             if link:

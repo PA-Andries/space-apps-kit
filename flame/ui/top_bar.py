@@ -19,7 +19,9 @@ def show_top_bar() -> None:
     scenario = get_scenario()
     # The home page buttons write into these keys: set them only once.
     st.session_state.setdefault("ui_habitat", scenario["habitat"])
-    st.session_state.setdefault("ui_pillar", scenario["pilier"])
+    # The pillar switch of the dashboard can be emptied by a second click: keep the last pillar then.
+    if st.session_state.get("ui_pillar") is None:
+        st.session_state["ui_pillar"] = scenario["pilier"]
     if st.session_state.get("ui_profile") not in PROFILES_OFFERED:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]

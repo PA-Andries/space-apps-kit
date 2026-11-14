@@ -34,7 +34,7 @@ PILLAR_HINTS = {
     "Éteindre": "Put a fire out",
 }
 
-SCENE_HEIGHT = 420
+SCENE_HEIGHT = 440
 
 # A zone is the clickable area around one 3D object: an ellipse centred on (cx, cy), in fractions of the
 # frame's width and height, and w, h in fractions of the frame's HEIGHT (the scene sizes objects by the
@@ -42,7 +42,7 @@ SCENE_HEIGHT = 420
 # zone centre, and a transparent round button covers the zone: clicking the object clicks the button.
 # `label`: where the name goes, "below" (default) or "right".
 FIRST_VIEW_ZONES = [
-    {"cx": 1 / 6, "cy": 0.48, "w": 0.75, "h": 0.5},
+    {"cx": 1 / 6, "cy": 0.48, "w": 0.62, "h": 0.5},
     {"cx": 1 / 2, "cy": 0.48, "w": 0.5, "h": 0.5},
     {"cx": 5 / 6, "cy": 0.48, "w": 0.5, "h": 0.5},
 ]

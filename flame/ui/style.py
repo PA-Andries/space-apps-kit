@@ -27,7 +27,7 @@ GLOBAL_STYLE = f"""<style>
 [data-testid="stMain"] {{ scroll-behavior: smooth; }}
 
 /* A centred column with room to breathe. */
-.stMainBlockContainer, .block-container {{ max-width: 1040px; padding-top: 1rem; padding-bottom: 3rem; }}
+.stMainBlockContainer, .block-container {{ max-width: 1440px; padding: 1.2rem 2rem 2rem; }}
 
 /* Pill-shaped buttons, with a soft lift on hover. */
 .stButton button, .stLinkButton a {{
@@ -48,12 +48,12 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 [data-stale="true"] {{ opacity: 1 !important; transition: none !important; }}
 
 /* The mascot: no frame around it, and a speech bubble pointing at it. */
-.st-key-ui_mascot {{ max-width: 640px; margin: 1rem auto 0; }}
+.st-key-ui_mascot {{ margin: 0; }}
 .st-key-ui_mascot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
-.ff-bubble {{ position: relative; background: #fff; border-radius: 22px; padding: 1.1rem 1.3rem; color: {INK};
-  font-size: 1.08rem; line-height: 1.45; font-weight: 500; box-shadow: 0 10px 30px -12px rgba(29, 29, 31, 0.18); }}
+.ff-bubble {{ position: relative; background: #f5f5f7; border-radius: 22px; padding: 1.1rem 1.3rem; color: {INK};
+  font-size: 0.95rem; line-height: 1.45; font-weight: 500; }}
 .ff-bubble::before {{ content: ""; position: absolute; left: -9px; top: 50%; width: 18px; height: 18px;
-  background: #fff; transform: translateY(-50%) rotate(45deg); border-radius: 3px; }}
+  background: #f5f5f7; transform: translateY(-50%) rotate(45deg); border-radius: 3px; }}
 
 /* Alerts and bordered containers as soft white tiles. */
 [data-testid="stAlert"] {{ border-radius: 18px; border: none; }}
@@ -105,7 +105,33 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 /* What follows a 3D scene: a centred caption and link. */
 .st-key-ui_after_scene [data-testid="stCaptionContainer"] {{ text-align: center; margin-top: 0.8rem; }}
 .st-key-ui_after_scene [data-testid="stElementContainer"]:has([data-testid="stPageLink"]) {{ align-self: center; }}
-.ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 6rem; padding-top: 1.2rem; }}
+/* Dashboard (see flame/ui/home.py): a header line, then white cards in a grid. */
+.ff-header {{ display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap;
+  margin: 0.4rem 0 0.6rem; }}
+.ff-header h1 {{ font-size: 1.9rem; font-weight: 800; letter-spacing: -0.035em; margin: 0; padding: 0;
+  display: flex; align-items: center; gap: 0.6rem; }}
+.ff-header p {{ color: {MUTED}; margin: 0.2rem 0 0; font-size: 0.98rem; font-weight: 500; }}
+.ff-mark {{ width: 14px; height: 22px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: {GRADIENT};
+  display: inline-block; }}
+.ff-chips {{ display: flex; gap: 0.5rem; flex-wrap: wrap; }}
+.ff-chip {{ background: #fff; border-radius: 980px; padding: 0.35rem 0.85rem; font-size: 0.85rem; font-weight: 600;
+  color: {INK}; box-shadow: 0 1px 4px rgba(29, 29, 31, 0.06); }}
+.st-key-ui_card_destination, .st-key-ui_card_conditions, .st-key-ui_card_ranking,
+.st-key-ui_card_assistant, .st-key-ui_card_compare {{
+  background: #fff; border: none !important; border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem;
+  box-shadow: 0 2px 14px rgba(29, 29, 31, 0.05);
+}}
+.ff-card-title h3 {{ font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; padding: 0; }}
+.ff-card-title p {{ color: {MUTED}; font-size: 0.88rem; margin: 0.15rem 0 0.2rem; }}
+.ff-compact.ff-stats {{ gap: 0.6rem; margin: 0.2rem 0 0.4rem; }}
+.ff-compact .ff-stat {{ background: #f5f5f7; border-radius: 18px; padding: 0.8rem 0.5rem 0.9rem; }}
+.ff-compact .ff-stat span {{ font-size: 0.8rem; margin-bottom: 0.2rem; }}
+.ff-compact .ff-stat strong {{ font-size: 1.9rem; }}
+.ff-compact .ff-stat strong.ff-unknown {{ font-size: 1.05rem; line-height: 1.9; }}
+.ff-compact + .ff-note, .ff-note.ff-small {{ font-size: 0.78rem; margin: 0 0 0.4rem; }}
+.st-key-ui_card_conditions iframe, .st-key-ui_card_destination iframe {{ box-shadow: none; border-radius: 18px; }}
+
+.ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 2rem; padding-top: 1rem; }}
 .ff-footer p {{ color: #86868b; font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.5rem; }}
 
 @media (max-width: 640px) {{

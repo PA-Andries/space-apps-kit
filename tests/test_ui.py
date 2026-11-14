@@ -162,18 +162,34 @@ def test_planet_maps_are_sent_only_when_needed():
     assert scene_assets(["earth_whole"])["earth"].startswith("data:image/jpeg;base64,")
 
 
-def test_home_page_goes_step_by_step():
+def test_dashboard_shows_everything_at_once():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert [b.key for b in site.button if not b.key.startswith("ui_body_")] == []
+    assert not site.exception
+    assert len(site.dataframe) >= 1  # the ranking is there from the start
     site.button(key="ui_body_Mars").click().run()
     assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == ["ui_place_Base martienne"]
     site.button(key="ui_place_Base martienne").click().run()
-    assert len([b for b in site.button if b.key.startswith("ui_pillar_")]) == 3
-    assert len(site.caption) == 3  # one hint per pillar, no result yet
-    site.button(key="ui_pillar_Éteindre").click().run()
+    assert site.session_state["ui_habitat"] == "Base martienne"  # app.py turns it into the scenario
     assert not site.exception
-    assert len(site.caption) == 4  # the flame caption of the result
+
+
+def _pillar_switch_emptied():
+    import streamlit as st
+
+    from flame.ui.top_bar import show_top_bar
+
+    st.session_state["ui_pillar"] = "Éteindre"
+    show_top_bar()
+    st.session_state["first"] = st.session_state["pilier"]
+    st.session_state["ui_pillar"] = None  # a second click on the switch empties it
+    show_top_bar()
+
+
+def test_pillar_switch_sets_the_scenario_and_never_empties_it():
+    site = AppTest.from_function(_pillar_switch_emptied).run()
+    assert site.session_state["first"] == "Éteindre"
+    assert site.session_state["pilier"] == "Éteindre"
 
 
 def test_back_button_returns_to_the_bodies():
@@ -188,10 +204,9 @@ def test_earth_button_shows_the_reference():
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.button(key="ui_body_Terre").click().run()
     site.button(key="ui_place_Terre").click().run()
-    site.button(key="ui_pillar_Prévenir").click().run()
     assert not site.exception
     assert site.session_state["ui_place"] == "Terre"
-    assert len(site.info) == 1
+    assert any("Earth is the reference" in caption.value for caption in site.caption)
 
 
 def test_no_scenario_bar_and_student_is_not_offered():
