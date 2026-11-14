@@ -697,7 +697,19 @@ for n in sorted(CUR):
                 )
             elif n == 22:
                 if not g("Test Day"):
+                    # continuation line of the PSI table: one more fuel concentration used on the same test day
+                    mm = (
+                        T
+                        and T[-1]["investigation_id"] == "PSI-22"
+                        and re.search(r"Fuel conc ([^.]*)\.", T[-1]["notes"])
+                    )
+                    if g("Fuel Conc") and mm and g("Fuel Conc") not in mm.group(1).split(", "):
+                        T[-1]["notes"] = T[-1]["notes"].replace(
+                            mm.group(0), "Fuel conc %s, %s." % (mm.group(1), g("Fuel Conc")), 1
+                        )
                     continue
+                if T and T[-1]["investigation_id"] == "PSI-22" and T[-1]["test_id"] == g("Test Day"):
+                    continue  # PSI's table repeats the last test day
                 add(
                     n,
                     tb,
@@ -837,6 +849,16 @@ for n in sorted(CUR):
                 )
             elif n in (98, 99, 100):
                 sid = g("Sample Number")
+                # Saffire-II: the Material cell of samples 2-6 and 2-9 is empty in PSI's table (merged cell). Table 1 of
+                # "SAFFIRE Objectives, Development and Status.pdf" gives S6 = SIBAL fabric and S9 = flat PMMA.
+                filled = (
+                    {"2-6": "Cotton-Fiberglass (SIBAL)", "2-9": "PMMA"}.get(sid)
+                    if n == 99 and not g("Material")
+                    else None
+                )
+                if filled:
+                    r = dict(r, Material=filled)
+                    g = r.get
                 if not g("Material") or len(sid) > 12 or g("Material").lower().startswith("pre-test"):
                     continue
                 o2 = rng(g("Percent O2") or g("Percent O2 (Note 1)"), lo=5, hi=100)
@@ -859,7 +881,12 @@ for n in sorted(CUR):
                     outcome=g("?-g Burn Length")
                     and "microgravity burn length %s; 1-g burn length %s" % (g("?-g Burn Length"), g("1-g Burn Length"))
                     or "",
-                    notes="Cameras %s %s" % (g("Camera 1"), g("Camera 2")),
+                    notes="Cameras %s %s" % (g("Camera 1"), g("Camera 2"))
+                    + (
+                        "; material cell is empty in PSI's table (merged cell), filled from Table 1 of 'SAFFIRE Objectives, Development and Status.pdf'"
+                        if filled
+                        else ""
+                    ),
                 )
             elif n == 101:
                 add(

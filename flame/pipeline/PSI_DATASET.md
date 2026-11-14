@@ -27,7 +27,7 @@ To rebuild from an existing mirror: `uv run python flame/pipeline/psi_construire
 | Table | Rows | One row is | Main use in the dashboard |
 |---|---|---|---|
 | `investigations` | 24 | a PSI combustion investigation (19 flight, 5 ground) | Catalogue, ranking, comparison |
-| `tests` | 1,988 | a row of a PSI "Experimental Table", harmonised | Filter by fuel, oxygen, pressure, airflow; export for modelling |
+| `tests` | 1,989 | a row of a PSI "Experimental Table", harmonised | Filter by fuel, oxygen, pressure, airflow; export for modelling |
 | `hardware_families` | 6 | a hardware group | "Same hardware" grouping |
 | `relations` | 32 | a link between investigations or to a theme | Graph: related work, reused data, shared instruments |
 | `habitats` | 6 | a crew environment (ISS, suit, Moon Base, rover, Mars) | "Relevant to my habitat" view, coverage gaps |

@@ -10,18 +10,19 @@ Rien n'est inventé : une valeur absente de PSI reste vide. Choix de traduction,
 - `pilier` : le premier pilier attribué par l'équipe ; pour une étude fondamentale, la catégorie la mieux notée.
 - `habitats` : les habitats dont le taux d'oxygène type (`ATMOSPHERES`) tombe dans la plage d'oxygène testée,
   à un point de pourcentage près. La pression n'entre pas dans ce choix.
-- `verifie_par` reste vide : c'est une personne qui valide une fiche. Une validation déjà écrite dans
-  `data/investigations.csv` est conservée quand on relance le script.
+- `verifie_par` reste vide : c'est une personne qui valide une fiche. Après sa relecture, elle relance le script
+  avec `--verifie-par <prénom>`. Une validation déjà écrite dans `data/investigations.csv` est conservée.
 """
 
+import argparse
 import sys
 from pathlib import Path
 
 import pandas as pd
 
 from flame.commun.constantes import ATMOSPHERES, COLONNES_FICHES, COLONNES_TESTS
-from flame.commun.donnees import DOSSIER_DATA
 
+DOSSIER_DATA = Path(__file__).resolve().parents[2] / "data"
 DOSSIER_PSI = DOSSIER_DATA / "raw" / "psi_dataset"
 KPA_PAR_ATM = 101.325
 # Un essai à 21,5 % d'oxygène compte pour un habitat à 21 % : écart toléré, en points de pourcentage.
@@ -150,7 +151,14 @@ def lignes_de_tests_du_contrat(tests_psi: pd.DataFrame) -> pd.DataFrame:
 
 
 def main() -> None:
-    dossier_psi = Path(sys.argv[1]) if len(sys.argv) > 1 else DOSSIER_PSI
+    parametres = argparse.ArgumentParser(description="Écrit data/investigations.csv et data/tests.csv.")
+    parametres.add_argument("dossier_psi", nargs="?", type=Path, default=DOSSIER_PSI)
+    parametres.add_argument(
+        "--verifie-par",
+        help="prénom de la personne qui a vérifié les fiches : il est écrit sur toutes les fiches non encore validées",
+    )
+    arguments = parametres.parse_args()
+    dossier_psi = arguments.dossier_psi
     if not (dossier_psi / "investigations.csv").exists():
         sys.exit(f"Jeu de données PSI introuvable dans {dossier_psi} : lancer d'abord flame.pipeline.psi_telecharger")
     noms = ["investigations", "tests", "measurements", "documents", "relevance"]
@@ -161,6 +169,8 @@ def main() -> None:
         anciennes = pd.read_csv(fichier_fiches).dropna(subset=["verifie_par"])
         deja_verifiees = dict(zip(anciennes["id"], anciennes["verifie_par"], strict=True))
     fiches = fiches_du_contrat(psi, deja_verifiees)
+    if arguments.verifie_par:
+        fiches["verifie_par"] = fiches["verifie_par"].fillna(arguments.verifie_par)
     tests = lignes_de_tests_du_contrat(psi["tests"])
     fiches.to_csv(fichier_fiches, index=False)
     tests.to_csv(DOSSIER_DATA / "tests.csv", index=False)
