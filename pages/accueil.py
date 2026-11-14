@@ -1,7 +1,8 @@
 """Page 1 « My environment ». Owner: role F (Interface and 3D); the conditions chart comes from role D.
 
-Layout of sketch 1 of the team's whiteboard: the crew environment and its sliders (O₂, g, P, fuel), four
-cards with the values and their sources, the O₂ × P chart of NASA's tests, an ANALYSE button, a chatbot icon.
+Layout of sketch 1 of the team's whiteboard: the crew environments (one button each) and the sliders (O₂, g, P,
+fuel), four cards with the values and their sources, the O₂ × P chart of NASA's tests, an ANALYSE button, a
+chatbot icon.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
 """
@@ -22,7 +23,7 @@ from flame.ui import (
     footer,
     investigation_card,
     label,
-    place_picker,
+    place_buttons,
     save_environment,
     show_environment_in_sidebar,
     source_name,
@@ -64,11 +65,10 @@ picker_column, sliders_column = st.columns([7, 5], gap="medium")
 with picker_column, st.container(key="ui_card_destination", height="stretch"):
     card_title(
         "Habitable crew environment",
-        "Spacecraft, space station, lunar base, Mars base or pressurized rover: tap a planet, then one of them.",
+        "Space station, spacecraft, lunar base, pressurized rover or Mars base: choose yours.",
     )
-    body, place = place_picker()
+    shown_place = place_buttons(habitat)
 
-shown_place = place or habitat
 sources = conditions(shown_place)["sources"]
 values = environment_values(shown_place)
 
@@ -175,9 +175,7 @@ footer(
         "Flame in Freefall is a student project for the NASA Space Apps Challenge 2026. It is not affiliated "
         "with or endorsed by NASA. Fuel types are the team's classification; scores are the team's judgement, "
         "not NASA data.",
-        "Experiments: NASA Physical Sciences Informatics. Planet maps: NASA Scientific Visualization Studio (Blue "
-        "Marble; LRO LROC colour map of the Moon) and NASA 3D Resources (Mars). Moon and Mars scenes: NASA "
-        "illustrations (Moon to Mars Transportation and Habitation, NASA logo removed; PIA23302). Station and "
-        "spacecraft: simplified 3D shapes. The mascot is a drawing.",
+        "Experiments: NASA Physical Sciences Informatics. Button icons: Google Material Symbols (Apache 2.0). "
+        "The mascot is a drawing.",
     ]
 )
