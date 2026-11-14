@@ -95,3 +95,26 @@ def test_commit_cosigne_par_une_ia(monkeypatch):
         monkeypatch.delenv(nom, raising=False)
     assert est_un_agent("Filtres\n\nCo-authored-by: Claude <noreply@anthropic.com>")
     assert not est_un_agent("Filtres\n\nCo-authored-by: Hugo <hugo@example.org>")
+
+
+def test_un_claim_apres_le_centieme_commentaire_est_trouve(monkeypatch):
+    import io
+    import json
+
+    from space_apps_kit import regles
+
+    pages = {
+        1: [{"body": "RELEASE ancien"}] * 100,
+        2: [{"body": "CLAIM\nbranch: comparateur/sans-piliers"}],
+    }
+    adresses = []
+
+    def fausse_ouverture(adresse, timeout=None):
+        adresses.append(adresse)
+        numero = int(adresse.rsplit("page=", 1)[1])
+        return io.BytesIO(json.dumps(pages.get(numero, [])).encode())
+
+    monkeypatch.setattr(regles.urllib.request, "urlopen", fausse_ouverture)
+    assert regles.claim_trouve("comparateur/sans-piliers") is True
+    assert regles.claim_trouve("branche/sans-claim") is False
+    assert len(adresses) == 4  # deux pages par recherche, pas une de plus
