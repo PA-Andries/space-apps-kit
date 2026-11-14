@@ -152,10 +152,12 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
 
-/* The mascot of the Assistant page, small and centred just above the chat box; no frame around it. */
-.st-key-ui_assistant_mascot {{ align-items: center; margin: 0.5rem 0 0; }}
-.st-key-ui_assistant_mascot iframe {{ width: 160px !important; box-shadow: none; border-radius: 0;
-  background: transparent; }}
+/* The mascot of the Assistant page: pinned to the bottom-right corner, high enough to stand on top of the
+   chat box (legs and shoes visible), with no frame around it. */
+.st-key-ui_assistant_mascot {{ position: fixed; right: 24px; bottom: 96px; z-index: 1000; width: 170px; gap: 0;
+  pointer-events: none; }}
+.st-key-ui_assistant_mascot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
+@media (max-width: 640px) {{ .st-key-ui_assistant_mascot {{ width: 110px; right: 8px; }} }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;

@@ -110,12 +110,12 @@ def chatbot_button(page: str) -> None:
 
 
 def assistant_mascot() -> None:
-    """The flame mascot, small and centred, just above the chat box of the Assistant page.
+    """The flame mascot of the Assistant page, in the bottom-right corner, standing on top of the chat box.
 
     It talks (its mouth moves) while `talking()` is open: see below.
     """
     with st.container(key="ui_assistant_mascot"):
-        mascot_scene(height=150)
+        mascot_scene(height=190)
 
 
 @contextmanager

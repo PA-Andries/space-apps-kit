@@ -21,7 +21,7 @@ st.caption(
 )
 
 historique = st.session_state.setdefault("assistant_historique", [])
-# La conversation d'abord, puis la petite flamme juste au-dessus de la zone de saisie.
+# La conversation, puis la petite flamme (fixée en bas à droite, debout sur la zone de saisie).
 conversation = st.container()
 with conversation:
     for message in historique:
