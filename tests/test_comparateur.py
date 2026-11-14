@@ -7,14 +7,19 @@ from streamlit.testing.v1 import AppTest
 
 from flame.commun import INCONNU, charger_fiches, charger_tests
 from flame.comparateur import (
+    ABSENT,
     CRITERES,
     VARIABLES,
     carte,
     comparables,
     comparer,
+    cote_a_cote,
+    explication_carte,
     instruments_communs,
+    mesures,
     plages,
     points,
+    portrait,
     resume,
     separer,
     variables_communes,
@@ -110,23 +115,96 @@ def test_instruments_communs():
     assert instruments_communs(fiches, ["A", "C"]) == []
 
 
-def test_resume_dit_ce_qui_ressort():
-    phrases = resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], 30, "Moon base")
-    assert phrases[0].startswith("Exemple C (fictif) : gouttes de carburant is complementary to")
-    assert "Tested at or above the Moon base oxygen level (30 %)" in phrases[1]
-    assert "Oxygen ranges overlap at 16 to 21 %." in phrases
-    assert "Pressure ranges do not overlap" in " ".join(phrases)
+def _phrases(themes: dict[str, list[str]]) -> str:
+    return " ".join(phrase for phrases in themes.values() for phrase in phrases)
+
+
+def test_resume_range_les_phrases_par_theme():
+    themes = resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], 30, "Moon base")
+    assert list(themes) == [
+        "How they relate",
+        "For your habitat",
+        "Test conditions",
+        "Fuels and results",
+        "Data and instruments",
+    ]
+    assert themes["How they relate"][0].startswith("Exemple C (fictif) : gouttes de carburant is complementary to")
+    assert "has 1 test row(s) at or above the Moon base oxygen level (30 %), up to 40 %." in _phrases(themes)
+    assert "stops at 21 % oxygen, below the Moon base oxygen level (30 %)." in _phrases(themes)
+    assert "Oxygen ranges overlap at 16 to 21 % (test rows there:" in _phrases(themes)
+    assert "Pressure ranges do not overlap" in _phrases(themes)
 
 
 def test_resume_signale_ce_qui_manque_sans_l_inventer():
-    phrases = " ".join(resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-B"], 30, "Moon base"))
+    phrases = _phrases(resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-B"], 30, "Moon base"))
     assert "Oxygen is only recorded for" in phrases
-    assert "None was tested at the Moon base oxygen level (30 %): the highest is 21 %." in phrases
+    assert "has no oxygen value in NASA's tables." in phrases
+    assert "How each test ended is not recorded for Exemple B (fictif) : fumées de matériaux." in phrases
+    assert "Rows in NASA's test tables:" in phrases
 
 
 def test_resume_sans_atmosphere_connue_ne_parle_pas_de_l_habitat():
-    phrases = " ".join(resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"]))
-    assert "oxygen level" not in phrases
+    themes = resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"])
+    assert "For your habitat" not in themes
+
+
+def test_resume_cite_les_liens_donnes_par_nasa():
+    relations = pd.DataFrame(
+        {
+            "from_id": ["EXEMPLE-A", "EXEMPLE-C", "EXEMPLE-D"],
+            "to_id": ["EXEMPLE-C", "EXEMPLE-A", "EXEMPLE-A"],
+            "relation": ["related to", "related to", "reuses data from"],
+        }
+    )
+    themes = resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], relations=relations)
+    liens = [phrase for phrase in themes["How they relate"] if "listed by NASA as related" in phrase]
+    assert len(liens) == 1  # les deux sens ne font qu'une phrase, et EXEMPLE-D n'est pas comparée
+
+
+def test_resume_previent_quand_les_lignes_ne_veulent_pas_dire_la_meme_chose():
+    psi = pd.DataFrame({"investigation_id": ["EXEMPLE-A", "EXEMPLE-C"], "row_levels": ["test", "sample"]})
+    phrases = _phrases(resume(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], investigations_psi=psi))
+    assert "so the counts are not comparable" in phrases
+
+
+def test_portrait_d_une_investigation():
+    fiche = charger_fiches().iloc[0]
+    psi = pd.Series(
+        {"flight_platform": "ISS", "start_date": "08-01-2007", "end_date": "07-31-2016", "row_levels": "test"}
+    )
+    infos = portrait(fiche, charger_tests(), psi)
+    assert infos["Where"] == "ISS"
+    assert infos["Project dates"] == "2007 to 2016"
+    assert infos["Test rows"] == "3 (one row = one test)"
+    assert infos["Conditions tested"].startswith("oxygen 16 to 21 %")
+
+
+def test_portrait_sans_table_psi_ne_devine_rien():
+    infos = portrait(charger_fiches().iloc[0], charger_tests(), None)
+    assert infos["Where"] == ABSENT
+    assert infos["Project dates"] == ABSENT
+
+
+def test_cote_a_cote_dit_ce_qui_est_pareil():
+    tableau = cote_a_cote(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-B"], pd.DataFrame())
+    assert list(tableau.columns) == ["same", "EXEMPLE-A", "EXEMPLE-B"]
+    assert tableau.loc["Hardware", "same"] == "same"
+    assert tableau.loc["type_combustible", "same"] == "different"
+    assert tableau.loc["Where", "same"] == ABSENT
+
+
+def test_mesures_separe_le_commun_du_propre():
+    fiches = pd.DataFrame({"id": ["A", "B"], "capteurs": ["Caméra ; Radiomètre", "Radiomètre ; Sonde"]})
+    communs, propres = mesures(fiches, ["A", "B"])
+    assert communs == ["Radiomètre"]
+    assert propres == {"A": ["Caméra"], "B": ["Sonde"]}
+
+
+def test_explication_carte_dit_toujours_pourquoi():
+    tests = charger_tests()
+    assert explication_carte(tests, ["EXEMPLE-A", "EXEMPLE-C"]).startswith("Chart shown because")
+    assert "no test condition" in explication_carte(tests, ["EXEMPLE-A", "EXEMPLE-B"])
+    assert "fewer than 5 distinct test points" in explication_carte(tests, ["EXEMPLE-A", "EXEMPLE-D"])
 
 
 def test_carte_seulement_si_elle_apprend_quelque_chose():
@@ -184,3 +262,13 @@ def test_la_page_accepte_une_troisieme_investigation():
     site.selectbox(key="comparateur_troisieme_EXEMPLE-A_EXEMPLE-C").set_value("EXEMPLE-B").run()
     assert not site.exception
     assert any("vs" in titre.value and "Exemple B" in titre.value for titre in site.subheader)
+
+
+def test_un_nouveau_lien_remplace_l_investigation_choisie_a_la_main():
+    site = _page("EXEMPLE-C")
+    site.selectbox(key="comparateur_depart").set_value("EXEMPLE-B").run()
+    assert site.selectbox(key="comparateur_depart").value == "EXEMPLE-B"
+    site.query_params["id"] = "EXEMPLE-C"  # l'utilisateur reclique sur « Compare » pour EXEMPLE-C
+    site.run()
+    assert not site.exception
+    assert site.selectbox(key="comparateur_depart").value == "EXEMPLE-C"

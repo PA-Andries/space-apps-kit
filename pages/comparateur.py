@@ -1,33 +1,36 @@
 """Page Comparateur. Propriétaire : rôle D (Comparateur). Les textes affichés sont en anglais.
 
-La page part d'une investigation, propose celles qui lui sont comparables, puis résume
-ce qui ressort de la comparaison. Une autre page peut y envoyer l'utilisateur avec
-l'adresse `comparateur?id=<identifiant>`.
+La page part d'une investigation, propose celles qui lui sont comparables, puis détaille
+la comparaison : portrait de chaque expérience, résumé par thèmes, tableau côte à côte.
+Une autre page peut y envoyer l'utilisateur avec l'adresse `comparateur?id=<identifiant>`.
 """
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from flame.commun import INCONNU, charger_fiches, charger_tests, get_scenario
+from flame.commun import charger_fiches, charger_table_psi, charger_tests, get_scenario
 from flame.comparateur import (
+    ABSENT,
     EXPLICATIONS,
     NIVEAUX,
     carte,
     comparables,
-    comparer,
-    instruments_communs,
+    cote_a_cote,
+    explication_carte,
+    frequents,
+    ligne_psi,
+    mesures,
     plages,
+    portrait,
     resume,
-    separer,
 )
 from flame.ui import label, place_conditions
 
 LIBELLES = {
+    "same": "Same?",
     "pilier": "Pillar",
     "type_combustible": "Fuel type",
-    "materiel": "Hardware",
-    "nb_tests": "Rows in NASA's test tables",
     "oxygene_pct": "Oxygen (%)",
     "pression_kpa": "Pressure (kPa)",
     "debit_air_cm_s": "Air flow (cm/s)",
@@ -38,6 +41,8 @@ COULEURS = ["#e0662a", "#2563eb", "#15803d"]  # une couleur par investigation, l
 
 fiches = charger_fiches()
 tests = charger_tests()
+investigations_psi = charger_table_psi("investigations")
+relations = charger_table_psi("relations")
 noms = dict(zip(fiches["id"], fiches["nom"], strict=True))
 
 
@@ -56,21 +61,30 @@ def tableau_lisible(tableau: pd.DataFrame) -> pd.DataFrame:
     lisible = tableau.copy()
     for critere in ("pilier", "type_combustible"):
         if critere in lisible.index:
-            lisible.loc[critere] = lisible.loc[critere].map(en_anglais)
-    return lisible.rename(index=LIBELLES, columns=nom_affiche).rename_axis("Criterion")
+            lisible.loc[critere, lisible.columns != "same"] = lisible.loc[critere, lisible.columns != "same"].map(
+                en_anglais
+            )
+    colonnes = {identifiant: nom_affiche(identifiant) for identifiant in noms}
+    return lisible.rename(index=LIBELLES, columns={**colonnes, **LIBELLES}).rename_axis("Criterion")
+
+
+def liste(lignes: list[str], sinon: str) -> None:
+    st.markdown("\n".join(f"- {ligne}" for ligne in lignes) if lignes else sinon)
 
 
 st.title("Compare")
 st.write("Start from one investigation and see how another relates to it: what they share and where they differ.")
 
-# Une autre page peut choisir l'investigation de départ avec `?id=...` dans l'adresse.
+# Une autre page peut choisir l'investigation de départ avec `?id=...` dans l'adresse. `comparateur_id_adresse`
+# retient la dernière valeur vue dans l'adresse : une valeur différente vient d'un lien, la même vient de cette page.
 demande = st.query_params.get("id")
 if demande in noms and st.session_state.get("comparateur_id_adresse") != demande:
-    st.session_state["comparateur_id_adresse"] = demande
     st.session_state["comparateur_depart"] = demande
 
 colonne_depart, colonne_avec, colonne_troisieme = st.columns(3)
 depart = colonne_depart.selectbox("Start from", list(noms), format_func=nom_affiche, key="comparateur_depart")
+st.query_params["id"] = depart
+st.session_state["comparateur_id_adresse"] = depart
 candidats = comparables(fiches, tests, depart)
 niveaux = dict(zip(candidats["id"], candidats["niveau"], strict=True))
 
@@ -113,54 +127,92 @@ with st.expander(f"Why these suggestions: all {len(candidats)} investigations, f
 
 st.subheader(" vs ".join(noms[identifiant] for identifiant in ids))
 
+# Le portrait de chaque expérience, côte à côte.
+for colonne, identifiant in zip(st.columns(len(ids)), ids, strict=True):
+    fiche = fiches[fiches["id"] == identifiant].iloc[0]
+    psi = ligne_psi(investigations_psi, identifiant)
+    with colonne.container(border=True):
+        st.markdown(f"**{noms[identifiant]}** · {identifiant}")
+        if psi is not None and pd.notna(psi.get("title")):
+            st.caption(str(psi["title"]))
+        st.write(fiche["resume"])
+        st.caption(f"{en_anglais(fiche['pilier'])} · {en_anglais(fiche['type_combustible'])}")
+        for libelle, valeur in portrait(fiche, tests, psi).items():
+            st.markdown(f"**{libelle}:** {valeur}")
+        if pd.notna(fiche["objectif"]):
+            with st.expander("Goal of the experiment"):
+                st.write(fiche["objectif"])
+        st.link_button("View on PSI", fiche["source_psi"], key=f"comparateur_psi_{identifiant}")
+
 # L'atmosphère de l'habitat n'est utilisée que si l'énoncé la donne (le corps céleste ne sert qu'à la gravité).
 habitat = get_scenario()["habitat"]
 conditions = place_conditions(habitat, "Terre")
 oxygene_habitat, pression_habitat = conditions["oxygen_pct"], conditions["pressure_kpa"]
 
 with st.container(border=True):
-    st.markdown("**What stands out**")
-    for phrase in resume(fiches, tests, ids, oxygene_habitat, label(habitat)):
-        st.markdown(f"- {phrase}")
+    st.markdown("#### What stands out")
+    themes = resume(fiches, tests, ids, oxygene_habitat, label(habitat), relations, investigations_psi)
+    for theme, phrases in themes.items():
+        st.markdown(f"**{theme}**")
+        liste(phrases, "")
+    if oxygene_habitat is None:
+        st.caption(f"The challenge statement gives no atmosphere for the {label(habitat)}: nothing is assumed here.")
 
-# Le graphique n'apparaît que s'il apprend quelque chose : deux conditions chiffrées pour toutes, assez de points.
-a_tracer = carte(tests, ids)
-if a_tracer:
-    (axe_x, axe_y), lignes = a_tracer
-    lignes = lignes.assign(Investigation=lignes["investigation_id"].map(noms))
-    figure = px.scatter(
-        lignes,
-        x=axe_x,
-        y=axe_y,
-        color="Investigation",
-        symbol="Investigation",
-        color_discrete_sequence=COULEURS,
-        opacity=0.7,
-        labels=LIBELLES,
-        hover_data=["test_id", "combustible"],
-    )
-    legende = f"Each point is one row of NASA's test tables ({len(lignes)} rows)."
-    if oxygene_habitat is not None:
-        figure.add_vline(x=oxygene_habitat, line_dash="dash", annotation_text=f"{label(habitat)} oxygen")
-        if axe_y == "pression_kpa":
-            figure.add_hline(y=pression_habitat, line_dash="dash", annotation_text=f"{label(habitat)} pressure")
-        legende += f" Dashed lines: the {label(habitat)} atmosphere given by the challenge statement."
-    st.plotly_chart(figure, key="comparateur_carte")
-    st.caption(legende)
+onglet_tableau, onglet_conditions, onglet_combustibles, onglet_mesures = st.tabs(
+    ["Side by side", "Test conditions", "Fuels and results", "Measurements"]
+)
 
-communs, differences, _ = separer(pd.concat([comparer(fiches, ids), plages(tests, ids)]))
-if not differences.empty:
-    st.markdown("**Where they differ**")
-    st.table(tableau_lisible(differences.replace(INCONNU, "not recorded")))
-if not communs.empty:
-    lisibles = tableau_lisible(communs)
-    st.markdown(
-        "**In common** · " + " · ".join(f"{critere}: {ligne.iloc[0]}" for critere, ligne in lisibles.iterrows())
-    )
+with onglet_tableau:
+    st.table(tableau_lisible(cote_a_cote(fiches, tests, ids, investigations_psi)))
+    st.caption(f"“{ABSENT}” means the value is not in NASA's tables. Nothing is filled in by guessing.")
 
-instruments = instruments_communs(fiches, ids)
-if instruments:
-    with st.expander(f"Measuring instruments they share ({len(instruments)})"):
-        st.write(" · ".join(instruments))
+with onglet_conditions:
+    # Le graphique n'apparaît que s'il apprend quelque chose ; la phrase dit toujours pourquoi il est là ou non.
+    st.info(explication_carte(tests, ids))
+    a_tracer = carte(tests, ids)
+    if a_tracer:
+        (axe_x, axe_y), lignes = a_tracer
+        lignes = lignes.assign(Investigation=lignes["investigation_id"].map(noms))
+        figure = px.scatter(
+            lignes,
+            x=axe_x,
+            y=axe_y,
+            color="Investigation",
+            symbol="Investigation",
+            color_discrete_sequence=COULEURS,
+            opacity=0.7,
+            labels=LIBELLES,
+            hover_data=["test_id", "combustible"],
+        )
+        legende = f"Each point is one row of NASA's test tables ({len(lignes)} rows)."
+        if oxygene_habitat is not None:
+            figure.add_vline(x=oxygene_habitat, line_dash="dash", annotation_text=f"{label(habitat)} oxygen")
+            if axe_y == "pression_kpa":
+                figure.add_hline(y=pression_habitat, line_dash="dash", annotation_text=f"{label(habitat)} pressure")
+            legende += f" Dashed lines: the {label(habitat)} atmosphere given by the challenge statement."
+        st.plotly_chart(figure, key="comparateur_carte")
+        st.caption(legende)
+    st.markdown("**Range tested for each condition**")
+    st.table(tableau_lisible(plages(tests, ids).replace("inconnu", ABSENT)))
 
-st.caption("Pillar and fuel type are the team's classification, not NASA's. Test conditions come from NASA PSI.")
+with onglet_combustibles:
+    for colonne, identifiant in zip(st.columns(len(ids)), ids, strict=True):
+        with colonne:
+            st.markdown(f"**{noms[identifiant]}**")
+            st.caption("Most tested fuels")
+            combustibles = frequents(tests, identifiant, "combustible", 5)
+            liste([f"{nom} ({nombre} rows)" for nom, nombre in combustibles], f"Fuels: {ABSENT}.")
+            st.caption("How the tests ended")
+            fins = frequents(tests, identifiant, "resultat", 5)
+            liste([f"{valeur} ({nombre} rows)" for valeur, nombre in fins], f"Outcomes: {ABSENT}.")
+
+with onglet_mesures:
+    communs, propres = mesures(fiches, ids)
+    st.markdown(f"**Instruments listed for all of them** ({len(communs)})")
+    liste(communs, "None.")
+    for colonne, identifiant in zip(st.columns(len(ids)), ids, strict=True):
+        with colonne:
+            st.markdown(f"**Only listed for {noms[identifiant]}** ({len(propres[identifiant])})")
+            liste(propres[identifiant], "None.")
+
+st.caption("Pillar and fuel type are the team's classification, not NASA's. Everything else comes from NASA PSI.")

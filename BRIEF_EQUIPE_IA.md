@@ -30,6 +30,7 @@ Pour que les six assistants restent alignés, tiens-toi à ces règles :
   2. Extraire des données utiles à la modélisation prédictive de l'inflammabilité.
   3. Mettre en avant la recherche utile aux équipements de sécurité de demain.
 - **Bonus possible :** les applications sur Terre (extincteurs à brouillard d'eau, détection de fumée, équipement des pompiers).
+- **Notre mission (recadrage du samedi 14 novembre, validé par PA) :** l'utilisateur décrit l'environnement qu'il étudie (habitat, oxygène, pression, gravité, combustible). Le tableau de bord lui montre où se situent les tests NASA en microgravité par rapport à ces conditions, classe et explique les investigations utiles, fournit les données pour la modélisation et la recherche utile aux équipements de demain. Il dit clairement ce qu'on ne sait pas : aucune donnée en gravité partielle. Une IA répond aux questions en citant ses sources.
 - **Public visé :** étudiants, chercheurs et ingénieurs en aérospatial.
 - **À rendre :** le lien du site en ligne, une vidéo très courte (30 secondes maximum d'après les règles 2025, à confirmer) ou 7 slides, et une page projet.
 - **Notre heure limite interne :** dimanche 20h00. Gel des fonctionnalités dimanche 14h00.
@@ -38,11 +39,13 @@ Pour que les six assistants restent alignés, tiens-toi à ces règles :
 
 - **En microgravité, il n'y a pas d'air chaud qui monte.** La flamme devient une sphère bleue, alimentée lentement en oxygène par diffusion.
 - **L'oxygène et le débit d'air sont les deux paramètres clés** de l'inflammabilité.
-- **NASA organise la sécurité incendie en trois piliers :** prévenir, détecter, éteindre. Tout le site s'appuie sur ces trois mots.
-- **Atmosphères à connaître (chiffres de l'énoncé) :**
-  - Terre : 21 % d'oxygène, 14,7 psi (environ 101 kPa).
-  - Base lunaire et rovers pressurisés : 30 % d'oxygène ou plus, 10,2 psi (environ 70 kPa) ou moins.
-  - Combinaison spatiale : 100 % d'oxygène, 4,3 psi (environ 30 kPa).
+- **NASA organise la sécurité incendie en trois piliers :** prévenir, détecter, éteindre. Ils viennent du contexte de la consigne, pas de ses objectifs : sur le site, ils servent de filtre et d'étiquette, pas de note dans le classement.
+- **Atmosphères à connaître :**
+  - Terre : 21 % d'oxygène, 14,7 psi (environ 101 kPa). Source : énoncé.
+  - Base lunaire et rovers pressurisés : 30 % d'oxygène ou plus, 10,2 psi (70,3 kPa) ou moins. Source : énoncé. Ce sont des **bornes** : le site les montre comme une zone, jamais comme un point.
+  - Combinaison spatiale : 100 % d'oxygène, 4,3 psi (environ 30 kPa). Source : énoncé.
+  - Vaisseau et station : 21 %, environ 101 kPa. **Hypothèse à sourcer**, absente de l'énoncé.
+  - Base martienne : **inconnu**. L'énoncé ne donne aucun chiffre ; le site n'en affiche aucun.
 - **Il n'existe aucune donnée en gravité lunaire ou martienne dans la base NASA.** Les résultats en microgravité et sur Terre encadrent ce qui se passe entre les deux. Le site montre ces bornes et n'invente aucune prédiction.
 - **Hors sujet :** les fusées et leurs carburants.
 
@@ -143,18 +146,38 @@ Pas de base de données, pas de serveur séparé, pas de React. Le rôle B chois
 
 ## 5. L'organisation du site
 
-Le site part de la question de l'utilisateur (« j'ai tel habitat, tel besoin »), pas des données. Le scénario se choisit dans la barre latérale, visible sur toutes les pages.
+Le site part de l'**environnement de l'utilisateur**, pas des données ni des piliers (recadrage du samedi 14 novembre, validé par PA). Le parcours :
 
-| Page | Fichier | Rôle | Ce que l'utilisateur donne | Ce qu'il reçoit |
-| --- | --- | --- | --- | --- |
-| Accueil « Mon scénario » | `pages/accueil.py` | F | Un habitat, un pilier, un profil | Le scénario mémorisé pour toutes les pages ; la flamme en 3D selon la gravité |
-| Recherche | `pages/recherche.py` | C | Une question libre, des filtres | Les investigations classées par pertinence pour le scénario, avec l'explication du score et la fiche de chaque résultat |
-| Comparateur | `pages/comparateur.py` | D | Deux ou trois investigations | Points communs et différences ; les conditions testées situées par rapport à l'atmosphère de l'habitat |
-| Assistant | `pages/assistant.py` | E | Une question libre | Une réponse fondée sur les fiches, avec leurs `id`, ou « je ne sais pas » |
+1. Je décris mon environnement.
+2. Je vois où sont les tests NASA par rapport à mes conditions.
+3. Je lis les investigations classées, et ce qu'on ne sait pas.
+4. Je compare ou j'exporte les données.
+5. Je pose mes questions à l'assistant.
 
-Ce que deviennent les anciennes pages (proposition à confirmer en équipe) : le Classement devient l'ordre des résultats de la Recherche ; les Fiches deviennent le détail d'un résultat ; la carte oxygène × pression, avec la zone « base lunaire », va dans le Comparateur.
+L'environnement choisi en page 1 est mémorisé pour toutes les pages et rappelé dans la barre latérale. Tout l'affichage est en anglais.
 
-Bonus, seulement si tout le reste marche dimanche 9h : mode profil (même fiche expliquée différemment selon le public), brief téléchargeable par habitat, page « Retombées sur Terre », quiz « Mythe ou réalité ».
+| Page | Fichier | Rôle | Objectif NASA | Onglets | Ce que l'utilisateur reçoit |
+| --- | --- | --- | --- | --- | --- |
+| 1. My environment | `pages/accueil.py` | F (graphique : D) | Point d'entrée | — | Son environnement mémorisé, le graphique des tests avec ceux qui correspondent surlignés, un compteur, les 3 investigations les plus pertinentes |
+| 2. Investigations | `pages/recherche.py` | C | 1 | Classement · Fiche · Ce qu'on ne sait pas | Les investigations classées pour son environnement, avec la raison du classement, le détail de chaque fiche et les trous de données |
+| 3. Data | `pages/donnees.py` (à créer) | D | 2 | Carte · Tableau + CSV · Variables et capteurs | Le grand graphique des conditions testées, les tests filtrés et téléchargeables, ce que chaque investigation a mesuré et fait varier |
+| 4. Compare | `pages/comparateur.py` | D | 1 et 2 | (ceux de la page actuelle) | Portraits côte à côte, points communs et différences, conditions testées situées par rapport à l'environnement |
+| 5. Equipment and Earth | `pages/equipements.py` (à créer) | E | 3 + bonus | Détecter · Éteindre · Sur Terre | La recherche utile aux détecteurs et extincteurs de demain, et les retombées sur Terre, avec leurs sources |
+| 6. Assistant | `pages/assistant.py` | E | Tous | — | Une réponse fondée sur les fiches et sur son environnement, avec les `id`, ou « je ne sais pas » |
+
+**La page 1 en détail.** À gauche, un formulaire :
+- **Type d'habitat**, qui pré-remplit l'oxygène, la pression et la gravité, chacun avec sa source ou « inconnu ». Les valeurs restent modifiables.
+- **Combustible** (solide, liquide, gaz), **débit d'air** (optionnel) et **pilier** (optionnel, « tous » par défaut).
+
+À droite, le graphique et un compteur, par exemple « 66 tests · 2 investigations · 0 en gravité partielle ». En bas, les 3 investigations les plus pertinentes. La flamme 3D reste, en petit, comme illustration.
+
+**Le graphique des conditions testées.** Aucun test n'a les trois mesures à la fois (O₂, pression et débit d'air) : un nuage en 3D serait vide. On montre donc **deux vues 2D qui partagent l'axe de l'oxygène** :
+- **O₂ × pression** : 1 022 tests, des flammes de gaz et des gouttes. La pression est en échelle logarithmique.
+- **O₂ × débit d'air** : 131 tests de solides (BASS-II, Saffire), dont la pression n'est pas notée.
+
+Chaque point est un vrai test de `data/tests.csv`. Le graphique dessine les zones sourcées (Terre, base lunaire et rover en zone, combinaison) et surligne les tests qui correspondent à l'environnement choisi. Mars n'a pas de zone. D part des fonctions `carte()` et `points()` de `flame/comparateur/`. Le même graphique sert en page 1 et en page 3.
+
+Bonus, seulement si tout le reste marche dimanche 9h : mode profil (même fiche expliquée différemment selon le public), brief téléchargeable par habitat, quiz « Mythe ou réalité ».
 
 ### Le code commun : `flame/commun/` (propriété du rôle A)
 
@@ -170,6 +193,10 @@ scenario = get_scenario()  # {"habitat": ..., "pilier": ..., "profil": ...}
 
 `ATMOSPHERES` donne, pour chaque habitat, l'oxygène en % et la pression en kPa. Base lunaire et rover : chiffres de l'énoncé. Les autres sont des hypothèses à valider.
 
+**À faire par le rôle A (recadrage) :**
+- **Étendre le scénario**, avec les clés prévues `habitat`, `oxygene_pct`, `pression_kpa`, `gravite`, `type_combustible`, `debit_air_cm_s`, `pilier` (optionnel) et `profil`. Jusque-là, les clés actuelles de `get_scenario()` restent valables.
+- **Corriger `ATMOSPHERES`** comme décrit en section 2 : Mars inconnue, la Lune et le rover en bornes.
+
 ### Ce que chaque dossier offre aux autres
 
 Chaque dossier expose ses fonctions dans son `__init__.py`. Les versions de départ existent déjà et marchent sur les données d'exemple ; chaque rôle les remplace par la vraie version sans changer leur nom ni leurs paramètres.
@@ -184,14 +211,16 @@ Chaque dossier expose ses fonctions dans son `__init__.py`. Les versions de dép
 
 ### Le score du classement (rôle C)
 
-Un score sur 100, affiché avec son détail pour rester explicable :
+Depuis le recadrage, **le pilier ne compte plus dans le score.** C'est un **filtre**, qui montre seulement les investigations utiles au pilier choisi, et une **étiquette** (« primaire », « secondaire » ou « indirect », c'est-à-dire le jugement de l'équipe).
 
-- **Pilier (40 points) :** l'investigation correspond au pilier choisi.
-- **Oxygène (25 points) :** la plage testée couvre l'oxygène de l'habitat, ou s'en approche.
-- **Combustible (20 points) :** les solides comptent le plus, car un habitat contient surtout des tissus et des plastiques ; puis liquides, puis gaz.
-- **Données (15 points) :** nombre de tests disponibles.
+Le score sur 100 repose sur les preuves, et il est affiché avec sa raison :
 
-Ces poids sont un point de départ ; le rôle A les ajuste avec le rôle C.
+- **Atmosphère (40 points) :** des tests ont été faits dans les conditions de l'environnement (O₂ et pression).
+- **Combustible (25 points) :** les solides comptent le plus, car un habitat contient surtout des tissus et des plastiques ; puis les liquides, puis les gaz.
+- **Gravité (20 points) :** les résultats s'appliquent directement (microgravité pour un vaisseau ou une station) ou ne sont qu'une borne (Lune, Mars ; seule E-FIELD Flames imite une gravité partielle).
+- **Données (15 points) :** le nombre de tests disponibles.
+
+Ces poids sont un jugement d'équipe : le site le dit. La pertinence par habitat s'appuie sur `data/psi/relevance.csv` (rôle B), sans son poids de pilier. Elle ne s'appuie plus sur la colonne `habitats` des fiches, calculée sur la seule plage d'oxygène, qui laisse 14 fiches sur 24 sans habitat.
 
 ## 6. Organisation du dépôt
 
@@ -206,7 +235,9 @@ flame/ui/                   cadre, composants, three/ (three.js)    rôle F
 pages/accueil.py                                                    rôle F
 pages/recherche.py                                                  rôle C
 pages/comparateur.py                                                rôle D
+pages/donnees.py            page Data (à créer)                     rôle D
 pages/assistant.py                                                  rôle E
+pages/equipements.py        page Equipment and Earth (à créer)      rôle E
 data/                       les trois CSV du site                   rôle B
 data/exemples/              données fictives pour développer        rôle A
 tests/test_<dossier>.py     un fichier de tests par rôle
@@ -227,12 +258,12 @@ Le calcul est dans `flame/<dossier>/`, l'affichage dans `pages/`. Un fichier de 
 
 | Rôle | Prénom | Mission | Binôme |
 | --- | --- | --- | --- |
-| A. Intégration et pitch | Clément | Fusionne les PR, garde le site en ligne, tient `flame/commun/` et les garde-fous, valide chaque fiche, règle les poids du score, prépare les 20 questions de référence, la vidéo, la page projet et le README | B |
-| B. Données | PA | Interroge l'API NTRS, lit les pages PSI, produit `investigations.csv`, `tests.csv` et `publications.csv` | A |
-| C. Recherche | Martin | Le moteur de recherche, le score du scénario et la page Recherche, avec le détail de chaque fiche | E |
-| D. Comparateur | Hugo | La page Comparateur et la carte oxygène × pression, en supposant les données présentes | F |
-| E. Assistant | Ethan | Le chatbot d'aide : consignes, appel du LLM, réponses qui citent les fiches | C |
-| F. Interface et 3D | Mathéo | L'habillage Streamlit, les composants partagés, la scène three.js et la page d'accueil | D |
+| A. Intégration et pitch | Clément, **remplacé par PA** pendant son absence | Fusionne les PR, garde le site en ligne, tient `flame/commun/` et les garde-fous, valide chaque fiche, règle les poids du score, prépare les 20 questions de référence, la vidéo, la page projet et le README | B |
+| B. Données | PA | Interroge l'API NTRS, lit les pages PSI, produit `investigations.csv`, `tests.csv`, `publications.csv` et les tables de `data/psi/` | A |
+| C. Recherche | Martin | La page Investigations : classement sur les preuves avec sa raison, pilier en filtre, détail de chaque fiche, « ce qu'on ne sait pas » | E |
+| D. Comparateur | Hugo | Le graphique des conditions testées (pages 1 et 3), la page Data et la page Compare | F |
+| E. Assistant | Ethan | Le chatbot d'aide (consignes, appel du LLM, réponses qui citent les fiches et tiennent compte de l'environnement) et la page Equipment and Earth | C |
+| F. Interface et 3D | Mathéo | L'habillage Streamlit, les composants partagés, la scène three.js et la page 1 « My environment » avec son formulaire | D |
 
 Pourquoi ces binômes : A valide les fiches que B produit ; l'assistant de E s'appuie sur le moteur de C pour retrouver les bonnes fiches ; le comparateur de D a besoin des composants et des graphiques de F.
 
@@ -240,8 +271,18 @@ Pourquoi ces binômes : A valide les fiches que B produit ; l'assistant de E s'a
 
 - **Samedi jusqu'à 13h — démarrer.** Chacun installe le dépôt, lance le site sur les données d'exemple et ouvre sa première PR. A met le site en ligne. B commence par les 10 investigations de priorité 1.
 - **Samedi 13h à 19h — les pages.** C, D, E et F construisent leur page sur les données d'exemple, puis sur les vraies dès que B les livre. E branche le LLM. A valide les fiches de B et écrit le texte de la vidéo.
-- **Samedi 19h à 1h — l'intelligence.** C ajoute le score du scénario. E teste l'assistant sur les 20 questions de référence ; A note les réponses. D ajoute la carte oxygène × pression. B complète les priorités 2 et relie les rapports NTRS aux fiches. F soigne l'accueil et la scène 3D.
-- **Dimanche 9h à 14h — solidifier.** Corrections, textes clairs, bonus qui marchent déjà. Ce qui ne marche pas à 11h est abandonné.
+- **Samedi 17h à 22h — le recadrage.**
+  - A : étend le scénario partagé et corrige `ATMOSPHERES` (section 5). Attribue `pages/donnees.py` à D et `pages/equipements.py` à E dans `CONTRIBUTING.md` et dans `COULOIRS` de `src/space_apps_kit/regles.py`. Ajoute les nouvelles pages à `app.py` dès que leurs fichiers existent.
+  - F : construit le formulaire de la page 1.
+  - D : construit le graphique des conditions testées, à partir de `carte()` et `points()`.
+  - C : sort le pilier du score et affiche la raison du classement.
+  - B : dans `relevance.csv`, renomme « Réagir » en « Éteindre », retire le poids du pilier et confirme l'O₂ de BASS et Saffire-III.
+- **Samedi 22h à 1h — l'intelligence.**
+  - D : page Data (tableau filtré + CSV).
+  - C : onglet « Ce qu'on ne sait pas ».
+  - E : l'assistant lit l'environnement de la page 1 et reçoit des outils (filtre par habitat, comptage de tests). E teste l'assistant sur les 20 questions de référence ; A note les réponses.
+  - F : branche le graphique de D en page 1.
+- **Dimanche 9h à 14h — solidifier.** E livre la page Equipment and Earth. Corrections, textes clairs, bonus qui marchent déjà. Ce qui ne marche pas à 11h est abandonné.
 - **Dimanche après 14h — raconter.** Le code est gelé. Tout le monde aide A sur la vidéo, les sous-titres anglais et la page projet. A garde le site en ligne.
 
 Les binômes testent la page l'un de l'autre cinq minutes à chaque point d'étape, et se remplacent en cas de blocage.
@@ -252,10 +293,12 @@ Les binômes testent la page l'un de l'autre cinq minutes à chaque point d'éta
 | --- | --- |
 | Samedi 13h | Squelette du site en ligne ; chacun fait tourner le site chez soi et a ouvert une première PR |
 | Samedi 16h | Les 10 fiches de priorité 1 sont dans `data/`, validées par le rôle A |
+| Samedi 18h | Recadrage inscrit dans ce brief ; scénario étendu et `ATMOSPHERES` sourcées (rôle A) |
 | Samedi 19h | Le site en ligne fonctionne sur un téléphone avec les vraies données |
-| Samedi 1h | Au moins 15 réponses justes sur les 20 questions de référence |
+| Samedi 22h | Page 1 avec formulaire et graphique des conditions testées ; classement sans pilier dans le score |
+| Samedi 1h | Page Data (tableau + CSV) ; l'assistant lit l'environnement ; au moins 15 réponses justes sur les 20 questions de référence |
 | Nuit | Au moins 5 heures de sommeil ; aucune fusion entre 2h et 8h |
-| Dimanche 9h | Choix des bonus à garder |
+| Dimanche 9h | Page Equipment and Earth ; choix des bonus à garder |
 | Dimanche 14h | Gel des fonctionnalités |
 | Dimanche 20h | Soumission envoyée |
 
@@ -277,7 +320,7 @@ Les règles complètes sont dans `CONTRIBUTING.md`. L'essentiel :
 - **Pas de source, pas d'affichage.** Chaque information du site renvoie vers sa page PSI ou son rapport.
 - **Une fiche sans initiales dans `verifie_par` n'est pas affichée.**
 - **L'IA du site répond uniquement à partir des fiches** et a le droit de dire « je ne sais pas ».
-- **Aucun chiffre inventé pour la Lune ou Mars.**
+- **Aucun chiffre inventé pour la Lune ou Mars.** Mars : atmosphère inconnue, le site n'affiche rien. Lune et rover : une zone (≥ 30 % d'O₂, ≤ 70,3 kPa), jamais un point inventé.
 - **La clé d'API ne va jamais dans un fichier du dépôt.**
 - **Les gros fichiers PSI ne vont pas dans le dépôt** : seuls les trois CSV de synthèse.
 - **Les données d'exemple ne sont jamais présentées comme réelles** : tant qu'elles servent, le site l'affiche en haut de chaque page.
