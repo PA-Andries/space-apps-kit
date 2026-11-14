@@ -37,6 +37,6 @@ Then generate 3 alternative concepts that answer the same user/problem different
 
 ## Output
 
-Write `work/spec.md` from `templates/spec.md`. End by listing the open questions and the 3 riskiest assumptions to test before the event.
+Write `work/spec.md` from `spec-template.md` in this skill folder. End by listing the open questions and the 3 riskiest assumptions to test before the event.
 
 Reminder: the spec, mockups and research are allowed prep. The product code is written from Saturday 09:00.

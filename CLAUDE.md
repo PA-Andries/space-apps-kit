@@ -2,6 +2,8 @@
 
 This repo prepares a team for the **NASA Space Apps Challenge 2026**, Paris local event, 14-15 Nov 2026 (theme "The Next Frontier"). Submission closes Sunday 15 Nov 23:59 Paris time.
 
+**Chosen challenge: Flame in Freefall** (`challenges/flame-in-freefall.md`). Read `DECISIONS.md` before any task; it is the latest truth on scope.
+
 ## Hard constraints (never violate)
 
 - **No project code before Sat 14 Nov 09:00.** This repo holds tooling, research, specs and pitch drafts only. Generic boilerplate is fine; the actual app is built during the event in a separate repo.
@@ -25,3 +27,6 @@ Influence, Creativity, Validity, Relevance, Presentation. See `docs/judging.md`.
 - Write outputs under `work/` (create it if needed): `work/shortlist.md`, `work/data/<challenge>.md`, `work/spec.md`, `work/pitch.md`.
 - Be explicit about what is verified (from a statement, dataset or source) and what is assumed.
 - Prefer small, demo-able scope: one complete user flow on real NASA data beats many partial features.
+- Python: one environment managed by uv (`uv sync`, `uv run ...`); add dependencies with `uv add`, never `pip install`. Before proposing a commit, run `uv run ruff check .`, `uv run ruff format --check .` and `uv run pytest` (what CI runs).
+- Never write keys or passwords in code; they go in `.env` (see `.env.example`). Team workflow (branches, PRs, commits): `CONTRIBUTING.md`.
+- Coordinate with the other AI agents (Claude, Codex) in issue #2 "com inter agents": read it before any task, post a CLAIM before your first edit and a RELEASE when you stop.

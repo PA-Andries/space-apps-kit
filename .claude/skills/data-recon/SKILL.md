@@ -9,11 +9,11 @@ Data wrangling is what sinks hackathon teams on Saturday afternoon. This skill r
 
 ## Input
 
-A challenge name (argument). Read its file in `challenges/` and `docs/data-portals.md`.
+A challenge name (argument). Read its file in `challenges/` and `data-portals.md` (in this skill folder).
 
 ## Procedure
 
-1. **List candidate datasets**: every dataset named in the statement first, then relevant ones from `docs/data-portals.md`. For each: name, provider, URL, access method (direct download, API, Earthdata Login, STAC), format, spatial/temporal resolution and coverage, approximate size.
+1. **List candidate datasets**: every dataset named in the statement first, then relevant ones from `data-portals.md` (in this skill folder). For each: name, provider, URL, access method (direct download, API, Earthdata Login, STAC), format, spatial/temporal resolution and coverage, approximate size.
 2. **Sample it** (allowed prep, not project code): in a scratch folder, download the smallest useful slice (one tile, one day, one region) and load it in Python. Typical loaders:
    - NetCDF/HDF5: `xarray.open_dataset`
    - GeoTIFF/COG: `rasterio` or `rioxarray`
@@ -26,6 +26,6 @@ A challenge name (argument). Read its file in `challenges/` and `docs/data-porta
 
 ## Output
 
-Write `work/data/<challenge-slug>.md` using `templates/data-cheatsheet.md`. Don't commit large data files; store the download commands instead.
+Write `work/data/<challenge-slug>.md` using `cheatsheet-template.md` from this skill folder. Don't commit large data files; store the download commands instead.
 
 Finish by telling the user which datasets are confirmed loadable and which are risky.
