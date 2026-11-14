@@ -6,7 +6,10 @@ Fill this in first. Every skill reads it.
 
 | Name | Role on the team | Strong skills | Tools/stacks | Available hours on the weekend | Sleeps on site? |
 |---|---|---|---|---|---|
-| | | | | | |
+| PA (@PA-Andries) | | | | | |
+| Clément Batonnier (@clementbatonnier-hue) | | | | | |
+| Hugo (@hugovlst) | | | | | |
+| Ethan Samson, aka Dadax (@Ethan-111) | | | | | |
 
 Roles to cover: front/full-stack dev · data/ML dev · science/domain · designer/storyteller (owns video + project page) · pitcher/PM (owns scope and time).
 

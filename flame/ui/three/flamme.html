@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #05070d; }
+      canvas { display: block; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      // Illustration qualitative, pas une simulation : la flamme passe d'une sphère bleue
+      // (microgravité) à une goutte jaune étirée vers le haut (gravité terrestre).
+      import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+
+      const reglages = __REGLAGES__; // remplacé par Python : { gravite: 0 à 1, oxygene: en % }
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0.6, 5);
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const couleur = new THREE.Color("#3b82f6").lerp(new THREE.Color("#fbbf24"), reglages.gravite);
+      const taille = 0.6 + reglages.oxygene / 100;
+      const flamme = new THREE.Mesh(
+        new THREE.SphereGeometry(taille, 48, 48),
+        new THREE.MeshBasicMaterial({ color: couleur, transparent: true, opacity: 0.85 }),
+      );
+      flamme.scale.y = 1 + 1.5 * reglages.gravite;
+      flamme.position.y = 0.75 * reglages.gravite;
+      scene.add(flamme);
+
+      const combustible = new THREE.Mesh(
+        new THREE.SphereGeometry(0.18, 24, 24),
+        new THREE.MeshBasicMaterial({ color: "#9ca3af" }),
+      );
+      scene.add(combustible);
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      renderer.setAnimationLoop((temps) => {
+        const souffle = 1 + 0.03 * Math.sin(temps / 300);
+        flamme.scale.x = flamme.scale.z = souffle;
+        renderer.render(scene, camera);
+      });
+    </script>
+  </body>
+</html>

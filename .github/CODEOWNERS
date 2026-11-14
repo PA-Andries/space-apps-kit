@@ -1,0 +1,34 @@
+# Qui possède quoi (voir CONTRIBUTING.md). GitHub demande une relecture au propriétaire
+# quand une PR touche ses fichiers.
+#
+# Pour l'activer : remplacer chaque @pseudo par le pseudo GitHub de la personne
+# et retirer le « # » au début des lignes ci-dessous.
+
+# A. Intégration et pitch (tout ce qui n'est pas listé plus bas)
+# *                         @pseudo-role-a
+
+# B. Données
+# /flame/pipeline/          @pseudo-role-b
+# /data/                    @pseudo-role-b
+# /tests/test_pipeline.py   @pseudo-role-b
+
+# C. Recherche
+# /flame/recherche/         @pseudo-role-c
+# /pages/recherche.py       @pseudo-role-c
+# /tests/test_recherche.py  @pseudo-role-c
+
+# D. Comparateur
+# /flame/comparateur/       @pseudo-role-d
+# /pages/comparateur.py     @pseudo-role-d
+# /tests/test_comparateur.py @pseudo-role-d
+
+# E. Assistant
+# /flame/assistant/         @pseudo-role-e
+# /pages/assistant.py       @pseudo-role-e
+# /tests/test_assistant.py  @pseudo-role-e
+
+# F. Interface et 3D
+# /flame/ui/                @pseudo-role-f
+# /pages/accueil.py         @pseudo-role-f
+# /.streamlit/config.toml   @pseudo-role-f
+# /tests/test_ui.py         @pseudo-role-f

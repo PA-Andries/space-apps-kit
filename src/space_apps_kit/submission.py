@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
 """Check a Space Apps project page draft and demo file against the submission rules.
 
 Usage:
-    python3 scripts/check_submission.py work/project-page.md [--demo FILE] [--no-network]
+    uv run check-submission work/project-page.md [--demo FILE] [--no-network]
+    uv run check-submission --demo FILE
 
 Checks:
   - required sections are present and filled (no leftover <placeholders>)
@@ -22,6 +22,8 @@ import urllib.error
 import urllib.request
 import zipfile
 from pathlib import Path
+
+from pypdf import PdfReader
 
 REQUIRED_SECTIONS = [
     "Project Name",
@@ -158,13 +160,7 @@ def video_duration(path):
 
 
 def pdf_pages(path):
-    try:
-        from pypdf import PdfReader  # optional dependency
-
-        return len(PdfReader(str(path)).pages)
-    except ImportError:
-        data = path.read_bytes()
-        return len(re.findall(rb"/Type\s*/Page(?!s)", data))
+    return len(PdfReader(str(path)).pages)
 
 
 def pptx_slides(path):
@@ -196,27 +192,36 @@ def check_demo(path, report):
         report.warn(f"Unknown demo format {suffix}: check the 30 s / 7 slides limit by hand")
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("page", help="project page draft (Markdown, headings as in templates/project-page.md)")
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        prog="check-submission", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "page", nargs="?", help="project page draft (Markdown, headings as in project-page-template.md)"
+    )
     parser.add_argument("--demo", help="local demo file: video (mp4/mov/webm) or slides (pdf/pptx)")
     parser.add_argument("--no-network", action="store_true", help="skip the public link checks")
     parser.add_argument("--timeout", type=float, default=15.0)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+    if not args.page and not args.demo:
+        parser.error("give a project page, a --demo file, or both")
 
-    text = Path(args.page).read_text(encoding="utf-8")
     report = Report()
-    check_sections(text, report)
-    if not args.no_network:
-        check_links(text, report, args.timeout)
+    if args.page:
+        text = Path(args.page).read_text(encoding="utf-8")
+        check_sections(text, report)
+        if not args.no_network:
+            check_links(text, report, args.timeout)
     if args.demo:
         check_demo(args.demo, report)
 
     report.print()
-    print("Manual checks left: official challenge, datasets credited, AI media watermarked, "
-          "no minors, OSI licence in repo, all members on the Members tab.")
-    sys.exit(1 if report.blocking else 0)
+    print(
+        "Manual checks left: official challenge, datasets credited, AI media watermarked, "
+        "no minors, OSI licence in repo, all members on the Members tab."
+    )
+    return 1 if report.blocking else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

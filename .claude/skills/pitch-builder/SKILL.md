@@ -39,4 +39,4 @@ Ask the user for the time limit the local organisers set (historically ~4 minute
 
 ## Output
 
-Write `work/pitch.md` from `templates/pitch-30s.md` and `templates/slides-7.md`. Flag every line that is a claim needing evidence.
+Write `work/pitch.md` from `pitch-30s-template.md` and `slides-7-template.md` in this skill folder. Flag every line that is a claim needing evidence.
