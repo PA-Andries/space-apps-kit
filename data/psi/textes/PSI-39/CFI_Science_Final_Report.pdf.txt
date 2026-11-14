@@ -1,0 +1,459 @@
+Source : NASA PSI, PSI-39, Reports, CFI Science Final Report.pdf
+
+--- page 1 ---
+Cool Flame 
+Investigation (CFI) 
+SCIENCE FINAL REPORT 
+Vedha Nayagam (CWRU/LTX) and Daniel L. Dietrich (NASA/LTX) 
+7-23-2020
+
+--- page 2 ---
+1 
+ 
+Table of Contents  
+ 
+0.  Nomenclature  
+1.  Overview  
+2.  Introduction  
+ a.  Objectives  
+ b.  Team Members  
+ c.  Dates of Operations  
+3.  Science Overview  
+ a.  Background  
+ b.  Rational for Microgravity (if unusual)  
+ c.  NRA the Investigations was Selected Under  
+ d.  Final Experiment Objectives  
+4.  Operations  
+ a.  Procedures  
+ b.  On-Orbit Testing  
+ c.  Anomalies That Effect Science Surprises/New Discovery  
+ d.  Organization of Data in PSI  
+5.  Results  
+ a.  Findings  
+ b.  Benefits  
+ c.  Patents  
+6.  Appendices 
+ a.  30-Day Operational Accomplishments Report  
+ b.  Publications  
+ c.  Presentations  
+ d.  Webpages
+
+--- page 3 ---
+2 
+ 
+ 
+0.  Nomenclature 
+ 
+CFI Cool Flame Investigation (ISS droplet combustion experiment focused on cool flames on normal 
+alkane fuels) 
+CIR Combustion Integrated Rack 
+FLEX  Flame Extinguishment Experiment (ISS droplet combustion experiments focused on spacecraft fire 
+safety) 
+FLEX-2 Flame Extinguishment Experiment - 2 (ISS droplet combustion experiments focused on fundamental 
+aspects) 
+FOV filed of view 
+ISS International Space Station 
+MDCA Multi-used Droplet Combustion Apparatus 
+NTC Negative Temperature Coefficient 
+OH* hydroxyl radical 
+TSC Tele-science Support Center 
+ 
+ 
+1.  Overview 
+The CFI experiments are conceived as follow-up experiments to the FLEX and FLEX-2 droplet combustion experiments 
+onboard the ISS to further explore the newly discovered quasi-steady “cool flames.”  Cool flames are controlled by low 
+temperature chemistry, and occur in the NTC region of n-alkane fuels.  FLEX series of experiments showed for the first 
+time that quasi-steady stable flames can be established surrounding a droplet in microgravity under certain conditions, 
+without a visible flame at temperatures in the range of 700 to 900 K, unlike the hot flames where the flame temperature 
+is higher than 1200 K.  Since the cool-flame chemistry depends on the chemical structure of the fuel as well as pressure 
+and temperature, three different fuel combinations were investigated, namely, pure n-dodecane, n-dodecane/iso-
+dodecane mixtures and farnesane ( a renewable jet fuel) at ambient pressures up to 5 atmospheres. Cool flame 
+extinction occurs when its static stability is lost close to the lower turnover point in the NTC region, addition of helium to 
+the ambient gas is also considered. Results for droplet burning rates, flame dynamics, droplet extinction diameters, and 
+flame radiant out put are measured. 
+ 
+2.  Introduction (PS):  
+Understanding the combustion characteristics of liquid hydrocarbon fuels is of practical and fundamental importance. 
+The United States alone consumes approximately 19 million barrels of liquid fuels per day which averages out to an 
+astonishing 2.5 gallons per day per person (Reitz, 2013). The primary reasons for such a high reliance on hydrocarbon 
+fuels as the single most important energy source, not only in the US but globally, is their high energy density, ease of 
+handling, and portability compared to many other forms of energy. With the emergence of newer internal combustion 
+engine technologies such as Homogeneous Charge Compression Ignition (HCCI) and Reactivity-Controlled Compression 
+Ignition (RCCI) engines, understanding the autoignition and heat release chemistry and kinetics of hydrocarbon fuels is 
+more important that ever. These new technologies coupled with the emergence of major sources of renewable fuels for 
+both gasoline and diesel applications, including butanols and heavier alcohols, bio-diesel, farnesane and high carbon 
+number synthetics, further emphasize the need to understand the kinetic effects of blending renewables with 
+petroleum derived fuels. 
+ 
+a. Objectives  
+Cool flame phenomena are influenced by a number of factors, including the fuel molecular structure (for 
+pure fuel cases), the ambient environment (pressure, temperature, oxygen and diluent (He) concentrations), 
+and the fuel composition (the mixture of fuel structures and perhaps fuel additives such as those used to 
+change octane or cetane behavior). Though it is not possible to examine all of these factors in a thorough 
+manner, here we propose a set of experiments that explore each one of these factors, namely, fuel structure 
+effects, ambient conditions effect, fuel mixture effects, and the presence of fuel additives.
+
+--- page 4 ---
+3 
+ 
+ 
+ 
+b. Team Members  
+Science Definition Team: 
+Prof. Forman A. Williams, University of California, San Diego 
+Prof. Frederick L. Dryer, Princeton University 
+Prof. Tanvir I. Farouk, University of South Carolina 
+Dr. Vedha Nayagam, Case Western Reserve University 
+Dr. Daniel L. Dietrich, NASA John H. Glenn Research Center 
+ 
+Russian Collaborators:  
+Sergey M. Frolov 
+Valentin Ya. Basevich 
+Sergey N. Medvedev 
+Andrey A. Belyaev 
+ 
+Engineering Team (ZIN Technologies Inc.): 
+Marty O’Toole, Engineering Manager 
+Jess Robbins, Mechanical Engineering Lead 
+Joe Samrani, Electrical Engineering Lead 
+Steve Lawn, Diagnostic Engineering Lead 
+Jim Birchenough, FCF Engineering Lead 
+ 
+Glenn Research Center Project Staff: 
+Andrew Suttles, Project Manager 
+Daniel L.  Dietrich, Project Scientist 
+Vedha Nayagam, Staff Scientist 
+ 
+c. Dates of Operation 
+CFI experiments were conducted onboard the ISS from January 2017 through September 2017. 
+ 
+3.  Science Overview 
+a. Background 
+Understanding the combustion characteristics of liquid hydrocarbon fuels is of practical and fundamental 
+importance. The United States alone consumes approximately 19 million barrels of liquid fuels per day, 
+which averages out to an amazing 2.5 gallons per day per person.  The primary reason for such high reliance 
+on hydrocarbon fuels as the single most important energy source, not only in the US but in the rest of the 
+world, is their high energy density, ease of handling, and portability, compared to many other forms of 
+energy sources. With the emergence of newer technologies for internal combustion engines and the 
+increasing use of renewable bio-fuels, such as the Homogeneous Charge Compression Ignition (HCCI) engine 
+and bio-diesel, that promise cleaner more efficient and sustainable utilization of hydrocarbon fuels, the 
+need to understand the fundamental chemical and physical aspects of liquid-fuel combustion is bound to 
+increase. 
+ 
+Commercially available transportation fuels, such as gasoline, diesel, and jet fuel, are comprised of many 
+hydrocarbon compounds, normal alkanes and branched alkanes being major components. The combustion 
+characteristics of these alkanes are quite complex and follow branched-chain reaction pathways involving 
+many intermediate radicals. The chemical pathways vary, depending on temperature and, to a lesser extent, 
+on pressure.  In general it is possible to identify a low-temperature reaction mechanism and a high-
+temperature mechanism, with a transition region between them. Many hydrocarbons exhibit a unique 
+feature in this transition region, namely that the reaction rate decreases with increasing temperature,
+
+--- page 5 ---
+4 
+ 
+leading it to be called the negative-temperature-coefficient (NTC) region. There area a number of models 
+available in the literature, simplified chemical-kinetic model involving hundreds of reactions as well as 
+detailed mechanisms involving thousands of reactions. 
+ 
+Droplet-combustion experiments (FLEX, FLEX-2) conducted onboard the International Space Station, as part 
+of the Flame Extinguishment Experiments, have revealed for the first time that large n-alkane droplets can 
+continue to burn quasi-steadily in the NTC region (see, Fig 1).  NTC behavior of the heat-release rate is 
+necessary for low-temperature quasi-steady droplet burning to be stable. It was observed that the second-
+stage combustion of the droplet controlled by low-temperature NTC chemistry, referred to as ``cool-flame 
+combustion" here for the sake of simplicity, abruptly ends at a finite droplet diameter, leaving the unburned 
+droplet to vaporize in the hot atmosphere. A vapor cloud was also found to form around the droplet as the 
+partially oxidized fuel condensed immediately following cool-flame extinction. 
+ 
+ 
+ 
+Figure 1. Three representative examples of radiative extinction and subsequent cool flame combustion of n-
+heptane droplets in air. Inset shows the visible flame, backlit droplet images and the vapor cloud formation. 
+ 
+Furthermore, the second-stage flame is shown to lie closer to the droplet surface where the rates of heat 
+generation by the NTC chemistry is dynamically balanced by the heat loss rate. Unlike the hot-flame 
+combustion where the overall process is controlled by equilibrium thermodynamic properties of the fuel, 
+the cool-flame combustion depends on the chemical-kinetic details of the NTC region.  These experimental 
+and numerical studies provide a new tool to further explore the NTC chemistry of liquid fuels in an entirely 
+new way.  The experimental cool-flame droplet burning rates provide measures of the heat-release rates 
+and stoichiometry, the flame-diameter evolution provides insight into hot-flame diffusive and convective 
+heat-loss effects, and the droplet extinction diameter provides a stringent measurement of chemical-kinetic 
+characteristic times. 
+ 
+The objectives of the CFI experiments is to further explore the cool flame phenomenon using pure fuels, and 
+fuel mixtures over a range of pressures and helium dilution. 
+ 
+b. Rational for Microgravity (if unusual)
+
+--- page 6 ---
+5 
+ 
+Rationale for microgravity remains the same for all the droplet combustion experiments conducted onboard 
+the ISS. In microgravity the droplets burn in a spherically symmetric form, and therefore it is possible to 
+model the processes with complex chemical kinetic mechanisms involving thousands of reactions leading to 
+a better understanding of the chemistry.  Moreover, the cool flames need much longer residence times and 
+cannot be observed under normal gravity conditions with droplet flames.  
+c. NRA the Investigation was Selected Under 
+This project was initiated by NASA through a Science Definition Team (SDT) which formulated the overall 
+objectives. It was peer reviewed by an independent panel of scientists and approved by NASA HQ as a 
+follow-up experiments to FLEX, and FLEX-2 in the CIR using additional fuels and gases needed to complete 
+the test matrix. The experimental hardware is same as that of the FLEX experiments with few minor 
+modifications in the data acquisition systems.  
+d. Final Experiment Objectives 
+Examine the cool flame combustion behavior of n-dodecane, n-dodecane/iso-dodecane fuel mixtures, and 
+farnesane fuels over a rage of pressure from 0.25 atm to 5 atm.  
+4.  Operations  
+a. Procedures 
+The operational procedure used in the CFI tests is the same as for the FLEX experiments. Once the ISS crew 
+installs the required fuel syringe, and the gas bottles containing the gas mixtures in the MDCA and CIR 
+facilities, all the actual experimental operations are conducted from the ground at the Telescience Support 
+Center (TSC) located at the NASA Glenn Research Center.  Prior to each test the combustion chamber is filled 
+with the specified gas mixture at the required pressure, and the hot-wire igniters are positioned close to the 
+droplet deployment site.  Subsequently, a droplet of desired size is dispensed between the hypodermic 
+needles and freely deployed, and ignited.  The igniter is withdrawn from the FOV once ignition is detected. 
+When required a 40 micron silicon-carbide fiber is used to tether the droplet at one place and stop it from 
+drifting off from the field of view.  
+ 
+The combustion process is recorded using a backlit, black-and-white camera ( 5 cm X 5 cm FOV) to obtain 
+droplet size as a function of time, a UV-sensitive camera is used to image the OH* emission from the flame 
+which provides the flame size data.  A color camera which is had a live downlink to the TSC is used to 
+perform and monitor the overall process.  Narrow-band and wide-band radiometers are used to measure 
+the radiation emission from the flame.  Details of the experimental hardware and the data reduction 
+procedures can be found in Dietrich et al. (2014) 
+ 
+b. On-Orbit Testing 
+Over two hundred tests were carried out during the CFI experimental campaign.  The initial droplet size was 
+kept around 4 mm so that radiative extinction and the subsequent cool flame combustion can be observed. 
+The list of experiments performed are as follows: 
+ 
+• Pure n-dodecane at 0.5, 0.75, 1, 1.25, 2, 3, and 5 atm. 
+• N-dodecane/Iso-dodecane mixtures: 75/25% and 60/40% by mass at pressures from 0.5 to 5 atm 
+• Helium dilution by 29% and 59% with O2 mole fraction at 0.21 
+• Farnesane: from 0.75 to 3 atm 
+ 
+c. Anomalies That Effect Science Surprises/New Discovery  
+No new anomalies or surprises were observed during the CFI experiments. However, as the ambient 
+pressure is increased above 2 atm, multiple reignition cycles were observed, where first the hot flame 
+extinguishes due to radiative heat loss followed by cool flame, and then reignition to a hot-flame followed 
+by a cool flame, with this cycle repeating several times until the fuel droplet is completely consumed. This 
+behavior is unexpected based on earlier observations from FLEX experiments. Furthermore, the soot-shell
+
+--- page 7 ---
+6 
+ 
+which surrounds the droplet and lies between the droplet surface and the flame, became unstable and ill-
+defined at higher pressures, a phenomenon which is not fully understood.  
+d. Organization of Data in PSI 
+The organization od the data posted in the PSI website is as follows: 
+ 
+• Pure n-dodecane data: FLEX-1206 to FLEX-1284 
+• N-dodecane/Iso-dodecane ( 75%-25% & 60%-40%) mixture data: FLEX-1285 to FLEX-1387) 
+• Farnesane data: FLEX-1388 to FLEX-1431 
+ 
+5.  Results 
+a. Findings  
+All the CFI data is yet to be fully analyzed and interpreted using theoretical and numerical models.  A brief 
+overview of general observations made during preliminary data analysis prior to posting on the PSI website is 
+presented below.  Interested researchers are welcome to propose to NASA for further analysis and 
+interpretation of CFI data. 
+ 
+5.1 Cool flames: 
+Cool flames were observed during n-dodecanol combustion as well as n-dodecanol/iso-dodecanol mixture cases. 
+The addition of iso-dodecanol reduces the tendency to form cool flames in n-dodecanol.  Figure 1 shows a 
+typical case of cool-flame behavior for n-dodecanol.  
+ 
+ 
+Figure 1. FLEX-1223: N-dodecane at 1.25 atm pressure in air. 
+ 
+5.2 Warm flames: 
+Warm flames are a consequence of changing in chemical pathway during n-alkane oxidation.  Figure 2 shows 
+(Westbrook, 2010) the various chemical pathways: cool flames occur when low-temperature branching is 
+dominant, when intermediate temperatures become more active warm flames are established.  During warm 
+flames the heat release rate dynamically balance the heat loss rate. Addition of helium seems to enhance this 
+balance within the NTC region.
+
+--- page 8 ---
+7 
+ 
+ 
+Figure 2. Chemical kinetic pathways for n-alkane oxidation (Westbrook, 2010). 
+ 
+ 
+ 
+ 
+Figure 3: FLEX-1268 – N-dodecane at 3 atm burning in 12%O2 – 50% N2 – 29% Helium. Reignition and warm 
+flame formation are shown. 
+ 
+Warm flames were observed typically at higher pressures following radiative extinction and the flame is not 
+visible in the color camera.  Subsequently, a hot flame is ignited which quickly extinguishes to form a cool flame. 
+ 
+5.3 Cool flame extinction:
+
+--- page 9 ---
+8 
+ 
+Cool flame extinction is controlled primarily by chemical kinetics.  As the droplet size decreases, the residence 
+time in the reaction zone of the gas-phase diffusion flame is reduced to a value corresponding to which the cool 
+flame becomes statically unstable, and this leads to cool flame extinction.  Figure 4 shows the cool flame 
+extinction diameter as function of ambient pressure for both free-floated and fiber-supported droplets for pure 
+n-dodecane burning in air. As mentioned earlier, as the pressure is increased above approximately 2 atm, 
+reignitions were commonly observed, eventually leading to complete combustion of the fuel droplet.  It is 
+interesting to note that the 40 micron fiber shows relatively little effect on the extinction diameter. 
+ 
+ 
+ 
+ 
+Figure 4. Cool flame extinction diameters as a function of ambient pressure for n-dodecane droplets  
+burning in air. 
+ 
+Since the cool flame extinction is an instability phenomenon where the dynamic balance between heat release 
+and heat loss from the flame is lost at the lower turning point in the NTC region, one would expect addition of 
+helium to have a substantial influence on the process. Figure 5 illustrates the effect of helium dilution on the 
+extinction diameter for n-dodecane. Increase helium dilution leads to earlier cool flame extinction giving a larger 
+extinction diameter.
+
+--- page 10 ---
+9 
+ 
+ 
+ 
+Figure 5. Effect of helium dilution on cool flame extinction during n-dodecane droplet combustion. 
+ 
+ 
+5.4  Sooting behavior as function of ambient pressure: 
+The effects and the process of soot formation during cool flame combustion remains largely unexplored. The 
+shoot shell that forms during hot flame is stabilized by the balance of force between fluid mechanical drag 
+and the thermophoretic force. At low pressures a stable spherical soot-shell is formed. However, as the 
+pressure increase the soot-shell becomes diffuse and undefined.  The reasons for this phenomenon is still 
+not well understood. At low pressures, due to the low flame temperature of the cool flame, soot is not 
+formed. The soot that is formed during the hot flame combustion is simply convected away from the droplet 
+surface. But, when the pressure increases, residual soot is seen surrounding the droplet even after the hot 
+flame extinction.  The mechanisms behind this process has not been fully understood, and further analysis 
+and research is needed.
+
+--- page 11 ---
+10 
+ 
+ 
+ 
+Figure 6. Backlit images of the droplet during hot and cool flame burning at atmospheric pressures of 
+approximately 380, 570, 760, 1520, 2280 and 3800 mmHg.  The hot flame images are approximately 4 sec 
+after igniter withdraw and the cool flame images are approximately 5 sec after hot flame extinction.  The 
+droplet in the cool flame image at 1520 mmHg was close to the edge of the FOV.  The red circles during hot 
+flame burning at the two highest pressures show the approximate location of the droplet surface. 
+ 
+5.5 Summary of findings: 
+CFI experiments has provided cool flame burning data for pure n-dodecane, and n-dodecane/iso-dodecane 
+mixtures.  Farnesane, a commercially available renewable fuel characteristics were also studied.  The effect 
+of pressure and helium dilution were studied for these fuels. Data for droplet regression rate, hot and cool 
+flame diameters, extinction conditions, and radiant emission, both broad band and narrow band, are 
+obtained and posted to the PSI website.   
+ 
+ 
+b. Benefits  
+Low temperature chemistry is of fundamental importance in the combustion of many practical fuels.  Low 
+temperature chemistry controls the autoignition of fuels when injected into a combustion chamber, and in 
+homogeneous mixtures of fuel and oxygen.  New internal combustion engines, such as the HCCI engines, 
+operate at low temperatures reducing the pollution formation and increasing overall efficiencies. The CFI 
+experimental measurements provide a useful way to validate the complex chemical kinetic mechanisms that 
+are being developed. The cool flame combustion process itself maybe of use in fuel reformulation 
+technologies to produce hydrogen in fuel cell applications.  
+c. Patents   
+None 
+6.  Appendices 
+a. 30-Day Operational Accomplishments Report
+
+--- page 12 ---
+11 
+ 
+ 
+Not available 
+ 
+b. Publications  
+The following publications are from the FLEX series of experiments and address various aspects of cool flame 
+supported droplet combustion.  They are listed here because they form the motivation for the CFI 
+experiments. A limited data from CFI experiments pertaining to cool flame extinction diameters are published 
+and included in this list. 
+ 
+Dietrich, Daniel L., Vedha Nayagam, Michael C. Hicks, Paul V. Ferkul, Frederick L. Dryer, Tanvir Farouk, 
+Benjamin D. Shaw et al. "Droplet combustion experiments aboard the international space 
+station." Microgravity Science and Technology 26, no. 2 (2014): 65-76. 
+ 
+Farouk, T., & Dryer, F. L. (2011). Microgravity droplet combustion: effect of tethering fiber on burning rate and 
+flame structure. Combustion Theory and Modelling, 15(4), 487-515. 
+ 
+Farouk, Tanvir I., and Frederick L. Dryer. "Isolated n-heptane droplet combustion in microgravity: “Cool 
+Flames”–two-stage combustion." Combustion and Flame 161.2 (2014): 565-581. 
+ 
+Farouk, T. I., Hicks, M. C., & Dryer, F. L. (2015). Multistage oscillatory “Cool Flame” behavior for isolated 
+alkane droplet combustion in elevated pressure microgravity condition. Proceedings of the Combustion 
+Institute, 35(2), 1701-1708. 
+ 
+Farouk, T. I., Dietrich, D., Alam, F. E., & Dryer, F. L. (2017). Isolated n-decane droplet combustion–Dual stage 
+and single stage transition to “Cool Flame” droplet burning. Proceedings of the Combustion Institute, 36(2), 
+2523-2530. 
+ 
+Farouk, T. I., Dietrich, D., & Dryer, F. L. (2019). Three stage cool flame droplet burning behavior of n-alkane 
+droplets at elevated pressure conditions: Hot, warm and cool flame. Proceedings of the Combustion 
+Institute, 37(3), 3353-3361. 
+ 
+Liu, Y. C., Xu, Y., Avedisian, C. T., & Hicks, M. C. (2015). The effect of support fibers on micro-convection in 
+droplet combustion experiments. Proceedings of the Combustion Institute, 35(2), 1709-1716. 
+ 
+Nayagam, V., Dietrich, D. L., Ferkul, P. V., Hicks, M. C., & Williams, F. A. (2012). Can cool flames support 
+quasi-steady alkane droplet burning?. Combustion and Flame, 159(12), 3583-3588. 
+ 
+Nayagam, V., Dietrich, D. L., Hicks, M. C., & Williams, F. A. (2015). Cool-flame extinction during n-alkane 
+droplet combustion in microgravity. Combustion and Flame, 162(5), 2140-2147. 
+ 
+Nayagam, V., Dietrich, D.L. and Williams, F.A., 2017. A Burke-Schumann analysis of dual-flame structure 
+supported by a burning droplet. International Communications in Heat and Mass Transfer, 87, pp.84-89. 
+ 
+Seshadri, K., Peters, N., Williams, F. A., Nayagam, V., & Paczko, G. (2016). Asymptotic analysis of quasi-
+steady n-heptane droplet combustion supported by cool-flame chemistry. Combustion Theory and 
+Modelling, 20(6), 1118-1130. 
+ 
+Shaw, B. D. (2014). ISS droplet combustion experiments-uncertainties in droplet sizes and burning 
+rates. Microgravity Science and Technology, 26(2), 89-99.
+
+--- page 13 ---
+12 
+ 
+Shaw, B. D., & Vang, C. L. (2016). Oxygen Lewis number effects on reduced gravity combustion of methanol 
+and n-heptane droplets. Combustion Science and Technology, 188(1), 1-20. 
+ 
+Tyurenkova, V. (2019). Two regimes of a single n-heptane droplet combustion. Acta Astronautica, 163, 25-32. 
+ 
+Paczko, G., Peters, N., Seshadri, K., & Williams, F. A. (2014). The role of cool-flame chemistry in quasi-steady 
+combustion and extinction of n-heptane droplets. Combustion Theory and Modelling, 18(4-5), 515-531. 
+ 
+Vang, C. L., & Shaw, B. D. (2018). ISS Experiments on Combustion of Heptane/Hexadecane Droplets. AIAA 
+Journal, 56(12), 4858-4869. 
+ 
+Williams, F. A., & Nayagam, V. (2019). Quasi-steady combustion of normal-alkane droplets supported by 
+Cool-Flame chemistry near diffusive extinction. Combustion Theory and Modelling, 23(4), 748-770. 
+ 
+Williams, F.A. and Nayagam, V., 2020. Cool-flame dodecane-droplet extinction diameters. Combustion and 
+Flame, 212, pp.242-244. 
+ 
+Xu, Y., Farouk, T. I., Hicks, M. C., & Avedisian, C. T. (2020). Initial diameter effects on combustion of 
+unsupported equi-volume n-heptane/iso-octane mixture droplets and the transition to cool flame behavior: 
+Experimental observations and detailed numerical modeling. Combustion and Flame, 220, 82-91. 
+ 
+ 
+c. Presentations  
+Dietrich, D. L., Nayagam, V., and Williams, F. A., 2018. Hot and Cool-Flame Combustion of N-dodecane 
+Droplets at Moderately High Pressures in Microgravity, 34th Annual Technical Meeting, The American Society 
+for Gravitational and Space Research, 31 October – 03 November, 2018, Rockville, Maryland. 
+ 
+ 
+d. Webpages  
+https://www1.grc.nasa.gov/space/iss-research/iss-fcf/cir/mdca/experiments-using-the-mdca/cfi/ 
+ 
+ 
+ 
+References to commercial products are made for clarity and do not indicate an endorsement on the part of NASA or the 
+federal government.  
+ 
+This document includes many internet links, where efforts were made to verify that the webpages and other online 
+content was functional when the report was prepared.  However, there is of course no guarantee of their continued 
+function.

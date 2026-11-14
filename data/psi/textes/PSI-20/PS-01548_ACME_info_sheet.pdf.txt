@@ -1,0 +1,123 @@
+Source : NASA PSI, PSI-20, Science Documents, PS-01548_ACME_info_sheet.pdf
+
+--- page 1 ---
+National Aeronautics and Space Administration
+Advanced Combustion via Microgravity Experiments (ACME)
+www.nasa.gov
+advanced combustion via microgravity experiments 
+Burning Rate Emulator (BRE)
+• Objective: Fire Safety—To improve our fundamental understanding of materials ﬂammability, such 
+   as extinction behavior and the conditions needed for sustained combustion, and to assess the 
+   relevance of existing ﬂammability test methods for low- and partial-gravity environments.
+• Flame/Burner: Flat perforated disk fed with gaseous fuel to simulate the burning of solid and 
+   liquid fuels, where measurements are made of the thermal feedback upon which the vaporization 
+   of such fuels depend.
+• Investigators: Profs. James G. Quintiere and Peter B. Sunderland, University of Maryland; and 
+   Dr. John L. deRis, FM Global (retired)
+• Objective: Energy and Environment—To extend the range of ﬂame conditions that can be 
+   accurately predicted by computational models, especially for highly dilute and heavily 
+   sooting conditions.
+• Flame/Burner: Coﬂow ﬂame where the gaseous fuel issues from an inner tube, which is centered 
+   within a much larger outer tube, where an oxygen/nitrogen mixture issues from the annulus. 
+• Investigators: Profs. Marshall B. Long and Mitchell D. Smooke, Yale University
+Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames)
+• Objective: Energy and Environment—To gain an improved understanding of ion production in ﬂames 
+   and investigate how an electric ﬁeld can be used to control ﬂames through the ion-driven wind.
+• Flame/Burner: Gas-jet ﬂame, where (1) the gaseous fuel issues from a small circular tube into a 
+   still atmosphere and (2) a high-voltage electric ﬁeld is established between the burner and a 
+   disk-shaped copper mesh located a few centimeters downstream of the burner. 
+• Investigator: Prof. Derek Dunn-Rankin, University of California, Irvine
+Coﬂow Laminar Diffusion Flame (CLD Flame)
+• Objective: Energy and Environment—To improve our understanding of soot inception and control in 
+   order to enable (1) the “design” of nonpremixed ﬂames that are both robust and soot free and (2) the 
+   optimization of oxygen-enriched combustion.
+• Flame/Burner: Spherical ﬂame where the burner gas issues from a porous spherical burner. Tests 
+   are planned for both (1) normal ﬂames, where the fuel ﬂows into an oxygen/inert atmosphere and 
+   (2) inverse ﬂames, where an oxygen/inert mixture ﬂows into a fuel atmosphere.
+• Investigators: Prof. Richard L. Axelbaum, Washington University in St. Louis; Prof. Beei-Huan Chao, 
+   University of Hawaii; Prof. Peter B. Sunderland, University of Maryland; and Dr. David L. Urban, 
+   NASA Glenn Research Center
+Flame Design
+PURPOSE: ACME is focused on advanced combustion technology via fundamental microgravity research. The primary goal is to 
+improve efﬁciency and reduce pollutant emission in practical terrestrial combustion. A secondary objective is ﬁre prevention, 
+especially for spacecraft.
+RESEARCH: ACME includes ﬁve independent experiments investigating laminar, gaseous, nonpremixed ﬂames. They will be 
+conducted with a single set of modular hardware in the Combustion Integrated Rack (CIR) on the International Space Station 
+(ISS). An ACME precursor, the Structure and Liftoff In Combustion Experiment (SLICE), was conducted on ISS in 2012.
+STATUS: ZIN Technologies, under the direction of the NASA Glenn Research Center, has completed the design and is now 
+fabricating the space ﬂight hardware. On-orbit testing is expected to begin in 2017 and continue for a few years.
+WEB SITE: http://spaceﬂightsystems.grc.nasa.gov/acme/   
+• Objective: Energy and Environment—To advance our ability to predict the structure and dynamics, 
+   including extinction, of both soot-free and sooty ﬂames.
+• Flame/Burner: Spherical ﬂame—which is only possible in microgravity—where the gaseous fuel (fed 
+   through a small tube) issues from a porous spherical burner into a still oxygen/inert atmosphere.
+• Investigators: Prof. C.K. Law, Princeton University;  Prof. Stephen D. Tse, Rutgers University; and 
+   Dr. Kurt R. Sacksteder, NASA Glenn Research Center
+Structure and Response of Spherical Diffusion Flames (s-Flame)
+
+--- page 2 ---
+National Aeronautics and Space Administration
+Glenn Research Center
+21000 Brookpark Road
+Cleveland, Ohio 44135 PS–01548–0515
+Advanced Combustion via Microgravity Experiments
+Mass Flow Controllers (MFCs)
+• Three MFCs for the delivery of fuel, oxidizer, and/or nitrogen to the burner (and 
+   chamber for ﬁlling)
+• Capable of on-orbit dilution of fuel or oxidizer (but not both at once), coﬂow ﬂames, 
+   inverse ﬂames, and premixed ﬂames
+Igniter
+• Resistively heated, retracting with stepper-motor drive for precise positioning, with an 
+   exchangeable tip and arm 
+High-Voltage Supply and Electrode Mesh—for E-FIELD Flames
+• –10 to +10 kV to crew-removable mesh downstream of burner where the ion current 
+   between mesh and burner is determined from the voltage drop across a known resistor
+Thermocouples (TCs)
+• Six far-ﬁeld TCs to measure the thermal ﬁeld spread, where two versions of a 
+   four-TC rake allow varied proximity to the burner
+Radiometers (speciﬁcally thermopile detectors)
+• One ﬁxed wide-view sensor plus a crew-exchangeable array with up to ﬁve additional 
+   radiometers, where all sensors are sensitive from 0.2 to 11 microns
+Photomultiplier Tube (PMT) Modules
+•Three wide-view PMTs: (1) broadband, 230 to 700 nm, (2) OH* emission, 310-nm ﬁlter, 
+   and (3) CH* emission, 430-nm ﬁlter
+Analog Color Camera (hidden from view)
+• Downlinked in near real time to support operations, with an array of light-emitting diodes 
+   (LEDs) to illuminate the burner position, etc.
+OH* Camera (not shown)
+• Intensiﬁed monochrome camera, 310-nm ﬁlter, 30 frames per second binned at 512/H11003512
+Digital Color Camera (not shown)
+• 12-bit, up to 30 frames per second at 1360/H110031024
+• Motorized lens with independent control of zoom, iris, and focus 
+• Four ﬁlters: (1) clear for color imaging, (2) blue-green ﬁlter to balance color planes for 
+   pyrometry and soot volume fraction measurements, and (3-4) 430- and 450-nm ﬁlters 
+   for CH* imaging, where the combination enables subtraction of interfering soot emission
+Color-Ratio Soot and Thin Filament Pyrometry
+• (1) Compare color planes of digital color camera (see above) and/or (2) compare frames from a second monochrome camera (not shown) 
+   equipped with a liquid-crystal tunable ﬁlter, 30 frames per second binned at 512/H11003512
+• Translating array of ﬁve silicon carbide ﬁbers (5 mm apart) with alternate arrays for absolute light calibration
+Soot Volume Fraction
+• Determined from (1) digital color camera (see above) using pyrometry results and absolute light calibration and/or (2) light extinction using a third 
+   monochrome camera (not shown), 30 frames per second at 1024/H110031024, and a light source with two ﬁber-coupled laser diodes
+Gas Chromatograph (GC)
+• Pre- and post-test analysis of chamber atmosphere for oxygen, nitrogen, carbon dioxide, carbon monoxide, and fuel gases
+ACME Hardware
+ACME Operations
+• ACME experiments are constant volume, with ~85 liters free, where tests are 
+   typically 0.5 to 2 minutes long to limit the pressure rise
+• Tests manually set up by ISS crew and then remotely commanded from the 
+   NASA Glenn Research Center (Cleveland, OH)
+• Tests conducted in (1) a nominally automated mode using preprogrammed 
+   scripts and/or (2) a “manual” mode where changes can be made, for example, 
+   to ﬂow(s) in response to video downlink and telemetry (e.g., to approach a 
+   soot or stability limit)
+Project Manager: J. Mark Hickman, 216–977–7105
+john.m.hickman@nasa.gov
+Deputy Project Manager: Andrew C. Suttles, 216–433–8328 
+andrew.c.suttles@nasa.gov
+Project Scientist: Dennis P . Stocker, 216–433–2166 
+dennis.p.stocker@nasa.gov 
+Deputy Project Scientist: Dr. Fumiaki Takahashi, 216–433–3778
+fumiaki.takahashi-1@nasa.gov
+ACME chamber insert
+ACME Contacts

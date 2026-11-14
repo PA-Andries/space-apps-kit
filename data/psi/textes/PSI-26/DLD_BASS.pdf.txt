@@ -1,0 +1,24 @@
+Source : NASA PSI, PSI-26, Science Documents, DLD_BASS.pdf
+
+--- page 1 ---
+PSI Data Layout Document – BASS (Burning and Suppression of Solids) Investigation 
+ 
+ 
+BASS (Burning and Suppression of Solids) examines the burning and extinction characteristics of a wide 
+variety of fuel samples in microgravity. The BASS experiment will guide strategies for extinguishing 
+accidental fires in microgravity. BASS results contribute to the combustion computational models used 
+in the design of fire detection and suppression systems in microgravity and on Earth. The BASS data 
+available in PSI is organized into 2 datasets by the year the tests were conducted: 
+ 
+• BASS_2012 
+• BASS_2013 
+ 
+These Experiment Data records are located on the “Data” tab within the BASS investigation in PSI. When 
+an experiment data record is selected, the “Scientific Data and Information” tab is opened. For 
+BASS_2012, on the “Scientific Data and Information” tab, “Images” are organized by date formatted 
+yyyy_mm_dd. There are 21 image galleries for BASS_2012. For BASS_2013, on the “Scientific Data and 
+Information” tab, “Audio/Video Files” and “Images” are both organized by date formatted yyyy_mm_dd. 
+There are 12 audio/video collections and 15 image galleries for BASS_2013.  
+ 
+Other relevant data and information about the BASS investigation can be located throughout the other 
+tabs in the BASS record.

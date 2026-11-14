@@ -95,3 +95,25 @@ def test_une_plage_d_oxygene_reste_vide_dans_les_tests():
     assert tests["oxygene_pct"].tolist()[0] == 21.0
     assert pd.isna(tests["oxygene_pct"].tolist()[1])
     assert tests["pression_kpa"].tolist()[0] == 101.3
+
+
+def test_le_nom_du_fichier_texte_est_simple():
+    from flame.pipeline.psi_textes import nom_texte
+
+    assert nom_texte("SRD BASS-II (v2).pdf") == "SRD_BASS-II_v2_.pdf.txt"
+
+
+def test_un_vieux_doc_word_donne_ses_phrases(tmp_path):
+    from flame.pipeline.psi_textes import texte_doc
+
+    fichier = tmp_path / "rapport.doc"
+    fichier.write_bytes(b"\x00\x01\x02\x03" + b"The flame spread along the sample.\r" + b"\x00\x02zQx#@!\x00")
+    assert texte_doc(fichier) == "The flame spread along the sample."
+
+
+def test_un_tableur_n_est_pas_un_texte(tmp_path):
+    from flame.pipeline.psi_textes import extraire
+
+    fichier = tmp_path / "matrice.xlsx"
+    fichier.write_bytes(b"")
+    assert extraire(fichier) is None

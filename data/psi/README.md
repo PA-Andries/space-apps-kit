@@ -1,6 +1,7 @@
 # Tables complètes du jeu de données PSI
 
-Écrites par `uv run python -m flame.pipeline.psi_contrat` (rôle B) à partir du jeu de données construit par
+Écrites par `uv run python -m flame.pipeline.psi_contrat` et, pour `textes/` et `textes.csv`,
+`uv run python -m flame.pipeline.psi_textes` (rôle B), à partir du jeu de données construit par
 `flame.pipeline.psi_telecharger`. Ne pas modifier à la main : relancer les deux scripts.
 
 Les colonnes de chaque table sont décrites dans `flame/pipeline/PSI_DATASET.md`. Les pages les lisent par les

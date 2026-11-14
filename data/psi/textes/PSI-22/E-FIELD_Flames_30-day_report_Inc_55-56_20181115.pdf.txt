@@ -1,0 +1,610 @@
+Source : NASA PSI, PSI-22, Reports, E-FIELD Flames 30-day report Inc 55-56 20181115.pdf
+
+--- page 1 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+1 
+ 
+15 Nov. 2018 
+30-day Operational Accomplishments Report  
+… for the International Space Station (ISS) Increments 55 and 56 
+ 
+ACME Advanced Combustion via Microgravity Experiments 
+E-FIELD Flames Electric-Field Effects on Laminar Diffusion Flames 
+E-FIELD Flame s is one of several independent experiments that are part of the ACME project, 
+which uses a single modular set of hardware to carry out studies of flames burning gaseous fuels 
+in the ISS’ Combustion Integrated Rack (CIR). 
+ 
+Prepared by the PI team and Dennis Stocker  (dennis.p.stocker@nasa.gov), the ACME Project 
+Scientist, who is the primary contact for E-FIELD Flames and ACME information. 
+ 
+ 
+ 
+Principal Investigator (PI): Prof. Derek Dunn-Rankin, University of California, Irvine, CA 
+PI project scientist:  Dr. Yu-Chien (Alice) Chien, University of California, Irvine, CA 
+Lead collaborator: Prof. Sergey Minaev, Far Eastern Federal University , Vladivostok, 
+Russia 
+NASA Project Scientist (PS): Dennis P. Stocker, NASA Glenn Research Center, Cleveland, OH 
+PS team member: Dr. Uday G. Hegde, Case Western Reserve University, Cleveland, 
+OH 
+ 
+ 
+ 
+I.  Introduction 
+The Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) experiment is conducted 
+in the Combustion Integrated Rack (CIR) on the International Space Station, as part of the 
+Advanced Combustion via Microgravity Experiments (ACME) project.  In this experiment, an 
+electric field with voltages as high as 10,000 volts is established between the bur ner and a flat, 
+circular mesh electrode  suspended above (i.e., downstream of) the burner .  The motion of the 
+charged ions, which are naturally produced within the flame, are strongly affected by a strong 
+electric field.  The resulting ion -driven wind can dramatically influence the stability and sooting 
+behavior of the flame.  Measurements are made of electric-field strength, the ion current passing 
+through the flame, and flame characteristics such as the size, structure, temperature, soot, and 
+stability.  Conducting the tests in microgravity allows for great simplifications in the analysis  of 
+ion-driven convection and flame interaction, enabling new understanding and the development 
+of less polluting and more efficient combustion technology for use on Earth. 
+ 
+An electric field can strongly influence flames because of its effect on the ions produced as a 
+result of the combustion reactions. The induced ion wind can modify the flame shape, alter the 
+soot and stability limits, and direct the heat transfer.  The p urpose of the E -FIELD Flames
+
+--- page 2 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+2 
+ 
+experiment is to gain an improved understanding of flame ion production and learn how the 
+electric field can be used to manipulate the ions and control non-premixed flames for practical 
+benefit.  For example, electric fields ca n enable stable burner operation at fuel -lean conditions 
+with reduced pollutant emission, i.e., where the flame is not reliably sustained without the 
+electric field.  As another example, the role of electric fields on soot formation can be dramatic.  
+It ap pears that the  ion driven wind alters the local convection and strongly influences the 
+residence time of the soot precursors within the hot flame.   The experiment contributes to our 
+critical understanding of combustion processes in the presence of electric fields. 
+ 
+More specifically, E-FIELD Flames has the following experimental objectives: 
+A. Determine the relationship between electric field voltage and chemi -ion current as 
+functions of total fuel (methane and ethylene) flow rate and the amount of inert 
+(nitrogen) in the fuel. 
+B. Obtain the time response of the flame chemiluminescence, luminosity, and the ion 
+current to large step changes in voltage, as functions of total fuel (methane and ethylene) 
+flow rate and amount of inert (nitrogen) added to the fuel stream. 
+C. Evaluate and manipulate sooting behavior (i.e., soot volume fraction and location of 
+luminous soot) in relation to the electric field voltage and chemi-ion current as functions 
+of total fuel (methane and ethy lene) flow rate and amount of inert (nitrogen) added to 
+the fuel stream. 
+D. Use the variation of the chemi-ion current as a function of applied voltage to characterize 
+the combustion behavior of near -limit lifted flames and use the associated i on-driven 
+wind to stabilize or reattach these flames. 
+ 
+The effect of the electric field on the flame is studied through tests conducted with a range of 
+flame and electric field conditions.  The fuel, fuel jet velocity, air flow, electric -field voltage and 
+polarity are the primary parameters of the E-FIELD Flames experiment.  Tests are conducted with 
+methane and ethylene, including nitrogen dilutions of each, which provide a broad range of soot-
+producing conditions, i.e., from soot -free to highly sooting.  T hey are conducted with both a 
+simple gas-jet burner and the coflow burner that was also used for the Coflow Laminar Diffusion 
+Flame (CLD Flame) experiment.  Tests with the coflow burner is conducted with and without a 
+coflow of air, where the results of the latter are compared with those from the gas-jet burner to 
+assess the effect of air entrainment on the flame.  The coflow burner also provides a different 
+electrode configuration (close to a plane-to-plane) than the jet burner (close to a point-to-plane).  
+In a typical test, the mesh electrode is energized at increasing potentials (relative to the burner), 
+where the flame’s response (e.g., ion current, luminosity, shape) to the resulting field strength is 
+measured.  The field strength is changed in repeated steps or is instead smoothly ramped. 
+ 
+Microgravity studies of flames allow for a range of simplifications and provide various advantages 
+over normal-gravity studies.  For example, the flicker of flames, which is a buoyancy-driven (i.e., 
+gravity-driven) instability, is eliminated yielding quasi -steady flames in microgravit y.  
+Microgravity f lame flicker is then the result of electric body forces alone .  Length scales are 
+increased in microgravity flames facilitating analysis of the flame structure.  Momentum -
+dominated flames, which are important for most practical combust ion, can be studied at low
+
+--- page 3 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+3 
+ 
+velocities to simplify analysis.  Microgravity flames tend to have a much stronger sensitivity to 
+their atmosphere and exhibit a much broader range of characteristics than normal-gravity flames 
+because of the near absence of buoy ant entrainment.  The long residence times in microgravity 
+flames can lead to strong soot production, but many microgravity flames are soot free.  The 
+absence of buoyancy makes microgravity flames advantageous for studies of limit and stability 
+behavior where chemical kinetics are important.  With these advantages, microgravity testing 
+can lead to new understanding of the complex nature of combustion – regardless of the 
+gravitational environment of the combustion application.   Chemi-ion species, electronica lly 
+excited chemiluminescent species are are very low concentration in typical flames, making the 
+reduced buoyancy environment valuable for evaluating the minor species chemistry. 
+ 
+ 
+II.  Methods/Research Operations 
+  
+A. Discussion of Method/Protocol 
+E-FIELD Flames and other ACME experiments are configured, but not conducted, by the 
+ISS crew.  The crew’s role is to set up the hardware, gas bottles, etc. for each set of tests.  
+The most common changes include the gas bottles on the Combustion Integrated Rack 
+(CIR) and the mass flow controllers on the modular ACME chamber insert. 
+ 
+All testing is commanded from the ground, specifically from the  Glenn ISS Payload 
+Operations Center (GIPOC).  The science portion of the testing is typically conducted in a 
+nominally automated mode using pre-programmed scripts.  However, it may alternately 
+be conducted in a ‘manual’ mode, where changes are made to a control parameter in 
+response to the analog video downlink and the numerical data available in the telemetry 
+stream.  For example, the mesh voltage can be adjusted to approach a flame’s stability or 
+soot limit.  This was not done during Increments 5 5-56, where the console commanding 
+during a test was typically limited to halting the test when it was observed in the analog 
+ops video that the flame had extinguished. 
+ 
+Testing is not conducted when thrusters fire or spacecraft dock or undock from ISS to 
+ensure an acceptable acceleration environment. 
+ 
+Data is downlinked between each set of tests, i.e., day of testing, to allow for preliminary 
+analysis and requisite planning for subsequent testing. 
+  
+ 
+III.  Results 
+A. Baselined Activities Completed – Pre-flight, In-flight, Post-Flight 
+A total of 142 flames were ignited for the E-FIELD Flames experiment during Increments 
+55 and 56.  The first round of testing occurred from March to May 2018, which was 
+followed by a second round , which began in September 2018 and was still underway at 
+the beginning of Increment 57.  The first round of tests resulted in 120 ignited flames
+
+--- page 4 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+4 
+ 
+conducted with the same coflow burner used by the Coflow Laminar Diffusion Flame (CLD 
+Flame) experiment, where CLD Flames’s second round occurred between the two rounds 
+of the E -FIELD Flames expeirment.  The ‘interruption’ in the E-FIELD Flames testing was 
+intentionally planned years in advance to enable the PI team to review the initial results 
+in detail and with that knowledge plan the second round of tests to maximize its scientific 
+outcome. 
+ 
+E-FIELD Flames does not have living subjects like a life science experiment, but th e tests 
+are independently conducted with two different gaseous fuels, methan e and ethylene.  
+Both are simple hydrocarbon gases for which the chemistry is well understood.  Methane 
+(CH4) is the primary component of natural gas and tends to produce low level s of soot 
+given the absence of carbon-carbon bonds.  Meanwhile, ethylene (C2H4), is highly sooting 
+because of its carbon double bond.   For both fuels, tests were conducted with pure fuel 
+and fuel mixed with nitrogen over a broad range of dilutions.  For li mited cases, the fuel 
+and nitrogen was premixed on the ground prior to launch.  ACME bottles were launched 
+with methane concentrations of 30%, 40%, 45%, and 100% with a balance of nitrogen (on 
+a volume basis).  Similarly, bottles were launched with ethylen e concentrations of 30%, 
+50%, and 100%, again with a balance of nitrogen  (on a volume basis) .  But the ACME 
+hardware also allows for simultaneous flow of fuel and nitrogen to the burner, allowing 
+for on-orbit fuel dilution and testing at a continuum of fuel concentrations.  In all cases, 
+the coflow was 21% oxygen with a balance of nitrogen (on a volume basis).  
+ 
+There are no samples (e.g., of soot) collected for E-FIELD F lames, where all of the ISS 
+results are electronically transmitted to the ground.   That is furthermore the case for all 
+currently planned ACME experiments. 
+ 
+A summary log of the E-FIELD Flames ignited for E-FIELD Flames during Increments 55 and 
+56, including a limited overview of the test conditions, is found on the next page in Table 
+1.
+
+--- page 5 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+5 
+ 
+Table 1. 
+E-FIELD Flames log of flames ignited in Increments 55 and 56 
+Test 
+Day1 Year Month Date 
+Mesh 
+Polarity2 Fuel bottle Fuel conc.3 
+Flames 
+ignited4 
+First round of tests, with the coflow burner, in March to May 2018 (Increment 55) 
+18073 
+2018 
+3 
+14 
+negative 
+100% CH4 100% 10 18078 19 70%, 100% 10 
+18080 21 40% CH4 40% 8 
+18087 28 100% C2H4 80%, 100% 10 
+18092 
+4 
+2 30% C2H4 30%  11 18095 5 
+positive 
+30% 10 
+18102 12 40% CH4 40% 8 18106 16 40% 13 
+18113 23 100% CH4 100% 15 18130 5 10 70% 13 18137 17 100% C2H4 80%, 100% 12 
+Start of the second round of tests, with the gas-jet burner, in Sept.-Oct. (Increment 56) 
+18269 2018 9 26 negative 40% CH4 40% 11 18274 10 1 30% C2H4 30% 11 
+1Test Day includes the year as the first two digits followed by the 3-digit day of the year. 
+2Mesh Polarity refers to the polarity of the high -voltage power supply and the copper 
+electrode mesh relative to the burner. 
+3Fuel conc. (as diluted with nitrogen on a volume basis) was varied between tests, but 
+typically matched the bottle.  The list only accounts for the flames which ignited. 
+4Flames ignited is the number ignited on that day (neglecting the day change on ISS). 
+ 
+Pre-flight and post-flight activities are generally not addressed in this report. 
+ 
+B. List of Preflight, In-flight, Postflight Anomalies 
+1. Mission anomalies  
+The primary hard drive for the CIR’s IPSU-G Image Processing and Storage Unit  - for 
+Gigabit Ethernet (GigE) cameras – failed to boot on April 27, 2018 (18117).  For ACME 
+experiments, the IPSU-G is used for two key cameras, the ACME color digital ‘data’ 
+camera (i.e., DataCam) and the Cool Flames Investigation (CFI) intensified camer a, 
+which is used for CLD Flame with a narrow bandpass filter to image CH* 
+chemiluminesence.  Use of the IPSU -G was recovered by astronaut Scott Tingle on 
+May 7 (18127) by the removal of that primary drive.  The removed drive was 
+reinstalled on Aug. 14 (18226) by astronaut Ricky Arnold during the second round of 
+CLD Flame testing.  Although the hard drive was installed in the secondary position, 
+the IPSU-G surprisingly again became unusable.  Therefore, it was removed on Aug. 
+22 (18234) by astronaut Al ex Gerst, returning it to use, albeit without the intended 
+storage capacity.
+
+--- page 6 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+6 
+ 
+The CIR’s IPSU-1 Image Processing and Storage Unit, which is used with the High Bit -
+Depth Multispectral (HiBMs) camera and the collimated illumination package, was 
+only intermittently operable in mid-Sept. 2018 and was not operable at the start of E-
+FIELD Flames’ second round.  Those capabilities were not seen as critical for E-FIELD 
+Flames, where the illumination is significantly blocked by the mounting bracket for 
+the mesh electrode.  Therefore, the tests on Sept. 26 (18269) and Oct. 1 (18274) were 
+conducted without HiBMs imaging or the CIR illumination.  It was later determined to 
+be an issue with a cable connection, which was corrected by astronaut Alex Gerst on 
+Oct. 22 (18295) when he carried out other ACME tasks. 
+ 
+2. Any other difficulties in obtaining scientific data   
+E-FIELD Flames tests sometimes automatically abort (due to the controlling software 
+script), where that is typically prior to gas flow and the activation of the igniter.  As a 
+result, there is little lost other than the time  in the failed test attempt .   The aborts 
+normally occur because of communication issues with  IPSU-1.  These are infrequent, 
+but there are some days when tests abort repeatedly.  
+ 
+Tests are of course also unsu ccessful when the flame fails to ignite.  The first test of 
+the day has sometimes failed to ignite, presumably because the fuel line has not been 
+sufficiently primed.  Ignition is sometimes unsuccessful because the settings for the 
+automatic flame detectio n are such that detection threshold is reached because of 
+the igniter glow rather than a flame.  As a result of the detection, the hot-wire igniter 
+is deactivated and retracted, which is of course an issue if the flame has yet to ignite.  
+This is typically avoided by detecting ignition with measurement of the flame’s OH* 
+chemiluminescence with a Photomultiplier Tube (PMT) module.  The OH* 
+chemiluminescence, in the ultraviolet at 310 nm, is a good indicator of an ignited 
+flame rather than the glowing igniter, which emits primarily in the infrared and visible 
+spectrum.  However, the combination of igniter settings and PMT gains can lead to 
+false ignition detection. 
+ 
+ACME’s Mass Flow Controllers (MFCs) used to control the flow of fuel, nitrogen, and 
+synthetic air (i.e., 21% oxygen with a balance of nitrogen, on a volume basis) have 
+unfortunately not always performed adequately.  The fuel and especially nitrogen 
+flows sometimes oscillate. Furthermore, the MFC used for the ‘air’ coflow behaves as 
+if it is sticking  in a few places, where the flow rate won’t linearly ramp when 
+commanded (as required for the CLD Flame experiment) .  It tends to stick in some 
+places and then abruptly overshoot where that has sometimes been seen to 
+extinguish the flame.  As a result, mass flow controllers are tested - without flames - 
+after they are first installed.  Adjustments are often then made to (1) the settings that 
+control when the valves open and (2) the Proportional -Integral-Derivative (PID) 
+settings.  This activity has involved significant testing, separate from flame tests, and 
+has taken place during CLD Flame operations on 17333, 17334, 17347, 17354, 18008, 
+18022, 18038, 18046, 18143, and 18241.  In this regard, there are an assortment of 
+MFCs with different flow ranges for each of the three gases.  While the MFC tuning
+
+--- page 7 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+7 
+ 
+has been beneficial in some cases, it has not eliminated all gas flow problems.  It was 
+seen that nitrogen oscillations te nd to damp with time, so a nitrogen pre -flow was 
+implemented so that the oscillations would typically end before the flame  
+measurements.  That approach has been partially successful and was introduced 
+during E-FIELD Flames’ first round.  Later, a procedure of re-zeroing the MFCs prior to 
+each test was also implemented during E-FIELD Flames’ second round.  A replacement 
+MFC for the ‘air’ coflow is being prepared for spaceflight, where a limited third round 
+of CLD Flame testing is being planned to accomplish its extinction limit objective.  
+ 
+The final day of testing during E-FIELD Flame’s first round was conducted with highly 
+sooty ethylene flames and a positively charged mesh, which tends to push the flame 
+down toward the burner.  A significant amount of soot deposited on the burner, both 
+on the inner tube from which the fuel issues as well as the hon eycomb in the burner 
+annulus from which the air flows.  The extent of the soot wasn’t appreciated until 
+flame testing for CLD Flame’s second round began on May 25 (18145).  Additional 
+evaluation tests were performed on May 31 (18151), and the decision was made to 
+have the crew clean the soot from the burner  because it was clear that the gas flow 
+from the burner was affected by the soot buildup .  A cleaning procedure was 
+developed, approved, and carried out by astronaut Ricky Arnold on June 19 (18170).  
+The cleaned burner was imaged with the CIR cameras on June 21 (18172), but the 
+evaluation testing was deferred because of a cable mating issue.  The cable mating 
+was corrected by Arnold on June 25 (18176) and the evaluation testing of the cleaned 
+burner was conducted on the following day, June 26 (18177).  Regular flame testing 
+in CLD Flame’s second round finally commenced on July 5 (18186), six weeks after the 
+soot accumulation was identified as an issue.  However, useful scientific results were 
+obtained on the June 26 evaluation day, so the burner cleaning effectively led to a 1- 
+month delay. 
+ 
+C. Completeness/Quality of Data 
+The number of flames ignited significantly exceeds the planned tests which were (1) 
+specified as required in the ACME Integrated Science Requirem ents Documen t (ISRD), 
+using the gas-jet burner, and (2) later expanded to include tests with the coflow burner 
+to partially make up for science loss resulting from the slow response time of the high -
+voltage power supply .  Following the revision, a total of 74  E-FIELD Flames tests were 
+identified as required .  In contrast , 120 flames were ignited in the experiment’s first 
+round, i.e., first half.   In that round, roughly 200% more flames were ignited than had 
+been planned.  
+ 
+It should be understood that a complete set of image data is not available for all tests.  As 
+discussed in section III.B, the IPSU-1 was not working at the beginning of the second round 
+of testing, preventing use of both the HiBMs camera and the CIR’s collimated illumination 
+package.  Those are not critical for E-FIELD Flames, so tests continued without their use.
+
+--- page 8 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+8 
+ 
+Furthermore, recorded image data i s sometimes deleted withou t downlinking.  This i s 
+done because of operational constraints which limit the amount of data that can be 
+managed per test day.  Given the constraint, the decision is sometimes made to sacrifice 
+some image data (e.g., from the HiBMs camera) to allow additional tests to be conducted.  
+This is intentionally done in order to maximize the scientific return of each day of testing 
+within the project constraints. 
+ 
+Data quality is of course dependent on the experimental hardware.  But neglecting that  
+limitation on data quality , the cameras are sensitive to radiation where pixels gradually 
+become ‘hot’ over time.  While these bright spots are addressed in image post-processing, 
+they are a degradation of the image quality. 
+ 
+It is possible that the tests are subtly affected by the acceleration environment, but there 
+is not obvious indication of this and it has thus far not been evaluated  with available 
+measurements from the Space Acceleration Measurement System (SAMS).  In this regard, 
+note that the Combustion Integrated Rack (CIR), in which the experiment is conducted, is 
+equipped with a Passive Rack Isolation System (PaRIS).  
+ 
+Regardless of the shortcomings discussed above, a great wealth of experimental data has 
+been secured and E-FIELD Flames is considered to be highly successful. 
+ 
+D. Status of Data Analysis 
+Data from the E-FIELD Flames experiments includes video recordings from the operations 
+camera for general flame behavior, the ACME data camera for high resolution images at 
+various exposures and frame rates as dictated by the flame luminosity, intensified camera 
+images and non-imaging data at 100 Hz.  The non-imaging data is extracted using Matlab 
+scripts (modified from those developed by CLD Flame researchers) to show trends of ion 
+current and flame luminosity as a function of the applied field, and the flame parameters 
+(fuel, flowrate, burner ty pe).  Image data is processed using the OMA software (also 
+developed and used by CLD Flame researchers).   
+ 
+The overall data volume is large with a storage limit of 127,000 MB per test day, the data 
+has been downloaded to the hard drive with a backup system at UC Irvine.  At this stage, 
+with operations ongoing, the analysis is comparative and qualitative, just to show the 
+major differences in behavior in microgravity and normal-gravity (1-g) flames. 
+ 
+E. Preliminary Research Findings 
+Results from the early E -FIELD Flame experim ents have demonstrated clear differences 
+between normal-gravity and microgravity flame behaviors.  A few examples include the 
+distinct maximum of ion current for co-flow burner flames in microgravity, where the 1-g 
+flames more smoothly reach a saturation cond ition.  The results also show that the 
+electric body force can produce flame oscillations similar to those driven by buoyancy in 
+normal gravity, and microgravity flame shapes with an electric field can mimic normal-
+
+--- page 9 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+9 
+ 
+gravity flames without electric fields .  Burner type plays a ro le in the flame/field 
+interaction, and in particular, reversing the field polarity for the jet flame does not 
+produce an inverted result over the entire voltage range tested.  Results also demonstrate 
+the interactions between electric fields and soot are m ore complex in microgravity.  At 
+the same time, the preliminary findings suggest that some of the key expectations 
+generally hold (e.g., ion current scales approximately with flow rate for a fixed fuel and 
+burner). 
+ 
+100% methane for positive field strength with and without coflowing air 
+This section only includes representative findings as the ISS experiments covered a wide 
+range of conditions and outcomes.  Color camera images, intensified camera images, total 
+flame luminosity, and ion current, along with all  test parameters and flow monitoring, 
+were recorded in all cases.  Figure 1 gives example flame images from the first tests 
+conducted with methane as fuel.  Two fuel flow rates are shown, with the voltage 
+indicated as nominal field strength (kV/cm).  Since  the physical spacing from the burner 
+to the mesh is 37 mm, 2 kV/cm represents 7000 V across the flame.  
+ 
+           0.06                        0.71                   1.0 kV/cm                   1.49                        2.00 
+ 
+           0.06                        0.71                   1.0 kV/cm                   1.63                        2.00 
+ 
+Figure 1. Typical flame appearance as a function of the field strength and fuel velocity 
+with a 3.1 cm/s coflow. (a) 15 cm/s methane. (b) 19 cm/s methane. 
+ 
+The key measurement for the E-FIELD Flames experiments is the ion current as a function 
+of applied voltage, i.e., the voltage-current or V-I curve.  This curve provides information 
+on the flames ability to produce chemi -ions based on its saturation ion current, and it 
+provides a measure of combustion performance in that ion production is a function of 
+carbon influx into the flame and the vigorousness of the combustion process.  More 
+compact, higher temperature flames produce more chemi -ions than do larger more 
+diffuse reaction zones of lower overall temperature for the same fuel flow.  The first effect 
+(i.e., the relationship between carbon influx and peak ion current) can be seen in Figure 
+2, where the flow of 15 cm/s methane produces slightly above 2 microamps of ion current 
+at the peak (1.5 kV/cm) and the flow of 19 cm/s methane has a peak of 2.75 microamps.  
+While the ratio is not exact, the peak ion current is nearly proportional to the flow
+
+--- page 10 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+10 
+ 
+velocity.  Another interesting feature of these curves is the peak value.  Traditional 
+electrical aspects of flames studies look for a saturation ion current plateau, where the 
+ion current remains fixed despite an increase in applied electric field.  For these 
+microgravity flames, there is a pronounced peak in the ion current at saturation and then 
+a gradual decrease to a global saturation plateau.  This is a strikingly different behavior 
+than is seen in 1-g, and the behavior is even more pronounced for the case where there 
+is zero coflow. 
+ 
+ 
+Figure 2. Ion current as a function of the f ield strength and fuel velocity with a 3.1 cm/s 
+coflow. (a) 15 cm/s methane. (b) 19 cm/s methane. 
+ 
+As can be seen in Figure 3, which is the same V-I curve result in microgravity for the case 
+where there is no coflowing air, and Figure 4 shows the flame images.  These figures again 
+show a reasonably linear scaling of peak ion current with fuel flow velocity, but they 
+demonstrate a very pronounced peak ion current with a rapid drop to a global saturation 
+ion current plateau.  Since these are diffusion flames , essentially all of the fuel is being 
+burned independent of the flame’s shape and the applied electric field, but it seems clear 
+that the electric field is affecting the chemi -ion production capability of the flame.  As is 
+apparent from the flame images, the flame is most compact at the voltage consistent with 
+the peak ion current.  With increasing voltage, the flame becomes less compact and the 
+ion current decreases.  We presume that the flame remains at saturation throughout this 
+period (that is, the fla me is producing as many ions as it can, and those ions are being 
+removed from the reaction zone as soon as they are created) so the decrease in ion 
+current results from a change in combustion intensity.  We can explore this hypothesis 
+further using the PMT data collected in the experiments.
+
+--- page 11 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+11 
+ 
+ 
+Figure 3. Ion current as a function of field strength and fuel velocity with no coflow. (a) 
+15 cm/s methane. (b) 19 cm/s methane. 
+ 
+            0.14                       0.71                   1.0 kV/cm                   1.49                        2.17 
+ 
+            0.14                       0.71                   1.0 kV/cm                   1.51                        2.60 
+ 
+Figure 4. Flame appearance as a function of field strength and fuel velocity with no coflow.  
+(a) 15 cm/s methane. (b) 19 cm/s methane. 
+ 
+In all of the curves, the jagged features are spikes following a voltage step change that 
+are mostly associated with the transient capacitance of the system when rapid steps are 
+requested.  These overshoots notwithstanding, the V -I curves follow smooth and 
+reproducible trajectories. 
+ 
+For comparison, the equivalent V -I curves for 1 -g flames with the same b urner 
+configuration with no coflow are shown in Figure 5.  The results are too recent to allow a 
+detailed analysis and discussion of the differences, but some significant observations from 
+these results and the comparison follow.
+
+--- page 12 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+12 
+ 
+ 
+(1) The ion current reache s a peak at approximately the same field strength for both 
+velocities in 1 -g while in microgravity the ion current peak for a lower fuel velocity 
+occurs at a lower field strength.  The field strength at the peak current seems to scale 
+linearly with the fuel velocity. 
+ 
+ 
+Figure 5. Ion current as a function of field strength and fuel velocity with no coflow in 
+normal gravity. (a) 16 cm/s methane. (b) 19 cm/s methane. 
+ 
+(2) In microgravity, the ion current does not smoothly increase to saturation nor does it 
+show a gentle peak with a mild decrease as is seen in the normal gravity results.  
+Instead, in microgravity there is a distinct peak in the ion current with a severe 
+decrease throughout the saturation condition, with a final saturation plateau 
+observed at voltages substantially above the voltage at peak ion current.  That is, the 
+microgravity final saturation is not the maximum ion current observed.  This 
+difference is more dramatic when there is no coflow, which suggests that entrainment 
+plays an important role whether caused by buoyancy or a forced coflow.  
+ 
+(3) The peak ion current is higher for microgravity than comparison 1 -g flames.  The 
+reason is not obvious at thi s point but may result from a more focused upward flow 
+from the electric body force and ion-driven wind as compared to the combined effects 
+of the ion wind and buoyancy. 
+ 
+(4) The peak ion current is approximately proportional to fuel flow velocity, which, a s 
+described in prior studies, reflects the relationship between ion production and the 
+carbon flux into the system.  The peak ion current also increases with the coflow which 
+suggests that healthier oxidizer transport helps increase the ion production.
+
+--- page 13 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+13 
+ 
+30% ethylene with coflowing air at 3.1cm/s 
+The results from ethylene flames with coflow are shown in Figures 6 and 7, positive field 
+and negative field respectively.  At 15 cm/s, the ion current reaches a peak around 2.7 
+microamps which is similar to the 19 cm/s 100% methane coflow  air case but with only 
+0.4 of the volumetric carbon content.  The results for 15 cm/s also presents a rapid 
+parabolic behavior after reaching the saturation peak.  In the negative field case, the peak 
+ion current decreases to 0.56 of the positive field case at the same flow rate 19 cm/s (or 
+0.4 for 15 cm/s).  Another aspect is that the ion current peaks sooner for the higher flow 
+rate/carbon content in the negative field configuration as compared to the positive field 
+experiments.  These phenomena, particularly for the positive field strength ha ve not yet 
+been measured in the laboratory at 1-g.  The difference in behavior appears to be related 
+to the removal of the buoyancy force so that the momentum flow coupled with the ion 
+driven flow tend s to resettle under the electric field body force.  Detailed analysis is 
+underway.  
+ 
+ 
+Figure 6. Ion current to electric field strength per unit distance for positive field of 100% 
+ethylene with coflow air. The ion current peaks around 3.5 microamps at 19 cm/s and 2.7 
+microamps for 15 cm/s.
+
+--- page 14 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+14 
+ 
+ 
+Figure 7. Ion current to electric field strength per unit distance for negative field of 100% 
+ethylene with coflow air. The peak ion current reduces to around 1.5 microamps for all 
+the fuel flows: 27, 19, and 15 cm/s.  
+ 
+Early E-FIELD Flame results from the ISS testing were presented in following oral and 
+poster presentations: 
+1. Derek Dunn-Rankin and Yu-Chien (Alice) Chien, “Electrical Field Effects on Laminar 
+Diffusion Flames,” 11th Multi-Agency Coordinating Committee for Combustion 
+Research (MACCCR)  Annual Fuel and Combustion Research Review, Livermore, 
+CA, 9-11 April 2018. (oral presentation) 
+2. Chien, Y.-C., Tinajero, J., Stocker, D., Hegde, U. and Dunn-Rankin, D. “Electric Field 
+Effects on Flames in Microgravity on the International Space Station,” Central 
+States Section Combustion Institute Spring Technical Meeting, St. Paul, MN, 20-22 
+April 2018. (conference paper and oral presentation) 
+3. Chien, Y. -C., Tinajero, J., Stocker, D., Hegde, U. and Dunn -Rankin, D. “Small 
+Diffusion Flames under the influences of Electric-Field: Microgravity and Gravity,” 
+37th International Symposium on Combustion, Dublin, Ireland, 29 July to 3 Aug. 
+2018.  (Work-in-Progress poster) 
+4. Yu-Chien (Alice) Chien, Jesse Tinajero, Dennis Stocker, Uday Hegde, Derek Dunn -
+Rankin, “Microgravity Experiments of Electric Field Effects on Laminar 
+Ethylene/Air Diffusion Flames,” 34th Annual Meeting of the American Society for 
+Gravitational and Space Research (ASGSR) Meeting, Rockville, MD, 31 Oct. to 3 
+Nov. 2018. (oral presentation)
+
+--- page 15 ---
+ACME/E-FIELD Flames – 30-Day Operation Accomplishments Report for ISS Increments 55 and 56 
+ 
+15 
+ 
+F. Communication Imagery 
+1. Still Imagery 
+Photos are available online at www.flickr.com/photos/space-flames.  Although the 
+Facebook page at www.facebook.com/space.flames is meant to provide updates on 
+ACME and related combustion research, it is good source for recent photo s, e.g., of 
+flames, that may not be available on the Flickr site.  Additional photographs may be 
+requested from the Project Scientist, Dennis Stocker (dennis.p.stocker@nasa.gov).  
+ 
+2. Video 
+‘The Power of Studying Combustion on the ISS,’ which was developed with input from 
+the ACME Project Scientist, is available at https://science.nasa.gov/science-
+news/news-articles/the-power-of-studying-combustion-on-the-iss. 
+ 
+Videos describing the ACME project, its hardware, and the value of combustion 
+research can be found at: 
+https://spaceflightsystems.grc.nasa.gov/sopo/ihho/psrp/fcf/fcf-
+investigations/acme/. 
+ 
+Meanwhile, E-FIELD Flames videos can be found at: 
+https://spaceflightsystems.grc.nasa.gov/sopo/ihho/psrp/fcf/fcf-
+investigations/acme/e-field-flames/ 
+ 
+Videos related to E-FIELD Flames and other microgravity combustion research can also 
+be seen on Facebook at www.facebook.com/space.flames. 
+  
+Contact Dennis Stocker (dennis.p.stocker@nasa.gov) for access to those videos or for 
+additional videos. 
+ 
+ 
+IV. Additional Comments from science team 
+None.

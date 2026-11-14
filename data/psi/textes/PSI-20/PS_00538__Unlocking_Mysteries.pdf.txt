@@ -1,0 +1,283 @@
+Source : NASA PSI, PSI-20, Science Documents, PS_00538__Unlocking_Mysteries.pdf
+
+--- page 1 ---
+Unlocking Mysteries in Microgravity:
+NASA Glenn Provides the Keys With the Fluids 
+and Combustion Facility
+What Is Microgravity?
+ Gravity is a force that governs motion 
+throughout the universe. It holds us to the 
+ground and keeps the Earth in orbit around the 
+Sun. Microgravity describes the environment 
+in orbital space flight, which has very weak 
+gravitational effects (one-millionth of what is 
+felt on Earth) and which is sometimes referred 
+to as a state of “weightlessness.” The condition 
+of microgravity occurs when an object is in 
+“free fall.” In free fall, an object falls faster and 
+faster, accelerating with exactly the speed of 
+attraction caused by gravity. Objects travelling 
+around the Earth in a state of continuous free 
+fall, or orbit, are essentially weightless even 
+though their mass remains the same.
+ Conducting research in a microgravity 
+environment gives researchers a unique oppor-
+tunity to study the true nature of processes and 
+materials without having to consider the effects 
+of Earth’s gravity. Thus, physics theories can be 
+tested at levels of accuracy that are impossible 
+on Earth. Microgravity experiments uncover the 
+mystery of how gravity affects processes such 
+as combustion science and fluid physics. This 
+knowledge can then help to improve the way 
+we do things on Earth.
+Astronaut Michael Fincke, Expedition 18 commander, works on the Combustion Integrated Rack in the Destiny 
+Laboratory of the International Space Station.
+
+--- page 2 ---
+Powering the Future 2 NASA Facts
+A World-Class Orbiting Laboratory
+ The term “microgravity” will become more com-
+monplace when the International Space Station (ISS) is 
+fully operational. The ISS will be the largest orbiting space 
+structure and the largest international scientific and tech-
+nological endeavor in history. Sixteen countries, including 
+the United States, are participating in this record-breaking 
+project. The ISS is a permanent laboratory in space where 
+studies can be performed without the effects of gravity.
+ The space station provides researchers with all the 
+laboratory space and equipment and electrical power 
+needed for safe, long-term research by human beings in 
+space. The ISS enables larger and longer experiments than 
+were possible on the typical 2-week space shuttle mission. 
+This gives scientists time for more detailed observation in 
+the microgravity environment.
+ The knowledge gained from ISS microgravity experi-
+ments is benefiting research on Earth in many fields. Our 
+understanding of theories relevant to everything from high-
+temperature superconductivity to weather prediction will 
+be advanced. New insights into areas such as human health 
+and disease prevention and treatment will be achieved. In 
+addition, scientists are using the microgravity environment 
+to uncover other, more subtle forces and interactions in flu-
+ids and materials. By essentially taking gravitational effects 
+out of the equation, researchers are able to study as primary 
+characteristics what would have been secondary behaviors 
+on Earth.
+ Simple investigations of fluid interfaces and combus-
+tion processes can be addressed in small, contained experi-
+ments, such as the shuttle Glovebox experiments. However, 
+more complex and challenging investigations require dedi-
+cated facilities to contain fluids and products of combustion 
+in a controlled and safe environment.
+The ISS Fluids and Combustion Facility
+ The United States Laboratory Module on the ISS con-
+tains the Fluids and Combustion Facility (FCF), designed 
+and built at NASA Glenn Research Center in Cleveland, 
+Ohio. The FCF was developed to accommodate the unique 
+challenges of working with fluids and combustion pro-
+cesses in microgravity, as well as to provide services and 
+capabilities comparable to those found in traditional Earth-
+based laboratories.
+ Glenn was an ideal choice for this project because of 
+their reputation for award-winning research, particularly in 
+the areas of fluids and combustion, as well as their long-
+standing experience in developing experiment hardware and 
+world-class test facilities. Glenn engineers and scientists 
+have been involved in designing, producing, and manag-
+ing space-based hardware and facilities since the 1960s. 
+As pioneers in rocket research, they had tested high-energy 
+propellants even before the United States officially entered 
+into the space business. Glenn Research Center advanced 
+the propulsion technology that helped make space travel 
+possible.
+ The Center’s unique Zero Gravity Research Facility 
+and other drop towers and laboratories were the source of 
+foundational work in microgravity research. NASA’s Zero 
+Gravity Trainer aircraft occasionally operates out of NASA 
+Glenn in support of Glenn’s ground-based microgravity 
+research. Some flights include astronauts participating in 
+crew training so they can have low-gravity experience with 
+experiment hardware and materials prior to shuttle mis-
+sions. In all, these facilities give Glenn a unique ability to 
+develop and test microgravity experiments.
+ Glenn Research Center is NASA’s center of excellence 
+for fluid physics and combustion science and has been 
+responsible for 153 experiments on 47 shuttle flights. In 
+addition to providing the FCF, they are a major contributor 
+to the investigations onboard the FCF, in gloveboxes, and 
+in other ISS facilities. A forerunner of the FCF, the Glenn-
+developed Combustion Module–1 (CM–1), which flew 
+onboard the Shuttle Columbia, STS–83, in April 1997, laid 
+the groundwork for the combustion portion of the new FCF 
+with several hardware innovations.
+ The FCF is ushering in a new era of fluids and com-
+bustion research. It is a modular, multi-user, permanent 
+microgravity science laboratory that is making it possible 
+for researchers on the ground, with the assistance of the 
+astronauts in space, to schedule and perform studies of how 
+fluids and flames behave in the absence of gravity at a cost 
+that is not out of this world.
+ The Combustion Integrated Rack (CIR) was delivered 
+by the Space Shuttle Endeavour in November 2008 dur-
+ing mission STS–126.  The Fluids Integrated Rack (FIR)
+was delivered by Space Shuttle Discovery in August 2009 
+during mission STS–128. The two racks provide the basic 
+physical and functional framework required to perform 
+combustion science, fluid physics, and associated science 
+Glenn researchers working on Fluids Integrated Rack (FIR) during 
+development.
+
+--- page 3 ---
+Powering the Future 3 NASA Facts
+onboard the ISS. The environmental control subsystems 
+will provide temperature and pressure control for air and 
+water systems, as well as safety measures and fire detection.
+ The end result is true facility operations with all of the 
+capabilities that serious researchers expect on the ground 
+without the effects of gravity. 
+Combustion Science
+ Combustion, or burning, is a process in which a sub-
+stance reacts with oxygen to give off heat and light. Com-
+bustion meets almost 85 percent of the U.S. energy needs. 
+While it does a good job of powering how we live on Earth, 
+combustion is a major contributor to air pollution. 
+ The cost of combustion energy is about $450 billion 
+each year in the United States. In any area of the economy 
+where a huge amount of money is spent, even the small-
+est improvements in efficiency can mean savings of very 
+large amounts of money. A mere 1 percent increase in 
+fuel efficiency, like improving your gas mileage from 25 
+miles per gallon to 25.25 miles per gallon, would translate 
+into a savings to America of nearly 100 million barrels of 
+oil a year (roughly $5.5 million per day at today’s cost). 
+Although today combustion is vital to transportation, mate-
+rials processing, hazardous waste disposal, and many other 
+areas, there is still only limited understanding of many of 
+its fundamental characteristics. 
+ There are over 2500 fatalities and tens of billions of 
+dollars in property damage each year in accidental fires.  
+ Combustion research in microgravity can lead to 
+advances in fire prevention, detection, and fighting. In addi-
+tion, combustion research in microgravity can lead to more 
+efficient use of energy, reduced pollution, and improved 
+processes for making high-technology materials. Glenn 
+Research Center’s experience with jet engines provides a 
+solid background in combustion and Glenn scientists have 
+already begun to study combustion in space. 
+ A simple example of microgravity’s effect in combus-
+tion is the behavior of flames in space. On Earth, hot air 
+rises around a candle flame, which causes the flame to 
+flicker and take on an elongated shape. In microgravity, 
+however, no such distortion takes place. The flame, without 
+the effects of gravity, has a steady, spherical shape. The 
+FCF allows researchers to study aspects of combustion, 
+such as flame behavior, that are impossible to observe on 
+the ground. Their research will lead to a better understand-
+ing of whole processes, such as soot production, which will 
+aid development of improvements in fire fighting and pollu-
+tion reduction. 
+Fluid Physics
+ Of the four states of matter—solid, liquid, gas, and 
+plasma—three are fluid, meaning they flow in response 
+to an applied force. An understanding of fluid physics is 
+not only vital to advancing aircraft and spacecraft applica-
+tions, such as airflow and propellant management, but is 
+also essential to understanding the human body, aspects of 
+everyday life, and many industrial processes. In micrograv-
+ity, fluid positioning and flow characteristics can be studied 
+from a new perspective. 
+ Scientists at NASA Glenn Research Center have 
+played an important role in fluid physics research since the 
+1940s. With orbiting spacecraft, microgravity fluid phys-
+ics became an important research area in which NASA 
+Glenn has always played a leading role. Glenn is currently 
+focusing its research on the enabling technology for space 
+exploration (water and fuel flow, life support systems, tem-
+perature control, etc.) as well as on using the space environ-
+ment (reduced gravity) to provide insight into phenomena 
+that are important for Earth-based applications. One spinoff 
+of the special nonintrusive instruments and techniques 
+developed to perform the fluid experiments is a dynamic 
+light scattering (DLS) probe and Hruby lens holder that 
+make early detection of cataracts and other eye diagnoses 
+easier. 
+ Glenn researchers have also experimented with the 
+behavior of colloidal suspensions. A colloid is a system of 
+fine particles suspended in a fluid. Italian salad dressing 
+provides a simple illustration of the effects of micrograv-
+ity on the behavior of colloidal suspensions. In space you 
+would need to shake the dressing only once, rather than 
+between uses, which is needed on Earth. Paint, ink, milk, 
+and orange juice are also common examples. Though these 
+products are routinely produced and used, scientists know 
+little about the underlying structure of colloidal systems 
+because they are difficult to study in ground-based labora-
+tories. Understanding their structures may allow scientists 
+to manipulate the physical properties of colloids for the 
+creation of new materials and products or to improve the 
+manufacturing of known products. 
+Flame in microgravity.
+
+--- page 4 ---
+FS–2011–06–035–GRC
+National Aeronautics and Space Administration
+Glenn Research Center
+21000 Brookpark Road
+Cleveland, Ohio 44135
+ NASA Facts
+PS–00538–0611
+Experiments by Remote Control
+ While the astronauts perform their roles in experiment 
+setup, operation, observation, evaluation, and feedback, the 
+FCF is teleoperated from the NASA Glenn Research Cen-
+ter. Operation of experiments via remote control is coor-
+dinated through the Telescience Support Center (TSC) at 
+Glenn. Telescience is the systematic monitoring, command, 
+and control of an experiment from a remote location and 
+has already been implemented successfully by NASA on 
+the shuttle/Spacelab and the Russian Mir Space Station. In 
+concert with the work performed by the astronauts in space 
+and the Cleveland-based operations team, the FCF principle 
+investigator’s (PI’s) experiment can remotely monitor and 
+control from the PI’s home site through Glenn’s TSC. 
+ The concept of telescience offers several advantages. 
+Typically, the development of an experiment takes years 
+and involves a varied group of scientists, engineers, and 
+support personnel. Only a few of these people need to be on 
+the operations team that travels to a NASA center to sup-
+port actual mission operations. A major benefit of remote 
+operations is that the entire team that developed and built 
+the experiment can be connected to the operations team to 
+support data analysis, command decisions, anomaly resolu-
+tion, and other real-time considerations. Also, some facili-
+ties that are not physically located at NASA centers can be 
+included (e.g., colleges, universities, and industrial labs). 
+Additional benefits are reductions in travel requirements 
+and increases in the amount of science data acquired.
+The Sky Is Not the Limit!
+ With over 10 years of continuous occupation, the ISS 
+was assembled by over 100 launches of Russian vehicles, 
+the American space shuttles as well as European and Japa-
+nese vehicles. Over 150 spacewalks have been conducted 
+in support of space station assembly totaling more than 944 
+hours.  It has been visited by over 200 individuals, coming 
+from 8 different countries. The newest star in the night sky  
+continues to grow brightly, demonstrating to the world that 
+its nations can work together in peace.
+ Researchers at NASA Glenn, world leaders in micro-
+gravity science, continuously define scientific requirements 
+and develop hardware for microgravity space experiments 
+that will eventually have an impact on many areas of life 
+here on Earth. Microgravity research aboard the ISS’s FCF, 
+developed by NASA Glenn, is helping to improve indus-
+trial processes, increase fundamental knowledge, advance 
+our health care technologies, and make space exploration 
+easier and safer. NASA Glenn has delivered and conducted 
+18 investigations on ISS with many more in the pipeline. 
+This research is helping create new ideas for tomorrow’s 
+products, today.
+ Microgravity research on the ISS is showing life on 
+Earth to us in ways we have never seen before. The sky is 
+not the limit at NASA Glenn Research Center.
+Telescience Support Center.

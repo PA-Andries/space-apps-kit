@@ -1,0 +1,19 @@
+Source : NASA PSI, PSI-69, Science Documents, FLEX DoD.docx
+
+
+FLEX (Flame Extinguishment Experiment) investigates the effectiveness of fire suppressants in microgravity and quantify the effect of different possible crew exploration atmospheres on fire suppression. There are five fuel samples. Experiment data records representing the fuel samples are:
+
+FLEX – Calibration
+FLEX - LCTF Calibration
+FLEX - Radiometer Calibration
+FLEX – HEP
+FLEX – MeOH
+
+These Experiment Data records are located on the “Data” tab within the FLEX investigation in PSI. When an experiment data record is selected, the “Scientific Data and Information” tab is opened. In the Experiment Data records “Raw Data”, “Analyzed Data”, “Raw Videos”, “Images” are organized by GMT data and/or gas mixture. 
+
+The “Raw Data”, “Analyzed Data” links display records for the raw/analyzed data within the specific GMT/gas mixture.  When a raw/analyzed data record is selected, there will be the following tabs: “General”, “Analyzed Data and Information”, “Raw Data and Information”, and “Comments”. The “Analyzed Data and Information” tab will contain .txt files of the experiment’s analyzed data and the “Raw Data and Information” will contain .txt files of the experiment’s raw data. 
+
+The “Raw Videos” and “Images” links displays records for each video/image within the specific GMT/gas mixture.  The “General” tab will contain the Video. An “Image Data” tab within this link provides an Image Gallery with thumbnail images, and a .zip file provides the original images.  
+ 
+
+

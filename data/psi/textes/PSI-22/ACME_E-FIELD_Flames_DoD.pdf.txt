@@ -1,0 +1,45 @@
+Source : NASA PSI, PSI-22, Science Documents, ACME E-FIELD Flames DoD.pdf
+
+--- page 1 ---
+PSI Data Organization Document 
+Advanced Combustion via Microgravity Experiments (ACME) Electric-Field Effects on Laminar Diffusion 
+Flames (E-FIELD Flames) 
+ 
+1 
+ 
+To gain an initial understanding of this experiment, refer to the documents “ACME non-imaging data file 
+description.pdf” and “E-FIELD Flames data interpretation document.pdf” located in the “Data Organization 
+Document(s)” section of the “Scientific Data and Information” section on the “Data” tab.  
+ 
+The E-FIELD Flames data is organization in PSI by co-flow burner position and mesh polarity, or power 
+supply. Raw data, and Images & Videos data are available on the “Scientific Data and Information Tab” of 
+each of the four “Experiment Data” records:  
+ 
+• Co-Flow Burner – Negative Power Supply 
+• Co-Flow Burner – Positive Power Supply 
+• Gas-Jet Burner – Negative Power Supply 
+• Gas-Jet Burner – Positive Power Supply 
+ 
+ 
+Within each “Experiment Data” record, “Raw Data”, “Images” and “Audio/Video Files” are available on the 
+“Scientific Data and Information” tab. Data records are identified by year (2 digits), day of year (GMT, 3 
+digits), a letter (1 character) and a number (1 digit) – where the different numbers can be for repeats but 
+are typically variants, e.g., with different flow rate(s) or instrumentation setting(s), e.g. 18073A3. Record 
+naming and listings are based on the detailed information in the test conditions table below (page 2). 
+ 
+Test specific raw data files are located on the “Raw Data and Information” tab of the “Raw & Analyzed 
+Data” record. The headers of the basic data in .csv files is explained in Section 10.1, beginning on page 
+126 of the “ACME-DOC-010 Rev D.pdf” located in the “Data Organization Document(s)” section of the 
+“Scientific Data and Information” section on the “Data” tab of the ACME E-FIELD Flames “Investigations” 
+record. Associated videos are located on the “General” tab and associated images are located on the 
+“Image Data and Information” tab of the “Videos & Images” record. 
+ 
+There are various other supporting engineering documents, videos, reports and publications available on 
+the other tabs of the “Investigations” record.
+
+--- page 2 ---
+PSI Data Organization Document 
+Advanced Combustion via Microgravity Experiments (ACME) Electric-Field Effects on Laminar Diffusion 
+Flames (E-FIELD Flames) 
+ 
+2

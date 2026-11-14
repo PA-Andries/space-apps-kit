@@ -1,0 +1,424 @@
+Source : NASA PSI, PSI-26, Science Documents, SRD_BASS.pdf
+
+--- page 1 ---
+February 2010 1 
+ 
+ 
+ 
+Science Requirements for  
+ 
+Burning and Suppression of Solids 
+ 
+“BASS” 
+ 
+(Material Flammability in Low-Speed Air Flow at 
+Microgravity Including an Assessment of  
+Inert-Gas Extinguishing Agent: 
+ An ISS Glovebox Experiment Utilizing Existing SPICE 
+Hardware with Minor Modifications) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+February 2010
+
+--- page 2 ---
+
+
+--- page 3 ---
+February 2010 3 
+ 
+Background 
+ 
+Flame spread behavior, flammability, and suppression data are of interest to NASA for 
+application to fire safety efforts.  The reduced buoyant flows, coupled with low-speed air 
+circulation currents, create an environment quite different than normal Earth gravity.  In 
+addition, there are several oxidizer atmospheres proposed for crew-manned vehicles 
+and habitats [NASA CxP-70024], which further complicates the problem.  
+Understanding flammability and suppression in a variety of environments is especially 
+important given NASA’s current exploration initiatives. 
+ 
+There is some evidence for the hypothesis that materials in microgravity, with adequate 
+ventilation, burn as well if not better than the same material in normal gravity  with other 
+conditions being identical (pressure, oxygen concentration, temperature, etc.)  To test 
+this hypothesis with any but the thinnest materials requires extended microgravity time – 
+longer than available in drop towers or parabolic aircraft. If this hypothesis is true, it 
+implies serious safety concerns over the utility and margin of safety provided NASA-
+STD-6001 Test #1. 
+ 
+There are important differences in the suppression of fires in space compared to on 
+Earth.  On Earth it is understood that best results are generally obtained when the 
+extinguisher “attacks” the base of the flame, which is both the stabilization point and the 
+point of fresh air entrainment.   For a fire burning in microgravity, the best point of 
+application of suppressant may not be immediately apparent, especially for a partially 
+obstructed flame or a wake-stabilized flame.  Depending on the geometry of the flame 
+and the characteristics of the extinguisher (distance from flame, dispersion angle) it is 
+possible that the suppressant stream will be ineffective or might actually make the flame 
+worse through the entrainment of oxygen. 
+ 
+Objectives 
+ 
+ 
+There are two main objectives: 
+ 
+1.)  Begin to bridge the gap between the normal gravity NASA-STD-6001 Test#1 
+method, ground-based microgravity tests, and actual material flammability in space.  
+The relation between these can be investigated by observing flames burning for the 
+longer times available in flight.  Practical materials in typical geometries will be 
+examined, including wake flames which have characteristics of a fire burning behind 
+another object (for example, a fire burning in tight area which may not be easily 
+accessible).  Fuels can be significantly thicker than the thin sheets studied in 
+ground-based facilities.
+
+--- page 4 ---
+February 2010 4 
+2.)  Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that 
+used on ISS) in putting out flames over different materials, geometries, preheating, 
+and flow. 
+Hardware changes 
+ 
+The plan is to use the existing NASA glovebox SPICE hardware with four changes:  
+1.) Accommodation of replaceable solid fuel samples 
+2.) Igniter element adjustable (e.g. by bending wire leads) into the correct position 
+3.) Nitrogen gas jet for flame extinguishment 
+4.) Providing a way to shut off the flow completely 
+ 
+ 
+ 
+The air co-flow is produced by using a fan to blow air through the duct.  An anemometer 
+is used to measure the actual flow speed.  The airflow speed can be adjusted from 5 to 
+50 cm/s.  Nitrogen is supplied through the nozzle from pressurized bottles via a mass 
+flow controller, from 0 to 500 cc/min.  A radiometer measures flame output.  Video and 
+still cameras are used to image the flame. 
+Multiple fuel assemblies (total of 30, see test matrix) will be used.  Figure 1 presents a 
+possible concept for mounting to the existing nozzle structure.  Another concept for 
+mounting to the top window is shown in Figure 2. 
+Front view Side view 
+Figure 1. Possible Concept:  
+Fuel Assembly for Flat Sample 
+Solid fuel or wax-
+impregnated “wick” 
+Fuel  
+support 
+Gas nozzle for  
+suppression 
+SPICE nozzle 
+Embedded 
+igniter 
+Deployable 
+igniter 
+Air co-flow 
+from SPICE 
+duct 
+Flat sample shown installed in 
+SPICE hardware 
+Fan Section 
+Air  Co- 
+Flow
+
+--- page 5 ---
+February 2010 5 
+ 
+ 
+ 
+There are three categories of sample: flat sheets, solid spheres, and candles within 
+tubes (Figure 3).  For the sheets, concurrent-flow spread rate and limiting flame length 
+are the main interest.  The cotton-fiberglass fabric blend SIBAL1 fuel is our leading 
+candidate for the sample material, since it was specially developed just for this purpose.  
+For some of these spread tests, the suppressant system will be engaged at a gradually 
+                                                             
+1 Solid Inflammability Boundary at Low Speed (Principal Investigator: James T’ien) was 
+a previously funded flight project to examine the flammability of a thin solid material 
+burning within an airflow tunnel in microgravity. 
+Modified Top Lid 
+Support posts attached to lid 
+Cylindrical fuel assembly 
+Connection 
+SPICE nozzle 
+Axial Adjustment 
+Flat fuel assembly 
+Figure 2. Fuel Sample Mounting Concept 
+Candle within tube assembly
+
+--- page 6 ---
+February 2010 6 
+increasing level until extinction is reached.  A flat slab of fiberglass fabric saturated with 
+wax wax and a one-sided flat PMMA sample are included. 
+ 
+ 
+ 
+For the solid spheres, flame growth rate, flame shape, and luminosity are the main 
+interests.  Again, the suppression system will be engaged after some period of burning.  
+Some of these samples will have inert hemispheres so that a wake flame can be 
+investigated (the inert hemispheres prevent flames from spreading into the forward-
+stagnation region).  Wake flames may occur in real situations where flames are 
+confined behind obstacles and within tight spaces.  The burning behavior of these 
+samples and their suppression characteristics are of interest.  For the candles within 
+tubes, the effect of suppression amount on the flame structure at different flow speeds 
+will be investigated. 
+ 
+PMMA Sphere 
+Fuel support arm 
+Gas nozzle for  
+  suppression 
+SPICE nozzle 
+Fuel support arm 
+locking nut 
+Figure 3. a.) Fuel Assembly for PMMA Sphere 
+Igniter 
+Side view Front view 
+b.) Fuel Geometries (not to scale) 
+1 and 2-cm PMMA 
+spheres 
+1 and 2-cm width 
+SIBAL fuel 
+sheets 
+1-cm width flat wax 
+and PMMA sample  
+Candle within 
+tube
+
+--- page 7 ---
+February 2010 7 
+Science Requirements (with reference to SPICE SRD) 
+ 
+Existing SPICE Requirement BASS Requirement 
+General requirements 
+Configuration: Round gas jet diffusion 
+flame in a co-flowing oxidizer stream 
+Configuration: Solid fuel materials on 
+individual and exchangeable sample cards 
+Pressure:  Shuttle ambient pressure ---Same--- 
+Ignition: Hot wire ---Same--- 
+Fuel Flow Range:  0 to 500 SCCM N2 
+equivalent flow 
+Nitrogen gas to be used instead of fuel:   
+0 to 500 SCCM N2 
+Oxidizer Velocity: 5 to 50 cm/s ---Same--- 
+Nozzle Diameter: (0.4, 0.8, 1.6 mm) 2 required nozzles: Diameter: (3.2 mm normal length and 3.2 mm short length) 
+Flame Length: 5 to 100 mm ---Same--- 
+n/a Flow must be shut off completely as a safety mechanism to extinguish flame 
+ 
+Parameters to be measured: (Accuracy +/- 10% of reading, 4 Hz) 
+Fuel Mass Flow: 25 to 500 SCCM Nitrogen gas to be used instead of fuel:   25 to 500 SCCM N2 
+Co-flow Fan Voltage:  0.5 to 12 V ---Same--- 
+Co-flow Velocity:   5 to 50 cm/s ---Same--- 
+Flame Radiation: wavelength visible to 
+near infra-red ---Same--- 
+ 
+Imaging Requirements 
+Video record of flame: color (FOV: 10 mm 
+of the nozzle to the end of the duct) 
+Video record of flame: color (FOV: 20 mm 
+upstream of the fuel to the end of the duct) 
+High resolution color images of flame: 2-3 
+per test (FOV: 10 mm of the nozzle to the 
+end of the duct; resolution: 3000 by 2000 
+pixels or greater, 8 bits/pixel in 3 colors or 
+greater).  Images stored in raw 
+(uncompressed) mode. 
+---Same---
+
+--- page 8 ---
+February 2010 8 
+ 
+Existing SPICE Requirement BASS Requirement 
+Acceleration Requirements 
+n/a 
+Testing not to be conducted during 
+thruster fire or spacecraft dock or undock 
+from ISS.  Based on the SPICE results, 
+the normal ISS operations provide an 
+adequate acceleration environment. 
+n/a 
+When possible, the acceleration 
+environment is to be measured by SAMS 
+during testing.  
+ 
+Ambient Oxygen Concentration Requirements 
+n/a 
+On each day of testing, the oxygen 
+concentration of the ISS cabin atmosphere 
+should be measured.  Testing is 
+restricted to oxygen concentrations at 
+or above 21% O2.   
+n/a 
+When possible, the oxygen concentration 
+within the MSG working volume shall be 
+known during testing.  It should be 
+possible for a crewmember to measure the 
+oxygen concentration within the MSG 
+working volume with a CSA-CP 
+(Compound Specific Analyzer – 
+Combustion Products).  Testing is 
+restricted to oxygen concentrations at 
+or above 21% O2.  
+n/a 
+The oxygen concentration can be 
+measured by the MCA (Major Constituent 
+Analyzer) or oxygen sensors in the 
+Columbus module or Service Module (i.e., 
+Zarya).  The oxygen concentration could 
+also be measured by a crewmember using 
+a CSA-CP (Compound Specific Analyzer – 
+Combustion Products).  If possible, it is 
+desired that the same O2 measurement 
+sensor be used for all tests to eliminate 
+variation between instruments.
+
+--- page 9 ---
+February 2010 9 
+ 
+Existing SPICE Requirement BASS Requirement 
+Operation requirements 
+Crew sets the co-flow based upon the test 
+matrix and ignites the flame.  Once ignited 
+the fuel flow is adjusted until the smoke 
+height is found.  High resolution digital 
+flame images are taken above and below 
+the smoke height.  The total crew time is 
+estimated to be 20 to 25 hours. 
+Crew inserts fuel sample and adjusts 
+igniter and fuel base to desired position.  
+The co-flow air is set to the specified 
+value.  Once ignited the fuel is allowed to 
+burn for about one minute.  High resolution 
+digital flame images are taken. Nitrogen 
+flow is then initiated to extinguish the 
+flame.  Total crew time estimate: 30 hours. 
+n/a Flow must be shut off completely as a safety mechanism to extinguish flame 
+ 
+Downlink 
+Real time video downlink is required for 
+the first few tests and highly desired for 
+subsequent tests. But, it is acceptable for 
+the crew to perform several tests without 
+downlink as long as the video is 
+downlinked before the next series of tests. 
+Video downlink will include fuel flow rate, 
+radiometer readings, and co-flow rate. 
+Real time video downlink is required for 
+the first few tests and highly desired for 
+subsequent tests. But, it is acceptable for 
+the crew to perform several tests without 
+downlink as long as the video is 
+downlinked before the next series of tests. 
+Video downlink will include nitrogen flow 
+rate, radiometer readings, and co-flow 
+rate. 
+ 
+Glovebox and Mission Resources 
+Experiment Power Converter Box, video 
+monitor, late stowage (L-48 hours). 
+Experiment Power Converter Box, video 
+monitor.
+
+--- page 10 ---
+February 2010 10 
+Test Matrix 
+ 
+ 
+Sampl
+e # 
+Test 
+ID Description 
+Estimated 
+Fuel Burned 
+(mg) 
+Flow speed 
+(cm/s) Suppression 
+1 1 216 5 
+2 2 216 10 
+3 3 216 20 
+4 4 
+Thin Flat, 2-cm Width 
+SIBAL fuel 
+216 50 
+5 5 108 5 
+6 6 
+Thin Flat, 1-cm Width 
+SIBAL fuel 108 20 
+7 7 132 30 
+8 8 
+Thin Flat, 2-cm Width 
+Nomex III (Blend) 132 50 
+9 9 252 30 
+10 10 
+Thin Flat, 2-cm Width 
+WSTF Nomex Natural (HT90-40) 252 50 
+11 11 384 30 
+12 12 
+Thin Flat, 2-cm Width 
+Ultem 384 50 
+Optional based 
+on results; when 
+flame covers 
+entire sample 
+13 13-16 300 
+14 17-20 
+Sphere, 1-cm Diameter  
+PMMA 300 
+15 21-24 300 
+16 25-28 
+Hemisphere, 1-cm Diameter 
+(Wake Flame) PMMA 300 
+17 29-32 1200 
+18 33-36 
+Sphere, 2-cm Diameter  
+PMMA 1200 
+19 37-40 1200 
+20 41-44 
+Hemisphere, 2-cm Diameter 
+(Wake Flame) PMMA 1200 
+21 45-48 
+Thick Flat, 1-cm Width, 2-mm 
+Thick 
+ PMMA, One-Sided 
+119 
+22 49-52 
+Flat fiberglass fabric saturated 
+with wax (paraffin), 1-cm Width  
+2-mm Thick, One-Sided 
+100 
+5, 10, 20, 50 
+(Re-ignition at 
+multiple 
+speeds) 
+23 53 Candle (Japan wax) within tube  (front ignition) 200 5 (temporarily 0) 
+24 54 Candle (Japan wax) within tube  (front ignition) 200 10 
+25 55 Candle (Japan wax) within tube  (front ignition) 200 30 
+26 56 Candle (paraffin) within tube  (front ignition) 200 5 (temporarily 0) 
+27 57 Candle (Japan wax) within tube (wake ignition) 200 5 (temporarily 0) 
+28 58 Candle (Japan wax) within tube (wake ignition) 200 10 
+29 59 Candle (Japan wax) within tube (wake ignition) 200 30 
+30 60 Candle (paraffin) within tube (wake ignition) 200 5 (temporarily 0) 
+After 1 minute; 
+ 
+ Extinguishment 
+will be initiated 
+by gradually 
+increasing the 
+mass flow rate of 
+nitrogen in a 
+series of step 
+increments
+
+--- page 11 ---
+February 2010 11 
+ 
+ 
+ 
+Success Criteria 
+ 
+• Minimal Success: 20 total tests including: eight tests with flat samples (four materials 
+at two different flow speeds); four tests with spherical PMMA samples (four different 
+flow speeds with nitrogen extinguishment); four tests with candles (four different flow 
+speeds with nitrogen extinguishment); and four tests of PMMA wake flames (four 
+different flow speeds with nitrogen extinguishment).  
+ 
+• Complete Success: 60 flames as indicated in test matrix.

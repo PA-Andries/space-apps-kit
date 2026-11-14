@@ -20,6 +20,18 @@ Re-running skips files already present. `data/raw/` is ignored by git: only the 
 Status: the download logic was tested against a local replay of the PSI API, and the same API calls were used by hand
 on 14 Nov 2026. It has not yet been run end to end against psi.nasa.gov, which the build machine's network blocks.
 
+Then, from the repo with uv:
+
+```bash
+uv run python -m flame.pipeline.psi_contrat --verifie-par <prénom>   # data/investigations.csv, data/tests.csv, data/psi/*.csv
+uv run python -m flame.pipeline.psi_textes                          # full text of every report: data/psi/textes/
+```
+
+`psi_textes` writes one text file per report and NASA document (PDF, Word) under `data/psi/textes/<PSI-n>/` and
+an index `data/psi/textes.csv` (investigation, category, source file, text file, pages, characters). About 7 MB of
+text for 98 documents. A scanned PDF gives an almost empty text, which shows in `caracteres`. Old `.doc` files are
+read on a best-effort basis.
+
 To rebuild from an existing mirror: `uv run python flame/pipeline/psi_construire.py <psi_mirror_folder> <output_folder>`.
 
 ## Tables
