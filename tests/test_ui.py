@@ -290,3 +290,24 @@ def _two_tiles():
 def test_stat_tiles_show_unknown_instead_of_a_guess():
     site = AppTest.from_function(_two_tiles).run()
     assert not site.exception
+
+
+def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
+    import flame.comparateur as comparateur
+    from flame.commun import charger_fiches, charger_tests
+    from flame.ui import style_conditions_chart
+
+    tests, fiches = charger_tests(), charger_fiches()
+    scenario = {"oxygene_pct": (32.0, None), "pression_kpa": (None, 70.3), "debit_air_cm_s": (None, None)}
+    for view in ("pression", "debit"):
+        figure = style_conditions_chart(
+            comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view
+        )
+        box, *others = figure.data
+        assert box.name == "Your selection" and box.fill == "toself"
+        assert min(box.x) == 32.0
+        zones = [trace for trace in others if trace.line.dash == "dot"]
+        assert len(zones) == 2 and all(trace.fill == "none" for trace in zones)
+    empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
+    figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
+    assert "Your selection" not in [trace.name for trace in figure.data]
