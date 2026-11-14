@@ -183,6 +183,6 @@ footer(
         "with or endorsed by NASA. Fuel types are the team's classification; scores are the team's judgement, "
         "not NASA data.",
         "Experiments: NASA Physical Sciences Informatics. Button icons: Google Material Symbols (Apache 2.0). "
-        "The mascot is a drawing.",
+        "The mascot and the space background are original drawings.",
     ]
 )

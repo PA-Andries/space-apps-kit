@@ -1,17 +1,25 @@
 """The look of the whole site, applied once per page by the top bar.
 
-Inspired by Apple's product pages: a frosted bar, very large tight headlines, a light grey page with
-white tiles, pill buttons, blue-free "Learn more ›" links in the flame colour, soft shadows and a gentle
-rise of each block as the page appears. Colours come from `.streamlit/config.toml`; this adds what the
-theme cannot set (font, spacing, shapes, motion).
+A space universe that stays easy to use: a deep night-blue page with soft nebula glows and a field of
+stars, frosted-glass cards with light text, pill buttons, links in the flame colour, and a gentle rise of
+each block as the page appears. Colours come from `.streamlit/config.toml`; this adds what the theme
+cannot set (font, background, glass, shapes, motion). Text keeps a strong contrast on the dark glass.
 """
+
+import base64
+from pathlib import Path
 
 import streamlit as st
 
-INK = "#1d1d1f"  # main text
-MUTED = "#6e6e73"  # secondary text
-FLAME = "#e0662a"  # main colour (same as primaryColor in config.toml)
-GRADIENT = "linear-gradient(90deg, #f59e0b 0%, #e0662a 45%, #d9365e 100%)"  # sunrise, for big words
+INK = "#eef1fb"  # main text, on the dark page
+MUTED = "#a3abc9"  # secondary text, still readable on the dark glass
+FLAME = "#ff7a3d"  # main colour (same as primaryColor in config.toml)
+GRADIENT = "linear-gradient(90deg, #fbbf24 0%, #ff7a3d 45%, #f0457a 100%)"  # sunrise, for big words
+
+# The background drawing: stars, small spiral galaxies and planets (an original SVG, drawn by
+# flame/ui/images/make_space_background.py), embedded so that no file has to be served.
+_BACKGROUND = Path(__file__).parent / "images" / "space_background.svg"
+SPACE_BACKGROUND = "data:image/svg+xml;base64," + base64.b64encode(_BACKGROUND.read_bytes()).decode()
 
 GLOBAL_STYLE = f"""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap');
@@ -151,6 +159,61 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_analyse {{ align-items: center; }}
 .ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 2rem; padding-top: 1rem; }}
 .ff-footer p {{ color: #86868b; font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.5rem; }}
+
+
+/* ---- The universe -------------------------------------------------------------------------------------
+   A drawing of stars, small galaxies and planets fills the window and stays still while the page scrolls,
+   over soft nebula glows. The planets and galaxies sit near the edges, so the cards never hide the text. */
+.stApp {{
+  background-color: #070a1c;
+  background-image: url("{SPACE_BACKGROUND}"),
+    radial-gradient(ellipse 60% 45% at 12% 8%, rgba(124, 58, 237, 0.18), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 70% 95%, rgba(37, 99, 235, 0.16), transparent 70%),
+    linear-gradient(180deg, #050816 0%, #0a1030 55%, #060914 100%);
+  background-size: cover, 100% 100%, 100% 100%, 100% 100%;
+  background-position: center;
+  background-attachment: fixed;
+}}
+[data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stBottomBlockContainer"] {{
+  background: transparent;
+}}
+
+/* Sidebar: a darker pane of glass. */
+[data-testid="stSidebar"] {{ background: rgba(6, 9, 26, 0.72); backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px); border-right: 1px solid rgba(160, 175, 255, 0.10); }}
+
+/* Cards: frosted glass on the nebula, a thin light rim, and a soft glow under them. */
+.st-key-ui_card_destination, .st-key-ui_card_conditions, .st-key-ui_card_ranking,
+.st-key-ui_card_assistant, .st-key-ui_card_compare, .st-key-ui_card_gaps {{
+  background: rgba(20, 26, 62, 0.58); border: 1px solid rgba(160, 175, 255, 0.14) !important;
+  backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}}
+.ff-stat, .ff-compact .ff-stat {{ background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(160, 175, 255, 0.10); }}
+.ff-stat small {{ color: #8790b3; }}
+.ff-stat strong.ff-unknown {{ -webkit-text-fill-color: #8790b3; color: #8790b3; }}
+.ff-chip {{ background: rgba(255, 255, 255, 0.07); color: {INK}; border: 1px solid rgba(160, 175, 255, 0.16);
+  box-shadow: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }}
+.ff-header h1 {{ font-size: 2.2rem; }}
+.ff-header .ff-mark {{ box-shadow: 0 0 18px rgba(255, 122, 61, 0.8); }}
+.ff-bubble, .ff-bubble::before {{ background: rgba(255, 255, 255, 0.08); }}
+.ff-disclaimer, .ff-footer p {{ color: #8790b3; }}
+.ff-footer {{ border-top-color: rgba(160, 175, 255, 0.16); }}
+[data-testid="stAlert"] {{ background: rgba(255, 255, 255, 0.06); }}
+iframe {{ box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }}
+
+/* The chatbot icon and the ANALYSE button glow a little, like the flame. */
+.st-key-ui_chatbot {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 122, 61, 0.18); }}
+.st-key-ui_analyse button {{ background: linear-gradient(135deg, #ff9a3d, #e0662a 55%, #d9365e);
+  box-shadow: 0 0 28px rgba(255, 122, 61, 0.35); }}
+.st-key-ui_analyse button:hover {{ background: linear-gradient(135deg, #ffab5c, #f0763a 55%, #e44a70);
+  box-shadow: 0 0 36px rgba(255, 122, 61, 0.5); }}
+
+/* Keyboard focus stays clearly visible on the dark page. */
+.stApp button:focus-visible, .stApp a:focus-visible {{ outline: 2px solid {FLAME}; outline-offset: 2px; }}
 
 @media (max-width: 640px) {{
   .ff-stats {{ grid-template-columns: 1fr; }}

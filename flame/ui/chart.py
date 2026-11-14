@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 SELECTION_COLOR = "22, 163, 74"  # green: distinct from the Earth (blue) and Moon (orange) zones
 SELECTION_NAME = "Your selection"
-OTHER_COLOR = "#b8bec9"  # the tests outside the environment
+OTHER_COLOR = "#7d86a8"  # the tests outside the environment
 OTHER_NAME = "Other tests"
 
 
@@ -32,8 +32,12 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
     # The reference zones are the only filled shapes of the chart (Earth and ISS, Moon base and rover).
     zones = [trace for trace in figure.data if trace.fill == "toself"]
     for trace in zones:
-        color = (trace.line.color or "").replace("0.55", "0.9")
+        # Brighter outlines, readable on the dark space background (the Earth blue is lightened).
+        color = (trace.line.color or "").replace("0.55", "0.95").replace("37, 99, 235", "96, 165, 250")
         trace.update(fill="none", line={"dash": "dot", "width": 2, "color": color})
+
+    # A transparent chart, so that the glass card and the stars show through.
+    figure.update_layout(paper_bgcolor="rgba(0, 0, 0, 0)", plot_bgcolor="rgba(0, 0, 0, 0)")
 
     key = "pression_kpa" if view == "pression" else "debit_air_cm_s"
     oxygen = scenario.get("oxygene_pct") or (None, None)
