@@ -1,11 +1,14 @@
-## What
+## Quoi
 
-<!-- One or two sentences: what changes and why. -->
+<!-- Une ou deux phrases : ce qui change et pourquoi. -->
 
-## Checklist
+## IA utilisée
 
-- [ ] Small and focused (one feature or fix)
-- [ ] Only touches my lane, or the owner agreed
-- [ ] `uv run ruff check . && uv run ruff format --check . && uv run pytest` passes
-- [ ] AI use added to `AI_LOG.md` (event weekend)
-- [ ] No keys, tokens or large data files committed
+<!-- Quel outil, pour quoi. « Aucune » si aucune. Sert à la déclaration demandée par le règlement. -->
+
+## Vérifications
+
+- [ ] `uv run verifier` finit par « Tout est bon »
+- [ ] La PR ne touche que mes fichiers, ou le propriétaire est d'accord
+- [ ] Ma page marche avec `uv run streamlit run app.py`
+- [ ] Aucune clé ni gros fichier de données dans la PR

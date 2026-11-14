@@ -1,0 +1,9 @@
+investigation_id,test_id,combustible,oxygene_pct,pression_kpa,debit_air_cm_s,resultat,source
+EXEMPLE-A,A-01,Tissu fictif,16,101,5,extinction,FICTIF
+EXEMPLE-A,A-02,Tissu fictif,18,101,10,flamme stable,FICTIF
+EXEMPLE-A,A-03,Tissu fictif,21,101,20,flamme stable,FICTIF
+EXEMPLE-C,C-01,Goutte fictive,10,70,0,extinction,FICTIF
+EXEMPLE-C,C-02,Goutte fictive,21,70,0,flamme stable,FICTIF
+EXEMPLE-C,C-03,Goutte fictive,40,70,0,flamme stable,FICTIF
+EXEMPLE-D,D-01,Gaz fictif,21,101,0,extinction,FICTIF
+EXEMPLE-D,D-02,Gaz fictif,40,101,0,flamme stable,FICTIF

@@ -1,6 +1,7 @@
 # Environment and secrets
 .venv/
 .env
+.streamlit/secrets.toml
 CLAUDE.local.md
 .claude/settings.local.json
 

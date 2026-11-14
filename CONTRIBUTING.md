@@ -1,37 +1,109 @@
-# How we work
+# Comment on travaille
 
-## Environment
+Ce fichier fixe qui possède quoi, comment on envoie son travail et comment on écrit le code. Le sujet, les données et le planning sont dans `BRIEF_EQUIPE_IA.md`.
 
-One environment for everyone, defined by `pyproject.toml` and pinned in `uv.lock`.
+## Démarrer
 
-- `uv sync` installs it into `.venv`. Run tools with `uv run <cmd>`; no manual activation or `pip install`.
-- Add a dependency with `uv add <pkg>` (runtime), `uv add --group dev <pkg>` (tooling) or `uv add --group data <pkg>` (NASA data stack). Commit `pyproject.toml` and `uv.lock` together.
-- Secrets go in `.env` (copied from `.env.example`), never in code or commits.
-
-## Checks
-
-The same three commands run in CI on every pull request. Run them before you push:
+Il faut [uv](https://docs.astral.sh/uv/getting-started/installation/) et GitHub Desktop.
 
 ```bash
-uv run ruff check .          # lint (add --fix to auto-fix)
-uv run ruff format .         # format
-uv run pytest                # tests
+uv sync
 ```
 
-## Branches and pull requests
+```bash
+uv run streamlit run app.py
+```
 
-- `main` always works. Nobody pushes to it directly.
-- Short branches named after your lane: `data/firms-ingest`, `app/search-screen`, `story/script-v2`.
-- One feature per PR, ideally under ~300 lines. CI must be green; the integrator merges.
-- Write only in your own lane's folder. Changes to someone else's files go through them.
-- AI agents claim and release work in [issue #2 "com inter agents"](https://github.com/PA-Andries/space-apps-kit/issues/2) so two agents never edit the same files.
+```bash
+uv run verifier
+```
 
-## Commits
+- **`uv sync`** installe le même environnement pour tout le monde. À relancer après chaque Pull.
+- **`uv run streamlit run app.py`** ouvre le site sur votre ordinateur.
+- **`uv run verifier`** met le code en forme, puis lance les vérifications du CI. À lancer avant chaque envoi.
 
-- Commit from your own GitHub account, with the email linked to it, so your work counts on your profile.
-- When Claude wrote part of the change, add it as co-author, not author:
-  `Co-authored-by: Claude <noreply@anthropic.com>`
+Tant que `data/investigations.csv` n'existe pas, le site tourne sur les données fictives de `data/exemples/` et l'affiche en haut de chaque page. Chacun peut donc avancer sans attendre les vraies données.
 
-## Event weekend (from Sat 14 Nov 09:00)
+## Qui possède quoi
 
-`DECISIONS.md` (one line per change, with time and who) already exists. The integrator adds `CONTRACTS.md` (data and screen interfaces, frozen Saturday morning) and `AI_LOG.md` (one line per significant AI use, needed for the AI declaration). Every Claude session starts by reading them.
+| Rôle | Mission | Ses dossiers et fichiers | Binôme |
+| --- | --- | --- | --- |
+| A. Intégration et pitch | Fusionne le travail, garde le site en ligne, valide les fiches, prépare la vidéo et la page projet | `app.py`, `flame/commun/`, `tests/test_app.py`, `tests/test_contrat.py`, `pyproject.toml`, `uv.lock`, `.github/`, `pitch/`, les fichiers `.md` de la racine | B |
+| B. Données | Interroge l'API NTRS, structure les données PSI, produit les trois CSV | `flame/pipeline/`, `data/`, `tests/test_pipeline.py` | A |
+| C. Recherche | Moteur de recherche et classement selon le scénario | `flame/recherche/`, `pages/recherche.py`, `tests/test_recherche.py` | E |
+| D. Comparateur | Comparaison de deux ou trois investigations | `flame/comparateur/`, `pages/comparateur.py`, `tests/test_comparateur.py` | F |
+| E. Assistant | Chatbot d'aide qui répond à partir des fiches | `flame/assistant/`, `pages/assistant.py`, `tests/test_assistant.py` | C |
+| F. Interface et 3D | Habillage Streamlit, composants partagés, scène three.js, page d'accueil | `flame/ui/`, `pages/accueil.py`, `.streamlit/config.toml`, `tests/test_ui.py` | D |
+
+Les prénoms sont dans `BRIEF_EQUIPE_IA.md`, section 7. Le binôme teste votre page cinq minutes à chaque point d'étape et vous remplace en cas de blocage.
+
+## Les règles pour ne pas se gêner
+
+1. **Un dossier, une personne.** Vous ne modifiez que vos fichiers. Pour un changement chez quelqu'un d'autre, vous le lui demandez ; il le fait, ou il vous donne son accord dans la PR.
+2. **Les fichiers partagés passent par le rôle A.** Cela couvre `app.py`, `flame/commun/`, `pyproject.toml` et `uv.lock`. Pour ajouter une bibliothèque, vous donnez son nom au rôle A, qui lance `uv add`.
+3. **Le contrat ne bouge pas sans annonce.** Le contrat, ce sont les noms de colonnes (`flame/commun/constantes.py`) et les fonctions listées dans le `__init__.py` de chaque dossier. Pour le changer : message dans le salon de l'équipe, accord du rôle A, une ligne dans `DECISIONS.md`.
+4. **On importe par la vitrine.** Le `__init__.py` d'un dossier liste ce que les autres ont le droit d'utiliser. On écrit `from flame.ui import carte_fiche`, jamais `from flame.ui.composants import ...`.
+5. **Les dépendances entre dossiers sont limitées.** Tout le monde peut importer `flame.commun` et `flame.ui`. L'assistant peut importer `flame.recherche`. Personne n'importe `flame.pipeline` : le site ne lit que les CSV.
+6. **Les données se lisent avec `charger_fiches()`, `charger_tests()` et `charger_publications()`.** Aucune page n'ouvre un CSV elle-même.
+7. **Le scénario se lit avec `get_scenario()`.** Vos propres clés dans `st.session_state` et vos `key=` de widgets commencent par le nom de votre dossier : `recherche_question`, `assistant_historique`.
+8. **Des envois petits et fréquents.** Une PR par étape qui marche, au moins toutes les deux heures. Une PR qui attend une journée finit en conflit.
+
+## Envoyer son travail
+
+Avec GitHub Desktop :
+
+1. **Se mettre à jour :** branche `main`, puis « Fetch origin » et « Pull ».
+2. **Créer une branche :** « Branch » puis « New branch », nommée `dossier/sujet`, par exemple `recherche/filtres` ou `ui/scene-flamme`.
+3. **Coder** dans ses fichiers, en regardant le résultat avec `uv run streamlit run app.py`.
+4. **Vérifier :** `uv run verifier` doit finir par « Tout est bon ».
+5. **Envoyer :** « Commit », « Push », puis « Create Pull Request ».
+6. **Fusionner :** quand le CI est vert, « Squash and merge », puis supprimer la branche.
+
+Qui fusionne :
+
+- **La PR ne touche que vos fichiers :** vous la fusionnez vous-même dès que le CI est vert.
+- **La PR touche les fichiers de quelqu'un d'autre :** elle attend son accord.
+- **La PR touche un fichier partagé :** elle attend le rôle A.
+
+Deux moments sans fusion, repris du planning : la nuit entre 2h et 8h, et après le gel de dimanche 14h, où seul le rôle A fusionne des corrections.
+
+Si GitHub Desktop affiche « conflict », ne cliquez sur rien et appelez le rôle A.
+
+## Le CI
+
+À chaque PR et à chaque fusion dans `main`, GitHub lance `.github/workflows/ci.yml`, qui vérifie trois choses :
+
+| Vérification | Commande | Ce qu'elle attrape |
+| --- | --- | --- |
+| Règles de code | `uv run ruff check .` | Imports inutiles, variables oubliées, erreurs probables |
+| Mise en forme | `uv run ruff format --check .` | Code non formaté |
+| Tests | `uv run pytest` | Une page qui plante, un CSV qui ne respecte pas le contrat, une fonction cassée |
+
+`uv run verifier` lance les mêmes vérifications sur votre ordinateur et corrige seul la mise en forme. Si le CI de GitHub est indisponible, c'est lui qui fait foi.
+
+## Les règles de code
+
+- **La mise en forme n'est pas un sujet.** Ruff s'en charge ; on ne la discute pas et on ne la corrige pas à la main. Lignes de 120 caractères au plus.
+- **Noms en français, sans accents, en minuscules avec des tirets bas :** `charger_fiches`, `oxygene_min`. Les constantes sont en majuscules : `PILIERS`. Les accents restent permis dans les textes affichés et les commentaires.
+- **Les unités sont dans le nom :** `pression_kpa`, `debit_air_cm_s`, `oxygene_pct`.
+- **Une fonction partagée a des types et une phrase d'explication :**
+
+  ```python
+  def comparer(fiches: pd.DataFrame, ids: list[str]) -> pd.DataFrame:
+      """Un tableau avec une ligne par critère et une colonne par investigation de `ids`."""
+  ```
+
+- **Le calcul va dans `flame/<dossier>/`, l'affichage dans `pages/`.** Un fichier de page reste court et ne contient que des appels à `st.` et aux fonctions de son dossier. C'est ce qui rend le calcul testable.
+- **Une fonction fait une seule chose** et tient sur un écran.
+- **Au moins un test par fonction partagée,** dans `tests/test_<dossier>.py`. Les tests n'appellent ni Internet ni l'API du LLM.
+- **Aucune donnée NASA inventée.** Une valeur absente reste vide ou vaut `INCONNU`.
+- **Aucune clé dans le code.** La clé du LLM se lit dans `st.secrets` ; le modèle à copier est `.streamlit/secrets.toml.example`.
+- **Pas de code mort :** ni blocs commentés, ni `print` oubliés, ni fichiers `copie_de_...`.
+- **three.js reste dans `flame/ui/three/`.** La bibliothèque est chargée avec un numéro de version précis. Python envoie des réglages à la scène ; la scène ne renvoie rien à Python.
+
+## L'IA dans le projet
+
+- **Déclarer l'usage.** Chaque PR dit quel outil d'IA a servi et pour quoi : le règlement demande cette déclaration, et le rôle A la compile à la fin.
+- **Donner le contexte à son assistant.** `BRIEF_EQUIPE_IA.md` et ce fichier, pour qu'il respecte vos dossiers et le contrat.
+- **Coordonner les agents.** Un agent qui modifie le dépôt l'annonce dans l'[issue n°2 « com inter agents »](https://github.com/PA-Andries/space-apps-kit/issues/2) : CLAIM avant de commencer, RELEASE à la fin.
+- **Signer honnêtement.** Vous commitez depuis votre compte ; l'IA est co-autrice : `Co-authored-by: Claude <noreply@anthropic.com>`.

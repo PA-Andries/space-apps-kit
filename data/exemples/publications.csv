@@ -1,0 +1,4 @@
+ntrs_id,titre,annee,auteurs,resume,url,investigation_id
+EXEMPLE-1,Rapport fictif sur la propagation de flamme,2020,"Nom, P.",Donnée FICTIVE pour développer : ne correspond à aucune expérience NASA.,https://ntrs.nasa.gov/,EXEMPLE-A
+EXEMPLE-2,Rapport fictif sur l'extinction des gouttes,2018,"Nom, P.; Autre, Q.",Donnée FICTIVE pour développer : ne correspond à aucune expérience NASA.,https://ntrs.nasa.gov/,EXEMPLE-C
+EXEMPLE-3,Rapport fictif sans investigation associée,2022,"Nom, P.",Donnée FICTIVE pour développer : ne correspond à aucune expérience NASA.,https://ntrs.nasa.gov/,

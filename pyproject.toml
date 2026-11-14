@@ -1,16 +1,21 @@
 [project]
 name = "space-apps-kit"
 version = "0.1.0"
-description = "Team tooling for NASA Space Apps 2026 Paris: Claude Code skills, rules and a submission checker"
+description = "Flame in Freefall: NASA Space Apps 2026 Paris project (Streamlit app, team tooling, submission checker)"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
+    "pandas>=3.0.6",
+    "plotly>=7.1.0",
     "pypdf>=5",
+    "requests>=2.34.2",
+    "streamlit>=1.67.0",
 ]
 
 [project.scripts]
 check-submission = "space_apps_kit.submission:main"
+verifier = "space_apps_kit.verifier:main"
 
 [dependency-groups]
 # Installed by default with `uv sync`: what CI runs.
@@ -45,6 +50,10 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "B", "UP", "SIM"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["flame", "space_apps_kit"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 addopts = "-q"

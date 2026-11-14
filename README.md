@@ -1,53 +1,54 @@
-# Space Apps Kit
+# Flame in Freefall
 
-The team's shared repo for the **NASA Space Apps Challenge 2026** (Paris local event, 14-15 Nov 2026): Claude Code skills, the rules that matter, and a submission checker, on a clean Python setup.
+Our project for the **NASA Space Apps Challenge 2026** (Paris local event, 14-15 Nov 2026), challenge **[Flame in Freefall](challenges/flame-in-freefall.md)**: a Streamlit site that searches, compares and explains NASA microgravity combustion experiments, to inform fire safety in future space habitats.
 
-**Our challenge: [Flame in Freefall](challenges/flame-in-freefall.md)** (microgravity combustion data for fire safety). Decisions are logged in `DECISIONS.md`.
+The team works in French, so the working docs are in French. The submission (project page, video) is in English.
 
-It contains **no project code**. The project itself is built from Saturday 14 Nov 09:00 (see `CLAUDE.md`).
+## Run it
 
-## Setup
-
-Needs [uv](https://docs.astral.sh/uv/getting-started/installation/) and, for the skills, [Claude Code](https://code.claude.com).
+Needs [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 ```bash
 git clone https://github.com/PA-Andries/space-apps-kit && cd space-apps-kit
-uv sync                 # one shared environment (.venv) from uv.lock: Python 3.12 + dev tools
-uv sync --group data    # add the NASA data stack (earthaccess, xarray, geopandas...) when you need it
-cp .env.example .env    # Earthdata and api.nasa.gov credentials, never committed
-claude                  # picks up CLAUDE.md and .claude/skills automatically
+uv sync                           # one shared environment (.venv) pinned by uv.lock
+uv run streamlit run app.py       # the site, on http://localhost:8501
+uv run verifier                   # format, lint and tests: run before every push
 ```
 
-## Workflow
+Until `data/investigations.csv` exists, the site runs on the fictional sample data in `data/exemples/` and says so on every page.
 
-| When | Step | Skill |
-|---|---|---|
-| Done 13 Nov | Challenge chosen: Flame in Freefall | `challenges/flame-in-freefall.md`, `DECISIONS.md` |
-| Now (13 Nov) | Fill in the team profile | `docs/team-profile.md` |
-| Now (13 Nov) | Find and document the datasets (NTRS, PSI) | `/data-recon` |
-| Sat 14 Nov morning | Brainstorm and freeze a one-page spec | `/brainstorm-spec` |
-| 14 → 15 Nov | 30-second video script and 7-slide fallback | `/pitch-builder` |
-| Sunday 15 Nov | Check page, links and demo before submitting | `/submission-checker` |
+## Where to read what
 
-Each skill is a readable Markdown procedure in `.claude/skills/<name>/SKILL.md`, next to the templates it fills in, so teammates without Claude Code can follow it by hand.
+| File | What it holds |
+|---|---|
+| `CONTRIBUTING.md` | Who owns which folder, how to send work (branch, PR, CI), code rules |
+| `BRIEF_EQUIPE_IA.md` | The brief each teammate gives their AI assistant: subject, data, pages, roles, schedule |
+| `GUIDE_SOURCES.md` | The NASA sources (PSI, NTRS) in detail |
+| `DECISIONS.md` | What we decided and why, one line each |
+| `CLAUDE.md` | Event rules and repo conventions, loaded in every Claude Code session |
 
 ## Layout
 
 ```
-CLAUDE.md                   rules and context loaded in every Claude session
-CONTRIBUTING.md             how we work: environment, checks, branches, PRs, commits
-DECISIONS.md                what we decided and why, one line each
-.claude/skills/             the five skills, each with its templates
-.claude/settings.json       shared Claude Code permissions
-docs/                       rules, judging criteria, team profile
-challenges/                 the chosen challenge's statement (flame-in-freefall.md)
-work/                       outputs of the skills (shortlist, data notes, spec, pitch)
-src/space_apps_kit/         shared Python tooling (check-submission)
-tests/                      tests for that tooling
-pyproject.toml, uv.lock     dependencies, pinned for everyone
-.github/workflows/ci.yml    quality check on every PR: ruff lint, ruff format, pytest
+app.py                      entry point: the list of pages
+pages/                      one short file per page (display only)
+flame/commun/               shared contract: column names, data loading, scenario
+flame/pipeline/             NTRS API client and data preparation (writes data/*.csv)
+flame/recherche/            search engine and scenario score
+flame/comparateur/          side-by-side comparison
+flame/assistant/            help chatbot and its prompts
+flame/ui/                   page frame, shared components, three.js scene
+data/                       the three CSV files the site reads; data/exemples/ is fictional
+tests/                      one test file per folder, plus page and data-contract checks
+pitch/                      video script, subtitles, project page text
+src/space_apps_kit/         team tooling: `verifier`, `check-submission`
+.claude/skills/             Claude Code skills from the prep phase, each with its templates
+docs/                       event rules, judging criteria, team profile
+.github/workflows/ci.yml    CI on every PR: ruff lint, ruff format, pytest
 ```
+
+Each folder under `flame/` belongs to one role; the table is in `CONTRIBUTING.md`.
 
 ## License
 
-MIT. The hackathon project must also use an OSI open-source license (see `docs/rules.md`).
+MIT (see `LICENSE`). NASA data sources and AI use are credited on the project page.
