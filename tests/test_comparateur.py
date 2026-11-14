@@ -250,6 +250,13 @@ def _traces(figure) -> dict[str, int]:
     return {trace.name: len(trace.x) for trace in figure.data}
 
 
+def _tests_traces(figure) -> tuple[int, int]:
+    """Le nombre de tests tracés qui correspondent à l'environnement, puis le nombre des autres."""
+    points = [trace for trace in figure.data if trace.mode == "markers" and not trace.name.startswith("Spacesuit")]
+    correspondent = sum(len(trace.x) for trace in points if trace.name.endswith("(matches)"))
+    return correspondent, sum(len(trace.x) for trace in points) - correspondent
+
+
 def test_les_plages_viennent_du_scenario_ou_de_son_habitat():
     assert plages_du_scenario(LUNE)["oxygene_pct"] == (30, None)
     assert plages_du_scenario(LUNE)["pression_kpa"] == (None, 70.3)
@@ -287,15 +294,25 @@ def test_la_zone_lunaire_contient_66_tests_de_2_investigations():
     surs = correspondants[correspondants["pression_notee"]]
     assert len(surs) == 66
     assert set(surs["investigation_id"]) == {"PSI-10", "PSI-159"}  # ACME Flame Design et ACME CFI-G
-    traces = _traces(graphique_conditions(tests, fiches, LUNE, vue="pression"))
-    assert sum(nombre for nom, nombre in traces.items() if nom.endswith("(matches)")) == 66
-    assert traces["Other tests"] == 1022 - 66
+    figure = graphique_conditions(tests, fiches, LUNE, vue="pression")
+    assert _tests_traces(figure) == (66, 1022 - 66)
+    assert {"ACME Flame Design (matches)", "ACME CFI-G (matches)"} <= set(_traces(figure))
 
 
 def test_la_vue_du_debit_montre_les_131_tests_de_solides():
     fiches, tests = _vraies_donnees()
-    traces = _traces(graphique_conditions(tests, fiches, LUNE, vue="debit"))
-    assert traces["Other tests"] == 131  # aucun solide n'a été testé à 30 % d'oxygène ou plus
+    figure = graphique_conditions(tests, fiches, LUNE, vue="debit")
+    assert _tests_traces(figure) == (0, 131)  # aucun solide n'a été testé à 30 % d'oxygène ou plus
+
+
+def test_chaque_investigation_a_sa_couleur_et_sa_ligne_de_legende():
+    fiches, tests = _vraies_donnees()
+    figure = graphique_conditions(tests, fiches, LUNE, vue="pression")
+    points = [trace for trace in figure.data if trace.legendgroup]
+    couleurs = {trace.legendgroup: trace.marker.color for trace in points}
+    assert len(set(couleurs.values())) == len(couleurs)  # une couleur par investigation
+    for groupe in couleurs:
+        assert sum(trace.showlegend for trace in points if trace.legendgroup == groupe) == 1
 
 
 def test_le_graphique_n_a_aucune_zone_pour_mars():

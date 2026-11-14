@@ -45,8 +45,22 @@ VUES = {
 }
 AXE_OXYGENE = (8, 104)
 AXE_PRESSION = (20, 700)
-COULEUR_AUTRES = "#b3bccb"
-COULEURS = ["#e0662a", "#2563eb", "#15803d", "#9333ea", "#db2777", "#0891b2", "#ca8a04", "#475569"]
+# Une couleur par investigation, la même dans les deux vues.
+COULEURS = [
+    "#e0662a",
+    "#2563eb",
+    "#15803d",
+    "#9333ea",
+    "#db2777",
+    "#0891b2",
+    "#ca8a04",
+    "#475569",
+    "#b91c1c",
+    "#4d7c0f",
+    "#7c2d12",
+    "#1e3a8a",
+]
+OPACITE_ESTOMPEE = 0.25
 
 
 def plages_du_scenario(scenario: dict) -> dict:
@@ -135,7 +149,9 @@ def _bornes(plage: tuple, axe: tuple) -> tuple:
 
 
 def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict, vue: str = "pression") -> go.Figure:
-    """Le graphique des conditions testées : chaque point est un test, en couleur s'il correspond à l'environnement.
+    """Le graphique des conditions testées : chaque point est un test, de la couleur de son investigation.
+
+    Les tests qui correspondent à l'environnement sont pleins et cerclés, les autres estompés.
 
     `vue="pression"` : oxygène × pression, la pression en échelle logarithmique.
     `vue="debit"` : oxygène × débit d'air (les solides, dont la pression n'est pas notée).
@@ -178,11 +194,21 @@ def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
                 hovertemplate="Spacesuit: 100 % oxygen, 29.6 kPa<extra></extra>",
             )
         )
-    figure.add_trace(_points(autres, colonne, noms, "Other tests", COULEUR_AUTRES, 0.55))
-    for rang, (identifiant, groupe) in enumerate(surlignes.groupby("investigation_id", sort=True)):
-        couleur = COULEURS[rang % len(COULEURS)]
+    # Les tests de chaque investigation sont regroupés : une couleur et une ligne de légende par investigation.
+    # Ceux qui correspondent à l'environnement sont pleins et cerclés, les autres estompés.
+    avec_oxygene = sorted(tests.dropna(subset=["oxygene_pct"])["investigation_id"].unique())
+    couleurs = {identifiant: COULEURS[rang % len(COULEURS)] for rang, identifiant in enumerate(avec_oxygene)}
+    estompe = OPACITE_ESTOMPEE if len(surlignes) else 0.7
+    for identifiant, groupe in autres.groupby("investigation_id", sort=True):
+        nom = noms.get(identifiant, identifiant)
+        dans_la_legende = identifiant not in set(surlignes["investigation_id"])
         figure.add_trace(
-            _points(groupe, colonne, noms, f"{noms.get(identifiant, identifiant)} (matches)", couleur, 0.9)
+            _points(groupe, colonne, noms, nom, couleurs[identifiant], estompe, identifiant, dans_la_legende)
+        )
+    for identifiant, groupe in surlignes.groupby("investigation_id", sort=True):
+        nom = f"{noms.get(identifiant, identifiant)} (matches)"
+        figure.add_trace(
+            _points(groupe, colonne, noms, nom, couleurs[identifiant], 0.95, identifiant, True, cercle=True)
         )
 
     figure.update_xaxes(title_text="Oxygen (%)", range=list(AXE_OXYGENE))
@@ -194,7 +220,18 @@ def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
     return figure
 
 
-def _points(lignes: pd.DataFrame, colonne: str, noms: dict, nom: str, couleur: str, opacite: float) -> go.Scatter:
+def _points(
+    lignes: pd.DataFrame,
+    colonne: str,
+    noms: dict,
+    nom: str,
+    couleur: str,
+    opacite: float,
+    groupe: str,
+    dans_la_legende: bool,
+    cercle: bool = False,
+) -> go.Scatter:
+    """Les points d'une investigation ; `groupe` relie dans la légende ses tests pleins et ses tests estompés."""
     details = pd.DataFrame(
         {
             "investigation": lignes["investigation_id"].map(lambda identifiant: noms.get(identifiant, identifiant)),
@@ -202,12 +239,17 @@ def _points(lignes: pd.DataFrame, colonne: str, noms: dict, nom: str, couleur: s
             "combustible": lignes["combustible"].fillna("not recorded").astype(str),
         }
     )
+    marqueur = {"color": couleur, "size": 9 if cercle else 7, "opacity": opacite}
+    if cercle:
+        marqueur["line"] = {"color": "#1f2937", "width": 1}
     return go.Scatter(
         x=lignes["oxygene_pct"],
         y=lignes[colonne],
         mode="markers",
-        marker={"color": couleur, "size": 7, "opacity": opacite},
+        marker=marqueur,
         name=nom,
+        legendgroup=groupe,
+        showlegend=dans_la_legende,
         customdata=details.to_numpy(),
         hovertemplate="%{customdata[0]} · test %{customdata[1]}<br>%{customdata[2]}<br>"
         "oxygen %{x} %, %{y}<extra></extra>",
