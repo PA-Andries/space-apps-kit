@@ -18,7 +18,7 @@ STEPS = [
     ("Read the chart", "Grey: every NASA test on the oxygen axis. Orange: the ones inside your environment."),
     ("Read the results", "What those tests show, the 3 most relevant investigations, and what NASA's data lacks."),
 ]
-NEXT = "Then go further with the menu on the left: Investigations, Data, Compare, Equipment and Earth, or ask Flamy."
+NEXT = "Then go further with the menu at the top: Investigations, Data and export, Compare, Equipment, or ask Flamy."
 HIDDEN_KEY = "ui_intro_hidden"
 
 INTRO_STYLE = f"""<style>

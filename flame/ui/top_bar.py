@@ -1,8 +1,14 @@
 """What shows on every page: the site style, a short disclaimer, the warnings, and the user's
-environment recalled in the sidebar. The environment itself is set on page 1 (My environment).
+environment recalled under the top menu. The environment itself is set on page 1 (Home).
+
+The menu itself is a bar fixed at the top of the window (`st.navigation(position="top")` in `app.py`);
+there is no sidebar.
 """
 
+from html import escape
+
 import streamlit as st
+from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 from flame.commun import PROFILS, donnees_exemple, get_scenario, set_scenario
 from flame.ui.environment import environment_summary
@@ -22,54 +28,32 @@ def show_top_bar() -> None:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]
     apply_style()
-    # Back to the home page, on the far left of every page (page 1 hides it: it is the home page).
-    # The home page then folds the sidebar away (see `fold_sidebar_after_home`).
-    with st.container(key="ui_home_link"):
-        if st.button("Home", icon=":material/arrow_back:", key="ui_home_button"):
-            st.session_state["ui_home_clicked"] = st.session_state.get("ui_home_clicks", 0) + 1
-            st.session_state["ui_home_clicks"] = st.session_state["ui_home_clicked"]
-            st.switch_page("pages/accueil.py")
-    st.html('<p class="ff-disclaimer">A tool to help understand the research: not a safety certification.</p>')
+    # Under the menu: the user's environment on the left, the disclaimer on the right.
+    with st.container(key="ui_status_line", horizontal=True, vertical_alignment="center"):
+        st.session_state["ui_sidebar_environment"] = (st.empty(), _this_run())
+        st.html('<p class="ff-disclaimer">A tool to help understand the research: not a safety certification.</p>')
     # Pillars are dropped (PA, Sat 17:00): the obsolete `pilier` key is passed on as it is, never chosen here.
     set_scenario(st.session_state["ui_habitat"], scenario["pilier"], st.session_state["ui_profile"])
     if donnees_exemple():
         st.warning("Fictional sample data: the real NASA data is not loaded yet.")
-    # The sidebar recalls the environment; page 1 writes in the same slot once its form is read.
-    st.sidebar.caption("My environment")
-    st.session_state["ui_sidebar_environment"] = st.sidebar.empty()
+    # Page 1 writes in the same slot again once its form is read.
     show_environment_in_sidebar()
 
 
 def show_environment_in_sidebar() -> None:
-    """Write the current environment in the sidebar slot made by `show_top_bar`."""
-    slot = st.session_state.get("ui_sidebar_environment")
-    if slot is not None:
-        slot.markdown(f"**{environment_summary(get_scenario()['habitat'])}**")
+    """Write the current environment in the slot under the top menu, made by `show_top_bar`.
 
-
-# A tiny invisible page that clicks the sidebar's own "collapse" button in the page around it.
-_FOLD_SCRIPT = """<script>
-// Click number __CLICK__ on Home (the number makes this page new each time, so that it runs again).
-const fold = (tries) => {
-  const page = window.parent.document;
-  const sidebar = page.querySelector('[data-testid="stSidebar"]');
-  const button = page.querySelector('[data-testid="stSidebarCollapseButton"] button')
-    || page.querySelector('[data-testid="stSidebarHeader"] button');
-  if (sidebar && sidebar.getAttribute("aria-expanded") === "false") return;
-  if (button) { button.click(); return; }
-  if (tries > 0) setTimeout(() => fold(tries - 1), 150);
-};
-fold(20);
-</script>"""
-
-
-def fold_sidebar_after_home() -> None:
-    """On the home page: fold the sidebar away when the visitor has just pressed Home.
-
-    The visitor can open it again with its usual arrow.
+    (The name stays from the time the environment was recalled in the sidebar.)
     """
-    click = st.session_state.pop("ui_home_clicked", None)
-    if click is None:
-        return
-    with st.container(key="ui_fold_sidebar"):
-        st.iframe(_FOLD_SCRIPT.replace("__CLICK__", str(click)), height=1)
+    slot, made_in = st.session_state.get("ui_sidebar_environment", (None, None))
+    # Only a slot made in this very run: an older one points to a page that is no longer on screen.
+    if slot is not None and made_in == _this_run():
+        summary = escape(environment_summary(get_scenario()["habitat"]))
+        with slot.container():
+            st.html(f'<p class="ff-env-line"><span>My environment</span>{summary}</p>')
+
+
+def _this_run() -> int | None:
+    """A number that changes with every run of the page script (Streamlit renews its cursors each run)."""
+    context = get_script_run_ctx()
+    return id(context.cursors) if context is not None else None

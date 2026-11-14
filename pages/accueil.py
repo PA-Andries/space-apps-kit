@@ -26,7 +26,6 @@ from flame.ui import (
     conditions,
     dashboard_header,
     environment_values,
-    fold_sidebar_after_home,
     footer,
     how_to_use,
     investigation_details,
@@ -65,10 +64,6 @@ def title_label(place: str) -> str:
     name = label(place)
     return f"{name[:1].upper()}{name[1:]}"
 
-
-# This is the home page: no "Home" button here; after a click on Home elsewhere, the sidebar folds away.
-st.html("<style>.st-key-ui_home_link { display: none; }</style>")
-fold_sidebar_after_home()
 
 fiches = charger_fiches()
 tests = charger_tests()

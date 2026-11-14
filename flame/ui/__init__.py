@@ -32,7 +32,7 @@ from flame.ui.labels import label
 from flame.ui.outcomes import answer, count_outcomes, kind_of_result, outcomes_card
 from flame.ui.places import EARTH, SPACESUIT, body_of, place_conditions
 from flame.ui.scene import flame_scene
-from flame.ui.top_bar import fold_sidebar_after_home, show_environment_in_sidebar, show_top_bar
+from flame.ui.top_bar import show_environment_in_sidebar, show_top_bar
 
 # French names from the team contract (BRIEF_EQUIPE_IA.md, section 5), still used by app.py
 # and pages/recherche.py. Keep them until their owners switch to the English names.
@@ -45,7 +45,6 @@ __all__ = [
     "count_outcomes",
     "kind_of_result",
     "outcomes_card",
-    "fold_sidebar_after_home",
     "assistant_mascot",
     "talking",
     "style_conditions_chart",
