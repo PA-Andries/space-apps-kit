@@ -1790,7 +1790,7 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
         ]
         ground = CUR[n][1].startswith("Ground")
         if olo is None:
-            atm, atxt = 0.0, "atmosphere of this habitat unknown, so no test can be matched to it"
+            atm, atxt = None, "Mars atmosphere unknown: the statement gives no figure"
             in_o2 = in_both = []
         elif not with_o2:
             atm, atxt = (0.3 if pmax is None else 0.0), "oxygen not recorded in PSI's table"
@@ -1824,12 +1824,12 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
                 "habitat": hlabel,
                 "investigation_id": iid,
                 "acronym": CUR[n][0] or iid,
-                "score": round(60 * atm + 20 * gv + 20 * CUR[n][5]),
+                "score": round(60 * (atm or 0) + 20 * gv + 20 * CUR[n][5]),
                 "rank": None,
                 "atmosphere_fit": atm,
                 "gravity_fit": gv,
                 "cited_in_statement": CUR[n][5],
-                "n_rows_matching_atmosphere": len(in_both) if pmax is not None else len(in_o2),
+                "n_rows_matching_atmosphere": None if atm is None else len(in_both) if pmax is not None else len(in_o2),
                 "why": "%s; %s%s" % (atxt, gtxt, "; named in the statement as fire-safety work" if CUR[n][5] else ""),
                 "atmosphere_source": asrc,
             }

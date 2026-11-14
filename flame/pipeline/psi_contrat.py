@@ -45,6 +45,8 @@ TABLES_PSI = [
 KPA_PAR_ATM = 101.325
 # Un essai à 21,5 % d'oxygène compte pour un habitat à 21 % : écart toléré, en points de pourcentage.
 TOLERANCE_OXYGENE_PCT = 1.0
+# Habitats dont l'énoncé ne donne pas l'atmosphère : on ne les rattache à aucune investigation par l'oxygène.
+HABITATS_SANS_ATMOSPHERE = ("Base martienne",)
 PILIER_FR = {"Prevention": "Prévenir", "Detection": "Détecter", "Suppression": "Éteindre"}
 CATEGORIE_FR = {"prevent": "Prévenir", "detect": "Détecter", "react": "Éteindre"}
 TYPES_COMBUSTIBLE = [
@@ -104,7 +106,9 @@ def _habitats(oxygene_min: float, oxygene_max: float) -> str:
     proches = [
         nom
         for nom, (oxygene, _) in ATMOSPHERES.items()
-        if oxygene is not None and oxygene_min - TOLERANCE_OXYGENE_PCT <= oxygene <= oxygene_max + TOLERANCE_OXYGENE_PCT
+        if nom not in HABITATS_SANS_ATMOSPHERE
+        and oxygene is not None
+        and oxygene_min - TOLERANCE_OXYGENE_PCT <= oxygene <= oxygene_max + TOLERANCE_OXYGENE_PCT
     ]
     return ";".join(proches)
 

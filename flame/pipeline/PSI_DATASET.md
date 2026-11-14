@@ -84,7 +84,8 @@ ranking (role C) is the one shown to the user.
 
 - `atmosphere_fit`: **computed from `tests`**. Station and spacecraft: rows at 19-23% O2. Moon Base and rover: rows at
   30% O2 or more and at 0.694 atm (10.2 psi) or less score 1; high oxygen only 0.7; reduced pressure only 0.3.
-  Mars base: 0 for every investigation, because the statement gives no atmosphere for Mars.
+  Mars base: empty for every investigation, because the statement gives no atmosphere for Mars; the score then
+  counts gravity and the citation only.
 - `gravity_fit`: microgravity flight data fits a station fully. For the Moon and Mars, PSI has no partial-gravity data:
   E-FIELD Flames scores 1 (the statement says it mimics partial gravity), Saffire-II 0.6 (has 1-g and microgravity
   results), other flight data 0.4.
