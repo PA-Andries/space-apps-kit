@@ -71,7 +71,7 @@ Si GitHub Desktop affiche « conflict », ne cliquez sur rien et appelez le rôl
 
 ## Les vérifications
 
-Il n'y a pas de CI sur GitHub. Les vérifications tournent sur l'ordinateur de chacun, avec `uv run verifier` :
+Les vérifications tournent sur l'ordinateur de chacun, avec `uv run verifier` :
 
 | Vérification | Commande | Ce qu'elle attrape |
 | --- | --- | --- |
