@@ -38,26 +38,3 @@ def valeurs_possibles(fiches: pd.DataFrame, colonne: str) -> list[str]:
     """Les valeurs distinctes de `colonne` (cellules à plusieurs valeurs séparées par « ; »), triées."""
     valeurs = {valeur.strip() for cellule in fiches[colonne].dropna() for valeur in str(cellule).split(";")}
     return sorted(valeur for valeur in valeurs if valeur)
-
-
-# Les piliers du contrat et leurs noms dans data/psi/relevance.csv (« react » est l'ancien nom d'« Éteindre »).
-PILIER_PSI = {"Prévenir": {"prevent"}, "Détecter": {"detect"}, "Éteindre": {"react", "extinguish"}}
-# Le poids de pilier du rôle B (jugement d'équipe) devient une étiquette, il ne compte plus dans le score.
-ETIQUETTES = {3: "primary", 2: "secondary", 1: "indirect"}
-
-
-def filtrer_par_pilier(fiches: pd.DataFrame, pilier: str | None, pertinence: pd.DataFrame) -> pd.DataFrame:
-    """Les fiches utiles au `pilier`, avec une colonne `etiquette` (primary, secondary ou indirect).
-
-    Sans pilier, rien n'est retiré et l'étiquette reste vide. Sans la table `relevance` (données d'exemple),
-    on se rabat sur la colonne `pilier` des fiches, sans étiquette.
-    """
-    if not pilier:
-        return fiches.assign(etiquette="").reset_index(drop=True)
-    if pertinence.empty or pilier not in PILIER_PSI:
-        return filtrer(fiches, piliers=[pilier]).assign(etiquette="")
-    lignes = pertinence[pertinence["category_id"].isin(PILIER_PSI[pilier])]
-    poids = pd.to_numeric(lignes["category_weight"], errors="coerce").groupby(lignes["investigation_id"]).max()
-    etiquettes = fiches["id"].map(poids).fillna(0).astype(int).map(ETIQUETTES)
-    gardees = fiches.assign(etiquette=etiquettes)[etiquettes.notna()]
-    return gardees.reset_index(drop=True)
