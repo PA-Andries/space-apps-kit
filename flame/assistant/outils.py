@@ -32,7 +32,7 @@ def filtrer_par_habitat(habitat: str) -> dict:
     if table.empty:
         return {"habitat": habitat, "investigations": [], "note": "La table de pertinence n'est pas disponible."}
     lignes = table[table["habitat_id"] == IDS_HABITATS[habitat]]
-    # L'ancienne table avait une ligne par pilier : on garde la meilleure ligne de chaque investigation.
+    # Une ligne par investigation ; on dédoublonne par sécurité, en gardant le meilleur score.
     meilleures = lignes.sort_values("score", ascending=False).drop_duplicates("investigation_id")
     return {
         "habitat": habitat,

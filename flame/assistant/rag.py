@@ -19,7 +19,6 @@ DELAI_MAX_S = 30
 COLONNES_SENS = [
     "id",
     "nom",
-    "pilier",
     "objectif",
     "type_combustible",
     "combustible",

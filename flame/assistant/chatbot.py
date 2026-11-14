@@ -24,6 +24,10 @@ MODELE = "gemini-3.5-flash"
 URL_GEMINI = "https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent"
 DELAI_MAX_S = 60
 NB_MAX_TOURS_OUTILS = 4  # au-delà, on arrête : Gemini tournerait en rond
+# Colonnes des fiches qu'on n'envoie pas au LLM : les piliers sont abandonnés (décision de PA, 14 novembre).
+COLONNES_IGNOREES = {"pilier"}
+NB_MIN_SYNTHESE, NB_MAX_SYNTHESE = 2, 3
+SYNTHESE_IMPOSSIBLE = "Pick two or three investigations to get a synthesis."
 # Gemini appelle « model » ce que la page appelle « assistant ».
 ROLES_GEMINI = {"user": "user", "assistant": "model"}
 SANS_CLE = "The assistant is not connected yet: `LLM_API_KEY` is missing from the Secrets."
@@ -52,15 +56,17 @@ def fiches_en_texte(fiches: pd.DataFrame) -> str:
     blocs = []
     for fiche in fiches.to_dict("records"):
         lignes = [
-            f"{colonne}: {valeur}" for colonne, valeur in fiche.items() if pd.notna(valeur) and str(valeur).strip()
+            f"{colonne}: {valeur}"
+            for colonne, valeur in fiche.items()
+            if colonne not in COLONNES_IGNOREES and pd.notna(valeur) and str(valeur).strip()
         ]
         blocs.append("\n".join(lignes))
     return "\n\n---\n\n".join(blocs) if blocs else "(aucune fiche)"
 
 
 def catalogue(fiches: pd.DataFrame) -> str:
-    """La liste courte de toutes les fiches : une ligne « - id : nom (pilier) » par fiche."""
-    return "\n".join(f"- {fiche['id']} : {fiche['nom']} ({fiche['pilier']})" for fiche in fiches.to_dict("records"))
+    """La liste courte de toutes les fiches : une ligne « - id : nom » par fiche."""
+    return "\n".join(f"- {fiche['id']} : {fiche['nom']}" for fiche in fiches.to_dict("records"))
 
 
 def texte_a_chercher(question: str, historique: list[dict[str, str]]) -> str:
@@ -106,16 +112,15 @@ def messages_gemini(question: str, historique: list[dict[str, str]]) -> list[dic
     return messages
 
 
-def envoyer(consigne: str, contenus: list[dict], cle: str) -> dict:
+def envoyer(consigne: str, contenus: list[dict], cle: str, avec_outils: bool = True) -> dict:
     """Un aller-retour avec Gemini : le contenu de sa réponse (du texte, ou des demandes d'outils)."""
+    corps = {"system_instruction": {"parts": [{"text": consigne}]}, "contents": contenus}
+    if avec_outils:
+        corps["tools"] = [{"functionDeclarations": DECLARATIONS}]
     reponse = requests.post(
         URL_GEMINI.format(modele=MODELE),
         headers={"x-goog-api-key": cle},  # la clé part dans un en-tête, jamais dans l'adresse
-        json={
-            "system_instruction": {"parts": [{"text": consigne}]},
-            "contents": contenus,
-            "tools": [{"functionDeclarations": DECLARATIONS}],
-        },
+        json=corps,
         timeout=DELAI_MAX_S,
     )
     reponse.raise_for_status()
@@ -164,3 +169,24 @@ def repondre(question: str, historique: list[dict[str, str]], fiches: pd.DataFra
     except requests.RequestException as erreur:
         return message_erreur(erreur)
     return texte or SANS_REPONSE
+
+
+def synthetiser(fiches: pd.DataFrame, ids: list[str]) -> str:
+    """Une synthèse en anglais de deux ou trois investigations, écrite par Gemini à partir de leurs seules fiches.
+
+    Cinq rubriques : comportement du feu, inflammabilité, dangers, prévention, détection.
+    `ids` sont les `id` des fiches à comparer ; `fiches` vient de `charger_fiches()`.
+    """
+    choisies = fiches[fiches["id"].isin(ids)]
+    if not NB_MIN_SYNTHESE <= len(choisies) <= NB_MAX_SYNTHESE:
+        return SYNTHESE_IMPOSSIBLE
+    cle = cle_api()
+    if cle is None:
+        return SANS_CLE
+    consigne = f"{lire_prompt('synthese')}\n\n# Les fiches à comparer\n\n{fiches_en_texte(choisies)}"
+    demande = [{"role": "user", "parts": [{"text": "Write the synthesis."}]}]
+    try:
+        parties = envoyer(consigne, demande, cle, avec_outils=False).get("parts", [])
+    except requests.RequestException as erreur:
+        return message_erreur(erreur)
+    return "".join(partie.get("text", "") for partie in parties).strip() or SANS_REPONSE
