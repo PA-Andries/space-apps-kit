@@ -1,4 +1,8 @@
-# Apparence du site. Propriétaire : rôle F (Interface et 3D).
+# Look of the site. Owner: role F (Interface and 3D).
+# Palette: deep night blue for space, flame orange as the main colour.
 [theme]
 base = "dark"
 primaryColor = "#f97316"
+backgroundColor = "#0b1020"
+secondaryBackgroundColor = "#151c33"
+textColor = "#e6e9f2"

@@ -39,8 +39,8 @@
       const camera = new THREE.OrthographicCamera(-1, 1, HALF_HEIGHT, -HALF_HEIGHT, 0.1, 20);
       camera.position.set(0, -0.12, 10);
 
-      scene.add(new THREE.HemisphereLight(0xffffff, 0x334155, 1.1));
-      const sun = new THREE.DirectionalLight(0xffffff, 2.4);
+      scene.add(new THREE.HemisphereLight(0xfff4e6, 0x151c33, 1.1)); // warm sky, site panel colour below
+      const sun = new THREE.DirectionalLight(0xffe2c4, 2.4); // a warm, flame-tinted sun
       sun.position.set(-3, 3, 5);
       scene.add(sun);
 
@@ -49,7 +49,7 @@
       tones.minFilter = tones.magFilter = THREE.NearestFilter;
       tones.needsUpdate = true;
 
-      const OUTLINE = new THREE.MeshBasicMaterial({ color: "#0f172a", side: THREE.BackSide });
+      const OUTLINE = new THREE.MeshBasicMaterial({ color: "#0b1020", side: THREE.BackSide }); // site background
 
       const toon = (color, options = {}) => new THREE.MeshToonMaterial({ color, gradientMap: tones, ...options });
 
@@ -97,9 +97,9 @@
       };
 
       const earthMap = paint((p, w, h) => {
-        p.fillStyle = "#38bdf8";
+        p.fillStyle = "#3b82f6";
         p.fillRect(0, 0, w, h);
-        blotches(p, ["#4ade80", "#22c55e", "#facc15"], 9, 8, 22, w, h);
+        blotches(p, ["#4ade80", "#34d399", "#fbbf24"], 9, 8, 22, w, h);
         iceCaps(p, w, h);
       });
       const cloudMap = paint((p, w, h) => blotches(p, ["rgba(255,255,255,0.95)"], 10, 4, 10, w, h));
@@ -121,9 +121,9 @@
         iceCaps(p, w, h, "#fff7ed");
       });
       const panelMap = paint((p, w, h) => {
-        p.fillStyle = "#2563eb";
+        p.fillStyle = "#1e3a8a";
         p.fillRect(0, 0, w, h);
-        p.strokeStyle = "#93c5fd";
+        p.strokeStyle = "#60a5fa";
         p.lineWidth = 4;
         for (let x = 0; x <= w; x += w / 4) { p.beginPath(); p.moveTo(x, 0); p.lineTo(x, h); p.stroke(); }
         for (let y = 0; y <= h; y += h / 6) { p.beginPath(); p.moveTo(0, y); p.lineTo(w, y); p.stroke(); }
@@ -166,6 +166,19 @@
         return g;
       };
 
+      // Keep a tilt towards the camera while the object turns around its own vertical axis
+      // (spinning the tilted object as a whole would make it wobble).
+      const tilted = (content, tiltX, tiltZ = 0) => {
+        const outer = new THREE.Group();
+        const spinner = new THREE.Group();
+        spinner.add(content);
+        spinner.userData.extraSpin = 0.006;
+        outer.add(spinner);
+        outer.rotation.set(tiltX, 0, tiltZ);
+        outer.userData.noPivotSpin = true;
+        return outer;
+      };
+
       const spacecraft = () => {
         const g = new THREE.Group();
         const body = part(new THREE.CapsuleGeometry(0.12, 0.2, 8, 24), white);
@@ -179,17 +192,17 @@
         g.add(body, stripe, window_, nozzle);
         for (const side of [-1, 1]) {
           const wing = part(new THREE.BoxGeometry(0.2, 0.12, 0.012), toon("#ffffff", { map: panelMap }), 1.08);
-          wing.position.set(side * 0.23, -0.06, 0);
+          wing.position.set(side * 0.23, -0.16, 0); // arrays leave from the service module, below the capsule
           g.add(wing);
         }
-        g.rotation.z = -0.45;
         return g;
       };
 
       const station = () => {
         const g = new THREE.Group();
+        // As on the ISS: the pressurized modules run perpendicular to the main truss that carries the arrays.
         const module = part(new THREE.CapsuleGeometry(0.06, 0.3, 8, 20), white);
-        module.rotation.z = Math.PI / 2;
+        module.rotation.x = Math.PI / 2;
         const node = part(new THREE.SphereGeometry(0.075, 20, 16), white);
         const truss = part(new THREE.CylinderGeometry(0.014, 0.014, 0.85, 8), grey, 1.2);
         truss.rotation.z = Math.PI / 2;
@@ -203,9 +216,8 @@
           g.add(wing);
         }
         const tip = part(new THREE.SphereGeometry(0.03, 12, 12), orange, 1.2);
-        tip.position.set(0.21, 0, 0);
+        tip.position.set(0, 0, 0.21);
         g.add(tip);
-        g.rotation.x = 0.3;
         return g;
       };
 
@@ -215,7 +227,7 @@
         const orbit = new THREE.Group();
         const ring = new THREE.Mesh(
           new THREE.TorusGeometry(0.43, 0.004, 6, 64),
-          new THREE.MeshBasicMaterial({ color: "#fde68a", transparent: true, opacity: 0.6 }),
+          new THREE.MeshBasicMaterial({ color: "#fdba74", transparent: true, opacity: 0.6 }), // orbit in light flame orange
         );
         ring.rotation.x = Math.PI / 2;
         const tiny = station();
@@ -277,11 +289,14 @@
         const g = dome();
         g.scale.setScalar(2.1);
         g.position.y = -0.12;
+        // A ground solar panel on a post, facing the sky (about 60 degrees up).
         const panel = part(new THREE.BoxGeometry(0.16, 0.1, 0.01), toon("#ffffff", { map: panelMap }), 1.08);
-        panel.position.set(-0.26, -0.03, 0.05);
-        panel.rotation.set(-0.5, 0.4, 0);
+        panel.position.set(-0.27, 0.0, 0.05);
+        panel.rotation.set(-1.05, 0, 0);
+        const post = part(new THREE.CylinderGeometry(0.008, 0.008, 0.12, 8), grey, 1.3);
+        post.position.set(-0.27, -0.07, 0.05);
         const g2 = new THREE.Group();
-        g2.add(g, panel);
+        g2.add(g, post, panel);
         return g2;
       };
 
@@ -312,8 +327,8 @@
         mars: () => planet(marsMap),
         earth: earth,
         earth_lab: () => onGround("#4ade80", "#16a34a", lab()),
-        station: station,
-        spacecraft: spacecraft,
+        station: () => tilted(station(), 0.3),
+        spacecraft: () => tilted(spacecraft(), 0.15, -0.45),
         base_moon: () => onGround("#cbd5e1", "#94a3b8", habitat()),
         base_mars: () => onGround("#fb923c", "#c2410c", habitat()),
         rover_moon: roverOn("#cbd5e1", "#94a3b8"),
@@ -325,7 +340,7 @@
       for (let i = 0; i < 90; i++) starPositions.push((random() - 0.5) * 12, (random() - 0.5) * 2, -3);
       const stars = new THREE.Points(
         new THREE.BufferGeometry().setAttribute("position", new THREE.Float32BufferAttribute(starPositions, 3)),
-        new THREE.PointsMaterial({ color: "#fde68a", size: 2.2, sizeAttenuation: false, transparent: true, opacity: 0.7 }),
+        new THREE.PointsMaterial({ color: "#e6e9f2", size: 2, sizeAttenuation: false, transparent: true, opacity: 0.6 }),
       );
       scene.add(stars);
 

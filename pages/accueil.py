@@ -24,10 +24,13 @@ if place and pillar:
     conditions = place_conditions(place, body)
     left, right = st.columns([2, 1])
     with right:
-        st.metric("Typical atmosphere", f"{conditions['oxygen_pct']} % O₂ · {conditions['pressure_kpa']} kPa")
-        st.caption(
-            "Source: challenge statement." if conditions["from_statement"] else "Team assumption, to be confirmed."
-        )
+        known = conditions["oxygen_pct"] is not None
+        if known:
+            st.metric("Typical atmosphere", f"{conditions['oxygen_pct']} % O₂ · {conditions['pressure_kpa']} kPa")
+            st.caption("Source: challenge statement.")
+        else:
+            st.metric("Typical atmosphere", "Unknown")
+            st.caption("Not given in the challenge statement, so the site shows no figure.")
         gravity = st.slider(
             "Gravity (0 = microgravity, 1 = Earth)", 0.0, 1.0, conditions["gravity"], key=f"accueil_gravity_{place}"
         )
@@ -36,5 +39,7 @@ if place and pillar:
             st.info(f"Earth is the reference. Search and Compare use your space habitat: {habitat}.")
         st.page_link("pages/recherche.py", label="Find the most useful experiments", icon=":material/search:")
     with left:
-        flame_scene(gravity=gravity, oxygen=conditions["oxygen_pct"])
-        st.caption("Illustration: the flame's shape and colour are not computed.")
+        # Unknown oxygen: the flame is drawn at Earth's 21 %, and the caption says so.
+        flame_scene(gravity=gravity, oxygen=conditions["oxygen_pct"] if known else 21)
+        caption = "Illustration: the flame's shape and colour are not computed."
+        st.caption(caption if known else f"{caption} Oxygen unknown here: drawn at Earth's 21 %.")

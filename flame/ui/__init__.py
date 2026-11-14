@@ -7,11 +7,11 @@ from flame.ui.components import investigation_card, pillar_picker, place_picker
 from flame.ui.labels import label
 from flame.ui.places import EARTH, place_conditions
 from flame.ui.scene import flame_scene
-from flame.ui.sidebar import show_sidebar
+from flame.ui.top_bar import show_top_bar
 
 # French names from the team contract (BRIEF_EQUIPE_IA.md, section 5), still used by app.py
 # and pages/recherche.py. Keep them until their owners switch to the English names.
-afficher_cadre = show_sidebar
+afficher_cadre = show_top_bar
 carte_fiche = investigation_card
 scene_3d = flame_scene
 
@@ -26,5 +26,5 @@ __all__ = [
     "place_conditions",
     "place_picker",
     "scene_3d",
-    "show_sidebar",
+    "show_top_bar",
 ]
