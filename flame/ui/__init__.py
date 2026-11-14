@@ -1,21 +1,31 @@
-"""Rôle F (Interface et 3D) : l'habillage du site et les composants réutilisables.
+"""Role F (Interface and 3D): the look of the site and the reusable components.
 
-Les autres rôles peuvent utiliser tout ce qui est listé ici.
+Other roles may use everything listed here.
 """
 
-from flame.ui.cadre import afficher_cadre
-from flame.ui.composants import carte_fiche, choix_lieu, choix_pilier
-from flame.ui.libelles import libelle
-from flame.ui.lieux import TERRE, conditions_lieu
-from flame.ui.scene import scene_3d
+from flame.ui.components import body_picker, investigation_card, pillar_picker, place_picker
+from flame.ui.labels import label
+from flame.ui.places import EARTH, place_conditions
+from flame.ui.scene import flame_scene
+from flame.ui.sidebar import show_sidebar
+
+# French names from the team contract (BRIEF_EQUIPE_IA.md, section 5), still used by app.py
+# and pages/recherche.py. Keep them until their owners switch to the English names.
+afficher_cadre = show_sidebar
+carte_fiche = investigation_card
+scene_3d = flame_scene
 
 __all__ = [
-    "TERRE",
+    "EARTH",
     "afficher_cadre",
+    "body_picker",
     "carte_fiche",
-    "choix_lieu",
-    "choix_pilier",
-    "conditions_lieu",
-    "libelle",
+    "flame_scene",
+    "investigation_card",
+    "label",
+    "pillar_picker",
+    "place_conditions",
+    "place_picker",
     "scene_3d",
+    "show_sidebar",
 ]

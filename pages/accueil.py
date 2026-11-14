@@ -1,36 +1,45 @@
-"""Page d'accueil « My scenario ». Propriétaire : rôle F (Interface et 3D)."""
+"""Home page "My scenario". Owner: role F (Interface and 3D).
+
+The file name stays `accueil.py` because `app.py` (role A) points to it.
+"""
 
 import streamlit as st
 
 from flame.commun import get_scenario
-from flame.ui import TERRE, choix_lieu, choix_pilier, conditions_lieu, libelle, scene_3d
+from flame.ui import EARTH, body_picker, flame_scene, label, pillar_picker, place_conditions, place_picker
 
 st.title("Flame in Freefall")
 st.write("What NASA microgravity combustion experiments teach us about fire safety in space.")
 
-st.subheader("1. Where are you?")
-lieu = choix_lieu()
+st.subheader("1. Where are you going?")
+body = body_picker()
 
-pilier = None
-if lieu:
-    st.subheader("2. What do you need?")
-    pilier = choix_pilier()
+place = None
+if body:
+    st.subheader("2. Where exactly?")
+    place = place_picker(body)
 
-if lieu and pilier:
-    st.subheader(f"3. {libelle(pilier)} fire · {libelle(lieu)}")
-    conditions = conditions_lieu(lieu)
-    gauche, droite = st.columns([2, 1])
-    with droite:
-        st.metric("Typical atmosphere", f"{conditions['oxygene_pct']} % O₂ · {conditions['pression_kpa']} kPa")
-        source = "Source: challenge statement." if conditions["source_enonce"] else "Team assumption, to be confirmed."
-        st.caption(source)
-        gravite = st.slider(
-            "Gravity (0 = microgravity, 1 = Earth)", 0.0, 1.0, conditions["gravite"], key=f"accueil_gravite_{lieu}"
+pillar = None
+if place:
+    st.subheader("3. What do you need?")
+    pillar = pillar_picker()
+
+if place and pillar:
+    st.subheader(f"{label(pillar)} fire · {label(place)}")
+    conditions = place_conditions(place, body)
+    left, right = st.columns([2, 1])
+    with right:
+        st.metric("Typical atmosphere", f"{conditions['oxygen_pct']} % O₂ · {conditions['pressure_kpa']} kPa")
+        st.caption(
+            "Source: challenge statement." if conditions["from_statement"] else "Team assumption, to be confirmed."
         )
-        if lieu == TERRE:
-            habitat = libelle(get_scenario()["habitat"])
+        gravity = st.slider(
+            "Gravity (0 = microgravity, 1 = Earth)", 0.0, 1.0, conditions["gravity"], key=f"accueil_gravity_{place}"
+        )
+        if place == EARTH:
+            habitat = label(get_scenario()["habitat"])
             st.info(f"Earth is the reference. Search and Compare use your space habitat: {habitat}.")
         st.page_link("pages/recherche.py", label="Find the most useful experiments", icon=":material/search:")
-    with gauche:
-        scene_3d(gravite=gravite, oxygene=conditions["oxygene_pct"])
+    with left:
+        flame_scene(gravity=gravity, oxygen=conditions["oxygen_pct"])
         st.caption("Illustration: the flame's shape and colour are not computed.")

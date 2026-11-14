@@ -1,6 +1,6 @@
-"""Les scènes three.js, affichées dans une page Streamlit.
+"""The three.js scenes, shown in a Streamlit page.
 
-Python envoie des réglages à la scène ; la scène ne renvoie rien à Python.
+Python sends settings to the scene; the scene sends nothing back to Python.
 """
 
 import json
@@ -8,35 +8,35 @@ from pathlib import Path
 
 import streamlit as st
 
-DOSSIER_THREE = Path(__file__).parent / "three"
+THREE_DIR = Path(__file__).parent / "three"
 
 
-def _remplir(nom_fichier: str, reglages: dict) -> str:
-    """Le code HTML d'une scène de `three/`, avec ses réglages écrits à la place de `__REGLAGES__`."""
-    page = (DOSSIER_THREE / nom_fichier).read_text(encoding="utf-8")
-    return page.replace("__REGLAGES__", json.dumps(reglages))
+def _fill(file_name: str, settings: dict) -> str:
+    """HTML of a scene from `three/`, with its settings written in place of `__SETTINGS__`."""
+    page = (THREE_DIR / file_name).read_text(encoding="utf-8")
+    return page.replace("__SETTINGS__", json.dumps(settings))
 
 
-def reglages_scene(gravite: float, oxygene: float) -> dict[str, float]:
-    """Les réglages envoyés à la scène, bornés : gravité entre 0 et 1, oxygène entre 0 et 100 %."""
-    return {"gravite": min(max(float(gravite), 0.0), 1.0), "oxygene": min(max(float(oxygene), 0.0), 100.0)}
+def flame_settings(gravity: float, oxygen: float) -> dict[str, float]:
+    """Settings sent to the flame scene, clamped: gravity between 0 and 1, oxygen between 0 and 100 %."""
+    return {"gravity": min(max(float(gravity), 0.0), 1.0), "oxygen": min(max(float(oxygen), 0.0), 100.0)}
 
 
-def page_scene(gravite: float, oxygene: float) -> str:
-    """Le code HTML de la scène de la flamme, avec ses réglages déjà écrits dedans."""
-    return _remplir("flamme.html", reglages_scene(gravite, oxygene))
+def flame_page(gravity: float, oxygen: float) -> str:
+    """HTML of the flame scene, with its settings already written in."""
+    return _fill("flame.html", flame_settings(gravity, oxygen))
 
 
-def page_lieux(lieux: list[str], choisi: str) -> str:
-    """Le code HTML de la scène des lieux, le lieu `choisi` mis en avant."""
-    return _remplir("lieux.html", {"lieux": lieux, "choisi": lieux.index(choisi) if choisi in lieux else -1})
+def places_page(objects: list[str], chosen: str | None) -> str:
+    """HTML of the places scene, with the `chosen` object highlighted."""
+    return _fill("places.html", {"objects": objects, "chosen": objects.index(chosen) if chosen in objects else -1})
 
 
-def scene_3d(gravite: float, oxygene: float, hauteur: int = 420) -> None:
-    """Affiche la flamme en 3D. `gravite` va de 0 (microgravité) à 1 (Terre), `oxygene` est en %."""
-    st.iframe(page_scene(gravite, oxygene), height=hauteur)
+def flame_scene(gravity: float, oxygen: float, height: int = 420) -> None:
+    """Show the 3D flame. `gravity` goes from 0 (microgravity) to 1 (Earth), `oxygen` is in %."""
+    st.iframe(flame_page(gravity, oxygen), height=height)
 
 
-def scene_lieux(lieux: list[str], choisi: str, hauteur: int = 170) -> None:
-    """Affiche les lieux en 3D côte à côte, une colonne chacun, le lieu `choisi` mis en avant."""
-    st.iframe(page_lieux(lieux, choisi), height=hauteur)
+def places_scene(objects: list[str], chosen: str | None, height: int = 190) -> None:
+    """Show 3D objects side by side, one column each, the `chosen` one highlighted."""
+    st.iframe(places_page(objects, chosen), height=height)

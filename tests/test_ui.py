@@ -1,4 +1,4 @@
-"""Tests de l'interface. Propriétaire : rôle F."""
+"""Interface tests. Owner: role F."""
 
 import json
 import re
@@ -6,106 +6,163 @@ from pathlib import Path
 
 from streamlit.testing.v1 import AppTest
 
-from flame.ui.scene import DOSSIER_THREE, page_lieux, page_scene, reglages_scene
+from flame.ui.scene import THREE_DIR, flame_page, flame_settings, places_page
 
 APP = str(Path(__file__).parents[1] / "app.py")
 
 
-def test_les_scenes_attendent_leurs_reglages():
-    for scene in DOSSIER_THREE.glob("*.html"):
-        assert "__REGLAGES__" in scene.read_text(encoding="utf-8"), scene.name
+def test_scenes_wait_for_their_settings():
+    for scene in THREE_DIR.glob("*.html"):
+        assert "__SETTINGS__" in scene.read_text(encoding="utf-8"), scene.name
 
 
-def test_les_reglages_sont_bornes():
-    assert reglages_scene(-1, 150) == {"gravite": 0.0, "oxygene": 100.0}
-    assert reglages_scene(0.5, 30) == {"gravite": 0.5, "oxygene": 30.0}
+def test_settings_are_clamped():
+    assert flame_settings(-1, 150) == {"gravity": 0.0, "oxygen": 100.0}
+    assert flame_settings(0.5, 30) == {"gravity": 0.5, "oxygen": 30.0}
 
 
-def test_la_page_contient_les_reglages():
-    page = page_scene(1, 21)
-    assert "__REGLAGES__" not in page
-    assert json.dumps({"gravite": 1.0, "oxygene": 21.0}) in page
+def test_flame_page_contains_its_settings():
+    page = flame_page(1, 21)
+    assert "__SETTINGS__" not in page
+    assert json.dumps({"gravity": 1.0, "oxygen": 21.0}) in page
 
 
-def test_three_js_a_une_version_precise():
-    for scene in DOSSIER_THREE.glob("*.html"):
+def test_three_js_has_an_exact_version():
+    for scene in THREE_DIR.glob("*.html"):
         assert re.search(r"three@\d+\.\d+\.\d+/", scene.read_text(encoding="utf-8")), scene.name
 
 
-def test_la_scene_des_lieux_met_en_avant_le_lieu_choisi():
-    assert '"choisi": 2' in page_lieux(["Terre", "Vaisseau", "Station"], "Station")
-    assert '"choisi": -1' in page_lieux(["Terre", "Vaisseau"], None)
+def test_places_scene_highlights_the_chosen_object():
+    assert '"chosen": 2' in places_page(["earth", "spacecraft", "station"], "station")
+    assert '"chosen": -1' in places_page(["earth", "spacecraft"], None)
 
 
-def test_libelle_traduit_les_valeurs_du_contrat():
+def test_every_object_has_a_drawing():
+    from flame.ui.components import BODY_OBJECTS, PLACE_OBJECTS
+
+    scene = (THREE_DIR / "places.html").read_text(encoding="utf-8")
+    objects = [*BODY_OBJECTS.values(), *PLACE_OBJECTS.values(), "rover_moon", "rover_mars"]
+    for name in objects:
+        assert re.search(rf"\b{name}:", scene), name
+
+
+def test_label_translates_contract_values():
     from flame.commun import HABITATS, PILIERS
-    from flame.ui import libelle
-    from flame.ui.cadre import PROFILS_PROPOSES
+    from flame.ui import label
+    from flame.ui.sidebar import PROFILES_OFFERED
 
-    for valeur in [*HABITATS, *PILIERS, *PROFILS_PROPOSES]:
-        assert libelle(valeur) != valeur
-    assert libelle("Prévenir;Éteindre") == "Prevent, Extinguish"
-    assert libelle("valeur absente") == "valeur absente"
-
-
-def test_chaque_lieu_a_ses_conditions():
-    from flame.ui import TERRE, conditions_lieu
-    from flame.ui.lieux import LIEUX
-
-    for lieu in LIEUX:
-        conditions = conditions_lieu(lieu)
-        assert 0 <= conditions["gravite"] <= 1
-    assert conditions_lieu(TERRE) == {"oxygene_pct": 21, "pression_kpa": 101, "gravite": 1.0, "source_enonce": True}
+    for value in [*HABITATS, *PILIERS, *PROFILES_OFFERED]:
+        assert label(value) != value
+    assert label("Prévenir;Éteindre") == "Prevent, Extinguish"
+    assert label("missing value") == "missing value"
 
 
-def _choisir_mars_puis_detecter():
-    from flame.ui.lieux import choisir_lieu, choisir_pilier
+def test_every_place_has_its_conditions():
+    from flame.ui import EARTH, place_conditions
+    from flame.ui.places import PLACES_BY_BODY
 
-    choisir_lieu("Base martienne")
-    choisir_pilier("Détecter")
-
-
-def _choisir_station_puis_terre():
-    from flame.ui.lieux import choisir_lieu
-
-    choisir_lieu("Station")
-    choisir_lieu("Terre")
-
-
-def test_un_habitat_choisi_devient_celui_du_scenario():
-    site = AppTest.from_function(_choisir_mars_puis_detecter).run()
-    assert site.session_state["ui_lieu"] == "Base martienne"
-    assert site.session_state["ui_habitat"] == "Base martienne"
-    assert site.session_state["ui_pilier"] == "Détecter"
+    for body, places in PLACES_BY_BODY.items():
+        for place in places:
+            assert 0 <= place_conditions(place, body)["gravity"] <= 1
+    assert place_conditions(EARTH, "Terre") == {
+        "oxygen_pct": 21,
+        "pressure_kpa": 101,
+        "gravity": 1.0,
+        "from_statement": True,
+    }
+    assert place_conditions("Station", "Terre")["gravity"] == 0.0
+    assert place_conditions("Rover pressurisé", "Mars")["gravity"] == 0.38
+    assert place_conditions("Rover pressurisé", "Lune")["gravity"] == 0.17
 
 
-def test_la_terre_ne_change_pas_l_habitat():
-    site = AppTest.from_function(_choisir_station_puis_terre).run()
-    assert site.session_state["ui_lieu"] == "Terre"
+def test_the_rover_keeps_its_body():
+    from flame.ui.places import body_of
+
+    assert body_of("Rover pressurisé", "Mars") == "Mars"
+    assert body_of("Rover pressurisé", None) == "Lune"
+    assert body_of("Station", "Mars") == "Terre"
+
+
+def _pick_mars_rover_then_detect():
+    from flame.ui.places import choose_body, choose_pillar, choose_place
+
+    choose_body("Mars")
+    choose_place("Rover pressurisé")
+    choose_pillar("Détecter")
+
+
+def _pick_station_then_earth():
+    from flame.ui.places import choose_body, choose_place
+
+    choose_body("Terre")
+    choose_place("Station")
+    choose_place("Terre")
+
+
+def _pick_moon_then_mars():
+    from flame.ui.places import choose_body, choose_place
+
+    choose_body("Lune")
+    choose_place("Base lunaire")
+    choose_body("Mars")
+
+
+# After a click, AppTest reruns only the page, not `app.py`: these tests check the keys
+# the buttons write, which the sidebar reads on the next run.
+def test_a_chosen_habitat_becomes_the_scenario_habitat():
+    site = AppTest.from_function(_pick_mars_rover_then_detect).run()
+    assert site.session_state["ui_body"] == "Mars"
+    assert site.session_state["ui_habitat"] == "Rover pressurisé"
+    assert site.session_state["ui_pillar"] == "Détecter"
+
+
+def test_earth_does_not_change_the_habitat():
+    site = AppTest.from_function(_pick_station_then_earth).run()
+    assert site.session_state["ui_place"] == "Terre"
     assert site.session_state["ui_habitat"] == "Station"
 
 
-def test_l_accueil_avance_etape_par_etape():
+def test_a_new_body_resets_the_place():
+    site = AppTest.from_function(_pick_moon_then_mars).run()
+    assert site.session_state["ui_body"] == "Mars"
+    assert "ui_place" not in site.session_state
+
+
+def test_home_page_goes_step_by_step():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert [b.key for b in site.button if b.key.startswith("ui_pilier_")] == []
-    site.button(key="ui_lieu_Base lunaire").click().run()
-    assert len([b for b in site.button if b.key.startswith("ui_pilier_")]) == 3
+    assert [b.key for b in site.button if not b.key.startswith("ui_body_")] == []
+    site.button(key="ui_body_Mars").click().run()
+    assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [
+        "ui_place_Base martienne",
+        "ui_place_Rover pressurisé",
+    ]
+    site.button(key="ui_place_Base martienne").click().run()
+    assert len([b for b in site.button if b.key.startswith("ui_pillar_")]) == 3
     assert len(site.slider) == 0
-    site.button(key="ui_pilier_Éteindre").click().run()
+    site.button(key="ui_pillar_Éteindre").click().run()
     assert not site.exception
     assert len(site.slider) == 1
 
 
-def test_le_bouton_terre_affiche_la_reference():
+def test_earth_button_shows_the_reference():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_lieu_Terre").click().run()
-    site.button(key="ui_pilier_Prévenir").click().run()
+    site.button(key="ui_body_Terre").click().run()
+    site.button(key="ui_place_Terre").click().run()
+    site.button(key="ui_pillar_Prévenir").click().run()
     assert not site.exception
-    assert site.session_state["ui_lieu"] == "Terre"
+    assert site.session_state["ui_place"] == "Terre"
     assert len(site.info) == 1
 
 
-def test_etudiant_n_est_plus_propose():
+def test_student_is_not_offered():
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert "Étudiant" not in site.sidebar.selectbox(key="ui_profil").options
+    assert "Étudiant" not in site.sidebar.selectbox(key="ui_profile").options
     assert site.session_state["profil"] == "Chercheur"
+
+
+def test_french_contract_names_still_work():
+    from flame.ui import afficher_cadre, carte_fiche, flame_scene, investigation_card, scene_3d, show_sidebar
+
+    assert afficher_cadre is show_sidebar
+    assert carte_fiche is investigation_card
+    assert scene_3d is flame_scene

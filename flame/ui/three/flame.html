@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #05070d; }
+      canvas { display: block; }
+      #error { color: #9ca3af; font: 14px sans-serif; padding: 16px; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      // Qualitative illustration, not a simulation: the flame goes from a calm blue sphere
+      // (microgravity, oxygen arrives by diffusion) to a yellow drop stretched upwards
+      // (Earth gravity, hot air rises). No value shown here is NASA data.
+      import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+
+      const settings = __SETTINGS__; // replaced by Python: { gravity: 0 to 1, oxygen: in % }
+      const g = settings.gravity;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+      } catch (e) {
+        document.body.innerHTML = '<p id="error">The 3D scene needs WebGL, which this browser does not offer.</p>';
+        throw e;
+      }
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0.8, 5.5);
+      camera.lookAt(0, 0.3, 0);
+
+      // More oxygen: a slightly bigger, brighter flame (visual effect, clamped).
+      const strength = Math.min(Math.max(settings.oxygen / 21, 0.5), 2);
+      const size = 0.45 + 0.15 * strength;
+      const blue = new THREE.Color("#3b82f6");
+      const yellow = new THREE.Color("#fbbf24");
+      const color = blue.clone().lerp(yellow, g);
+
+      // A round gradient, bright in the middle and transparent at the edge, for soft halos.
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 128;
+      const brush = canvas.getContext("2d");
+      const gradient = brush.createRadialGradient(64, 64, 0, 64, 64, 64);
+      gradient.addColorStop(0, "rgba(255,255,255,1)");
+      gradient.addColorStop(0.35, "rgba(255,255,255,0.6)");
+      gradient.addColorStop(1, "rgba(255,255,255,0)");
+      brush.fillStyle = gradient;
+      brush.fillRect(0, 0, 128, 128);
+      const texture = new THREE.CanvasTexture(canvas);
+
+      const glow = (tint, opacity) =>
+        new THREE.Sprite(
+          new THREE.SpriteMaterial({
+            map: texture,
+            color: tint,
+            transparent: true,
+            opacity: Math.min(opacity * strength, 1),
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+          }),
+        );
+
+      // The flame: a light core, a coloured halo, and a wide faint glow.
+      const flame = new THREE.Group();
+      const layers = [
+        { sprite: glow(color.clone().lerp(new THREE.Color("#ffffff"), 0.4), 0.8), width: 2.0 },
+        { sprite: glow(color, 0.6), width: 3.0 },
+        { sprite: glow(color, 0.25), width: 5.0 },
+      ];
+      for (const layer of layers) flame.add(layer.sprite);
+      flame.position.y = 0.45 * g;
+      scene.add(flame);
+
+      // The fuel: a grey droplet in the middle, drawn over the glow.
+      const fuel = new THREE.Mesh(
+        new THREE.SphereGeometry(0.12, 24, 24),
+        new THREE.MeshBasicMaterial({ color: "#6b7280", depthTest: false, transparent: true }),
+      );
+      fuel.renderOrder = 1;
+      scene.add(fuel);
+
+      // Particles: they drift slowly in every direction in microgravity, and rise with gravity.
+      const PARTICLE_COUNT = 260;
+      const positions = new Float32Array(PARTICLE_COUNT * 3);
+      const speeds = [];
+      const respawn = (i) => {
+        const direction = new THREE.Vector3().randomDirection();
+        const start = direction.clone().multiplyScalar(size * 0.9);
+        positions.set([start.x, start.y, start.z], i * 3);
+        speeds[i] = direction.multiplyScalar(0.004 * (1 - g) + 0.002).add(new THREE.Vector3(0, 0.02 * g, 0));
+      };
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        respawn(i);
+        const head = Math.random() * 120;
+        for (let k = 0; k < 3; k++) positions[i * 3 + k] += speeds[i].getComponent(k) * head;
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const particles = new THREE.Points(
+        geometry,
+        new THREE.PointsMaterial({
+          color: color,
+          size: 0.04,
+          transparent: true,
+          opacity: 0.7,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+        }),
+      );
+      scene.add(particles);
+
+      const LIMIT = 3.2;
+      const moveParticles = () => {
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          for (let k = 0; k < 3; k++) positions[i * 3 + k] += speeds[i].getComponent(k);
+          const x = positions[i * 3], y = positions[i * 3 + 1], z = positions[i * 3 + 2];
+          if (Math.hypot(x, y, z) > LIMIT) respawn(i);
+        }
+        geometry.attributes.position.needsUpdate = true;
+      };
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      const draw = (time = 0) => {
+        // With gravity the flame flickers; in microgravity it stays almost still.
+        const flicker = 0.015 + 0.06 * g;
+        const breath = 1 + flicker * Math.sin(time / 180) * Math.sin(time / 77);
+        for (const layer of layers) {
+          const width = size * layer.width;
+          layer.sprite.scale.set(width * breath, width * (1 + 1.2 * g) * (2 - breath), 1);
+        }
+        moveParticles();
+        renderer.render(scene, camera);
+      };
+
+      if (reducedMotion) {
+        draw();
+      } else {
+        renderer.setAnimationLoop(draw);
+      }
+    </script>
+  </body>
+</html>
