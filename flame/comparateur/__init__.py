@@ -14,6 +14,13 @@ from flame.comparateur.comparaison import (
     separer,
     variables_communes,
 )
+from flame.comparateur.conditions import (
+    decrire_environnement,
+    environnement_defini,
+    graphique_conditions,
+    plages_du_scenario,
+    tests_correspondants,
+)
 from flame.comparateur.details import (
     ABSENT,
     cote_a_cote,
@@ -35,15 +42,20 @@ __all__ = [
     "comparables",
     "comparer",
     "cote_a_cote",
+    "decrire_environnement",
+    "environnement_defini",
     "explication_carte",
     "frequents",
+    "graphique_conditions",
     "instruments_communs",
     "ligne_psi",
     "mesures",
     "plages",
+    "plages_du_scenario",
     "points",
     "portrait",
     "resume",
     "separer",
+    "tests_correspondants",
     "variables_communes",
 ]
