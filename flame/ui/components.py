@@ -158,7 +158,9 @@ def place_picker() -> tuple[str | None, str | None]:
         objects = [BODY_OBJECTS[b] for b in BODIES]
         _pick_in_3d(BODIES, objects, FIRST_VIEW_ZONES, None, action=choose_body, prefix="ui_body", name=BODY_NAMES.get)
         return None, None
-    st.button("Back to Earth, Moon and Mars", icon=":material/arrow_back:", key="ui_back", on_click=go_back)
+    st.html(BACK_STYLE)
+    with st.container(key="ui_back_row"):
+        st.button("All planets", icon=":material/chevron_left:", key="ui_back", on_click=go_back)
     places = PLACES_BY_BODY[body]
     place = current_place() if current_place() in places else None
     objects = [PLACE_VIEW[p][0] for p in places]
@@ -168,17 +170,37 @@ def place_picker() -> tuple[str | None, str | None]:
     return body, place
 
 
-# The three pillars as large white cards; the chosen one gets a flame-orange ring.
+# The three pillars as large white tiles: an orange icon, the name, and its hint inside the tile.
+# The chosen one gets a flame-orange ring and a faint warm tint.
 PILLAR_STYLE = """<style>
+.st-key-ui_pillars [data-testid="stColumn"] { position: relative; }
 .st-key-ui_pillars button {
-  height: 128px; border-radius: 24px; background: #fff; border: 2px solid transparent;
-  box-shadow: 0 2px 12px rgba(29, 29, 31, 0.06); flex-direction: column; gap: 0.4rem;
+  height: 210px; border-radius: 28px; background: #fff; border: 2px solid transparent;
+  flex-direction: column; justify-content: flex-start; gap: 0.7rem; padding: 1.8rem 1rem 0;
 }
-.st-key-ui_pillars button p { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
-.st-key-ui_pillars button [data-testid="stIconMaterial"] { font-size: 2rem; }
-.st-key-ui_pillars button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(29, 29, 31, 0.12); }
-.st-key-ui_pillars [data-testid="stBaseButton-primary"] { background: #fff; color: #e0662a; border-color: #e0662a; }
-.st-key-ui_pillars [data-testid="stCaptionContainer"] { text-align: center; font-size: 0.95rem; }
+/* Icon above the name, not beside it. */
+.st-key-ui_pillars button > div > span { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.st-key-ui_pillars button p { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; color: #1d1d1f; }
+.st-key-ui_pillars button [data-testid="stIconMaterial"] { font-size: 2.6rem; color: #e0662a; }
+.st-key-ui_pillars button:hover { transform: scale(1.02); box-shadow: 0 18px 40px -12px rgba(29, 29, 31, 0.2); }
+.st-key-ui_pillars [data-testid="stBaseButton-primary"] { background: #fff8f3; border-color: #e0662a; }
+.st-key-ui_pillars [data-testid="stBaseButton-primary"] p { color: #c9541c; }
+/* The hint sits inside the tile, near its bottom edge; clicks go through it to the button. */
+.st-key-ui_pillars [data-testid="stElementContainer"]:has([data-testid="stCaptionContainer"]) {
+  position: absolute; left: 0; right: 0; top: 136px; padding: 0 1.4rem; pointer-events: none;
+}
+.st-key-ui_pillars [data-testid="stCaptionContainer"] p {
+  text-align: center; font-size: 1rem; line-height: 1.35; color: #6e6e73; font-weight: 500;
+}
+
+</style>"""
+
+# "Back" as a plain flame-coloured text link with a chevron, not a framed button.
+BACK_STYLE = """<style>
+.st-key-ui_back_row button { border: none; background: transparent; padding: 0; min-height: 0; }
+.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #e0662a; font-size: 1.05rem; }
+.st-key-ui_back_row button:hover p { text-decoration: underline; }
+.st-key-ui_back_row { margin-bottom: 0.4rem; }
 </style>"""
 
 
