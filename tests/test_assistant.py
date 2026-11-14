@@ -353,3 +353,21 @@ def test_synthetiser_refuse_une_seule_fiche_et_dit_quand_la_cle_manque(monkeypat
     assert chatbot.synthetiser(FICHES_TEST, ["A"]) == chatbot.SYNTHESE_IMPOSSIBLE
     monkeypatch.setattr(chatbot, "cle_api", lambda: None)
     assert chatbot.synthetiser(FICHES_TEST, ["A", "B"]) == chatbot.SANS_CLE
+
+
+def test_compter_tests_compte_comme_les_pages(monkeypatch):
+    """Un test sans pression notée est compté, et le résultat dit combien ont une pression notée."""
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "B", "B"],
+            "oxygene_pct": [35.0, 35.0, 35.0, None],
+            "pression_kpa": [50.0, None, 101.0, 50.0],
+        }
+    )
+    monkeypatch.setattr(outils, "charger_tests", lambda: tests)
+    monkeypatch.setattr(outils, "charger_fiches", lambda: FICHES_TEST.assign(type_combustible="gaz"))
+    lune = outils.compter_tests(oxygene_min_pct=30, pression_max_kpa=70.3)
+    assert lune["nb_tests"] == 2
+    assert lune["nb_tests_avec_pression_notee"] == 1
+    assert lune["investigations"] == [{"id": "A", "nb_tests": 2}]
+    assert "nb_tests_avec_pression_notee" not in outils.compter_tests(oxygene_min_pct=30)
