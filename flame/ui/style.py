@@ -152,12 +152,16 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
 
-/* The mascot of the Assistant page: pinned to the bottom-right corner, high enough to stand on top of the
-   chat box (legs and shoes visible), with no frame around it. */
-.st-key-ui_assistant_mascot {{ position: fixed; right: 24px; bottom: 96px; z-index: 1000; width: 170px; gap: 0;
+/* The mascot of the Assistant page, as in a messaging app: on the left, its lower half hidden behind the
+   chat box, so that it seems to stand behind it. The chat box is drawn on top of it. */
+.st-key-ui_assistant_mascot {{ width: 150px; margin: 0 0 -74px 10px; position: relative; z-index: 0; gap: 0;
+  align-self: flex-start;
   pointer-events: none; }}
 .st-key-ui_assistant_mascot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
-@media (max-width: 640px) {{ .st-key-ui_assistant_mascot {{ width: 110px; right: 8px; }} }}
+[data-testid="stChatInput"] {{ position: relative; z-index: 1; }}
+/* The bottom bar lets the space background show through. */
+[data-testid="stBottom"], [data-testid="stBottom"] > div, [data-testid="stBottomBlockContainer"] {{
+  background: transparent; }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;

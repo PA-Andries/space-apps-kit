@@ -110,12 +110,15 @@ def chatbot_button(page: str) -> None:
 
 
 def assistant_mascot() -> None:
-    """The flame mascot of the Assistant page, in the bottom-right corner, standing on top of the chat box.
+    """The flame mascot of the Assistant page, peeking out from behind the chat box on the left.
 
-    It talks (its mouth moves) while `talking()` is open: see below.
+    As in a messaging app: only its head and shoulders show above the box; while `talking()` is open
+    it rises a little and talks. It is placed in the bottom bar, just before the chat box.
     """
-    with st.container(key="ui_assistant_mascot"):
-        mascot_scene(height=190)
+    # The bottom bar of the page (where the chat box lives); the main page if this Streamlit has none.
+    bottom = getattr(st, "bottom", st)
+    with bottom.container(key="ui_assistant_mascot"):
+        mascot_scene(height=170)
 
 
 @contextmanager

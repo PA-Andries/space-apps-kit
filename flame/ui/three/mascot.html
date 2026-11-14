@@ -231,8 +231,12 @@
       window.addEventListener("resize", resize);
       resize();
 
+      // While talking, the character rises a little (it peeks out further from behind the chat box).
+      let rise = 0;
       const draw = (time = 0) => {
         const t = reducedMotion ? 0.5 : time / 1000;
+        rise += ((talking ? 0.22 : 0) - rise) * 0.08;
+        character.position.y = rise;
         if (!reducedMotion) character.rotation.y = 0.2 * Math.sin(t * 0.6);
         pose(t);
         renderer.render(scene, camera);

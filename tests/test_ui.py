@@ -323,9 +323,10 @@ def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
 def test_the_assistant_page_shows_the_flame_and_it_talks_while_answering():
     page = AppTest.from_file("../pages/assistant.py", default_timeout=60).run()
     assert not page.exception
-    # The flame comes after the conversation; the style pins it to the bottom-right corner.
-    blocks = list(page.main.children.values())
-    assert "ui_assistant_mascot" in str(blocks[-1].proto)
+    # The flame stands in the bottom bar, just before the chat box (which hides its lower half).
+    bottom_bar = [block for block in page._tree.children.values() if "assistant_question" in str(block)][0]
+    flame, chat_box = [str(child.proto) for child in bottom_bar.children.values()]
+    assert "ui_assistant_mascot" in flame and "assistant_question" in chat_box
 
     def answer_while_talking():
         import streamlit as st
