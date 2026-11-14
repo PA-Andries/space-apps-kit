@@ -175,6 +175,23 @@ def test_dashboard_shows_everything_at_once():
     assert not site.exception
 
 
+def test_crew_environment_sets_parameters_that_refine_the_list():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_body_Lune").click().run()
+    site.button(key="ui_place_Rover pressurisé").click().run()
+    assert not site.exception
+    # The statement gives the rover 30 % oxygen and 70 kPa: the inputs are filled and the list narrows.
+    assert site.number_input(key="ui_oxygen_Rover pressurisé").value == 30
+    assert site.number_input(key="ui_pressure_Rover pressurisé").value == 70
+    narrowed = len(site.dataframe[0].value)
+    # The statement gives no atmosphere for the station: no figure, so nothing is filtered out.
+    site.button(key="ui_back").click().run()
+    site.button(key="ui_body_Terre").click().run()
+    site.button(key="ui_place_Station").click().run()
+    assert site.number_input(key="ui_oxygen_Station").value is None
+    assert narrowed < len(site.dataframe[0].value)  # sample data in tests: the rover list may be empty
+
+
 def _pillar_switch_emptied():
     import streamlit as st
 

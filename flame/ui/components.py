@@ -1,6 +1,7 @@
 """Display blocks shared between pages."""
 
 from collections.abc import Callable
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
@@ -147,8 +148,41 @@ def _pick_in_3d(values: list[str], objects: list[str], zones: list[dict], chosen
         _button_row(values, chosen, options["action"], prefix, options["name"])
 
 
+# Moon and Mars: NASA images seen from the ground, as if the crew were there (credits in images/README.md).
+IMAGES_DIR = Path(__file__).parent / "images"
+PLACE_PHOTOS = {
+    "Base lunaire": ("moon_base.jpg", "NASA Ames artwork, Rick Guidice (1978)"),
+    "Rover pressurisé": ("pressurized_rover.jpg", "NASA Lunar Electric Rover prototype, Arizona test (2008)"),
+    "Base martienne": ("mars_base.jpg", "NASA artist's concept, PIA23302"),
+}
+PHOTO_STYLE = """<style>
+.st-key-ui_photos [data-testid="stImage"] img { height: 330px; object-fit: cover; border-radius: 18px; }
+.st-key-ui_photos .stButton button { margin-top: 0.3rem; }
+.st-key-ui_photos [data-testid="stCaptionContainer"] { font-size: 0.75rem; }
+</style>"""
+
+
+def _pick_in_photos(places: list[str], chosen: str | None) -> None:
+    """One NASA image per crew environment, with its button below; the chosen one is highlighted."""
+    st.html(PHOTO_STYLE)
+    with st.container(key="ui_photos"):
+        for column, place in zip(st.columns(len(places)), places, strict=True):
+            file_name, credit = PLACE_PHOTOS[place]
+            with column:
+                st.image(str(IMAGES_DIR / file_name), width="stretch")
+                st.button(
+                    label(place),
+                    key=f"ui_place_{place}",
+                    type="primary" if place == chosen else "secondary",
+                    width="stretch",
+                    on_click=choose_place,
+                    args=(place,),
+                )
+                st.caption(credit)
+
+
 def place_picker() -> tuple[str | None, str | None]:
-    """Earth, Moon and Mars in 3D; clicking one zooms in on the whole planet and what belongs to it.
+    """Earth, Moon and Mars in 3D; Earth zooms in on its orbit, the Moon and Mars show NASA ground images.
 
     Returns (body, place), each None until chosen.
     """
@@ -162,6 +196,9 @@ def place_picker() -> tuple[str | None, str | None]:
         st.button("All planets", icon=":material/chevron_left:", key="ui_back", on_click=go_back)
     places = PLACES_BY_BODY[body]
     place = current_place() if current_place() in places else None
+    if body != EARTH:
+        _pick_in_photos(places, place)
+        return body, place
     objects = [PLACE_VIEW[p][0] for p in places]
     zones = [PLACE_VIEW[p][1] for p in places]
     zoom_from = BODIES.index(body)
