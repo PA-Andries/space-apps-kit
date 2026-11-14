@@ -21,7 +21,7 @@ Influence, Creativity, Validity, Relevance, Presentation. See `docs/judging.md`.
 
 ## Enforced rules (hooks block you, do not bypass them)
 
-These apply to every agent (Claude Code, Codex, Cursor, Copilot, any other) and are checked by the git hooks in `.githooks/`. There is no CI on GitHub: the hooks and `uv run verifier` are the gate.
+These apply to every agent (Claude Code, Codex, Cursor, Copilot, any other) and are checked by the git hooks in `.githooks/`. The hooks and `uv run verifier` are the gate.
 
 1. **Start every session with `uv sync` then `uv run verifier`.** The first run turns the hooks on in your clone (`core.hooksPath = .githooks`). If the hooks are off, turn them on before any edit.
 2. **Read issue #2 "com inter agents"**, then post a **CLAIM** (task, branch name, files) before your first edit and a **RELEASE** when you stop. The push hook refuses an agent's push when no CLAIM names its branch.

@@ -136,7 +136,7 @@ Une valeur inconnue reste vide ou vaut `inconnu`. Elle n'est jamais devinée.
 - **uv** pour installer le même environnement chez tout le monde : `uv sync`, puis `uv run ...`. Jamais `pip install`.
 - **API d'un LLM** pour l'assistant. La clé est rangée dans les Secrets de Streamlit Community Cloud, jamais dans le code.
 - **GitHub + GitHub Desktop** : une branche courte par tâche, une pull request (PR), fusion quand `uv run verifier` est passé.
-- **`uv run verifier`** : vérifie la mise en forme, les règles de code et les tests sur son ordinateur. Il n'y a pas de CI sur GitHub ; des garde-fous (`.githooks/`) relancent ces vérifications à chaque envoi et refusent un commit qui sort de son dossier.
+- **`uv run verifier`** : vérifie la mise en forme, les règles de code et les tests sur son ordinateur. Des garde-fous (`.githooks/`) relancent ces vérifications à chaque envoi et refusent un commit qui sort de son dossier.
 - **Streamlit Community Cloud** pour la mise en ligne : chaque fusion dans `main` met le site à jour.
 
 Pas de base de données, pas de serveur séparé, pas de React. Le rôle B choisit comment il remplit les fiches (Google Sheets ou script) ; seuls comptent les trois CSV de `data/`.
