@@ -19,6 +19,7 @@ from flame.comparateur.comparaison import (
     niveau_et_raison,
     variables_communes,
 )
+from flame.comparateur.conditions import decrire_environnement, environnement_defini, tests_correspondants
 
 # Ce que représente une ligne des tables de tests de NASA, selon l'investigation.
 SENS_D_UNE_LIGNE = {
@@ -177,10 +178,12 @@ def resume(
     habitat: str = "",
     relations: pd.DataFrame | None = None,
     investigations_psi: pd.DataFrame | None = None,
+    scenario: dict | None = None,
 ) -> dict[str, list[str]]:
     """Ce qui ressort de la comparaison, en phrases rangées par thème ; `ids[0]` est l'investigation de départ.
 
-    `oxygene_habitat` est le taux d'oxygène de l'habitat quand l'énoncé le donne, sinon None.
+    Avec `scenario`, le thème « For your environment » compte les tests dans les plages de l'environnement.
+    Sans lui, `oxygene_habitat` (le taux d'oxygène de l'habitat, si l'énoncé le donne) sert comme avant.
     Un thème sans rien à dire n'apparaît pas.
     """
     noms = dict(zip(fiches["id"], fiches["nom"], strict=True))
@@ -198,7 +201,9 @@ def resume(
     themes["How they relate"] = relation
 
     oxygene = etendues(tests, ids, "oxygene_pct")
-    if oxygene_habitat is not None:
+    if scenario is not None:
+        themes["For your environment"] = _pour_l_environnement(fiches, tests, ids, scenario, noms)
+    elif oxygene_habitat is not None:
         niveau_habitat = f"the {habitat} oxygen level ({oxygene_habitat:g} %)"
         pour_habitat = []
         for identifiant in ids:
@@ -285,3 +290,30 @@ def resume(
 def _lignes_entre(tests: pd.DataFrame, identifiant: str, variable: str, bas: float, haut: float) -> int:
     valeurs = tests[tests["investigation_id"] == identifiant][variable]
     return int(valeurs.between(bas, haut).sum())
+
+
+def _pour_l_environnement(
+    fiches: pd.DataFrame, tests: pd.DataFrame, ids: list[str], scenario: dict, noms: dict[str, str]
+) -> list[str]:
+    """Pour chaque investigation, combien de ses tests tombent dans les plages de l'environnement."""
+    if not environnement_defini(scenario):
+        return ["Your environment gives no oxygen, pressure or air flow range, so no test can be matched to it."]
+    phrases = [f"Your environment: {decrire_environnement(scenario) or 'fuel type only'}."]
+    correspondants = tests_correspondants(tests, fiches, scenario)
+    sans_pression = {**scenario, "pression_kpa": (None, None)}
+    oxygene_seul = tests_correspondants(tests, fiches, sans_pression)
+    for identifiant in ids:
+        dedans = correspondants[correspondants["investigation_id"] == identifiant]
+        surs = int(dedans["pression_notee"].sum())
+        a_verifier = len(dedans) - surs
+        if surs:
+            phrases.append(f"{noms[identifiant]} has {surs} test row(s) inside it.")
+        elif a_verifier:
+            phrases.append(
+                f"{noms[identifiant]} has {a_verifier} test row(s) that fit it, but their pressure is not recorded."
+            )
+        else:
+            proches = int((oxygene_seul["investigation_id"] == identifiant).sum())
+            suite = f" {proches} row(s) fit everything but the pressure range." if proches else ""
+            phrases.append(f"{noms[identifiant]} has no test row inside it.{suite}")
+    return phrases

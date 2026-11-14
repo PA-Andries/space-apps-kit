@@ -4,14 +4,19 @@
 """
 
 HABITATS = ["Vaisseau", "Station", "Base lunaire", "Base martienne", "Rover pressurisé"]
+# OBSOLÈTE (décision du 14 nov. 17h00) : les piliers sont abandonnés. La liste reste tant que des pages la lisent.
 PILIERS = ["Prévenir", "Détecter", "Éteindre"]
 PROFILS = ["Étudiant", "Chercheur", "Ingénieur"]
+
+# Les types de combustible que l'utilisateur peut choisir dans son environnement (clé `type_combustible`).
+TYPES_COMBUSTIBLE = ["solide", "liquide", "gaz"]
 
 # Valeur à écrire quand une information manque. On ne devine jamais une donnée NASA.
 INCONNU = "inconnu"
 
-# Atmosphère type de chaque habitat : (oxygène en %, pression en kPa).
-# Base lunaire et rover : chiffres de l'énoncé. Les autres sont des hypothèses à valider.
+# OBSOLÈTE, remplacé par `conditions_habitat(habitat)` : ne plus s'en servir dans du code nouveau.
+# Atmosphère type de chaque habitat : (oxygène en %, pression en kPa). Les valeurs de Mars n'ont pas de
+# source ; elles restent ici tant que flame/pipeline, flame/recherche et flame/ui lisent ce tableau.
 ATMOSPHERES = {
     "Vaisseau": (21, 101),
     "Station": (21, 101),
