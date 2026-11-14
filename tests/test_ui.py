@@ -225,6 +225,27 @@ def test_every_page_receives_the_environment_of_page_one():
         assert site.session_state["scenario_pression_kpa"] == (None, 70.3), page
 
 
+def test_partial_gravity_is_stated_as_a_gap_not_as_a_count():
+    def texts(site):
+        return " ".join(element.value for element in [*site.markdown, *site.caption])
+
+    site = AppTest.from_file(APP, default_timeout=30).run()  # Moon base: 0.165 g
+    assert "0 in partial gravity" not in texts(site)
+    assert "None of NASA's tests was run at 0.165 g" in texts(site)
+    site.button(key="ui_body_Terre").click().run()
+    site.button(key="ui_place_Station").click().run()  # the station is in microgravity: nothing to say
+    assert "partial gravity" not in texts(site) and "None of NASA's tests" not in texts(site)
+
+
+def test_the_fuel_choices_are_the_contract_ones():
+    from flame.commun import TYPES_COMBUSTIBLE
+    from flame.ui import label
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    fuels = next(group for group in site.get("button_group") if group.key == "ui_fuels")
+    assert list(fuels.options) == [label(fuel) for fuel in TYPES_COMBUSTIBLE]
+
+
 def test_analyse_shows_the_three_most_relevant():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert "ui_analysed" not in site.session_state  # the results wait for ANALYSE

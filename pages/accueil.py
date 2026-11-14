@@ -10,7 +10,7 @@ import streamlit as st
 
 import flame.comparateur as comparateur
 import flame.recherche as recherche
-from flame.commun import charger_fiches, charger_tests, get_scenario
+from flame.commun import TYPES_COMBUSTIBLE, charger_fiches, charger_tests, get_scenario
 from flame.ui import (
     EARTH,
     bounds_text,
@@ -29,7 +29,6 @@ from flame.ui import (
     stat_tiles,
 )
 
-FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen = all
 # Slider scales. A handle left at the end of its scale means "no bound" on that side.
 OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
@@ -87,7 +86,9 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
     gravity = st.slider("g (gravity, in g)", 0.0, 1.0, step=0.005, format="%.3f", key="ui_gravity")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
-    fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
+    fuels = st.pills(
+        "Fuel (none chosen = all)", TYPES_COMBUSTIBLE, selection_mode="multi", format_func=label, key="ui_fuels"
+    )
     air_flow = from_slider(
         st.slider("Air flow (cm/s, optional)", *AIR_FLOW_SCALE, step=0.5, key="ui_air_flow"), AIR_FLOW_SCALE
     )
@@ -132,9 +133,12 @@ with chart_column, st.container(key="ui_card_ranking", height="stretch"):
         st.info("The conditions chart and the test counter arrive with role D's work (lot D).")
     else:
         found = matching(tests, fiches, scenario)
-        st.markdown(
-            f"**{len(found):,} tests · {found['investigation_id'].nunique()} investigations · 0 in partial gravity**"
-        )
+        st.markdown(f"**{len(found):,} tests · {found['investigation_id'].nunique()} investigations**")
+        # La gravité partielle n'est pas une colonne des tests : on dit le manque, sans afficher de compte.
+        if 0 < gravity < 1:
+            st.caption(
+                f"None of NASA's tests was run at {gravity:g} g: PSI holds microgravity and Earth-gravity data only."
+            )
         view = st.segmented_control(
             "View",
             ["pression", "debit"],
