@@ -47,10 +47,9 @@ To rebuild from an existing mirror: `uv run python flame/pipeline/psi_construire
 | `documents` | 192 | a report or document in the local mirror | Sources for AI summaries; link to open the PDF |
 | `raw_data_map` | 24 | where the raw data of an investigation lives | Redirect users to raw data, with size and API recipe |
 | `resources` | 10 | an official challenge resource | Home page, Earth benefits page |
-| `categories` | 3 | a user category: prevent (prévenir), detect (détecter), react (réagir) | Category picker |
 | `measurements` | 163 | an instrument or measurement type of one investigation, with its source document | "What was measured and how" panel, comparison of sensors |
 | `raw_files` | about 79,000 | one raw or calibration file on PSI (only present after `psi_telecharger.py`) | Per-file redirect to raw data |
-| `relevance` | 360 | an investigation scored for one habitat and one category | **The ranking shown after the user picks a habitat and a category** |
+| `relevance` | 120 | an investigation scored for one habitat | **The ranking shown after the user picks a habitat** |
 
 ### `investigations` columns
 - Identity: `investigation_id` (PSI-25), `acronym`, `title`, `one_liner`, `project_type`, `flight_platform`, `start_date`, `end_date`, `doi`, `license`, `psi_url`.
@@ -72,23 +71,29 @@ To rebuild from an existing mirror: `uv run python flame/pipeline/psi_construire
 
 ## How the ranking works (`relevance`)
 
-The user picks a habitat (space station, spacecraft, Moon Base, pressurized rover, Mars base) and a category
-(prevent, detect, react). Filter `relevance` on both and sort by `rank`. Each row carries its `score` (0 to 100), the
-parts of the score, and a plain-English `why`.
+The user picks a habitat (space station, spacecraft, Moon Base, pressurized rover, Mars base). Filter `relevance`
+on it and sort by `rank`. There is one row per habitat and investigation (120 rows). Each row carries its `score`
+(0 to 100), the parts of the score, and a plain-English `why`.
 
-`score = 50 x category_weight/3 + 30 x atmosphere_fit + 10 x gravity_fit + 10 x cited_in_statement` (0 if the
-investigation is not relevant to the category).
+`score = 60 x atmosphere_fit + 20 x gravity_fit + 20 x cited_in_statement`
 
-- `category_weight` (0 to 3): **team judgement**, set in `psi_construire.py` (table `W`). 3 = primary, 2 = secondary, 1 = indirect. Review it.
-- `atmosphere_fit`: **computed from `tests`**. Station and spacecraft: rows at 19-23% O2. Moon Base, rover, Mars: rows at
+PA's decision of 14 Nov 2026: **the fire-safety pillars (prevent, detect, react) are dropped.** The table has no
+category any more and `categories.csv` is gone. The three parts of the score keep the proportions they had before
+(30, 10, 10), brought back to 100. Many investigations tie, and ties are broken by `investigation_id`: the site's own
+ranking (role C) is the one shown to the user.
+
+- `atmosphere_fit`: **computed from `tests`**. Station and spacecraft: rows at 19-23% O2. Moon Base and rover: rows at
   30% O2 or more and at 0.694 atm (10.2 psi) or less score 1; high oxygen only 0.7; reduced pressure only 0.3.
+  Mars base: empty for every investigation, because the statement gives no atmosphere for Mars; the score then
+  counts gravity and the citation only.
 - `gravity_fit`: microgravity flight data fits a station fully. For the Moon and Mars, PSI has no partial-gravity data:
   E-FIELD Flames scores 1 (the statement says it mimics partial gravity), Saffire-II 0.6 (has 1-g and microgravity
   results), other flight data 0.4.
 - `cited_in_statement`: 1 if the statement names it as fire-safety work.
 
-Two assumptions to show in the UI: spacecraft cabin air and the Mars base atmosphere are not given by the statement
-(`atmosphere_source` says so). The weights 50/30/10/10 are a starting point, easy to change in the script.
+To show in the UI: spacecraft and station cabin air is an assumption, and the Mars base atmosphere is unknown; the
+statement gives neither (`atmosphere_source` says so). The weights 60/20/20 are a starting point, easy to change in
+the script.
 
 ## Where each value comes from (verified vs chosen by us)
 
