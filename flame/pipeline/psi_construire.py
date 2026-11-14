@@ -1733,11 +1733,12 @@ RES = [dict(zip(("kind", "title", "url", "note"), r)) for r in RESOURCES]
 
 
 # ---------------------------------------------------------------- relevance (habitat x category x investigation)
-# Category weights are TEAM JUDGEMENT (0 none, 1 indirect, 2 secondary, 3 primary). Everything else is computed.
+# Category weights are TEAM JUDGEMENT (0 none, 1 indirect, 2 secondary, 3 primary). Since the reframing of 14 Nov they
+# are a FILTER and a LABEL only: they no longer enter the score. Everything else is computed.
 CATS = [
     ("prevent", "Prévenir", "Material choice and flammability limits: will it ignite and keep burning?"),
     ("detect", "Détecter", "Smoke, soot and particles: how fast and how reliably can a fire be detected?"),
-    ("react", "Réagir", "Suppression and extinction: what puts the flame out, and how does it end?"),
+    ("react", "Éteindre", "Suppression and extinction: what puts the flame out, and how does it end?"),
 ]
 W = {  # id: (prevent, detect, react)
     26: (3, 0, 2),
@@ -1847,7 +1848,7 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
             gv, gtxt = 0.4, "microgravity only: one bound for partial gravity (no partial-gravity data in PSI)"
         for ci, (cid, cfr, cdesc) in enumerate(CATS):
             w = W[n][ci]
-            score = round(50 * w / 3 + 30 * atm + 10 * gv + 10 * CUR[n][5]) if w else 0
+            score = round(60 * atm + 20 * gv + 20 * CUR[n][5])
             RELV.append(
                 {
                     "habitat_id": hid,
@@ -1866,22 +1867,20 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
                     "why": (
                         "%s for '%s'; %s; %s%s"
                         % (
-                            {3: "primary", 2: "secondary", 1: "indirect"}[w],
+                            {3: "primary", 2: "secondary", 1: "indirect", 0: "not relevant"}[w],
                             cid,
                             atxt,
                             gtxt,
                             "; named in the statement as fire-safety work" if CUR[n][5] else "",
                         )
-                    )
-                    if w
-                    else "not relevant to this category",
+                    ),
                     "atmosphere_source": asrc,
                 }
             )
 for hid, *_ in HR:
     for cid, *_ in CATS:
         grp = sorted(
-            [r for r in RELV if r["habitat_id"] == hid and r["category_id"] == cid and r["score"] > 0],
+            [r for r in RELV if r["habitat_id"] == hid and r["category_id"] == cid and r["category_weight"] > 0],
             key=lambda r: (-r["score"], r["investigation_id"]),
         )
         for i, r in enumerate(grp):

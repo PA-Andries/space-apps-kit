@@ -1,4 +1,4 @@
 category_id,label_fr,description,nasa_term
 prevent,Prévenir,Material choice and flammability limits: will it ignite and keep burning?,Prevention
 detect,Détecter,"Smoke, soot and particles: how fast and how reliably can a fire be detected?",Detection
-react,Réagir,"Suppression and extinction: what puts the flame out, and how does it end?",Suppression
+react,Éteindre,"Suppression and extinction: what puts the flame out, and how does it end?",Suppression

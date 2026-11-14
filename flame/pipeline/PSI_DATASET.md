@@ -47,7 +47,7 @@ To rebuild from an existing mirror: `uv run python flame/pipeline/psi_construire
 | `documents` | 192 | a report or document in the local mirror | Sources for AI summaries; link to open the PDF |
 | `raw_data_map` | 24 | where the raw data of an investigation lives | Redirect users to raw data, with size and API recipe |
 | `resources` | 10 | an official challenge resource | Home page, Earth benefits page |
-| `categories` | 3 | a user category: prevent (prévenir), detect (détecter), react (réagir) | Category picker |
+| `categories` | 3 | a user category: prevent (prévenir), detect (détecter), react (éteindre) | Category picker |
 | `measurements` | 163 | an instrument or measurement type of one investigation, with its source document | "What was measured and how" panel, comparison of sensors |
 | `raw_files` | about 79,000 | one raw or calibration file on PSI (only present after `psi_telecharger.py`) | Per-file redirect to raw data |
 | `relevance` | 360 | an investigation scored for one habitat and one category | **The ranking shown after the user picks a habitat and a category** |
@@ -73,13 +73,18 @@ To rebuild from an existing mirror: `uv run python flame/pipeline/psi_construire
 ## How the ranking works (`relevance`)
 
 The user picks a habitat (space station, spacecraft, Moon Base, pressurized rover, Mars base) and a category
-(prevent, detect, react). Filter `relevance` on both and sort by `rank`. Each row carries its `score` (0 to 100), the
-parts of the score, and a plain-English `why`.
+(prevent, detect, react). Filter `relevance` on both, keep the rows whose `category_weight` is above 0, and sort by
+`rank`. Each row carries its `score` (0 to 100), the parts of the score, and a plain-English `why`.
 
-`score = 50 x category_weight/3 + 30 x atmosphere_fit + 10 x gravity_fit + 10 x cited_in_statement` (0 if the
-investigation is not relevant to the category).
+`score = 60 x atmosphere_fit + 20 x gravity_fit + 20 x cited_in_statement`
 
-- `category_weight` (0 to 3): **team judgement**, set in `psi_construire.py` (table `W`). 3 = primary, 2 = secondary, 1 = indirect. Review it.
+Since the reframing of 14 Nov 2026 (`DECISIONS.md`, Sat 16:45) the category (pillar) is **a filter and a label, not
+part of the score**. The score is the same for the three categories of one habitat and one investigation; the three
+remaining parts keep the proportions they had before (30, 10, 10), brought back to 100. Many investigations tie, and
+ties are broken by `investigation_id`: the site's own ranking (role C) is the one shown to the user.
+
+- `category_weight` (0 to 3): **team judgement**, set in `psi_construire.py` (table `W`). 3 = primary, 2 = secondary,
+  1 = indirect, 0 = not relevant. It decides which rows get a `rank` and gives the label; it does not change `score`.
 - `atmosphere_fit`: **computed from `tests`**. Station and spacecraft: rows at 19-23% O2. Moon Base, rover, Mars: rows at
   30% O2 or more and at 0.694 atm (10.2 psi) or less score 1; high oxygen only 0.7; reduced pressure only 0.3.
 - `gravity_fit`: microgravity flight data fits a station fully. For the Moon and Mars, PSI has no partial-gravity data:
