@@ -31,6 +31,7 @@ from flame.comparateur.details import (
     portrait,
     resume,
 )
+from flame.comparateur.tableau import capteurs, ce_qui_varie, tableau_des_tests
 
 __all__ = [
     "ABSENT",
@@ -38,7 +39,9 @@ __all__ = [
     "EXPLICATIONS",
     "NIVEAUX",
     "VARIABLES",
+    "capteurs",
     "carte",
+    "ce_qui_varie",
     "comparables",
     "comparer",
     "cote_a_cote",
@@ -56,6 +59,7 @@ __all__ = [
     "portrait",
     "resume",
     "separer",
+    "tableau_des_tests",
     "tests_correspondants",
     "variables_communes",
 ]

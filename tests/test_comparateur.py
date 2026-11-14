@@ -11,7 +11,9 @@ from flame.comparateur import (
     ABSENT,
     CRITERES,
     VARIABLES,
+    capteurs,
     carte,
+    ce_qui_varie,
     comparables,
     comparer,
     cote_a_cote,
@@ -25,6 +27,7 @@ from flame.comparateur import (
     portrait,
     resume,
     separer,
+    tableau_des_tests,
     variables_communes,
 )
 
@@ -387,3 +390,82 @@ def test_un_nouveau_lien_remplace_l_investigation_choisie_a_la_main():
     site.run()
     assert not site.exception
     assert site.selectbox(key="comparateur_depart").value == "EXEMPLE-C"
+
+
+def test_tableau_des_tests_de_l_environnement():
+    fiches, tests = charger_fiches(), charger_tests()
+    lune = tableau_des_tests(tests, fiches, LUNE)
+    assert list(lune["Test"]) == ["C-03"]
+    assert lune["Investigation"].iloc[0] == "Exemple C (fictif) : gouttes de carburant"
+    assert "Oxygen (%)" in lune.columns and "Pressure (kPa)" in lune.columns
+    assert len(tableau_des_tests(tests, fiches, LUNE, tous=True)) == len(tests)
+    assert len(tableau_des_tests(tests, fiches, MARS)) == len(tests)  # sans plage, tout est montré
+
+
+def test_le_csv_garde_les_cases_vides():
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A"],
+            "test_id": ["1"],
+            "combustible": ["PMMA"],
+            "oxygene_pct": [35.0],
+            "pression_kpa": [None],
+            "debit_air_cm_s": [None],
+            "resultat": [None],
+            "source": ["https://psi.nasa.gov"],
+        }
+    )
+    fiches = pd.DataFrame({"id": ["A"], "nom": ["Étude A"], "type_combustible": ["solide"]})
+    csv = tableau_des_tests(tests, fiches, LUNE).to_csv(index=False)
+    assert csv.splitlines()[1] == "A,Étude A,1,PMMA,35.0,,,,https://psi.nasa.gov"  # rien n'est inventé
+
+
+def test_ce_qui_varie_par_investigation():
+    tableau = ce_qui_varie(charger_tests(), charger_fiches()).set_index("Investigation")
+    ligne = tableau.loc["Exemple A (fictif) : tissu dans une boîte à gants"]
+    assert ligne["Test rows"] == 3
+    assert ligne["Oxygen (%)"] == "16 to 21"
+    assert ligne["Pressure (kPa)"] == "101"
+    assert ligne["What varies"] == "oxygen, air flow"
+
+
+def test_capteurs_filtre_par_investigation():
+    mesures_psi = pd.DataFrame(
+        {
+            "investigation_id": ["EXEMPLE-A", "EXEMPLE-C"],
+            "instrument": ["Caméra", "Radiomètre"],
+            "measures": ["Images", "Rayonnement"],
+            "unit": ["images", "W"],
+            "basis": ["document", "document"],
+            "source": ["rapport A", "rapport C"],
+        }
+    )
+    fiches = charger_fiches()
+    assert len(capteurs(mesures_psi, fiches)) == 2
+    seul = capteurs(mesures_psi, fiches, ["EXEMPLE-C"])
+    assert list(seul["Instrument"]) == ["Radiomètre"]
+    assert capteurs(pd.DataFrame(), fiches).empty  # table PSI absente : un tableau vide, pas une erreur
+
+
+def _page_donnees() -> AppTest:
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    return site.switch_page("pages/donnees.py").run()
+
+
+def test_la_page_data_compte_les_tests_de_l_environnement():
+    site = _page_donnees()
+    assert not site.exception
+    assert [metrique.value for metrique in site.metric[:2]] == ["1", "1"]  # base lunaire : C-03, une investigation
+
+
+def test_la_page_data_montre_tout_sur_demande():
+    site = _page_donnees()
+    site.toggle(key="comparateur_donnees_tous").set_value(True).run()
+    assert not site.exception
+    assert any("8 test rows" in legende.value for legende in site.caption)
+
+
+def test_la_page_data_change_de_vue():
+    site = _page_donnees()
+    site.radio(key="comparateur_donnees_vue").set_value("Oxygen × air flow").run()
+    assert not site.exception
