@@ -19,6 +19,8 @@ from space_apps_kit.regles import (
         ("pages/accueil.py", "F"),
         ("data/investigations.csv", "B"),
         ("tests/test_assistant.py", "E"),
+        ("pages/donnees.py", "D"),
+        ("pages/equipements.py", "E"),
         ("flame/commun/constantes.py", "A"),
         ("pyproject.toml", "A"),
     ],
