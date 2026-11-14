@@ -8,7 +8,7 @@ Place values are the contract values (French); `label()` shows them in English.
 
 import streamlit as st
 
-from flame.commun import ATMOSPHERES, get_scenario
+from flame.commun import ATMOSPHERES
 
 EARTH = "Terre"
 BODIES = ["Terre", "Lune", "Mars"]
@@ -43,11 +43,6 @@ def current_place() -> str | None:
     return st.session_state.get("ui_place")
 
 
-def current_pillar() -> str | None:
-    """The pillar chosen on the home page, or None until the user presses one of its buttons."""
-    return get_scenario()["pilier"] if st.session_state.get("ui_pillar_chosen") else None
-
-
 def body_of(place: str) -> str | None:
     """The celestial body of a place, or None if the home page does not offer it (for example a rover on Mars)."""
     return next((body for body in BODIES if place in PLACES_BY_BODY[body]), None)
@@ -64,22 +59,16 @@ def place_conditions(place: str, body: str) -> dict:
 
 
 def choose_body(body: str) -> None:
-    """Remember the celestial body; the place has to be chosen again, and the scene zooms in once."""
+    """Remember the celestial body; the place has to be chosen again (the scene plays its zoom by itself)."""
     if body != st.session_state.get("ui_body"):
         st.session_state["ui_body"] = body
         st.session_state.pop("ui_place", None)
-        st.session_state["ui_zoom_pending"] = True
 
 
 def go_back() -> None:
     """Back to the three celestial bodies."""
-    for key in ["ui_body", "ui_place", "ui_zoom_pending"]:
+    for key in ["ui_body", "ui_place"]:
         st.session_state.pop(key, None)
-
-
-def take_zoom() -> bool:
-    """True only on the first display after a body was chosen, so the zoom plays once."""
-    return st.session_state.pop("ui_zoom_pending", False)
 
 
 def choose_place(place: str) -> None:
@@ -87,9 +76,3 @@ def choose_place(place: str) -> None:
     st.session_state["ui_place"] = place
     if place != EARTH:
         st.session_state["ui_habitat"] = place
-
-
-def choose_pillar(pillar: str) -> None:
-    """Remember the scenario pillar (top bar)."""
-    st.session_state["ui_pillar"] = pillar
-    st.session_state["ui_pillar_chosen"] = True
