@@ -5,18 +5,11 @@ from collections.abc import Callable
 import pandas as pd
 import streamlit as st
 
-from flame.commun import PILIERS, get_scenario
+from flame.commun import PILIERS
 from flame.ui.libelles import libelle
-from flame.ui.lieux import LIEUX, choisir_lieu, choisir_pilier, lieu_courant
+from flame.ui.lieux import LIEUX, choisir_lieu, choisir_pilier, lieu_courant, pilier_courant
+from flame.ui.scene import scene_lieux
 
-ICONES_LIEUX = {
-    "Terre": "🌍",
-    "Vaisseau": "🚀",
-    "Station": "🛰️",
-    "Base lunaire": "🌕",
-    "Base martienne": "🔴",
-    "Rover pressurisé": "🚙",
-}
 ICONES_PILIERS = {
     "Prévenir": ":material/shield:",
     "Détecter": ":material/sensors:",
@@ -33,12 +26,12 @@ def carte_fiche(fiche: pd.Series) -> None:
         st.link_button("View on PSI", fiche["source_psi"])
 
 
-def _rangee_boutons(valeurs: list[str], choisie: str, icones: dict, action: Callable, prefixe: str) -> None:
+def _rangee_boutons(valeurs: list[str], choisie: str | None, icones: dict, action: Callable, prefixe: str) -> None:
     """Une rangée de boutons ; celui de la valeur choisie est mis en avant."""
     for colonne, valeur in zip(st.columns(len(valeurs)), valeurs, strict=True):
         colonne.button(
             libelle(valeur),
-            icon=icones[valeur],
+            icon=icones.get(valeur),
             key=f"{prefixe}_{valeur}",
             type="primary" if valeur == choisie else "secondary",
             width="stretch",
@@ -47,15 +40,16 @@ def _rangee_boutons(valeurs: list[str], choisie: str, icones: dict, action: Call
         )
 
 
-def choix_lieu() -> str:
-    """Les boutons des lieux (Terre puis habitats). Renvoie le lieu choisi."""
+def choix_lieu() -> str | None:
+    """Les lieux en 3D (Terre puis habitats), un bouton sous chacun. Renvoie le lieu choisi, ou None."""
     lieu = lieu_courant()
-    _rangee_boutons(LIEUX, lieu, ICONES_LIEUX, choisir_lieu, "ui_lieu")
+    scene_lieux(LIEUX, lieu)
+    _rangee_boutons(LIEUX, lieu, {}, choisir_lieu, "ui_lieu")
     return lieu
 
 
-def choix_pilier() -> str:
-    """Les boutons des piliers : prévenir, détecter, éteindre. Renvoie le pilier choisi."""
-    pilier = get_scenario()["pilier"]
+def choix_pilier() -> str | None:
+    """Les boutons des piliers : prévenir, détecter, éteindre. Renvoie le pilier choisi, ou None."""
+    pilier = pilier_courant()
     _rangee_boutons(PILIERS, pilier, ICONES_PILIERS, choisir_pilier, "ui_pilier")
     return pilier

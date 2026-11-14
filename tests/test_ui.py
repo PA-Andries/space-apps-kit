@@ -6,13 +6,14 @@ from pathlib import Path
 
 from streamlit.testing.v1 import AppTest
 
-from flame.ui.scene import DOSSIER_THREE, page_scene, reglages_scene
+from flame.ui.scene import DOSSIER_THREE, page_lieux, page_scene, reglages_scene
 
 APP = str(Path(__file__).parents[1] / "app.py")
 
 
-def test_la_scene_attend_ses_reglages():
-    assert "__REGLAGES__" in (DOSSIER_THREE / "flamme.html").read_text(encoding="utf-8")
+def test_les_scenes_attendent_leurs_reglages():
+    for scene in DOSSIER_THREE.glob("*.html"):
+        assert "__REGLAGES__" in scene.read_text(encoding="utf-8"), scene.name
 
 
 def test_les_reglages_sont_bornes():
@@ -27,8 +28,13 @@ def test_la_page_contient_les_reglages():
 
 
 def test_three_js_a_une_version_precise():
-    page = (DOSSIER_THREE / "flamme.html").read_text(encoding="utf-8")
-    assert re.search(r"three@\d+\.\d+\.\d+/", page)
+    for scene in DOSSIER_THREE.glob("*.html"):
+        assert re.search(r"three@\d+\.\d+\.\d+/", scene.read_text(encoding="utf-8")), scene.name
+
+
+def test_la_scene_des_lieux_met_en_avant_le_lieu_choisi():
+    assert '"choisi": 2' in page_lieux(["Terre", "Vaisseau", "Station"], "Station")
+    assert '"choisi": -1' in page_lieux(["Terre", "Vaisseau"], None)
 
 
 def test_libelle_traduit_les_valeurs_du_contrat():
@@ -78,9 +84,21 @@ def test_la_terre_ne_change_pas_l_habitat():
     assert site.session_state["ui_habitat"] == "Station"
 
 
+def test_l_accueil_avance_etape_par_etape():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert [b.key for b in site.button if b.key.startswith("ui_pilier_")] == []
+    site.button(key="ui_lieu_Base lunaire").click().run()
+    assert len([b for b in site.button if b.key.startswith("ui_pilier_")]) == 3
+    assert len(site.slider) == 0
+    site.button(key="ui_pilier_Éteindre").click().run()
+    assert not site.exception
+    assert len(site.slider) == 1
+
+
 def test_le_bouton_terre_affiche_la_reference():
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.button(key="ui_lieu_Terre").click().run()
+    site.button(key="ui_pilier_Prévenir").click().run()
     assert not site.exception
     assert site.session_state["ui_lieu"] == "Terre"
     assert len(site.info) == 1

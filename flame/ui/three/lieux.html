@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; }
+      canvas { display: block; }
+      #erreur { color: #9ca3af; font: 14px sans-serif; padding: 16px; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      // Les lieux côte à côte : Terre, vaisseau, station, Lune, Mars, rover. Dessins simplifiés,
+      // faits ici sans image extérieure. Le lieu choisi grossit et s'entoure d'un halo orange.
+      // Le choix se fait avec les boutons Streamlit placés sous la scène : la scène ne renvoie rien.
+      import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+
+      const reglages = __REGLAGES__; // remplacé par Python : { lieux: [...], choisi: index du lieu choisi }
+      const mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      } catch (e) {
+        document.body.innerHTML = '<p id="erreur">La scène 3D demande WebGL, indisponible sur ce navigateur.</p>';
+        throw e;
+      }
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+      document.body.appendChild(renderer.domElement);
+
+      // Caméra orthographique : chaque lieu occupe une colonne de même largeur, comme les boutons dessous.
+      const nb = reglages.lieux.length;
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-nb / 2, nb / 2, 1, -1, 0.1, 20);
+      camera.position.set(0, 0, 10);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+      const soleil = new THREE.DirectionalLight(0xffffff, 2.2);
+      soleil.position.set(-3, 2, 5);
+      scene.add(soleil);
+
+      // Une texture dessinée à la main sur une toile : un fond et des taches.
+      const texture = (fond, taches, nbTaches, rayonMax, calottes) => {
+        const toile = document.createElement("canvas");
+        toile.width = 256;
+        toile.height = 128;
+        const p = toile.getContext("2d");
+        p.fillStyle = fond;
+        p.fillRect(0, 0, 256, 128);
+        let graine = 7;
+        const hasard = () => ((graine = (graine * 16807) % 2147483647) / 2147483647);
+        for (let i = 0; i < nbTaches; i++) {
+          p.fillStyle = taches[i % taches.length];
+          p.beginPath();
+          p.ellipse(hasard() * 256, 15 + hasard() * 98, 4 + hasard() * rayonMax, 3 + hasard() * rayonMax * 0.6, hasard() * 3, 0, 7);
+          p.fill();
+        }
+        if (calottes) {
+          p.fillStyle = "#f8fafc";
+          p.fillRect(0, 0, 256, 9);
+          p.fillRect(0, 119, 256, 9);
+        }
+        const t = new THREE.CanvasTexture(toile);
+        t.colorSpace = THREE.SRGBColorSpace;
+        return t;
+      };
+
+      const planete = (carte) =>
+        new THREE.Mesh(new THREE.SphereGeometry(0.34, 48, 32), new THREE.MeshStandardMaterial({ map: carte, roughness: 0.9 }));
+
+      const metal = (couleur) => new THREE.MeshStandardMaterial({ color: couleur, metalness: 0.4, roughness: 0.5 });
+      const panneau = new THREE.MeshStandardMaterial({ color: "#1d4ed8", metalness: 0.6, roughness: 0.3 });
+
+      const vaisseau = () => {
+        const g = new THREE.Group();
+        const capsule = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.32, 32), metal("#e5e7eb"));
+        capsule.position.y = 0.12;
+        const module = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.3, 32), metal("#9ca3af"));
+        module.position.y = -0.19;
+        const aile = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.12, 0.01), panneau);
+        aile.position.y = -0.19;
+        g.add(capsule, module, aile);
+        g.rotation.z = -0.5;
+        return g;
+      };
+
+      const station = () => {
+        const g = new THREE.Group();
+        const poutre = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.03, 0.03), metal("#d1d5db"));
+        const coeur = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.36, 24), metal("#e5e7eb"));
+        coeur.rotation.z = Math.PI / 2;
+        coeur.position.y = -0.06;
+        g.add(poutre, coeur);
+        for (const x of [-0.36, -0.24, 0.24, 0.36]) {
+          const aile = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.42, 0.01), panneau);
+          aile.position.x = x;
+          g.add(aile);
+        }
+        g.rotation.x = 0.35;
+        return g;
+      };
+
+      const rover = () => {
+        const g = new THREE.Group();
+        const caisse = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.28), metal("#f3f4f6"));
+        const cabine = new THREE.Mesh(
+          new THREE.SphereGeometry(0.13, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2),
+          new THREE.MeshStandardMaterial({ color: "#38bdf8", metalness: 0.2, roughness: 0.1 }),
+        );
+        cabine.position.set(0.1, 0.1, 0);
+        g.add(caisse, cabine);
+        for (const x of [-0.18, 0.18]) {
+          for (const z of [-0.15, 0.15]) {
+            const roue = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.06, 20), metal("#374151"));
+            roue.rotation.x = Math.PI / 2;
+            roue.position.set(x, -0.12, z);
+            g.add(roue);
+          }
+        }
+        g.rotation.set(0.35, -0.6, 0);
+        return g;
+      };
+
+      const fabriques = {
+        Terre: () => planete(texture("#1e40af", ["#15803d", "#166534", "#ca8a04"], 26, 26, true)),
+        Vaisseau: vaisseau,
+        Station: station,
+        "Base lunaire": () => planete(texture("#9ca3af", ["#6b7280", "#d1d5db", "#4b5563"], 45, 12, false)),
+        "Base martienne": () => planete(texture("#c2410c", ["#9a3412", "#ea580c", "#7c2d12"], 40, 18, true)),
+        "Rover pressurisé": rover,
+      };
+
+      // Le halo orange (couleur principale du site) derrière le lieu choisi.
+      const toile = document.createElement("canvas");
+      toile.width = toile.height = 128;
+      const pinceau = toile.getContext("2d");
+      const degrade = pinceau.createRadialGradient(64, 64, 0, 64, 64, 64);
+      degrade.addColorStop(0, "rgba(249,115,22,0.9)");
+      degrade.addColorStop(0.5, "rgba(249,115,22,0.35)");
+      degrade.addColorStop(1, "rgba(249,115,22,0)");
+      pinceau.fillStyle = degrade;
+      pinceau.fillRect(0, 0, 128, 128);
+      const halo = new THREE.Sprite(
+        new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(toile), transparent: true, depthWrite: false }),
+      );
+      halo.scale.set(1.35, 1.35, 1);
+      halo.position.z = -1;
+
+      const objets = reglages.lieux.map((lieu, i) => {
+        const objet = (fabriques[lieu] ?? (() => planete(texture("#6b7280", ["#9ca3af"], 10, 10, false))))();
+        objet.position.x = -nb / 2 + 0.5 + i;
+        const choisi = i === reglages.choisi;
+        objet.scale.setScalar(choisi ? 1.25 : 0.9);
+        if (choisi) {
+          halo.position.x = objet.position.x;
+          scene.add(halo);
+        }
+        scene.add(objet);
+        return objet;
+      });
+
+      const redimensionner = () => {
+        const largeur = window.innerWidth;
+        const hauteur = window.innerHeight;
+        renderer.setSize(largeur, hauteur);
+        // Hauteur visible adaptée à la largeur, pour garder des colonnes carrées.
+        const demiHauteur = (nb / 2) * (hauteur / largeur);
+        camera.top = demiHauteur;
+        camera.bottom = -demiHauteur;
+        camera.updateProjectionMatrix();
+      };
+      window.addEventListener("resize", redimensionner);
+      redimensionner();
+
+      const dessiner = (temps = 0) => {
+        objets.forEach((objet, i) => {
+          objet.rotation.y += i === reglages.choisi ? 0.012 : 0.004;
+        });
+        halo.material.opacity = 0.8 + 0.2 * Math.sin(temps / 400);
+        renderer.render(scene, camera);
+      };
+
+      if (mouvementReduit) {
+        dessiner();
+      } else {
+        renderer.setAnimationLoop(dessiner);
+      }
+    </script>
+  </body>
+</html>

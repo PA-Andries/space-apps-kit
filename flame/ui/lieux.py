@@ -28,9 +28,14 @@ GRAVITES = {
 }
 
 
-def lieu_courant() -> str:
-    """Le lieu choisi sur l'accueil ; par défaut, l'habitat du scénario."""
-    return st.session_state.get("ui_lieu", get_scenario()["habitat"])
+def lieu_courant() -> str | None:
+    """Le lieu choisi sur l'accueil, ou None tant que l'utilisateur n'en a pas choisi."""
+    return st.session_state.get("ui_lieu")
+
+
+def pilier_courant() -> str | None:
+    """Le pilier choisi sur l'accueil, ou None tant que l'utilisateur n'a pas appuyé sur un bouton."""
+    return get_scenario()["pilier"] if st.session_state.get("ui_pilier_choisi") else None
 
 
 def conditions_lieu(lieu: str) -> dict:
@@ -54,3 +59,4 @@ def choisir_lieu(lieu: str) -> None:
 def choisir_pilier(pilier: str) -> None:
     """Retient le pilier du scénario (barre latérale)."""
     st.session_state["ui_pilier"] = pilier
+    st.session_state["ui_pilier_choisi"] = True
