@@ -11,13 +11,14 @@ st.set_page_config(page_title="Flame in Freefall", page_icon=":material/local_fi
 
 page = st.navigation(
     [
-        st.Page("pages/accueil.py", title="My environment", icon=":material/home:", default=True),
+        st.Page("pages/accueil.py", title="Home", icon=":material/home:", default=True),
         st.Page("pages/recherche.py", title="Investigations", icon=":material/search:"),
-        st.Page("pages/donnees.py", title="Data", icon=":material/scatter_plot:"),
+        st.Page("pages/donnees.py", title="Data and export", icon=":material/scatter_plot:"),
         st.Page("pages/comparateur.py", title="Compare", icon=":material/compare_arrows:"),
-        st.Page("pages/equipements.py", title="Equipment and Earth", icon=":material/fire_extinguisher:"),
-        st.Page("pages/assistant.py", title="Assistant", icon=":material/chat:"),
-    ]
+        st.Page("pages/equipements.py", title="Equipment", icon=":material/fire_extinguisher:"),
+        st.Page("pages/assistant.py", title="Ask the assistant", icon=":material/chat:"),
+    ],
+    position="top",  # the menu is a bar at the top of the page, not a sidebar
 )
 afficher_cadre()
 page.run()

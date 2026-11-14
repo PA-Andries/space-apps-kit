@@ -43,7 +43,7 @@ GLOBAL_STYLE = f"""<style>
 [data-testid="stMain"] {{ scroll-behavior: smooth; }}
 
 /* A centred column with room to breathe. */
-.stMainBlockContainer, .block-container {{ max-width: 1440px; padding: 1.2rem 2rem 2rem; }}
+.stMainBlockContainer, .block-container {{ max-width: 1440px; padding: 4.6rem 2rem 2rem; }}  /* room for the menu bar */
 
 /* Pill-shaped buttons, with a soft lift on hover. */
 .stButton button, .stLinkButton a {{
@@ -171,15 +171,6 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 [data-testid="stBottom"], [data-testid="stBottom"] > div, [data-testid="stBottomBlockContainer"] {{
   background: transparent; }}
 
-/* The Home button: a small glass pill on the far left, above the page. */
-.st-key-ui_home_link {{ align-items: flex-start; margin: 0 0 -0.4rem; }}
-.st-key-ui_home_link button {{ background: {SECONDARY}; border: 1px solid {SECONDARY_LINE}; border-radius: 980px;
-  padding: 0.25rem 0.9rem; min-height: 0; color: {INK}; }}
-.st-key-ui_home_link button p {{ font-size: 0.92rem; font-weight: 600; }}
-.st-key-ui_home_link button:hover {{ border-color: {ACCENT}; color: {ACCENT}; }}
-/* The invisible page that folds the sidebar takes no room. */
-.st-key-ui_fold_sidebar {{ position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }}
-
 /* The answer to "can a flame burn here?": a short headline, the accent only for "Yes". */
 .ff-answer {{ display: flex; flex-direction: column; gap: 0.2rem; margin: 0.2rem 0 0.8rem; }}
 .ff-answer strong {{ font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: {INK}; }}
@@ -198,6 +189,25 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_card_outcomes {{ background: {SECONDARY}; border: 1px solid {SECONDARY_LINE} !important;
   border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem; backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%); }}
+
+/* The menu: a frosted bar fixed at the top of the window, as on Apple's site. */
+header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid {SECONDARY_LINE}; }}
+[data-testid="stTopNav"] {{ justify-content: center; gap: 0.2rem; }}
+[data-testid="stTopNav"] a {{ border-radius: 980px; padding: 0.3rem 0.85rem; }}
+[data-testid="stTopNav"] a p, [data-testid="stTopNav"] a span {{ font-size: 0.9rem; font-weight: 500; color: {MUTED}; }}
+[data-testid="stTopNav"] a:hover p, [data-testid="stTopNav"] a:hover span {{ color: {INK}; }}
+[data-testid="stTopNav"] a[aria-current="page"] {{ background: rgba(255, 255, 255, 0.08); }}
+[data-testid="stTopNav"] a[aria-current="page"] p, [data-testid="stTopNav"] a[aria-current="page"] span {{
+  color: {INK}; font-weight: 600; }}
+
+/* Under the menu: the user's environment on the left, the disclaimer on the right. */
+.st-key-ui_status_line {{ justify-content: space-between; flex-wrap: wrap; gap: 0.4rem 1rem; margin: 0.2rem 0 0.4rem; }}
+.st-key-ui_status_line .ff-disclaimer {{ margin: 0; }}
+.ff-env-line {{ margin: 0; font-size: 0.88rem; color: {INK}; font-weight: 600; background: {SECONDARY};
+  border: 1px solid {SECONDARY_LINE}; border-radius: 980px; padding: 0.3rem 0.9rem; }}
+.ff-env-line span {{ color: {ACCENT}; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; margin-right: 0.5rem; }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;

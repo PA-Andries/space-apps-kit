@@ -377,28 +377,17 @@ def test_colours_follow_the_60_30_10_rule():
 def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
     assert 'label="Flamy"' in Path("flame/ui/home.py").read_text()
     assert 'st.title("Flamy")' in Path("pages/assistant.py").read_text()
-    assert ".st-key-ui_home_link { display: none; }" in Path("pages/accueil.py").read_text()
 
 
-def test_home_goes_to_page_one_and_folds_the_sidebar():
-    top_bar = Path("flame/ui/top_bar.py").read_text()
-    assert 'st.button("Home"' in top_bar and 'st.switch_page("pages/accueil.py")' in top_bar
-
-    def home_page_after_a_click():
-        import streamlit as st
-
-        from flame.ui import fold_sidebar_after_home
-
-        st.session_state.setdefault("ui_home_clicked", 1)
-        fold_sidebar_after_home()
-
-    page = AppTest.from_function(home_page_after_a_click).run()
-    assert not page.exception
-    # The click is used once: the folding script is shown, then the click is forgotten.
-    assert "ui_home_clicked" not in page.session_state
-    assert "ui_fold_sidebar" in str([block.proto for block in page.main.children.values()])
-    script = __import__("flame.ui.top_bar", fromlist=["_FOLD_SCRIPT"])._FOLD_SCRIPT
-    assert "stSidebarCollapseButton" in script
+def test_the_menu_is_a_bar_at_the_top_and_the_environment_shows_under_it():
+    app = Path("app.py").read_text()
+    assert 'position="top"' in app
+    for title in ("Home", "Investigations", "Data and export", "Compare", "Equipment", "Ask the assistant"):
+        assert f'title="{title}"' in app
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    assert not site.sidebar.children  # no sidebar any more
+    assert "ui_status_line" in str([block.proto for block in site.main.children.values()])
 
 
 def test_outcomes_sort_nasa_results_and_show_on_arrival():
