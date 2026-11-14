@@ -1,5 +1,6 @@
 """Text blocks of the dashboard: header, card titles, key figures, mascot, footer (styles in style.py)."""
 
+from contextlib import contextmanager
 from html import escape
 
 import streamlit as st
@@ -36,11 +37,15 @@ def section(title: str, subtitle: str = "", step: str = "", anchor: str = "") ->
     st.html(f'<div class="ff-section"{target}>{above}<h2>{escape(title)}</h2>{below}</div>')
 
 
-def dashboard_header(title: str, subtitle: str, chips: list[str]) -> None:
-    """The dashboard's top line: the name with a flame mark, a grey subtitle, and small figure chips on the right."""
+def dashboard_header(title: str, subtitle: str, chips: list[str], eyebrow: str = "") -> None:
+    """The dashboard's top line: the name with a flame mark, a grey subtitle, and small figure chips on the right.
+
+    `eyebrow`: a small orange line above the title, for example the name of the page.
+    """
     badges = "".join(f'<span class="ff-chip">{escape(chip)}</span>' for chip in chips)
+    above = f'<span class="ff-tag">{escape(eyebrow)}</span>' if eyebrow else ""
     st.html(
-        f'<div class="ff-header"><div><h1><span class="ff-mark"></span>{escape(title)}</h1>'
+        f'<div class="ff-header"><div>{above}<h1><span class="ff-mark"></span>{escape(title)}</h1>'
         f'<p>{escape(subtitle)}</p></div><div class="ff-chips">{badges}</div></div>'
     )
 
@@ -98,7 +103,36 @@ def mascot(message: str, link: tuple[str, str] | None = None) -> None:
 
 
 def chatbot_button(page: str) -> None:
-    """The chatbot icon pinned to the bottom-right corner of the page: the mascot, and a link to `page`."""
+    """The chatbot icon pinned to the bottom-right corner of the page: Flamy the mascot, and a link to `page`."""
     with st.container(key="ui_chatbot"):
         mascot_scene(height=96)
-        st.page_link(page, label="Chatbot", icon=":material/forum:")
+        st.page_link(page, label="Flamy", icon=":material/forum:")
+
+
+def assistant_mascot() -> None:
+    """Flamy, the flame mascot of the Assistant page, peeking out from behind the chat box on the left.
+
+    As in a messaging app: only its head and shoulders show above the box; while `talking()` is open
+    it rises a little and talks. It is placed in the bottom bar, just before the chat box.
+    """
+    # The bottom bar of the page (where the chat box lives); the main page if this Streamlit has none.
+    bottom = getattr(st, "bottom", st)
+    with bottom.container(key="ui_assistant_mascot"):
+        mascot_scene(height=170)
+
+
+@contextmanager
+def talking():
+    """While this block runs, the mascot on the page talks.
+
+    It shows a hidden marker that the mascot's scene looks for; the scene never reloads.
+
+        with talking():
+            answer = ...
+    """
+    marker = st.empty()
+    marker.html('<span class="ff-talking" aria-hidden="true"></span>')
+    try:
+        yield
+    finally:
+        marker.empty()

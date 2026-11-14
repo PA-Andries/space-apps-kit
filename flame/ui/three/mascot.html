@@ -161,6 +161,20 @@
         sparks.push(spark);
       }
 
+      // Talking: the page shows an element with the class "ff-talking" while an answer is being written.
+      // The scene looks for it in the page around it (a few times a second), so it never has to reload.
+      let talking = false;
+      let lastLook = -1;
+      const lookForTalk = (t) => {
+        if (t - lastLook < 0.2) return;
+        lastLook = t;
+        try {
+          talking = !!window.parent.document.querySelector(".ff-talking");
+        } catch (error) {
+          talking = false;
+        }
+      };
+
       const V = (x, y, z) => new THREE.Vector3(x, y, z);
       // Pose at time t (s): a soft bouncy idle, the right arm waving hello, the left arm swinging gently.
       const pose = (t) => {
@@ -178,7 +192,7 @@
         });
         const shoulderY = -0.02 - drop;
         // Right arm raised, the hand swinging from the wrist as it waves.
-        const wave = Math.sin(t * 4.5);
+        const wave = talking ? 0.5 * Math.sin(t * 6) : Math.sin(t * 4.5);
         const raised = bend(arms[0], [V(0.46, shoulderY, 0.05), V(0.66, 0.16 - drop, 0.1), V(0.7 + 0.07 * wave, 0.42 - drop, 0.14)], 0.04);
         attach(hands[0], raised);
         hands[0].rotateY(0.35 * wave);
@@ -195,6 +209,11 @@
           feet[k].position.set(foot.x, foot.y - 0.03, foot.z);
           feet[k].rotation.y = 0.2 * side;
         });
+        // The mouth: a smile at rest; while talking it opens and closes, as in speech.
+        lookForTalk(t);
+        const speech = talking ? Math.abs(Math.sin(t * 13)) * (0.6 + 0.4 * Math.sin(t * 3.1)) : 0;
+        mouth.scale.set(1 - 0.15 * speech, 0.85 + 1.4 * speech, 1);
+        tongueTip.position.y = -0.14 - 0.07 * speech;
         // A blink every few seconds.
         const blink = t % 3.6 < 0.12 ? 0.1 : 1;
         eyes.forEach((eye) => (eye.scale.y = blink));
@@ -212,8 +231,12 @@
       window.addEventListener("resize", resize);
       resize();
 
+      // While talking, the character rises a little (it peeks out further from behind the chat box).
+      let rise = 0;
       const draw = (time = 0) => {
         const t = reducedMotion ? 0.5 : time / 1000;
+        rise += ((talking ? 0.22 : 0) - rise) * 0.08;
+        character.position.y = rise;
         if (!reducedMotion) character.rotation.y = 0.2 * Math.sin(t * 0.6);
         pose(t);
         renderer.render(scene, camera);

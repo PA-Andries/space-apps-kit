@@ -1,8 +1,7 @@
 """Page 1 « My environment ». Owner: role F (Interface and 3D); the conditions chart comes from role D.
 
 Layout of sketch 1 of the team's whiteboard: the crew environments (one button each) and the sliders (O₂, g, P,
-fuel), four cards with the values and their sources, the O₂ × P chart of NASA's tests, an ANALYSE button, a
-chatbot icon.
+fuel), the O₂ × P chart of NASA's tests, an ANALYSE button, a chatbot icon.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
 """
@@ -14,20 +13,18 @@ import flame.recherche as recherche
 from flame.commun import charger_fiches, charger_tests, get_scenario
 from flame.ui import (
     EARTH,
-    bounds_text,
     card_title,
     chatbot_button,
-    conditions,
     dashboard_header,
     environment_values,
+    fold_sidebar_after_home,
     footer,
     investigation_card,
     label,
+    outcomes_card,
     place_buttons,
     save_environment,
     show_environment_in_sidebar,
-    source_name,
-    stat_tiles,
     style_conditions_chart,
 )
 
@@ -36,15 +33,31 @@ FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen =
 OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
+# Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
+# Partial gravity (Moon 0.165 g, Mars 0.38 g) has no button: NASA's PSI tests have none. The Moon base,
+# the rover and the Mars base keep their own gravity, with no button selected.
+GRAVITY_CHOICES = {0.0: "0 g", 1.0: "1 g"}
+
+
+def gravity_choice(value: float | None) -> float | None:
+    """The button of a gravity value, or None when it has no button (Moon or Mars)."""
+    value = value or 0.0
+    return next((choice for choice in GRAVITY_CHOICES if abs(choice - value) < 1e-9), None)
+
+
+# This is the home page: no "Home" button here; after a click on Home elsewhere, the sidebar folds away.
+st.html("<style>.st-key-ui_home_link { display: none; }</style>")
+fold_sidebar_after_home()
 
 fiches = charger_fiches()
 tests = charger_tests()
 habitat = st.session_state.get("ui_habitat", get_scenario()["habitat"])
 
 dashboard_header(
-    "My environment",
+    "Flame in Freefall · Fire-safety dashboard",
     "Describe your habitable crew environment: see which NASA microgravity combustion tests apply to it.",
     [f"{len(fiches)} NASA investigations", f"{len(tests):,} test rows", "Source: NASA PSI"],
+    eyebrow="My environment",
 )
 
 
@@ -70,7 +83,6 @@ with picker_column, st.container(key="ui_card_destination", height="stretch"):
     )
     shown_place = place_buttons(habitat)
 
-sources = conditions(shown_place)["sources"]
 values = environment_values(shown_place)
 
 # The sliders start from the scenario: what the user typed stays, even after a visit to another page.
@@ -78,15 +90,20 @@ values = environment_values(shown_place)
 if st.session_state.get("ui_form_place") != shown_place or "ui_oxygen" not in st.session_state:
     st.session_state["ui_oxygen"] = to_slider(values["oxygene_pct"], OXYGEN_SCALE)
     st.session_state["ui_pressure"] = to_slider(values["pression_kpa"], PRESSURE_SCALE)
-    st.session_state["ui_gravity"] = float(values["gravite"] or 0.0)
+    st.session_state["ui_gravity"] = gravity_choice(values["gravite"])
     st.session_state["ui_fuels"] = list(values["type_combustible"])
     st.session_state["ui_air_flow"] = to_slider(values["debit_air_cm_s"], AIR_FLOW_SCALE)
     st.session_state["ui_form_place"] = shown_place
 
 with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
-    card_title(f"Parameters · {label(shown_place)}", "Filled in by the environment. Move a slider to change it.")
+    card_title(f"Parameters · {label(shown_place)}", "Filled in by the environment. Change a value to refine it.")
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
-    gravity = st.slider("g (gravity, in g)", 0.0, 1.0, step=0.005, format="%.3f", key="ui_gravity")
+    gravity = st.segmented_control(
+        "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
+    )
+    if gravity is None:  # no button chosen (Moon, Mars): keep the environment's own gravity
+        gravity = float(values["gravite"] or 0.0)
+    st.caption(f"0 g: spacecraft and station · 1 g: Earth. {label(shown_place)}: {float(values['gravite'] or 0):g} g.")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
     air_flow = from_slider(
@@ -107,25 +124,12 @@ if shown_place != EARTH:
 # The scenario as the other pages will read it (the same dict once lot A is on main).
 scenario = {**get_scenario(), "habitat": shown_place, **environment}
 
-# --- Four cards, and the chart of NASA's tests -------------------------------------------------------------
-cards_column, chart_column = st.columns([4, 8], gap="medium")
+# --- The chart of NASA's tests ------------------------------------------------------------------------------
+if shown_place == EARTH:
+    st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
 
-with cards_column, st.container(key="ui_card_assistant", height="stretch"):
-    card_title("Your environment", "Each value with its source.")
-    stat_tiles(
-        [
-            (bounds_text("", oxygen, "%"), "Oxygen", source_name(sources["oxygene_pct"])),
-            (bounds_text("", pressure, "kPa"), "Pressure", source_name(sources["pression_kpa"])),
-            (f"{gravity:g} g", "Gravity", source_name(sources["gravite"])),
-            (label(";".join(fuels)) if fuels else "All", "Fuel", "your choice"),
-        ],
-        compact=True,
-        grid=True,
-    )
-    if shown_place == EARTH:
-        st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
-
-with chart_column, st.container(key="ui_card_ranking", height="stretch"):
+found = None  # the NASA tests that match the environment (lot D)
+with st.container(key="ui_card_ranking"):
     card_title(
         "NASA tests against your conditions",
         "Each point is one NASA PSI test. Dotted: Earth and Moon zones. Green box: your selection.",
@@ -156,6 +160,14 @@ with chart_column, st.container(key="ui_card_ranking", height="stretch"):
 
 # --- After ANALYSE: the 3 most relevant investigations, and what we don't know -----------------------------
 if st.session_state.get("ui_analysed"):
+    if found is not None:
+        with st.container(key="ui_card_outcomes"):
+            card_title(
+                "Can a flame burn in these conditions?",
+                f"What the NASA tests that match {label(shown_place)} show.",
+                tag="What NASA's tests show",
+            )
+            outcomes_card(found, scenario)
     best_column, gaps_column = st.columns([7, 5], gap="medium")
     with best_column, st.container(key="ui_card_compare", height="stretch"):
         card_title("The 3 most relevant investigations", f"For {label(shown_place)}.")
@@ -195,6 +207,6 @@ footer(
         "with or endorsed by NASA. Fuel types are the team's classification; scores are the team's judgement, "
         "not NASA data.",
         "Experiments: NASA Physical Sciences Informatics. Button icons: Google Material Symbols (Apache 2.0). "
-        "The mascot is a drawing.",
+        "The mascot and the space background are original drawings.",
     ]
 )
