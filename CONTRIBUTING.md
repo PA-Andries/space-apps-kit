@@ -85,7 +85,7 @@ Le premier `uv run verifier` active aussi des garde-fous (les « hooks » du dos
 | --- | --- | --- |
 | Commit | Un commit sur `main` | Créer une branche `dossier/sujet` |
 | Commit | Un fichier de secrets, une clé d'API, un fichier de plus de 5 Mo | Le retirer du commit |
-| Commit | Un fichier d'un autre rôle (le rôle se lit dans le nom de la branche) | Le retirer, ou ajouter `Accord: <prénom du propriétaire>` au message s'il est d'accord |
+| Commit | Un fichier d'un autre rôle (le rôle se lit dans le nom de la branche) | Le retirer, ou ajouter `Accord: <prénom du propriétaire>` au message s'il est d'accord. Si vous dites à votre agent IA que le propriétaire est d'accord, cela compte : il écrit la ligne lui-même |
 | Envoi (Push) | Un envoi direct sur `main` | Envoyer sa branche et ouvrir une PR |
 | Envoi (Push) | Des vérifications qui échouent | `uv run verifier`, corriger, commiter |
 | Envoi (Push) | Un agent IA sans CLAIM dans l'issue n°2 | Poster le CLAIM |

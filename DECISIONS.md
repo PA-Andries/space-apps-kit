@@ -11,3 +11,4 @@ One line per decision, newest last: `day time - decision, why (who)`. Read it be
 - Sat 14 Nov 12:30 - GitHub Actions CI removed: it failed in seconds without logs on every run. `uv run verifier` and the push hook are the gate now (PA)
 - Sat 14 Nov 12:30 - Repo rules are enforced, not just written: git hooks in `.githooks/` refuse commits on `main`, files outside the author's lane, secrets, big files, and pushes that fail the checks or come from an agent without a CLAIM. `AGENTS.md` holds the rules for every AI agent (PA)
 - Sat 14 Nov 12:55 - Roles assigned: A Clément, B PA, C Martin, D Hugo, E Ethan, F Mathéo (table in `CONTRIBUTING.md`). `.github/CODEOWNERS` is active, so GitHub asks the owner of a folder for review when a PR touches it (PA)
+- Sat 14 Nov 13:00 - A relayed agreement counts: when a member tells their AI agent that a file's owner agreed, the agent may write the `Accord: <owner>` line; the member answers for it (PA)
