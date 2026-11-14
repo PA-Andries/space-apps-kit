@@ -12,7 +12,7 @@ Needs [uv](https://docs.astral.sh/uv/getting-started/installation/).
 git clone https://github.com/PA-Andries/space-apps-kit && cd space-apps-kit
 uv sync                           # one shared environment (.venv) pinned by uv.lock
 uv run streamlit run app.py       # the site, on http://localhost:8501
-uv run verifier                   # format, lint and tests: run before every push
+uv run verifier                   # format, lint and tests: run before every push; the first run turns the git hooks on
 ```
 
 Until `data/investigations.csv` exists, the site runs on the fictional sample data in `data/exemples/` and says so on every page.
@@ -21,11 +21,11 @@ Until `data/investigations.csv` exists, the site runs on the fictional sample da
 
 | File | What it holds |
 |---|---|
-| `CONTRIBUTING.md` | Who owns which folder, how to send work (branch, PR, CI), code rules |
+| `CONTRIBUTING.md` | Who owns which folder, how to send work (branch, PR, checks), code rules |
 | `BRIEF_EQUIPE_IA.md` | The brief each teammate gives their AI assistant: subject, data, pages, roles, schedule |
 | `GUIDE_SOURCES.md` | The NASA sources (PSI, NTRS) in detail |
 | `DECISIONS.md` | What we decided and why, one line each |
-| `CLAUDE.md` | Event rules and repo conventions, loaded in every Claude Code session |
+| `AGENTS.md` | Rules every AI agent must follow, enforced by the git hooks in `.githooks/`; loaded by Codex and, through `CLAUDE.md`, by Claude Code |
 
 ## Layout
 
@@ -41,10 +41,10 @@ flame/ui/                   page frame, shared components, three.js scene
 data/                       the three CSV files the site reads; data/exemples/ is fictional
 tests/                      one test file per folder, plus page and data-contract checks
 pitch/                      video script, subtitles, project page text
-src/space_apps_kit/         team tooling: `verifier`, `check-submission`
+src/space_apps_kit/         team tooling: `verifier`, `regles` (the hooks' logic), `check-submission`
 .claude/skills/             Claude Code skills from the prep phase, each with its templates
 docs/                       event rules, judging criteria, team profile
-.github/workflows/ci.yml    CI on every PR: ruff lint, ruff format, pytest
+.githooks/                  git hooks that enforce the repo rules on every commit and push (no CI on GitHub)
 ```
 
 Each folder under `flame/` belongs to one role; the table is in `CONTRIBUTING.md`.

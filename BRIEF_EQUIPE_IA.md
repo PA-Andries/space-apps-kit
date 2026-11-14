@@ -135,8 +135,8 @@ Une valeur inconnue reste vide ou vaut `inconnu`. Elle n'est jamais devinée.
 - **three.js** pour la scène 3D, affichée dans Streamlit par `flame/ui/scene.py`. Python envoie des réglages à la scène ; la scène ne renvoie rien.
 - **uv** pour installer le même environnement chez tout le monde : `uv sync`, puis `uv run ...`. Jamais `pip install`.
 - **API d'un LLM** pour l'assistant. La clé est rangée dans les Secrets de Streamlit Community Cloud, jamais dans le code.
-- **GitHub + GitHub Desktop** : une branche courte par tâche, une pull request (PR), fusion quand le CI est vert.
-- **CI GitHub Actions** : à chaque PR, vérification des règles de code, de la mise en forme et des tests. `uv run verifier` fait la même chose sur son ordinateur.
+- **GitHub + GitHub Desktop** : une branche courte par tâche, une pull request (PR), fusion quand `uv run verifier` est passé.
+- **`uv run verifier`** : vérifie la mise en forme, les règles de code et les tests sur son ordinateur. Il n'y a pas de CI sur GitHub ; des garde-fous (`.githooks/`) relancent ces vérifications à chaque envoi et refusent un commit qui sort de son dossier.
 - **Streamlit Community Cloud** pour la mise en ligne : chaque fusion dans `main` met le site à jour.
 
 Pas de base de données, pas de serveur séparé, pas de React. Le rôle B choisit comment il remplit les fiches (Google Sheets ou script) ; seuls comptent les trois CSV de `data/`.
@@ -214,7 +214,7 @@ tests/test_app.py           chaque page s'ouvre sans erreur         rôle A
 tests/test_contrat.py       les CSV respectent les colonnes         rôle A
 pitch/                      vidéo, sous-titres, page projet         rôle A
 pyproject.toml, uv.lock     bibliothèques                           rôle A
-.github/workflows/ci.yml    le CI                                   rôle A
+.githooks/, AGENTS.md       garde-fous et règles des agents IA      rôle A
 .streamlit/config.toml      couleurs du site                        rôle F
 CONTRIBUTING.md             règles de collaboration et de code
 DECISIONS.md                journal des décisions                   rôle A
@@ -229,7 +229,7 @@ Prénoms à compléter par l'équipe avant d'envoyer ce fichier.
 
 | Rôle | Prénom | Mission | Binôme |
 | --- | --- | --- | --- |
-| A. Intégration et pitch | (à compléter) | Fusionne les PR, garde le site en ligne, tient `flame/commun/` et le CI, valide chaque fiche, règle les poids du score, prépare les 20 questions de référence, la vidéo, la page projet et le README | B |
+| A. Intégration et pitch | (à compléter) | Fusionne les PR, garde le site en ligne, tient `flame/commun/` et les garde-fous, valide chaque fiche, règle les poids du score, prépare les 20 questions de référence, la vidéo, la page projet et le README | B |
 | B. Données | (à compléter) | Interroge l'API NTRS, lit les pages PSI, produit `investigations.csv`, `tests.csv` et `publications.csv` | A |
 | C. Recherche | (à compléter) | Le moteur de recherche, le score du scénario et la page Recherche, avec le détail de chaque fiche | E |
 | D. Comparateur | (à compléter) | La page Comparateur et la carte oxygène × pression, en supposant les données présentes | F |
@@ -271,7 +271,7 @@ Les règles complètes sont dans `CONTRIBUTING.md`. L'essentiel :
 
 - **Un dossier, une personne.** On ne modifie jamais le fichier d'un autre ; on lui demande.
 - **Les fichiers partagés passent par le rôle A :** `app.py`, `flame/commun/`, `pyproject.toml`, `uv.lock`. Pour ajouter une bibliothèque, on la demande au rôle A.
-- **Le cycle, toutes les une à deux heures :** Pull de `main`, nouvelle branche `dossier/sujet`, modifier ses fichiers, `uv run verifier`, Commit, Push, pull request, fusion quand le CI est vert.
+- **Le cycle, toutes les une à deux heures :** Pull de `main`, nouvelle branche `dossier/sujet`, modifier ses fichiers, `uv run verifier`, Commit, Push, pull request, fusion.
 - **Tester avant d'envoyer :** `uv run streamlit run app.py`, puis vérifier sa page.
 - **Si GitHub Desktop affiche « conflict », on ne clique sur rien** et on appelle le rôle A.
 - **Bloqué depuis 30 minutes :** on écrit dans le salon `#entraide` ce qu'on a essayé.
