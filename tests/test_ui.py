@@ -381,3 +381,25 @@ def test_home_goes_to_page_one_and_folds_the_sidebar():
     assert "ui_fold_sidebar" in str([block.proto for block in page.main.children.values()])
     script = __import__("flame.ui.top_bar", fromlist=["_FOLD_SCRIPT"])._FOLD_SCRIPT
     assert "stSidebarCollapseButton" in script
+
+
+def test_outcomes_sort_nasa_results_and_show_after_analyse():
+    import pandas as pd
+
+    from flame.ui import count_outcomes, kind_of_result
+
+    assert kind_of_result("Extinction") == "went_out"
+    assert kind_of_result("hot ignition: No; end: -") == "no_ignition"
+    assert kind_of_result("hot ignition: yes; end: FT") == "burned"
+    assert kind_of_result("cool flame observed") == "burned"
+    assert kind_of_result(float("nan")) == "unknown"
+    assert kind_of_result("no cool-flame burning rate reported") == "unknown"
+    tests = pd.DataFrame({"resultat": ["Extinction", "Completion", None, "hot ignition: no; end: -"]})
+    assert count_outcomes(tests) == {"burned": 1, "went_out": 1, "no_ignition": 1, "unknown": 1}
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_analyse_button").click().run()
+    assert not site.exception
+    # The card's sentence and its caption, from the matching tests' results.
+    texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
+    assert "match your environment" in texts and "team's reading" in texts

@@ -21,6 +21,7 @@ from flame.ui import (
     footer,
     investigation_card,
     label,
+    outcomes_card,
     place_buttons,
     save_environment,
     show_environment_in_sidebar,
@@ -126,6 +127,7 @@ scenario = {**get_scenario(), "habitat": shown_place, **environment}
 if shown_place == EARTH:
     st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
 
+found = None  # the NASA tests that match the environment (lot D)
 with st.container(key="ui_card_ranking"):
     card_title(
         "NASA tests against your conditions",
@@ -157,6 +159,14 @@ with st.container(key="ui_card_ranking"):
 
 # --- After ANALYSE: the 3 most relevant investigations, and what we don't know -----------------------------
 if st.session_state.get("ui_analysed"):
+    if found is not None:
+        with st.container(key="ui_card_outcomes"):
+            card_title(
+                "What NASA's tests show",
+                f"How the flames behaved in the NASA tests that match {label(shown_place)}.",
+                tag="Danger",
+            )
+            outcomes_card(found)
     best_column, gaps_column = st.columns([7, 5], gap="medium")
     with best_column, st.container(key="ui_card_compare", height="stretch"):
         card_title("The 3 most relevant investigations", f"For {label(shown_place)}.")

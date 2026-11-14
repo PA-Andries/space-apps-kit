@@ -180,6 +180,18 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 /* The invisible page that folds the sidebar takes no room. */
 .st-key-ui_fold_sidebar {{ position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }}
 
+/* What NASA's tests show (after ANALYSE): one bar split by outcome, and its legend. */
+.ff-outcomes .ff-bar {{ display: flex; height: 16px; border-radius: 980px; overflow: hidden; gap: 2px;
+  margin: 0.3rem 0 0.7rem; }}
+.ff-outcomes ul {{ display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; list-style: none; padding: 0;
+  margin: 0 0 0.6rem; }}
+.ff-outcomes li {{ color: {MUTED}; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; margin: 0; }}
+.ff-outcomes li b {{ color: {INK}; }}
+.ff-outcomes i {{ width: 10px; height: 10px; border-radius: 3px; display: inline-block; }}
+.st-key-ui_card_outcomes {{ background: {SECONDARY}; border: 1px solid {SECONDARY_LINE} !important;
+  border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem; backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%); }}
+
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
   padding: 0.6rem 2.2rem; }}
