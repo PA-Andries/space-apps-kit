@@ -47,16 +47,10 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 
 /* Each block rises gently into place. */
 @keyframes ff-rise {{ from {{ opacity: 0; transform: translateY(18px); }} to {{ opacity: 1; transform: none; }} }}
-.ff-hero, .ff-section, .ff-stats, .st-key-ui_pillars, /* What follows a 3D scene: a centred caption and link. */
-.st-key-ui_after_scene [data-testid="stCaptionContainer"] {{ text-align: center; margin-top: 0.8rem; }}
-.st-key-ui_after_scene [data-testid="stElementContainer"]:has([data-testid="stPageLink"]) {{ align-self: center; }}
-.ff-footer {{
+.ff-hero, .ff-section, .ff-stats, .st-key-ui_pillars, .ff-footer {{
   animation: ff-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }}
-@media (prefers-reduced-motion: reduce) {{ .ff-hero, .ff-section, .ff-stats, .st-key-ui_pillars, /* What follows a 3D scene: a centred caption and link. */
-.st-key-ui_after_scene [data-testid="stCaptionContainer"] {{ text-align: center; margin-top: 0.8rem; }}
-.st-key-ui_after_scene [data-testid="stElementContainer"]:has([data-testid="stPageLink"]) {{ align-self: center; }}
-.ff-footer {{
+@media (prefers-reduced-motion: reduce) {{ .ff-hero, .ff-section, .ff-stats, .st-key-ui_pillars, .ff-footer {{
   animation: none; }} }}
 
 /* Home page text blocks (see flame/ui/home.py). */
