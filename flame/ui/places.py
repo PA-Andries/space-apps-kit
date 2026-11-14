@@ -61,10 +61,22 @@ def place_conditions(place: str, body: str) -> dict:
 
 
 def choose_body(body: str) -> None:
-    """Remember the celestial body; the place has to be chosen again."""
+    """Remember the celestial body; the place has to be chosen again, and the scene zooms in once."""
     if body != st.session_state.get("ui_body"):
         st.session_state["ui_body"] = body
         st.session_state.pop("ui_place", None)
+        st.session_state["ui_zoom_pending"] = True
+
+
+def go_back() -> None:
+    """Back to the three celestial bodies."""
+    for key in ["ui_body", "ui_place", "ui_zoom_pending"]:
+        st.session_state.pop(key, None)
+
+
+def take_zoom() -> bool:
+    """True only on the first display after a body was chosen, so the zoom plays once."""
+    return st.session_state.pop("ui_zoom_pending", False)
 
 
 def choose_place(place: str) -> None:

@@ -27,9 +27,19 @@ def flame_page(gravity: float, oxygen: float) -> str:
     return _fill("flame.html", flame_settings(gravity, oxygen))
 
 
-def places_page(objects: list[str], chosen: str | None) -> str:
-    """HTML of the places scene, with the `chosen` object highlighted."""
-    return _fill("places.html", {"objects": objects, "chosen": objects.index(chosen) if chosen in objects else -1})
+def places_page(objects: list[str], chosen: str | None, backdrop: str | None = None, zoom_from: int = -1) -> str:
+    """HTML of the places scene, with the `chosen` object highlighted.
+
+    `backdrop` draws a big planet behind the objects (the zoomed-in body). `zoom_from` is the column
+    (0, 1 or 2) the body had among Earth, Moon and Mars: the scene then plays the zoom from there.
+    """
+    settings = {
+        "objects": objects,
+        "chosen": objects.index(chosen) if chosen in objects else -1,
+        "backdrop": backdrop,
+        "zoomFrom": zoom_from,
+    }
+    return _fill("places.html", settings)
 
 
 def flame_scene(gravity: float, oxygen: float, height: int = 420) -> None:
@@ -37,6 +47,8 @@ def flame_scene(gravity: float, oxygen: float, height: int = 420) -> None:
     st.iframe(flame_page(gravity, oxygen), height=height)
 
 
-def places_scene(objects: list[str], chosen: str | None, height: int = 190) -> None:
-    """Show 3D objects side by side, one column each, the `chosen` one highlighted."""
-    st.iframe(places_page(objects, chosen), height=height)
+def places_scene(
+    objects: list[str], chosen: str | None, backdrop: str | None = None, zoom_from: int = -1, height: int = 230
+) -> None:
+    """Show 3D objects side by side, one column each, the `chosen` one highlighted (see `places_page`)."""
+    st.iframe(places_page(objects, chosen, backdrop, zoom_from), height=height)

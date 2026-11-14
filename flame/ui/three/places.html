@@ -252,9 +252,8 @@
         return g;
       };
 
-      // The rover on a small patch of ground, grey for the Moon or orange for Mars.
-      // The ground stays tilted towards the camera and turns on itself, like a turntable.
-      const roverOn = (groundColor, rockColor) => () => {
+      // Something standing on a small patch of ground that turns like a turntable, tilted towards the camera.
+      const onGround = (groundColor, rockColor, content) => {
         const g = new THREE.Group();
         const turntable = new THREE.Group();
         const ground = part(new THREE.CylinderGeometry(0.4, 0.44, 0.08, 40), toon(groundColor), 1.04);
@@ -265,9 +264,7 @@
           rock.position.set(x, -0.11, z);
           turntable.add(rock);
         }
-        const vehicle = rover();
-        vehicle.scale.setScalar(0.8);
-        turntable.add(vehicle);
+        turntable.add(content);
         turntable.userData.extraSpin = 0.006;
         g.add(turntable);
         g.rotation.x = 0.5;
@@ -275,10 +272,38 @@
         return g;
       };
 
-      const onPlanet = (map) => () => {
+      // A habitat: a big glass dome on a ring, with a solar panel and an antenna.
+      const habitat = () => {
+        const g = dome();
+        g.scale.setScalar(2.1);
+        g.position.y = -0.12;
+        const panel = part(new THREE.BoxGeometry(0.16, 0.1, 0.01), toon("#ffffff", { map: panelMap }), 1.08);
+        panel.position.set(-0.26, -0.03, 0.05);
+        panel.rotation.set(-0.5, 0.4, 0);
+        const g2 = new THREE.Group();
+        g2.add(g, panel);
+        return g2;
+      };
+
+      // A small lab building: the "Earth" reference place.
+      const lab = () => {
         const g = new THREE.Group();
-        g.add(planet(map), dome());
+        const walls = part(new THREE.BoxGeometry(0.3, 0.18, 0.22), white, 1.06);
+        walls.position.y = -0.04;
+        const roof = part(new THREE.ConeGeometry(0.24, 0.12, 4), orange, 1.06);
+        roof.rotation.y = Math.PI / 4;
+        roof.position.y = 0.11;
+        const door = part(new THREE.BoxGeometry(0.06, 0.1, 0.01), toon("#38bdf8"), 1.1);
+        door.position.set(0, -0.08, 0.111);
+        g.add(walls, roof, door);
         return g;
+      };
+
+      // The rover on a small patch of ground, grey for the Moon or orange for Mars.
+      const roverOn = (groundColor, rockColor) => () => {
+        const vehicle = rover();
+        vehicle.scale.setScalar(0.8);
+        return onGround(groundColor, rockColor, vehicle);
       };
 
       const builders = {
@@ -286,10 +311,11 @@
         moon: () => planet(moonMap),
         mars: () => planet(marsMap),
         earth: earth,
+        earth_lab: () => onGround("#4ade80", "#16a34a", lab()),
         station: station,
         spacecraft: spacecraft,
-        moon_base: onPlanet(moonMap),
-        mars_base: onPlanet(marsMap),
+        base_moon: () => onGround("#cbd5e1", "#94a3b8", habitat()),
+        base_mars: () => onGround("#fb923c", "#c2410c", habitat()),
         rover_moon: roverOn("#cbd5e1", "#94a3b8"),
         rover_mars: roverOn("#fb923c", "#c2410c"),
       };
@@ -318,23 +344,53 @@
         }),
       );
       halo.scale.set(1.15, 1.15, 1);
-      halo.position.z = -2;
+      halo.position.z = -1; // in front of the backdrop planet, behind the objects
 
       const pivots = settings.objects.map((name, i) => {
         const pivot = new THREE.Group(); // the pivot floats and spins; the object keeps its own tilt
         pivot.add((builders[name] ?? builders.moon)());
-        const chosen = i === settings.chosen;
-        pivot.scale.setScalar(chosen ? 1.22 : 0.95);
-        if (chosen) scene.add(halo);
+        pivot.userData.size = i === settings.chosen ? 1.22 : 0.95;
+        pivot.scale.setScalar(pivot.userData.size);
+        if (i === settings.chosen) scene.add(halo);
         scene.add(pivot);
         return pivot;
       });
+
+      // Once zoomed in, the chosen body becomes a big planet at the bottom, behind the places.
+      const BACKDROP_SIZE = 6;
+      const backdropTop = -0.42;
+      let backdrop = null;
+      if (settings.backdrop) {
+        backdrop = new THREE.Group();
+        backdrop.add(builders[settings.backdrop]());
+        backdrop.position.z = -1.5;
+        scene.add(backdrop);
+      }
+
+      // The zoom: the body leaves its column among Earth, Moon and Mars, grows and sinks to the bottom,
+      // then the places pop up one after the other.
+      const ZOOM_MS = 1400;
+      const zooming = settings.zoomFrom >= 0 && !reducedMotion;
+      let zoomStart = null;
+      let halfWidth = 1;
+      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const clamp01 = (t) => Math.min(Math.max(t, 0), 1);
+
+      const placeBackdrop = (progress) => {
+        if (!backdrop) return;
+        const t = ease(progress);
+        const startX = -halfWidth + ((settings.zoomFrom + 0.5) * 2 * halfWidth) / 3;
+        const endY = backdropTop - RADIUS * BACKDROP_SIZE;
+        backdrop.position.x = startX * (1 - t);
+        backdrop.position.y = endY * t;
+        backdrop.scale.setScalar(0.95 + (BACKDROP_SIZE - 0.95) * t);
+      };
 
       const resize = () => {
         const width = window.innerWidth;
         const height = window.innerHeight;
         renderer.setSize(width, height);
-        const halfWidth = HALF_HEIGHT * (width / height);
+        halfWidth = HALF_HEIGHT * (width / height);
         camera.left = -halfWidth;
         camera.right = halfWidth;
         camera.updateProjectionMatrix();
@@ -343,19 +399,30 @@
           pivot.position.x = -halfWidth + ((i + 0.5) * 2 * halfWidth) / count;
         });
         if (settings.chosen >= 0) halo.position.x = pivots[settings.chosen].position.x;
+        if (!zooming) placeBackdrop(1);
       };
       window.addEventListener("resize", resize);
       resize();
 
       const draw = (time = 0) => {
+        let progress = 1;
+        if (zooming) {
+          zoomStart ??= time;
+          progress = clamp01((time - zoomStart) / ZOOM_MS);
+          placeBackdrop(progress);
+        }
         pivots.forEach((pivot, i) => {
           const chosen = i === settings.chosen;
+          // During the zoom, each place pops up after the planet has mostly settled.
+          const popIn = zooming ? ease(clamp01((progress - 0.55 - i * 0.12) / 0.3)) : 1;
+          pivot.scale.setScalar(Math.max(pivot.userData.size * popIn, 0.0001));
           if (!pivot.children[0].userData.noPivotSpin) pivot.rotation.y += chosen ? 0.014 : 0.005;
           pivot.position.y = (chosen ? 0.05 : 0.035) * Math.sin(time / 650 + i * 1.3);
           pivot.traverse((piece) => {
             if (piece.userData.extraSpin) piece.rotation.y += piece.userData.extraSpin;
           });
         });
+        if (backdrop) backdrop.rotation.y += 0.0015;
         halo.material.opacity = 0.75 + 0.25 * Math.sin(time / 450);
         stars.material.opacity = 0.55 + 0.2 * Math.sin(time / 900);
         renderer.render(scene, camera);

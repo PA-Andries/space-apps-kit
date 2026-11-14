@@ -3,7 +3,7 @@
 Other roles may use everything listed here.
 """
 
-from flame.ui.components import body_picker, investigation_card, pillar_picker, place_picker
+from flame.ui.components import investigation_card, pillar_picker, place_picker
 from flame.ui.labels import label
 from flame.ui.places import EARTH, place_conditions
 from flame.ui.scene import flame_scene
@@ -18,7 +18,6 @@ scene_3d = flame_scene
 __all__ = [
     "EARTH",
     "afficher_cadre",
-    "body_picker",
     "carte_fiche",
     "flame_scene",
     "investigation_card",

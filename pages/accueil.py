@@ -6,22 +6,17 @@ The file name stays `accueil.py` because `app.py` (role A) points to it.
 import streamlit as st
 
 from flame.commun import get_scenario
-from flame.ui import EARTH, body_picker, flame_scene, label, pillar_picker, place_conditions, place_picker
+from flame.ui import EARTH, flame_scene, label, pillar_picker, place_conditions, place_picker
 
 st.title("Flame in Freefall")
 st.write("What NASA microgravity combustion experiments teach us about fire safety in space.")
 
 st.subheader("1. Where are you going?")
-body = body_picker()
-
-place = None
-if body:
-    st.subheader("2. Where exactly?")
-    place = place_picker(body)
+body, place = place_picker()
 
 pillar = None
 if place:
-    st.subheader("3. What do you need?")
+    st.subheader("2. What do you need?")
     pillar = pillar_picker()
 
 if place and pillar:

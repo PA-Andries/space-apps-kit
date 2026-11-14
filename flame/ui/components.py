@@ -17,6 +17,8 @@ from flame.ui.places import (
     current_body,
     current_pillar,
     current_place,
+    go_back,
+    take_zoom,
 )
 from flame.ui.scene import places_scene
 
@@ -29,15 +31,17 @@ BODY_NAMES = {"Terre": "Earth & orbit", "Lune": "Moon", "Mars": "Mars"}
 
 # The three.js drawing of each choice (see `three/places.html`).
 BODY_OBJECTS = {"Terre": "earth_system", "Lune": "moon", "Mars": "mars"}
+# The big planet drawn behind the places once zoomed in.
+BACKDROPS = {"Terre": "earth", "Lune": "moon", "Mars": "mars"}
 PLACE_OBJECTS = {
-    EARTH: "earth",
+    EARTH: "earth_lab",
     "Station": "station",
     "Vaisseau": "spacecraft",
-    "Base lunaire": "moon_base",
-    "Base martienne": "mars_base",
+    "Base lunaire": "base_moon",
+    "Base martienne": "base_mars",
 }
 
-SCENE_HEIGHT = 190
+SCENE_HEIGHT = 230
 
 # The buttons sit on top of the 3D scene and are transparent:
 # you click "on the planet", but the Streamlit button receives the click.
@@ -58,6 +62,7 @@ PICKER_STYLE = f"""<style>
 }}
 [class*="st-key-ui_pick_"] button p {{
   font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 1px 2px #000, 0 0 8px #000, 0 0 14px #000;
 }}
 @media (max-width: 640px) {{
   [class*="st-key-ui_pick_"] [data-testid="stHorizontalBlock"] {{ gap: 0.25rem; }}
@@ -97,29 +102,33 @@ def _button_row(
         )
 
 
-def _pick_in_3d(values: list[str], objects: list[str], chosen: str | None, action: Callable, prefix: str, name) -> None:
-    """A row of 3D objects to choose by clicking on them."""
+def _pick_in_3d(
+    values: list[str], objects: list[str], chosen: str | None, action: Callable, prefix: str, name, **scene
+) -> None:
+    """A row of 3D objects to choose by clicking on them. `scene` goes to `places_scene` (backdrop, zoom)."""
     st.html(PICKER_STYLE)
     chosen_object = objects[values.index(chosen)] if chosen in values else None
-    places_scene(objects, chosen_object, height=SCENE_HEIGHT)
-    with st.container(key=f"ui_pick_{prefix}"):
+    places_scene(objects, chosen_object, height=SCENE_HEIGHT, **scene)
+    with st.container(key="ui_pick_row"):
         _button_row(values, chosen, action, prefix, name)
 
 
-def body_picker() -> str | None:
-    """Earth, Moon or Mars in 3D, chosen by clicking on them. Returns the chosen body, or None."""
+def place_picker() -> tuple[str | None, str | None]:
+    """Earth, Moon and Mars in 3D; clicking one zooms in on it and shows its places, to click in turn.
+
+    Returns (body, place), each None until chosen.
+    """
     body = current_body()
-    _pick_in_3d(BODIES, [BODY_OBJECTS[b] for b in BODIES], body, choose_body, "ui_body", BODY_NAMES.get)
-    return body
-
-
-def place_picker(body: str) -> str | None:
-    """The places of the chosen body in 3D (for example base or rover). Returns the chosen place, or None."""
+    if body is None:
+        _pick_in_3d(BODIES, [BODY_OBJECTS[b] for b in BODIES], None, choose_body, "ui_body", BODY_NAMES.get)
+        return None, None
+    st.button("Back to Earth, Moon and Mars", icon=":material/arrow_back:", key="ui_back", on_click=go_back)
     places = PLACES_BY_BODY[body]
     place = current_place() if current_place() in places else None
     objects = [PLACE_OBJECTS.get(p, f"rover_{BODY_OBJECTS[body]}") for p in places]
-    _pick_in_3d(places, objects, place, choose_place, "ui_place", label)
-    return place
+    zoom_from = BODIES.index(body) if take_zoom() else -1
+    _pick_in_3d(places, objects, place, choose_place, "ui_place", label, backdrop=BACKDROPS[body], zoom_from=zoom_from)
+    return body, place
 
 
 def pillar_picker() -> str | None:

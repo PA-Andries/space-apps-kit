@@ -37,11 +37,18 @@ def test_places_scene_highlights_the_chosen_object():
     assert '"chosen": -1' in places_page(["earth", "spacecraft"], None)
 
 
+def test_places_scene_gets_its_backdrop_and_zoom():
+    page = places_page(["base_mars", "rover_mars"], None, backdrop="mars", zoom_from=2)
+    assert '"backdrop": "mars", "zoomFrom": 2' in page
+
+
 def test_every_object_has_a_drawing():
     from flame.ui.components import BODY_OBJECTS, PLACE_OBJECTS
 
     scene = (THREE_DIR / "places.html").read_text(encoding="utf-8")
-    objects = [*BODY_OBJECTS.values(), *PLACE_OBJECTS.values(), "rover_moon", "rover_mars"]
+    from flame.ui.components import BACKDROPS
+
+    objects = [*BODY_OBJECTS.values(), *PLACE_OBJECTS.values(), *BACKDROPS.values(), "rover_moon", "rover_mars"]
     for name in objects:
         assert re.search(rf"\b{name}:", scene), name
 
@@ -126,12 +133,30 @@ def test_a_new_body_resets_the_place():
     site = AppTest.from_function(_pick_moon_then_mars).run()
     assert site.session_state["ui_body"] == "Mars"
     assert "ui_place" not in site.session_state
+    assert site.session_state["ui_zoom_pending"] is True
+
+
+def _zoom_plays_once():
+    import streamlit as st
+
+    from flame.ui.places import choose_body, take_zoom
+
+    choose_body("Lune")
+    st.session_state["first"] = take_zoom()
+    st.session_state["second"] = take_zoom()
+
+
+def test_the_zoom_plays_only_once():
+    site = AppTest.from_function(_zoom_plays_once).run()
+    assert site.session_state["first"] is True
+    assert site.session_state["second"] is False
 
 
 def test_home_page_goes_step_by_step():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert [b.key for b in site.button if not b.key.startswith("ui_body_")] == []
     site.button(key="ui_body_Mars").click().run()
+    assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [
         "ui_place_Base martienne",
         "ui_place_Rover pressurisé",
@@ -142,6 +167,14 @@ def test_home_page_goes_step_by_step():
     site.button(key="ui_pillar_Éteindre").click().run()
     assert not site.exception
     assert len(site.slider) == 1
+
+
+def test_back_button_returns_to_the_bodies():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_body_Lune").click().run()
+    site.button(key="ui_back").click().run()
+    assert not site.exception
+    assert len([b for b in site.button if b.key.startswith("ui_body_")]) == 3
 
 
 def test_earth_button_shows_the_reference():
