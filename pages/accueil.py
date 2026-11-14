@@ -47,25 +47,18 @@ OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
 # Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
-# Partial gravity (Moon 0.165 g, Mars 0.38 g) gets a button only in the habitat that has it, so the
-# selector always shows the value the page uses. NASA's PSI tests hold none at these values: a note says so.
+# Partial gravity (Moon 0.165 g, Mars 0.38 g) has no button: NASA's PSI tests have none at these values.
+# The Moon base, the rover and the Mars base keep their own gravity, with no button selected, and a note
+# under the selector gives that gravity and says NASA has no data at it.
 GRAVITY_CHOICES = {0.0: "0 g", 1.0: "1 g"}
 # The three hardware families the challenge statement names, in the order it names them.
 HARDWARE_ORDER = ["ACME gas burner", "MDCA droplet", "MSG flow duct"]
 
 
-def gravity_choices(own: float | None) -> dict:
-    """The gravity buttons of a habitat: 0 g, 1 g, and the habitat's own gravity when it is neither."""
-    choices = dict(GRAVITY_CHOICES)
-    if own is not None and gravity_choice(own, choices) is None:
-        choices[float(own)] = f"{float(own):g} g"
-    return dict(sorted(choices.items()))
-
-
-def gravity_choice(value: float | None, choices: dict = GRAVITY_CHOICES) -> float | None:
-    """The button of a gravity value, or None when it has no button."""
+def gravity_choice(value: float | None) -> float | None:
+    """The button of a gravity value, or None when it has no button (Moon or Mars)."""
     value = value or 0.0
-    return next((choice for choice in choices if abs(choice - value) < 1e-9), None)
+    return next((choice for choice in GRAVITY_CHOICES if abs(choice - value) < 1e-9), None)
 
 
 def title_label(place: str) -> str:
@@ -123,14 +116,13 @@ values = environment_values(shown_place)
 sources = conditions(shown_place)["sources"]
 # The habitat's own gravity (0.165 g for the Moon base), whatever button the user pressed since.
 own_gravity = conditions(shown_place)["gravite"]
-gravity_buttons = gravity_choices(own_gravity)
 
 # The sliders start from the scenario: what the user typed stays, even after a visit to another page.
 # They take the habitat's values again only when the habitat changes.
 if st.session_state.get("ui_form_place") != shown_place or "ui_oxygen" not in st.session_state:
     st.session_state["ui_oxygen"] = to_slider(values["oxygene_pct"], OXYGEN_SCALE)
     st.session_state["ui_pressure"] = to_slider(values["pression_kpa"], PRESSURE_SCALE)
-    st.session_state["ui_gravity"] = gravity_choice(values["gravite"], gravity_buttons)
+    st.session_state["ui_gravity"] = gravity_choice(values["gravite"])
     st.session_state["ui_fuels"] = list(values["type_combustible"])
     st.session_state["ui_air_flow"] = to_slider(values["debit_air_cm_s"], AIR_FLOW_SCALE)
     st.session_state["ui_form_place"] = shown_place
@@ -139,7 +131,7 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     card_title(f"Parameters · {title_label(shown_place)}", "Filled in by the environment. Move a slider to change it.")
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
     gravity = st.segmented_control(
-        "g (gravity)", list(gravity_buttons), format_func=gravity_buttons.get, key="ui_gravity"
+        "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
     )
     if gravity is None:  # no button chosen: keep the environment's own gravity
         gravity = float(own_gravity or 0.0)
@@ -148,8 +140,8 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
         st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: not given.")
     elif 0 < gravity < 1:
         st.caption(
-            f"{title_label(shown_place)}: {gravity:g} g. NASA's PSI tests hold no data at {gravity:g} g: "
-            "the tests shown here were run at 0 g or 1 g."
+            f"{title_label(shown_place)}: {gravity:g} g, with no button: NASA's PSI tests hold no data at "
+            f"{gravity:g} g. The tests shown here were run at 0 g or 1 g."
         )
     else:
         st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: {float(own_gravity):g} g.")
