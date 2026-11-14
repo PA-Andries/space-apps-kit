@@ -234,8 +234,6 @@ Le calcul est dans `flame/<dossier>/`, l'affichage dans `pages/`. Un fichier de 
 | E. Assistant | Ethan | Le chatbot d'aide : consignes, appel du LLM, réponses qui citent les fiches | C |
 | F. Interface et 3D | Mathéo | L'habillage Streamlit, les composants partagés, la scène three.js et la page d'accueil | D |
 
-Si l'équipe est à cinq, le rôle D reprend l'intégration du rôle A, et le pitch se partage dimanche après le gel.
-
 Pourquoi ces binômes : A valide les fiches que B produit ; l'assistant de E s'appuie sur le moteur de C pour retrouver les bonnes fiches ; le comparateur de D a besoin des composants et des graphiques de F.
 
 ### Ce que chaque rôle fait, étape par étape
