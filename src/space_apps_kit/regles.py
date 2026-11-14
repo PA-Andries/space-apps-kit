@@ -17,6 +17,8 @@ from pathlib import Path
 DOSSIER_HOOKS = ".githooks"
 TAILLE_MAX_MO = 5
 ISSUE_AGENTS = "https://api.github.com/repos/PA-Andries/space-apps-kit/issues/2/comments"
+# Nombre maximum de pages de 100 commentaires lues dans cette issue (2 000 commentaires).
+PAGES_MAX_ISSUE = 20
 
 # Qui possède quoi : le tableau de CONTRIBUTING.md. Le rôle A possède tout le reste.
 COULOIRS = {
@@ -165,14 +167,24 @@ def est_un_agent(messages_des_commits: str) -> bool:
 
 
 def claim_trouve(branche: str) -> bool | None:
-    """Vrai si l'issue « com inter agents » porte un CLAIM récent citant `branche`. None sans réseau."""
+    """Vrai si l'issue « com inter agents » porte un CLAIM récent citant `branche`. None sans réseau.
+
+    GitHub rend les commentaires par pages de 100, du plus ancien au plus récent : on lit toutes les pages,
+    sinon un CLAIM posté après le centième commentaire reste invisible.
+    """
     depuis = (datetime.now(UTC) - timedelta(days=3)).strftime("%Y-%m-%dT%H:%M:%SZ")
-    try:
-        with urllib.request.urlopen(f"{ISSUE_AGENTS}?since={depuis}&per_page=100", timeout=8) as reponse:
-            commentaires = json.load(reponse)
-    except Exception:
-        return None
-    return any("CLAIM" in c.get("body", "") and branche in c.get("body", "") for c in commentaires)
+    for page in range(1, PAGES_MAX_ISSUE + 1):
+        try:
+            adresse = f"{ISSUE_AGENTS}?since={depuis}&per_page=100&page={page}"
+            with urllib.request.urlopen(adresse, timeout=8) as reponse:
+                commentaires = json.load(reponse)
+        except Exception:
+            return None
+        if any("CLAIM" in c.get("body", "") and branche in c.get("body", "") for c in commentaires):
+            return True
+        if len(commentaires) < 100:
+            break
+    return False
 
 
 def pre_push(lignes: list[str]) -> int:
