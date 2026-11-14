@@ -14,6 +14,7 @@ from flame.ui.places import (
     PLACE_NAMES,
     PLACE_ROWS,
     PLACES_BY_BODY,
+    SPACESUIT,
     choose_body,
     choose_place,
     current_body,
@@ -51,6 +52,8 @@ PLACE_VIEW = {
     "Base lunaire": ("moon_whole", CENTRE),
     "Rover pressurisé": ("rover_moon", TOP),
     "Base martienne": ("mars_whole", CENTRE),
+    # The spacesuit is worn on the Moon during an EVA: the lunar view, with no vehicle to point at.
+    SPACESUIT: ("moon_whole", CENTRE),
 }
 
 # Names in small, quiet type: they brighten on hover and turn flame orange once chosen (no frame drawn).

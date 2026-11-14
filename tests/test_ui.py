@@ -125,6 +125,14 @@ def _pick_station_then_earth():
     choose_place("Terre")
 
 
+def _pick_moon_base_then_spacesuit():
+    from flame.ui.places import choose_body, choose_place
+
+    choose_body("Lune")
+    choose_place("Base lunaire")
+    choose_place("Scaphandre")
+
+
 def _pick_moon_then_mars():
     from flame.ui.places import choose_body, choose_place
 
@@ -145,6 +153,13 @@ def test_earth_does_not_change_the_habitat():
     site = AppTest.from_function(_pick_station_then_earth).run()
     assert site.session_state["ui_place"] == "Terre"
     assert site.session_state["ui_habitat"] == "Station"
+
+
+def test_the_spacesuit_does_not_change_the_habitat():
+    """Like Earth, the spacesuit is a reference: it is explored without replacing the crew's habitat."""
+    site = AppTest.from_function(_pick_moon_base_then_spacesuit).run()
+    assert site.session_state["ui_place"] == "Scaphandre"
+    assert site.session_state["ui_habitat"] == "Base lunaire"
 
 
 def test_a_new_body_resets_the_place():
@@ -218,12 +233,14 @@ def test_every_page_receives_the_environment_of_page_one():
         assert site.session_state["scenario_pression_kpa"] == (None, 70.3), page
 
 
-def test_analyse_shows_the_three_most_relevant():
+def test_the_three_most_relevant_are_shown_without_a_click():
+    """Hierarchy (Ethan, 14 Nov): the results no longer wait for ANALYSE, which now opens the full ranking."""
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert "ui_analysed" not in site.session_state  # the results wait for ANALYSE
-    site.button(key="ui_analyse_button").click().run()
     assert not site.exception
-    assert site.session_state["ui_analysed"]
+    textes = [block.value for block in site.markdown]
+    assert any("Where they agree" in texte for texte in textes)  # the comparison of the three
+    assert any("PSI's tables" in texte for texte in textes)  # the data gaps, on arrival
+    assert site.button(key="ui_analyse_button").label == "ANALYSE ALL 24"
 
 
 def test_slider_ranges_round_trip():
@@ -242,10 +259,11 @@ def test_mars_conditions_contain_no_atmosphere_figure():
 
 def test_page_one_has_one_button_per_crew_environment():
     from flame.commun import HABITATS
-    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS
+    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS, SPACESUIT
 
     offered = [place for row in PLACE_ROWS for place in row]
-    assert sorted(offered) == sorted([*HABITATS, EARTH])  # every habitat of the contract, and the Earth reference
+    # Every habitat of the contract, plus the two references the statement gives: Earth air and the suit.
+    assert sorted(offered) == sorted([*HABITATS, EARTH, SPACESUIT])
     assert set(PLACE_ICONS) == set(offered)  # each button has its small logo
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [f"ui_place_{place}" for place in offered]
@@ -383,7 +401,7 @@ def test_home_goes_to_page_one_and_folds_the_sidebar():
     assert "stSidebarCollapseButton" in script
 
 
-def test_outcomes_sort_nasa_results_and_show_after_analyse():
+def test_outcomes_sort_nasa_results_and_show_on_arrival():
     import pandas as pd
 
     from flame.ui import count_outcomes, kind_of_result
@@ -407,7 +425,6 @@ def test_outcomes_sort_nasa_results_and_show_after_analyse():
     assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"
 
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_analyse_button").click().run()
     assert not site.exception
     # The card's sentence and its caption, from the matching tests' results.
     texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
@@ -435,9 +452,9 @@ def test_the_how_to_card_folds_away_and_comes_back():
     assert [b.key for b in site.button if b.key == "ui_intro_hide"] == ["ui_intro_hide"]
 
 
-def test_analyse_explains_each_of_the_three_investigations():
+def test_page_one_explains_each_of_the_three_investigations():
+    """The detailed cards of #49, now shown on arrival: the results no longer wait for ANALYSE."""
     site = AppTest.from_file(APP, default_timeout=30).run()
-    site.button(key="ui_analyse_button").click().run()
     assert not site.exception
     shown = " ".join(str(block.value) for block in site.get("html"))
     assert shown.count("What the experiment studied") == 3
