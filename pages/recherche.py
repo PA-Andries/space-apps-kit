@@ -54,6 +54,7 @@ except FileNotFoundError:  # le tableau des rapports n'est pas encore livré
 for _, fiche in resultats.iterrows():
     carte_fiche(fiche)
     st.progress(int(fiche["score"]) / 100, text=f"Score for this scenario: {int(fiche['score'])} / 100")
+    st.page_link("pages/comparateur.py", label="Compare", query_params={"id": fiche["id"]})
     with st.expander(f"Why this score, and the details of {fiche['id']}"):
         st.dataframe(
             detail_du_score(fiche, scenario),
