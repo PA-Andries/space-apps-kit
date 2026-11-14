@@ -1,71 +1,50 @@
-"""Tests du classement et de « ce qu'on ne sait pas ». Propriétaire : rôle C."""
+"""Tests du classement et de « ce qu'on ne sait pas ». Propriétaire : rôle C.
+
+Données d'exemple (data/exemples/tests.csv) :
+- EXEMPLE-A (solide) : 16, 18 et 21 % d'O2, à 101 kPa ;
+- EXEMPLE-C (liquide) : 10, 21 et 40 %, à 70 kPa ;
+- EXEMPLE-D (gaz) : 21 et 40 %, à 101 kPa.
+"""
 
 import pandas as pd
 import pytest
 
 from flame.commun import INCONNU, charger_fiches, charger_tests
 from flame.recherche import (
-    ce_qu_on_ne_sait_pas,
+    ce_quon_ne_sait_pas,
     champs_inconnus,
     detail_du_score,
     filtrer,
-    filtrer_par_pilier,
     les_plus_pertinentes,
     rechercher,
     valeurs_possibles,
 )
+from flame.recherche import (
+    tests_dans_les_plages as dans_les_plages,
+)
 
-LUNE = {"habitat": "Base lunaire", "pilier": "Prévenir", "profil": "Étudiant"}
-STATION = {"habitat": "Station", "pilier": "Détecter", "profil": "Étudiant"}
-MARS = {"habitat": "Base martienne", "pilier": "Prévenir", "profil": "Étudiant"}
-SANS_O2 = "no rows at >=30% O2"
-PROCHE = "1 rows at >=30% O2, none at reduced pressure"
-
-
-def ligne(investigation_id, categorie, poids, atmosphere, gravite, why):
-    return {
-        "habitat_id": "moon_base",
-        "investigation_id": investigation_id,
-        "category_id": categorie,
-        "category_weight": poids,
-        "atmosphere_fit": atmosphere,
-        "gravity_fit": gravite,
-        "why": why,
-    }
+LUNE = {
+    "habitat": "Base lunaire",
+    "oxygene_pct": (30.0, None),
+    "pression_kpa": (None, 70.3),
+    "gravite": 0.165,
+    "type_combustible": [],
+    "debit_air_cm_s": (None, None),
+}
+STATION = {**LUNE, "habitat": "Station", "oxygene_pct": (19.0, 23.0), "pression_kpa": (90.0, 110.0), "gravite": 0.0}
+MARS = {**LUNE, "habitat": "Base martienne", "oxygene_pct": (None, None), "pression_kpa": (None, None), "gravite": 0.38}
+PERSONNALISE = {**MARS, "habitat": "Personnalisé", "gravite": None}
 
 
 @pytest.fixture
 def pertinence():
-    """Une petite table `relevance` fictive, au format du rôle B, pour les fiches d'exemple."""
-    return pd.DataFrame(
-        [
-            ligne("EXEMPLE-A", "prevent", 3, 0.0, 0.4, f"primary for 'prevent'; {SANS_O2}; microgravity only"),
-            ligne("EXEMPLE-A", "react", 0, 0.0, 0.4, "not relevant to this category"),
-            ligne("EXEMPLE-B", "detect", 2, 0.0, 0.4, "secondary for 'detect'; oxygen not recorded; microgravity only"),
-            ligne(
-                "EXEMPLE-C",
-                "react",
-                1,
-                1.0,
-                1.0,
-                "indirect for 'react'; 1 rows at >=30% O2 and <=0.69 atm; mimics partial gravity",
-            ),
-            ligne("EXEMPLE-D", "prevent", 1, 0.7, 0.4, f"indirect for 'prevent'; {PROCHE}; microgravity only"),
-            ligne("EXEMPLE-D", "react", 2, 0.7, 0.4, f"secondary for 'react'; {PROCHE}; microgravity only"),
-        ]
-    )
-
-
-@pytest.fixture
-def atmospheres():
-    """Les lignes utiles de data/psi/habitats.csv (rôle B)."""
-    colonnes = ["habitat_id", "o2_pct_min", "o2_pct_max", "pressure_psi_max", "gravity_g"]
+    """Une petite table `relevance` fictive, au format du rôle B (sans colonne de pilier)."""
     lignes = [
-        ("iss", 21, 21, 14.7, 0.0),
-        ("moon_base", 30, None, 10.2, 0.165),
-        ("mars_base", None, None, None, 0.38),
+        ("moon_base", "EXEMPLE-A", 0.4, "no rows at >=30% O2; microgravity only: one bound for partial gravity"),
+        ("moon_base", "EXEMPLE-C", 1.0, "1 rows at >=30% O2; mimics partial gravity with an electric field"),
+        ("moon_base", "EXEMPLE-D", 0.4, "no rows at >=30% O2; microgravity only: one bound for partial gravity"),
     ]
-    return pd.DataFrame(lignes, columns=colonnes)
+    return pd.DataFrame(lignes, columns=["habitat_id", "investigation_id", "gravity_fit", "why"])
 
 
 def fiche(id_fiche: str) -> pd.Series:
@@ -105,57 +84,66 @@ def test_les_fiches_qui_ont_le_plus_de_mots_passent_devant():
 
 
 def test_une_table_vide_ne_fait_pas_planter_la_recherche():
-    # Cas d'une page quand les filtres ne gardent aucune fiche.
-    aucune_fiche = filtrer(charger_fiches(), piliers=["Pilier qui n'existe pas"])
+    aucune_fiche = filtrer(charger_fiches(), types_combustible=["plasma"])
     for question in ("", "flamme"):
         resultats = rechercher(question, aucune_fiche, LUNE)
         assert resultats.empty
         assert {"score", "mots_trouves"} <= set(resultats.columns)
 
 
-# --- Le score sur les preuves (recadrage : le pilier n'en fait plus partie) ---
+# --- Les tests dans les plages du scénario ---
+
+
+def test_tests_dans_les_plages_de_la_lune():
+    # Seul C-03 (40 %, 70 kPa) a au moins 30 % d'O2 et au plus 70,3 kPa.
+    assert list(dans_les_plages(charger_tests(), LUNE)["test_id"]) == ["C-03"]
+
+
+def test_une_pression_non_notee_ne_retire_pas_le_test():
+    tests = pd.DataFrame({"investigation_id": ["X"], "test_id": ["X-1"], "oxygene_pct": [35], "pression_kpa": [None]})
+    assert len(dans_les_plages(tests, LUNE)) == 1
+
+
+def test_sans_plage_tous_les_tests_sont_gardes():
+    assert len(dans_les_plages(charger_tests(), MARS)) == len(charger_tests())
+
+
+# --- Le score sur les preuves ---
 
 
 def test_detail_du_score_explique_les_quatre_criteres(pertinence):
     detail = detail_du_score(fiche("EXEMPLE-C"), LUNE, pertinence)
     assert list(detail.columns) == ["critere", "points", "maximum", "explication"]
-    assert points(detail) == {"Atmosphere": 40, "Fuel": 15, "Gravity": 20, "Data": 10}
+    assert points(detail) == {"Atmosphere": 13, "Fuel": 15, "Gravity": 20, "Data": 10}  # 40 x 1/3 = 13
     assert list(detail["maximum"]) == [40, 25, 20, 15]
+    assert detail.iloc[0]["explication"].startswith("1 of its 3 tests (33%) fall in your atmosphere (O2 ≥ 30 %")
     assert detail["explication"].str.len().gt(0).all()
-    # La raison vient de la colonne `why` du rôle B, sans toucher aux majuscules (« O2 »).
-    assert "O2" in detail.iloc[0]["explication"]
 
 
-def test_le_pilier_ne_change_pas_le_score(pertinence):
-    a_prevenir = points(detail_du_score(fiche("EXEMPLE-D"), {**LUNE, "pilier": "Prévenir"}, pertinence))
-    a_detecter = points(detail_du_score(fiche("EXEMPLE-D"), {**LUNE, "pilier": "Détecter"}, pertinence))
-    assert a_prevenir == a_detecter
+def test_le_classement_change_avec_l_oxygene_et_la_pression():
+    lune = les_plus_pertinentes(charger_fiches(), LUNE)
+    station = les_plus_pertinentes(charger_fiches(), STATION)
+    assert lune.iloc[0]["id"] != station.iloc[0]["id"]
+    assert points(detail_du_score(fiche("EXEMPLE-D"), STATION))["Atmosphere"] == 20  # D-01 : 1 test sur 2
 
 
-def test_atmosphere_et_gravite_suivent_relevance(pertinence):
-    detail = points(detail_du_score(fiche("EXEMPLE-D"), LUNE, pertinence))
-    assert detail["Atmosphere"] == 28  # 40 x 0,7
-    assert detail["Gravity"] == 8  # 20 x 0,4
+def test_un_habitat_personnalise_avec_une_plage_compte_l_atmosphere():
+    personnalise = {**PERSONNALISE, "oxygene_pct": (30, None)}
+    detail = points(detail_du_score(fiche("EXEMPLE-D"), personnalise))
+    assert detail["Atmosphere"] == 20  # D-02 à 40 % : 1 test sur 2
 
 
-def test_mars_n_a_pas_d_atmosphere(pertinence):
-    detail = detail_du_score(fiche("EXEMPLE-C"), MARS, pertinence)
+def test_sans_atmosphere_le_critere_ne_compte_pas():
+    detail = detail_du_score(fiche("EXEMPLE-C"), MARS)
     assert points(detail)["Atmosphere"] == 0
-    assert "no atmosphere" in detail.iloc[0]["explication"]
+    assert "unknown" in detail.iloc[0]["explication"]
 
 
-def test_sans_habitat_ni_relevance_atmosphere_et_gravite_valent_zero():
-    detail = points(detail_du_score(fiche("EXEMPLE-A")))
-    assert detail["Atmosphere"] == 0 and detail["Gravity"] == 0
-    assert detail["Fuel"] == 25 and detail["Data"] == 10
-
-
-def test_une_valeur_inconnue_ne_donne_aucun_point(pertinence):
-    incomplete = fiche("EXEMPLE-A").copy()
-    incomplete["nb_tests"] = None
-    incomplete["type_combustible"] = INCONNU
-    detail = points(detail_du_score(incomplete, STATION, pertinence))
-    assert detail == {"Atmosphere": 0, "Fuel": 0, "Gravity": 0, "Data": 0}
+def test_les_combustibles_choisis_comptent():
+    seulement_gaz = {**LUNE, "type_combustible": ["gaz"]}
+    assert points(detail_du_score(fiche("EXEMPLE-A"), seulement_gaz))["Fuel"] == 0
+    assert points(detail_du_score(fiche("EXEMPLE-D"), seulement_gaz))["Fuel"] == 8
+    assert points(detail_du_score(fiche("EXEMPLE-A"), LUNE))["Fuel"] == 25
 
 
 def test_un_combustible_modele_compte_comme_son_type_de_base():
@@ -166,6 +154,19 @@ def test_un_combustible_modele_compte_comme_son_type_de_base():
     assert points(detail_du_score(modele))["Fuel"] == 0
 
 
+def test_une_valeur_inconnue_ne_donne_aucun_point(pertinence):
+    incomplete = fiche("EXEMPLE-A").copy()
+    incomplete["nb_tests"] = None
+    incomplete["type_combustible"] = INCONNU
+    detail = points(detail_du_score(incomplete, LUNE, pertinence))
+    assert detail["Fuel"] == 0 and detail["Data"] == 0
+
+
+def test_la_gravite_vient_de_relevance(pertinence):
+    assert points(detail_du_score(fiche("EXEMPLE-D"), LUNE, pertinence))["Gravity"] == 8  # 20 x 0,4
+    assert points(detail_du_score(fiche("EXEMPLE-D"), PERSONNALISE, pertinence))["Gravity"] == 0
+
+
 def test_le_score_est_la_somme_de_ses_quatre_parties(pertinence):
     resultats = rechercher("", charger_fiches(), LUNE, pertinence)
     parties = resultats[["score_atmosphere", "score_combustible", "score_gravite", "score_donnees"]].sum(axis=1)
@@ -173,56 +174,47 @@ def test_le_score_est_la_somme_de_ses_quatre_parties(pertinence):
     assert resultats["score"].between(0, 100).all()
 
 
-# --- Le pilier : un filtre et une étiquette ---
-
-
-def test_le_pilier_filtre_et_etiquette(pertinence):
-    eteindre = filtrer_par_pilier(charger_fiches(), "Éteindre", pertinence)
-    etiquettes = dict(zip(eteindre["id"], eteindre["etiquette"], strict=True))
-    assert etiquettes == {"EXEMPLE-C": "indirect", "EXEMPLE-D": "secondary"}
-
-
-def test_sans_pilier_rien_n_est_retire(pertinence):
-    tous = filtrer_par_pilier(charger_fiches(), None, pertinence)
-    assert len(tous) == len(charger_fiches())
-    assert (tous["etiquette"] == "").all()
-
-
-def test_sans_relevance_le_filtre_lit_la_colonne_pilier():
-    prevenir = filtrer_par_pilier(charger_fiches(), "Prévenir", pd.DataFrame())
-    assert list(prevenir["id"]) == ["EXEMPLE-A", "EXEMPLE-D"]
-
-
-def test_le_classement_est_trie_par_score(pertinence):
+def test_le_classement_garde_toutes_les_fiches_trie_par_score(pertinence):
     classement = les_plus_pertinentes(charger_fiches(), LUNE, pertinence=pertinence)
+    assert len(classement) == len(charger_fiches())
     assert list(classement["score"]) == sorted(classement["score"], reverse=True)
-    assert classement.iloc[0]["id"] == "EXEMPLE-C"
     assert len(les_plus_pertinentes(charger_fiches(), LUNE, nombre=3, pertinence=pertinence)) == 3
 
 
 # --- Ce qu'on ne sait pas ---
 
 
-def test_les_conditions_jamais_testees_sont_dites(atmospheres):
-    constats = ce_qu_on_ne_sait_pas("Base lunaire", charger_fiches(), charger_tests(), atmospheres)
-    texte = "\n".join(constats)
-    # Seul C-03 (liquide, 40 % et 70 kPa) est dans la zone lunaire : au moins 30 % et au plus 70,3 kPa.
-    assert "No solid-fuel test was run in the atmosphere of the Moon base." in constats
-    assert "1 liquid-fuel test(s), from 1 investigation(s), match the atmosphere of the Moon base." in constats
-    assert "No gas-fuel test" in texte
-    assert "partial gravity" in texte
-    assert "above 21 % oxygen" in texte
+def test_les_conditions_jamais_testees_sont_dites():
+    constats = ce_quon_ne_sait_pas(charger_fiches(), charger_tests(), LUNE)
+    conditions = "O2 ≥ 30 %, pressure ≤ 70.3 kPa"
+    assert f"No solid-fuel test was run at {conditions}." in constats
+    assert f"1 liquid-fuel test(s), from 1 investigation(s), were run at {conditions}." in constats
+    assert f"No gas-fuel test was run at {conditions}." in constats
+    assert any("partial gravity of the Moon base (0.165 g)" in constat for constat in constats)
+    assert any("above 21 % oxygen" in constat for constat in constats)
 
 
-def test_mars_dit_que_l_atmosphere_est_inconnue(atmospheres):
-    constats = ce_qu_on_ne_sait_pas("Base martienne", charger_fiches(), charger_tests(), atmospheres)
-    assert constats[0].startswith("The statement gives no oxygen or pressure for the Mars base")
+def test_seuls_les_combustibles_choisis_sont_comptes():
+    constats = ce_quon_ne_sait_pas(charger_fiches(), charger_tests(), {**LUNE, "type_combustible": ["solide"]})
+    assert not any("liquid-fuel" in constat or "gas-fuel" in constat for constat in constats)
 
 
-def test_la_station_compte_l_air_de_19_a_23_pour_cent(atmospheres):
-    constats = ce_qu_on_ne_sait_pas("Station", charger_fiches(), charger_tests(), atmospheres)
-    assert "1 solid-fuel test(s), from 1 investigation(s), match the atmosphere of the Space station." in constats
+def test_mars_dit_que_l_atmosphere_est_inconnue():
+    constats = ce_quon_ne_sait_pas(charger_fiches(), charger_tests(), MARS)
+    assert constats[0].startswith("The atmosphere of the Mars base is unknown")
+
+
+def test_la_station_n_a_pas_de_gravite_partielle():
+    constats = ce_quon_ne_sait_pas(charger_fiches(), charger_tests(), STATION)
+    assert (
+        "1 solid-fuel test(s), from 1 investigation(s), were run at O2 19 to 23 %, pressure 90 to 110 kPa." in constats
+    )
     assert not any("partial gravity" in constat for constat in constats)
+
+
+def test_une_gravite_inconnue_est_dite():
+    constats = ce_quon_ne_sait_pas(charger_fiches(), charger_tests(), PERSONNALISE)
+    assert "The gravity of your custom environment is unknown." in constats
 
 
 def test_champs_inconnus_d_une_fiche():
@@ -231,12 +223,11 @@ def test_champs_inconnus_d_une_fiche():
     assert champs_inconnus(incomplete) == ["pressure"]
 
 
-# --- Filtres et valeurs ---
+# --- Filtres et valeurs (utilisés par la page 1) ---
 
 
 def test_filtrer_garde_les_fiches_qui_ont_une_des_valeurs():
     fiches = charger_fiches()
-    assert list(filtrer(fiches, piliers=["Éteindre"])["id"]) == ["EXEMPLE-C", "EXEMPLE-D"]
     assert list(filtrer(fiches, types_combustible=["solide", "gaz"])["id"]) == ["EXEMPLE-A", "EXEMPLE-D"]
 
 
