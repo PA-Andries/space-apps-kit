@@ -1,5 +1,6 @@
 """Text blocks of the dashboard: header, card titles, key figures, mascot, footer (styles in style.py)."""
 
+from contextlib import contextmanager
 from html import escape
 
 import streamlit as st
@@ -102,3 +103,29 @@ def chatbot_button(page: str) -> None:
     with st.container(key="ui_chatbot"):
         mascot_scene(height=96)
         st.page_link(page, label="Chatbot", icon=":material/forum:")
+
+
+def assistant_mascot() -> None:
+    """The flame mascot, small and centred, just above the chat box of the Assistant page.
+
+    It talks (its mouth moves) while `talking()` is open: see below.
+    """
+    with st.container(key="ui_assistant_mascot"):
+        mascot_scene(height=150)
+
+
+@contextmanager
+def talking():
+    """While this block runs, the mascot on the page talks.
+
+    It shows a hidden marker that the mascot's scene looks for; the scene never reloads.
+
+        with talking():
+            answer = ...
+    """
+    marker = st.empty()
+    marker.html('<span class="ff-talking" aria-hidden="true"></span>')
+    try:
+        yield
+    finally:
+        marker.empty()

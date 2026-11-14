@@ -144,6 +144,11 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
 
+/* The mascot of the Assistant page, small and centred just above the chat box; no frame around it. */
+.st-key-ui_assistant_mascot {{ align-items: center; margin: 0.5rem 0 0; }}
+.st-key-ui_assistant_mascot iframe {{ width: 160px !important; box-shadow: none; border-radius: 0;
+  background: transparent; }}
+
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
   padding: 0.6rem 2.2rem; }}

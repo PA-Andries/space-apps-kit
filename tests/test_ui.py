@@ -314,3 +314,26 @@ def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
     empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
     figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
     assert "Your selection" not in [trace.name for trace in figure.data]
+
+
+def test_the_assistant_page_shows_the_flame_and_it_talks_while_answering():
+    page = AppTest.from_file("../pages/assistant.py", default_timeout=60).run()
+    assert not page.exception
+    # The flame sits after the conversation, just above the chat box.
+    blocks = list(page.main.children.values())
+    assert "ui_assistant_mascot" in str(blocks[-1].proto)
+
+    def answer_while_talking():
+        import streamlit as st
+
+        from flame.ui import talking
+
+        with talking():
+            st.session_state["marker_seen"] = True
+        st.session_state["done"] = True
+
+    page = AppTest.from_function(answer_while_talking).run()
+    assert not page.exception and page.session_state["done"]
+    # The marker is gone once the answer is written: the flame stops talking.
+    assert "ff-talking" not in str(page.main)
+    assert "ff-talking" in Path("flame/ui/three/mascot.html").read_text()
