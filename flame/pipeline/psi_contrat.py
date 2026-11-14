@@ -23,7 +23,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from flame.commun.constantes import ATMOSPHERES, COLONNES_FICHES, COLONNES_TESTS
+from flame.commun.constantes import ATMOSPHERES, COLONNES_FICHES, COLONNES_PUBLICATIONS, COLONNES_TESTS
 
 DOSSIER_DATA = Path(__file__).resolve().parents[2] / "data"
 DOSSIER_PSI = DOSSIER_DATA / "raw" / "psi_dataset"
@@ -193,6 +193,11 @@ def main() -> None:
     tests = lignes_de_tests_du_contrat(psi["tests"])
     fiches.to_csv(fichier_fiches, index=False)
     tests.to_csv(DOSSIER_DATA / "tests.csv", index=False)
+    # Le site lit aussi data/publications.csv dès que les vraies fiches existent. Tant que le script NTRS ne l'a pas
+    # écrit, on crée un fichier avec seulement les noms de colonnes, pour que la page Recherche ne plante pas.
+    fichier_publications = DOSSIER_DATA / "publications.csv"
+    if not fichier_publications.exists():
+        pd.DataFrame(columns=COLONNES_PUBLICATIONS).to_csv(fichier_publications, index=False)
     DOSSIER_TABLES_PSI.mkdir(exist_ok=True)
     for nom in TABLES_PSI:
         shutil.copyfile(dossier_psi / f"{nom}.csv", DOSSIER_TABLES_PSI / f"{nom}.csv")
