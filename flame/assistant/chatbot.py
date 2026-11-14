@@ -1,4 +1,7 @@
-"""L'assistant : envoie les consignes, les fiches, l'historique et la question à l'API Gemini.
+"""L'assistant (RAG) : retrouve les fiches utiles, puis les envoie à Gemini avec la question.
+
+1. Recherche (`rag.py`) : les fiches dont le sens est le plus proche de la question.
+2. Génération : Gemini répond à partir de ces fiches seulement, en citant leurs `id`.
 
 La clé se lit avec `cle_api()` et ne s'écrit jamais dans le code.
 """
@@ -8,6 +11,9 @@ from pathlib import Path
 import pandas as pd
 import requests
 import streamlit as st
+
+from flame.assistant.rag import NB_FICHES, fiches_proches
+from flame.recherche import rechercher
 
 DOSSIER_PROMPTS = Path(__file__).parent / "prompts"
 MODELE = "gemini-3.5-flash"
@@ -45,9 +51,40 @@ def fiches_en_texte(fiches: pd.DataFrame) -> str:
     return "\n\n---\n\n".join(blocs) if blocs else "(aucune fiche)"
 
 
-def consigne_systeme(fiches: pd.DataFrame) -> str:
-    """Les consignes de `prompts/systeme.md`, suivies de toutes les fiches."""
-    return f"{lire_prompt('systeme')}\n\n# Les fiches\n\n{fiches_en_texte(fiches)}"
+def catalogue(fiches: pd.DataFrame) -> str:
+    """La liste courte de toutes les fiches : une ligne « - id : nom (pilier) » par fiche."""
+    return "\n".join(f"- {fiche['id']} : {fiche['nom']} ({fiche['pilier']})" for fiche in fiches.to_dict("records"))
+
+
+def texte_a_chercher(question: str, historique: list[dict[str, str]]) -> str:
+    """La question, précédée de la question d'avant, pour comprendre une relance (« et celle sur les tissus ? »)."""
+    precedentes = [message["content"] for message in historique if message["role"] == "user"]
+    return f"{precedentes[-1]}\n{question}" if precedentes else question
+
+
+def choisir_fiches(question: str, historique: list[dict[str, str]], fiches: pd.DataFrame, cle: str) -> pd.DataFrame:
+    """Les fiches utiles à la question (étape « recherche » du RAG).
+
+    Si Gemini ne peut pas calculer les embeddings, on se rabat sur la recherche par mots du rôle C,
+    puis, si elle ne trouve rien, sur toutes les fiches.
+    """
+    texte = texte_a_chercher(question, historique)
+    try:
+        return fiches_proches(texte, fiches, cle)
+    except requests.RequestException:
+        trouvees = rechercher(texte, fiches)
+        if trouvees.empty:
+            return fiches
+        return fiches[fiches["id"].isin(trouvees["id"].head(NB_FICHES))]
+
+
+def consigne_systeme(fiches_utiles: pd.DataFrame, toutes_les_fiches: pd.DataFrame) -> str:
+    """Les consignes de `prompts/systeme.md`, la liste de toutes les fiches, puis le détail des fiches utiles."""
+    return (
+        f"{lire_prompt('systeme')}\n\n"
+        f"# Toutes les investigations (id et nom seulement)\n\n{catalogue(toutes_les_fiches)}\n\n"
+        f"# Les fiches détaillées utiles à cette question\n\n{fiches_en_texte(fiches_utiles)}"
+    )
 
 
 def messages_gemini(question: str, historique: list[dict[str, str]]) -> list[dict]:
@@ -91,7 +128,9 @@ def repondre(question: str, historique: list[dict[str, str]], fiches: pd.DataFra
     if cle is None:
         return "L'assistant n'est pas encore branché : il manque `LLM_API_KEY` dans les Secrets."
     try:
-        texte = appeler_gemini(consigne_systeme(fiches), messages_gemini(question, historique), cle)
+        fiches_utiles = choisir_fiches(question, historique, fiches, cle)
+        consigne = consigne_systeme(fiches_utiles, fiches)
+        texte = appeler_gemini(consigne, messages_gemini(question, historique), cle)
     except requests.RequestException as erreur:
         return message_erreur(erreur)
     return texte or "Je ne sais pas : Gemini n'a renvoyé aucune réponse."

@@ -6,7 +6,14 @@ import pytest
 from streamlit.testing.v1 import AppTest
 
 APP = str(Path(__file__).parents[1] / "app.py")
-PAGES = ["pages/accueil.py", "pages/recherche.py", "pages/comparateur.py", "pages/assistant.py"]
+PAGES = [
+    "pages/accueil.py",
+    "pages/recherche.py",
+    "pages/donnees.py",
+    "pages/comparateur.py",
+    "pages/equipements.py",
+    "pages/assistant.py",
+]
 
 
 def test_accueil_s_ouvre():
@@ -19,11 +26,3 @@ def test_page_s_ouvre(page):
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.switch_page(page).run()
     assert not site.exception
-
-
-def test_comparateur_affiche_un_tableau():
-    site = AppTest.from_file(APP, default_timeout=30).run()
-    site.switch_page("pages/comparateur.py").run()
-    site.multiselect(key="comparateur_ids").set_value(["EXEMPLE-A", "EXEMPLE-C"]).run()
-    assert not site.exception
-    assert len(site.dataframe) == 1

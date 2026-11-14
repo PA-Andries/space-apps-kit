@@ -1,5 +1,61 @@
-"""Rôle D (Comparateur) : met plusieurs investigations côte à côte."""
+"""Rôle D (Comparateur) : part d'une investigation et dit avec lesquelles elle se compare, et sur quoi."""
 
-from flame.comparateur.comparaison import CRITERES, comparer
+from flame.comparateur.comparaison import (
+    CRITERES,
+    EXPLICATIONS,
+    NIVEAUX,
+    VARIABLES,
+    carte,
+    comparables,
+    comparer,
+    instruments_communs,
+    plages,
+    points,
+    separer,
+    variables_communes,
+)
+from flame.comparateur.conditions import (
+    decrire_environnement,
+    environnement_defini,
+    graphique_conditions,
+    plages_du_scenario,
+    tests_correspondants,
+)
+from flame.comparateur.details import (
+    ABSENT,
+    cote_a_cote,
+    explication_carte,
+    frequents,
+    ligne_psi,
+    mesures,
+    portrait,
+    resume,
+)
 
-__all__ = ["CRITERES", "comparer"]
+__all__ = [
+    "ABSENT",
+    "CRITERES",
+    "EXPLICATIONS",
+    "NIVEAUX",
+    "VARIABLES",
+    "carte",
+    "comparables",
+    "comparer",
+    "cote_a_cote",
+    "decrire_environnement",
+    "environnement_defini",
+    "explication_carte",
+    "frequents",
+    "graphique_conditions",
+    "instruments_communs",
+    "ligne_psi",
+    "mesures",
+    "plages",
+    "plages_du_scenario",
+    "points",
+    "portrait",
+    "resume",
+    "separer",
+    "tests_correspondants",
+    "variables_communes",
+]
