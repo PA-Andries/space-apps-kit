@@ -32,25 +32,36 @@ def test_three_js_has_an_exact_version():
         assert re.search(r"three@\d+\.\d+\.\d+/", scene.read_text(encoding="utf-8")), scene.name
 
 
+ZONE = {"x": 0, "y": 0, "w": 0.5, "h": 1}
+
+
 def test_places_scene_highlights_the_chosen_object():
-    assert '"chosen": 2' in places_page(["earth", "spacecraft", "station"], "station")
-    assert '"chosen": -1' in places_page(["earth", "spacecraft"], None)
+    assert '"chosen": 1' in places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], "rover_moon")
+    assert '"chosen": -1' in places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], None)
 
 
-def test_places_scene_gets_its_backdrop_and_zoom():
-    page = places_page(["base_moon", "rover_moon"], None, backdrop="moon_ground", zoom_from=1)
-    assert '"backdrop": "moon_ground", "zoomFrom": 1' in page
+def test_places_scene_gets_its_zones_and_zoom():
+    page = places_page(["mars_whole"], [ZONE], None, zoom_from=2)
+    assert '"zones": [{"x": 0, "y": 0, "w": 0.5, "h": 1}]' in page
+    assert '"zoomFrom": 2' in page
 
 
 def test_every_object_has_a_drawing():
-    from flame.ui.components import BODY_OBJECTS, PLACE_OBJECTS
+    from flame.ui.components import BODY_OBJECTS, PLACE_VIEW
 
     scene = (THREE_DIR / "places.html").read_text(encoding="utf-8")
-    from flame.ui.components import BACKDROPS
+    for name in [*BODY_OBJECTS.values(), *(view[0] for view in PLACE_VIEW.values())]:
+        assert re.search(rf"\b{name}: \[", scene), name
 
-    objects = [*BODY_OBJECTS.values(), *PLACE_OBJECTS.values(), *BACKDROPS.values(), "rover_moon"]
-    for name in objects:
-        assert re.search(rf"\b{name}:", scene), name
+
+def test_every_offered_place_has_a_view():
+    from flame.ui.components import PLACE_VIEW
+    from flame.ui.places import PLACES_BY_BODY
+
+    for places in PLACES_BY_BODY.values():
+        for place in places:
+            zone = PLACE_VIEW[place][1]
+            assert zone["x"] >= 0 and zone["x"] + zone["w"] <= 1 and zone["y"] >= 0 and zone["y"] + zone["h"] <= 1
 
 
 def test_label_translates_contract_values():

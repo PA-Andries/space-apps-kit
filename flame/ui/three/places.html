@@ -10,13 +10,17 @@
   </head>
   <body>
     <script type="module">
-      // Cartoon-style 3D objects side by side: celestial bodies (Earth system, Moon, Mars), then the places
-      // of a body (planet, station, spacecraft, base, rover). Simple shapes drawn here, no outside image.
-      // The chosen object grows, spins and gets a halo. Clicks are received by the Streamlit buttons placed
-      // over the scene: the scene sends nothing back to Python.
+      // Cartoon-style 3D objects to choose from. First view: Earth system, Moon, Mars side by side.
+      // Zoomed view: the whole planet in the middle, with what belongs to it (the station and the spacecraft
+      // on their orbit around Earth, the rover on the edge of the Moon). Simple shapes drawn here, no image.
+      //
+      // Each object lives inside a "zone" (a rectangle given in fractions of the frame). Python places a
+      // transparent Streamlit button over each zone: the click goes to that button, and the scene sends
+      // nothing back to Python. Moving objects therefore never leave their zone.
       import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
 
-      const settings = __SETTINGS__; // replaced by Python: { objects: [...], chosen: index of the chosen object, or -1 }
+      // Replaced by Python: { objects: [...], zones: [{x, y, w, h}, ...], chosen: index or -1, zoomFrom: 0-2 or -1 }
+      const settings = __SETTINGS__;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       let renderer;
@@ -31,13 +35,11 @@
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       document.body.appendChild(renderer.domElement);
 
-      const count = settings.objects.length;
       const scene = new THREE.Scene();
-      // Orthographic camera: the visible height is fixed (objects keep their size),
-      // the width follows the frame, and each object sits in the middle of its column, like the buttons.
+      // Orthographic camera: the visible height is fixed (objects keep their size), the width follows the frame.
       const HALF_HEIGHT = 0.68;
       const camera = new THREE.OrthographicCamera(-1, 1, HALF_HEIGHT, -HALF_HEIGHT, 0.1, 20);
-      camera.position.set(0, -0.12, 10);
+      camera.position.set(0, 0, 10);
 
       scene.add(new THREE.HemisphereLight(0xfff4e6, 0x151c33, 1.1)); // warm sky, site panel colour below
       const sun = new THREE.DirectionalLight(0xffe2c4, 2.4); // a warm, flame-tinted sun
@@ -96,38 +98,30 @@
         p.fillRect(0, h * 0.91, w, h * 0.09);
       };
 
-      // Planet maps. `k` scales the canvas and its drawing: 1 for the small planets, 4 for the big
-      // planet seen up close once zoomed in (so its surface stays sharp).
-      const makeEarthMap = (k) =>
-        paint((p, w, h) => {
-          p.fillStyle = "#3b82f6";
-          p.fillRect(0, 0, w, h);
-          blotches(p, ["#4ade80", "#34d399", "#fbbf24"], 9, 8 * k, 22 * k, w, h);
-          if (k === 1) iceCaps(p, w, h); // the big planet is turned: its caps would show on the side
-        }, 256 * k, 128 * k);
-      const makeMoonMap = (k) =>
-        paint((p, w, h) => {
-          p.fillStyle = "#e2e8f0";
-          p.fillRect(0, 0, w, h);
-          for (let i = 0; i < 22; i++) {
-            const x = random() * w, y = 10 * k + random() * (h - 20 * k), r = (3 + random() * 9) * k;
-            p.fillStyle = "#94a3b8";
-            p.beginPath(); p.arc(x, y, r, 0, 7); p.fill();
-            p.fillStyle = "#cbd5e1";
-            p.beginPath(); p.arc(x - r * 0.25, y - r * 0.25, r * 0.65, 0, 7); p.fill();
-          }
-        }, 256 * k, 128 * k);
-      const makeMarsMap = (k) =>
-        paint((p, w, h) => {
-          p.fillStyle = "#fb923c";
-          p.fillRect(0, 0, w, h);
-          blotches(p, ["#ea580c", "#c2410c", "#fdba74"], 10, 6 * k, 18 * k, w, h);
-          if (k === 1) iceCaps(p, w, h, "#fff7ed");
-        }, 256 * k, 128 * k);
-      const earthMap = makeEarthMap(1);
-      const moonMap = makeMoonMap(1);
-      const marsMap = makeMarsMap(1);
+      const earthMap = paint((p, w, h) => {
+        p.fillStyle = "#3b82f6";
+        p.fillRect(0, 0, w, h);
+        blotches(p, ["#4ade80", "#34d399", "#fbbf24"], 9, 8, 22, w, h);
+        iceCaps(p, w, h);
+      });
       const cloudMap = paint((p, w, h) => blotches(p, ["rgba(255,255,255,0.95)"], 10, 4, 10, w, h));
+      const moonMap = paint((p, w, h) => {
+        p.fillStyle = "#e2e8f0";
+        p.fillRect(0, 0, w, h);
+        for (let i = 0; i < 22; i++) {
+          const x = random() * w, y = 10 + random() * (h - 20), r = 3 + random() * 9;
+          p.fillStyle = "#94a3b8";
+          p.beginPath(); p.arc(x, y, r, 0, 7); p.fill();
+          p.fillStyle = "#cbd5e1";
+          p.beginPath(); p.arc(x - r * 0.25, y - r * 0.25, r * 0.65, 0, 7); p.fill();
+        }
+      });
+      const marsMap = paint((p, w, h) => {
+        p.fillStyle = "#fb923c";
+        p.fillRect(0, 0, w, h);
+        blotches(p, ["#ea580c", "#c2410c", "#fdba74"], 10, 6, 18, w, h);
+        iceCaps(p, w, h, "#fff7ed");
+      });
       const panelMap = paint((p, w, h) => {
         p.fillStyle = "#1e3a8a";
         p.fillRect(0, 0, w, h);
@@ -137,7 +131,7 @@
         for (let y = 0; y <= h; y += h / 6) { p.beginPath(); p.moveTo(0, y); p.lineTo(w, y); p.stroke(); }
       }, 64, 128);
 
-      // --- The objects ----------------------------------------------------------------------------
+      // --- The objects (each about 0.65 units across at scale 1) -----------------------------------
       const RADIUS = 0.32;
       const glass = toon("#7dd3fc", { transparent: true, opacity: 0.85 });
       const white = toon("#f8fafc");
@@ -145,37 +139,16 @@
       const orange = toon("#f97316");
       const dark = toon("#1e293b");
 
-      const planet = (map) => part(new THREE.SphereGeometry(RADIUS, 48, 32), toon("#ffffff", { map }), 1.05);
-      // The big planet behind the places once zoomed in: a smoother sphere, a sharper map, no clouds.
-      const bigPlanet = (makeMap) => () => {
-        const map = makeMap(4);
-        map.anisotropy = renderer.capabilities.getMaxAnisotropy(); // stays sharp when seen at a grazing angle
-        return part(new THREE.SphereGeometry(RADIUS, 192, 96), toon("#ffffff", { map }), 1.01);
-      };
-
-      // A small habitat dome with its antenna, on top of a planet.
-      const dome = () => {
-        const g = new THREE.Group();
-        const bubble = part(new THREE.SphereGeometry(0.11, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), glass, 1.1);
-        const base = part(new THREE.CylinderGeometry(0.125, 0.135, 0.04, 24), white, 1.1);
-        base.position.y = -0.01;
-        const mast = part(new THREE.CylinderGeometry(0.008, 0.008, 0.12, 8), grey, 1.3);
-        mast.position.set(0.1, 0.06, 0);
-        const ball = part(new THREE.SphereGeometry(0.022, 12, 12), orange, 1.2);
-        ball.position.set(0.1, 0.13, 0);
-        g.add(base, bubble, mast, ball);
-        g.position.y = RADIUS - 0.02;
-        return g;
-      };
+      const planet = (map) => part(new THREE.SphereGeometry(RADIUS, 64, 40), toon("#ffffff", { map }), 1.04);
 
       const earth = () => {
         const g = new THREE.Group();
         g.add(planet(earthMap));
         const clouds = new THREE.Mesh(
-          new THREE.SphereGeometry(RADIUS * 1.04, 48, 32),
+          new THREE.SphereGeometry(RADIUS * 1.04, 64, 40),
           toon("#ffffff", { map: cloudMap, transparent: true, depthWrite: false }),
         );
-        clouds.userData.extraSpin = 0.006;
+        clouds.userData.extraSpin = 0.003;
         g.add(clouds);
         return g;
       };
@@ -189,7 +162,6 @@
         spinner.userData.extraSpin = 0.006;
         outer.add(spinner);
         outer.rotation.set(tiltX, 0, tiltZ);
-        outer.userData.noPivotSpin = true;
         return outer;
       };
 
@@ -235,13 +207,13 @@
         return g;
       };
 
-      // Earth with a tiny station on its orbit: the "Earth & orbit" choice.
+      // Earth with a tiny station on its orbit: the "Earth & orbit" choice of the first view.
       const earthSystem = () => {
         const g = earth();
         const orbit = new THREE.Group();
         const ring = new THREE.Mesh(
           new THREE.TorusGeometry(0.43, 0.004, 6, 64),
-          new THREE.MeshBasicMaterial({ color: "#fdba74", transparent: true, opacity: 0.6 }), // orbit in light flame orange
+          new THREE.MeshBasicMaterial({ color: "#fdba74", transparent: true, opacity: 0.6 }), // light flame orange
         );
         ring.rotation.x = Math.PI / 2;
         const tiny = station();
@@ -275,63 +247,23 @@
             g.add(wheel);
           }
         }
+        g.rotation.x = 0.25; // seen slightly from above
         return g;
       };
 
-      // A habitat: a big glass dome on a ring, with a solar panel and an antenna.
-      const habitat = () => {
-        const g = dome();
-        g.scale.setScalar(2.1);
-        g.position.y = -0.12;
-        // A ground solar panel on a post, facing the sky (about 60 degrees up).
-        const panel = part(new THREE.BoxGeometry(0.16, 0.1, 0.01), toon("#ffffff", { map: panelMap }), 1.08);
-        panel.position.set(-0.27, 0.0, 0.05);
-        panel.rotation.set(-1.05, 0, 0);
-        const post = part(new THREE.CylinderGeometry(0.008, 0.008, 0.12, 8), grey, 1.3);
-        post.position.set(-0.27, -0.07, 0.05);
-        const g2 = new THREE.Group();
-        g2.add(g, post, panel);
-        return g2;
+      // How each object behaves: "planet" in the middle of the zoomed view, "orbit" around it,
+      // "limb" driving on its edge, or "float" (first view: bobbing in its column).
+      const kinds = {
+        earth_system: ["float", earthSystem],
+        moon: ["float", () => planet(moonMap)],
+        mars: ["float", () => planet(marsMap)],
+        earth_whole: ["planet", earth],
+        moon_whole: ["planet", () => planet(moonMap)],
+        mars_whole: ["planet", () => planet(marsMap)],
+        station: ["orbit", () => tilted(station(), 0.3)],
+        spacecraft: ["orbit", () => tilted(spacecraft(), 0.15, -0.45)],
+        rover_moon: ["limb", rover],
       };
-
-      // A small lab building with two bushes: the "Earth" reference place.
-      const lab = () => {
-        const g = new THREE.Group();
-        const walls = part(new THREE.BoxGeometry(0.3, 0.18, 0.22), white, 1.06);
-        walls.position.y = -0.04;
-        const roof = part(new THREE.ConeGeometry(0.24, 0.12, 4), orange, 1.06);
-        roof.rotation.y = Math.PI / 4;
-        roof.position.y = 0.11;
-        const door = part(new THREE.BoxGeometry(0.06, 0.1, 0.01), toon("#38bdf8"), 1.1);
-        door.position.set(0, -0.08, 0.111);
-        g.add(walls, roof, door);
-        for (const [x, r] of [[-0.22, 0.05], [0.21, 0.04]]) {
-          const bush = part(new THREE.SphereGeometry(r, 16, 12), toon("#22c55e"), 1.12);
-          bush.position.set(x, -0.13 + r * 0.8, 0.06);
-          g.add(bush);
-        }
-        return g;
-      };
-
-      const builders = {
-        earth_system: earthSystem,
-        moon: () => planet(moonMap),
-        mars: () => planet(marsMap),
-        earth_ground: bigPlanet(makeEarthMap),
-        moon_ground: bigPlanet(makeMoonMap),
-        mars_ground: bigPlanet(makeMarsMap),
-        earth: earth,
-        earth_lab: lab,
-        station: () => tilted(station(), 0.3),
-        spacecraft: () => tilted(spacecraft(), 0.15, -0.45),
-        base_moon: habitat,
-        base_mars: habitat,
-        rover_moon: rover,
-      };
-
-      // Places that stand on the ground. Once zoomed in, they sit directly on the planet's surface;
-      // the others (station, spacecraft) stay above it, in orbit.
-      const SURFACE = new Set(["earth_lab", "base_moon", "base_mars", "rover_moon"]);
 
       // --- Stars and the halo of the chosen object ------------------------------------------------
       const starPositions = [];
@@ -356,66 +288,61 @@
           depthWrite: false,
         }),
       );
-      halo.scale.set(1.15, 1.15, 1);
-      halo.position.z = -1; // in front of the backdrop planet, behind the objects
+      halo.position.z = -2;
+      halo.visible = settings.chosen >= 0;
+      scene.add(halo);
 
-      const zoomedIn = Boolean(settings.backdrop);
-      const pivots = settings.objects.map((name, i) => {
-        const pivot = new THREE.Group(); // the pivot floats and spins, or sits on the ground
-        const content = (builders[name] ?? builders.moon)();
-        pivot.add(content);
-        const chosen = i === settings.chosen;
-        pivot.userData.onSurface = zoomedIn && SURFACE.has(name);
-        if (pivot.userData.onSurface) {
-          // Seen from slightly above, three-quarter view, with its lowest point at the pivot (on the ground).
-          content.rotation.set(0.12, -0.5, 0);
-          const box = new THREE.Box3().setFromObject(content);
-          content.position.y -= box.min.y;
-          pivot.userData.size = chosen ? 1.5 : 1.3;
-        } else {
-          pivot.userData.size = (zoomedIn ? 1.4 : 1.0) * (chosen ? 1.2 : 0.95);
-        }
-        pivot.scale.setScalar(pivot.userData.size);
-        if (chosen) scene.add(halo);
+      // --- Build the objects ----------------------------------------------------------------------
+      const items = settings.objects.map((name, i) => {
+        const [kind, build] = kinds[name] ?? kinds.moon;
+        const pivot = new THREE.Group();
+        pivot.add(build());
         scene.add(pivot);
-        return pivot;
+        const chosen = i === settings.chosen;
+        const size = { planet: 1.3, orbit: 0.75, limb: 0.6, float: 0.95 }[kind] * (chosen ? 1.15 : 1);
+        return { name, kind, pivot, chosen, size, zone: settings.zones[i], phase: i * 1.7 };
       });
-      if (zoomedIn) halo.scale.set(1.6, 1.6, 1);
+      const centre = items.find((item) => item.kind === "planet");
 
-      // Once zoomed in, the chosen body becomes a huge planet: its surface is the horizon at the bottom.
-      const BACKDROP_SIZE = 16;
-      const HORIZON = -0.4; // height of the top of the planet, in the middle of the frame
-      const planetRadius = RADIUS * BACKDROP_SIZE;
-      const planetCentreY = HORIZON - planetRadius;
-      const surfaceY = (x) => planetCentreY + Math.sqrt(Math.max(planetRadius ** 2 - x ** 2, 0));
-      const ORBIT_Y = 0.12;
-
-      let backdrop = null;
-      if (zoomedIn) {
-        backdrop = new THREE.Group();
-        backdrop.add(builders[settings.backdrop]());
-        backdrop.position.z = -1.5;
-        scene.add(backdrop);
+      // The orbit around the middle planet: a dotted ellipse whose dots travel around it.
+      let orbitDots = null;
+      if (centre && items.some((item) => item.kind === "orbit")) {
+        const dots = [];
+        for (let i = 0; i < 90; i++) dots.push(0, 0, 0);
+        orbitDots = new THREE.Points(
+          new THREE.BufferGeometry().setAttribute("position", new THREE.Float32BufferAttribute(dots, 3)),
+          new THREE.PointsMaterial({ color: "#fdba74", size: 2.5, sizeAttenuation: false, transparent: true, opacity: 0.8 }),
+        );
+        scene.add(orbitDots);
       }
 
-      // The zoom: the body leaves its column among Earth, Moon and Mars, grows and sinks to the bottom,
-      // then the places pop up one after the other.
-      const ZOOM_MS = 1400;
-      const zooming = settings.zoomFrom >= 0 && !reducedMotion;
-      let zoomStart = null;
+      // --- Layout: from a zone (fractions of the frame) to scene units ----------------------------
       let halfWidth = 1;
-      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-      const clamp01 = (t) => Math.min(Math.max(t, 0), 1);
+      const zoneCentre = (zone) => ({
+        x: -halfWidth + 2 * halfWidth * (zone.x + zone.w / 2),
+        y: HALF_HEIGHT - 2 * HALF_HEIGHT * (zone.y + zone.h / 2),
+      });
+      let orbit = { a: 1, b: 0.2 }; // half-axes of the orbit ellipse
 
-      const placeBackdrop = (progress) => {
-        if (!backdrop) return;
-        const t = ease(progress);
-        const startX = -halfWidth + ((settings.zoomFrom + 0.5) * 2 * halfWidth) / 3;
-        backdrop.position.x = settings.zoomFrom >= 0 ? startX * (1 - t) : 0;
-        backdrop.position.y = planetCentreY * t;
-        backdrop.scale.setScalar(0.95 + (BACKDROP_SIZE - 0.95) * t);
-        // Turn the planet a quarter so the horizon shows its equator (oceans, land), not an ice cap.
-        backdrop.children[0].rotation.z = (Math.PI / 2) * t;
+      const ORBIT_SWING = 0.4; // radians: how far the station and spacecraft slide along their orbit
+      const LIMB_SWING = 0.22; // radians: how far the rover drives along the edge
+
+      // Position of an item at time `time` (ms). Returns {x, y, z, angle}.
+      const where = (item, time) => {
+        const home = zoneCentre(item.zone);
+        if (!centre || item.kind === "float" || item.kind === "planet") return { ...home, z: 0, angle: 0 };
+        const c = zoneCentre(centre.zone);
+        const sway = reducedMotion ? 0 : Math.sin(time / 2600 + item.phase);
+        if (item.kind === "orbit") {
+          const start = home.x < c.x ? Math.PI : 0;
+          const theta = start + ORBIT_SWING * sway;
+          return { x: c.x + orbit.a * Math.cos(theta), y: c.y + orbit.b * Math.sin(theta), z: 0.6, angle: 0 };
+        }
+        // limb: on the planet's edge, pointing outwards, around the direction of its zone
+        const r = RADIUS * centre.size + 0.17 * item.size; // wheels on the ground
+        const start = Math.atan2(home.y - c.y, home.x - c.x);
+        const phi = start + LIMB_SWING * sway;
+        return { x: c.x + r * Math.cos(phi), y: c.y + r * Math.sin(phi), z: 0.6, angle: phi - Math.PI / 2 };
       };
 
       const resize = () => {
@@ -426,46 +353,72 @@
         camera.left = -halfWidth;
         camera.right = halfWidth;
         camera.updateProjectionMatrix();
-        // Middle of column i, in scene units. Ground places sit on the curved surface and lean with it.
-        pivots.forEach((pivot, i) => {
-          const x = -halfWidth + ((i + 0.5) * 2 * halfWidth) / count;
-          pivot.position.x = x;
-          if (pivot.userData.onSurface) {
-            pivot.position.y = surfaceY(x) - 0.02;
-            pivot.rotation.z = -Math.asin(x / planetRadius);
-          }
-        });
-        if (settings.chosen >= 0) {
-          const chosen = pivots[settings.chosen];
-          halo.position.x = chosen.position.x;
-          halo.position.y = chosen.userData.onSurface ? chosen.position.y + 0.3 : zoomedIn ? ORBIT_Y : 0;
+        if (centre) {
+          const c = zoneCentre(centre.zone);
+          const side = items.find((item) => item.kind === "orbit");
+          orbit = { a: side ? Math.abs(zoneCentre(side.zone).x - c.x) : 1, b: 0.16 };
         }
-        if (!zooming) placeBackdrop(1);
       };
       window.addEventListener("resize", resize);
       resize();
+
+      // --- The zoom: the planet comes from its column of the first view and grows in the middle ---
+      const ZOOM_MS = 1300;
+      const zooming = settings.zoomFrom >= 0 && centre && !reducedMotion;
+      let zoomStart = null;
+      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const clamp01 = (t) => Math.min(Math.max(t, 0), 1);
 
       const draw = (time = 0) => {
         let progress = 1;
         if (zooming) {
           zoomStart ??= time;
           progress = clamp01((time - zoomStart) / ZOOM_MS);
-          placeBackdrop(progress);
         }
-        pivots.forEach((pivot, i) => {
-          const chosen = i === settings.chosen;
-          // During the zoom, each place pops up (from the ground) once the planet has mostly settled.
-          const popIn = zooming ? ease(clamp01((progress - 0.55 - i * 0.12) / 0.3)) : 1;
-          pivot.scale.setScalar(Math.max(pivot.userData.size * popIn, 0.0001));
-          if (pivot.userData.onSurface) return; // standing still on the ground
-          if (!pivot.children[0].userData.noPivotSpin) pivot.rotation.y += chosen ? 0.014 : 0.005;
-          const floatY = zoomedIn ? ORBIT_Y : 0;
-          pivot.position.y = floatY + (chosen ? 0.05 : 0.035) * Math.sin(time / 650 + i * 1.3);
-          pivot.traverse((piece) => {
-            if (piece.userData.extraSpin) piece.rotation.y += piece.userData.extraSpin;
-          });
+        items.forEach((item, i) => {
+          let { x, y, z, angle } = where(item, time);
+          let scale = item.size;
+          if (item === centre && progress < 1) {
+            // From the column it had among Earth, Moon and Mars, at its first-view size.
+            const t = ease(progress);
+            const startX = -halfWidth + 2 * halfWidth * ((settings.zoomFrom + 0.5) / 3);
+            x = startX + (x - startX) * t;
+            y = y * t;
+            scale = 0.95 + (item.size - 0.95) * t;
+          } else if (item !== centre && zooming) {
+            scale *= ease(clamp01((progress - 0.6 - i * 0.08) / 0.3)); // pop up once the planet is in place
+          }
+          if (item.kind === "float" && !reducedMotion) y += (item.chosen ? 0.05 : 0.035) * Math.sin(time / 650 + i * 1.3);
+          item.pivot.position.set(x, y, z);
+          item.pivot.rotation.z = angle;
+          item.pivot.scale.setScalar(Math.max(scale, 0.0001));
+          if (!reducedMotion) {
+            if (item.kind === "float" || item.kind === "planet") item.pivot.rotation.y += item.chosen ? 0.012 : 0.004;
+            item.pivot.traverse((piece) => {
+              if (piece.userData.extraSpin) piece.rotation.y += piece.userData.extraSpin;
+            });
+          }
+          if (item.chosen) {
+            halo.position.x = x;
+            halo.position.y = y;
+            const span = (item.kind === "planet" ? 2.4 : 1.8) * RADIUS * scale * 1.6;
+            halo.scale.set(span, span, 1);
+          }
         });
-        if (backdrop && !zoomedIn) backdrop.rotation.y += 0.0015;
+
+        if (orbitDots && centre) {
+          const c = centre.pivot.position;
+          const positions = orbitDots.geometry.attributes.position;
+          const shift = reducedMotion ? 0 : time / 9000;
+          for (let i = 0; i < positions.count; i++) {
+            const theta = (i / positions.count) * Math.PI * 2 + shift;
+            // Dots behind the planet (z < 0) are hidden by it.
+            positions.setXYZ(i, c.x + orbit.a * Math.cos(theta), c.y + orbit.b * Math.sin(theta), Math.sin(theta) * 0.5);
+          }
+          positions.needsUpdate = true;
+          orbitDots.material.opacity = 0.8 * (zooming ? clamp01((progress - 0.5) / 0.3) : 1);
+        }
+
         halo.material.opacity = 0.75 + 0.25 * Math.sin(time / 450);
         stars.material.opacity = 0.55 + 0.2 * Math.sin(time / 900);
         renderer.render(scene, camera);
