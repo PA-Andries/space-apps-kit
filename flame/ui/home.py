@@ -50,6 +50,22 @@ def dashboard_header(title: str, subtitle: str, chips: list[str], eyebrow: str =
     )
 
 
+def verdict_banner(figure: str, title: str, sentence: str, source: str, note: str = "", severe: bool = True) -> None:
+    """The one thing the page says, at the top: a big figure, a title, a sentence and its source.
+
+    `figure`: the number to read first ("22.2 %", "0", "—"). `note`: an extra line, for example what
+    would fill the gap. `severe` paints the figure in the flame colour; otherwise it stays ink-coloured.
+    The 60-30-10 rule of the site: this banner is the only place of the page where the figure is painted.
+    """
+    kind = "ff-verdict ff-severe" if severe else "ff-verdict"
+    extra = f'<p class="ff-verdict-note">{escape(note)}</p>' if note else ""
+    st.html(
+        f'<section class="{kind}"><div class="ff-verdict-figure">{escape(figure)}</div>'
+        f'<div class="ff-verdict-words"><h2>{escape(title)}</h2><p>{escape(sentence)}</p>'
+        f'<p class="ff-verdict-source">Source: {escape(source)}</p>{extra}</div></section>'
+    )
+
+
 def card_title(title: str, subtitle: str = "", tag: str = "") -> None:
     """The title line of a dashboard card, with an optional grey hint.
 

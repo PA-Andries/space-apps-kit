@@ -204,6 +204,30 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
   padding: 0.6rem 2.2rem; }}
 .st-key-ui_analyse button:hover {{ background: #c9541c; color: #fff; }}
 .st-key-ui_analyse {{ align-items: center; }}
+/* The verdict banner: the one thing the page says. The 60-30-10 rule of the site holds here — the
+   night-blue page (60 %), one more pane of glass and light words (30 %), and the flame colour on the
+   figure and the left edge alone (10 %). Nothing else on the page is painted, so the eye lands here. */
+.ff-verdict {{ display: flex; align-items: center; gap: 1.6rem; background: {SECONDARY};
+  border: 1px solid {SECONDARY_LINE}; border-left: 5px solid rgba(160, 175, 255, 0.28); border-radius: 26px;
+  padding: 1.4rem 1.8rem; margin: 0 0 1.1rem;
+  backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05); }}
+.ff-verdict.ff-severe {{ border-left-color: {FLAME}; }}
+.ff-verdict-figure {{ font-size: 3.4rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  color: {INK}; flex: 0 0 auto; min-width: 5.5rem; text-align: center; }}
+.ff-verdict.ff-severe .ff-verdict-figure {{ color: {FLAME}; }}
+.ff-verdict-words h2 {{ font-size: 1.45rem; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 0.3rem;
+  color: {INK}; }}
+.ff-verdict-words p {{ color: {INK}; font-size: 0.97rem; line-height: 1.5; margin: 0; }}
+.ff-verdict-source {{ color: {MUTED}; font-size: 0.78rem !important; margin-top: 0.4rem !important;
+  text-transform: uppercase; letter-spacing: 0.04em; }}
+.ff-verdict-note {{ color: {MUTED}; font-size: 0.85rem !important; margin-top: 0.5rem !important;
+  padding-top: 0.5rem; border-top: 1px solid {SECONDARY_LINE}; }}
+@media (max-width: 640px) {{
+  .ff-verdict {{ flex-direction: column; align-items: flex-start; gap: 0.7rem; padding: 1.1rem 1.2rem; }}
+  .ff-verdict-figure {{ font-size: 2.8rem; min-width: 0; text-align: left; }}
+}}
+
 .ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 2rem; padding-top: 1rem; }}
 .ff-footer p {{ color: #86868b; font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.5rem; }}
 

@@ -6,6 +6,8 @@ Données d'exemple (data/exemples/tests.csv) :
 - EXEMPLE-D (gaz) : 21 et 40 %, à 101 kPa.
 """
 
+from importlib import import_module
+
 import pandas as pd
 import pytest
 
@@ -16,10 +18,13 @@ from flame.recherche import (
     descriptif,
     detail_du_score,
     filtrer,
+    frontiere_des_solides,
+    independance,
     les_plus_pertinentes,
     rechercher,
     synthese_des_plus_pertinentes,
     valeurs_possibles,
+    verdict,
 )
 from flame.recherche import (
     tests_dans_les_plages as dans_les_plages,
@@ -336,3 +341,63 @@ def test_le_descriptif_marche_sans_la_table_de_nasa(pertinence):
     assert detail["titre"] == "" and detail["cadre"] == "" and not detail["citee"]
     assert detail["en_bref"] == fiche("EXEMPLE-A")["resume"]
     assert len(detail["raisons"]) == 4
+
+
+def test_le_verdict_de_mars_dit_que_l_atmosphere_manque():
+    verdict_mars = verdict(charger_fiches(), charger_tests(), MARS)
+    assert verdict_mars["chiffre"] == "—" and verdict_mars["grave"] is True
+    assert "no oxygen and no pressure" in verdict_mars["phrase"]
+    assert "statement" in verdict_mars["source"]
+
+
+def test_le_verdict_compte_zero_quand_aucun_test_ne_rentre():
+    impossible = {**LUNE, "oxygene_pct": (99.0, 100.0), "pression_kpa": (1.0, 2.0)}
+    assert verdict(charger_fiches(), charger_tests(), impossible)["chiffre"] == "0"
+
+
+def test_le_verdict_nomme_les_experiences_a_venir_en_gravite_partielle():
+    fiches, tests = charger_fiches(), charger_tests()
+    assert "LUCI" in verdict(fiches, tests, LUNE)["comblement"]
+    assert "FM2" in verdict(fiches, tests, LUNE)["comblement"]
+    assert verdict(fiches, tests, STATION)["comblement"] == ""  # la station est en microgravité, pas partielle
+
+
+def test_le_verdict_sans_trou_n_est_pas_peint():
+    fiches, tests = charger_fiches(), charger_tests()
+    # Une atmosphère donnée mais très large : des tests rentrent, et aucun ne manque sous le minimum.
+    tout = {**STATION, "oxygene_pct": (0.0, 100.0), "pression_kpa": (0.0, 400.0), "type_combustible": ["gaz"]}
+    verdict_large = verdict(fiches, tests, tout)
+    assert verdict_large["grave"] is False and verdict_large["chiffre"] != "0"
+
+
+def test_la_frontiere_des_solides_exclut_les_emulateurs():
+    frontiere = frontiere_des_solides(charger_fiches(), charger_tests())
+    assert frontiere["reel"] is None or frontiere["reel"] > 0
+    if frontiere["emule"] is not None:
+        assert "ACME BRE" in frontiere["emulateurs"]
+
+
+def test_l_independance_replie_les_chaines_de_reutilisation(monkeypatch):
+    module = import_module("flame.recherche.independance")
+
+    relations = pd.DataFrame(
+        [
+            {"from_id": "PSI-117", "to_id": "PSI-69", "relation": "reuses data from"},
+            {"from_id": "PSI-142", "to_id": "PSI-69", "relation": "reuses data from"},
+            {"from_id": "PSI-22", "to_id": "PSI-23", "relation": "related to"},
+        ]
+    )
+    monkeypatch.setattr(module, "charger_table_psi", lambda nom: relations if nom == "relations" else pd.DataFrame())
+    resultat = independance(["PSI-69", "PSI-117", "PSI-142"])
+    assert resultat["total"] == 3 and resultat["independantes"] == 1
+    assert set(resultat["reanalyses"]) == {"PSI-117", "PSI-142"}
+    # « related to » ne replie rien : deux investigations liées restent deux mesures.
+    assert independance(["PSI-22", "PSI-23"])["independantes"] == 2
+
+
+def test_l_independance_sans_table_ne_replie_personne(monkeypatch):
+    module = import_module("flame.recherche.independance")
+
+    monkeypatch.setattr(module, "charger_table_psi", lambda nom: pd.DataFrame())
+    resultat = independance(["PSI-69", "PSI-117"])
+    assert resultat["independantes"] == 2 and resultat["reanalyses"] == {}
