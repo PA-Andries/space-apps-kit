@@ -1,8 +1,7 @@
 """Page 1 « My environment ». Owner: role F (Interface and 3D); the conditions chart comes from role D.
 
 Layout of sketch 1 of the team's whiteboard: the crew environments (one button each) and the sliders (O₂, g, P,
-fuel), four cards with the values and their sources, the O₂ × P chart of NASA's tests, an ANALYSE button, a
-chatbot icon.
+fuel), the O₂ × P chart of NASA's tests, an ANALYSE button, a chatbot icon.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
 """
@@ -14,10 +13,8 @@ import flame.recherche as recherche
 from flame.commun import charger_fiches, charger_tests, get_scenario
 from flame.ui import (
     EARTH,
-    bounds_text,
     card_title,
     chatbot_button,
-    conditions,
     dashboard_header,
     environment_values,
     footer,
@@ -26,8 +23,6 @@ from flame.ui import (
     place_buttons,
     save_environment,
     show_environment_in_sidebar,
-    source_name,
-    stat_tiles,
     style_conditions_chart,
 )
 
@@ -71,7 +66,6 @@ with picker_column, st.container(key="ui_card_destination", height="stretch"):
     )
     shown_place = place_buttons(habitat)
 
-sources = conditions(shown_place)["sources"]
 values = environment_values(shown_place)
 
 # The sliders start from the scenario: what the user typed stays, even after a visit to another page.
@@ -108,25 +102,11 @@ if shown_place != EARTH:
 # The scenario as the other pages will read it (the same dict once lot A is on main).
 scenario = {**get_scenario(), "habitat": shown_place, **environment}
 
-# --- Four cards, and the chart of NASA's tests -------------------------------------------------------------
-cards_column, chart_column = st.columns([4, 8], gap="medium")
+# --- The chart of NASA's tests ------------------------------------------------------------------------------
+if shown_place == EARTH:
+    st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
 
-with cards_column, st.container(key="ui_card_assistant", height="stretch"):
-    card_title("Your environment", "Each value with its source.")
-    stat_tiles(
-        [
-            (bounds_text("", oxygen, "%"), "Oxygen", source_name(sources["oxygene_pct"])),
-            (bounds_text("", pressure, "kPa"), "Pressure", source_name(sources["pression_kpa"])),
-            (f"{gravity:g} g", "Gravity", source_name(sources["gravite"])),
-            (label(";".join(fuels)) if fuels else "All", "Fuel", "your choice"),
-        ],
-        compact=True,
-        grid=True,
-    )
-    if shown_place == EARTH:
-        st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
-
-with chart_column, st.container(key="ui_card_ranking", height="stretch"):
+with st.container(key="ui_card_ranking"):
     card_title(
         "NASA tests against your conditions",
         "Each point is one NASA PSI test. Dotted: Earth and Moon zones. Green box: your selection.",
