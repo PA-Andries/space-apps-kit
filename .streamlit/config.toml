@@ -1,9 +1,13 @@
 # Look of the site. Owner: role F (Interface and 3D).
-# Soft light theme: blue-grey page, slate text, a warm orange as the main colour. The 3D scenes are
-# twilight-blue "portholes" on space, close enough in tone to the page to avoid a harsh contrast.
+# Clean light look: light grey page, white cards, near-black text, flame orange as the main colour.
+# Font, spacing and shapes are in flame/ui/style.py. The 3D scenes keep their own space background.
 [theme]
 base = "light"
 primaryColor = "#e0662a"
-backgroundColor = "#e8ecf4"
-secondaryBackgroundColor = "#dde3ee"
-textColor = "#26314d"
+backgroundColor = "#f5f5f7"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#1d1d1f"
+
+[client]
+# Hide the developer menu for visitors.
+toolbarMode = "minimal"

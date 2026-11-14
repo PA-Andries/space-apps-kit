@@ -168,8 +168,24 @@ def place_picker() -> tuple[str | None, str | None]:
     return body, place
 
 
+# The three pillars as large white cards; the chosen one gets a flame-orange ring.
+PILLAR_STYLE = """<style>
+.st-key-ui_pillars button {
+  height: 128px; border-radius: 24px; background: #fff; border: 2px solid transparent;
+  box-shadow: 0 2px 12px rgba(29, 29, 31, 0.06); flex-direction: column; gap: 0.4rem;
+}
+.st-key-ui_pillars button p { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
+.st-key-ui_pillars button [data-testid="stIconMaterial"] { font-size: 2rem; }
+.st-key-ui_pillars button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(29, 29, 31, 0.12); }
+.st-key-ui_pillars [data-testid="stBaseButton-primary"] { background: #fff; color: #e0662a; border-color: #e0662a; }
+.st-key-ui_pillars [data-testid="stCaptionContainer"] { text-align: center; font-size: 0.95rem; }
+</style>"""
+
+
 def pillar_picker() -> str | None:
-    """The pillar buttons: prevent, detect, extinguish. Returns the chosen pillar, or None."""
+    """The pillars as three large cards: prevent, detect, extinguish. Returns the chosen pillar, or None."""
     pillar = current_pillar()
-    _button_row(PILIERS, pillar, choose_pillar, "ui_pillar", icons=PILLAR_ICONS, hints=PILLAR_HINTS)
+    st.html(PILLAR_STYLE)
+    with st.container(key="ui_pillars"):
+        _button_row(PILIERS, pillar, choose_pillar, "ui_pillar", icons=PILLAR_ICONS, hints=PILLAR_HINTS)
     return pillar

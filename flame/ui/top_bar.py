@@ -5,6 +5,7 @@ import streamlit as st
 from flame.commun import HABITATS, PILIERS, PROFILS, donnees_exemple, get_scenario, set_scenario
 from flame.ui.labels import label
 from flame.ui.places import body_of
+from flame.ui.style import apply_style
 
 # Profiles offered in the bar. "Étudiant" is removed at role F's request;
 # it stays in the contract (PROFILS) until role A changes it.
@@ -12,10 +13,15 @@ PROFILES_OFFERED = [profile for profile in PROFILS if profile != "Étudiant"]
 
 TOP_BAR_STYLE = """<style>
 .st-key-ui_top_bar {
-  background: #dde3ee; border: 1px solid rgba(38, 49, 77, 0.12); border-radius: 16px; padding: 0.6rem 1rem 0.4rem;
+  background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06); border-radius: 20px; padding: 0.8rem 1.2rem 0.5rem;
+  box-shadow: 0 2px 12px rgba(29, 29, 31, 0.05);
 }
-/* The 3D scenes are round-cornered "portholes" on space. */
-iframe { border-radius: 22px; }
+.st-key-ui_top_bar label p { color: #6e6e73; font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; }
+.st-key-ui_top_bar [data-baseweb="select"] > div {
+  border-radius: 12px; background: #f5f5f7; border-color: transparent;
+}
 .st-key-ui_top_bar [data-testid="stCaptionContainer"] { margin-top: -0.4rem; }
 </style>"""
 
@@ -36,6 +42,7 @@ def show_top_bar() -> None:
     if st.session_state.get("ui_profile") not in PROFILES_OFFERED:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]
+    apply_style()
     st.html(TOP_BAR_STYLE)
     with st.container(key="ui_top_bar"):
         habitat_column, pillar_column, profile_column = st.columns(3)

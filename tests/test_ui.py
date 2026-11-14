@@ -177,10 +177,10 @@ def test_home_page_goes_step_by_step():
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == ["ui_place_Base martienne"]
     site.button(key="ui_place_Base martienne").click().run()
     assert len([b for b in site.button if b.key.startswith("ui_pillar_")]) == 3
-    assert len(site.slider) == 0
+    assert len(site.caption) == 3  # one hint per pillar, no result yet
     site.button(key="ui_pillar_Éteindre").click().run()
     assert not site.exception
-    assert len(site.slider) == 1
+    assert len(site.caption) == 4  # the flame caption of the result
 
 
 def test_back_button_returns_to_the_bodies():
@@ -213,3 +213,14 @@ def test_french_contract_names_still_work():
     assert afficher_cadre is show_top_bar
     assert carte_fiche is investigation_card
     assert scene_3d is flame_scene
+
+
+def _two_tiles():
+    from flame.ui.home import stat_tiles
+
+    stat_tiles([(None, "Oxygen"), ("0.38 g", "Gravity")], "note")
+
+
+def test_stat_tiles_show_unknown_instead_of_a_guess():
+    site = AppTest.from_function(_two_tiles).run()
+    assert not site.exception

@@ -4,6 +4,7 @@ Other roles may use everything listed here.
 """
 
 from flame.ui.components import investigation_card, pillar_picker, place_picker
+from flame.ui.home import hero, section, stat_tiles
 from flame.ui.labels import label
 from flame.ui.places import EARTH, place_conditions
 from flame.ui.scene import flame_scene
@@ -20,11 +21,14 @@ __all__ = [
     "afficher_cadre",
     "carte_fiche",
     "flame_scene",
+    "hero",
     "investigation_card",
     "label",
     "pillar_picker",
     "place_conditions",
     "place_picker",
     "scene_3d",
+    "section",
     "show_top_bar",
+    "stat_tiles",
 ]
