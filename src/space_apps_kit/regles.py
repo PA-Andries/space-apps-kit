@@ -22,8 +22,8 @@ ISSUE_AGENTS = "https://api.github.com/repos/PA-Andries/space-apps-kit/issues/2/
 COULOIRS = {
     "B": ("flame/pipeline/", "data/", "tests/test_pipeline.py"),
     "C": ("flame/recherche/", "pages/recherche.py", "tests/test_recherche.py"),
-    "D": ("flame/comparateur/", "pages/comparateur.py", "tests/test_comparateur.py"),
-    "E": ("flame/assistant/", "pages/assistant.py", "tests/test_assistant.py"),
+    "D": ("flame/comparateur/", "pages/comparateur.py", "pages/donnees.py", "tests/test_comparateur.py"),
+    "E": ("flame/assistant/", "pages/assistant.py", "pages/equipements.py", "tests/test_assistant.py"),
     "F": ("flame/ui/", "pages/accueil.py", ".streamlit/config.toml", "tests/test_ui.py"),
 }
 # Le début du nom de branche (`dossier/sujet`) donne le rôle.
