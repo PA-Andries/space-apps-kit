@@ -1732,40 +1732,9 @@ for h in HAB:
 RES = [dict(zip(("kind", "title", "url", "note"), r)) for r in RESOURCES]
 
 
-# ---------------------------------------------------------------- relevance (habitat x category x investigation)
-# Category weights are TEAM JUDGEMENT (0 none, 1 indirect, 2 secondary, 3 primary). Since the reframing of 14 Nov they
-# are a FILTER and a LABEL only: they no longer enter the score. Everything else is computed.
-CATS = [
-    ("prevent", "Prévenir", "Material choice and flammability limits: will it ignite and keep burning?"),
-    ("detect", "Détecter", "Smoke, soot and particles: how fast and how reliably can a fire be detected?"),
-    ("react", "Éteindre", "Suppression and extinction: what puts the flame out, and how does it end?"),
-]
-W = {  # id: (prevent, detect, react)
-    26: (3, 0, 2),
-    25: (3, 1, 2),
-    98: (3, 1, 1),
-    99: (3, 1, 1),
-    100: (3, 1, 1),
-    20: (3, 0, 0),
-    159: (2, 0, 0),
-    39: (2, 0, 1),
-    22: (2, 0, 0),
-    10: (1, 1, 0),
-    21: (1, 0, 0),
-    23: (1, 0, 0),
-    106: (1, 0, 0),
-    107: (1, 2, 0),
-    69: (2, 0, 3),
-    68: (1, 0, 3),
-    102: (0, 3, 0),
-    101: (0, 3, 0),
-    47: (0, 3, 0),
-    62: (2, 0, 1),
-    142: (2, 0, 1),
-    117: (1, 0, 2),
-    60: (0, 2, 0),
-    115: (0, 2, 0),
-}
+# ---------------------------------------------------------------- relevance (habitat x investigation)
+# Decision of PA, 14 Nov 2026: the fire-safety pillars (categories) are dropped. One row per habitat and investigation,
+# scored on evidence only. Everything is computed from the tables, except `cited_in_statement` (read in the statement).
 # habitat_id, label, o2 window (min, max) in %, max pressure in atm, gravity class, atmosphere source
 HR = [
     (
@@ -1799,11 +1768,11 @@ HR = [
     (
         "mars_base",
         "Mars surface base",
-        30,
-        100,
-        0.694,
+        None,
+        None,
+        None,
         "partial",
-        "ASSUMPTION: same exploration atmosphere as the Moon Base; statement gives no number for Mars",
+        "Unknown: the statement gives no number for Mars",
     ),
 ]
 RELV = []
@@ -1812,7 +1781,7 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
         iid = "PSI-%d" % n
         tt = [t for t in T if t["investigation_id"] == iid]
         with_o2 = [t for t in tt if t["o2_pct_max"] is not None]
-        in_o2 = [t for t in with_o2 if t["o2_pct_max"] >= olo and t["o2_pct_min"] <= ohi]
+        in_o2 = [t for t in with_o2 if olo is not None and t["o2_pct_max"] >= olo and t["o2_pct_min"] <= ohi]
         in_both = [
             t for t in in_o2 if pmax is not None and t["pressure_atm_min"] is not None and t["pressure_atm_min"] <= pmax
         ]
@@ -1820,7 +1789,10 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
             t for t in tt if pmax is not None and t["pressure_atm_min"] is not None and t["pressure_atm_min"] <= pmax
         ]
         ground = CUR[n][1].startswith("Ground")
-        if not with_o2:
+        if olo is None:
+            atm, atxt = 0.0, "atmosphere of this habitat unknown, so no test can be matched to it"
+            in_o2 = in_both = []
+        elif not with_o2:
             atm, atxt = (0.3 if pmax is None else 0.0), "oxygen not recorded in PSI's table"
         elif pmax is None:
             atm, atxt = (
@@ -1846,54 +1818,26 @@ for hid, hlabel, olo, ohi, pmax, grav, asrc in HR:
             gv, gtxt = 0.3, "ground or model study; no partial-gravity data in PSI"
         else:
             gv, gtxt = 0.4, "microgravity only: one bound for partial gravity (no partial-gravity data in PSI)"
-        for ci, (cid, cfr, cdesc) in enumerate(CATS):
-            w = W[n][ci]
-            score = round(60 * atm + 20 * gv + 20 * CUR[n][5])
-            RELV.append(
-                {
-                    "habitat_id": hid,
-                    "habitat": hlabel,
-                    "category_id": cid,
-                    "category_fr": cfr,
-                    "investigation_id": iid,
-                    "acronym": CUR[n][0] or iid,
-                    "score": score,
-                    "rank": None,
-                    "category_weight": w,
-                    "atmosphere_fit": atm,
-                    "gravity_fit": gv,
-                    "cited_in_statement": CUR[n][5],
-                    "n_rows_matching_atmosphere": len(in_both) if pmax is not None else len(in_o2),
-                    "why": (
-                        "%s for '%s'; %s; %s%s"
-                        % (
-                            {3: "primary", 2: "secondary", 1: "indirect", 0: "not relevant"}[w],
-                            cid,
-                            atxt,
-                            gtxt,
-                            "; named in the statement as fire-safety work" if CUR[n][5] else "",
-                        )
-                    ),
-                    "atmosphere_source": asrc,
-                }
-            )
-for hid, *_ in HR:
-    for cid, *_ in CATS:
-        grp = sorted(
-            [r for r in RELV if r["habitat_id"] == hid and r["category_id"] == cid and r["category_weight"] > 0],
-            key=lambda r: (-r["score"], r["investigation_id"]),
+        RELV.append(
+            {
+                "habitat_id": hid,
+                "habitat": hlabel,
+                "investigation_id": iid,
+                "acronym": CUR[n][0] or iid,
+                "score": round(60 * atm + 20 * gv + 20 * CUR[n][5]),
+                "rank": None,
+                "atmosphere_fit": atm,
+                "gravity_fit": gv,
+                "cited_in_statement": CUR[n][5],
+                "n_rows_matching_atmosphere": len(in_both) if pmax is not None else len(in_o2),
+                "why": "%s; %s%s" % (atxt, gtxt, "; named in the statement as fire-safety work" if CUR[n][5] else ""),
+                "atmosphere_source": asrc,
+            }
         )
-        for i, r in enumerate(grp):
-            r["rank"] = i + 1
-CATT = [
-    {
-        "category_id": a,
-        "label_fr": b,
-        "description": c,
-        "nasa_term": {"prevent": "Prevention", "detect": "Detection", "react": "Suppression"}[a],
-    }
-    for a, b, c in CATS
-]
+for hid, *_ in HR:
+    grp = sorted([r for r in RELV if r["habitat_id"] == hid], key=lambda r: (-r["score"], r["investigation_id"]))
+    for i, r in enumerate(grp):
+        r["rank"] = i + 1
 
 TABLES = {
     "investigations": I,
@@ -1905,7 +1849,6 @@ TABLES = {
     "documents": DOCS,
     "raw_data_map": RAW,
     "resources": RES,
-    "categories": CATT,
     "relevance": RELV,
     "measurements": MEAS,
 }

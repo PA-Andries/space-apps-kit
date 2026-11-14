@@ -36,7 +36,6 @@ TABLES_PSI = [
     "hardware_families",
     "relations",
     "habitats",
-    "categories",
     "relevance",
     "raw_data_map",
     "publications",
@@ -67,6 +66,9 @@ def _pilier(fiche: pd.Series, pertinence: pd.DataFrame) -> str:
     premier = str(fiche["fire_safety_pillar"]).split(";")[0]
     if premier in PILIER_FR:
         return PILIER_FR[premier]
+    # Depuis l'abandon des piliers (décision de PA, 14 novembre), `relevance` n'a plus de catégorie.
+    if "category_weight" not in pertinence.columns:
+        return ""
     notes = pertinence[pertinence["investigation_id"] == fiche["investigation_id"]]
     if notes.empty:
         return ""
@@ -102,7 +104,7 @@ def _habitats(oxygene_min: float, oxygene_max: float) -> str:
     proches = [
         nom
         for nom, (oxygene, _) in ATMOSPHERES.items()
-        if oxygene_min - TOLERANCE_OXYGENE_PCT <= oxygene <= oxygene_max + TOLERANCE_OXYGENE_PCT
+        if oxygene is not None and oxygene_min - TOLERANCE_OXYGENE_PCT <= oxygene <= oxygene_max + TOLERANCE_OXYGENE_PCT
     ]
     return ";".join(proches)
 
