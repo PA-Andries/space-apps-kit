@@ -4,7 +4,7 @@ import pandas as pd
 
 from flame.commun import COLONNES_FICHES, COLONNES_PUBLICATIONS, COLONNES_TESTS
 from flame.pipeline.ntrs import _vers_ligne
-from flame.pipeline.psi_contrat import fiches_du_contrat, lignes_de_tests_du_contrat
+from flame.pipeline.psi_contrat import fiches_du_contrat, lignes_de_tests_du_contrat, publications_du_contrat
 
 
 def test_un_rapport_ntrs_devient_une_ligne():
@@ -117,3 +117,20 @@ def test_un_tableur_n_est_pas_un_texte(tmp_path):
     fichier = tmp_path / "matrice.xlsx"
     fichier.write_bytes(b"")
     assert extraire(fichier) is None
+
+
+def test_une_publication_psi_suit_le_contrat():
+    psi = pd.DataFrame(
+        {
+            "investigation_id": ["PSI-1", "PSI-1"],
+            "acronym": ["ESSAI", "ESSAI"],
+            "title": ["Article A", "Article B"],
+            "authors": ["Nom A.", "Nom B."],
+            "doi": ["10.1/a", "10.1/b"],
+            "link": ["https://exemple.org/a", None],
+        }
+    )
+    publications = publications_du_contrat(psi)
+    assert list(publications.columns) == COLONNES_PUBLICATIONS
+    assert publications["url"].tolist() == ["https://exemple.org/a", "https://doi.org/10.1/b"]
+    assert publications["annee"].isna().all()
