@@ -47,17 +47,25 @@ OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
 # Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
-# Partial gravity (Moon 0.165 g, Mars 0.38 g) has no button: NASA's PSI tests have none. The Moon base,
-# the rover and the Mars base keep their own gravity, with no button selected.
+# Partial gravity (Moon 0.165 g, Mars 0.38 g) gets a button only in the habitat that has it, so the
+# selector always shows the value the page uses. NASA's PSI tests hold none at these values: a note says so.
 GRAVITY_CHOICES = {0.0: "0 g", 1.0: "1 g"}
 # The three hardware families the challenge statement names, in the order it names them.
 HARDWARE_ORDER = ["ACME gas burner", "MDCA droplet", "MSG flow duct"]
 
 
-def gravity_choice(value: float | None) -> float | None:
-    """The button of a gravity value, or None when it has no button (Moon or Mars)."""
+def gravity_choices(own: float | None) -> dict:
+    """The gravity buttons of a habitat: 0 g, 1 g, and the habitat's own gravity when it is neither."""
+    choices = dict(GRAVITY_CHOICES)
+    if own is not None and gravity_choice(own, choices) is None:
+        choices[float(own)] = f"{float(own):g} g"
+    return dict(sorted(choices.items()))
+
+
+def gravity_choice(value: float | None, choices: dict = GRAVITY_CHOICES) -> float | None:
+    """The button of a gravity value, or None when it has no button."""
     value = value or 0.0
-    return next((choice for choice in GRAVITY_CHOICES if abs(choice - value) < 1e-9), None)
+    return next((choice for choice in choices if abs(choice - value) < 1e-9), None)
 
 
 def title_label(place: str) -> str:
@@ -113,13 +121,16 @@ with picker_column, st.container(key="ui_card_destination", height="stretch"):
 
 values = environment_values(shown_place)
 sources = conditions(shown_place)["sources"]
+# The habitat's own gravity (0.165 g for the Moon base), whatever button the user pressed since.
+own_gravity = conditions(shown_place)["gravite"]
+gravity_buttons = gravity_choices(own_gravity)
 
 # The sliders start from the scenario: what the user typed stays, even after a visit to another page.
 # They take the habitat's values again only when the habitat changes.
 if st.session_state.get("ui_form_place") != shown_place or "ui_oxygen" not in st.session_state:
     st.session_state["ui_oxygen"] = to_slider(values["oxygene_pct"], OXYGEN_SCALE)
     st.session_state["ui_pressure"] = to_slider(values["pression_kpa"], PRESSURE_SCALE)
-    st.session_state["ui_gravity"] = gravity_choice(values["gravite"])
+    st.session_state["ui_gravity"] = gravity_choice(values["gravite"], gravity_buttons)
     st.session_state["ui_fuels"] = list(values["type_combustible"])
     st.session_state["ui_air_flow"] = to_slider(values["debit_air_cm_s"], AIR_FLOW_SCALE)
     st.session_state["ui_form_place"] = shown_place
@@ -128,13 +139,20 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     card_title(f"Parameters · {title_label(shown_place)}", "Filled in by the environment. Move a slider to change it.")
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
     gravity = st.segmented_control(
-        "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
+        "g (gravity)", list(gravity_buttons), format_func=gravity_buttons.get, key="ui_gravity"
     )
-    if gravity is None:  # no button chosen (Moon, Mars): keep the environment's own gravity
-        gravity = float(values["gravite"] or 0.0)
+    if gravity is None:  # no button chosen: keep the environment's own gravity
+        gravity = float(own_gravity or 0.0)
     # The spacesuit has no gravity of its own: the statement gives none, and nothing is invented here.
-    own_gravity = "not given" if values["gravite"] is None else f"{float(values['gravite']):g} g"
-    st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: {own_gravity}.")
+    if own_gravity is None:
+        st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: not given.")
+    elif 0 < gravity < 1:
+        st.caption(
+            f"{title_label(shown_place)}: {gravity:g} g. NASA's PSI tests hold no data at {gravity:g} g: "
+            "the tests shown here were run at 0 g or 1 g."
+        )
+    else:
+        st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: {float(own_gravity):g} g.")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
     air_flow = from_slider(
@@ -218,16 +236,35 @@ with links_zone:
 
 independance = recherche.independance(matching["investigation_id"].unique())
 with figures_zone:
+    # The same count as the verdict above when no fuel or air flow is chosen; the tests whose pressure is
+    # recorded are a part of it, said under the figure.
     sure = matching[matching["pression_notee"]]
-    stat_tiles(
-        [
-            (f"{len(sure):,}", "Tests in your environment", "pressure recorded"),
-            (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
-            (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
-        ],
-        note=independance["phrase"],
-        compact=True,
-    )
+    filtered = bool(fuels) or air_flow != (None, None)
+    if oxygen == (None, None) and pressure == (None, None):
+        # No atmosphere given (Mars base): every test would "match", so no count is shown, as the verdict says.
+        stat_tiles(
+            [
+                ("—", "Tests matching your environment", "no oxygen or pressure given"),
+                ("—", "Investigations", "none can be placed"),
+                ("—", "Independent measurements", "none can be placed"),
+            ],
+            note="Give an oxygen or a pressure range with the sliders to see the NASA tests that match it.",
+            compact=True,
+        )
+    else:
+        stat_tiles(
+            [
+                (
+                    f"{len(matching):,}",
+                    "Tests matching your environment" + (" and filters" if filtered else ""),
+                    f"{len(sure):,} with pressure recorded",
+                ),
+                (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
+                (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
+            ],
+            note=independance["phrase"],
+            compact=True,
+        )
 
 # --- Level 4: what the tests show, the 3 most relevant investigations, and what we don't know --------------
 with st.container(key="ui_card_outcomes"):

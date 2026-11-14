@@ -157,7 +157,7 @@ def verdict(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None) ->
             "niveau": CRITIQUE,
             "grave": True,
             "chiffre": "0",
-            "titre": f"No NASA test was run in {nom}",
+            "titre": f"No NASA test matches the atmosphere of {nom}",
             "phrase": (
                 f"No test of PSI's tables falls in {decrire_plages(scenario) or 'these conditions'}. "
                 "Widen a slider to see the nearest tests."
@@ -192,10 +192,11 @@ def verdict(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None) ->
         "niveau": OK,
         "grave": False,
         "chiffre": f"{len(dedans):,}",
-        "titre": f"NASA tests were run in {nom}",
+        "titre": f"NASA tests match the atmosphere of {nom}",
         "phrase": (
             f"{len(dedans):,} test(s) of PSI's tables, from {dedans['investigation_id'].nunique()} "
-            f"investigation(s), fall in {decrire_plages(scenario) or 'these conditions'}."
+            f"investigation(s), fall in {decrire_plages(scenario) or 'these conditions'}. They were run in "
+            "orbit or on the ground at these conditions, not in the habitat itself."
         ),
         "source": "NASA PSI test tables",
         "comblement": comblement,
