@@ -308,6 +308,10 @@ def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
         assert min(box.x) == 32.0
         zones = [trace for trace in others if trace.line.dash == "dot"]
         assert len(zones) == 2 and all(trace.fill == "none" for trace in zones)
+        points = [trace for trace in others if trace.mode == "markers" and trace.marker.symbol != "star"]
+        grey = [trace for trace in points if trace.name == "Other tests"]
+        assert grey and all(trace.marker.color == "#b8bec9" for trace in grey)
+        assert all(trace.name.endswith("(matches)") for trace in points if trace not in grey)
     empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
     figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
     assert "Your selection" not in [trace.name for trace in figure.data]

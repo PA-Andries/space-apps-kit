@@ -36,11 +36,15 @@ def section(title: str, subtitle: str = "", step: str = "", anchor: str = "") ->
     st.html(f'<div class="ff-section"{target}>{above}<h2>{escape(title)}</h2>{below}</div>')
 
 
-def dashboard_header(title: str, subtitle: str, chips: list[str]) -> None:
-    """The dashboard's top line: the name with a flame mark, a grey subtitle, and small figure chips on the right."""
+def dashboard_header(title: str, subtitle: str, chips: list[str], eyebrow: str = "") -> None:
+    """The dashboard's top line: the name with a flame mark, a grey subtitle, and small figure chips on the right.
+
+    `eyebrow`: a small orange line above the title, for example the name of the page.
+    """
     badges = "".join(f'<span class="ff-chip">{escape(chip)}</span>' for chip in chips)
+    above = f'<span class="ff-tag">{escape(eyebrow)}</span>' if eyebrow else ""
     st.html(
-        f'<div class="ff-header"><div><h1><span class="ff-mark"></span>{escape(title)}</h1>'
+        f'<div class="ff-header"><div>{above}<h1><span class="ff-mark"></span>{escape(title)}</h1>'
         f'<p>{escape(subtitle)}</p></div><div class="ff-chips">{badges}</div></div>'
     )
 

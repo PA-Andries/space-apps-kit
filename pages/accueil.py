@@ -41,9 +41,10 @@ tests = charger_tests()
 habitat = st.session_state.get("ui_habitat", get_scenario()["habitat"])
 
 dashboard_header(
-    "My environment",
+    "Flame in Freefall · Fire-safety dashboard",
     "Describe your habitable crew environment: see which NASA microgravity combustion tests apply to it.",
     [f"{len(fiches)} NASA investigations", f"{len(tests):,} test rows", "Source: NASA PSI"],
+    eyebrow="My environment",
 )
 
 
