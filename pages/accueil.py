@@ -1,21 +1,29 @@
-"""Page d'accueil « Mon scénario ». Propriétaire : rôle F (Interface et 3D)."""
+"""Page d'accueil « My scenario ». Propriétaire : rôle F (Interface et 3D)."""
 
 import streamlit as st
 
-from flame.commun import ATMOSPHERES, get_scenario
-from flame.ui import scene_3d
-
-scenario = get_scenario()
-oxygene_habitat, pression_habitat = ATMOSPHERES[scenario["habitat"]]
+from flame.commun import get_scenario
+from flame.ui import TERRE, choix_lieu, choix_pilier, conditions_lieu, libelle, scene_3d
 
 st.title("Flame in Freefall")
-st.write("Ce que les expériences NASA de combustion en microgravité nous apprennent pour la sécurité incendie.")
+st.write("What NASA microgravity combustion experiments teach us about fire safety in space.")
 
+st.subheader("Where?")
+lieu = choix_lieu()
+st.subheader("What do you need?")
+choix_pilier()
+
+conditions = conditions_lieu(lieu)
 gauche, droite = st.columns([2, 1])
 with droite:
-    st.metric("Habitat", scenario["habitat"])
-    st.metric("Atmosphère type", f"{oxygene_habitat} % O₂ · {pression_habitat} kPa")
-    gravite = st.slider("Gravité (0 = microgravité, 1 = Terre)", 0.0, 1.0, 0.0, key="accueil_gravite")
+    st.metric("Typical atmosphere", f"{conditions['oxygene_pct']} % O₂ · {conditions['pression_kpa']} kPa")
+    st.caption("Source: challenge statement." if conditions["source_enonce"] else "Team assumption, to be confirmed.")
+    gravite = st.slider(
+        "Gravity (0 = microgravity, 1 = Earth)", 0.0, 1.0, conditions["gravite"], key=f"accueil_gravite_{lieu}"
+    )
+    if lieu == TERRE:
+        habitat = libelle(get_scenario()["habitat"])
+        st.info(f"Earth is the reference. Search and Compare use your space habitat: {habitat}.")
 with gauche:
-    scene_3d(gravite=gravite, oxygene=oxygene_habitat)
-    st.caption("Illustration : la forme et la couleur de la flamme ne sont pas calculées.")
+    scene_3d(gravite=gravite, oxygene=conditions["oxygene_pct"])
+    st.caption("Illustration: the flame's shape and colour are not computed.")

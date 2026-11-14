@@ -3,17 +3,26 @@
 import streamlit as st
 
 from flame.commun import HABITATS, PILIERS, PROFILS, donnees_exemple, get_scenario, set_scenario
+from flame.ui.libelles import libelle
+
+
+def _suivre_habitat() -> None:
+    """Un habitat choisi dans la barre latérale devient aussi le lieu de l'accueil."""
+    st.session_state["ui_lieu"] = st.session_state["ui_habitat"]
 
 
 def afficher_cadre() -> None:
     """À appeler une seule fois, dans `app.py`."""
     scenario = get_scenario()
+    # Les boutons de l'accueil écrivent dans ces clés : on ne les initialise qu'une fois.
+    for cle in ["habitat", "pilier", "profil"]:
+        st.session_state.setdefault(f"ui_{cle}", scenario[cle])
     with st.sidebar:
-        st.subheader("Mon scénario")
-        habitat = st.selectbox("Habitat", HABITATS, index=HABITATS.index(scenario["habitat"]), key="ui_habitat")
-        pilier = st.selectbox("Besoin", PILIERS, index=PILIERS.index(scenario["pilier"]), key="ui_pilier")
-        profil = st.selectbox("Profil", PROFILS, index=PROFILS.index(scenario["profil"]), key="ui_profil")
-        st.caption("Outil d'aide à la compréhension : ce site n'est pas une certification de sécurité.")
+        st.subheader("My scenario")
+        habitat = st.selectbox("Habitat", HABITATS, format_func=libelle, key="ui_habitat", on_change=_suivre_habitat)
+        pilier = st.selectbox("Need", PILIERS, format_func=libelle, key="ui_pilier")
+        profil = st.selectbox("Profile", PROFILS, format_func=libelle, key="ui_profil")
+        st.caption("A tool to help understand the research: this site is not a safety certification.")
     set_scenario(habitat, pilier, profil)
     if donnees_exemple():
-        st.warning("Données d'exemple fictives : les vraies données NASA ne sont pas encore chargées.")
+        st.warning("Fictional sample data: the real NASA data is not loaded yet.")
