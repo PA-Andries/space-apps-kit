@@ -17,6 +17,7 @@ from flame.ui import (
     chatbot_button,
     dashboard_header,
     environment_values,
+    fold_sidebar_after_home,
     footer,
     investigation_card,
     label,
@@ -31,6 +32,10 @@ FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen =
 OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
+
+# This is the home page: no "Home" button here; after a click on Home elsewhere, the sidebar folds away.
+st.html("<style>.st-key-ui_home_link { display: none; }</style>")
+fold_sidebar_after_home()
 
 fiches = charger_fiches()
 tests = charger_tests()

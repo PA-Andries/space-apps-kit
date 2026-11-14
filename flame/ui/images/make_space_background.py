@@ -1,5 +1,5 @@
 # ruff: noqa: E501
-"""Draw the site's space background, `space_background.svg`: stars, small spiral galaxies, planets.
+"""Draw the site's space background (colours in the dominant blue family, 60-30-10 rule), `space_background.svg`: stars, small spiral galaxies, planets.
 
 An original drawing made of simple shapes (no photo, no outside image). Run it again to change the drawing:
 
@@ -114,12 +114,12 @@ DEFS = """<defs>
 <radialGradient id="core"><stop offset="0" stop-color="#fffaf0"/><stop offset="0.35" stop-color="#ffe2b8" stop-opacity="0.8"/><stop offset="1" stop-color="#ffb37a" stop-opacity="0"/></radialGradient>
 <radialGradient id="halo"><stop offset="0" stop-color="#b9a4ff" stop-opacity="0.35"/><stop offset="1" stop-color="#6d4bd8" stop-opacity="0"/></radialGradient>
 <radialGradient id="atmo"><stop offset="0.72" stop-color="#8fb4ff" stop-opacity="0.18"/><stop offset="1" stop-color="#8fb4ff" stop-opacity="0"/></radialGradient>
-<radialGradient id="giant" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#f6c99a"/><stop offset="0.5" stop-color="#c9784a"/><stop offset="1" stop-color="#4a2140"/></radialGradient>
-<radialGradient id="red" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ff9c73"/><stop offset="0.6" stop-color="#b8432b"/><stop offset="1" stop-color="#3a1020"/></radialGradient>
+<radialGradient id="giant" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#cdd6f6"/><stop offset="0.5" stop-color="#6574b4"/><stop offset="1" stop-color="#1b2150"/></radialGradient>
+<radialGradient id="red" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#e3a58c"/><stop offset="0.6" stop-color="#8a4a44"/><stop offset="1" stop-color="#26142a"/></radialGradient>
 <radialGradient id="ice" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#c8f1ff"/><stop offset="0.55" stop-color="#4f9bd6"/><stop offset="1" stop-color="#132a5c"/></radialGradient>
-<radialGradient id="violet" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#e3c8ff"/><stop offset="0.55" stop-color="#7d55c7"/><stop offset="1" stop-color="#22134a"/></radialGradient>
+<radialGradient id="violet" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#d2d6f2"/><stop offset="0.55" stop-color="#5c64a6"/><stop offset="1" stop-color="#1a1d45"/></radialGradient>
 <radialGradient id="grey" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#eeeef2"/><stop offset="0.6" stop-color="#8b8c99"/><stop offset="1" stop-color="#25263a"/></radialGradient>
-<linearGradient id="ring" x1="0" x2="1"><stop offset="0" stop-color="#f2d6b3" stop-opacity="0"/><stop offset="0.2" stop-color="#f2d6b3"/><stop offset="0.5" stop-color="#c79d7a" stop-opacity="0.6"/><stop offset="0.8" stop-color="#f2d6b3"/><stop offset="1" stop-color="#f2d6b3" stop-opacity="0"/></linearGradient>
+<linearGradient id="ring" x1="0" x2="1"><stop offset="0" stop-color="#c9d1ee" stop-opacity="0"/><stop offset="0.2" stop-color="#c9d1ee"/><stop offset="0.5" stop-color="#8d98c8" stop-opacity="0.6"/><stop offset="0.8" stop-color="#c9d1ee"/><stop offset="1" stop-color="#c9d1ee" stop-opacity="0"/></linearGradient>
 <linearGradient id="shade" x1="0.15" y1="0.15" x2="0.9" y2="0.9"><stop offset="0.38" stop-color="#02030a" stop-opacity="0"/><stop offset="1" stop-color="#02030a" stop-opacity="0.9"/></linearGradient>
 <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
 </defs>"""
@@ -135,13 +135,13 @@ def drawing() -> str:
     """The whole picture. Planets and galaxies sit near the edges, where the cards leave the page visible."""
     nebulae = (
         '<g filter="url(#soft)" opacity="0.5">'
-        '<ellipse cx="260" cy="180" rx="260" ry="120" fill="#5b2aa8"/>'
+        '<ellipse cx="260" cy="180" rx="260" ry="120" fill="#2e3a8c"/>'
         '<ellipse cx="1350" cy="760" rx="300" ry="140" fill="#1d3f9e"/>'
-        '<ellipse cx="900" cy="80" rx="220" ry="70" fill="#a8432a" opacity="0.6"/></g>'
+        '<ellipse cx="900" cy="80" rx="220" ry="70" fill="#26306e" opacity="0.6"/></g>'
     )
     galaxies = (
         galaxy(1390, 150, 90, 0.45, -25, "#d9ccff")
-        + galaxy(150, 760, 120, 0.38, 20, "#ffd9c2")
+        + galaxy(150, 760, 120, 0.38, 20, "#dfe4ff")
         + galaxy(760, 930, 55, 0.5, 60, "#c9dcff")
         + galaxy(560, 110, 38, 0.55, -40, "#e6dcff")
     )

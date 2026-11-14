@@ -222,10 +222,10 @@ PLACE_BUTTONS_STYLE = """<style>
 .st-key-ui_places [data-testid="stBaseButton-primary"] [data-testid="stIconMaterial"] { color: #fff; }
 .st-key-ui_places button:hover { border-color: #ff7a3d; background: rgba(255, 255, 255, 0.1); color: inherit; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] {
-  background: linear-gradient(135deg, #ff9a3d, #e0662a 55%, #d9365e); border-color: transparent;
+  background: #ff7a3d; border-color: transparent;
   box-shadow: 0 0 28px rgba(255, 122, 61, 0.35);
 }
-.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #c9541c; color: #fff; }
+.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #ff8c55; color: #fff; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
 </style>"""
 
@@ -278,7 +278,7 @@ def place_picker() -> tuple[str | None, str | None]:
 # "Back" as a plain flame-coloured text link with a chevron, not a framed button.
 BACK_STYLE = """<style>
 .st-key-ui_back_row button { border: none; background: transparent; padding: 0; min-height: 0; }
-.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #e0662a; font-size: 1.05rem; }
+.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #ff7a3d; font-size: 1.05rem; }
 .st-key-ui_back_row button:hover p { text-decoration: underline; }
 .st-key-ui_back_row { margin-bottom: 0.4rem; }
 </style>"""

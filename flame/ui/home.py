@@ -103,14 +103,14 @@ def mascot(message: str, link: tuple[str, str] | None = None) -> None:
 
 
 def chatbot_button(page: str) -> None:
-    """The chatbot icon pinned to the bottom-right corner of the page: the mascot, and a link to `page`."""
+    """The chatbot icon pinned to the bottom-right corner of the page: Flamy the mascot, and a link to `page`."""
     with st.container(key="ui_chatbot"):
         mascot_scene(height=96)
-        st.page_link(page, label="Chatbot", icon=":material/forum:")
+        st.page_link(page, label="Flamy", icon=":material/forum:")
 
 
 def assistant_mascot() -> None:
-    """The flame mascot of the Assistant page, peeking out from behind the chat box on the left.
+    """Flamy, the flame mascot of the Assistant page, peeking out from behind the chat box on the left.
 
     As in a messaging app: only its head and shoulders show above the box; while `talking()` is open
     it rises a little and talks. It is placed in the bottom bar, just before the chat box.

@@ -12,20 +12,22 @@ from flame.assistant import repondre
 from flame.commun import charger_fiches, get_scenario
 from flame.ui import assistant_mascot, label, talking
 
-st.title("Assistant")
+st.title("Flamy")
 habitat = get_scenario().get("habitat")
 st.caption(
-    f"Answers are based on the NASA investigation records and on your environment ({label(habitat)}), "
-    "which you can change on the My environment page. They cite the investigations they use, "
-    'and say "I don\'t know" when the records do not hold the answer.'
+    f"Flamy, the assistant, answers from the NASA investigation records and from your environment "
+    f"({label(habitat)}), which you can change on the My environment page. Its answers cite the investigations "
+    'they use, and say "I don\'t know" when the records do not hold the answer.'
 )
+# Les réponses de Flamy portent sa petite flamme comme avatar.
+AVATARS = {"assistant": ":material/local_fire_department:"}
 
 historique = st.session_state.setdefault("assistant_historique", [])
 # La conversation, puis la petite flamme (fixée en bas à droite, debout sur la zone de saisie).
 conversation = st.container()
 with conversation:
     for message in historique:
-        st.chat_message(message["role"]).write(message["content"])
+        st.chat_message(message["role"], avatar=AVATARS.get(message["role"])).write(message["content"])
 assistant_mascot()
 
 
@@ -36,14 +38,14 @@ def mot_a_mot(texte: str):
         time.sleep(0.03)
 
 
-question = st.chat_input("Ask a question about the experiments", key="assistant_question")
+question = st.chat_input("Ask Flamy about the experiments", key="assistant_question")
 if question:
     with conversation:
         st.chat_message("user").write(question)
         # La flamme parle pendant la recherche et pendant que la réponse s'écrit.
         with talking():
-            with st.spinner("Searching the investigation records…"):
+            with st.spinner("Flamy is searching the investigation records…"):
                 reponse = repondre(question, historique, charger_fiches())
-            st.chat_message("assistant").write_stream(mot_a_mot(reponse))
+            st.chat_message("assistant", avatar=AVATARS["assistant"]).write_stream(mot_a_mot(reponse))
     historique.append({"role": "user", "content": question})
     historique.append({"role": "assistant", "content": reponse})

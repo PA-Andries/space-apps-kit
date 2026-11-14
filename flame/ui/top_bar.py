@@ -22,6 +22,13 @@ def show_top_bar() -> None:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]
     apply_style()
+    # Back to the home page, on the far left of every page (page 1 hides it: it is the home page).
+    # The home page then folds the sidebar away (see `fold_sidebar_after_home`).
+    with st.container(key="ui_home_link"):
+        if st.button("Home", icon=":material/arrow_back:", key="ui_home_button"):
+            st.session_state["ui_home_clicked"] = st.session_state.get("ui_home_clicks", 0) + 1
+            st.session_state["ui_home_clicks"] = st.session_state["ui_home_clicked"]
+            st.switch_page("pages/accueil.py")
     st.html('<p class="ff-disclaimer">A tool to help understand the research: not a safety certification.</p>')
     # Pillars are dropped (PA, Sat 17:00): the obsolete `pilier` key is passed on as it is, never chosen here.
     set_scenario(st.session_state["ui_habitat"], scenario["pilier"], st.session_state["ui_profile"])
@@ -38,3 +45,31 @@ def show_environment_in_sidebar() -> None:
     slot = st.session_state.get("ui_sidebar_environment")
     if slot is not None:
         slot.markdown(f"**{environment_summary(get_scenario()['habitat'])}**")
+
+
+# A tiny invisible page that clicks the sidebar's own "collapse" button in the page around it.
+_FOLD_SCRIPT = """<script>
+// Click number __CLICK__ on Home (the number makes this page new each time, so that it runs again).
+const fold = (tries) => {
+  const page = window.parent.document;
+  const sidebar = page.querySelector('[data-testid="stSidebar"]');
+  const button = page.querySelector('[data-testid="stSidebarCollapseButton"] button')
+    || page.querySelector('[data-testid="stSidebarHeader"] button');
+  if (sidebar && sidebar.getAttribute("aria-expanded") === "false") return;
+  if (button) { button.click(); return; }
+  if (tries > 0) setTimeout(() => fold(tries - 1), 150);
+};
+fold(20);
+</script>"""
+
+
+def fold_sidebar_after_home() -> None:
+    """On the home page: fold the sidebar away when the visitor has just pressed Home.
+
+    The visitor can open it again with its usual arrow.
+    """
+    click = st.session_state.pop("ui_home_clicked", None)
+    if click is None:
+        return
+    with st.container(key="ui_fold_sidebar"):
+        st.iframe(_FOLD_SCRIPT.replace("__CLICK__", str(click)), height=1)

@@ -11,10 +11,18 @@ from pathlib import Path
 
 import streamlit as st
 
+# Colours follow the 60-30-10 rule:
+# 60 % DOMINANT, the night-blue page and its background; 30 % SECONDARY, the slate-blue glass of cards,
+# chips, sidebar and the secondary text; 10 % ACCENT, flame orange, kept for actions and highlights only
+# (the chosen environment, ANALYSE, links, sliders, the user's selection on the chart).
+DOMINANT = "#070a1c"
+SECONDARY = "rgba(26, 33, 80, 0.6)"  # card glass, over the dominant page
+SECONDARY_LINE = "rgba(160, 175, 255, 0.14)"  # thin rims of the glass
+ACCENT = "#ff7a3d"
 INK = "#eef1fb"  # main text, on the dark page
 MUTED = "#a3abc9"  # secondary text, still readable on the dark glass
-FLAME = "#ff7a3d"  # main colour (same as primaryColor in config.toml)
-GRADIENT = "linear-gradient(90deg, #fbbf24 0%, #ff7a3d 45%, #f0457a 100%)"  # sunrise, for big words
+FLAME = ACCENT  # same as primaryColor in config.toml
+GRADIENT = "linear-gradient(90deg, #ffa066 0%, #ff7a3d 100%)"  # the accent, a little lighter on the left
 
 # The background drawing: stars, small spiral galaxies and planets (an original SVG, drawn by
 # flame/ui/images/make_space_background.py), embedded so that no file has to be served.
@@ -163,6 +171,15 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 [data-testid="stBottom"], [data-testid="stBottom"] > div, [data-testid="stBottomBlockContainer"] {{
   background: transparent; }}
 
+/* The Home button: a small glass pill on the far left, above the page. */
+.st-key-ui_home_link {{ align-items: flex-start; margin: 0 0 -0.4rem; }}
+.st-key-ui_home_link button {{ background: {SECONDARY}; border: 1px solid {SECONDARY_LINE}; border-radius: 980px;
+  padding: 0.25rem 0.9rem; min-height: 0; color: {INK}; }}
+.st-key-ui_home_link button p {{ font-size: 0.92rem; font-weight: 600; }}
+.st-key-ui_home_link button:hover {{ border-color: {ACCENT}; color: {ACCENT}; }}
+/* The invisible page that folds the sidebar takes no room. */
+.st-key-ui_fold_sidebar {{ position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }}
+
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
   padding: 0.6rem 2.2rem; }}
@@ -176,9 +193,9 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
    A drawing of stars, small galaxies and planets fills the window and stays still while the page scrolls,
    over soft nebula glows. The planets and galaxies sit near the edges, so the cards never hide the text. */
 .stApp {{
-  background-color: #070a1c;
+  background-color: {DOMINANT};
   background-image: url("{SPACE_BACKGROUND}"),
-    radial-gradient(ellipse 60% 45% at 12% 8%, rgba(124, 58, 237, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 45% at 12% 8%, rgba(64, 76, 170, 0.20), transparent 70%),
     radial-gradient(ellipse 70% 50% at 70% 95%, rgba(37, 99, 235, 0.16), transparent 70%),
     linear-gradient(180deg, #050816 0%, #0a1030 55%, #060914 100%);
   background-size: cover, 100% 100%, 100% 100%, 100% 100%;
@@ -196,7 +213,7 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 /* Cards: frosted glass on the nebula, a thin light rim, and a soft glow under them. */
 .st-key-ui_card_destination, .st-key-ui_card_conditions, .st-key-ui_card_ranking,
 .st-key-ui_card_assistant, .st-key-ui_card_compare, .st-key-ui_card_gaps {{
-  background: rgba(20, 26, 62, 0.58); border: 1px solid rgba(160, 175, 255, 0.14) !important;
+  background: {SECONDARY}; border: 1px solid {SECONDARY_LINE} !important;
   backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
   box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }}
@@ -218,9 +235,9 @@ iframe {{ box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }}
 .st-key-ui_chatbot {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 122, 61, 0.18); }}
-.st-key-ui_analyse button {{ background: linear-gradient(135deg, #ff9a3d, #e0662a 55%, #d9365e);
+.st-key-ui_analyse button {{ background: {ACCENT};
   box-shadow: 0 0 28px rgba(255, 122, 61, 0.35); }}
-.st-key-ui_analyse button:hover {{ background: linear-gradient(135deg, #ffab5c, #f0763a 55%, #e44a70);
+.st-key-ui_analyse button:hover {{ background: #ff8c55;
   box-shadow: 0 0 36px rgba(255, 122, 61, 0.5); }}
 
 /* Keyboard focus stays clearly visible on the dark page. */

@@ -342,3 +342,41 @@ def test_the_assistant_page_shows_the_flame_and_it_talks_while_answering():
     # The marker is gone once the answer is written: the flame stops talking.
     assert "ff-talking" not in str(page.main)
     assert "ff-talking" in Path("flame/ui/three/mascot.html").read_text()
+
+
+def test_colours_follow_the_60_30_10_rule():
+    from flame.ui import chart, style
+
+    # One accent only (flame orange): no pink, green or violet left in the interface's colours.
+    interface = Path("flame/ui/style.py").read_text() + Path("flame/ui/components.py").read_text()
+    for colour in ("#d9365e", "#f0457a", "#e44a70", "22, 163, 74", "124, 58, 237"):
+        assert colour not in interface
+    assert style.FLAME == style.ACCENT == "#ff7a3d"
+    assert chart.SELECTION_COLOR == "255, 122, 61"  # the user's selection is the accent
+
+
+def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
+    assert 'label="Flamy"' in Path("flame/ui/home.py").read_text()
+    assert 'st.title("Flamy")' in Path("pages/assistant.py").read_text()
+    assert ".st-key-ui_home_link { display: none; }" in Path("pages/accueil.py").read_text()
+
+
+def test_home_goes_to_page_one_and_folds_the_sidebar():
+    top_bar = Path("flame/ui/top_bar.py").read_text()
+    assert 'st.button("Home"' in top_bar and 'st.switch_page("pages/accueil.py")' in top_bar
+
+    def home_page_after_a_click():
+        import streamlit as st
+
+        from flame.ui import fold_sidebar_after_home
+
+        st.session_state.setdefault("ui_home_clicked", 1)
+        fold_sidebar_after_home()
+
+    page = AppTest.from_function(home_page_after_a_click).run()
+    assert not page.exception
+    # The click is used once: the folding script is shown, then the click is forgotten.
+    assert "ui_home_clicked" not in page.session_state
+    assert "ui_fold_sidebar" in str([block.proto for block in page.main.children.values()])
+    script = __import__("flame.ui.top_bar", fromlist=["_FOLD_SCRIPT"])._FOLD_SCRIPT
+    assert "stSidebarCollapseButton" in script
