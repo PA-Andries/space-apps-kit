@@ -42,13 +42,13 @@ def places_page(objects: list[str], zones: list[dict], chosen: str | None, zoom_
     return _fill("places.html", settings)
 
 
-def flame_scene(gravity: float, oxygen: float, height: int = 420) -> None:
+def flame_scene(gravity: float, oxygen: float, height: int = 460) -> None:
     """Show the 3D flame. `gravity` goes from 0 (microgravity) to 1 (Earth), `oxygen` is in %."""
     st.iframe(flame_page(gravity, oxygen), height=height)
 
 
 def places_scene(
-    objects: list[str], zones: list[dict], chosen: str | None, zoom_from: int = -1, height: int = 300
+    objects: list[str], zones: list[dict], chosen: str | None, zoom_from: int = -1, height: int = 420
 ) -> None:
     """Show 3D objects, each in its zone, the `chosen` one highlighted (see `places_page`)."""
     st.iframe(places_page(objects, zones, chosen, zoom_from), height=height)

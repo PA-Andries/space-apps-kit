@@ -12,9 +12,10 @@ PROFILES_OFFERED = [profile for profile in PROFILS if profile != "Étudiant"]
 
 TOP_BAR_STYLE = """<style>
 .st-key-ui_top_bar {
-  background: var(--secondary-background-color, #151c33);
-  border: 1px solid rgba(249, 115, 22, 0.25); border-radius: 16px; padding: 0.6rem 1rem 0.4rem;
+  background: #dde3ee; border: 1px solid rgba(38, 49, 77, 0.12); border-radius: 16px; padding: 0.6rem 1rem 0.4rem;
 }
+/* The 3D scenes are round-cornered "portholes" on space. */
+iframe { border-radius: 22px; }
 .st-key-ui_top_bar [data-testid="stCaptionContainer"] { margin-top: -0.4rem; }
 </style>"""
 

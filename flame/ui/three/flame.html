@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <style>
-      html, body { margin: 0; height: 100%; overflow: hidden; background: #0b1020; /* site background */ }
+      html, body { height: 100%; margin: 0; }
+      html { background: transparent; } body { margin: 0; height: 100%; overflow: hidden; border-radius: 22px; background: radial-gradient(ellipse at 50% 35%, #3a4a86 0%, #232d55 75%); /* twilight blue */ }
       canvas { display: block; }
       #error { color: #9ca3af; font: 14px sans-serif; padding: 16px; }
     </style>
@@ -21,13 +22,13 @@
 
       let renderer;
       try {
-        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       } catch (e) {
         document.body.innerHTML = '<p id="error">The 3D scene needs WebGL, which this browser does not offer.</p>';
         throw e;
       }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor("#0b1020"); // site background
+      renderer.setClearColor(0x000000, 0); // transparent: the page shows its space gradient
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 

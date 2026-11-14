@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <style>
-      html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; }
+      html, body { height: 100%; margin: 0; }
+      html { background: transparent; } body { margin: 0; height: 100%; overflow: hidden; border-radius: 22px; background: radial-gradient(ellipse at 50% 35%, #3a4a86 0%, #232d55 75%); /* twilight blue */ }
       canvas { display: block; }
       #error { color: #9ca3af; font: 14px sans-serif; padding: 16px; }
     </style>
@@ -14,12 +15,12 @@
       // Zoomed view: the whole planet in the middle, with what belongs to it (the station and the spacecraft
       // on their orbit around Earth, the rover on the edge of the Moon). Simple shapes drawn here, no image.
       //
-      // Each object lives inside a "zone" (a rectangle given in fractions of the frame). Python places a
-      // transparent Streamlit button over each zone: the click goes to that button, and the scene sends
+      // Each object is drawn at the centre of its "zone" (cx, cy in fractions of the frame). Python places a
+      // transparent round Streamlit button over each zone: the click goes to that button, and the scene sends
       // nothing back to Python. Moving objects therefore never leave their zone.
       import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
 
-      // Replaced by Python: { objects: [...], zones: [{x, y, w, h}, ...], chosen: index or -1, zoomFrom: 0-2 or -1 }
+      // Replaced by Python: { objects: [...], zones: [{cx, cy, w, h}, ...], chosen: index or -1, zoomFrom: 0-2 or -1 }
       const settings = __SETTINGS__;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -41,8 +42,8 @@
       const camera = new THREE.OrthographicCamera(-1, 1, HALF_HEIGHT, -HALF_HEIGHT, 0.1, 20);
       camera.position.set(0, 0, 10);
 
-      scene.add(new THREE.HemisphereLight(0xfff4e6, 0x151c33, 1.1)); // warm sky, site panel colour below
-      const sun = new THREE.DirectionalLight(0xffe2c4, 2.4); // a warm, flame-tinted sun
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x232d55, 1.1)); // white sky light, twilight blue below
+      const sun = new THREE.DirectionalLight(0xfff3e6, 2.2); // a slightly warm sun (whites stay white)
       sun.position.set(-3, 3, 5);
       scene.add(sun);
 
@@ -51,7 +52,7 @@
       tones.minFilter = tones.magFilter = THREE.NearestFilter;
       tones.needsUpdate = true;
 
-      const OUTLINE = new THREE.MeshBasicMaterial({ color: "#0b1020", side: THREE.BackSide }); // site background
+      const OUTLINE = new THREE.MeshBasicMaterial({ color: "#1c2547", side: THREE.BackSide }); // deep twilight blue
 
       const toon = (color, options = {}) => new THREE.MeshToonMaterial({ color, gradientMap: tones, ...options });
 
@@ -78,50 +79,119 @@
       let seed = 11;
       const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 
-      const blotches = (p, colors, number, minRadius, maxRadius, w, h) => {
-        for (let i = 0; i < number; i++) {
-          p.fillStyle = colors[i % colors.length];
-          const x = random() * w;
-          const y = h * 0.18 + random() * h * 0.64;
-          // A blotch = a few joined circles: soft, cartoon-like edges.
-          for (let k = 0; k < 4; k++) {
-            p.beginPath();
-            p.arc(x + (random() - 0.5) * maxRadius, y + (random() - 0.5) * maxRadius * 0.6, minRadius + random() * (maxRadius - minRadius), 0, 7);
-            p.fill();
+
+
+      // --- Planet maps: 1024 x 512 so they stay sharp on the big planets, with crisp cartoon shapes ---
+      const MAP_W = 1024;
+      const MAP_H = 512;
+
+      // A landmass: a cluster of overlapping circles around (x, y), with a few smaller patches on top.
+      const landmass = (p, x, y, size, color, patches) => {
+        p.fillStyle = color;
+        for (let k = 0; k < 9; k++) {
+          p.beginPath();
+          p.arc(x + (random() - 0.5) * size * 1.6, y + (random() - 0.5) * size * 0.9, size * (0.35 + random() * 0.4), 0, 7);
+          p.fill();
+        }
+        for (const [patchColor, count] of patches) {
+          p.fillStyle = patchColor;
+          for (let k = 0; k < count; k++) {
+            // Each patch is three merged circles: an irregular shape, not a dot.
+            const px = x + (random() - 0.5) * size * 1.1, py = y + (random() - 0.5) * size * 0.5;
+            for (let c = 0; c < 3; c++) {
+              p.beginPath();
+              p.arc(px + (random() - 0.5) * size * 0.35, py + (random() - 0.5) * size * 0.2, size * (0.1 + random() * 0.12), 0, 7);
+              p.fill();
+            }
           }
         }
       };
 
-      const iceCaps = (p, w, h, color = "#f8fafc") => {
+      // Ice caps with a wavy edge instead of a straight band.
+      const wavyCaps = (p, color, depth) => {
         p.fillStyle = color;
-        p.fillRect(0, 0, w, h * 0.09);
-        p.fillRect(0, h * 0.91, w, h * 0.09);
+        for (const top of [true, false]) {
+          p.beginPath();
+          p.moveTo(0, top ? 0 : MAP_H);
+          for (let x = 0; x <= MAP_W; x += 16) {
+            const edge = depth * (1 + 0.35 * Math.sin(x / 37) + 0.2 * Math.sin(x / 13));
+            p.lineTo(x, top ? edge : MAP_H - edge);
+          }
+          p.lineTo(MAP_W, top ? 0 : MAP_H);
+          p.fill();
+        }
+      };
+
+      // A crater: dark floor, light rim on the lit side.
+      const crater = (p, x, y, r, floor, rim) => {
+        p.fillStyle = floor;
+        p.beginPath(); p.arc(x, y, r, 0, 7); p.fill();
+        p.strokeStyle = rim;
+        p.lineWidth = Math.max(2, r * 0.18);
+        p.beginPath(); p.arc(x, y, r, Math.PI * 0.9, Math.PI * 1.9); p.stroke();
       };
 
       const earthMap = paint((p, w, h) => {
         p.fillStyle = "#3b82f6";
         p.fillRect(0, 0, w, h);
-        blotches(p, ["#4ade80", "#34d399", "#fbbf24"], 9, 8, 22, w, h);
-        iceCaps(p, w, h);
-      });
-      const cloudMap = paint((p, w, h) => blotches(p, ["rgba(255,255,255,0.95)"], 10, 4, 10, w, h));
-      const moonMap = paint((p, w, h) => {
-        p.fillStyle = "#e2e8f0";
-        p.fillRect(0, 0, w, h);
-        for (let i = 0; i < 22; i++) {
-          const x = random() * w, y = 10 + random() * (h - 20), r = 3 + random() * 9;
-          p.fillStyle = "#94a3b8";
-          p.beginPath(); p.arc(x, y, r, 0, 7); p.fill();
-          p.fillStyle = "#cbd5e1";
-          p.beginPath(); p.arc(x - r * 0.25, y - r * 0.25, r * 0.65, 0, 7); p.fill();
+        p.fillStyle = "#4f93f8"; // shallow seas
+        for (let k = 0; k < 14; k++) { p.beginPath(); p.arc(random() * w, 120 + random() * 270, 30 + random() * 40, 0, 7); p.fill(); }
+        const green = [["#22c55e", 3], ["#fbbf24", 1]];
+        for (const [x, y, size] of [[160, 190, 95], [250, 330, 70], [520, 170, 110], [560, 330, 80], [800, 220, 100], [900, 360, 55]]) {
+          landmass(p, x, y, size, "#4ade80", green);
         }
-      });
-      const marsMap = paint((p, w, h) => {
-        p.fillStyle = "#fb923c";
+        wavyCaps(p, "#f8fafc", 34);
+      }, MAP_W, MAP_H);
+
+      const cloudMap = paint((p, w, h) => {
+        p.fillStyle = "rgba(255, 255, 255, 0.92)";
+        for (let k = 0; k < 16; k++) {
+          const x = random() * w, y = 90 + random() * 330, length = 50 + random() * 90;
+          for (let c = 0; c < 4; c++) {
+            p.beginPath();
+            p.ellipse(x + c * length * 0.3, y + (random() - 0.5) * 10, length * 0.35, 10 + random() * 8, 0, 0, 7);
+            p.fill();
+          }
+        }
+      }, MAP_W, MAP_H);
+
+      const moonMap = paint((p, w, h) => {
+        p.fillStyle = "#d8dde6";
         p.fillRect(0, 0, w, h);
-        blotches(p, ["#ea580c", "#c2410c", "#fdba74"], 10, 6, 18, w, h);
-        iceCaps(p, w, h, "#fff7ed");
-      });
+        p.fillStyle = "#b3bccb"; // the darker "seas" (maria)
+        for (const [x, y, size] of [[250, 200, 90], [420, 260, 70], [700, 230, 100], [860, 320, 60]]) {
+          for (let k = 0; k < 6; k++) {
+            p.beginPath();
+            p.arc(x + (random() - 0.5) * size, y + (random() - 0.5) * size * 0.6, size * (0.4 + random() * 0.3), 0, 7);
+            p.fill();
+          }
+        }
+        for (let k = 0; k < 45; k++) {
+          crater(p, random() * w, 40 + random() * (h - 80), 6 + random() * 22, "#a3adbd", "#eef1f6");
+        }
+      }, MAP_W, MAP_H);
+
+      const marsMap = paint((p, w, h) => {
+        p.fillStyle = "#f08a4b";
+        p.fillRect(0, 0, w, h);
+        for (const [x, y, size] of [[200, 180, 80], [450, 320, 90], [760, 200, 85], [900, 330, 60]]) {
+          landmass(p, x, y, size, "#d9622b", [["#c2410c", 2]]);
+        }
+        // A great canyon along the equator, and a large volcano.
+        p.strokeStyle = "#9a3412";
+        p.lineWidth = 9;
+        p.lineCap = "round";
+        p.beginPath();
+        p.moveTo(330, 270);
+        p.bezierCurveTo(420, 250, 500, 290, 620, 262);
+        p.stroke();
+        for (const [r, color] of [[46, "#e2733a"], [22, "#f6a46e"], [8, "#d9622b"]]) { // a soft volcano
+          p.fillStyle = color;
+          p.beginPath(); p.arc(240, 330, r, 0, 7); p.fill();
+        }
+        wavyCaps(p, "#fff1e6", 26);
+      }, MAP_W, MAP_H);
+
       const panelMap = paint((p, w, h) => {
         p.fillStyle = "#1e3a8a";
         p.fillRect(0, 0, w, h);
@@ -141,9 +211,35 @@
 
       const planet = (map) => part(new THREE.SphereGeometry(RADIUS, 64, 40), toon("#ffffff", { map }), 1.04);
 
+      // A soft atmosphere glow behind a planet.
+      const atmosphere = (color, strength) => {
+        const glow = new THREE.Sprite(
+          new THREE.SpriteMaterial({
+            map: paint((p, w) => {
+              const gradient = p.createRadialGradient(w / 2, w / 2, w * 0.3, w / 2, w / 2, w / 2);
+              gradient.addColorStop(0, `rgba(${color}, ${strength})`);
+              gradient.addColorStop(1, `rgba(${color}, 0)`);
+              p.fillStyle = gradient;
+              p.fillRect(0, 0, w, w);
+            }, 128, 128),
+            transparent: true,
+            depthWrite: false,
+          }),
+        );
+        glow.scale.set(RADIUS * 2.9, RADIUS * 2.9, 1);
+        // At the planet's centre: its front face hides the middle of the glow, whatever the rotation.
+        return glow;
+      };
+
+      const mars = () => {
+        const g = new THREE.Group();
+        g.add(planet(marsMap), atmosphere("251, 146, 60", 0.45));
+        return g;
+      };
+
       const earth = () => {
         const g = new THREE.Group();
-        g.add(planet(earthMap));
+        g.add(planet(earthMap), atmosphere("125, 211, 252", 0.6));
         const clouds = new THREE.Mesh(
           new THREE.SphereGeometry(RADIUS * 1.04, 64, 40),
           toon("#ffffff", { map: cloudMap, transparent: true, depthWrite: false }),
@@ -256,10 +352,10 @@
       const kinds = {
         earth_system: ["float", earthSystem],
         moon: ["float", () => planet(moonMap)],
-        mars: ["float", () => planet(marsMap)],
+        mars: ["float", mars],
         earth_whole: ["planet", earth],
         moon_whole: ["planet", () => planet(moonMap)],
-        mars_whole: ["planet", () => planet(marsMap)],
+        mars_whole: ["planet", mars],
         station: ["orbit", () => tilted(station(), 0.3)],
         spacecraft: ["orbit", () => tilted(spacecraft(), 0.15, -0.45)],
         rover_moon: ["limb", rover],
@@ -299,7 +395,7 @@
         pivot.add(build());
         scene.add(pivot);
         const chosen = i === settings.chosen;
-        const size = { planet: 1.3, orbit: 0.75, limb: 0.6, float: 0.95 }[kind] * (chosen ? 1.15 : 1);
+        const size = { planet: 1.45, orbit: 0.8, limb: 0.6, float: 0.95 }[kind] * (chosen ? 1.15 : 1);
         return { name, kind, pivot, chosen, size, zone: settings.zones[i], phase: i * 1.7 };
       });
       const centre = items.find((item) => item.kind === "planet");
@@ -319,8 +415,8 @@
       // --- Layout: from a zone (fractions of the frame) to scene units ----------------------------
       let halfWidth = 1;
       const zoneCentre = (zone) => ({
-        x: -halfWidth + 2 * halfWidth * (zone.x + zone.w / 2),
-        y: HALF_HEIGHT - 2 * HALF_HEIGHT * (zone.y + zone.h / 2),
+        x: -halfWidth + 2 * halfWidth * zone.cx,
+        y: HALF_HEIGHT - 2 * HALF_HEIGHT * zone.cy,
       });
       let orbit = { a: 1, b: 0.2 }; // half-axes of the orbit ellipse
 
@@ -381,9 +477,9 @@
           if (item === centre && progress < 1) {
             // From the column it had among Earth, Moon and Mars, at its first-view size.
             const t = ease(progress);
-            const startX = -halfWidth + 2 * halfWidth * ((settings.zoomFrom + 0.5) / 3);
-            x = startX + (x - startX) * t;
-            y = y * t;
+            const start = zoneCentre({ cx: (settings.zoomFrom + 0.5) / 3, cy: 0.48 });
+            x = start.x + (x - start.x) * t;
+            y = start.y + (y - start.y) * t;
             scale = 0.95 + (item.size - 0.95) * t;
           } else if (item !== centre && zooming) {
             scale *= ease(clamp01((progress - 0.6 - i * 0.08) / 0.3)); // pop up once the planet is in place

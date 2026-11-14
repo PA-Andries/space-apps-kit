@@ -28,16 +28,29 @@ PILLAR_ICONS = {
     "Éteindre": ":material/fire_extinguisher:",
 }
 BODY_NAMES = {"Terre": "Earth & orbit", "Lune": "Moon", "Mars": "Mars"}
+# One line under each pillar button, so users know what they pick (the three pillars of NASA fire safety).
+PILLAR_HINTS = {
+    "Prévenir": "Stop a fire from starting or spreading",
+    "Détecter": "Notice a fire or smoke early",
+    "Éteindre": "Put a fire out",
+}
 
-SCENE_HEIGHT = 300
+SCENE_HEIGHT = 420
 
-# A zone is a rectangle of the 3D frame, in fractions of its width and height. The scene draws each
-# object in its zone, and a transparent button covers the same zone: clicking the object clicks the button.
-FIRST_VIEW_ZONES = [{"x": i / 3, "y": 0, "w": 1 / 3, "h": 1} for i in range(3)]
-CENTRE = {"x": 0.3, "y": 0.3, "w": 0.4, "h": 0.58}  # the whole planet
-LEFT = {"x": 0.02, "y": 0.27, "w": 0.24, "h": 0.64}  # on the orbit, left of the planet
-RIGHT = {"x": 0.74, "y": 0.27, "w": 0.24, "h": 0.64}  # on the orbit, right of the planet
-TOP = {"x": 0.38, "y": 0.0, "w": 0.24, "h": 0.3, "label": "top"}  # on the top edge; name above the object
+# A zone is the clickable area around one 3D object: an ellipse centred on (cx, cy), in fractions of the
+# frame's width and height, and w, h in fractions of the frame's HEIGHT (the scene sizes objects by the
+# height, so zones stay around their objects whatever the screen width). The scene draws each object at its
+# zone centre, and a transparent round button covers the zone: clicking the object clicks the button.
+# `label`: where the name goes, "below" (default) or "right".
+FIRST_VIEW_ZONES = [
+    {"cx": 1 / 6, "cy": 0.48, "w": 0.75, "h": 0.5},
+    {"cx": 1 / 2, "cy": 0.48, "w": 0.5, "h": 0.5},
+    {"cx": 5 / 6, "cy": 0.48, "w": 0.5, "h": 0.5},
+]
+CENTRE = {"cx": 0.5, "cy": 0.55, "w": 0.7, "h": 0.7}  # the whole planet
+LEFT = {"cx": 0.14, "cy": 0.55, "w": 0.55, "h": 0.5}  # on the orbit, left of the planet
+RIGHT = {"cx": 0.86, "cy": 0.55, "w": 0.55, "h": 0.5}  # on the orbit, right of the planet
+TOP = {"cx": 0.5, "cy": 0.13, "w": 0.45, "h": 0.24, "label": "right"}  # driving on the top edge
 
 # The three.js drawing of each choice (see `three/places.html`).
 BODY_OBJECTS = {"Terre": "earth_system", "Lune": "moon", "Mars": "mars"}
@@ -52,41 +65,43 @@ PLACE_VIEW = {
     "Base martienne": ("mars_whole", CENTRE),
 }
 
+# Names glow instead of drawing a frame: white on hover, flame orange once chosen.
+NAME_GLOW = "0 0 6px rgba(255, 255, 255, 0.9), 0 0 14px rgba(255, 255, 255, 0.6)"
+CHOSEN_GLOW = "0 0 6px rgba(249, 115, 22, 0.95), 0 0 16px rgba(249, 115, 22, 0.7)"
+
 
 def _picker_style(key: str, zones: list[dict]) -> str:
-    """CSS that turns the buttons of container `key` into transparent zones over the 3D frame."""
+    """CSS that turns the buttons of container `key` into invisible round zones over the 3D frame."""
     box = f".st-key-{key}"
     rules = [
         f"{box} {{ margin-top: calc(-{SCENE_HEIGHT}px - 1rem); height: {SCENE_HEIGHT}px; position: relative; }}",
         f'{box} [data-testid="stHorizontalBlock"] {{ position: relative; height: {SCENE_HEIGHT}px; }}',
         f'{box} [data-testid="stColumn"] {{ position: absolute !important; min-width: 0; padding: 0; }}',
         f"""{box} button {{
-  width: 100%; align-items: flex-end; padding: 0 4px 8px; background: transparent;
-  border: 2px solid transparent; border-radius: 20px; transition: border-color 0.2s, background 0.2s;
+  width: 100%; border-radius: 50%; border: none !important; background: transparent !important;
+  box-shadow: none !important; position: relative; padding: 0;
 }}""",
-        f"{box} button:hover {{ background: rgba(249, 115, 22, 0.07); border-color: rgba(249, 115, 22, 0.45); }}",
-        f'{box} [data-testid="stBaseButton-primary"] {{ background: rgba(249,115,22,0.08); border-color: #f97316; }}',
         f"""{box} button p {{
-  font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  text-shadow: 0 1px 2px #000, 0 0 8px #000, 0 0 14px #000;
+  position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%); white-space: nowrap;
+  font-weight: 700; color: rgba(230, 233, 242, 0.85); text-shadow: 0 1px 2px #000;
+  transition: color 0.2s, text-shadow 0.2s;
 }}""",
-        f'{box} [data-testid="stBaseButton-primary"] p {{ color: #fdba74; }}',
-        f"@media (max-width: 640px) {{ {box} button p {{ font-size: 0.7rem; }} }}",
+        f"{box} button:hover p, {box} button:focus-visible p {{ color: #fff; text-shadow: {NAME_GLOW}; }}",
+        f'{box} [data-testid="stBaseButton-primary"] p {{ color: #fdba74; text-shadow: {CHOSEN_GLOW}; }}',
+        f"@media (max-width: 640px) {{ {box} button p {{ font-size: 0.75rem; }} }}",
     ]
     for i, zone in enumerate(zones, start=1):
+        width, height = zone["w"] * SCENE_HEIGHT, zone["h"] * SCENE_HEIGHT
+        column = f'{box} [data-testid="stColumn"]:nth-child({i})'
+        # `top` in pixels: Streamlit keeps the row's height at 0, so a percentage would give 0.
+        top = zone["cy"] * SCENE_HEIGHT - height / 2
         rules.append(
-            # `top` in pixels: Streamlit keeps the row's height at 0, so a percentage would give 0.
-            f'{box} [data-testid="stColumn"]:nth-child({i}) {{ left: {zone["x"]:.0%};'
-            f" top: {zone['y'] * SCENE_HEIGHT:.0f}px;"
-            f" width: {zone['w']:.0%} !important; flex: none !important; }}"
+            f"{column} {{ left: calc({zone['cx']:.2%} - {width / 2:.0f}px); top: {top:.0f}px;"
+            f" width: {width:.0f}px !important; flex: none !important; }}"
         )
-        rules.append(
-            f'{box} [data-testid="stColumn"]:nth-child({i}) button {{ height: {zone["h"] * SCENE_HEIGHT:.0f}px; }}'
-        )
-        if zone.get("label") == "top":
-            rules.append(
-                f'{box} [data-testid="stColumn"]:nth-child({i}) button {{ align-items: flex-start; padding-top: 2px; }}'
-            )
+        rules.append(f"{column} button {{ height: {height:.0f}px; }}")
+        if zone.get("label") == "right":
+            rules.append(f"{column} button p {{ left: calc(100% - 1.5rem); top: 50%; transform: translateY(-50%); }}")
     return "<style>\n" + "\n".join(rules) + "\n</style>"
 
 
@@ -106,8 +121,9 @@ def _button_row(
     prefix: str,
     name: Callable = label,
     icons: dict | None = None,
+    hints: dict | None = None,
 ) -> None:
-    """A row of buttons; the chosen value's button is highlighted."""
+    """A row of buttons; the chosen value's button is highlighted. `hints`: a short line under each button."""
     for column, value in zip(st.columns(len(values)), values, strict=True):
         column.button(
             name(value),
@@ -118,6 +134,8 @@ def _button_row(
             on_click=action,
             args=(value,),
         )
+        if hints:
+            column.caption(hints[value])
 
 
 def _pick_in_3d(values: list[str], objects: list[str], zones: list[dict], chosen: str | None, **options) -> None:
@@ -153,5 +171,5 @@ def place_picker() -> tuple[str | None, str | None]:
 def pillar_picker() -> str | None:
     """The pillar buttons: prevent, detect, extinguish. Returns the chosen pillar, or None."""
     pillar = current_pillar()
-    _button_row(PILIERS, pillar, choose_pillar, "ui_pillar", icons=PILLAR_ICONS)
+    _button_row(PILIERS, pillar, choose_pillar, "ui_pillar", icons=PILLAR_ICONS, hints=PILLAR_HINTS)
     return pillar

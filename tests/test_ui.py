@@ -32,7 +32,7 @@ def test_three_js_has_an_exact_version():
         assert re.search(r"three@\d+\.\d+\.\d+/", scene.read_text(encoding="utf-8")), scene.name
 
 
-ZONE = {"x": 0, "y": 0, "w": 0.5, "h": 1}
+ZONE = {"cx": 0.5, "cy": 0.5, "w": 0.5, "h": 0.5}
 
 
 def test_places_scene_highlights_the_chosen_object():
@@ -42,7 +42,7 @@ def test_places_scene_highlights_the_chosen_object():
 
 def test_places_scene_gets_its_zones_and_zoom():
     page = places_page(["mars_whole"], [ZONE], None, zoom_from=2)
-    assert '"zones": [{"x": 0, "y": 0, "w": 0.5, "h": 1}]' in page
+    assert '"zones": [{"cx": 0.5, "cy": 0.5, "w": 0.5, "h": 0.5}]' in page
     assert '"zoomFrom": 2' in page
 
 
@@ -61,7 +61,8 @@ def test_every_offered_place_has_a_view():
     for places in PLACES_BY_BODY.values():
         for place in places:
             zone = PLACE_VIEW[place][1]
-            assert zone["x"] >= 0 and zone["x"] + zone["w"] <= 1 and zone["y"] >= 0 and zone["y"] + zone["h"] <= 1
+            assert 0 <= zone["cx"] <= 1
+            assert zone["cy"] - zone["h"] / 2 >= 0 and zone["cy"] + zone["h"] / 2 <= 1
 
 
 def test_label_translates_contract_values():
