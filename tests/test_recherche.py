@@ -17,6 +17,7 @@ from flame.recherche import (
     filtrer,
     les_plus_pertinentes,
     rechercher,
+    synthese_des_plus_pertinentes,
     valeurs_possibles,
 )
 from flame.recherche import (
@@ -221,6 +222,46 @@ def test_champs_inconnus_d_une_fiche():
     incomplete = fiche("EXEMPLE-B").copy()
     incomplete["pression_kpa"] = None
     assert champs_inconnus(incomplete) == ["pressure"]
+
+
+# --- La synthèse des 3 plus pertinentes (pour la page 1) ---
+
+
+def test_la_synthese_compare_les_trois_plus_pertinentes():
+    synthese = synthese_des_plus_pertinentes(charger_fiches(), charger_tests(), LUNE)
+    assert len(synthese["investigations"]) == 3
+    assert "All 3 ran tests at 21 % oxygen: a common ground to compare them." in synthese["accords"]
+    assert any(phrase.startswith("They burn different fuels") for phrase in synthese["attention"])
+    assert any("partial gravity of the Moon base (0.165 g)" in phrase for phrase in synthese["attention"])
+
+
+def test_la_synthese_trouve_le_combustible_et_le_materiau_communs():
+    fiches = charger_fiches()
+    fiches.loc[fiches["id"] != "EXEMPLE-B", ["type_combustible", "combustible"]] = ["solide", "PMMA slab"]
+    accords = synthese_des_plus_pertinentes(fiches, charger_tests(), LUNE)["accords"]
+    assert "All 3 burn solid fuel." in accords
+    assert "All 3 burned PMMA (acrylic): their results can be read side by side." in accords
+
+
+def test_la_synthese_previent_quand_les_donnees_sont_minces():
+    fiches = charger_fiches()
+    fiches.loc[fiches["id"] == "EXEMPLE-A", "nb_tests"] = 2
+    attention = synthese_des_plus_pertinentes(fiches, charger_tests(), STATION)["attention"]
+    assert any(phrase.endswith("has only 2 test(s): thin evidence.") for phrase in attention)
+
+
+def test_la_synthese_dit_que_l_atmosphere_de_mars_est_inconnue():
+    attention = synthese_des_plus_pertinentes(charger_fiches(), charger_tests(), MARS)["attention"]
+    assert attention[0].startswith("The atmosphere of the Mars base is unknown")
+
+
+def test_la_synthese_sans_fiche_est_vide():
+    aucune_fiche = filtrer(charger_fiches(), types_combustible=["plasma"])
+    assert synthese_des_plus_pertinentes(aucune_fiche, charger_tests(), LUNE) == {
+        "investigations": [],
+        "accords": [],
+        "attention": [],
+    }
 
 
 # --- Filtres et valeurs (utilisés par la page 1) ---
