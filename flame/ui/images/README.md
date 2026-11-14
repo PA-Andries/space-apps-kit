@@ -1,13 +1,12 @@
 # NASA images of the crew environments
 
-Shown when the Moon or Mars is chosen on the dashboard. NASA images; credits are also on the page.
+Shown when the Moon or Mars is chosen on the dashboard: the user taps the base or the rover in the image.
+NASA images; credits are also on the page.
 
 | File | What it is | Source |
 | --- | --- | --- |
-| `moon_base.jpg` | Lunar base habitat with an astronaut, Earth in the sky (artwork, 1978) | NASA Ames Research Center, artist Rick Guidice, NASA image ARC-1978-AC78-0330-1, https://images.nasa.gov/details/ARC-1978-AC78-0330-1 |
-| `pressurized_rover.jpg` | NASA's Lunar Electric Rover, a pressurized rover prototype, at the Desert RATS field test in Arizona (2008) | NASA/Regan Geeseman, jsc2008e138809, https://images.nasa.gov/details/jsc2008e138809 |
+| `moon_scene.jpg` | Astronauts driving a pressurized rover away from the domes of a lunar habitat (illustration) | NASA, "Moon to Mars Transportation and Habitation", https://images.nasa.gov/details/Moon%20to%20Mars%20Transportation%20and%20Habitation |
 | `mars_base.jpg` | Astronauts and habitats on Mars (artist's concept, 2019) | NASA, PIA23302, https://images.nasa.gov/details/PIA23302 |
 
-Changes: the grey frame of the 1978 artwork is cut off; the rover photo is cropped to the cabin front, which
-leaves out the NASA logo and the flag painted on its side (the event rules forbid NASA logos and flags);
-all are resized and saved as JPEG.
+Changes: `moon_scene.jpg` is cropped (domes and rover) and the NASA logo painted on the rover is removed,
+because the event rules forbid NASA logos. Both are resized and saved as JPEG.

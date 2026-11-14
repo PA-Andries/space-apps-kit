@@ -148,41 +148,82 @@ def _pick_in_3d(values: list[str], objects: list[str], zones: list[dict], chosen
         _button_row(values, chosen, options["action"], prefix, options["name"])
 
 
-# Moon and Mars: NASA images seen from the ground, as if the crew were there (credits in images/README.md).
+# Moon and Mars: one NASA image of the environment seen from the ground; tap what you want in it.
+# A zone is (left, top, width, height) in fractions of the image (credits in images/README.md).
 IMAGES_DIR = Path(__file__).parent / "images"
-PLACE_PHOTOS = {
-    "Base lunaire": ("moon_base.jpg", "NASA Ames artwork, Rick Guidice (1978)"),
-    "Rover pressurisé": ("pressurized_rover.jpg", "NASA Lunar Electric Rover prototype, Arizona test (2008)"),
-    "Base martienne": ("mars_base.jpg", "NASA artist's concept, PIA23302"),
+BODY_SCENES = {
+    "Lune": (
+        "moon_scene.jpg",
+        1000 / 970,  # width / height of the image
+        "NASA illustration, Moon to Mars Transportation and Habitation (NASA logo removed from the rover)",
+        {"Base lunaire": (0.0, 0.02, 0.78, 0.34), "Rover pressurisé": (0.24, 0.46, 0.72, 0.54)},
+    ),
+    "Mars": (
+        "mars_base.jpg",
+        1400 / 704,
+        "NASA artist's concept, First Humans on Mars (PIA23302)",
+        {"Base martienne": (0.42, 0.42, 0.53, 0.3)},
+    ),
 }
-PHOTO_STYLE = """<style>
-.st-key-ui_photos [data-testid="stImage"] img { height: 330px; object-fit: cover; border-radius: 18px; }
-.st-key-ui_photos .stButton button { margin-top: 0.3rem; }
-.st-key-ui_photos [data-testid="stCaptionContainer"] { font-size: 0.75rem; }
-</style>"""
+SCENE_MAX_HEIGHT = 520  # px: the image is never taller than this
 
 
-def _pick_in_photos(places: list[str], chosen: str | None) -> None:
-    """One NASA image per crew environment, with its button below; the chosen one is highlighted."""
-    st.html(PHOTO_STYLE)
-    with st.container(key="ui_photos"):
-        for column, place in zip(st.columns(len(places)), places, strict=True):
-            file_name, credit = PLACE_PHOTOS[place]
-            with column:
-                st.image(str(IMAGES_DIR / file_name), width="stretch")
-                st.button(
-                    label(place),
-                    key=f"ui_place_{place}",
-                    type="primary" if place == chosen else "secondary",
-                    width="stretch",
-                    on_click=choose_place,
-                    args=(place,),
-                )
-                st.caption(credit)
+def _image_style(key: str, aspect: float, zones: list[tuple[float, float, float, float]]) -> str:
+    """CSS that lays transparent buttons over the zones of the image in container `key`."""
+    box = f".st-key-{key}"
+    rules = [
+        f"{box} {{ position: relative; gap: 0; max-width: {SCENE_MAX_HEIGHT * aspect:.0f}px; margin: 0 auto; }}",
+        f"{box} [data-testid='stImage'] img {{ border-radius: 18px; display: block; }}",
+        f".st-key-{key}_spots {{ position: absolute !important; inset: 0; gap: 0; }}",
+        f"""{box} button {{
+  width: 100%; height: 100%; border: none !important; background: transparent !important; box-shadow: none !important;
+  border-radius: 22px; padding: 0; position: relative;
+}}""",
+        f"""{box} button p {{
+  position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); white-space: nowrap;
+  font-weight: 600; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85); transition: color 0.2s, text-shadow 0.2s;
+  background: rgba(8, 11, 20, 0.45); padding: 0.2rem 0.6rem; border-radius: 980px;
+}}""",
+        f"{box} button:hover p, {box} button:focus-visible p {{ color: #fff; text-shadow: {NAME_GLOW}; }}",
+        f'{box} [data-testid="stBaseButton-primary"] p {{ color: #f59a66; text-shadow: {CHOSEN_GLOW}; }}',
+    ]
+    for i, (left, top, width, height) in enumerate(zones):
+        rules.append(
+            f".st-key-{key}_spot{i} {{ position: absolute !important; left: {left:.1%}; top: {top:.1%};"
+            f" width: {width:.1%}; height: {height:.1%}; }}"
+        )
+        rules.append(
+            f".st-key-{key}_spot{i} .stButton, .st-key-{key}_spot{i} [data-testid='stElementContainer']"
+            " { height: 100%; }"
+        )
+    return "<style>\n" + "\n".join(rules) + "\n</style>"
+
+
+def _pick_on_image(body: str, chosen: str | None) -> None:
+    """The NASA image of `body`, where each crew environment is a clickable zone."""
+    file_name, aspect, credit, zones = BODY_SCENES[body]
+    path = IMAGES_DIR / file_name
+    key = f"ui_scene_{body}"
+    st.html(_image_style(key, aspect, list(zones.values())))
+    with st.container(key=key):
+        st.image(str(path), width="stretch")
+        with st.container(key=f"{key}_spots"):
+            for i, place in enumerate(zones):
+                with st.container(key=f"{key}_spot{i}"):
+                    st.button(
+                        label(place),
+                        key=f"ui_place_{place}",
+                        type="primary" if place == chosen else "secondary",
+                        width="stretch",
+                        on_click=choose_place,
+                        args=(place,),
+                    )
+    st.caption(credit)
 
 
 def place_picker() -> tuple[str | None, str | None]:
-    """Earth, Moon and Mars in 3D; Earth zooms in on its orbit, the Moon and Mars show NASA ground images.
+    """Earth, Moon and Mars in 3D; Earth zooms in on its orbit, the Moon and Mars show a NASA image to tap in.
 
     Returns (body, place), each None until chosen.
     """
@@ -196,8 +237,8 @@ def place_picker() -> tuple[str | None, str | None]:
         st.button("All planets", icon=":material/chevron_left:", key="ui_back", on_click=go_back)
     places = PLACES_BY_BODY[body]
     place = current_place() if current_place() in places else None
-    if body != EARTH:
-        _pick_in_photos(places, place)
+    if body in BODY_SCENES:
+        _pick_on_image(body, place)
         return body, place
     objects = [PLACE_VIEW[p][0] for p in places]
     zones = [PLACE_VIEW[p][1] for p in places]
