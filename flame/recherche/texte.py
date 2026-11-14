@@ -63,6 +63,10 @@ def mots_de_la_question(question: str) -> list[str]:
 
 def texte_des_fiches(fiches: pd.DataFrame) -> pd.Series:
     """Pour chaque fiche, tout son texte simplifié, entouré d'espaces pour repérer les débuts de mot."""
+    # Sans fiche (par exemple quand les filtres ont tout retiré), pandas renverrait un tableau
+    # au lieu d'une colonne et la recherche planterait : on renvoie une colonne vide.
+    if fiches.empty:
+        return pd.Series("", index=fiches.index, dtype=str)
     colonnes = [colonne for colonne in COLONNES_TEXTE if colonne in fiches.columns]
     brut = fiches[colonnes].fillna("").astype(str).agg(" ".join, axis=1)
     return " " + brut.map(simplifier) + " "
