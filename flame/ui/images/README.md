@@ -9,4 +9,6 @@ NASA images; credits are also on the page.
 | `mars_base.jpg` | Astronauts and habitats on Mars (artist's concept, 2019) | NASA, PIA23302, https://images.nasa.gov/details/PIA23302 |
 
 Changes: `moon_scene.jpg` is cropped (domes and rover) and the NASA logo painted on the rover is removed,
-because the event rules forbid NASA logos. Both are resized and saved as JPEG.
+because the event rules forbid NASA logos. Both images are cropped, colour-graded (the Moon's purple tint is
+neutralised towards grey ground and a dark sky; Mars gets a little more contrast), given a soft vignette,
+resized and saved as JPEG.

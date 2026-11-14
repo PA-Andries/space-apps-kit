@@ -139,15 +139,15 @@ IMAGES_DIR = Path(__file__).parent / "images"
 BODY_SCENES = {
     "Lune": (
         "moon_scene.jpg",
-        1000 / 970,  # width / height of the image
+        1100 / 1084,  # width / height of the image
         "NASA illustration, Moon to Mars Transportation and Habitation (NASA logo removed from the rover)",
-        {"Base lunaire": (0.0, 0.02, 0.78, 0.34), "Rover pressurisé": (0.24, 0.46, 0.72, 0.54)},
+        {"Base lunaire": (0.0, 0.03, 0.78, 0.34), "Rover pressurisé": (0.24, 0.46, 0.72, 0.54)},
     ),
     "Mars": (
         "mars_base.jpg",
-        1400 / 704,
+        1400 / 630,
         "NASA artist's concept, First Humans on Mars (PIA23302)",
-        {"Base martienne": (0.42, 0.42, 0.53, 0.3)},
+        {"Base martienne": (0.37, 0.3, 0.6, 0.38)},
     ),
 }
 SCENE_MAX_HEIGHT = 520  # px: the image is never taller than this
