@@ -44,7 +44,7 @@ pitch/                      video script, subtitles, project page text
 src/space_apps_kit/         team tooling: `verifier`, `regles` (the hooks' logic), `check-submission`
 .claude/skills/             Claude Code skills from the prep phase, each with its templates
 docs/                       event rules, judging criteria, team profile
-.githooks/                  git hooks that enforce the repo rules on every commit and push (no CI on GitHub)
+.githooks/                  git hooks that enforce the repo rules on every commit and push
 ```
 
 Each folder under `flame/` belongs to one role; the table is in `CONTRIBUTING.md`.

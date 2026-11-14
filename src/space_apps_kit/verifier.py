@@ -1,6 +1,6 @@
 """`uv run verifier` : met le code en forme, puis lance les vérifications du dépôt.
 
-Il n'y a pas de CI sur GitHub : ce sont ces vérifications qui font foi. Le hook `pre-push`
+Ce sont ces vérifications qui font foi. Le hook `pre-push`
 les relance, sans rien modifier, et bloque l'envoi si l'une d'elles échoue.
 """
 
