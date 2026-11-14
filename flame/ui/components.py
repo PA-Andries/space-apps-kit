@@ -210,18 +210,21 @@ def _pick_on_image(body: str, chosen: str | None) -> None:
     st.caption(credit)
 
 
-# The place buttons of page 1: large white tiles, the logo in the flame colour; the chosen one is filled.
+# The place buttons of page 1: large frosted-glass tiles, the logo in the flame colour; the chosen one is filled.
 PLACE_BUTTONS_STYLE = """<style>
 .st-key-ui_places { gap: 0.7rem; margin-top: 0.4rem; }
 .st-key-ui_places button {
   min-height: 8rem; border-radius: 18px; padding: 0.6rem 1rem;
-  background: #f5f5f7; border: 1.5px solid transparent;
+  background: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(160, 175, 255, 0.14);
 }
 .st-key-ui_places button p { font-weight: 600; font-size: 1rem; }
-.st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 1.6rem; color: #e0662a; margin-right: 0.2rem; }
+.st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 1.6rem; color: #ff7a3d; margin-right: 0.2rem; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] [data-testid="stIconMaterial"] { color: #fff; }
-.st-key-ui_places button:hover { border-color: #e0662a; background: #fff; color: inherit; }
-.st-key-ui_places [data-testid="stBaseButton-primary"] { background: #e0662a; border-color: #e0662a; }
+.st-key-ui_places button:hover { border-color: #ff7a3d; background: rgba(255, 255, 255, 0.1); color: inherit; }
+.st-key-ui_places [data-testid="stBaseButton-primary"] {
+  background: linear-gradient(135deg, #ff9a3d, #e0662a 55%, #d9365e); border-color: transparent;
+  box-shadow: 0 0 28px rgba(255, 122, 61, 0.35);
+}
 .st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #c9541c; color: #fff; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
 </style>"""
