@@ -13,6 +13,7 @@ from flame.commun.constantes import (
     INCONNU,
     PILIERS,
     PROFILS,
+    TYPES_COMBUSTIBLE,
 )
 from flame.commun.donnees import (
     TABLES_PSI,
@@ -36,6 +37,7 @@ __all__ = [
     "PILIERS",
     "PROFILS",
     "TABLES_PSI",
+    "TYPES_COMBUSTIBLE",
     "charger_fiches",
     "charger_publications",
     "charger_table_psi",

@@ -8,6 +8,9 @@ HABITATS = ["Vaisseau", "Station", "Base lunaire", "Base martienne", "Rover pres
 PILIERS = ["Prévenir", "Détecter", "Éteindre"]
 PROFILS = ["Étudiant", "Chercheur", "Ingénieur"]
 
+# Les types de combustible que l'utilisateur peut choisir dans son environnement (clé `type_combustible`).
+TYPES_COMBUSTIBLE = ["solide", "liquide", "gaz"]
+
 # Valeur à écrire quand une information manque. On ne devine jamais une donnée NASA.
 INCONNU = "inconnu"
 

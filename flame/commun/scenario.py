@@ -67,7 +67,7 @@ def get_scenario() -> dict:
     - `habitat` : un nom de `HABITATS`, ou « Personnalisé » ;
     - `oxygene_pct`, `pression_kpa`, `debit_air_cm_s` : des plages (minimum, maximum), None = pas de borne ;
     - `gravite` : en g, None = inconnue ;
-    - `type_combustible` : une liste parmi « solide », « liquide », « gaz » ; vide = tous ;
+    - `type_combustible` : une liste prise dans `TYPES_COMBUSTIBLE` ; vide = tous ;
     - `pilier` (obsolète) et `profil`.
 
     Tant que l'utilisateur n'a rien saisi, l'oxygène, la pression et la gravité sont ceux de

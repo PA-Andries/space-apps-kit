@@ -143,3 +143,9 @@ def test_conditions_habitat_rend_une_copie():
 
     conditions_habitat("Station")["sources"]["oxygene_pct"] = "modifié"
     assert conditions_habitat("Station")["sources"]["oxygene_pct"] == "à sourcer"
+
+
+def test_les_types_de_combustible_du_scenario():
+    from flame.commun import TYPES_COMBUSTIBLE
+
+    assert TYPES_COMBUSTIBLE == ["solide", "liquide", "gaz"]
