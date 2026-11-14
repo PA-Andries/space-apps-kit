@@ -12,6 +12,7 @@ from flame.ui import (
     footer,
     hero,
     label,
+    mascot,
     pillar_picker,
     place_conditions,
     place_picker,
@@ -25,6 +26,11 @@ hero(
     "What NASA combustion experiments teach us about keeping crews safe in orbit, on the Moon and on Mars.",
     accent="in space.",
     actions=[("Choose a destination", "#where")],
+)
+mascot(
+    "Hi! I'm your fire-safety guide. Pick where your crew will live, and I'll point you to the NASA "
+    "experiments that matter.",
+    ("pages/assistant.py", "Ask the assistant  ›"),
 )
 
 section("Where are you going?", "Tap a planet, then the place you will live in.", step="Step 1", anchor="where")
@@ -65,5 +71,7 @@ footer(
         "with or endorsed by NASA.",
         "Experiments come from NASA's Physical Sciences Informatics system. Missing figures are left empty, "
         "never guessed.",
+        "Planet maps: NASA Scientific Visualization Studio (Blue Marble; LRO LROC colour map of the Moon) and "
+        "NASA 3D Resources (Mars). Station, spacecraft and rover: simplified 3D shapes; the mascot is a drawing.",
     ]
 )

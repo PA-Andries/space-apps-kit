@@ -35,13 +35,15 @@ def test_three_js_has_an_exact_version():
 ZONE = {"cx": 0.5, "cy": 0.5, "w": 0.5, "h": 0.5}
 
 
-def test_places_scene_highlights_the_chosen_object():
-    assert '"chosen": 1' in places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], "rover_moon")
-    assert '"chosen": -1' in places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], None)
+def test_places_scene_does_not_change_with_the_choice():
+    # The scene reads the chosen button in the page: its HTML must not depend on the choice (no reload).
+    page = places_page(["moon_whole", "rover_moon"], [ZONE, ZONE], "ui_pick_ui_place")
+    assert '"pickKey": "ui_pick_ui_place"' in page
+    assert '"chosen"' not in page
 
 
 def test_places_scene_gets_its_zones_and_zoom():
-    page = places_page(["mars_whole"], [ZONE], None, zoom_from=2)
+    page = places_page(["mars_whole"], [ZONE], "ui_pick_ui_place", zoom_from=2)
     assert '"zones": [{"cx": 0.5, "cy": 0.5, "w": 0.5, "h": 0.5}]' in page
     assert '"zoomFrom": 2' in page
 
@@ -150,23 +152,14 @@ def test_a_new_body_resets_the_place():
     site = AppTest.from_function(_pick_moon_then_mars).run()
     assert site.session_state["ui_body"] == "Mars"
     assert "ui_place" not in site.session_state
-    assert site.session_state["ui_zoom_pending"] is True
 
 
-def _zoom_plays_once():
-    import streamlit as st
+def test_planet_maps_are_sent_only_when_needed():
+    from flame.ui.scene import scene_assets
 
-    from flame.ui.places import choose_body, take_zoom
-
-    choose_body("Lune")
-    st.session_state["first"] = take_zoom()
-    st.session_state["second"] = take_zoom()
-
-
-def test_the_zoom_plays_only_once():
-    site = AppTest.from_function(_zoom_plays_once).run()
-    assert site.session_state["first"] is True
-    assert site.session_state["second"] is False
+    assert set(scene_assets(["moon", "mars"])) == {"moon", "mars"}
+    assert scene_assets(["spacecraft"]) == {}
+    assert scene_assets(["earth_whole"])["earth"].startswith("data:image/jpeg;base64,")
 
 
 def test_home_page_goes_step_by_step():
@@ -201,9 +194,12 @@ def test_earth_button_shows_the_reference():
     assert len(site.info) == 1
 
 
-def test_student_is_not_offered():
+def test_no_scenario_bar_and_student_is_not_offered():
+    from flame.ui.top_bar import PROFILES_OFFERED
+
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert "Étudiant" not in site.selectbox(key="ui_profile").options
+    assert len(site.selectbox) == 0  # the scenario is set by the home page clicks only
+    assert "Étudiant" not in PROFILES_OFFERED
     assert site.session_state["profil"] == "Chercheur"
 
 

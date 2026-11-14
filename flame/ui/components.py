@@ -18,7 +18,6 @@ from flame.ui.places import (
     current_pillar,
     current_place,
     go_back,
-    take_zoom,
 )
 from flame.ui.scene import places_scene
 
@@ -65,9 +64,9 @@ PLACE_VIEW = {
     "Base martienne": ("mars_whole", CENTRE),
 }
 
-# Names glow instead of drawing a frame: white on hover, flame orange once chosen.
-NAME_GLOW = "0 0 6px rgba(255, 255, 255, 0.9), 0 0 14px rgba(255, 255, 255, 0.6)"
-CHOSEN_GLOW = "0 0 6px rgba(249, 115, 22, 0.95), 0 0 16px rgba(249, 115, 22, 0.7)"
+# Names in small, quiet type: they brighten on hover and turn flame orange once chosen (no frame drawn).
+NAME_GLOW = "0 0 10px rgba(255, 255, 255, 0.45)"
+CHOSEN_GLOW = "0 0 12px rgba(240, 122, 58, 0.5)"
 
 
 def _picker_style(key: str, zones: list[dict]) -> str:
@@ -83,11 +82,12 @@ def _picker_style(key: str, zones: list[dict]) -> str:
 }}""",
         f"""{box} button p {{
   position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%); white-space: nowrap;
-  font-weight: 700; color: rgba(230, 233, 242, 0.85); text-shadow: 0 1px 2px #000;
+  font-weight: 500; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(226, 232, 245, 0.72); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   transition: color 0.2s, text-shadow 0.2s;
 }}""",
         f"{box} button:hover p, {box} button:focus-visible p {{ color: #fff; text-shadow: {NAME_GLOW}; }}",
-        f'{box} [data-testid="stBaseButton-primary"] p {{ color: #fdba74; text-shadow: {CHOSEN_GLOW}; }}',
+        f'{box} [data-testid="stBaseButton-primary"] p {{ color: #f59a66; text-shadow: {CHOSEN_GLOW}; }}',
         f"@media (max-width: 640px) {{ {box} button p {{ font-size: 0.75rem; }} }}",
     ]
     for i, zone in enumerate(zones, start=1):
@@ -101,7 +101,7 @@ def _picker_style(key: str, zones: list[dict]) -> str:
         )
         rules.append(f"{column} button {{ height: {height:.0f}px; }}")
         if zone.get("label") == "right":
-            rules.append(f"{column} button p {{ left: calc(100% - 1.5rem); top: 50%; transform: translateY(-50%); }}")
+            rules.append(f"{column} button p {{ left: calc(100% + 0.4rem); top: 50%; transform: translateY(-50%); }}")
     return "<style>\n" + "\n".join(rules) + "\n</style>"
 
 
@@ -142,8 +142,7 @@ def _pick_in_3d(values: list[str], objects: list[str], zones: list[dict], chosen
     """3D objects to choose by clicking on them. `options`: action, prefix, name, zoom_from."""
     prefix = options["prefix"]
     st.html(_picker_style(f"ui_pick_{prefix}", zones))
-    chosen_object = objects[values.index(chosen)] if chosen in values else None
-    places_scene(objects, zones, chosen_object, zoom_from=options.get("zoom_from", -1), height=SCENE_HEIGHT)
+    places_scene(objects, zones, f"ui_pick_{prefix}", zoom_from=options.get("zoom_from", -1), height=SCENE_HEIGHT)
     with st.container(key=f"ui_pick_{prefix}"):
         _button_row(values, chosen, options["action"], prefix, options["name"])
 
@@ -165,7 +164,7 @@ def place_picker() -> tuple[str | None, str | None]:
     place = current_place() if current_place() in places else None
     objects = [PLACE_VIEW[p][0] for p in places]
     zones = [PLACE_VIEW[p][1] for p in places]
-    zoom_from = BODIES.index(body) if take_zoom() else -1
+    zoom_from = BODIES.index(body)
     _pick_in_3d(places, objects, zones, place, action=choose_place, prefix="ui_place", name=label, zoom_from=zoom_from)
     return body, place
 

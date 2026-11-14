@@ -4,6 +4,8 @@ from html import escape
 
 import streamlit as st
 
+from flame.ui.scene import mascot_scene
+
 
 def hero(eyebrow: str, title: str, lead: str, accent: str = "", actions: list[tuple[str, str]] | None = None) -> None:
     """The big centred opening of a page.
@@ -52,3 +54,18 @@ def footer(lines: list[str]) -> None:
     """Small grey lines at the bottom of a page, under a thin rule."""
     text = "".join(f"<p>{escape(line)}</p>" for line in lines)
     st.html(f'<footer class="ff-footer">{text}</footer>')
+
+
+def mascot(message: str, link: tuple[str, str] | None = None) -> None:
+    """The cartoon flame mascot with a speech bubble: `mascot("Hi!", ("pages/assistant.py", "Ask me ›"))`.
+
+    `link`: an optional (page, text) shown under the bubble. Any page may use it, the Assistant page first.
+    """
+    with st.container(key="ui_mascot"):
+        figure, words = st.columns([1, 1.5], vertical_alignment="center")
+        with figure:
+            mascot_scene(height=280)
+        with words:
+            st.html(f'<div class="ff-bubble">{escape(message)}</div>')
+            if link:
+                st.page_link(link[0], label=link[1])

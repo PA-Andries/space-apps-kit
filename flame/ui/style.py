@@ -38,8 +38,22 @@ GLOBAL_STYLE = f"""<style>
 [data-testid="stPageLink"] a:hover {{ background: transparent; }}
 [data-testid="stPageLink"] a:hover p {{ text-decoration: underline; }}
 
-/* 3D scenes: large round-cornered windows on space, with a soft, wide shadow. */
-iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.35); }}
+/* 3D scenes: large round-cornered windows on space, with a soft, wide shadow. The dark background
+   shows while a scene loads, instead of a white flash. */
+iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.35); background: #080b14; }}
+
+.ff-disclaimer {{ text-align: center; color: #86868b; font-size: 0.78rem; margin: 0.4rem 0 0; }}
+
+/* No grey fade on the page while Streamlit updates it after a click. */
+[data-stale="true"] {{ opacity: 1 !important; transition: none !important; }}
+
+/* The mascot: no frame around it, and a speech bubble pointing at it. */
+.st-key-ui_mascot {{ max-width: 640px; margin: 1rem auto 0; }}
+.st-key-ui_mascot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
+.ff-bubble {{ position: relative; background: #fff; border-radius: 22px; padding: 1.1rem 1.3rem; color: {INK};
+  font-size: 1.08rem; line-height: 1.45; font-weight: 500; box-shadow: 0 10px 30px -12px rgba(29, 29, 31, 0.18); }}
+.ff-bubble::before {{ content: ""; position: absolute; left: -9px; top: 50%; width: 18px; height: 18px;
+  background: #fff; transform: translateY(-50%) rotate(45deg); border-radius: 3px; }}
 
 /* Alerts and bordered containers as soft white tiles. */
 [data-testid="stAlert"] {{ border-radius: 18px; border: none; }}

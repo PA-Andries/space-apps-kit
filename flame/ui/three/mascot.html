@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html, body { height: 100%; margin: 0; background: transparent; overflow: hidden; }
+      canvas { display: block; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      // The site's mascot, an original character: a living cartoon flame with rubber-hose arms and legs
+      // (the bendy style of 1930s cartoons), waving hello. Decorative only: no data here.
+      import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+
+      const settings = __SETTINGS__; // nothing to set for now: {}
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      } catch (e) {
+        throw e; // no WebGL: the mascot simply does not show
+      }
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      document.body.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
+      camera.position.set(0, 0.0, 5.7);
+      camera.lookAt(0, -0.05, 0);
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0xffd9c2, 1.3));
+      const key = new THREE.DirectionalLight(0xffffff, 1.6);
+      key.position.set(-2, 3, 4);
+      scene.add(key);
+
+      // Soft cartoon shading: four flat tones.
+      const tones = new THREE.DataTexture(new Uint8Array([120, 180, 225, 255]), 4, 1, THREE.RedFormat);
+      tones.minFilter = tones.magFilter = THREE.NearestFilter;
+      tones.needsUpdate = true;
+      const toon = (color, options = {}) => new THREE.MeshToonMaterial({ color, gradientMap: tones, ...options });
+      const glow = (color, opacity) => new THREE.MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false });
+
+      // A flame shape turned around its axis: round at the bottom, a soft point at the top.
+      const flameShape = (height, width) => {
+        const points = [];
+        for (let i = 0; i <= 40; i++) {
+          const t = i / 40; // 0 at the bottom, 1 at the tip
+          const r = width * Math.sin(Math.PI * Math.pow(t, 0.62)) * (1 - 0.35 * t);
+          points.push(new THREE.Vector2(Math.max(r, 0.0001), height * (t - 0.32)));
+        }
+        return new THREE.LatheGeometry(points, 48);
+      };
+
+      const character = new THREE.Group();
+      scene.add(character);
+      const body = new THREE.Group(); // squashes and stretches as the character bounces
+      character.add(body);
+
+      // The flame: orange outside, warm yellow inside, a pale core low down, and three tongues on top as hair.
+      const outer = new THREE.Mesh(flameShape(1.3, 0.52), toon("#ff6a2b"));
+      const middle = new THREE.Mesh(flameShape(0.9, 0.38), glow("#ffa63d", 0.95));
+      middle.position.set(0, -0.14, 0.1);
+      const core = new THREE.Mesh(flameShape(0.5, 0.24), glow("#ffe7a0", 0.95));
+      core.position.set(0, -0.24, 0.2);
+      body.add(outer, middle, core);
+      const tongues = [];
+      for (const [x, tilt, size] of [[-0.24, 0.55, 0.42], [0.25, -0.5, 0.38], [0.05, -0.12, 0.3]]) {
+        const tongue = new THREE.Mesh(flameShape(0.9, 0.3), toon("#ff7d33"));
+        tongue.scale.setScalar(size);
+        tongue.position.set(x, 0.5 + (x === 0.05 ? 0.25 : 0), -0.05);
+        tongue.rotation.z = tilt;
+        tongue.userData.base = { tilt, size };
+        body.add(tongue);
+        tongues.push(tongue);
+      }
+
+      // The face: big round eyes with a shine, rosy cheeks, an open smile.
+      const ink = toon("#2a1610");
+      const face = new THREE.Group();
+      face.position.set(0, 0.08, 0.44);
+      const eyes = [];
+      for (const side of [-1, 1]) {
+        const eye = new THREE.Group();
+        const white = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 18), toon("#ffffff"));
+        white.scale.set(0.82, 1.15, 0.45);
+        const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.058, 20, 16), ink);
+        pupil.position.set(0.012 * side, 0.0, 0.035);
+        pupil.scale.set(0.9, 1.2, 0.6);
+        const shine = new THREE.Mesh(new THREE.SphereGeometry(0.018, 12, 10), new THREE.MeshBasicMaterial({ color: "#ffffff" }));
+        shine.position.set(-0.018, 0.03, 0.07);
+        eye.add(white, pupil, shine);
+        eye.position.set(0.12 * side, 0.08, 0);
+        face.add(eye);
+        eyes.push(eye);
+        const cheek = new THREE.Mesh(new THREE.CircleGeometry(0.045, 20), glow("#ff5a6e", 0.45));
+        cheek.position.set(0.23 * side, -0.05, -0.02);
+        face.add(cheek);
+      }
+      const mouth = new THREE.Mesh(new THREE.CircleGeometry(0.085, 28, Math.PI, Math.PI), ink);
+      mouth.scale.set(1, 0.85, 1);
+      mouth.position.set(0, -0.07, 0.07);
+      const tongueTip = new THREE.Mesh(new THREE.CircleGeometry(0.04, 20, Math.PI, Math.PI), toon("#ff4f5e"));
+      tongueTip.position.set(0, -0.125, 0.072);
+      face.add(mouth, tongueTip);
+      body.add(face);
+
+      // Rubber-hose limbs: soft tubes that bend in a smooth curve (no elbows), white gloves, big round shoes.
+      const hose = (radius) => new THREE.Mesh(new THREE.BufferGeometry(), ink);
+      const bend = (mesh, points, radius) => {
+        mesh.geometry.dispose();
+        mesh.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 24, radius, 10);
+      };
+      const glove = () => {
+        const g = new THREE.Group();
+        const palm = new THREE.Mesh(new THREE.SphereGeometry(0.085, 20, 16), toon("#ffffff"));
+        palm.scale.set(1, 1.1, 0.8);
+        const thumb = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 10), toon("#ffffff"));
+        thumb.position.set(0.06, 0.03, 0.03);
+        const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.022, 10, 24), toon("#ffffff"));
+        cuff.rotation.x = Math.PI / 2;
+        cuff.position.y = -0.08;
+        g.add(palm, thumb, cuff);
+        return g;
+      };
+      const shoe = () => {
+        const g = new THREE.Group();
+        const toe = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 18), toon("#3a2218"));
+        toe.scale.set(1, 0.62, 1.45);
+        toe.position.z = 0.06;
+        const sole = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.02, 24), toon("#f2e6d8"));
+        sole.scale.set(1, 1, 1.45);
+        sole.position.set(0, -0.055, 0.06);
+        g.add(toe, sole);
+        return g;
+      };
+      const arms = [hose(), hose()];
+      const hands = [glove(), glove()];
+      const legs = [hose(), hose()];
+      const feet = [shoe(), shoe()];
+      character.add(...arms, ...hands, ...legs, ...feet);
+
+      // Little sparks drifting around, as embers do.
+      const sparks = [];
+      for (let i = 0; i < 6; i++) {
+        const spark = new THREE.Mesh(new THREE.SphereGeometry(0.025, 10, 8), glow(i % 2 ? "#ffcf5a" : "#ff8a3d", 0.9));
+        spark.userData = { angle: (i / 6) * Math.PI * 2, speed: 0.4 + 0.15 * (i % 3), height: 0.1 + 0.12 * i };
+        character.add(spark);
+        sparks.push(spark);
+      }
+
+      const V = (x, y, z) => new THREE.Vector3(x, y, z);
+      // Pose at time t (s): a bouncy idle, the right arm waving hello, the left hand on the hip.
+      const pose = (t) => {
+        const bounce = Math.abs(Math.sin(t * 3)); // 0 at the bottom of each hop, 1 at the top
+        const drop = 0.08 * (1 - bounce);
+        body.position.y = -drop;
+        const squash = 1 - 0.07 * (1 - bounce);
+        body.scale.set(1 / Math.sqrt(squash), squash, 1 / Math.sqrt(squash));
+        const flicker = 1 + 0.04 * Math.sin(t * 9) + 0.025 * Math.sin(t * 15.3);
+        outer.scale.set(1, flicker, 1);
+        tongues.forEach((tongue, k) => {
+          const { tilt, size } = tongue.userData.base;
+          tongue.rotation.z = tilt + 0.15 * Math.sin(t * 5 + k * 2);
+          tongue.scale.setScalar(size * (1 + 0.08 * Math.sin(t * 8 + k)));
+        });
+        const shoulderY = 0.02 - drop;
+        // Right arm up, waving.
+        const wave = Math.sin(t * 7);
+        const hand = V(0.78 + 0.08 * wave, 0.55 - drop, 0.12);
+        bend(arms[0], [V(0.4, shoulderY, 0.05), V(0.66, shoulderY + 0.05, 0.1), hand], 0.032);
+        hands[0].position.copy(hand);
+        hands[0].rotation.z = -0.3 + 0.35 * wave;
+        // Left arm down, hand on the hip.
+        const hip = V(-0.62, -0.32 - drop, 0.12);
+        bend(arms[1], [V(-0.4, shoulderY, 0.05), V(-0.72, -0.08 - drop, 0.08), hip], 0.032);
+        hands[1].position.copy(hip);
+        hands[1].rotation.z = 2.4;
+        // Legs: they bend as the body comes down, feet stay on the ground.
+        legs.forEach((leg, k) => {
+          const side = k ? -1 : 1;
+          const foot = V(0.2 * side, -1.02, 0.05);
+          const knee = V(0.26 * side + 0.06 * side * (1 - bounce), -0.72 - drop * 0.5, 0.06);
+          bend(leg, [V(0.15 * side, -0.36 - drop, 0), knee, foot], 0.034);
+          feet[k].position.set(foot.x, foot.y - 0.02, foot.z);
+          feet[k].rotation.y = 0.25 * side;
+        });
+        // A blink every few seconds.
+        const blink = t % 3.6 < 0.12 ? 0.1 : 1;
+        eyes.forEach((eye) => (eye.scale.y = blink));
+        sparks.forEach((spark) => {
+          const a = spark.userData.angle + t * spark.userData.speed;
+          spark.position.set(0.75 * Math.cos(a), spark.userData.height + 0.08 * Math.sin(t * 2 + a), 0.75 * Math.sin(a) - 0.2);
+        });
+      };
+
+      const resize = () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      };
+      window.addEventListener("resize", resize);
+      resize();
+
+      const draw = (time = 0) => {
+        const t = reducedMotion ? 0.5 : time / 1000;
+        if (!reducedMotion) character.rotation.y = 0.2 * Math.sin(t * 0.6);
+        pose(t);
+        renderer.render(scene, camera);
+      };
+
+      if (reducedMotion) {
+        draw();
+      } else {
+        renderer.setAnimationLoop(draw);
+      }
+    </script>
+  </body>
+</html>
