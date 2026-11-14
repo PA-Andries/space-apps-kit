@@ -18,6 +18,7 @@ from flame.ui.home import (
     stat_tiles,
     talking,
 )
+from flame.ui.intro import how_to_use
 from flame.ui.labels import label
 from flame.ui.outcomes import answer, count_outcomes, kind_of_result, outcomes_card
 from flame.ui.places import EARTH, body_of, place_conditions
@@ -56,6 +57,7 @@ __all__ = [
     "footer",
     "hero",
     "investigation_card",
+    "how_to_use",
     "label",
     "mascot",
     "place_buttons",

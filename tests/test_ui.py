@@ -412,3 +412,24 @@ def test_outcomes_sort_nasa_results_and_show_after_analyse():
     # The card's sentence and its caption, from the matching tests' results.
     texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
     assert "match your environment" in texts and "not fires" in texts
+
+
+def test_page_one_explains_how_to_use_the_dashboard():
+    from flame.ui.intro import STEPS
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert "How to use this dashboard" in shown
+    for title, _ in STEPS:
+        assert title in shown, title
+
+
+def test_the_how_to_card_folds_away_and_comes_back():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_intro_hide").click().run()
+    assert not site.exception
+    assert [b.key for b in site.button if b.key == "ui_intro_hide"] == []
+    assert "Choose your environment" not in " ".join(str(block.value) for block in site.get("html"))
+    site.button(key="ui_intro_show").click().run()
+    assert [b.key for b in site.button if b.key == "ui_intro_hide"] == ["ui_intro_hide"]
