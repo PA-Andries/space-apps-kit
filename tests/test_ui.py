@@ -163,10 +163,10 @@ def test_planet_maps_are_sent_only_when_needed():
     assert scene_assets(["earth_whole"])["earth"].startswith("data:image/jpeg;base64,")
 
 
-def test_dashboard_shows_everything_at_once():
+def test_page_one_keeps_the_environment_and_the_top_three():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
-    assert len(site.dataframe) >= 1  # the ranking is there from the start
+    assert not site.dataframe  # the full ranking lives on the Investigations page now
     site.button(key="ui_body_Mars").click().run()
     assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == ["ui_place_Base martienne"]
@@ -175,21 +175,32 @@ def test_dashboard_shows_everything_at_once():
     assert not site.exception
 
 
-def test_crew_environment_sets_parameters_that_refine_the_list():
+def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.button(key="ui_body_Lune").click().run()
-    site.button(key="ui_place_Rover pressurisé").click().run()
+    site.button(key="ui_place_Base lunaire").click().run()
     assert not site.exception
-    # The statement gives the rover 30 % oxygen and 70 kPa: the inputs are filled and the list narrows.
-    assert site.number_input(key="ui_oxygen_Rover pressurisé").value == 30
-    assert site.number_input(key="ui_pressure_Rover pressurisé").value == 70
-    narrowed = len(site.dataframe[0].value)
-    # The statement gives no atmosphere for the station: no figure, so nothing is filtered out.
+    # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa, from the challenge statement.
+    assert site.number_input(key="ui_oxygen_Base lunaire_min").value == 30
+    assert site.number_input(key="ui_oxygen_Base lunaire_max").value is None
+    assert site.number_input(key="ui_pressure_Base lunaire_max").value == 70.3
+    environment = site.session_state["ui_environment"]
+    assert environment["oxygene_pct"] == (30.0, None) and environment["pression_kpa"] == (None, 70.3)
+    # Mars: the statement gives no atmosphere, so no figure at all.
     site.button(key="ui_back").click().run()
-    site.button(key="ui_body_Terre").click().run()
-    site.button(key="ui_place_Station").click().run()
-    assert site.number_input(key="ui_oxygen_Station").value is None
-    assert narrowed < len(site.dataframe[0].value)  # sample data in tests: the rover list may be empty
+    site.button(key="ui_body_Mars").click().run()
+    site.button(key="ui_place_Base martienne").click().run()
+    assert site.number_input(key="ui_oxygen_Base martienne_min").value is None
+    assert site.number_input(key="ui_pressure_Base martienne_max").value is None
+    assert site.session_state["ui_environment"]["oxygene_pct"] == (None, None)
+
+
+def test_mars_conditions_contain_no_atmosphere_figure():
+    from flame.ui import conditions
+
+    mars = conditions("Base martienne")
+    assert mars["oxygene_pct"] == (None, None) and mars["pression_kpa"] == (None, None)
+    assert mars["sources"]["oxygene_pct"] == "inconnu"
 
 
 def _pillar_switch_emptied():

@@ -1,12 +1,11 @@
-"""What shows at the top of every page: the site style, a short disclaimer, and the warnings.
-
-There is no scenario bar any more (removed at role F's request): the home page sets the scenario,
-by clicking a place and a pillar. This keeps the scenario in step with those choices.
+"""What shows on every page: the site style, a short disclaimer, the warnings, and the user's
+environment recalled in the sidebar. The environment itself is set on page 1 (My environment).
 """
 
 import streamlit as st
 
 from flame.commun import PROFILS, donnees_exemple, get_scenario, set_scenario
+from flame.ui.environment import environment_summary, full_scenario
 from flame.ui.style import apply_style
 
 # Profiles the site uses. "Étudiant" is removed at role F's request;
@@ -30,3 +29,14 @@ def show_top_bar() -> None:
     set_scenario(st.session_state["ui_habitat"], st.session_state["ui_pillar"], st.session_state["ui_profile"])
     if donnees_exemple():
         st.warning("Fictional sample data: the real NASA data is not loaded yet.")
+    # The sidebar recalls the environment; page 1 writes in the same slot once its form is read.
+    st.sidebar.caption("My environment")
+    st.session_state["ui_sidebar_environment"] = st.sidebar.empty()
+    show_environment_in_sidebar()
+
+
+def show_environment_in_sidebar() -> None:
+    """Write the current environment in the sidebar slot made by `show_top_bar`."""
+    slot = st.session_state.get("ui_sidebar_environment")
+    if slot is not None:
+        slot.markdown(f"**{environment_summary(full_scenario())}**")
