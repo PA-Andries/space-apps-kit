@@ -286,3 +286,70 @@ def test_gemini_ne_tourne_pas_en_rond(monkeypatch):
     monkeypatch.setattr(chatbot.requests, "post", faux_post)
     assert chatbot.repondre("Compte encore", [], charger_fiches()) == chatbot.SANS_REPONSE
     assert len(demandes) == chatbot.NB_MAX_TOURS_OUTILS + 1
+
+
+def test_le_catalogue_et_les_fiches_ne_parlent_plus_de_pilier():
+    assert "Détecter" not in chatbot.catalogue(FICHES_TEST)
+    assert "pilier" not in chatbot.fiches_en_texte(FICHES_TEST)
+    assert "pilier" not in rag.COLONNES_SENS
+
+
+def test_les_fiches_d_un_equipement_gardent_l_ordre_annonce():
+    from flame.assistant import EQUIPEMENTS, fiches_pour
+
+    fiches = pd.DataFrame({"id": ["PSI-25", "PSI-10", "PSI-69", "PSI-68"], "nom": ["a", "b", "c", "d"]})
+    assert list(fiches_pour("extincteurs", fiches)["id"]) == EQUIPEMENTS["extincteurs"]
+    assert fiches_pour("detecteurs", fiches).empty
+
+
+def test_les_retombees_citent_nasa_et_sautent_les_cases_vides():
+    from flame.assistant import instruments_de, liens_terre, retombees_sur_terre
+
+    psi = pd.DataFrame(
+        {
+            "investigation_id": ["PSI-1", "PSI-2"],
+            "acronym": ["UN", "DEUX"],
+            "impacts_earth_benefits": ["Texte de NASA.", None],
+            "psi_url": ["https://psi.nasa.gov/1", "https://psi.nasa.gov/2"],
+        }
+    )
+    retombees = retombees_sur_terre(psi)
+    assert retombees.to_dict("records") == [
+        {"id": "PSI-1", "nom": "UN", "texte": "Texte de NASA.", "source": "https://psi.nasa.gov/1"}
+    ]
+    # Sans les tables PSI (données d'exemple), rien ne plante et rien n'est inventé.
+    assert retombees_sur_terre(pd.DataFrame()).empty
+    assert instruments_de("PSI-1", pd.DataFrame()).empty
+    assert liens_terre(pd.DataFrame()).empty
+
+
+def test_la_page_equipements_s_ouvre():
+    from pathlib import Path
+
+    from streamlit.testing.v1 import AppTest
+
+    page = AppTest.from_file(str(Path(__file__).parent.parent / "pages" / "equipements.py")).run()
+    assert not page.exception
+    assert [onglet.label for onglet in page.tabs] == ["Detectors", "Extinguishers", "On Earth"]
+
+
+def test_synthetiser_n_envoie_que_les_fiches_choisies(monkeypatch):
+    envois = []
+
+    def faux_post(url, headers, json, timeout):
+        envois.append(json)
+        return FausseReponse({"candidates": [{"content": {"parts": [{"text": "#### Fire behaviour\nTexte (A)."}]}}]})
+
+    monkeypatch.setattr(chatbot, "cle_api", lambda: "fausse-cle")
+    monkeypatch.setattr(chatbot.requests, "post", faux_post)
+    assert chatbot.synthetiser(FICHES_TEST, ["A", "C"]).startswith("#### Fire behaviour")
+    consigne = envois[0]["system_instruction"]["parts"][0]["text"]
+    assert "Fumée des câbles" in consigne and "Tissu en feu" in consigne
+    assert "Gouttes de carburant" not in consigne
+    assert "tools" not in envois[0]  # la synthèse n'a pas besoin des outils
+
+
+def test_synthetiser_refuse_une_seule_fiche_et_dit_quand_la_cle_manque(monkeypatch):
+    assert chatbot.synthetiser(FICHES_TEST, ["A"]) == chatbot.SYNTHESE_IMPOSSIBLE
+    monkeypatch.setattr(chatbot, "cle_api", lambda: None)
+    assert chatbot.synthetiser(FICHES_TEST, ["A", "B"]) == chatbot.SANS_CLE
