@@ -61,10 +61,10 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 
 /* Each block rises gently into place. */
 @keyframes ff-rise {{ from {{ opacity: 0; transform: translateY(18px); }} to {{ opacity: 1; transform: none; }} }}
-.ff-hero, .ff-section, .ff-stats, .st-key-ui_pillars, .ff-footer {{
+.ff-hero, .ff-section, .ff-stats, .ff-footer {{
   animation: ff-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }}
-@media (prefers-reduced-motion: reduce) {{ .ff-hero, .ff-section, .ff-stats, .st-key-ui_pillars, .ff-footer {{
+@media (prefers-reduced-motion: reduce) {{ .ff-hero, .ff-section, .ff-stats, .ff-footer {{
   animation: none; }} }}
 
 /* Home page text blocks (see flame/ui/home.py). */
@@ -117,7 +117,7 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-chip {{ background: #fff; border-radius: 980px; padding: 0.35rem 0.85rem; font-size: 0.85rem; font-weight: 600;
   color: {INK}; box-shadow: 0 1px 4px rgba(29, 29, 31, 0.06); }}
 .st-key-ui_card_destination, .st-key-ui_card_conditions, .st-key-ui_card_ranking,
-.st-key-ui_card_assistant, .st-key-ui_card_compare {{
+.st-key-ui_card_assistant, .st-key-ui_card_compare, .st-key-ui_card_gaps {{
   background: #fff; border: none !important; border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem;
   box-shadow: 0 2px 14px rgba(29, 29, 31, 0.05);
 }}
@@ -133,6 +133,22 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-compact + .ff-note, .ff-note.ff-small {{ font-size: 0.78rem; margin: 0 0 0.4rem; }}
 .st-key-ui_card_conditions iframe, .st-key-ui_card_destination iframe {{ box-shadow: none; border-radius: 18px; }}
 
+.ff-grid2.ff-stats {{ grid-template-columns: repeat(2, 1fr); }}
+.ff-stat small {{ display: block; color: #86868b; font-size: 0.72rem; margin-top: 0.25rem; }}
+
+/* The chatbot icon, pinned to the bottom-right corner (sketch 1 of the whiteboard). */
+.st-key-ui_chatbot {{ position: fixed; right: 22px; bottom: 18px; z-index: 1000; width: 112px; gap: 0;
+  background: #fff; border-radius: 24px; padding: 0.3rem 0.4rem 0.4rem;
+  box-shadow: 0 10px 30px rgba(29, 29, 31, 0.18); }}
+.st-key-ui_chatbot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
+.st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
+.st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
+
+/* The ANALYSE button under the chart. */
+.st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
+  padding: 0.6rem 2.2rem; }}
+.st-key-ui_analyse button:hover {{ background: #c9541c; color: #fff; }}
+.st-key-ui_analyse {{ align-items: center; }}
 .ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 2rem; padding-top: 1rem; }}
 .ff-footer p {{ color: #86868b; font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.5rem; }}
 

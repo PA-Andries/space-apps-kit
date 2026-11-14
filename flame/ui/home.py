@@ -55,19 +55,22 @@ def card_title(title: str, subtitle: str = "", tag: str = "") -> None:
     st.html(f'<div class="ff-card-title">{above}<h3>{escape(title)}</h3>{below}</div>')
 
 
-def stat_tiles(tiles: list[tuple[str | None, str]], note: str = "", compact: bool = False) -> None:
-    """A row of key figures: [(value, caption), ...]. A value of None shows "Not given", never a guess.
+def stat_tiles(tiles: list[tuple], note: str = "", compact: bool = False, grid: bool = False) -> None:
+    """A row of key figures: [(value, caption), ...] or [(value, caption, small line), ...].
 
-    `compact`: smaller tiles, for a dashboard card.
+    A value of None shows "Not given", never a guess. The small line goes under the value (a source).
+
+    `compact`: smaller tiles, for a dashboard card. `grid`: two tiles per row (a 2 × 2 grid for four).
     """
     cells = []
-    for value, caption in tiles:
+    for value, caption, *small in tiles:
+        below = f"<small>{escape(small[0])}</small>" if small else ""
         if value is None:
             figure = '<strong class="ff-unknown">Not given</strong>'
         else:
             figure = f"<strong>{escape(value)}</strong>"
-        cells.append(f'<div class="ff-stat"><span>{escape(caption)}</span>{figure}</div>')
-    size = " ff-compact" if compact else ""
+        cells.append(f'<div class="ff-stat"><span>{escape(caption)}</span>{figure}{below}</div>')
+    size = (" ff-compact" if compact else "") + (" ff-grid2" if grid else "")
     st.html(f'<div class="ff-stats{size}">{"".join(cells)}</div>')
     if note:
         st.html(f'<p class="ff-note">{escape(note)}</p>')
@@ -92,3 +95,10 @@ def mascot(message: str, link: tuple[str, str] | None = None) -> None:
             st.html(f'<div class="ff-bubble">{escape(message)}</div>')
             if link:
                 st.page_link(link[0], label=link[1])
+
+
+def chatbot_button(page: str) -> None:
+    """The chatbot icon pinned to the bottom-right corner of the page: the mascot, and a link to `page`."""
+    with st.container(key="ui_chatbot"):
+        mascot_scene(height=96)
+        st.page_link(page, label="Chatbot", icon=":material/forum:")

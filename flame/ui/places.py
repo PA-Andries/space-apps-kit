@@ -8,7 +8,7 @@ Place values are the contract values (French); `label()` shows them in English.
 
 import streamlit as st
 
-from flame.commun import ATMOSPHERES, get_scenario
+from flame.commun import ATMOSPHERES
 
 EARTH = "Terre"
 BODIES = ["Terre", "Lune", "Mars"]
@@ -41,11 +41,6 @@ def current_body() -> str | None:
 def current_place() -> str | None:
     """The place chosen on the home page, or None until the user picks one."""
     return st.session_state.get("ui_place")
-
-
-def current_pillar() -> str | None:
-    """The pillar chosen on the home page, or None until the user presses one of its buttons."""
-    return get_scenario()["pilier"] if st.session_state.get("ui_pillar_chosen") else None
 
 
 def body_of(place: str) -> str | None:
@@ -81,9 +76,3 @@ def choose_place(place: str) -> None:
     st.session_state["ui_place"] = place
     if place != EARTH:
         st.session_state["ui_habitat"] = place
-
-
-def choose_pillar(pillar: str) -> None:
-    """Remember the scenario pillar (top bar)."""
-    st.session_state["ui_pillar"] = pillar
-    st.session_state["ui_pillar_chosen"] = True

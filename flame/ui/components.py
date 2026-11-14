@@ -6,35 +6,20 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from flame.commun import PILIERS
 from flame.ui.labels import label
 from flame.ui.places import (
     BODIES,
     EARTH,
     PLACES_BY_BODY,
     choose_body,
-    choose_pillar,
     choose_place,
     current_body,
-    current_pillar,
     current_place,
     go_back,
 )
 from flame.ui.scene import places_scene
 
-PILLAR_ICONS = {
-    "Prévenir": ":material/shield:",
-    "Détecter": ":material/sensors:",
-    "Éteindre": ":material/fire_extinguisher:",
-}
 BODY_NAMES = {"Terre": "Earth & orbit", "Lune": "Moon", "Mars": "Mars"}
-# One line under each pillar button, so users know what they pick (the three pillars of NASA fire safety).
-PILLAR_HINTS = {
-    "Prévenir": "Stop a fire from starting or spreading",
-    "Détecter": "Notice a fire or smoke early",
-    "Éteindre": "Put a fire out",
-}
-
 SCENE_HEIGHT = 440
 
 # A zone is the clickable area around one 3D object: an ellipse centred on (cx, cy), in fractions of the
@@ -110,7 +95,7 @@ def investigation_card(row: pd.Series) -> None:
     """Show an investigation as a short card: `investigation_card(fiches.iloc[0])`."""
     with st.container(border=True):
         st.markdown(f"**{row['id']}** · {row['nom']}")
-        st.caption(f"{label(row['pilier'])} · {label(row['type_combustible'])} · {row['materiel']}")
+        st.caption(f"{label(row['type_combustible'])} · {row['materiel']}")
         st.write(row["resume"])
         st.link_button("View on PSI", row["source_psi"])
 
@@ -247,31 +232,6 @@ def place_picker() -> tuple[str | None, str | None]:
     return body, place
 
 
-# The three pillars as large white tiles: an orange icon, the name, and its hint inside the tile.
-# The chosen one gets a flame-orange ring and a faint warm tint.
-PILLAR_STYLE = """<style>
-.st-key-ui_pillars [data-testid="stColumn"] { position: relative; }
-.st-key-ui_pillars button {
-  height: 210px; border-radius: 28px; background: #fff; border: 2px solid transparent;
-  flex-direction: column; justify-content: flex-start; gap: 0.7rem; padding: 1.8rem 1rem 0;
-}
-/* Icon above the name, not beside it. */
-.st-key-ui_pillars button > div > span { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
-.st-key-ui_pillars button p { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; color: #1d1d1f; }
-.st-key-ui_pillars button [data-testid="stIconMaterial"] { font-size: 2.6rem; color: #e0662a; }
-.st-key-ui_pillars button:hover { transform: scale(1.02); box-shadow: 0 18px 40px -12px rgba(29, 29, 31, 0.2); }
-.st-key-ui_pillars [data-testid="stBaseButton-primary"] { background: #fff8f3; border-color: #e0662a; }
-.st-key-ui_pillars [data-testid="stBaseButton-primary"] p { color: #c9541c; }
-/* The hint sits inside the tile, near its bottom edge; clicks go through it to the button. */
-.st-key-ui_pillars [data-testid="stElementContainer"]:has([data-testid="stCaptionContainer"]) {
-  position: absolute; left: 0; right: 0; top: 136px; padding: 0 1.4rem; pointer-events: none;
-}
-.st-key-ui_pillars [data-testid="stCaptionContainer"] p {
-  text-align: center; font-size: 1rem; line-height: 1.35; color: #6e6e73; font-weight: 500;
-}
-
-</style>"""
-
 # "Back" as a plain flame-coloured text link with a chevron, not a framed button.
 BACK_STYLE = """<style>
 .st-key-ui_back_row button { border: none; background: transparent; padding: 0; min-height: 0; }
@@ -279,12 +239,3 @@ BACK_STYLE = """<style>
 .st-key-ui_back_row button:hover p { text-decoration: underline; }
 .st-key-ui_back_row { margin-bottom: 0.4rem; }
 </style>"""
-
-
-def pillar_picker() -> str | None:
-    """The pillars as three large cards: prevent, detect, extinguish. Returns the chosen pillar, or None."""
-    pillar = current_pillar()
-    st.html(PILLAR_STYLE)
-    with st.container(key="ui_pillars"):
-        _button_row(PILIERS, pillar, choose_pillar, "ui_pillar", icons=PILLAR_ICONS, hints=PILLAR_HINTS)
-    return pillar

@@ -110,12 +110,11 @@ def test_the_rover_is_only_on_the_moon():
     assert body_of("Station") == "Terre"
 
 
-def _pick_moon_rover_then_detect():
-    from flame.ui.places import choose_body, choose_pillar, choose_place
+def _pick_moon_rover():
+    from flame.ui.places import choose_body, choose_place
 
     choose_body("Lune")
     choose_place("Rover pressurisé")
-    choose_pillar("Détecter")
 
 
 def _pick_station_then_earth():
@@ -137,10 +136,9 @@ def _pick_moon_then_mars():
 # After a click, AppTest reruns only the page, not `app.py`: these tests check the keys
 # the buttons write, which the top bar reads on the next run.
 def test_a_chosen_habitat_becomes_the_scenario_habitat():
-    site = AppTest.from_function(_pick_moon_rover_then_detect).run()
+    site = AppTest.from_function(_pick_moon_rover).run()
     assert site.session_state["ui_body"] == "Lune"
     assert site.session_state["ui_habitat"] == "Rover pressurisé"
-    assert site.session_state["ui_pillar"] == "Détecter"
 
 
 def test_earth_does_not_change_the_habitat():
@@ -180,19 +178,40 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     site.button(key="ui_body_Lune").click().run()
     site.button(key="ui_place_Base lunaire").click().run()
     assert not site.exception
-    # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa, from the challenge statement.
-    assert site.number_input(key="ui_oxygen_Base lunaire_min").value == 30
-    assert site.number_input(key="ui_oxygen_Base lunaire_max").value is None
-    assert site.number_input(key="ui_pressure_Base lunaire_max").value == 70.3
-    environment = site.session_state["ui_environment"]
-    assert environment["oxygene_pct"] == (30.0, None) and environment["pression_kpa"] == (None, 70.3)
-    # Mars: the statement gives no atmosphere, so no figure at all.
+    # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa (statement). A handle at the end of its scale = no bound.
+    assert site.slider(key="ui_oxygen").value == (30.0, 100.0)
+    assert site.slider(key="ui_pressure").value == (0.0, 70.3)
+    assert site.slider(key="ui_gravity").value == 0.165
+    # Mars: the statement gives no atmosphere, so no bound at all.
     site.button(key="ui_back").click().run()
     site.button(key="ui_body_Mars").click().run()
     site.button(key="ui_place_Base martienne").click().run()
-    assert site.number_input(key="ui_oxygen_Base martienne_min").value is None
-    assert site.number_input(key="ui_pressure_Base martienne_max").value is None
-    assert site.session_state["ui_environment"]["oxygene_pct"] == (None, None)
+    assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
+    assert site.slider(key="ui_pressure").value == (0.0, 350.0)
+
+
+def test_a_typed_value_stays_while_the_habitat_does_not_change():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    site.run()  # another rerun, as after a click elsewhere
+    assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
+    site.button(key="ui_body_Terre").click().run()
+    site.button(key="ui_place_Station").click().run()
+    assert site.slider(key="ui_oxygen").value == (19.0, 23.0)  # a new habitat brings its own values
+
+
+def test_analyse_shows_the_three_most_relevant():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert "ui_analysed" not in site.session_state  # the results wait for ANALYSE
+    site.button(key="ui_analyse_button").click().run()
+    assert not site.exception
+    assert site.session_state["ui_analysed"]
+
+
+def test_slider_ranges_round_trip():
+    from importlib import import_module
+
+    assert import_module("flame.ui.environment").bounds_text("O₂", (30, None), "%") == "O₂ ≥ 30 %"
 
 
 def test_mars_conditions_contain_no_atmosphere_figure():
@@ -201,24 +220,6 @@ def test_mars_conditions_contain_no_atmosphere_figure():
     mars = conditions("Base martienne")
     assert mars["oxygene_pct"] == (None, None) and mars["pression_kpa"] == (None, None)
     assert mars["sources"]["oxygene_pct"] == "inconnu"
-
-
-def _pillar_switch_emptied():
-    import streamlit as st
-
-    from flame.ui.top_bar import show_top_bar
-
-    st.session_state["ui_pillar"] = "Éteindre"
-    show_top_bar()
-    st.session_state["first"] = st.session_state["pilier"]
-    st.session_state["ui_pillar"] = None  # a second click on the switch empties it
-    show_top_bar()
-
-
-def test_pillar_switch_sets_the_scenario_and_never_empties_it():
-    site = AppTest.from_function(_pillar_switch_emptied).run()
-    assert site.session_state["first"] == "Éteindre"
-    assert site.session_state["pilier"] == "Éteindre"
 
 
 def test_back_button_returns_to_the_bodies():

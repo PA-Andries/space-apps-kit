@@ -5,7 +5,7 @@ environment recalled in the sidebar. The environment itself is set on page 1 (My
 import streamlit as st
 
 from flame.commun import PROFILS, donnees_exemple, get_scenario, set_scenario
-from flame.ui.environment import environment_summary, full_scenario
+from flame.ui.environment import environment_summary
 from flame.ui.style import apply_style
 
 # Profiles the site uses. "Étudiant" is removed at role F's request;
@@ -18,15 +18,13 @@ def show_top_bar() -> None:
     scenario = get_scenario()
     # The home page buttons write into these keys: set them only once.
     st.session_state.setdefault("ui_habitat", scenario["habitat"])
-    # The pillar switch of the dashboard can be emptied by a second click: keep the last pillar then.
-    if st.session_state.get("ui_pillar") is None:
-        st.session_state["ui_pillar"] = scenario["pilier"]
     if st.session_state.get("ui_profile") not in PROFILES_OFFERED:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]
     apply_style()
     st.html('<p class="ff-disclaimer">A tool to help understand the research: not a safety certification.</p>')
-    set_scenario(st.session_state["ui_habitat"], st.session_state["ui_pillar"], st.session_state["ui_profile"])
+    # Pillars are dropped (PA, Sat 17:00): the obsolete `pilier` key is passed on as it is, never chosen here.
+    set_scenario(st.session_state["ui_habitat"], scenario["pilier"], st.session_state["ui_profile"])
     if donnees_exemple():
         st.warning("Fictional sample data: the real NASA data is not loaded yet.")
     # The sidebar recalls the environment; page 1 writes in the same slot once its form is read.
@@ -39,4 +37,4 @@ def show_environment_in_sidebar() -> None:
     """Write the current environment in the sidebar slot made by `show_top_bar`."""
     slot = st.session_state.get("ui_sidebar_environment")
     if slot is not None:
-        slot.markdown(f"**{environment_summary(full_scenario())}**")
+        slot.markdown(f"**{environment_summary(get_scenario()['habitat'])}**")
