@@ -32,6 +32,14 @@ FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen =
 OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
+# Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
+GRAVITY_CHOICES = {0.0: "0 g", 0.165: "0.165 g", 0.38: "0.38 g", 1.0: "1 g"}
+
+
+def gravity_choice(value: float | None) -> float:
+    """The button closest to a gravity value (0 g when the value is unknown)."""
+    return min(GRAVITY_CHOICES, key=lambda choice: abs(choice - (value or 0.0)))
+
 
 # This is the home page: no "Home" button here; after a click on Home elsewhere, the sidebar folds away.
 st.html("<style>.st-key-ui_home_link { display: none; }</style>")
@@ -78,15 +86,20 @@ values = environment_values(shown_place)
 if st.session_state.get("ui_form_place") != shown_place or "ui_oxygen" not in st.session_state:
     st.session_state["ui_oxygen"] = to_slider(values["oxygene_pct"], OXYGEN_SCALE)
     st.session_state["ui_pressure"] = to_slider(values["pression_kpa"], PRESSURE_SCALE)
-    st.session_state["ui_gravity"] = float(values["gravite"] or 0.0)
+    st.session_state["ui_gravity"] = gravity_choice(values["gravite"])
     st.session_state["ui_fuels"] = list(values["type_combustible"])
     st.session_state["ui_air_flow"] = to_slider(values["debit_air_cm_s"], AIR_FLOW_SCALE)
     st.session_state["ui_form_place"] = shown_place
 
 with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
-    card_title(f"Parameters · {label(shown_place)}", "Filled in by the environment. Move a slider to change it.")
+    card_title(f"Parameters · {label(shown_place)}", "Filled in by the environment. Change a value to refine it.")
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
-    gravity = st.slider("g (gravity, in g)", 0.0, 1.0, step=0.005, format="%.3f", key="ui_gravity")
+    gravity = st.segmented_control(
+        "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
+    )
+    if gravity is None:  # a click on the chosen button unselects it: keep the environment's gravity
+        gravity = gravity_choice(values["gravite"])
+    st.caption("0 g: spacecraft and station · 0.165 g: Moon · 0.38 g: Mars · 1 g: Earth")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
     air_flow = from_slider(

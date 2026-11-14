@@ -177,7 +177,7 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa (statement). A handle at the end of its scale = no bound.
     assert site.slider(key="ui_oxygen").value == (30.0, 100.0)
     assert site.slider(key="ui_pressure").value == (0.0, 70.3)
-    assert site.slider(key="ui_gravity").value == 0.165
+    assert site.session_state["ui_gravity"] == 0.165  # the "Moon · 0.165 g" button
     # Mars: the statement gives no atmosphere, so no bound at all.
     site.button(key="ui_place_Base martienne").click().run()
     assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
