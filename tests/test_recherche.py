@@ -3,7 +3,7 @@
 import pandas as pd
 
 from flame.commun import INCONNU, charger_fiches
-from flame.recherche import detail_du_score, filtrer, rechercher, valeurs_possibles
+from flame.recherche import SCORE_MIN, detail_du_score, filtrer, les_plus_pertinentes, rechercher, valeurs_possibles
 
 LUNE_PREVENIR = {"habitat": "Base lunaire", "pilier": "Prévenir", "profil": "Étudiant"}
 STATION_DETECTER = {"habitat": "Station", "pilier": "Détecter", "profil": "Étudiant"}
@@ -116,3 +116,19 @@ def test_une_table_vide_ne_fait_pas_planter_la_recherche():
         resultats = rechercher(question, aucune_fiche, LUNE_PREVENIR)
         assert resultats.empty
         assert {"score", "mots_trouves"} <= set(resultats.columns)
+
+
+def test_les_plus_pertinentes_gardent_seulement_les_scores_au_dessus_du_seuil():
+    fiches = charger_fiches()
+    tous = rechercher("", fiches, LUNE_PREVENIR)
+    gardees = les_plus_pertinentes(fiches, LUNE_PREVENIR)
+    assert (gardees["score"] > SCORE_MIN).all()
+    assert len(gardees) == (tous["score"] > SCORE_MIN).sum()
+    assert list(gardees["score"]) == sorted(gardees["score"], reverse=True)
+
+
+def test_le_seuil_est_strict():
+    fiches = charger_fiches()
+    meilleur = int(rechercher("", fiches, LUNE_PREVENIR)["score"].max())
+    assert les_plus_pertinentes(fiches, LUNE_PREVENIR, score_min=meilleur).empty
+    assert not les_plus_pertinentes(fiches, LUNE_PREVENIR, score_min=meilleur - 1).empty

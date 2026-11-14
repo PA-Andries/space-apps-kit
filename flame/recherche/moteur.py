@@ -19,3 +19,19 @@ def rechercher(question: str, fiches: pd.DataFrame, scenario: dict[str, str] | N
     if mots:
         resultats = resultats[resultats["mots_trouves"] > 0]
     return resultats.sort_values(["mots_trouves", "score"], ascending=False, kind="stable").reset_index(drop=True)
+
+
+# Seuil de la page Recherche : seules les fiches au score strictement supérieur sont affichées.
+SCORE_MIN = 80
+
+
+def les_plus_pertinentes(
+    fiches: pd.DataFrame, scenario: dict[str, str] | None = None, score_min: int = SCORE_MIN
+) -> pd.DataFrame:
+    """Les fiches dont le score pour `scenario` dépasse strictement `score_min`, la meilleure en premier.
+
+    Pas de question : seul le score du scénario compte (voir `detail_du_score`).
+    """
+    resultats = rechercher("", fiches, scenario)
+    resultats = resultats[resultats["score"] > score_min]
+    return resultats.sort_values("score", ascending=False, kind="stable").reset_index(drop=True)
