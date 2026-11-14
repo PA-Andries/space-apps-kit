@@ -125,6 +125,14 @@ def _pick_station_then_earth():
     choose_place("Terre")
 
 
+def _pick_moon_base_then_spacesuit():
+    from flame.ui.places import choose_body, choose_place
+
+    choose_body("Lune")
+    choose_place("Base lunaire")
+    choose_place("Scaphandre")
+
+
 def _pick_moon_then_mars():
     from flame.ui.places import choose_body, choose_place
 
@@ -145,6 +153,13 @@ def test_earth_does_not_change_the_habitat():
     site = AppTest.from_function(_pick_station_then_earth).run()
     assert site.session_state["ui_place"] == "Terre"
     assert site.session_state["ui_habitat"] == "Station"
+
+
+def test_the_spacesuit_does_not_change_the_habitat():
+    """Like Earth, the spacesuit is a reference: it is explored without replacing the crew's habitat."""
+    site = AppTest.from_function(_pick_moon_base_then_spacesuit).run()
+    assert site.session_state["ui_place"] == "Scaphandre"
+    assert site.session_state["ui_habitat"] == "Base lunaire"
 
 
 def test_a_new_body_resets_the_place():
@@ -177,9 +192,10 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     # Lot F: "Moon base" fills O2 >= 30 % and <= 70.3 kPa (statement). A handle at the end of its scale = no bound.
     assert site.slider(key="ui_oxygen").value == (30.0, 100.0)
     assert site.slider(key="ui_pressure").value == (0.0, 70.3)
-    assert site.slider(key="ui_gravity").value == 0.165
+    assert site.session_state["ui_gravity"] is None  # no Moon button: the base keeps its 0.165 g
     # Mars: the statement gives no atmosphere, so no bound at all.
     site.button(key="ui_place_Base martienne").click().run()
+    assert site.session_state["ui_gravity"] is None  # no Mars button either; its 0.38 g is kept
     assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
     assert site.slider(key="ui_pressure").value == (0.0, 350.0)
 
@@ -217,12 +233,14 @@ def test_every_page_receives_the_environment_of_page_one():
         assert site.session_state["scenario_pression_kpa"] == (None, 70.3), page
 
 
-def test_analyse_shows_the_three_most_relevant():
+def test_the_three_most_relevant_are_shown_without_a_click():
+    """Hierarchy (Ethan, 14 Nov): the results no longer wait for ANALYSE, which now opens the full ranking."""
     site = AppTest.from_file(APP, default_timeout=30).run()
-    assert "ui_analysed" not in site.session_state  # the results wait for ANALYSE
-    site.button(key="ui_analyse_button").click().run()
     assert not site.exception
-    assert site.session_state["ui_analysed"]
+    textes = [block.value for block in site.markdown]
+    assert any("Where they agree" in texte for texte in textes)  # the comparison of the three
+    assert any("PSI's tables" in texte for texte in textes)  # the data gaps, on arrival
+    assert site.button(key="ui_analyse_button").label == "ANALYSE ALL 24"
 
 
 def test_slider_ranges_round_trip():
@@ -241,10 +259,11 @@ def test_mars_conditions_contain_no_atmosphere_figure():
 
 def test_page_one_has_one_button_per_crew_environment():
     from flame.commun import HABITATS
-    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS
+    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS, SPACESUIT
 
     offered = [place for row in PLACE_ROWS for place in row]
-    assert sorted(offered) == sorted([*HABITATS, EARTH])  # every habitat of the contract, and the Earth reference
+    # Every habitat of the contract, plus the two references the statement gives: Earth air and the suit.
+    assert sorted(offered) == sorted([*HABITATS, EARTH, SPACESUIT])
     assert set(PLACE_ICONS) == set(offered)  # each button has its small logo
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [f"ui_place_{place}" for place in offered]
@@ -311,6 +330,141 @@ def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
         assert min(box.x) == 32.0
         zones = [trace for trace in others if trace.line.dash == "dot"]
         assert len(zones) == 2 and all(trace.fill == "none" for trace in zones)
+        points = [trace for trace in others if trace.mode == "markers" and trace.marker.symbol != "star"]
+        grey = [trace for trace in points if trace.name == "Other tests"]
+        assert grey and all(trace.marker.color == "#7d86a8" for trace in grey)
+        assert all(trace.name.endswith("(matches)") for trace in points if trace not in grey)
     empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
     figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
     assert "Your selection" not in [trace.name for trace in figure.data]
+
+
+def test_the_assistant_page_shows_the_flame_and_it_talks_while_answering():
+    page = AppTest.from_file("../pages/assistant.py", default_timeout=60).run()
+    assert not page.exception
+    # The flame stands in the bottom bar, just before the chat box (which hides its lower half).
+    bottom_bar = [block for block in page._tree.children.values() if "assistant_question" in str(block)][0]
+    flame, chat_box = [str(child.proto) for child in bottom_bar.children.values()]
+    assert "ui_assistant_mascot" in flame and "assistant_question" in chat_box
+
+    def answer_while_talking():
+        import streamlit as st
+
+        from flame.ui import talking
+
+        with talking():
+            st.session_state["marker_seen"] = True
+        st.session_state["done"] = True
+
+    page = AppTest.from_function(answer_while_talking).run()
+    assert not page.exception and page.session_state["done"]
+    # The marker is gone once the answer is written: the flame stops talking.
+    assert "ff-talking" not in str(page.main)
+    assert "ff-talking" in Path("flame/ui/three/mascot.html").read_text()
+
+
+def test_colours_follow_the_60_30_10_rule():
+    from flame.ui import chart, style
+
+    # One accent only (flame orange): no pink, green or violet left in the interface's colours.
+    interface = Path("flame/ui/style.py").read_text() + Path("flame/ui/components.py").read_text()
+    for colour in ("#d9365e", "#f0457a", "#e44a70", "22, 163, 74", "124, 58, 237"):
+        assert colour not in interface
+    assert style.FLAME == style.ACCENT == "#ff7a3d"
+    assert chart.SELECTION_COLOR == "255, 122, 61"  # the user's selection is the accent
+
+
+def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
+    assert 'label="Flamy"' in Path("flame/ui/home.py").read_text()
+    assert 'st.title("Flamy")' in Path("pages/assistant.py").read_text()
+    assert ".st-key-ui_home_link { display: none; }" in Path("pages/accueil.py").read_text()
+
+
+def test_home_goes_to_page_one_and_folds_the_sidebar():
+    top_bar = Path("flame/ui/top_bar.py").read_text()
+    assert 'st.button("Home"' in top_bar and 'st.switch_page("pages/accueil.py")' in top_bar
+
+    def home_page_after_a_click():
+        import streamlit as st
+
+        from flame.ui import fold_sidebar_after_home
+
+        st.session_state.setdefault("ui_home_clicked", 1)
+        fold_sidebar_after_home()
+
+    page = AppTest.from_function(home_page_after_a_click).run()
+    assert not page.exception
+    # The click is used once: the folding script is shown, then the click is forgotten.
+    assert "ui_home_clicked" not in page.session_state
+    assert "ui_fold_sidebar" in str([block.proto for block in page.main.children.values()])
+    script = __import__("flame.ui.top_bar", fromlist=["_FOLD_SCRIPT"])._FOLD_SCRIPT
+    assert "stSidebarCollapseButton" in script
+
+
+def test_outcomes_sort_nasa_results_and_show_on_arrival():
+    import pandas as pd
+
+    from flame.ui import count_outcomes, kind_of_result
+
+    assert kind_of_result("Extinction") == "went_out"
+    assert kind_of_result("hot ignition: No; end: -") == "no_ignition"
+    assert kind_of_result("hot ignition: yes; end: FT") == "burned"
+    assert kind_of_result("cool flame observed") == "burned"
+    assert kind_of_result(float("nan")) == "unknown"
+    assert kind_of_result("no cool-flame burning rate reported") == "unknown"
+    tests = pd.DataFrame({"resultat": ["Extinction", "Completion", None, "hot ignition: no; end: -"]})
+    assert count_outcomes(tests) == {"burned": 1, "went_out": 1, "no_ignition": 1, "unknown": 1}
+
+    from flame.ui import answer
+
+    moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
+    assert answer({"burned": 3, "went_out": 1, "no_ignition": 0, "unknown": 5}, moon)[0] == "yes"
+    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    assert answer({"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 4}, moon)[1] == "No data"
+    mars = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}  # no atmosphere bounds: no answer
+    assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    # The card's sentence and its caption, from the matching tests' results.
+    texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
+    assert "match your environment" in texts and "not fires" in texts
+
+
+def test_page_one_explains_how_to_use_the_dashboard():
+    from flame.ui.intro import STEPS
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert "How to use this dashboard" in shown
+    for title, _ in STEPS:
+        assert title in shown, title
+
+
+def test_the_how_to_card_folds_away_and_comes_back():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.button(key="ui_intro_hide").click().run()
+    assert not site.exception
+    assert [b.key for b in site.button if b.key == "ui_intro_hide"] == []
+    assert "Choose your environment" not in " ".join(str(block.value) for block in site.get("html"))
+    site.button(key="ui_intro_show").click().run()
+    assert [b.key for b in site.button if b.key == "ui_intro_hide"] == ["ui_intro_hide"]
+
+
+def test_page_one_explains_each_of_the_three_investigations():
+    """The detailed cards of #49, now shown on arrival: the results no longer wait for ANALYSE."""
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert shown.count("What the experiment studied") == 3
+    assert shown.count("Why it matters for Moon base") == 3
+    assert "Atmosphere:" in shown and "Gravity:" in shown
+
+
+def test_the_ranking_explains_every_investigation():
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    site.switch_page("pages/recherche.py").run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert shown.count("Why it matters for Moon base") >= 3

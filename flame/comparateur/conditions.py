@@ -62,6 +62,15 @@ COULEURS = [
 ]
 OPACITE_ESTOMPEE = 0.25
 
+# Le graphique de répartition : une vue d'ensemble, pas un outil d'analyse. Trois couleurs seulement,
+# selon la règle 60-30-10 du site : les surfaces restent neutres, l'encre de structure porte la masse
+# des tests, et l'orange de la flamme est réservé à ce qui correspond à l'environnement de l'utilisateur.
+PAS_REPARTITION = 5  # largeur d'une tranche d'oxygène, en points de pourcentage
+BORNES_REPARTITION = list(range(0, 105, PAS_REPARTITION))
+COULEUR_STRUCTURE = "#7d86a8"  # 30 % : tous les tests (le gris-bleu du site, lisible sur la page de nuit)
+COULEUR_ACCENT = "#ff7a3d"  # 10 % : les tests de l'environnement (le même orange que primaryColor)
+COULEUR_ENCRE = "#e9ecf8"  # le trait de la frontière et ses mots (le textColor du thème sombre)
+
 
 def plages_du_scenario(scenario: dict) -> dict:
     """Les plages de conditions de l'environnement : oxygène, pression, débit d'air (min, max) et combustibles.
@@ -254,3 +263,79 @@ def _points(
         hovertemplate="%{customdata[0]} · test %{customdata[1]}<br>%{customdata[2]}<br>"
         "oxygen %{x} %, %{y}<extra></extra>",
     )
+
+
+def _tranches(valeurs: pd.Series, centres: list[float]) -> pd.Series:
+    """Chaque valeur d'oxygène rangée dans sa tranche, repérée par le centre de la tranche."""
+    return pd.cut(valeurs, bins=BORNES_REPARTITION, right=False, labels=centres, ordered=False)
+
+
+def graphique_repartition(
+    tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict, frontiere: float | None = None
+) -> go.Figure:
+    """La répartition des tests NASA sur l'axe de l'oxygène : une lecture en une seconde.
+
+    Les barres grises comptent tous les tests dont l'oxygène est noté ; la part orange est celle qui
+    tombe dans l'environnement de l'utilisateur. `frontiere` trace, si elle est donnée, l'oxygène le plus
+    haut auquel un vrai échantillon solide a été testé : au-delà, plus aucune mesure de matériau.
+    Aucune légende : tout est écrit sur le graphique.
+    """
+    centres = [borne + PAS_REPARTITION / 2 for borne in BORNES_REPARTITION[:-1]]
+    oxygene = pd.to_numeric(tests["oxygene_pct"], errors="coerce")
+    visibles = tests[oxygene.notna()]
+    correspondants = tests_correspondants(tests, fiches, scenario).index if environnement_defini(scenario) else []
+    dans_l_environnement = visibles.index.isin(correspondants)
+    rangees = _tranches(oxygene[oxygene.notna()], centres)
+    compte_accent = rangees[dans_l_environnement].value_counts().reindex(centres, fill_value=0)
+    compte_autres = rangees[~dans_l_environnement].value_counts().reindex(centres, fill_value=0)
+
+    figure = go.Figure()
+    for compte, couleur, suffixe in (
+        (compte_autres, COULEUR_STRUCTURE, "outside your environment"),
+        (compte_accent, COULEUR_ACCENT, "in your environment"),
+    ):
+        figure.add_trace(
+            go.Bar(
+                x=centres,
+                y=compte.to_numpy(),
+                marker={"color": couleur, "line": {"width": 0}},
+                width=PAS_REPARTITION * 0.86,
+                hovertemplate=("oxygen %{customdata} %%<br>%{y} test(s) " + suffixe + "<extra></extra>"),
+                customdata=[f"{borne:g}–{borne + PAS_REPARTITION:g}" for borne in BORNES_REPARTITION[:-1]],
+                showlegend=False,
+            )
+        )
+
+    plages = plages_du_scenario(scenario)
+    if environnement_defini(scenario) and any(borne is not None for borne in plages["oxygene_pct"]):
+        debut, fin = _bornes(plages["oxygene_pct"], (BORNES_REPARTITION[0], BORNES_REPARTITION[-1]))
+        figure.add_vrect(
+            x0=debut,
+            x1=fin,
+            fillcolor=COULEUR_ACCENT,
+            opacity=0.08,
+            line={"color": COULEUR_ACCENT, "width": 1},
+            layer="below",
+            # À droite : la frontière des solides écrit son étiquette à gauche, elles ne se chevauchent pas.
+            annotation={"text": "your environment", "font": {"size": 11, "color": COULEUR_ACCENT}},
+            annotation_position="top right",
+        )
+    if frontiere is not None:
+        figure.add_vline(
+            x=frontiere,
+            line={"color": COULEUR_ENCRE, "width": 1.5, "dash": "dot"},
+            annotation={"text": f"no solid tested above {frontiere:g} %", "font": {"size": 11, "color": COULEUR_ENCRE}},
+            annotation_position="top right",
+        )
+
+    figure.update_xaxes(title_text="Oxygen (%)", range=[0, BORNES_REPARTITION[-1]], dtick=10)
+    figure.update_yaxes(title_text="NASA tests", rangemode="tozero", gridcolor="rgba(160,175,255,0.12)")
+    figure.update_layout(
+        barmode="stack",
+        bargap=0,
+        height=260,
+        margin={"t": 30, "b": 40, "l": 55, "r": 10},
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+    )
+    return figure

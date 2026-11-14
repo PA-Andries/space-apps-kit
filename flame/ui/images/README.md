@@ -12,3 +12,6 @@ Changes: `moon_scene.jpg` is cropped (domes and rover) and the NASA logo painted
 because the event rules forbid NASA logos. Both images are cropped, colour-graded (the Moon's purple tint is
 neutralised towards grey ground and a dark sky; Mars gets a little more contrast), given a soft vignette,
 resized and saved as JPEG.
+
+`space_background.svg`: the site's background (stars, small spiral galaxies, planets, nebulae). An original
+drawing made of simple shapes by `make_space_background.py`, no outside image; run that script to redraw it.

@@ -16,6 +16,7 @@ LABELS = {
     "Base lunaire": "Moon base",
     "Base martienne": "Mars base",
     "Rover pressurisé": "Pressurized rover",
+    "Scaphandre": "spacesuit",
     # Pillars
     "Prévenir": "Prevent",
     "Détecter": "Detect",

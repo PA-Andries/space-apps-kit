@@ -6,8 +6,8 @@ The scenario and the habitats' conditions come from `flame.commun` (lot A): `get
 
 from flame.commun import conditions_habitat, get_scenario, set_scenario
 from flame.ui.labels import label
+from flame.ui.places import EARTH, REFERENCE_PLACES, SPACESUIT
 
-EARTH = "Terre"
 # The environment keys of the extended scenario (lot A), written by page 1.
 ENVIRONMENT_KEYS = ("oxygene_pct", "pression_kpa", "gravite", "type_combustible", "debit_air_cm_s")
 
@@ -19,6 +19,15 @@ EARTH_CONDITIONS = {
     "gravite": 1.0,
     "sources": {"oxygene_pct": "énoncé", "pression_kpa": "énoncé", "gravite": "énoncé"},
 }
+# The spacesuit: the statement gives 100 % oxygen at 4.3 psi (29.6 kPa). It is the lower bound that explains
+# the lunar atmosphere: between the suit and Earth's air, to shorten pre-breathing before an EVA.
+# Its gravity is left unknown: a suit is worn in microgravity and on the Moon alike.
+SPACESUIT_CONDITIONS = {
+    "oxygene_pct": (100.0, 100.0),
+    "pression_kpa": (29.6, 29.6),
+    "gravite": None,
+    "sources": {"oxygene_pct": "énoncé", "pression_kpa": "énoncé", "gravite": "inconnu"},
+}
 SOURCE_NAMES = {"énoncé": "statement", "à sourcer": "to be sourced", "inconnu": "unknown"}
 
 
@@ -27,13 +36,17 @@ def conditions(place: str) -> dict:
 
     {"oxygene_pct": (min, max), "pression_kpa": (min, max), "gravite": g, "sources": {key: source}}
     """
-    return EARTH_CONDITIONS if place == EARTH else conditions_habitat(place)
+    if place == EARTH:
+        return EARTH_CONDITIONS
+    if place == SPACESUIT:
+        return SPACESUIT_CONDITIONS
+    return conditions_habitat(place)
 
 
 def environment_values(place: str) -> dict:
     """The environment of `place` as the scenario holds it: what the user typed, else the habitat's values."""
     scenario = get_scenario()
-    if place != EARTH and scenario["habitat"] == place:
+    if place not in REFERENCE_PLACES and scenario["habitat"] == place:
         return {key: scenario[key] for key in ENVIRONMENT_KEYS}
     known = conditions(place)
     return {
