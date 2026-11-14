@@ -19,7 +19,6 @@ LIBELLES = {
     "Détecter": "Detect",
     "Éteindre": "Extinguish",
     # Profils
-    "Étudiant": "Student",
     "Chercheur": "Researcher",
     "Ingénieur": "Engineer",
     # Types de combustible

@@ -40,11 +40,43 @@ def _rangee_boutons(valeurs: list[str], choisie: str | None, icones: dict, actio
         )
 
 
+HAUTEUR_LIEUX = 190
+
+# Les boutons des lieux sont posés par-dessus la scène 3D et rendus transparents :
+# on clique « sur la planète », mais c'est le bouton Streamlit qui reçoit le clic.
+STYLE_LIEUX = f"""<style>
+.st-key-ui_lieux_boutons {{ margin-top: calc(-{HAUTEUR_LIEUX}px - 1rem); position: relative; z-index: 1; }}
+.st-key-ui_lieux_boutons [data-testid="stHorizontalBlock"] {{ flex-wrap: nowrap; }}
+.st-key-ui_lieux_boutons [data-testid="stColumn"] {{ min-width: 0; }}
+.st-key-ui_lieux_boutons button {{
+  height: {HAUTEUR_LIEUX}px; align-items: flex-end; padding-bottom: 8px;
+  background: transparent; border: 2px solid transparent; border-radius: 20px;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}}
+.st-key-ui_lieux_boutons button:hover {{
+  background: rgba(249, 115, 22, 0.07); border-color: rgba(249, 115, 22, 0.45); transform: translateY(-2px);
+}}
+.st-key-ui_lieux_boutons [data-testid="stBaseButton-primary"] {{
+  background: rgba(249, 115, 22, 0.1); border-color: #f97316; color: #fdba74;
+}}
+.st-key-ui_lieux_boutons button p {{
+  font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}}
+@media (max-width: 640px) {{
+  .st-key-ui_lieux_boutons [data-testid="stHorizontalBlock"] {{ gap: 0.25rem; }}
+  .st-key-ui_lieux_boutons button {{ padding: 0 2px 4px; }}
+  .st-key-ui_lieux_boutons button p {{ font-size: 0.6rem; }}
+}}
+</style>"""
+
+
 def choix_lieu() -> str | None:
-    """Les lieux en 3D (Terre puis habitats), un bouton sous chacun. Renvoie le lieu choisi, ou None."""
+    """Les lieux en 3D (Terre puis habitats), à choisir en cliquant dessus. Renvoie le lieu choisi, ou None."""
     lieu = lieu_courant()
-    scene_lieux(LIEUX, lieu)
-    _rangee_boutons(LIEUX, lieu, {}, choisir_lieu, "ui_lieu")
+    st.html(STYLE_LIEUX)
+    scene_lieux(LIEUX, lieu, hauteur=HAUTEUR_LIEUX)
+    with st.container(key="ui_lieux_boutons"):
+        _rangee_boutons(LIEUX, lieu, {}, choisir_lieu, "ui_lieu")
     return lieu
 
 

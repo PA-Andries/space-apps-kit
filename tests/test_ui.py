@@ -38,10 +38,11 @@ def test_la_scene_des_lieux_met_en_avant_le_lieu_choisi():
 
 
 def test_libelle_traduit_les_valeurs_du_contrat():
-    from flame.commun import HABITATS, PILIERS, PROFILS
+    from flame.commun import HABITATS, PILIERS
     from flame.ui import libelle
+    from flame.ui.cadre import PROFILS_PROPOSES
 
-    for valeur in [*HABITATS, *PILIERS, *PROFILS]:
+    for valeur in [*HABITATS, *PILIERS, *PROFILS_PROPOSES]:
         assert libelle(valeur) != valeur
     assert libelle("Prévenir;Éteindre") == "Prevent, Extinguish"
     assert libelle("valeur absente") == "valeur absente"
@@ -102,3 +103,9 @@ def test_le_bouton_terre_affiche_la_reference():
     assert not site.exception
     assert site.session_state["ui_lieu"] == "Terre"
     assert len(site.info) == 1
+
+
+def test_etudiant_n_est_plus_propose():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert "Étudiant" not in site.sidebar.selectbox(key="ui_profil").options
+    assert site.session_state["profil"] == "Chercheur"
