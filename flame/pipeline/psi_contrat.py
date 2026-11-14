@@ -169,32 +169,8 @@ def lignes_de_tests_du_contrat(tests_psi: pd.DataFrame) -> pd.DataFrame:
     return tests[COLONNES_TESTS]
 
 
-def publications_du_contrat(publications_psi: pd.DataFrame) -> pd.DataFrame:
-    """Les articles listés par PSI pour chaque investigation, avec les colonnes de `COLONNES_PUBLICATIONS`.
-
-    PSI ne donne ni l'année ni le résumé : ces colonnes restent vides. `ntrs_id` est vide aussi (ce ne sont pas des
-    rapports NTRS). Le lien est celui de PSI, ou à défaut celui du DOI.
-    """
-    doi = publications_psi["doi"].fillna("").astype(str).str.strip()
-    lien_doi = ("https://doi.org/" + doi).where(doi != "")
-    publications = pd.DataFrame(
-        {
-            "ntrs_id": None,
-            "titre": publications_psi["title"],
-            "annee": None,
-            "auteurs": publications_psi["authors"],
-            "resume": None,
-            "url": publications_psi["link"].where(publications_psi["link"].notna(), lien_doi),
-            "investigation_id": publications_psi["investigation_id"],
-        }
-    )
-    return publications[COLONNES_PUBLICATIONS]
-
-
 def main() -> None:
-    parametres = argparse.ArgumentParser(
-        description="Écrit data/investigations.csv, data/tests.csv et data/publications.csv."
-    )
+    parametres = argparse.ArgumentParser(description="Écrit data/investigations.csv et data/tests.csv.")
     parametres.add_argument("dossier_psi", nargs="?", type=Path, default=DOSSIER_PSI)
     parametres.add_argument(
         "--verifie-par",
@@ -217,21 +193,16 @@ def main() -> None:
     tests = lignes_de_tests_du_contrat(psi["tests"])
     fiches.to_csv(fichier_fiches, index=False)
     tests.to_csv(DOSSIER_DATA / "tests.csv", index=False)
-    # data/publications.csv : les articles listés par PSI. Les lignes venues de NTRS (avec un `ntrs_id`) sont gardées.
+    # Le site lit aussi data/publications.csv dès que les vraies fiches existent. Tant que le script NTRS ne l'a pas
+    # écrit, on crée un fichier avec seulement les noms de colonnes, pour que la page Recherche ne plante pas.
     fichier_publications = DOSSIER_DATA / "publications.csv"
-    publications = publications_du_contrat(pd.read_csv(dossier_psi / "publications.csv"))
-    if fichier_publications.exists():
-        anciennes = pd.read_csv(fichier_publications)
-        publications = pd.concat([anciennes[anciennes["ntrs_id"].notna()], publications], ignore_index=True)
-    publications.to_csv(fichier_publications, index=False)
+    if not fichier_publications.exists():
+        pd.DataFrame(columns=COLONNES_PUBLICATIONS).to_csv(fichier_publications, index=False)
     DOSSIER_TABLES_PSI.mkdir(exist_ok=True)
-    for nom in TABLES_PSI if dossier_psi.resolve() != DOSSIER_TABLES_PSI.resolve() else []:
+    for nom in TABLES_PSI:
         shutil.copyfile(dossier_psi / f"{nom}.csv", DOSSIER_TABLES_PSI / f"{nom}.csv")
     validees = fiches["verifie_par"].notna().sum()
-    sys.stdout.write(
-        f"{len(fiches)} fiches ({validees} validées), {len(tests)} tests et {len(publications)} publications"
-        f" écrits dans {DOSSIER_DATA}\n"
-    )
+    sys.stdout.write(f"{len(fiches)} fiches ({validees} validées) et {len(tests)} tests écrits dans {DOSSIER_DATA}\n")
 
 
 if __name__ == "__main__":
