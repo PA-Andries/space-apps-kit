@@ -1,9 +1,11 @@
-"""L'assistant (RAG) : retrouve les fiches utiles, puis les envoie à Gemini avec la question.
+"""L'assistant (RAG + outils) : retrouve les fiches utiles, puis les envoie à Gemini avec la question.
 
 1. Recherche (`rag.py`) : les fiches dont le sens est le plus proche de la question.
-2. Génération : Gemini répond à partir de ces fiches seulement, en citant leurs `id`.
+2. Environnement (`environnement.py`) : l'habitat et les conditions choisis en page 1.
+3. Génération : Gemini répond à partir des fiches, et peut appeler les outils de `outils.py`
+   (investigations par habitat, comptage des tests dans des conditions données).
 
-La clé se lit avec `cle_api()` et ne s'écrit jamais dans le code.
+La clé se lit avec `cle_api()` et ne s'écrit jamais dans le code. Les messages affichés sont en anglais.
 """
 
 from pathlib import Path
@@ -12,6 +14,8 @@ import pandas as pd
 import requests
 import streamlit as st
 
+from flame.assistant.environnement import decrire_environnement, scenario_courant
+from flame.assistant.outils import DECLARATIONS, executer_outil
 from flame.assistant.rag import NB_FICHES, fiches_proches
 from flame.recherche import rechercher
 
@@ -19,11 +23,14 @@ DOSSIER_PROMPTS = Path(__file__).parent / "prompts"
 MODELE = "gemini-3.5-flash"
 URL_GEMINI = "https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent"
 DELAI_MAX_S = 60
+NB_MAX_TOURS_OUTILS = 4  # au-delà, on arrête : Gemini tournerait en rond
 # Gemini appelle « model » ce que la page appelle « assistant ».
 ROLES_GEMINI = {"user": "user", "assistant": "model"}
+SANS_CLE = "The assistant is not connected yet: `LLM_API_KEY` is missing from the Secrets."
+SANS_REPONSE = "I don't know: Gemini returned no answer."
 MESSAGES_ERREUR = {
-    429: "Le quota gratuit de Gemini est atteint pour le moment. Réessayez dans une minute.",
-    503: "Gemini est surchargé en ce moment. Réessayez dans quelques secondes.",
+    429: "Gemini's free quota is used up for now. Please try again in a minute.",
+    503: "Gemini is overloaded right now. Please try again in a few seconds.",
 }
 
 
@@ -78,10 +85,12 @@ def choisir_fiches(question: str, historique: list[dict[str, str]], fiches: pd.D
         return fiches[fiches["id"].isin(trouvees["id"].head(NB_FICHES))]
 
 
-def consigne_systeme(fiches_utiles: pd.DataFrame, toutes_les_fiches: pd.DataFrame) -> str:
-    """Les consignes de `prompts/systeme.md`, la liste de toutes les fiches, puis le détail des fiches utiles."""
+def consigne_systeme(fiches_utiles: pd.DataFrame, toutes_les_fiches: pd.DataFrame, environnement: str = "") -> str:
+    """Les consignes, l'environnement de l'utilisateur, la liste de toutes les fiches, puis les fiches utiles."""
+    bloc_environnement = environnement or "(non précisé : l'utilisateur n'a pas encore choisi d'environnement)"
     return (
         f"{lire_prompt('systeme')}\n\n"
+        f"# L'environnement étudié par l'utilisateur\n\n{bloc_environnement}\n\n"
         f"# Toutes les investigations (id et nom seulement)\n\n{catalogue(toutes_les_fiches)}\n\n"
         f"# Les fiches détaillées utiles à cette question\n\n{fiches_en_texte(fiches_utiles)}"
     )
@@ -97,40 +106,61 @@ def messages_gemini(question: str, historique: list[dict[str, str]]) -> list[dic
     return messages
 
 
-def appeler_gemini(consigne: str, messages: list[dict], cle: str) -> str:
-    """Le texte renvoyé par Gemini. Lève `requests.RequestException` si l'appel échoue."""
+def envoyer(consigne: str, contenus: list[dict], cle: str) -> dict:
+    """Un aller-retour avec Gemini : le contenu de sa réponse (du texte, ou des demandes d'outils)."""
     reponse = requests.post(
         URL_GEMINI.format(modele=MODELE),
         headers={"x-goog-api-key": cle},  # la clé part dans un en-tête, jamais dans l'adresse
-        json={"system_instruction": {"parts": [{"text": consigne}]}, "contents": messages},
+        json={
+            "system_instruction": {"parts": [{"text": consigne}]},
+            "contents": contenus,
+            "tools": [{"functionDeclarations": DECLARATIONS}],
+        },
         timeout=DELAI_MAX_S,
     )
     reponse.raise_for_status()
     candidats = reponse.json().get("candidates") or [{}]
-    parties = candidats[0].get("content", {}).get("parts", [])
-    return "".join(partie.get("text", "") for partie in parties).strip()
+    return candidats[0].get("content") or {}
+
+
+def appeler_gemini(consigne: str, messages: list[dict], cle: str) -> str:
+    """Le texte final de Gemini, après avoir exécuté les outils qu'il demande. Lève `requests.RequestException`."""
+    contenus = list(messages)
+    for _ in range(NB_MAX_TOURS_OUTILS + 1):
+        parties = envoyer(consigne, contenus, cle).get("parts", [])
+        appels = [partie["functionCall"] for partie in parties if "functionCall" in partie]
+        if not appels:
+            return "".join(partie.get("text", "") for partie in parties).strip()
+        # On renvoie à Gemini sa propre demande telle quelle, puis le résultat de chaque outil.
+        contenus.append({"role": "model", "parts": parties})
+        resultats = [
+            {"functionResponse": {"name": appel["name"], "response": executer_outil(appel["name"], appel.get("args"))}}
+            for appel in appels
+        ]
+        contenus.append({"role": "user", "parts": resultats})
+    return ""
 
 
 def message_erreur(erreur: requests.RequestException) -> str:
     """Une phrase simple pour l'utilisateur quand Gemini ne répond pas."""
     if isinstance(erreur, requests.Timeout):
-        return "Gemini met trop de temps à répondre. Réessayez dans quelques secondes."
+        return "Gemini is taking too long to answer. Please try again in a few seconds."
     code = getattr(erreur.response, "status_code", None)
-    return MESSAGES_ERREUR.get(code, f"L'assistant n'a pas pu joindre Gemini (erreur {code or 'réseau'}).")
+    return MESSAGES_ERREUR.get(code, f"The assistant could not reach Gemini (error {code or 'network'}).")
 
 
 def repondre(question: str, historique: list[dict[str, str]], fiches: pd.DataFrame) -> str:
-    """La réponse de l'assistant à `question`, fondée sur `fiches`.
+    """La réponse de l'assistant à `question`, fondée sur `fiches` et sur l'environnement choisi en page 1.
 
     `historique` est la liste des messages précédents : {"role": "user" ou "assistant", "content": texte}.
     """
     cle = cle_api()
     if cle is None:
-        return "L'assistant n'est pas encore branché : il manque `LLM_API_KEY` dans les Secrets."
+        return SANS_CLE
     try:
         fiches_utiles = choisir_fiches(question, historique, fiches, cle)
-        consigne = consigne_systeme(fiches_utiles, fiches)
+        consigne = consigne_systeme(fiches_utiles, fiches, decrire_environnement(scenario_courant()))
         texte = appeler_gemini(consigne, messages_gemini(question, historique), cle)
     except requests.RequestException as erreur:
         return message_erreur(erreur)
-    return texte or "Je ne sais pas : Gemini n'a renvoyé aucune réponse."
+    return texte or SANS_REPONSE

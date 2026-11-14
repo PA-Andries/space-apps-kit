@@ -9,7 +9,7 @@ import pandas as pd
 from flame.commun import INCONNU
 
 # Les critères lus dans la fiche de chaque investigation.
-CRITERES = ["pilier", "type_combustible", "materiel", "nb_tests"]
+CRITERES = ["type_combustible", "materiel", "nb_tests"]
 
 # Les conditions de test chiffrées, lues dans le tableau des tests.
 VARIABLES = ["oxygene_pct", "pression_kpa", "debit_air_cm_s"]

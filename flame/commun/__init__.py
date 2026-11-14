@@ -23,7 +23,7 @@ from flame.commun.donnees import (
     charger_tests,
     donnees_exemple,
 )
-from flame.commun.habitats import HABITAT_PERSONNALISE, conditions_habitat
+from flame.commun.habitats import HABITAT_PERSONNALISE, conditions_habitat, dans_la_plage
 from flame.commun.scenario import get_scenario, set_scenario
 
 __all__ = [
@@ -43,6 +43,7 @@ __all__ = [
     "charger_table_psi",
     "charger_tests",
     "conditions_habitat",
+    "dans_la_plage",
     "donnees_exemple",
     "get_scenario",
     "set_scenario",

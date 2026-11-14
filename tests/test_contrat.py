@@ -149,3 +149,43 @@ def test_les_types_de_combustible_du_scenario():
     from flame.commun import TYPES_COMBUSTIBLE
 
     assert TYPES_COMBUSTIBLE == ["solide", "liquide", "gaz"]
+
+
+def test_dans_la_plage_respecte_les_bornes():
+    from flame.commun import dans_la_plage
+
+    valeurs = pd.Series([18.0, 21.0, 30.0, None])
+    assert list(dans_la_plage(valeurs, (19.0, 23.0))) == [False, True, False, False]
+    assert list(dans_la_plage(valeurs, (30.0, None))) == [False, False, True, False]
+    assert list(dans_la_plage(valeurs, (None, 21.0))) == [True, True, False, False]
+
+
+def test_dans_la_plage_sans_borne_laisse_tout_passer():
+    from flame.commun import dans_la_plage
+
+    assert list(dans_la_plage(pd.Series([21.0, None]), (None, None))) == [True, True]
+
+
+def test_dans_la_plage_ne_compte_pas_une_valeur_illisible():
+    from flame.commun import dans_la_plage
+
+    assert list(dans_la_plage(pd.Series(["21", "inconnu", ""]), (19.0, 23.0))) == [True, False, False]
+
+
+def test_dans_la_plage_compte_comme_le_comparateur():
+    """Les pages Investigations et Compare doivent compter les mêmes tests pour une même plage."""
+    from flame.commun import charger_tests, dans_la_plage
+
+    try:
+        from flame.comparateur.conditions import _dans
+    except ImportError:
+        pytest.skip("le comparateur n'a pas encore sa règle de plage")
+    tests = charger_tests()
+    if tests.empty:
+        pytest.skip("pas de tests dans les données")
+    for colonne, plage in (
+        ("oxygene_pct", (30.0, None)),
+        ("pression_kpa", (None, 70.3)),
+        ("oxygene_pct", (19.0, 23.0)),
+    ):
+        assert dans_la_plage(tests[colonne], plage).equals(_dans(tests[colonne], plage)), (colonne, plage)

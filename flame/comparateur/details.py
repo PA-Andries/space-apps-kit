@@ -114,7 +114,6 @@ def cote_a_cote(
         fiche = fiches[fiches["id"] == identifiant].iloc[0]
         fins = frequents(tests, identifiant, "resultat")
         colonnes[identifiant] = {
-            "pilier": _texte(fiche["pilier"]),
             "type_combustible": _texte(fiche["type_combustible"]),
             **portrait(fiche, tests, ligne_psi(investigations_psi, identifiant)),
             "How tests ended": "; ".join(f"{valeur} ({nombre})" for valeur, nombre in fins) or ABSENT,

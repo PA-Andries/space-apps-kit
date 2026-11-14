@@ -4,6 +4,8 @@ Une plage s'écrit (minimum, maximum) ; `None` veut dire « pas de borne » ou �
 On ne devine jamais : ce que l'énoncé du défi ne donne pas reste `None`, avec la source « inconnu ».
 """
 
+import pandas as pd
+
 from flame.commun.constantes import INCONNU
 
 # Nom d'habitat à utiliser quand l'utilisateur saisit ses propres conditions.
@@ -59,3 +61,22 @@ def conditions_habitat(habitat: str) -> dict:
     """
     conditions = _CONDITIONS.get(habitat, _SANS_VALEUR)
     return {**conditions, "sources": dict(conditions["sources"])}
+
+
+def dans_la_plage(valeurs: pd.Series, plage: tuple) -> pd.Series:
+    """Vrai pour chaque valeur de `valeurs` qui tombe dans `plage`, bornes comprises.
+
+    `plage` s'écrit (minimum, maximum), comme dans le scénario ; `None` veut dire « pas de borne ».
+    Sans aucune borne, tout passe. Dès qu'il y a une borne, une valeur absente ne passe pas :
+    on ne sait pas si elle respecte la plage, donc on ne la compte pas.
+    """
+    mini, maxi = plage
+    if mini is None and maxi is None:
+        return pd.Series(True, index=valeurs.index)
+    nombres = pd.to_numeric(valeurs, errors="coerce")
+    dedans = nombres.notna()
+    if mini is not None:
+        dedans &= nombres >= mini
+    if maxi is not None:
+        dedans &= nombres <= maxi
+    return dedans
