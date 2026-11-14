@@ -34,7 +34,7 @@ These apply to every agent (Claude Code, Codex, Cursor, Copilot, any other) and 
 
 ## How to work in this repo
 
-The event has started and the app is built in this repo (see `DECISIONS.md`). The team are beginners working in French: explain simply, and write code comments, docstrings and identifiers in French (identifiers without accents).
+The event has started and the app is built in this repo (see `DECISIONS.md`). The team are beginners working in French: explain simply, and write code comments and docstrings in French.
 
 - Read `CONTRIBUTING.md` before any edit: it assigns each folder to one role and sets the code rules. `BRIEF_EQUIPE_IA.md` holds the subject, data, pages and schedule.
 - **Keep the contract stable**: column names in `flame/commun/constantes.py` and the functions exported by each folder's `__init__.py`. Propose changes instead of applying them.
