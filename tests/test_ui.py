@@ -180,6 +180,7 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     assert site.session_state["ui_gravity"] == 0.165  # the "Moon · 0.165 g" button
     # Mars: the statement gives no atmosphere, so no bound at all.
     site.button(key="ui_place_Base martienne").click().run()
+    assert site.session_state["ui_gravity"] is None  # Mars has no gravity button; its 0.38 g is kept
     assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
     assert site.slider(key="ui_pressure").value == (0.0, 350.0)
 

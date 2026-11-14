@@ -33,12 +33,14 @@ OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
 # Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
-GRAVITY_CHOICES = {0.0: "0 g", 0.165: "0.165 g", 0.38: "0.38 g", 1.0: "1 g"}
+# Mars (0.38 g) has no button: the Mars base keeps its gravity, with no button selected.
+GRAVITY_CHOICES = {0.0: "0 g", 0.165: "0.165 g", 1.0: "1 g"}
 
 
-def gravity_choice(value: float | None) -> float:
-    """The button closest to a gravity value (0 g when the value is unknown)."""
-    return min(GRAVITY_CHOICES, key=lambda choice: abs(choice - (value or 0.0)))
+def gravity_choice(value: float | None) -> float | None:
+    """The button of a gravity value, or None when it has no button (Mars, 0.38 g)."""
+    value = value or 0.0
+    return next((choice for choice in GRAVITY_CHOICES if abs(choice - value) < 1e-9), None)
 
 
 # This is the home page: no "Home" button here; after a click on Home elsewhere, the sidebar folds away.
@@ -97,9 +99,9 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     gravity = st.segmented_control(
         "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
     )
-    if gravity is None:  # a click on the chosen button unselects it: keep the environment's gravity
-        gravity = gravity_choice(values["gravite"])
-    st.caption("0 g: spacecraft and station · 0.165 g: Moon · 0.38 g: Mars · 1 g: Earth")
+    if gravity is None:  # no button chosen (or Mars): keep the environment's own gravity
+        gravity = float(values["gravite"] or 0.0)
+    st.caption("0 g: spacecraft and station · 0.165 g: Moon and rover · 1 g: Earth")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
     air_flow = from_slider(
