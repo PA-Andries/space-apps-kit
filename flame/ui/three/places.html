@@ -395,7 +395,7 @@
         pivot.add(build());
         scene.add(pivot);
         const chosen = i === settings.chosen;
-        const size = { planet: 1.45, orbit: 0.8, limb: 0.6, float: 0.95 }[kind] * (chosen ? 1.15 : 1);
+        const size = { planet: 1.45, orbit: 0.8, limb: 0.45, float: 0.95 }[kind] * (chosen ? 1.15 : 1);
         return { name, kind, pivot, chosen, size, zone: settings.zones[i], phase: i * 1.7 };
       });
       const centre = items.find((item) => item.kind === "planet");

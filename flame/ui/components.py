@@ -50,7 +50,7 @@ FIRST_VIEW_ZONES = [
 CENTRE = {"cx": 0.5, "cy": 0.55, "w": 0.7, "h": 0.7}  # the whole planet
 LEFT = {"cx": 0.14, "cy": 0.55, "w": 0.55, "h": 0.5}  # on the orbit, left of the planet
 RIGHT = {"cx": 0.86, "cy": 0.55, "w": 0.55, "h": 0.5}  # on the orbit, right of the planet
-TOP = {"cx": 0.5, "cy": 0.13, "w": 0.45, "h": 0.24, "label": "right"}  # driving on the top edge
+TOP = {"cx": 0.5, "cy": 0.15, "w": 0.36, "h": 0.2, "label": "right"}  # driving on the top edge
 
 # The three.js drawing of each choice (see `three/places.html`).
 BODY_OBJECTS = {"Terre": "earth_system", "Lune": "moon", "Mars": "mars"}
