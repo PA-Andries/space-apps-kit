@@ -19,6 +19,7 @@ from flame.ui import (
     environment_values,
     fold_sidebar_after_home,
     footer,
+    how_to_use,
     investigation_card,
     label,
     outcomes_card,
@@ -59,6 +60,7 @@ dashboard_header(
     [f"{len(fiches)} NASA investigations", f"{len(tests):,} test rows", "Source: NASA PSI"],
     eyebrow="My environment",
 )
+how_to_use()  # a light cover: how the dashboard works, in four steps (can be folded away)
 
 
 def to_slider(bounds: tuple, scale: tuple) -> tuple:
