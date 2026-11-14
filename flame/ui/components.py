@@ -32,7 +32,7 @@ BODY_NAMES = {"Terre": "Earth & orbit", "Lune": "Moon", "Mars": "Mars"}
 # The three.js drawing of each choice (see `three/places.html`).
 BODY_OBJECTS = {"Terre": "earth_system", "Lune": "moon", "Mars": "mars"}
 # The big planet drawn behind the places once zoomed in.
-BACKDROPS = {"Terre": "earth", "Lune": "moon", "Mars": "mars"}
+BACKDROPS = {"Terre": "earth_ground", "Lune": "moon_ground", "Mars": "mars_ground"}
 PLACE_OBJECTS = {
     EARTH: "earth_lab",
     "Station": "station",
@@ -41,7 +41,7 @@ PLACE_OBJECTS = {
     "Base martienne": "base_mars",
 }
 
-SCENE_HEIGHT = 230
+SCENE_HEIGHT = 300
 
 # The buttons sit on top of the 3D scene and are transparent:
 # you click "on the planet", but the Streamlit button receives the click.

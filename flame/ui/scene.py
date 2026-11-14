@@ -48,7 +48,7 @@ def flame_scene(gravity: float, oxygen: float, height: int = 420) -> None:
 
 
 def places_scene(
-    objects: list[str], chosen: str | None, backdrop: str | None = None, zoom_from: int = -1, height: int = 230
+    objects: list[str], chosen: str | None, backdrop: str | None = None, zoom_from: int = -1, height: int = 300
 ) -> None:
     """Show 3D objects side by side, one column each, the `chosen` one highlighted (see `places_page`)."""
     st.iframe(places_page(objects, chosen, backdrop, zoom_from), height=height)

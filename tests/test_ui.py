@@ -38,8 +38,8 @@ def test_places_scene_highlights_the_chosen_object():
 
 
 def test_places_scene_gets_its_backdrop_and_zoom():
-    page = places_page(["base_mars", "rover_mars"], None, backdrop="mars", zoom_from=2)
-    assert '"backdrop": "mars", "zoomFrom": 2' in page
+    page = places_page(["base_moon", "rover_moon"], None, backdrop="moon_ground", zoom_from=1)
+    assert '"backdrop": "moon_ground", "zoomFrom": 1' in page
 
 
 def test_every_object_has_a_drawing():
@@ -48,7 +48,7 @@ def test_every_object_has_a_drawing():
     scene = (THREE_DIR / "places.html").read_text(encoding="utf-8")
     from flame.ui.components import BACKDROPS
 
-    objects = [*BODY_OBJECTS.values(), *PLACE_OBJECTS.values(), *BACKDROPS.values(), "rover_moon", "rover_mars"]
+    objects = [*BODY_OBJECTS.values(), *PLACE_OBJECTS.values(), *BACKDROPS.values(), "rover_moon"]
     for name in objects:
         assert re.search(rf"\b{name}:", scene), name
 
