@@ -51,7 +51,6 @@ TABLES_PSI = [
     "hardware_families",
     "relations",
     "habitats",
-    "categories",
     "relevance",
     "raw_data_map",
     "publications",
