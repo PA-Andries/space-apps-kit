@@ -76,6 +76,7 @@ def test_label_translates_contract_values():
         assert label(value) != value
     assert label("Prévenir;Éteindre") == "Prevent, Extinguish"
     assert label("missing value") == "missing value"
+    assert label("solide (modèle)") == "solid (model)"
 
 
 def test_every_place_has_its_conditions():

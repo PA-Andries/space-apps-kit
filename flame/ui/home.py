@@ -45,10 +45,14 @@ def dashboard_header(title: str, subtitle: str, chips: list[str]) -> None:
     )
 
 
-def card_title(title: str, subtitle: str = "") -> None:
-    """The title line of a dashboard card, with an optional grey hint."""
+def card_title(title: str, subtitle: str = "", tag: str = "") -> None:
+    """The title line of a dashboard card, with an optional grey hint.
+
+    `tag`: a small orange line above the title, for example the challenge objective the card answers.
+    """
+    above = f'<span class="ff-tag">{escape(tag)}</span>' if tag else ""
     below = f"<p>{escape(subtitle)}</p>" if subtitle else ""
-    st.html(f'<div class="ff-card-title"><h3>{escape(title)}</h3>{below}</div>')
+    st.html(f'<div class="ff-card-title">{above}<h3>{escape(title)}</h3>{below}</div>')
 
 
 def stat_tiles(tiles: list[tuple[str | None, str]], note: str = "", compact: bool = False) -> None:

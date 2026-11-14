@@ -121,6 +121,8 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
   background: #fff; border: none !important; border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem;
   box-shadow: 0 2px 14px rgba(29, 29, 31, 0.05);
 }}
+.ff-tag {{ display: block; color: {FLAME}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 0.15rem; }}
 .ff-card-title h3 {{ font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; padding: 0; }}
 .ff-card-title p {{ color: {MUTED}; font-size: 0.88rem; margin: 0.15rem 0 0.2rem; }}
 .ff-compact.ff-stats {{ gap: 0.6rem; margin: 0.2rem 0 0.4rem; }}
