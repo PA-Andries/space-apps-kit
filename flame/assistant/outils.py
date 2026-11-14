@@ -6,7 +6,7 @@ Les résultats ne contiennent que des types JSON simples (str, int, float, None,
 
 import pandas as pd
 
-from flame.commun import HABITATS, charger_fiches, charger_table_psi, charger_tests
+from flame.commun import HABITATS, charger_fiches, charger_table_psi, charger_tests, dans_la_plage
 
 # Les habitats du contrat, tels que les nomme `data/psi/relevance.csv`.
 IDS_HABITATS = {
@@ -32,7 +32,7 @@ def filtrer_par_habitat(habitat: str) -> dict:
     if table.empty:
         return {"habitat": habitat, "investigations": [], "note": "La table de pertinence n'est pas disponible."}
     lignes = table[table["habitat_id"] == IDS_HABITATS[habitat]]
-    # L'ancienne table avait une ligne par pilier : on garde la meilleure ligne de chaque investigation.
+    # Une ligne par investigation ; on dédoublonne par sécurité, en gardant le meilleur score.
     meilleures = lignes.sort_values("score", ascending=False).drop_duplicates("investigation_id")
     return {
         "habitat": habitat,
@@ -61,26 +61,30 @@ def compter_tests(
     tests = charger_tests()
     types = charger_fiches().set_index("id")["type_combustible"]
     type_du_test = tests["investigation_id"].map(types).fillna("").astype(str)
-    garde = pd.Series(True, index=tests.index)
-    # Une comparaison avec une case vide donne False : un test sans valeur notée n'est pas compté.
-    for colonne, borne, plus_grand in [
-        ("oxygene_pct", oxygene_min_pct, True),
-        ("oxygene_pct", oxygene_max_pct, False),
-        ("pression_kpa", pression_min_kpa, True),
-        ("pression_kpa", pression_max_kpa, False),
-    ]:
-        if borne is not None:
-            garde &= tests[colonne] >= borne if plus_grand else tests[colonne] <= borne
+    # Même règle que les pages My environment, Data et Compare (`flame.comparateur`) : l'oxygène doit être noté ;
+    # la pression n'est vérifiée que lorsqu'elle est notée, et on dit combien de tests l'ont.
+    plage_pression = (pression_min_kpa, pression_max_kpa)
+    garde = dans_la_plage(tests["oxygene_pct"], (oxygene_min_pct, oxygene_max_pct))
+    pression_notee = tests["pression_kpa"].notna()
+    garde &= ~pression_notee | dans_la_plage(tests["pression_kpa"], plage_pression)
     if types_combustible:
         garde &= type_du_test.apply(lambda valeur: any(valeur.startswith(t) for t in types_combustible))
-    par_investigation = tests[garde].groupby("investigation_id").size().sort_values(ascending=False)
-    return {
+    retenus = tests[garde]
+    par_investigation = retenus.groupby("investigation_id").size().sort_values(ascending=False)
+    resultat = {
         "nb_tests": int(garde.sum()),
         "nb_tests_au_total": int(len(tests)),
         "investigations": [{"id": str(i), "nb_tests": int(n)} for i, n in par_investigation.items()],
-        "note": "Un test sans valeur notée pour une condition demandée n'est pas compté. "
+        "note": "Un test sans oxygène noté n'est pas compté quand une plage d'oxygène est demandée. "
         "Aucun test n'a été fait en gravité partielle (Lune, Mars).",
     }
+    if plage_pression != (None, None):
+        resultat["nb_tests_avec_pression_notee"] = int((garde & pression_notee).sum())
+        resultat["note"] += (
+            " Un test dont la pression n'est pas notée est compté : donne les deux chiffres, "
+            "le total et ceux dont la pression est notée."
+        )
+    return resultat
 
 
 OUTILS = {"filtrer_par_habitat": filtrer_par_habitat, "compter_tests": compter_tests}
