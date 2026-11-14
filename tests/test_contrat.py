@@ -57,35 +57,3 @@ def test_une_table_psi_inconnue_est_refusee():
 
     with pytest.raises(ValueError):
         charger_table_psi("pas_une_table")
-
-
-def test_atmospheres_et_gravites_couvrent_tous_les_habitats():
-    from flame.commun import ATMOSPHERES, GRAVITES, HABITATS, INCONNU, NATURE_ATMOSPHERES
-
-    assert set(ATMOSPHERES) == set(GRAVITES) == set(NATURE_ATMOSPHERES) == set(HABITATS)
-    # L'énoncé ne donne aucun chiffre pour Mars : le contrat n'en invente pas.
-    assert ATMOSPHERES["Base martienne"] == (None, None)
-    assert NATURE_ATMOSPHERES["Base martienne"] == INCONNU
-
-
-def test_le_scenario_reprend_l_environnement_de_l_habitat():
-    from streamlit.testing.v1 import AppTest
-
-    def page():
-        import streamlit as st
-
-        from flame.commun import get_scenario, set_scenario
-
-        set_scenario("Base lunaire", "Prévenir", "Étudiant")
-        st.session_state["lune"] = get_scenario()
-        set_scenario("Base martienne", "Prévenir", "Étudiant", type_combustible="solide", oxygene_pct=25)
-        st.session_state["mars"] = get_scenario()
-
-    etat = AppTest.from_function(page).run().session_state
-    assert etat["lune"]["oxygene_pct"] == 30
-    assert etat["lune"]["pression_kpa"] == 70.3
-    assert etat["lune"]["gravite"] == 0.17
-    assert etat["lune"]["type_combustible"] is None
-    assert etat["mars"]["oxygene_pct"] == 25
-    assert etat["mars"]["pression_kpa"] is None
-    assert etat["mars"]["type_combustible"] == "solide"

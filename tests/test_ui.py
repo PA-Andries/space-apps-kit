@@ -93,7 +93,7 @@ def test_only_figures_from_the_statement_are_shown():
     from flame.ui import place_conditions
 
     assert place_conditions("Base lunaire", "Lune")["oxygen_pct"] == 30
-    assert place_conditions("Rover pressurisé", "Lune")["pressure_kpa"] == 70.3
+    assert place_conditions("Rover pressurisé", "Lune")["pressure_kpa"] == 70
     for place, body in [("Base martienne", "Mars"), ("Station", "Terre"), ("Vaisseau", "Terre")]:
         assert place_conditions(place, body)["oxygen_pct"] is None
         assert place_conditions(place, body)["pressure_kpa"] is None

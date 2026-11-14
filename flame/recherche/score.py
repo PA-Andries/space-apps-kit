@@ -48,8 +48,6 @@ def _points_oxygene(fiche: pd.Series, scenario: dict[str, str] | None) -> tuple[
     if habitat not in ATMOSPHERES:
         return 0, "No habitat chosen: criterion not counted."
     oxygene_habitat_pct = ATMOSPHERES[habitat][0]
-    if oxygene_habitat_pct is None:
-        return 0, f"The oxygen level of {habitat} is unknown: criterion not counted."
     oxygene_min_pct, oxygene_max_pct = _nombre(fiche.get("oxygene_min")), _nombre(fiche.get("oxygene_max"))
     if oxygene_min_pct is None or oxygene_max_pct is None:
         return 0, "Tested oxygen range unknown."

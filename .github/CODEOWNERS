@@ -17,13 +17,11 @@
 # D. Comparateur : Hugo
 /flame/comparateur/        @hugovlst
 /pages/comparateur.py      @hugovlst
-/pages/donnees.py          @hugovlst
 /tests/test_comparateur.py @hugovlst
 
 # E. Assistant : Ethan
 /flame/assistant/          @Ethan-111
 /pages/assistant.py        @Ethan-111
-/pages/equipements.py      @Ethan-111
 /tests/test_assistant.py   @Ethan-111
 
 # F. Interface et 3D : Mathéo

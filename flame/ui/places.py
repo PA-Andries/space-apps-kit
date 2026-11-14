@@ -19,7 +19,7 @@ PLACES_BY_BODY = {
 }
 
 # Atmospheres attributed to the challenge statement by BRIEF_EQUIPE_IA.md: Earth 21 % / 14.7 psi (about
-# 101 kPa); "lunar base and pressurized rovers" 30 % / 10.2 psi (70.3 kPa, as in the contract ATMOSPHERES).
+# 101 kPa); "lunar base and pressurized rovers" 30 % / 10.2 psi (about 70 kPa, as in the contract ATMOSPHERES).
 # For any other place the statement gives nothing: the site shows no figure rather than a guess.
 STATEMENT_ATMOSPHERES = {
     EARTH: (21, 101),

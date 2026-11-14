@@ -23,9 +23,8 @@ st.title("Search")
 fiches = charger_fiches()
 scenario = get_scenario()
 oxygene_pct, pression_kpa = ATMOSPHERES[scenario["habitat"]]
-atmosphere = "atmosphere unknown" if oxygene_pct is None else f"{oxygene_pct} % oxygen, {pression_kpa} kPa"
 st.caption(
-    f"Ranked for: {scenario['habitat']} ({atmosphere}) · "
+    f"Ranked for: {scenario['habitat']} ({oxygene_pct} % oxygen, {pression_kpa} kPa) · "
     f"pillar: {scenario['pilier']}. Change the scenario in the sidebar."
 )
 
