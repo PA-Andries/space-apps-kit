@@ -1,0 +1,7 @@
+#!/bin/sh
+# Règles du dépôt (AGENTS.md, CONTRIBUTING.md). La logique est dans src/space_apps_kit/regles.py.
+if ! command -v uv >/dev/null 2>&1; then
+  echo "regles : uv introuvable ici, vérification sautée. Lancez 'uv run verifier' dans un terminal avant d'envoyer." >&2
+  exit 0
+fi
+exec uv run --quiet python -m space_apps_kit.regles commit-msg "$@"

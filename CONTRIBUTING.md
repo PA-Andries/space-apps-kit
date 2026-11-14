@@ -20,7 +20,7 @@ uv run verifier
 
 - **`uv sync`** installe le même environnement pour tout le monde. À relancer après chaque Pull.
 - **`uv run streamlit run app.py`** ouvre le site sur votre ordinateur.
-- **`uv run verifier`** met le code en forme, puis lance les vérifications du CI. À lancer avant chaque envoi.
+- **`uv run verifier`** met le code en forme, puis lance les vérifications. À lancer avant chaque envoi. Au premier lancement, il active aussi les garde-fous du dépôt (voir « Les vérifications »).
 
 Tant que `data/investigations.csv` n'existe pas, le site tourne sur les données fictives de `data/exemples/` et l'affiche en haut de chaque page. Chacun peut donc avancer sans attendre les vraies données.
 
@@ -57,11 +57,11 @@ Avec GitHub Desktop :
 3. **Coder** dans ses fichiers, en regardant le résultat avec `uv run streamlit run app.py`.
 4. **Vérifier :** `uv run verifier` doit finir par « Tout est bon ».
 5. **Envoyer :** « Commit », « Push », puis « Create Pull Request ».
-6. **Fusionner :** quand le CI est vert, « Squash and merge », puis supprimer la branche.
+6. **Fusionner :** « Squash and merge », puis supprimer la branche.
 
 Qui fusionne :
 
-- **La PR ne touche que vos fichiers :** vous la fusionnez vous-même dès que le CI est vert.
+- **La PR ne touche que vos fichiers :** vous la fusionnez vous-même, une fois `uv run verifier` passé.
 - **La PR touche les fichiers de quelqu'un d'autre :** elle attend son accord.
 - **La PR touche un fichier partagé :** elle attend le rôle A.
 
@@ -69,17 +69,30 @@ Deux moments sans fusion, repris du planning : la nuit entre 2h et 8h, et après
 
 Si GitHub Desktop affiche « conflict », ne cliquez sur rien et appelez le rôle A.
 
-## Le CI
+## Les vérifications
 
-À chaque PR et à chaque fusion dans `main`, GitHub lance `.github/workflows/ci.yml`, qui vérifie trois choses :
+Il n'y a pas de CI sur GitHub. Les vérifications tournent sur l'ordinateur de chacun, avec `uv run verifier` :
 
 | Vérification | Commande | Ce qu'elle attrape |
 | --- | --- | --- |
+| Mise en forme | `uv run ruff format .` | Code non formaté (corrigé tout seul) |
 | Règles de code | `uv run ruff check .` | Imports inutiles, variables oubliées, erreurs probables |
-| Mise en forme | `uv run ruff format --check .` | Code non formaté |
-| Tests | `uv run pytest` | Une page qui plante, un CSV qui ne respecte pas le contrat, une fonction cassée |
+| Tests | `uv run pytest` | Une page qui plante, un CSV hors contrat, une fonction cassée, un import interdit (règles 4 à 6) |
 
-`uv run verifier` lance les mêmes vérifications sur votre ordinateur et corrige seul la mise en forme. Si le CI de GitHub est indisponible, c'est lui qui fait foi.
+Le premier `uv run verifier` active aussi des garde-fous (les « hooks » du dossier `.githooks/`). Ils valent pour tout le monde, humains et agents IA, et refusent :
+
+| Moment | Ce qui est refusé | Quoi faire |
+| --- | --- | --- |
+| Commit | Un commit sur `main` | Créer une branche `dossier/sujet` |
+| Commit | Un fichier de secrets, une clé d'API, un fichier de plus de 5 Mo | Le retirer du commit |
+| Commit | Un fichier d'un autre rôle (le rôle se lit dans le nom de la branche) | Le retirer, ou ajouter `Accord: <prénom du propriétaire>` au message s'il est d'accord |
+| Envoi (Push) | Un envoi direct sur `main` | Envoyer sa branche et ouvrir une PR |
+| Envoi (Push) | Des vérifications qui échouent | `uv run verifier`, corriger, commiter |
+| Envoi (Push) | Un agent IA sans CLAIM dans l'issue n°2 | Poster le CLAIM |
+
+Le nom de la branche donne le rôle : `integration/`, `commun/`, `pitch/` (A), `pipeline/`, `donnees/`, `data/` (B), `recherche/` (C), `comparateur/` (D), `assistant/` (E), `ui/`, `interface/` (F). Avec un autre nom, on ajoute une ligne `Role: C` au message de commit.
+
+On ne contourne pas un garde-fou (`--no-verify`). S'il bloque à tort, on appelle le rôle A.
 
 ## Les règles de code
 
@@ -104,6 +117,6 @@ Si GitHub Desktop affiche « conflict », ne cliquez sur rien et appelez le rôl
 ## L'IA dans le projet
 
 - **Déclarer l'usage.** Chaque PR dit quel outil d'IA a servi et pour quoi : le règlement demande cette déclaration, et le rôle A la compile à la fin.
-- **Donner le contexte à son assistant.** `BRIEF_EQUIPE_IA.md` et ce fichier, pour qu'il respecte vos dossiers et le contrat.
-- **Coordonner les agents.** Un agent qui modifie le dépôt l'annonce dans l'[issue n°2 « com inter agents »](https://github.com/PA-Andries/space-apps-kit/issues/2) : CLAIM avant de commencer, RELEASE à la fin.
+- **Donner le contexte à son assistant.** `AGENTS.md` (les règles des agents, lues automatiquement par Claude Code et Codex), `BRIEF_EQUIPE_IA.md` et ce fichier, pour qu'il respecte vos dossiers et le contrat.
+- **Coordonner les agents.** Un agent qui modifie le dépôt l'annonce dans l'[issue n°2 « com inter agents »](https://github.com/PA-Andries/space-apps-kit/issues/2) : CLAIM avant de commencer, RELEASE à la fin. Sans CLAIM, son envoi est refusé.
 - **Signer honnêtement.** Vous commitez depuis votre compte ; l'IA est co-autrice : `Co-authored-by: Claude <noreply@anthropic.com>`.
