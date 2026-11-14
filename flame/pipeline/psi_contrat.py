@@ -1,5 +1,7 @@
 """Traduit le jeu de données PSI vers les fichiers que le site lit : `data/investigations.csv` et `data/tests.csv`.
 
+Copie aussi les tables complètes du jeu de données dans `data/psi/` (décrites dans `flame/pipeline/PSI_DATASET.md`).
+
 À lancer après `psi_telecharger` : `uv run python -m flame.pipeline.psi_contrat`
 
 Rien n'est inventé : une valeur absente de PSI reste vide. Choix de traduction, à connaître :
@@ -15,6 +17,7 @@ Rien n'est inventé : une valeur absente de PSI reste vide. Choix de traduction,
 """
 
 import argparse
+import shutil
 import sys
 from pathlib import Path
 
@@ -24,6 +27,22 @@ from flame.commun.constantes import ATMOSPHERES, COLONNES_FICHES, COLONNES_TESTS
 
 DOSSIER_DATA = Path(__file__).resolve().parents[2] / "data"
 DOSSIER_PSI = DOSSIER_DATA / "raw" / "psi_dataset"
+# Copie complète des tables PSI qui part sur git, pour les pages qui en ont besoin (liens, matériel, capteurs...).
+DOSSIER_TABLES_PSI = DOSSIER_DATA / "psi"
+TABLES_PSI = [
+    "investigations",
+    "tests",
+    "measurements",
+    "hardware_families",
+    "relations",
+    "habitats",
+    "categories",
+    "relevance",
+    "raw_data_map",
+    "publications",
+    "documents",
+    "resources",
+]
 KPA_PAR_ATM = 101.325
 # Un essai à 21,5 % d'oxygène compte pour un habitat à 21 % : écart toléré, en points de pourcentage.
 TOLERANCE_OXYGENE_PCT = 1.0
@@ -174,6 +193,9 @@ def main() -> None:
     tests = lignes_de_tests_du_contrat(psi["tests"])
     fiches.to_csv(fichier_fiches, index=False)
     tests.to_csv(DOSSIER_DATA / "tests.csv", index=False)
+    DOSSIER_TABLES_PSI.mkdir(exist_ok=True)
+    for nom in TABLES_PSI:
+        shutil.copyfile(dossier_psi / f"{nom}.csv", DOSSIER_TABLES_PSI / f"{nom}.csv")
     validees = fiches["verifie_par"].notna().sum()
     sys.stdout.write(f"{len(fiches)} fiches ({validees} validées) et {len(tests)} tests écrits dans {DOSSIER_DATA}\n")
 

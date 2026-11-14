@@ -1,0 +1,11 @@
+kind,title,url,note
+data,PSI Data Repository: Combustion Science,https://psi.nasa.gov/physci/repo/search,Source of the data the app must be based on.
+reference,NASA Combustion Science,https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/,Basic information about most combustion investigations.
+reference,A Researcher's Guide to ISS Combustion Science (2015),https://www.nasa.gov/missions/station/a-researchers-guide-to-combustion-science/,50+ page review of ISS combustion research.
+video,NASA ScienceCasts: The Power of Studying Combustion on the ISS (2018),https://www.youtube.com/watch?v=W1oXykoz9zg,3.6-minute introduction.
+incident,Apollo 1,https://sma.nasa.gov/sma-disciplines/accllp/apollo-1,1967 pre-launch test fire in an oxygen-filled cabin; crew lost.
+incident,Apollo 13,https://sma.nasa.gov/sma-disciplines/accllp/apollo-13,1970 oxygen tank explosion on the way to the Moon.
+incident,Fire aboard Mir (1997),https://www.nasa.gov/history/25-years-ago-fire-aboard-space-station-mir/,Oxygen generator fire on the Mir space station.
+earth_benefit,Fireman's Air Tanks,https://spinoff.nasa.gov/node/9582,1970s spacesuit technology adapted to firefighter breathing gear.
+earth_benefit,Fire Detector,https://spinoff.nasa.gov/node/9407,1970s shuttle smoke detector that tells smoke from dust; used in mining.
+earth_benefit,New Technology for the Fire Attire,https://spinoff.nasa.gov/node/9918,1980s spacesuit technology applied to firefighter clothing.

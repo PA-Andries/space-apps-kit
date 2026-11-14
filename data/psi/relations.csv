@@ -1,0 +1,33 @@
+from_id,to_id,relation,source
+PSI-22,PSI-23,related to,PSI 'Related Investigations' field
+PSI-25,PSI-26,related to,PSI 'Related Investigations' field
+PSI-26,PSI-25,related to,PSI 'Related Investigations' field
+PSI-26,PSI-107,related to,PSI 'Related Investigations' field
+PSI-39,PSI-69,related to,PSI 'Related Investigations' field
+PSI-47,PSI-102,related to,PSI 'Related Investigations' field
+PSI-60,PSI-107,reuses data from,PSI 'Related Investigations' field
+PSI-62,PSI-25,reuses data from,PSI 'Related Investigations' field
+PSI-62,PSI-26,reuses data from,PSI 'Related Investigations' field
+PSI-68,PSI-69,related to,PSI 'Related Investigations' field
+PSI-69,PSI-68,related to,PSI 'Related Investigations' field
+PSI-69,PSI-39,related to,PSI 'Related Investigations' field
+PSI-98,PSI-99,related to,PSI 'Related Investigations' field
+PSI-98,PSI-100,related to,PSI 'Related Investigations' field
+PSI-98,PSI-26,related to,PSI 'Related Investigations' field
+PSI-99,PSI-98,related to,PSI 'Related Investigations' field
+PSI-99,PSI-100,related to,PSI 'Related Investigations' field
+PSI-100,PSI-99,related to,PSI 'Related Investigations' field
+PSI-100,PSI-98,related to,PSI 'Related Investigations' field
+PSI-101,PSI-102,related to,PSI 'Related Investigations' field
+PSI-102,PSI-101,related to,PSI 'Related Investigations' field
+PSI-106,PSI-107,related to,PSI 'Related Investigations' field
+PSI-107,PSI-106,related to,PSI 'Related Investigations' field
+PSI-115,PSI-102,reuses data from,PSI 'Related Investigations' field
+PSI-117,PSI-69,reuses data from,PSI 'Related Investigations' field
+PSI-117,PSI-142,reuses data from,PSI 'Related Investigations' field
+PSI-142,PSI-69,reuses data from,PSI 'Related Investigations' field
+PSI-47,PSI-102,shared instrument (smoke detector used for dust),statement
+PSI-47,PSI-101,shared instrument (smoke detector used for dust),statement
+PSI-22,partial gravity,mimics partial gravity with an electric field,statement
+PSI-159,high oxygen,highest-oxygen microgravity tests (up to 85% O2),statement
+PSI-20,materials flammability,gas burner emulating material flammability in still air,statement
