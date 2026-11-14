@@ -19,8 +19,10 @@ PLACES_BY_BODY = {
 
 # Earth: figures from the challenge statement (21 % oxygen, 14.7 psi, about 101 kPa).
 EARTH_ATMOSPHERE = (21, 101)
-# Atmospheres given by the statement. The others are team assumptions (flame/commun/constantes.py).
-STATEMENT_PLACES = {EARTH, "Base lunaire", "Rover pressurisé"}
+# Atmospheres attributed to the challenge statement by BRIEF_EQUIPE_IA.md, as (place, body):
+# Earth 21 % / 14.7 psi; "lunar base and pressurized rovers" 30 % / 10.2 psi. The statement gives
+# nothing for Mars, so a rover on Mars, like the Mars base, shows a team assumption.
+STATEMENT_PLACES = {(EARTH, "Terre"), ("Base lunaire", "Lune"), ("Rover pressurisé", "Lune")}
 
 # Gravity as a fraction of Earth's, for the 3D illustration only.
 # Moon 0.17 and Mars 0.38: usual physical values. In orbit (station, spacecraft): microgravity.
@@ -56,7 +58,7 @@ def place_conditions(place: str, body: str) -> dict:
         "oxygen_pct": oxygen_pct,
         "pressure_kpa": pressure_kpa,
         "gravity": 0.0 if place in ORBIT_PLACES else BODY_GRAVITY[body],
-        "from_statement": place in STATEMENT_PLACES,
+        "from_statement": (place, body) in STATEMENT_PLACES,
     }
 
 

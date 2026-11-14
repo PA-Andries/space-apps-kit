@@ -82,6 +82,16 @@ def test_every_place_has_its_conditions():
     assert place_conditions("Rover pressurisé", "Lune")["gravity"] == 0.17
 
 
+def test_only_lunar_and_earth_atmospheres_come_from_the_statement():
+    from flame.ui import place_conditions
+
+    assert place_conditions("Rover pressurisé", "Lune")["from_statement"] is True
+    assert place_conditions("Base lunaire", "Lune")["from_statement"] is True
+    assert place_conditions("Rover pressurisé", "Mars")["from_statement"] is False
+    assert place_conditions("Base martienne", "Mars")["from_statement"] is False
+    assert place_conditions("Station", "Terre")["from_statement"] is False
+
+
 def test_the_rover_keeps_its_body():
     from flame.ui.places import body_of
 
