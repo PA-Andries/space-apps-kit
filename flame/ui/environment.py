@@ -1,28 +1,23 @@
 """The user's environment (page 1): its conditions with their sources, read from and written to the scenario.
 
-Lot A (PR #28) gives `conditions_habitat(habitat)` and an 8-key `get_scenario()` / `set_scenario(**keys)`.
-Until it is on main, `conditions` uses a copy of its table and only habitat and profile reach the scenario.
+The scenario and the habitats' conditions come from `flame.commun` (lot A): `get_scenario()`,
+`set_scenario(**keys)` and `conditions_habitat(habitat)`. Only Earth, the reference, is described here.
 """
 
-import contextlib
-
-import flame.commun as commun
-from flame.commun import get_scenario
+from flame.commun import conditions_habitat, get_scenario, set_scenario
 from flame.ui.labels import label
 
 EARTH = "Terre"
 # The environment keys of the extended scenario (lot A), written by page 1.
 ENVIRONMENT_KEYS = ("oxygene_pct", "pression_kpa", "gravite", "type_combustible", "debit_air_cm_s")
 
-# Copy of the lot A table (`flame/commun/habitats.py` in PR #28), used until `conditions_habitat` is on main.
-# Ranges are (min, max); None = no bound. Earth is the reference: 21 % and 14.7 psi from the statement.
-FALLBACK_CONDITIONS = {
-    "Vaisseau": ((19.0, 23.0), (90.0, 110.0), 0.0, "à sourcer", "à sourcer"),
-    "Station": ((19.0, 23.0), (90.0, 110.0), 0.0, "à sourcer", "à sourcer"),
-    "Base lunaire": ((30.0, None), (None, 70.3), 0.165, "énoncé", "à sourcer"),
-    "Rover pressurisé": ((30.0, None), (None, 70.3), 0.165, "énoncé", "à sourcer"),
-    "Base martienne": ((None, None), (None, None), 0.38, "inconnu", "à sourcer"),
-    EARTH: ((19.0, 23.0), (90.0, 110.0), 1.0, "énoncé", "énoncé"),
+# Earth is not a crew environment of the contract: it is the reference, 21 % and 14.7 psi from the statement,
+# with the team's tolerance (as for the station in `conditions_habitat`).
+EARTH_CONDITIONS = {
+    "oxygene_pct": (19.0, 23.0),
+    "pression_kpa": (90.0, 110.0),
+    "gravite": 1.0,
+    "sources": {"oxygene_pct": "énoncé", "pression_kpa": "énoncé", "gravite": "énoncé"},
 }
 SOURCE_NAMES = {"énoncé": "statement", "à sourcer": "to be sourced", "inconnu": "unknown"}
 
@@ -32,22 +27,13 @@ def conditions(place: str) -> dict:
 
     {"oxygene_pct": (min, max), "pression_kpa": (min, max), "gravite": g, "sources": {key: source}}
     """
-    from_lot_a = getattr(commun, "conditions_habitat", None)
-    if from_lot_a is not None and place != EARTH:
-        return from_lot_a(place)
-    oxygen, pressure, gravity, atmosphere_source, gravity_source = FALLBACK_CONDITIONS[place]
-    return {
-        "oxygene_pct": oxygen,
-        "pression_kpa": pressure,
-        "gravite": gravity,
-        "sources": {"oxygene_pct": atmosphere_source, "pression_kpa": atmosphere_source, "gravite": gravity_source},
-    }
+    return EARTH_CONDITIONS if place == EARTH else conditions_habitat(place)
 
 
 def environment_values(place: str) -> dict:
     """The environment of `place` as the scenario holds it: what the user typed, else the habitat's values."""
     scenario = get_scenario()
-    if place != EARTH and scenario.get("habitat") == place and "oxygene_pct" in scenario:
+    if place != EARTH and scenario["habitat"] == place:
         return {key: scenario[key] for key in ENVIRONMENT_KEYS}
     known = conditions(place)
     return {
@@ -60,10 +46,8 @@ def environment_values(place: str) -> dict:
 
 
 def save_environment(**keys) -> None:
-    """Write the environment of page 1 in the scenario, for every page (`set_scenario(**keys)`, lot A)."""
-    # Before lot A is on main, set_scenario only takes habitat, pillar and profile: the top bar writes those.
-    with contextlib.suppress(TypeError):
-        commun.set_scenario(**keys)
+    """Write the environment of page 1 in the scenario, for every page."""
+    set_scenario(**keys)
 
 
 def source_name(source: str) -> str:
