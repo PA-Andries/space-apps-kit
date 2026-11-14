@@ -17,15 +17,17 @@ from flame.comparateur import (
     carte,
     comparables,
     cote_a_cote,
+    decrire_environnement,
     explication_carte,
     frequents,
     ligne_psi,
     mesures,
     plages,
+    plages_du_scenario,
     portrait,
     resume,
 )
-from flame.ui import label, place_conditions
+from flame.ui import label
 
 LIBELLES = {
     "same": "Same?",
@@ -144,19 +146,17 @@ for colonne, identifiant in zip(st.columns(len(ids)), ids, strict=True):
                 st.write(fiche["objectif"])
         st.link_button("View on PSI", fiche["source_psi"], key=f"comparateur_psi_{identifiant}")
 
-# L'atmosphère de l'habitat n'est utilisée que si l'énoncé la donne (le corps céleste ne sert qu'à la gravité).
-habitat = get_scenario()["habitat"]
-conditions = place_conditions(habitat, "Terre")
-oxygene_habitat, pression_habitat = conditions["oxygen_pct"], conditions["pressure_kpa"]
+# Les conditions sont situées par rapport aux plages de l'environnement choisi (le scénario), et plus par
+# rapport à une atmosphère unique par habitat. Un environnement sans plage connue (Mars) ne donne aucun chiffre.
+scenario = get_scenario()
+environnement = plages_du_scenario(scenario)
 
 with st.container(border=True):
     st.markdown("#### What stands out")
-    themes = resume(fiches, tests, ids, oxygene_habitat, label(habitat), relations, investigations_psi)
+    themes = resume(fiches, tests, ids, relations=relations, investigations_psi=investigations_psi, scenario=scenario)
     for theme, phrases in themes.items():
         st.markdown(f"**{theme}**")
         liste(phrases, "")
-    if oxygene_habitat is None:
-        st.caption(f"The challenge statement gives no atmosphere for the {label(habitat)}: nothing is assumed here.")
 
 onglet_tableau, onglet_conditions, onglet_combustibles, onglet_mesures = st.tabs(
     ["Side by side", "Test conditions", "Fuels and results", "Measurements"]
@@ -185,11 +185,16 @@ with onglet_conditions:
             hover_data=["test_id", "combustible"],
         )
         legende = f"Each point is one row of NASA's test tables ({len(lignes)} rows)."
-        if oxygene_habitat is not None:
-            figure.add_vline(x=oxygene_habitat, line_dash="dash", annotation_text=f"{label(habitat)} oxygen")
-            if axe_y == "pression_kpa":
-                figure.add_hline(y=pression_habitat, line_dash="dash", annotation_text=f"{label(habitat)} pressure")
-            legende += f" Dashed lines: the {label(habitat)} atmosphere given by the challenge statement."
+        # Les pointillés marquent les bornes de l'environnement, quand il en donne.
+        for borne in environnement["oxygene_pct"]:
+            if borne is not None:
+                figure.add_vline(x=borne, line_dash="dash", annotation_text=f"oxygen {borne:g} %")
+        if axe_y == "pression_kpa":
+            for borne in environnement["pression_kpa"]:
+                if borne is not None:
+                    figure.add_hline(y=borne, line_dash="dash", annotation_text=f"pressure {borne:g} kPa")
+        if decrire_environnement(scenario):
+            legende += f" Dashed lines: the limits of your environment ({decrire_environnement(scenario)})."
         st.plotly_chart(figure, key="comparateur_carte")
         st.caption(legende)
     st.markdown("**Range tested for each condition**")
