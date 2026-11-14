@@ -200,6 +200,15 @@ def test_a_typed_value_stays_while_the_habitat_does_not_change():
     assert site.slider(key="ui_oxygen").value == (19.0, 23.0)  # a new habitat brings its own values
 
 
+def test_a_typed_value_survives_a_visit_to_another_page():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    assert site.session_state["scenario_oxygene_pct"] == (25.0, None)  # written in the scenario (lot A)
+    site.switch_page("pages/comparateur.py").run()
+    site.switch_page("pages/accueil.py").run()
+    assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
+
+
 def test_analyse_shows_the_three_most_relevant():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert "ui_analysed" not in site.session_state  # the results wait for ANALYSE
