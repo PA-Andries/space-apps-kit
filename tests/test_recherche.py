@@ -58,21 +58,21 @@ def test_le_score_est_la_somme_de_ses_quatre_parties():
 def test_detail_du_score_explique_chaque_critere():
     detail = detail_du_score(fiche("EXEMPLE-D"), LUNE_PREVENIR)
     assert list(detail.columns) == ["critere", "points", "maximum", "explication"]
-    assert points(detail) == {"Pilier": 40, "Oxygène": 25, "Combustible": 6, "Données": 10}
+    assert points(detail) == {"Pillar": 40, "Oxygen": 25, "Fuel": 6, "Data": 10}
     assert list(detail["maximum"]) == [40, 25, 20, 15]
     assert detail["explication"].str.len().gt(0).all()
 
 
 def test_l_oxygene_perd_des_points_avec_l_ecart():
     # EXEMPLE-A est testé de 16 à 21 % : à 9 points des 30 % de la base lunaire, couvert pour la station.
-    assert points(detail_du_score(fiche("EXEMPLE-A"), LUNE_PREVENIR))["Oxygène"] == 2
-    assert points(detail_du_score(fiche("EXEMPLE-A"), STATION_DETECTER))["Oxygène"] == 25
+    assert points(detail_du_score(fiche("EXEMPLE-A"), LUNE_PREVENIR))["Oxygen"] == 2
+    assert points(detail_du_score(fiche("EXEMPLE-A"), STATION_DETECTER))["Oxygen"] == 25
 
 
 def test_sans_scenario_pilier_et_oxygene_valent_zero():
     detail = points(detail_du_score(fiche("EXEMPLE-A")))
-    assert detail["Pilier"] == 0 and detail["Oxygène"] == 0
-    assert detail["Combustible"] == 20 and detail["Données"] == 10
+    assert detail["Pillar"] == 0 and detail["Oxygen"] == 0
+    assert detail["Fuel"] == 20 and detail["Data"] == 10
 
 
 def test_une_valeur_inconnue_ne_donne_aucun_point():
@@ -81,7 +81,7 @@ def test_une_valeur_inconnue_ne_donne_aucun_point():
     incomplete["nb_tests"] = None
     incomplete["type_combustible"] = INCONNU
     detail = points(detail_du_score(incomplete, LUNE_PREVENIR))
-    assert detail == {"Pilier": 0, "Oxygène": 0, "Combustible": 0, "Données": 0}
+    assert detail == {"Pillar": 0, "Oxygen": 0, "Fuel": 0, "Data": 0}
 
 
 def test_filtrer_garde_les_fiches_qui_ont_une_des_valeurs():
@@ -99,3 +99,11 @@ def test_filtrer_sans_choix_ne_retire_rien():
 
 def test_valeurs_possibles_separe_les_valeurs_multiples():
     assert valeurs_possibles(charger_fiches(), "pilier") == ["Détecter", "Prévenir", "Éteindre"]
+
+
+def test_un_combustible_modele_compte_comme_son_type_de_base():
+    modele = fiche("EXEMPLE-A").copy()
+    modele["type_combustible"] = "solide (modèle)"
+    assert points(detail_du_score(modele))["Fuel"] == 20
+    modele["type_combustible"] = "fumée"
+    assert points(detail_du_score(modele))["Fuel"] == 0

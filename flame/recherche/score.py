@@ -18,6 +18,8 @@ POINTS_DONNEES = 15
 ECART_OXYGENE_MAX_PCT = 10
 # Le brief classe les combustibles : solides, puis liquides, puis gaz. Les valeurs sont une hypothèse.
 POINTS_PAR_COMBUSTIBLE = {"solide": 20, "liquide": 12, "gaz": 6}
+# Le nom anglais de chaque type, pour les explications affichées.
+COMBUSTIBLE_EN_ANGLAIS = {"solide": "solid", "liquide": "liquid", "gaz": "gas"}
 # Hypothèse : (nombre de tests à atteindre, points), du palier le plus haut au plus bas.
 PALIERS_NB_TESTS = [(50, 15), (10, 10), (1, 5)]
 
@@ -33,64 +35,64 @@ def _nombre(valeur: object) -> float | None:
 
 def _points_pilier(fiche: pd.Series, scenario: dict[str, str] | None) -> tuple[int, str]:
     if not scenario or not scenario.get("pilier"):
-        return 0, "Pas de pilier choisi : critère non compté."
+        return 0, "No pillar chosen: criterion not counted."
     piliers = [pilier.strip() for pilier in str(fiche.get("pilier", "")).split(";") if pilier.strip()]
     if simplifier(scenario["pilier"]) in [simplifier(pilier) for pilier in piliers]:
-        return POINTS_PILIER, f"L'investigation traite le pilier « {scenario['pilier']} »."
-    connus = ", ".join(piliers) or "non renseignés"
-    return 0, f"Piliers de l'investigation : {connus} ; pilier choisi : {scenario['pilier']}."
+        return POINTS_PILIER, f"The investigation addresses the chosen pillar ({scenario['pilier']})."
+    connus = ", ".join(piliers) or "not recorded"
+    return 0, f"Investigation pillar: {connus}; chosen pillar: {scenario['pilier']}."
 
 
 def _points_oxygene(fiche: pd.Series, scenario: dict[str, str] | None) -> tuple[int, str]:
     habitat = (scenario or {}).get("habitat")
     if habitat not in ATMOSPHERES:
-        return 0, "Pas d'habitat choisi : critère non compté."
+        return 0, "No habitat chosen: criterion not counted."
     oxygene_habitat_pct = ATMOSPHERES[habitat][0]
     oxygene_min_pct, oxygene_max_pct = _nombre(fiche.get("oxygene_min")), _nombre(fiche.get("oxygene_max"))
     if oxygene_min_pct is None or oxygene_max_pct is None:
-        return 0, "Plage d'oxygène testée inconnue."
-    plage = f"{oxygene_min_pct:g} à {oxygene_max_pct:g} %"
+        return 0, "Tested oxygen range unknown."
+    plage = f"{oxygene_min_pct:g} to {oxygene_max_pct:g} %"
     if oxygene_min_pct <= oxygene_habitat_pct <= oxygene_max_pct:
-        return (
-            POINTS_OXYGENE,
-            f"La plage testée ({plage}) couvre les {oxygene_habitat_pct} % d'oxygène de « {habitat} ».",
-        )
+        return POINTS_OXYGENE, f"The tested range ({plage}) covers the {oxygene_habitat_pct} % oxygen of {habitat}."
     ecart_pct = min(abs(oxygene_habitat_pct - oxygene_min_pct), abs(oxygene_habitat_pct - oxygene_max_pct))
     points = round(POINTS_OXYGENE * max(0.0, 1 - ecart_pct / ECART_OXYGENE_MAX_PCT))
     return points, (
-        f"La plage testée ({plage}) est à {ecart_pct:g} point(s) des {oxygene_habitat_pct} % d'oxygène "
-        f"de « {habitat} » ; "
-        f"le critère tombe à 0 à partir de {ECART_OXYGENE_MAX_PCT} points d'écart."
+        f"The tested range ({plage}) is {ecart_pct:g} point(s) away from the {oxygene_habitat_pct} % oxygen "
+        f"of {habitat}; the criterion drops to 0 from a gap of {ECART_OXYGENE_MAX_PCT} points."
     )
 
 
 def _points_combustible(fiche: pd.Series) -> tuple[int, str]:
-    type_combustible = simplifier(fiche.get("type_combustible", ""))
+    # « solide (modèle) » désigne une étude au sol sur un solide : on compte son type de base.
+    type_combustible = simplifier(str(fiche.get("type_combustible", "")).split("(")[0])
     if type_combustible in POINTS_PAR_COMBUSTIBLE:
         return POINTS_PAR_COMBUSTIBLE[type_combustible], (
-            f"Combustible {type_combustible} : un habitat contient surtout des solides (tissus, plastiques), "
-            "puis des liquides, puis des gaz."
+            f"{COMBUSTIBLE_EN_ANGLAIS[type_combustible].capitalize()} fuel: a habitat holds mostly solids "
+            "(fabrics, plastics), then liquids, then gases."
         )
-    return 0, "Pas de combustible solide, liquide ou gazeux renseigné."
+    return 0, "No solid, liquid or gas fuel recorded."
 
 
 def _points_donnees(fiche: pd.Series) -> tuple[int, str]:
     nb_tests = _nombre(fiche.get("nb_tests"))
     if nb_tests is None:
-        return 0, "Nombre de tests inconnu."
+        return 0, "Number of tests unknown."
     for seuil, points in PALIERS_NB_TESTS:
         if nb_tests >= seuil:
-            return points, f"{nb_tests:g} test(s) disponibles (palier : {seuil} ou plus)."
-    return 0, "Aucun test disponible."
+            return points, f"{nb_tests:g} test(s) available (step: {seuil} or more)."
+    return 0, "No test available."
 
 
 def detail_du_score(fiche: pd.Series, scenario: dict[str, str] | None = None) -> pd.DataFrame:
-    """Le score de `fiche` pour `scenario`, critère par critère : colonnes critere, points, maximum, explication."""
+    """Le score de `fiche` pour `scenario`, critère par critère : colonnes critere, points, maximum, explication.
+
+    Les noms de critères et les explications s'affichent sur le site : ils sont en anglais.
+    """
     lignes = [
-        ("Pilier", *_points_pilier(fiche, scenario), POINTS_PILIER),
-        ("Oxygène", *_points_oxygene(fiche, scenario), POINTS_OXYGENE),
-        ("Combustible", *_points_combustible(fiche), POINTS_COMBUSTIBLE),
-        ("Données", *_points_donnees(fiche), POINTS_DONNEES),
+        ("Pillar", *_points_pilier(fiche, scenario), POINTS_PILIER),
+        ("Oxygen", *_points_oxygene(fiche, scenario), POINTS_OXYGENE),
+        ("Fuel", *_points_combustible(fiche), POINTS_COMBUSTIBLE),
+        ("Data", *_points_donnees(fiche), POINTS_DONNEES),
     ]
     detail = pd.DataFrame(lignes, columns=["critere", "points", "explication", "maximum"])
     return detail[COLONNES_DETAIL]

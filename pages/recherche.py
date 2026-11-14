@@ -1,4 +1,4 @@
-"""Page Recherche. Propriétaire : rôle C (Recherche)."""
+"""Page Recherche. Propriétaire : rôle C (Recherche). Les textes affichés sont en anglais."""
 
 import streamlit as st
 
@@ -6,47 +6,76 @@ from flame.commun import ATMOSPHERES, HABITATS, charger_fiches, charger_publicat
 from flame.recherche import detail_du_score, filtrer, rechercher, valeurs_possibles
 from flame.ui import carte_fiche
 
-st.title("Recherche")
+TITRES_SCORE = {"critere": "Criterion", "points": "Points", "maximum": "Out of", "explication": "Why"}
+TITRES_TESTS = {
+    "investigation_id": "Investigation",
+    "test_id": "Test",
+    "combustible": "Fuel",
+    "oxygene_pct": "Oxygen (%)",
+    "pression_kpa": "Pressure (kPa)",
+    "debit_air_cm_s": "Air flow (cm/s)",
+    "resultat": "Result",
+    "source": "Source",
+}
+TITRES_PUBLICATIONS = {"titre": "Title", "annee": "Year", "auteurs": "Authors", "url": "Link"}
+
+st.title("Search")
 
 fiches = charger_fiches()
 scenario = get_scenario()
 oxygene_pct, pression_kpa = ATMOSPHERES[scenario["habitat"]]
 st.caption(
-    f"Classement pour : {scenario['habitat']} ({oxygene_pct} % d'oxygène, {pression_kpa} kPa) · "
-    f"pilier « {scenario['pilier']} ». Le scénario se change dans la barre latérale."
+    f"Ranked for: {scenario['habitat']} ({oxygene_pct} % oxygen, {pression_kpa} kPa) · "
+    f"pillar: {scenario['pilier']}. Change the scenario in the sidebar."
 )
 
-question = st.text_input("Que cherchez-vous ?", placeholder="tissu, extinction, fumée…", key="recherche_question")
-with st.expander("Filtres"):
-    piliers = st.multiselect("Pilier", valeurs_possibles(fiches, "pilier"), key="recherche_filtre_piliers")
+question = st.text_input(
+    "What are you looking for?", placeholder="fabric, extinction, smoke…", key="recherche_question"
+)
+with st.expander("Filters"):
+    piliers = st.multiselect("Pillar", valeurs_possibles(fiches, "pilier"), key="recherche_filtre_piliers")
     types_combustible = st.multiselect(
-        "Type de combustible", valeurs_possibles(fiches, "type_combustible"), key="recherche_filtre_combustibles"
+        "Fuel type", valeurs_possibles(fiches, "type_combustible"), key="recherche_filtre_combustibles"
     )
-    habitats = st.multiselect("Habitat concerné", HABITATS, key="recherche_filtre_habitats")
+    habitats = st.multiselect("Relevant habitat", HABITATS, key="recherche_filtre_habitats")
 
 resultats = rechercher(question, filtrer(fiches, piliers, types_combustible, habitats), scenario)
 
-st.caption(f"{len(resultats)} investigation(s) sur {len(fiches)}")
+st.caption(f"{len(resultats)} investigation(s) out of {len(fiches)}")
 if resultats.empty:
-    st.info("Aucune investigation ne correspond. Essayez un autre mot ou retirez un filtre.")
+    st.info("No investigation matches. Try another word or remove a filter.")
 
 tests = charger_tests()
-publications = charger_publications()
+try:
+    publications = charger_publications()
+except FileNotFoundError:  # le tableau des rapports n'est pas encore livré
+    publications = None
+
 for _, fiche in resultats.iterrows():
     carte_fiche(fiche)
-    st.progress(int(fiche["score"]) / 100, text=f"Score pour ce scénario : {int(fiche['score'])} / 100")
-    with st.expander(f"Pourquoi ce score, et la fiche de {fiche['id']}"):
-        st.dataframe(detail_du_score(fiche, scenario), hide_index=True, key=f"recherche_score_{fiche['id']}")
-        st.markdown(f"**Objectif :** {fiche['objectif']}")
-        st.markdown(f"**Combustible :** {fiche['combustible']} · **Ce qui varie :** {fiche['ce_qui_varie']}")
-        st.markdown(f"**Mesures :** {fiche['capteurs']}")
+    st.progress(int(fiche["score"]) / 100, text=f"Score for this scenario: {int(fiche['score'])} / 100")
+    with st.expander(f"Why this score, and the details of {fiche['id']}"):
+        st.dataframe(
+            detail_du_score(fiche, scenario),
+            hide_index=True,
+            column_config=TITRES_SCORE,
+            key=f"recherche_score_{fiche['id']}",
+        )
+        st.markdown(f"**Goal:** {fiche['objectif']}")
+        st.markdown(f"**Fuel:** {fiche['combustible']} · **What varies:** {fiche['ce_qui_varie']}")
+        st.markdown(f"**Measurements:** {fiche['capteurs']}")
         st.markdown("**Tests**")
         st.dataframe(
-            tests[tests["investigation_id"] == fiche["id"]], hide_index=True, key=f"recherche_tests_{fiche['id']}"
-        )
-        st.markdown("**Rapports NTRS**")
-        st.dataframe(
-            publications[publications["investigation_id"] == fiche["id"]][["titre", "annee", "auteurs", "url"]],
+            tests[tests["investigation_id"] == fiche["id"]],
             hide_index=True,
-            key=f"recherche_publications_{fiche['id']}",
+            column_config=TITRES_TESTS,
+            key=f"recherche_tests_{fiche['id']}",
         )
+        if publications is not None:
+            st.markdown("**NTRS reports**")
+            st.dataframe(
+                publications[publications["investigation_id"] == fiche["id"]][list(TITRES_PUBLICATIONS)],
+                hide_index=True,
+                column_config=TITRES_PUBLICATIONS,
+                key=f"recherche_publications_{fiche['id']}",
+            )
