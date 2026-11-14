@@ -27,6 +27,7 @@ from flame.ui import (
     show_environment_in_sidebar,
     source_name,
     stat_tiles,
+    style_conditions_chart,
 )
 
 FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen = all
@@ -125,7 +126,10 @@ with cards_column, st.container(key="ui_card_assistant", height="stretch"):
         st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
 
 with chart_column, st.container(key="ui_card_ranking", height="stretch"):
-    card_title("NASA tests against your conditions", "Each point is one NASA PSI test; those that match are coloured.")
+    card_title(
+        "NASA tests against your conditions",
+        "Each point is one NASA PSI test. Dotted: Earth and Moon zones. Green box: your selection.",
+    )
     matching = getattr(comparateur, "tests_correspondants", None)
     chart = getattr(comparateur, "graphique_conditions", None)
     if matching is None or chart is None:
@@ -143,7 +147,9 @@ with chart_column, st.container(key="ui_card_ranking", height="stretch"):
             key="ui_chart_view",
             label_visibility="collapsed",
         )
-        st.plotly_chart(chart(tests, fiches, scenario, vue=view or "pression"), key="ui_conditions_chart")
+        view = view or "pression"
+        figure = style_conditions_chart(chart(tests, fiches, scenario, vue=view), scenario, view)
+        st.plotly_chart(figure, key="ui_conditions_chart")
     with st.container(key="ui_analyse"):
         if st.button("ANALYSE", key="ui_analyse_button"):
             st.session_state["ui_analysed"] = True
