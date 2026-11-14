@@ -1,0 +1,585 @@
+Source : NASA PSI, PSI-101, Science Documents, SAME_Baseline Concept Description Document_001 Rev A.pdf
+
+--- page 1 ---
+SAME-DOC-001 Rev A
+
+--- page 2 ---
+SAME-DOC-001 Rev. A 
+ ii 
+APPROVALS 
+Prepared by: /s/ Greg Funk  Date: 06-02-05 
+ Gregory P. Funk 
+ZIN Technologies, Inc. 
+SAME Project Lead 
+   
+     
+Reviewed by: /s/ N/A GF  Date:  
+ Amber S. Krauss 
+ZIN Technologies, Inc. 
+SAME Mechanical Engineer 
+   
+     
+Concurred by: /s/ William A Sheredy  Date: 06-02-05 
+ William A. Sheredy 
+NASA GRC 
+SAME Project Manager 
+   
+     
+Approved by: /s/ Gary A Ruff  Date: 06-06-05 
+ Gary A. Ruff 
+NASA GRC 
+SAME Project Scientist 
+   
+     
+Approved by: /s/ David L Urban  Date: 06-06-05 
+ David L. Urban 
+NASA GRC 
+SAME Principal Investigator 
+   
+     
+Approved by: /s/ N/A GF  Date:  
+ Zeng Gaung Yuan 
+National Center for Microgravity Research 
+SAME Co-Investigator 
+   
+     
+Approved by: /s/ N/A GF  Date:  
+ John M. Koudelka 
+NASA GRC 
+Chief, Life Support & Habitation Branch
+
+--- page 3 ---
+SAME-DOC-001 Rev. A 
+ iii 
+REVISIONS 
+Revision Letter Publication Date Change Description Approval 
+- 4/04 Presented to RDR Review Panel as a non-baseline document.  
+A 6/05 Post RDR review.  No ECO required.
+
+--- page 4 ---
+SAME-DOC-001 Rev. A 
+ iv 
+TABLE OF CONTENTS 
+1.0 Document Overview ........................................................................................................... 1 
+1.1 Abstract ........................................................................................................................... 1 
+1.2 Scope ............................................................................................................................... 1 
+1.3 Applicable Documents .................................................................................................... 1 
+1.4 Referenced Documents ................................................................................................... 1 
+1.5 Acronyms ........................................................................................................................ 2 
+2.0 SAME Experiment Overview ............................................................................................. 2 
+2.1 SAME Principal Investigators ........................................................................................ 2 
+2.2 SAME Experiment Background ..................................................................................... 3 
+2.3 SAME Experiment Objectives ........................................................................................ 3 
+2.4 SAME “Firsts” for NASA .............................................................................................. 3 
+2.5 The SAME Risk mitigation experiment – DAFT ........................................................... 4 
+3.0 SAME Carrier Interfaces – Microgravity Science Glovebox (MSG) ................................. 4 
+3.1 Power .............................................................................................................................. 4 
+3.2 Control and Data Transfer .............................................................................................. 5 
+3.3 Fluids............................................................................................................................... 5 
+3.4 MSG Cooling and Air Recirculation .............................................................................. 5 
+4.0 SAME Crew Interfaces ....................................................................................................... 5 
+4.1 Hardware Subsystem Description ................................................................................... 5 
+4.2 Video Recording Devices ............................................................................................... 7 
+4.3 On-Orbit Crew Operational Functions............................................................................ 7 
+5.0 SAME Software Control ..................................................................................................... 8 
+5.1 Software Controlled Operational Functions ................................................................... 8 
+5.2 Data Collection ............................................................................................................... 8 
+6.0 SAME Operations ............................................................................................................... 8 
+6.1 Operations Flow .............................................................................................................. 8 
+6.2 Detailed Operations ........................................................................................................ 8 
+6.3 Timeline .......................................................................................................................... 8 
+6.4 Test Matrix ...................................................................................................................... 9 
+7.0 Safety Concerns & Preventative Measures ......................................................................... 9 
+7.1 Overall Strategy .............................................................................................................. 9 
+7.2 Pressurized Systems ...................................................................................................... 10 
+7.3 Structures ...................................................................................................................... 10 
+7.4 Materials ....................................................................................................................... 10 
+7.5 Frangible Materials (Glass)........................................................................................... 10 
+7.6 Release of Experiment By-products into the Cabin Atmosphere ................................. 10 
+7.7 Non-Ionizing Laser Radiation....................................................................................... 11 
+7.8 Ionizing Radiation ......................................................................................................... 11 
+8.0 Product Assurance ............................................................................................................ 11 
+9.0 Project Plan ....................................................................................................................... 11 
+10.0 Project Phone List ............................................................................................................. 11
+
+--- page 5 ---
+SAME-DOC-001 Rev. A 
+ 1 
+1.0 DOCUMENT OVERVIEW 
+1.1 Abstract 
+The primary purpose of this document is to provide the reviewer with a comprehensive overview of the designs and systems 
+for the Smoke Aerosol Measurement Experiment (SAME). This document also provides the references to the other 
+pertinent drawings, schematics and documents that fully describe and define SAME. 
+1.2 Scope 
+The scope of this document includes a high level description of the SAME hardware and its required support systems at a 
+PDR design maturity level. This document is not intended to be a controlling document of any sort, and therefore, the reader 
+is advised to always request the latest revision when viewing any referenced documents. 
+1.3 Applicable Documents 
+The most current draft of the Science Requirements Document (SRD) for the Smoke experiment was used as input to this 
+document. 
+• Exploration Investigation Requirements Document for SAME a.k.a. Smoke Aerosol Measurement 
+Experiment, Rev. 1.01, Dr. David Urban, NASA Glenn Research Center, January 3, 2005 
+1.4 Referenced Documents 
+DRAWINGS: 
+The following drawing numbers represent the integration level assembly drawings for SAME: 
+Mechanical Drawings 
+67198MABA100 Experiment Support Plate Assembly 
+67198MABA150 Smoke Aging Chamber Assembly 
+67198MDBA165 Dynamic Diagnostics Plenum Assembly 
+67198MABA180 Dynamic Diluter Assembly 
+67198MABA220 Fluids Control Box Assembly 
+67198EABA680 Power Distribution and Control Unit 
+67198EABA660 Data Acquisition and Control Unit 
+67198MABA500 P-Trak Diagnostics Enclosure Assembly 
+67198MABA600 Commercial Diagnostics Enclosure Assembly 
+67198MABB300 Thermal Precipitator Module Assembly 
+67198MABB400 Sample Carousel Assembly 
+67198MABD700 Alcohol Wick Container 
+67198PABA000 SAME Fluid Schematic 
+Electrical Drawings 
+67198EBBS001 Interconnection Block Diagram 
+67198EBBS002 Power Block Diagram 
+67198EBBS003 Control Block Diagram
+
+--- page 6 ---
+SAME-DOC-001 Rev. A 
+ 2 
+DOCUMENTS: 
+SAME-DOC-009 SAME Operations Concept Document 
+SAME-DOC-002 SAME Engineering Requirements Document 
+SAME-DOC-004 SAME Software Requirements Document 
+SAME-PLN-003 SAME Product Assurance Plan 
+SAME-PLN-001 SAME Project Plan 
+SAME-SDP-001 Smoke Phase 0/1 Safety Data Package 
+SAME-PLN-006 SAME Software Assurance Plan 
+1.5 Acronyms 
+CSD  Comparative Soot Diagnostics 
+DACU  Data Acquisition and Control Unit 
+DAFT  Dust and Aerosol Measurement Feasibility Test 
+EIRD  Exploration Investigation Requirements Document 
+ERD  Engineering Requirements Document 
+GN2  Gaseous Nitrogen 
+GSE  Ground Support Equipment 
+ISS  International Space Station 
+MIUL  Material Identification and Usage List 
+MLC  MSG Laptop Computer 
+MSG  Microgravity Science Glovebox 
+MUA  Materials Usage Agreement 
+SAME  Smoke Aerosol Measurement Experiment 
+SPLC  Standard Payload Laptop Computer 
+STS  Space Transportation System (shuttle) 
+TEM  Transmission Electron Microscopy 
+TSI  TSI Incorporated 
+VUA  Volatile Usage Agreement 
+WV  (MSG) Work Volume 
+2.0 SAME EXPERIMENT OVERVIEW 
+2.1 SAME Principal Investigators 
+Dr. David Urban, SAME Principal Investigator, NASA Glenn Research Center 
+George Mulholland, SAME Co-Investigator, National Institute for Standards Technology 
+Zeng Guang Yuan, SAME Co-Investigator, National Center for Microgravity Research 
+Jiann Yang, SAME Co-Investigator, National Institute for Standards Technology 
+Thomas Cleary, SAME Co-Investigator, National Institute for Standards Technology 
+Gary Ruff, SAME Project Scientist, NASA Glenn Research Center
+
+--- page 7 ---
+SAME-DOC-001 Rev. A 
+ 3 
+2.2 SAME Experiment Background 
+Since the very beginning of the manned space flight program, NASA engineers and scientists have gone to great lengths to 
+prevent fires from occurring on spacecraft. They have done this by adapting fire safety systems and procedures developed 
+on Earth to the unique conditions and operating environment of spacecraft. However, microgravity combustion experiments 
+have shown that fire can behave very differently in space and the best methods to prevent, detect, and extinguish fires on a 
+spacecraft may be very different than those used on Earth. 
+In 2000, NASA's Bioastronautics Initiative began with the objective of ensuring and enhancing the health, safety, and 
+performance of humans in space. As part of this effort, the  Life Support and Habitation Branch at NASA Glenn Research 
+Center is responsible for developing and implementing a research plan to significantly improve fire safety on spacecraft and 
+in space habitats. This goal will be achieved by applying a significant amount of fundamental knowledge and the 
+experimental capability of microgravity research to spacecraft fire safety questions. 
+Spacecraft smoke detectors must detect smoke with a variety of particulate types. Hydrocarbon fuels typically produce soot, 
+while overheated plastics produce droplets of recondensed polymer fragments. Paper and silicone rubber produce a smoke 
+that is composed of liquid droplets of recondensed pyrolysis products. Differences in the nucleation and growth processes 
+for these different types of smokes create particles that have different sizes and properties. 
+The Comparative Soot Diagnostics (CSD) experiment that flew in the Glovebox on STS-75 demonstrated that the  smokes 
+with solid particulates created in microgravity formed longer chains, and aggregated into larger particles than those created 
+in normal Earth gravity. This is surmised to have occurred because of the increased residence time in the high concentration 
+smoke regions and to have affected the responses of the two spacecraft smoke detectors (ISS and STS) utilized in that 
+experiment. 
+To develop smoke detectors that are sensitive to the type and size of smoke particles that will be encountered in 
+microgravity and to allow them to distinguish between dust and smoke, better knowledge of the size distribution and 
+morphology of the particulates is required. 
+2.3 SAME Experiment Objectives 
+The major goal of this experiment is to quantify the sizes that the liquid smoke particulates achieve in microgravity and to 
+relate the droplet size and distribution to the smoke generation and smoke transport conditions in the experiment. This will 
+be accomplished by extending the Comparative Soot Diagnostics (CSD) concept to provide a particulate count and mass 
+density determination to the diagnostic array used to analyze these liquid smokes. The experimental design and practical 
+application of this data will be enhanced by the development of a numerical code that will predict the smoke droplet growth 
+as a function of the fuel pyrolysis rate, the thermodynamic properties of the pyrolysis vapor, and the flow environment. 
+The SAME experiment has the following (listed) objectives: 
+1. Make measurements of three moments of the particle size distribution for the μg smoke from several 
+materials found in spacecraft considering the effects of sample temperature, air flow, smoke residence time 
+(near the source) and smoke aging. The primary targets are materials that produce liquid smoke particulate 
+but solid smoke producers will also be considered.  
+2. Make measurements of the effect of µg and 1-g on the size distribution of liquid aerosol smokes (using an 
+idealized smoke e.g. DBT) to provide data for numerical model comparison.   
+3. Evaluate the performance in µg of the two existing U.S. spacecraft smoke detector designs for the test 
+conditions. 
+4. Evaluate other smoke detection/sensing devices at NASA’s request for the test materials  
+2.4 SAME “Firsts” for NASA 
+• Measurements of microgravity smoke: Diagnostics such as the P-Trak and the DustTrak will be used to measure 
+particle count and particle mass concentration, respectively.  Both devices are manufactured by TSI.  With the aid of 
+these instruments (and others), microgravity smoke will be characterized. 
+• The use of rapid prototype materials for manned flight experiment hardware. 
+• Use of an automatic, remotely adjustable, ‘particulate friendly’ dilution system.
+
+--- page 8 ---
+SAME-DOC-001 Rev. A 
+ 4 
+2.5 The SAME Risk mitigation experiment – DAFT  
+The objective for the risk mitigation experiment, DAFT (Dust and Aerosol Measurement Feasibility Test), is to provide a 
+microgravity technology demonstration of the P-Trak Ultrafine Particle Counter manufactured by TSI.  The P-Trak is a 
+hand held air quality monitor which is capable of counting particles whose mean diameter is in the range of 1.0 to 0.05 
+microns. 
+After extensive market research performed by both the Engineering and Science teams, it has been determined that the P-
+Trak is the only commercially available hardware that can perform this particle count while maintaining the weight, 
+resource, and space limitations for an MSG experiment.   
+P-Trak measures particle number concentrations in real-time  while storing that data in a memory maintained by an on-
+board battery. These measurements are made in units of particles per cubic centimeter (pt/cm3) versus traditional aerosol 
+measurements of milligrams per cubic meter (mg/m3) made by photometers.  P-Trak operates by using the particles in the 
+aerosol as seeds to condense droplets of alcohol (a condensate nuclei counter).  These droplets have many times the average 
+diameter of the original particles, and may, therefore, be easily counted with standard optical techniques.  The potential 
+problem is that these droplets are directed through a nozzle to facilitate the counting, and some of these droplets (a 
+predictable percentage) collide with the walls and form a film. In a gravity environment, this film is recycled by ‘falling’ 
+down hill. 
+In microgravity, the distinct possibility exists that these droplets will form a film that will bridge and block the nozzle, 
+effectively plugging the flow of droplets and preventing the device from functioning, or obscuring the optics.  Furthermore, 
+there is some concern that the droplets inside the optics chamber may get trapped in an internal circular motion and be 
+counted more than once, producing an erroneously high count. 
+The modification that was implemented in order to counteract these potential problems was: 60. 0.006” grooves were 
+machined down the length of the inside of the condenser.  These grooves were designed to provide a mechanism in which 
+the smoke particle/ alcohol mixture can wick its way back to reservoir end to simulate the effects of gravity, hence, 
+inhibiting the possibility of the fluid to inhibit the functioning of the unit. 
+The modifications to account for and eliminate this problem have been devised and implemented, however, it is not possible 
+to test the effectiveness of these modifications in any of the available ground based facilities and/or the KC-135 due to the 
+duration of the nominal operation time required (minutes per instance).  This testing, and the verification of the accuracy of 
+the instrument functions on orbit, are the core of the DAFT experiment. 
+Two P-Trak units are included in DAFT flight hardware, one being only flight hardened, and the other with the modified 
+condenser and flight hardened. 
+To successfully accomplish P-Trak functional demonstration, additional hardware (which will not be explained in detail 
+here) has to be delivered to the ISS. This hardware includes a dust concentration monitor (DustTrak), data cables, fill 
+assembly, sample bag assemblies, sample holders, virtual impactor, alcohol reservoir, battery packs, a HEPA filter 
+assembly, and appropriate tubing. 
+The P-Trak utilizes isopropyl alcohol as a condensate, and its use must therefore, be carefully monitored and requires a 
+specific agreement for that use on the ISS which is contained within a Volatile Usage Agreement (VUA) created for the 
+experiment. 
+3.0 SAME CARRIER INTERFACES – MICROGRAVITY SCIENCE GLOVEBOX 
+(MSG) 
+3.1 Power 
+• 120 VDC  
+• 28 VDC  
+• ± 12 VDC 
+• 5 VDC 
+• Switch Control
+
+--- page 9 ---
+SAME-DOC-001 Rev. A 
+ 5 
+3.2 Control and Data Transfer 
+• MSG SPLC(RS422) 
+• Video Monitor (Composite) 
+• Video Recording and Downlink (Y-C) 
+• WV Direct Ethernet connection 
+3.3 Fluids 
+• GN2 (at nominal 120 psig, reduced to <15 psig by Smoke) 
+• Vacuum Exhaust System (VES) 
+3.4 MSG Cooling and Air Recirculation 
+• MSG air cooling (via the air recirculation system) will provide most of cooling needs for SAME (60 W nominal 
+average power draw) 
+• Augmented by Cold Plate if necessary 
+• MSG air recirculation system becomes backup particulate containment system 
+4.0 SAME CREW INTERFACES 
+4.1 Hardware Subsystem Description 
+The major planned components of SAME are as follows. They are organized by the assembly level, and the order in which 
+they are currently planned to be installed into the MSG.: 
+1. Fluids Control Box Assembly (67198MABA220) 
+The Fluids Control Box (FCB) installs on the back wall of the MSG in the upper left section. It is a fan cooled 
+enclosure made from aluminum that contains most of the fluids control devices and monitoring devices including 
+solenoids, pressure regulator, pressure transducers and mass flow controller. It interfaces directly with the MSG 
+fluids resources (VES and GN2) and the Power Distribution and Control Unit (PDCU), and distributes the fluids 
+resources accordingly. Please refer to the SAME Fluids Schematic (67198PABA000) for more information on its, 
+and the other fluids system functions. 
+2. Sample Plate Assembly (Experiment Support Plate Assembly) 67198ABA100 
+This assembly, when fully integrated, contains all of the major functional systems of SAME. It is a mounting plate 
+which includes the mounting hardware for the Sample Carousel, the Thermal Precipitator Unit (TPU), the 
+Dynamic Diagnostics Assembly (DDA) and the Aging Chamber Assembly (ACA). Permanently mounted to it 
+are: 
+• The Smoke Generation Tube 
+• The Video Camera and Controller 
+• The Sample Positioning system including: 
+o the Sample Turning Module 
+o the sample engagement  mechanism 
+o the sample position indicator 
+o the sample positioning lock mechanism 
+o the Sample Carousel mounting system
+
+--- page 10 ---
+SAME-DOC-001 Rev. A 
+ 6 
+3. Dynamic Diagnostics Assembly (DDA) (67198MDBA165) 
+The DDA is attached to the Sample Plate Assembly and the Aging Chamber Assembly by the crew and contains: 
+the ISS and STS smoke detectors and the sampling ports that supply the P-Trak Enclosure and the Commercial 
+Diagnostics Enclosure (and port(s) added for any additional diagnostics required). The DDA has a very low 
+internal volume, and the flow of the sample aerosol through it is controlled by regulating and balancing the 
+requirements of the active diagnostics in the DDA with the exhaust rate of the Aging Chamber piston, as 
+controlled by its mass flow controller. It also contains a port, protected by a HEPA filter, that is connected to the 
+VES for exhaust and purging. 
+4. Aging Chamber Assembly (67198MABA150) 
+The Aging Chamber Assembly contains the cylindrical, metallic Aging Chamber, the pneumatically activated 
+Inlet and Outlet Gate Valves and the Inlet and Outlet Elbows, which connect to the Smoke Generation Tube and 
+the DDA, respectively. A Rulon piston, internal to the chamber, moves the sample into and out from the internal 
+volume, and that flow is controlled by a mass flow controller which regulates the pressure or vacuum flow 
+accordingly.  Sampling ports are provided in the elbows for use by the Thermal Precipitator, and the unit contains 
+a Mixing Fan to insure that the contents are homogenous before disbursal to the DDA. 
+5. Data Acquisition and Control Unit (DACU) (67198EABA660) 
+The DACU is the central control unit for SAME. The baseline software is resident there, and, although many of 
+the other packages contain their own relay and control cards, ultimately it is the DACU that interfaces with the 
+Ethernet and the MLC to orchestrate the performance of the experiment. It also collects and stores data for 
+subsequent downlink through the MSG systems, and controls the MSG Video Recorder to provide a taped record 
+of the pyrolysis event. 
+6. P-Trak Enclosure (67198MABA500) 
+The P-Trak Enclosure is a flight hardened assembly containing a TSI P-Trak modified to take advantage of the 
+VES system and to function in a microgravity environment. Although it interfaces with the DDA, the DACU, the 
+Fluids Control Unit and the Power Distribution and Control Unit, it is basically a smart box that can operate 
+independently and store its own data.  
+7. Commercial Diagnostics Enclosure (CDE) (67198MABA600) 
+The CDE houses two of the SAME diagnostics, the TSI DustTrak and a First Alert ionization smoke detector. 
+Both units have been hardened for flight and have been modified to utilize the VES to drive the sample. The 
+DustTrak has also been modified to utilize MSG air to provide its ‘sheath air’ in order to decrease the amount of 
+aerosol required by the unit. Like P-Trak, the DustTrak portion of this device can operate independently and store 
+its own data. The modified First Alert cannot.  
+8. Dynamic Diluter (DD) (67198MABA180) 
+The DD is a custom designed component that provides dilution of the aerosol from the DDA before its 
+introduction into the P-Trak (and possibly the DustTrak). It works by utilizing a laminar flow element to measure 
+the amount of sample being introduced and using that information (from a differential pressure transducer) to 
+increase or decrease the diluent flow to achieve the desired concentration. The dilution setpoint may be altered by 
+software and adjusts to the desired setting in approximately 5 seconds. 
+9. Power Distribution and Control Unit (PDCU) (67198EABA680) 
+The PDCU is the central disbursement point for the commands, power distribution and data collection for SAME. 
+It contains the power converters, main relays and terminal data connections for the entire system and interfaces the 
+DACU with the various systems and devices constituting the experiment.
+
+--- page 11 ---
+SAME-DOC-001 Rev. A 
+ 7 
+10. Sample Carousel Assembly (67198MABB400) 
+The Sample Carousel Assemblies (5) each contain six (6) Sample Tubes that interface the samples to the Smoke 
+Generation Tube and allow the capture of the smoke in the Aging Chamber. Sample Carousels are sequentially 
+installed onto the mounting locations on the Sample Plate Assembly, and the mechanisms contained by it identify 
+the individual sample numbers, rotate the carousel to the correct position and engage the Sample Tube, which 
+allows the sample to be in a position to be energized.  The samples themselves are composed of five (5) materials: 
+Teflon, Kapton, Silicone, Cellulose and DiButyl Phthalate (which being a liquid, is contained within a small 
+section of cotton lampwick) in small, cylindrical sections, that are wrapped with coils of wire (baseline: stainless 
+steel) that both provides the heat energy to the sample when energized and measures its temperature (by its 
+varying resistance). 
+These samples are removed from the tubes for weighing, both before and after the experiment (before launch and 
+after being downmassed) to quantify the actual mass loss during pyrolysis. 
+11. Thermal Precipitator Unit (TPU) (67198MABB300) 
+The TPU is a device that captures actual samples of the aerosol particulate on Transmission Electron Microscope 
+(TEM) grids for examination when returned from the ISS. The units (4) are number matched to the samples in the 
+carousel, to take samples from both the Inlet and Outlet Elbows leading to and from the Aging Chamber. 
+12. Alcohol Wick Storage Container (67198MABD700) 
+The Alcohol Wick Storage Container is a custom manufactured aluminum vessel to contain the alcohol wick 
+required by the P-Trak during the time (launch, non-ops) when it is not in direct use. Only one is nominally 
+required, but two are included to provide one as a backup. 
+13. Hoses 
+SAME utilizes ISS GN2 and the VES system both as resources for the experiment process and as systems to 
+power its devices. These resources are distributed to the components from the FCU via the hoses, which are 
+nominally operated at +/- 15 psig. In order to conserve weight and volume, and provide ease of operation, acrylic 
+hoses and quick disconnects will be used for the distribution of pressure and vacuum throughout the system (not 
+typical Teflon with stainless steel overbraid). 
+14. Harnessing 
+All harnessing will conform to applicable standards and be designed to minimize the crew time needed to make 
+the required experiment connections, without sacrificing reliability. 
+15. SAME Service Kit 
+This is a place holder. SAME has not yet defined any servicing requirements. 
+4.2 Video Recording Devices 
+Video recordings of the smoke evolution process are very important for establishing proper operation of the test apparatus 
+and for debugging the system operation.  Furthermore, the video provides a helpful demonstration of the variability in 
+smoke evolution. Experience with CSD showed dramatic cases where clearly visible smoke streams were not always 
+detectable by the smoke detectors while invisible smoke streams were readily detected. Normal video resolution is 
+acceptable if the smoke is illuminated by forward scattered light from an appropriate light source. Video will be viewed on 
+and recorded by the MSG video Monitor/Recorder. 
+4.3 On-Orbit Crew Operational Functions 
+The crew will be asked to assemble the experiment from provided subsections, load software, reload Sample Carousels, 
+Thermal Precipitator Modules, and alcohol for the particle counter, enter parameters, initiate the experiment, and 
+disassemble the experiment.
+
+--- page 12 ---
+SAME-DOC-001 Rev. A 
+ 8 
+5.0 SAME SOFTWARE CONTROL 
+5.1 Software Controlled Operational Functions 
+The DACU is the central point for SAME control.  It is ultimately responsible for all experiment operations and interfacing 
+with the environment external to SAME.  It contains all of the logic necessary to autonomously operate the experiment as 
+well as receive, validate, and process commands from the MSG.  The DACU periodically transmits the status of the Smoke 
+system to the MSG, which then forwards it to the ground.   The software can autonomously control the progress of 
+preprogrammed test, manage and store all science and system files on the local data storage medium, control the MSG 
+video recorder capturing Smoke images, and copy the files to the MLC for downlink.  The software inside the DACU is 
+also responsible for providing diagnostic information and manual control of all sensors and controls using the GSE port. 
+Please refer to the SAME Baseline Software Requirements Document (SAME-DOC-004) for more detail. 
+5.2 Data Collection 
+Data is collected and stored in the DACU until it is time to downlink the information.  The Thermal Precipitator Module, 
+which collects samples of the smoke, will be bagged and returned for analysis.  Sample Carousels are retained so that the 
+samples can be weighed after return to Earth. 
+6.0 SAME OPERATIONS 
+6.1 Operations Flow 
+1. Experiment Setup- The experiment will be shipped in individual subassemblies that will be assembled inside of 
+the MSG.  Parts will be inserted through the MSG side ports starting with the upper, back components.  After 
+the MSG ports are covered and the rack is returned to nominal position, the Experiment Software is installed 
+onto the MSG Laptop. 
+2. Perform Experiment- The first steps in performing the experiment are to load the desired Sample Carousel, load 
+or replenish the alcohol wick in the particle counter, and install a new Thermal Precipitator Module.  Next, the 
+start-up check out routine is performed.  After the uplink parameters are sent, the experiment is initiated.  Then, 
+the baseline uplink parameters are modified, as required, for the next test and the experiment is initiated again 
+until all six samples in the Sample Carousel have been used.  The next number matched Sample Carousel and 
+Thermal Precipitator Module will then be loaded and the experiment will continue as such until complete. 
+3. Shutdown and Repack Experiment- When all the Sample Carousels have been used and all the experiments 
+have been performed,  the final Sample Carousel and Thermal Precipitator Module will be capped and bagged.  
+In reverse order of installation, the experiment hardware will be repackaged for downmassing. 
+6.2 Detailed Operations 
+Please refer to the SAME Operations Concept Document (SAME-DOC-009) for a more detailed description of all 
+Operations functions. 
+6.3 Timeline 
+Since the experiment is designed for operations controlled from the ground, once the components have been installed in the 
+MSG, timeline concerns have mainly to do with the acquisition of command windows and with weekly or semi weekly 
+service sessions by the crew.  
+SAME will follow the standard ISS procedures for scheduling activities aboard the station including OCR and iURC 
+submittals and conferences with the ISS Cadre.
+
+--- page 13 ---
+SAME-DOC-001 Rev. A 
+ 9 
+6.4 Test Matrix 
+The baseline experiment parameters will be resident in the software loaded into the DACU, however, it is anticipated that, 
+other than the first few test points, the exact operating conditions will be varied based upon the results of prior testThe test 
+matrix is anticipated to cover two weight loss rates, two flow rates, and two aging durations plus repetitions.  Multiple aging 
+durations should be possible for some single samples, and the inclusion of this desirement will alter the published matrix.  
+More test points are strongly desired as the test matrix below has no margin for repeats of test points and each parameter is 
+not varied over more than two conditions. 
+This section includes the current test matrix as taken from the latest EIRD (Rev. 1.01). 
+Table 1: Test Matrix 
+Test 
+Number 
+Sample Material Air Flow 
+(cm/s) 
+Weight Loss Rate 
+(mg/min) 
+Aging Duration 
+(minutes) 
+1 TeflonTM 5 2 1 
+2 TeflonTM 5 1 1 
+3 TeflonTM 5 2 20 
+4 TeflonTM 10 2 1 
+5 KaptonTM 5 2 1 
+6 KaptonTM 5 1 1 
+7 KaptonTM 5 2 20 
+8 KaptonTM 10 2 1 
+9 Silicone Rubber 5 2 1 
+10 Silicone Rubber 5 1 1 
+11 Silicone Rubber 5 2 20 
+12 Silicone Rubber 10 2 1 
+13 Lamp Wick 5 2 1 
+14 Lamp Wick 5 1 1 
+15 Lamp Wick 5 2 20 
+16 Lamp Wick 10 2 1 
+17 Dibutyl Phthalate 5 2 1 
+18 Dibutyl Phthalate 5 1 1 
+19 Dibutyl Phthalate 5 2 20 
+20 Dibutyl Phthalate 10 2 1 
+For questions and issues regarding the compliance of the experiment with the Science and other requirements, please refer 
+to the SAME Engineering Requirements Document, SAME-DOC-002. 
+7.0 SAFETY CONCERNS & PREVENTATIVE MEASURES 
+7.1 Overall Strategy 
+Safety analysis is being performed for the SAME (formerly Smoke) hardware in accordance with the safety policies and 
+safety requirements for flight hardware (NSTS1700.7B and ISS Addendum). This assessment is being prepared using 
+NSTS 13830C as a guideline for data submittal. Hazards not eliminated by design are addressed in either the latest revision 
+of standardized hazard control report JSC Form 1230 for ISS and launch/landing phase of the mission or in a Unique 
+Hazard Report, JSC 542B. For the most part, the SAME experiment uses generic hazard controls for electrical power 
+hazards, sharp edges, EMI (testing), rotating equipment (smaller than 8 inch diameter rotors and less than 8000 RPM), Fire 
+Detection and suppression, and touch temperature. More detail can be found in the safety date package (SAME-SDP-001).
+
+--- page 14 ---
+SAME-DOC-001 Rev. A 
+ 10 
+7.2 Pressurized Systems  
+The pressure system includes the aging chamber, the system for moving the piston in the aging chamber (valves, regulator, 
+lines, hoses, relief devices) and the Dynamic Diluter. All of the parts will be designed to meet the requirements of 
+NSTS1700.7 ISS addendum, NASA-STD-5003, SSP 30558, and SSP 52005 for pressurized hardware. Pressurized lines 
+and fittings will be designed to a factor of safety of 4.0 X System MDP of 200 psid (ISS N2 limiting pressure). Pressurized 
+system components will be designed to a factor of safety of greater than or equal to 2.5 X System MDP of 200 psid. Down 
+stream of the pressure reduction the MDP is 20 psig. These components are designed with the same factors of safety. See 
+table of components and factors of safety and hazard report SMOKE-04. Materials will be selected and evaluated for stress 
+corrosion and/or fluid compatibility in accordance with SSP 30233, Space Station Requirements for Materials and 
+Processes. In the event of loss of power all solenoids will close including the mass flow controllers, therefore the system will 
+not over pressurize. More detail can be found in the safety date package (SAME-SDP-001) specifically hazard report 
+SMOKE-04. 
+7.3 Structures 
+The SAME experiment is launched in stowage and contained in MSG for on orbit use. The structural aspect of SAME is 
+primarily sealed containers and vented containers. Pressure systems are covered in section 1.2. SAME structural failure is 
+addressed in Hazard Report SMOKE STD 01 in the safety date package (SAME-SDP-001). 
+7.4 Materials 
+The ZIN Tech Engineering Team will assure that reasonable measures have been taken with regard to material selection for 
+the experiment‘s design, and selected materials are safe for the intended manned space flight application in their respective 
+usage environment. A material flammability assessment will be performed per NSTS  22648. The flight unit will be offgas 
+tested. The SAME Project Team will prepare the standard Materials Identification & Usage List (MIUL) and MUA’s. ZIN 
+Engineering will review and approve material evaluation prepared by the SAME Project, and submit it to 
+NASA/GRC/SMAD for concurrence. Upon material evaluation approval, NASA/GRC/SMTD will issue the Material 
+Certification Letter in accordance with the guidelines established in the  applicable Material and Processes (M&P) 
+Intercenter Agreement prior to flight hardware fabrication. Further information can be found in Hazard Report SMOKE 
+STD 01 in the safety date package (SAME-SDP-001). 
+7.5 Frangible Materials (Glass) 
+All of the hardware which contains glass will undergo a vibration test in the stowed configuration at workmanship or 
+protoflight levels and a post-test visual inspection to verify ability to survive launch loads. The duct with the video camera 
+lens and LEDs installed will be stowed with clear plastic for crew inspection after launch. 
+7.6 Release of Experiment By-products into the Cabin Atmosphere 
+The P-Trak needs a cartridge with an alcohol-saturated wick for its operation; therefore, a risk of contaminating the ISS 
+environment has to be considered.  The amount of alcohol released will be carefully controlled and limited. The Project 
+Team will submit a Volatile Usage Agreement request to JSC/OC (Material and Processes) for disposition and approval.  
+All payloads are to submit their usage requests to a single approval authority at JSC because alcohol usage is a cumulative 
+risk, and it will be necessary to process VUA through a single approval authority to track the total quantity of alcohol being 
+used. More detail can be found in the safety date package (SMOKE-SDP-001). 
+The pyrolysis products of Teflon currently have a JSC Tox level 3 for 5 minutes after creation. After this point the particles 
+coalesce and drop to tox level 0. A hazard report has been generated to address this issue. The smoke is contained in the 
+smoke tube and aging chamber for 5 minutes. All the smoke is expelled through HEPA filters, some of which dumps into 
+the ISS vent the rest of it into the MSG. The MSG is the second containment of the smoke if the aging chamber where to 
+leak. Finally the MSG is under a negative pressure which would prevent the smoke from leaking in the event of an MSG 
+leak. Hazard Report SAME-08 has been written and submitted to the PSRP for review.
+
+--- page 15 ---
+SAME-DOC-001 Rev. A 
+ 11 
+7.7 Non-Ionizing Laser Radiation 
+The ISS Smoke Detector, the P-Trak and the DustTrak contain lasers as a part of their diagnostics systems.  These lasers are 
+of Class 1 lasers, and the laser beams are fully contained. These items are not removed from their original housings and are 
+used in the applications for which they are intended. There is no crew access to the lasers at any time.  The lasers meet 
+ANSI Z136.1-2000 standards for Class 1. More detail can be found in the safety date package (SAME-SDP-001).  
+7.8 Ionizing Radiation 
+The STS Smoke detector and the First Alert Smoke Alarm each contain 1 micro curie of Americium-241.  These items are 
+not removed from their original housings and are used in the applications for which they are intended. More detail can be 
+found in the safety date package (SAME-SDP-001). 
+8.0 PRODUCT ASSURANCE 
+In order to assure the overall quality and performance of the systems created by the project team, Product Assurance will be 
+provided by the ZIN Quality team and will include but not be limited to oversight of the manufacturing and assembly 
+processes, investigations into materials and their compatibilities, compliance with the Safety requirements, assessment of 
+the systems controls (i.e. Software) and inspection of the final products. The specific methods and strategies planned can be 
+found in the following documents: SAME Product Assurance Plan (SAME-PLN-003) and Same Software Assurance Plan 
+(SAME-PLN-006). Please refer to them for more detail. 
+9.0 PROJECT PLAN 
+The SAME Project Plan (SAME-PLN-001) contains information regarding the Project organization and its levels, 
+schedules, budget and a top level description of the project Science goals and the Engineering concepts. Please refer to that 
+document for questions regarding those subjects 
+10.0 PROJECT PHONE LIST 
+Dave Urban 
+Zeng Guang Yuan 
+Gary Ruff 
+Bill Sheredy 
+Greg Funk

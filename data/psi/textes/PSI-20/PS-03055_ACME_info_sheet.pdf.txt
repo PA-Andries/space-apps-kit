@@ -1,0 +1,78 @@
+Source : NASA PSI, PSI-20, Science Documents, PS-03055_ACME_info_sheet.pdf
+
+--- page 1 ---
+PURPOSE:  ACME is focused on advanced combustion 
+technology via fundamental microgravity research. The 
+primary goal is to improve efficiency and reduce pollutant 
+emission in practical terrestrial combustion.  A secondary 
+objective is fire prevention, especially for spacecraft.
+RESEARCH: ACME includes six independent experiments 
+investigating laminar and nonpremixed flames of gaseous 
+fuels. The experiments are being conducted with a single 
+set of modular hardware in the Combustion Integrated 
+Rack (CIR) on the International Space Station (ISS).  
+While the ISS astronauts set up the experimental hardware, 
+the ACME tests are remotely commanded from the 
+NASA Glenn Research Center.
+STATUS: ACME was set up by the ISS crew in Septem-
+ber and October 2017 where thus far 21 astronauts from 
+Canada, Germany, Italy, Japan, Russia, and the United 
+States have supported the project’s research. Over 800 
+flames have been ignited since November 2017 for five of 
+the six ACME experiments. On-orbit testing has yet to 
+begin for the CFIG experiment. In contrast, the planned 
+testing for the E–FIELD Flames investigation has been 
+completed. Testing is currently underway for the s–Flame 
+experiment. ACME tests are expected to continue on the 
+ISS through most, if not all, of 2020.
+Advanced Combustion via Microgravity Experiments (ACME)
+National Aeronautics and
+Space Administration
+NASA GLENN RESEARCH CENTER
+www.nasa.gov
+U.S. astronaut Christina Koch preparing the ACME chamber 
+insert for the Flame Design experiment.
+Example images from ACME’s Flame Design experiment.
+Canadian astronaut David Saint-Jacques replacing the igniter 
+tip on the ACME chamber insert.
+U.S. astronaut Joe Acaba and Russian cosmonaut Alexander 
+Misurkin exchanging a CIR oxidizer bottle.
+
+--- page 2 ---
+PS–03055–1119
+Advanced Combustion via Microgravity Experiments
+U.S. astronaut Ricky Arnold conducting CIR maintenance tasks.
+Flame Design is led by Prof. Rich Axelbaum (Washington 
+University in St. Louis), where there are collaborators from 
+the University of Maryland and the N.N. Semenov Institute 
+of Chemical Physics of the Russian Academy of Sciences.  
+Example flame images can be seen on the other side of this 
+information sheet.
+Structure and Response of Spherical Diffusion Flames 
+(s-Flame) is led by Profs. C.K. Law (Princeton University) 
+and Stephen Tse (Rutgers University), where the Russian 
+collaborators are from the P .N. Lebedev Physical Institute of 
+the Russian Academy of Sciences.
+WEBSITE:  https://www1.grc.nasa.gov/go/acme
+UPDATES:  www.facebook.com/space.flames 
+PHOTOGRAPHS:  www.flickr.com/photos/space-flames 
+EDUCATION:  https://tinyurl.com/space-flames  
+CONTACT: Dennis Stocker, NASA Glenn Research Center, ACME Project Scientist, 
+                   216–433–2166, dennis.p.stocker@nasa.gov
+EXPERIMENTS: 
+Burning Rate Emulator (BRE) is led by Prof. Jim Quintiere (University of Maryland), where 
+collaborating researchers are from Russia’s Peter the Great St. Petersburg Polytechnic 
+University. A dramatic image of a flame shortly after ignition can be seen to the right, after 
+which the nominally hemispherical flame became non-sooty.
+Cool Flames Investigation with Gases (CFIG)  is led by Prof. 
+Peter Sunderland (University of Maryland), where the collaborators 
+are from Washington University in St. Louis and the University of 
+California San Diego.  
+Coﬂow Laminar Diffusion (CLD) Flame is led by Prof. Marshall 
+Long (Yale University), where the Russian collaborators are from the Far Eastern Federal University. 
+Example images of a flame detached and lifted from the coflow burner can be seen on the left.
+Electric-Field Effects on Laminar Diffusion (E-FIELD) Flames is led by Prof. Derek Dunn-Rankin 
+(University of California Irvine), where the Russian collaborators are from the Far Eastern Federal 
+University. Example flame images from a test with ACME’s coflow burner can be seen below as  
+a function of the electric field strength, where the copper electrode mesh above the burner is        
+negatively and positively charged in the top and bottom rows, respectively.

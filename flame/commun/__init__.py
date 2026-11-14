@@ -14,7 +14,14 @@ from flame.commun.constantes import (
     PILIERS,
     PROFILS,
 )
-from flame.commun.donnees import charger_fiches, charger_publications, charger_tests, donnees_exemple
+from flame.commun.donnees import (
+    TABLES_PSI,
+    charger_fiches,
+    charger_publications,
+    charger_table_psi,
+    charger_tests,
+    donnees_exemple,
+)
 from flame.commun.scenario import get_scenario, set_scenario
 
 __all__ = [
@@ -26,8 +33,10 @@ __all__ = [
     "INCONNU",
     "PILIERS",
     "PROFILS",
+    "TABLES_PSI",
     "charger_fiches",
     "charger_publications",
+    "charger_table_psi",
     "charger_tests",
     "donnees_exemple",
     "get_scenario",

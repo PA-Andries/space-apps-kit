@@ -41,3 +41,19 @@ def test_pas_d_exemple_dans_les_vraies_donnees():
     if not vraies.exists():
         pytest.skip("pas encore de vraies données")
     assert not pd.read_csv(vraies)["id"].str.startswith("EXEMPLE").any()
+
+
+def test_les_tables_psi_ont_des_colonnes():
+    from flame.commun.donnees import TABLES_PSI
+
+    for nom in TABLES_PSI:
+        fichier = DOSSIER_DATA / "psi" / f"{nom}.csv"
+        if fichier.exists():
+            assert len(pd.read_csv(fichier).columns) > 1, nom
+
+
+def test_une_table_psi_inconnue_est_refusee():
+    from flame.commun import charger_table_psi
+
+    with pytest.raises(ValueError):
+        charger_table_psi("pas_une_table")

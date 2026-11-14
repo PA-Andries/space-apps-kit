@@ -1,0 +1,2125 @@
+Source : NASA PSI, PSI-22, Science Documents, E-FIELD_Flames_procedure_20200723.pdf
+
+--- page 1 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+1 
+ 
+Advanced Combustion via Microgravity Experiments (ACME) 
+Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) 
+ACME/E-FIELD Flames Experimental Procedure 
+ 
+Prepared by: 
+Dennis P. Stocker, ACME Project Scientist  
+NASA Glenn Research Center 
+dennis.p.stocker@nasa.gov, 216-433-2166 
+ 
+              
+ 
+              
+ 
+Table of Contents         Page 
+1. Introduction 2 
+2. Test Sequences and Parameters  5 
+3. Voltage Sweep Script 14 
+4. Test Matrices 40 
+A. Test Matrices: Years in Advance 40 
+B. Test Matrices: Months in Advance 40 
+C. Test Matrices: Days in Advance 41 
+D. Test Matrices: As-Run 41 
+5. Nomenclature 42 
+ 
+ 
+Commercial products are identified for reference and are not meant 
+to indicate endorsement by NASA or the federal government.
+
+--- page 2 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+2 
+ 
+1. Introduction 
+The narrative description of the experimental procedure is from the ‘Methods / Experimental’ section of 
+the following conference paper: 
+Y.-C. Chien, J. Tinajero, D. Stocker, U. Hegde, and D. Dunn -Rankin, “Electric Field Effects on Flames in 
+Microgravity on the International Space Station,” 2018 Spring Technical Meeting of the Central States 
+Section of The Combustion Institute, Minneapolis, MN, 20-22 May 2018. 
+This description also appears in Section 4.B Overview of Experiment Test Operations of the E-FIELD Flames 
+Final Report.  Note that the referenced Figure 4 (showing the coflow burner geometry) is not included in 
+this document. 
+ 
+The CIR experiments are configured, but not conducted, by the ISS crew.  Thus far, ACME’s activity has 
+included the majority of the crew members, regardle ss of their nationalities.  Most often the astronauts 
+and cosmonauts exchange gas bottles, mass flow controllers, and igniter tips.  In the latter case, the igniter 
+tip exchange can occur after failure or proactively before failure when the crew already ha s changes to 
+make changes in th e interior of the insert.  While these activities may seem mundane, the crew play a 
+critical role in setting up the hardware for each experiment.  As an extreme example, there were crew 
+activities on 8 separate days in Sept.-Oct. 2017 to configure the CIR and ACME hardware for the first ACME 
+experiment, namely the Coflow Laminar Diffusion Flame (CLD Flame) experiment.  In contrast, only two 
+crew days were required to reconfigure the hardware for the first E -FIELD Flames tests because of the 
+initial use of the same coflow burner.  Planning is critical because crew activity is scheduled three weeks 
+in advance, for which detailed procedures must be prepared and uplinked to the ISS. 
+ 
+All CIR tests are remotely commanded from the ground from NASA’s Glenn ISS Payload Operations Center 
+(GIPOC) in Cleveland, Ohio.  Typically , four to six people staff four consoles during the testing.  The CIR 
+hardware is controlled from the Rack Officer (RO) and Data Management Officer (DMO) consoles, and the 
+ACME hardware is control led from the Payload Developer (PD) console.  Two shifts of personnel are 
+scheduled to staff these three consoles on test days because they typically last 14 hours with the many 
+pre- and post-testing activities.  Given that the tests are remotely commanded, the operations are carried 
+out in the day and evening in Cleveland, e.g., from 7 AM to 9 PM.  A day’s tests, i.e., with flames, are 
+normally conducted in a period of 10 hours of less.  Tests are normally conducted on three weekdays per 
+two weeks.  On intervening weekdays, the image data is downlinked and the crew often swap one or both 
+gas bottles.  Transferring and downlinking data from a day’s tests also requires a 2 -shift day for the RO 
+and DMO consoles, where it is alway s necessary to verify that data  was downlinked without errors and 
+that data is not missing.  Those two positions are also staffed to guide and oversee the crew activity.  As 
+a result, the CIR consoles are normally actively staffed on four weekdays per week.  A team of four carry 
+out the detailed planning for the CIR and ACME console staff, and the daily operational plans typically 
+exceed 50 pages on days including testing. 
+ 
+The science console allows for review of the analog video and non-imaging telemetry (at 1 Hz) in near real 
+time but doesn’t allow for commanding.  In the case of E-FIELD Flames, arrangements were made so that 
+the analog video is streamed to a secure computer at UC Irvine to allow the research team to participate 
+in test operations and to recommend adjustments to the day’s planned parameters.  That team does not 
+see the telemetry during the testing, but is in communication via phone and e -mail with their NASA 
+research partners at the GRC ISS Payload Operations Center (GIPOC).  While there are many preparatory 
+steps, the tests are ultimately conducted using an uploaded software script and parameter files.  In 
+advance of the test day, the UC Irvine science team plans the nearly 60 parameters in the voltage sweep 
+script and specifies other para meters that are configured outs ide of the script, such as camera settings.
+
+--- page 3 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+3 
+ 
+It is also possible to effectively conduct tests in a ‘manual’ mode, where parameters are changed in 
+response to the analog video downlink or telemetry.  For example, the electric field potential can be 
+adjusted to approach a stability or soot limit. 
+ 
+Typically, ten E-FIELD Flames tests are conducted per test day. Despite the short test durations, the low 
+rate results from several unavoidable factors.  After a test is conducted, the 125 -Hz non-imaging data is 
+downlinked for immediate review by the scien ce team.  A small sample of images are often downlinked 
+to ensure that the camera exposures are appropriate, where the times for those images are typically 
+selected based on non-imaging data to provide extreme examples.  The review helps to verify parameters 
+or plan for adjustments in subsequent tests, e.g., to select the voltage range after determining where the 
+ion current saturates for the given flame conditions.  After a test is conducted, a fan circulates the chamber 
+atmosphere after which the chamber is vented (to space) back to atmospheric pressure, if needed.  
+Midway through a day’s E-FIELD Flames tests, the atmosphere is circulated for 15 minutes through a filter 
+cartridge filled with molecular sieves to capture any soot and adsorb at least a portion of the combustion 
+products, e.g., carbon dioxide, water vapor, and incomplete combustion products.  The tests are only 
+conducted when both Ku and S band communication is available through NASA’s Tracking and Data Relay 
+Satellite (TDRS) System.  Depending on the various orbits, there are periodic communication outages with 
+a loss of signal (LOS) that can be a short handover (from one satellite to another) or can last as long as 30 
+minutes. 
+ 
+A variety of constraints limit the number of tests that can be performed, both overall and on a daily basis.  
+The next combustion experiments in the CIR will feature solid fuels and focus on flame spread and material 
+flammability.  That follow-on plan limits the duration of ACME operations, where each ACME experiment 
+is allotted four months for testing.  Although it requires additional crew time, these allotments are split 
+into two rounds so that the investigators have a break from testing for careful review of the early results 
+so that they can maximize the scientific outcome of their second round.  This paper reports on early results 
+from the first round of E-FIELD Flames. 
+ 
+While nitrogen is available from the space station, the combustion testing is limited by the available gas 
+bottles that were and are launched to supp ort the tests.  For E -FIELD Flames and most of ACME’s 
+experiments, the test matrices used to plan those gas resources were established in 2010.  At that time, 
+NASA limited the scope of the ACME tests matrices with t he intent of focused experiments with lim ited 
+objectives rather than comprehensive experiments.  As such, the general target was 50 tests per 
+experiment.  For most ACME experiments, the limiting gas constraint is the oxygen/nitrogen bottles used 
+to fill the chamber.  This resource constraint is exacerbated by the CIR because it is equipped with a pair 
+of redundant safety timers to limit the fuel that can flow into the combustion chamber (where the timers 
+can be set for the oxidizer flow in the case of inver se flame testing).  The timers can only b e reset by 
+venting the combustion chamber.  Therefore, the timer limit combined with other constraints effectively 
+corresponds to the day’s maximum flow time for the fuel (or more generally, the limiting reactant).  For 
+E-FIELD Flames, the safety timers are set to the maximum value of 999 seconds, which corresponds to the 
+10 tests typically completed per day. 
+ 
+Another constraint is the available time in a day, where the console personnel and ISS resources, such as 
+the video downlink, are planned for a limited number of hours.  When necessary for the research, NASA 
+does have continuous 24-hour/day operations for some non-CIR experiments.  But as discussed, the ACME 
+tests are typically two minutes or less in duration, s o the testing is almost always limited to  the planned 
+durations.
+
+--- page 4 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+4 
+ 
+Data limits are yet another constraint, where the on -orbit hardware can store a limited amount of data.  
+More importantly, 127,000 MB is the most that can be reasonably managed in a two -shift transfer and 
+downlink day.  Therefore, tests days are limited to this amount of data, where image data from select 
+cameras is often archived at reduced rates to mitigate this challenge.  Nonetheless, the limit sometimes 
+forces decisions to abandon recorded images. 
+ 
+This detailed description of operations and hardware provides the context under which the ACME 
+experiments are conducted.  Their complexity makes the flame conditions seem trivial in comparison.  It 
+is a simple coflow flame, with just a small j et of fuel surrounded by a weak coflow of  ‘air’ which also fills 
+the chamber, but where tests are also conducted with no coflow.  A test includes starting the gas flows to 
+prime the system, energizing the igniter to initiate a flame, retracting the igniter, and allowing the flame 
+to steady slight ly before energizing the electric field to its initial value.  The flame is again allowed to 
+steady before beginning a voltage sweep over a specified range with steps or smooth ramps of specified 
+voltage changes and durations.  The sweep can be in one direction or can include cycles of sweeps.  After 
+each test, a duplicate field sweep is made to ensure that there are no current leaks, i.e., other than the 
+ion current through the flame. 
+ 
+The first phase tests in E -FIELD Flames employ the coflow burner geomet ry shown in Figure 4, with the 
+fuel tube extending slightly above the burner surface.  The results shown in this paper are for tests 
+conducted with 100% methane in a chamber atmosphere and coflow (when used) of synt hetic ‘air’ (i.e., 
+21/79 oxygen/nitrogen by volume) at a nominal pressure of 100 kPa.  The mesh is held at a negative 
+potential relative to the burner in these tests.  The sweeps shown in this paper extend to at least -7 kV, 
+where the voltage is increased in small steps (e.g., of 100 V) lasting 1-2 seconds.  The details of the voltage 
+changes can be seen in the resulting plots.
+
+--- page 5 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+5 
+ 
+2. Test Sequences and Parameters All E-FIELD Flames tests conducted on the ISS 
+were carried out using automated software w hich had its roots in  ACME’s Integrated Science 
+Requirements Documents (ISRD, RDR version, Rev. B) and Science Operations Requirements 
+Documents (SORD, Rev. A).  The E -FIELD Flames Science Requirements Document (SRD) is of course 
+pertinent but only that wh ich was incorporated in the ISRD and SORD was used by the engineering 
+team in developing the control software. 
+ 
+Multiple software scripts and corresponding parameter files were prepared to address the various 
+objectives explained in this excerpt from section 4.2 of the ACME ISRD.  The section is fully included with 
+the important exception of the tables detailing the envisioned operational sequences.  Given that they 
+were conceptual, they were left out to reduce the chance of a confused understanding of the engineering 
+implementation.  For example, excessive electromagnetic interference (EMI) led to a change in the design 
+of the electric field system limiting the voltage to a single polarity on a given test day.  As a result, the step 
+response procedure could not be carried out as detailed in Table 4.2.2 of the ISRD.   
+ 
+The E-FIELD experiment consists of 4 objectives corresponding to 4 series of tests  using 2 different 
+diffusion flame burner configurations. The first three test series  provide the key fundamental 
+information regarding the electrical character of diffusion flames and the influence of electric fields on 
+soot formation; the final series focuses on electric field sensing and control of flames. 
+ 
+General Operations 
+Before any of the electric field experiments, the high voltage mesh should be installed (or moved into 
+position). Leak current should be measured by sweeping the voltage  from 0 to 10kV and 0 to -10kV 
+with no flame present. A steep rise in current under these conditions indicates corona discharge and 
+sets the upper limit on the potential.  The test sequence involves a complete repeat voltage sweep 
+with no flame to provide  a point -by-point current leak measurement. A similar sweep should be 
+completed following flame extinguishment at the end of a test set. Only ion current would need to be 
+measured during the no-flame sweep. In addition, excessive leak current at relatively low voltage may 
+indicate electron emission from carbon buildup on the gas  jet flame tip. If the leak current exceed s 
+10% of the flame ion current, cleaning of the  gas jet tip is requested. Cleaning consists of a manual 
+wiping or possibly burning off the carbon with a modified flame condition. We expect this to be a rare 
+request, but the continuous monitor of flameless ion current provides a reliable in-situ monitor. We 
+assume that the chamber will be emptied and refilled approximately every 7-8 tests to minimize the 
+oxygen concentration uncertainty in the test chamber. The exact times for settling and voltage steps 
+may vary (they should be reconfigurable from the  ground), but a nominal expected operational 
+sequence for one chamber fill and the key measurement data sets are shown below. 
+ 
+(A) Voltage Sweep – collection of VI curves (or VCC curves) -- where the voltage is swept from 0-±5kV 
+(or until flame blowout) and the ion current is monitored and  recorded. The sweep will consist of a 
+series of discrete steps, where a settling time is allowed after each voltage change. At the same time, 
+color and OH* video rec ords the fla me shape and luminosity (both broadband flame and soot 
+luminosity and OH* chemiluminescence) throughout the sweep. A typical step sweep might comprise: 
+15 second ignition & stabilization; 100 V/step, 0.3 sec settle between steps, and a 0.25 sec. ion current 
+measurement at each point, to ±5kV or blowout. Blowout can be  detected by a sharp drop in ion 
+current. Expected run time is 50 seconds per sweep (not including a background current sweep with 
+the flame off). However, the time  between voltage steps for fl ame adjustment and data collection 
+shall be adjustable via uplink between the values of 0-10 seconds.
+
+--- page 6 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+6 
+ 
+ 
+(B) Step Response—This test will involve the rapid change of voltage from a base  level to a much 
+higher (or lower) level, while the ion curre nt (and flame luminosity and shape) is monitored in time 
+as it settles to its new steady value. The key measurable is the ion current as a function of time through 
+the voltage step change and the flame’s subsequent settling. As in test set (A), video, luminosity, and 
+chemiluminescence will record flame behaviors in response to an instantaneous change in the electric 
+field. A typical experiment sequence might comprise a 15  second ignition and stabilization, step 
+changes on the order of hundreds of volts, and  recording ion current for 2 seconds between step 
+changes (where steps will not be limited to a single polarity). Settling time for these step changes in 
+zero gravity (particularly, for soot related phenomena) may need to be adjusted via uplink; the test 
+procedures shown are based on a nominal settling time observed in preliminary testing at 1g and the 
+2.2 Second Drop Tower. The range of times between voltage steps may vary between 0-100 seconds. 
+ 
+(C) Electric Field Effects on Soot – The following tests will demonstrate the effects of electric fields on 
+soot (measured by broadband emission from the flame and soot volume fraction) by slowly increasing 
+the coflow air velocity, comparing the flame  structure at each step to a flame affected purely by 
+electric forcing. Conditions will be  uplinked and derived from experiments (A) and (B). Timing will 
+depend on the burner, but each test will be allowed at least 100 seconds. Also, note that the step 
+time between one coflow velocitity and the next shall be adjustable via uplink between the values of 
+0-10 seconds. Broad solid angle collection luminosity, flame  images along with soot volume fraction 
+and soot pyrometry will be collected. 
+ 
+(D) Open Loop Sensing and Control – The experiments associated with control will be uplinked, based 
+on the results of the above baseline mapping experiments (A) and  (B) above. Timing will depend on 
+the condition, but each test will be allowed at least  70 seconds. The procedure is a series of voltage 
+ramps (or small steps with  continuous data collection). Ion current and luminosity (broadband and 
+CH*) fluctuations will be collected as well as flame images. The time between voltage  changes for 
+flame adjustment and data collection shall be adjustable via uplink  between the values of 0 -10 
+seconds. 
+ 
+Although four types of E -FIELD Flames tests are discussed above, it was determined by 2017 that three 
+types of tests could be used to address the four experimental objectives, where a separate script to 
+investigate effects on the soot was not needed. 
+ 
+While scripts were developed for the three remaining sequences, it was later determined that the open 
+loop objectives could be accomplished by proper selection of parameter values with the voltage sweep 
+script, e.g., limiting the voltage range.  Furthermore, the step response script was ultimately not employed 
+because of the slow response time of the high -voltage power supply.  As such, all of the experiment’s 
+flame tests were conducted with the voltage sweep script .  Therefore, that procedure is the only one to 
+be further discussed in this document. 
+ 
+The major phases of the test sequence are graphically displayed in Figure 1 , where the green and gold 
+lines represent the oxidizer coflow (if any), nitrogen flow (if any), and fuel flow.   The gold lines represent 
+optional changes to flow rates, e.g., for a change  in the fuel dilution after ignition.  The phases are 
+described in d etail at the bottom of the schematic , where the nomen clature throughou t the figure 
+generally corresponds to parameter names.
+
+--- page 7 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+7 
+ 
+ 
+Figure 1.  Schematic illustrating the voltage sweep script sequence from the beginning of E-FIELD Flames 
+testing in March 2018. 
+ 
+In its initial use, the script used 64 parameters, but it was revised in April 2018 with the addition of one 
+parameter and the replacement of four parameters, resulting in a new total of 65 script parameters.  The 
+parameters (with values) are subsequently shown for one test each before (left) and after (right) the script 
+change.  The lines separate general types of parameters , e.g., those corresponding to imaging, ignition, 
+gas flow, the electric field, etc. 
+ 
+testpointName:18073A3, testpointName:18319T1, 
+preIgnitionDataTimeSec:0, preIgnitionDataTimeSec:0, 
+postFlameDataTimeSec:5, postFlameDataTimeSec:5, 
+useIPSUs:true, useIPSUs:true, 
+ipsuTimeoutSec:40, ipsuTimeoutSec:40, 
+useAcmeCamera:true, useAcmeCamera:true, 
+useIntensifiedCamera:true, useIntensifiedCamera:true, 
+ipsu1ArchiveRate:2, ipsu1ArchiveRate:2, 
+dataCameraPreIgnitionExposureUs:100000, dataCameraPreIgnitionExposureUs:100000, 
+dataCameraTestExposureUs:650000, dataCameraTestExposureUs:20000, 
+analogCameraPreIgnitionShutter:2, analogCameraPreIgnitionShutter:2, 
+analogCameraTestShutter:2, analogCameraTestShutter:5, 
+intensifierGainAmplitude:40000, intensifierGainAmplitude:40000, 
+preIgnitionImageTimeSec:0, preIgnitionImageTimeSec:0, 
+postFlameImagingTimeSec:3, postFlameImagingTimeSec:3, 
+useSideLedBank:true, useSideLedBank:true, 
+useEndLedBank:true, useEndLedBank:true,
+
+--- page 8 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+8 
+ 
+useBracketedExposures:false, useBracketedExposures:true, 
+bracketedExposureStartUsec:5000, bracketingImagesPerExposure:1, 
+bracketedExposureIncrementUsec:5000, bracketingNumberOfExposures:4, 
+bracketedExposureNumber:4, bracketingExposureStartUsec:180000, 
+bracketedExposureCommandDelayMsec:167, bracketingExposureIncrementUsec:119, 
+igniterIgnitionPosition:2410, igniterIgnitionPosition:2472, 
+igniterPreheatPowerV:0.0, igniterPreheatPowerV:0.0, 
+igniterPreheatTimeMs:0, igniterPreheatTimeMs:0, 
+igniterIgnitionPowerV:3.75, igniterIgnitionPowerV:3.75, 
+igniterIgnitionDurationMs:2000, igniterIgnitionDurationMs:2000, 
+igniterDelayBeforeRetractMs:1500, igniterDelayBeforeRetractMs:1500, 
+useIgnitionDetection:true, useIgnitionDetection:true, 
+extinctionDetectionStopsTest:true, extinctionDetectionStopsTest:true, 
+pmt1Gain:6.25, pmt1Gain:5.00, 
+pmt2Gain:6.5, pmt2Gain:5.5, 
+pmt3Gain:6.5, pmt3Gain:5.5, 
+useFoma:true, useFoma:true, 
+flowTimeoutSec:150, flowTimeoutSec:150, 
+ nitrogenPrimingDurationSec:10, 
+primingAndPreIgnitionDurationSec:5, primingAndPreIgnitionDurationSec:5, 
+stabilizationTime1Sec:5, stabilizationTime1Sec:1.5, 
+dilutionTimeSec:0, dilutionTimeSec:0, 
+stabilizationTime2Sec:0, stabilizationTime2Sec:0, 
+matchingCoflowRampTimeSec:0, matchingCoflowRampTimeSec:0, 
+stabilizationTime3Sec:0, stabilizationTime3Sec:0, 
+fuelAndCoflowRampTimeSec:0, fuelAndCoflowRampTimeSec:0, 
+constantFlowTimeSec:10, constantFlowTimeSec:5, 
+velocityAirIgnitionMPerSec:0, velocityAirIgnitionMPerSec:0, 
+velocityAirFinalMPerSec:0, velocityAirFinalMPerSec:0, 
+velocityMixIgnitionMPerSec:0.19, velocityMixIgnitionMPerSec:0.24, 
+velocityMixFinalMPerSec:0.19, velocityMixFinalMPerSec:0.24, 
+concentrationInitial:1.0, concentrationInitial:0.25, 
+concentrationFinal:1.0, concentrationFinal:0.25, 
+rampCount:0, rampCount:0, 
+rampSizeMPerSec:0.05, rampSizeMPerSec:0.05, 
+rampTimeSec:10, rampTimeSec:10, 
+rampConstantFlowTimeSec:10, rampConstantFlowTimeSec:10, 
+efieldCommandManually:false, efieldCommandManually:false, 
+efieldInitializeVolts:-200, efieldInitializeVolts:180, 
+efieldInitializeTimeSec:4, efieldInitializeTimeSec:4, 
+efieldMinVoltage:-5000, efieldMinVoltage:500, 
+efieldMaxVoltage:-200, efieldMaxVoltage:10000, 
+efieldCycles:1, efieldCycles:1,
+
+--- page 9 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+9 
+ 
+efieldStepVoltage:-100, efieldStepVoltage:350, 
+efieldStepDurationSecs:1.0, efieldStepDurationSecs:2, 
+efieldRampRatePerSec:0, efieldRampRatePerSec:0, 
+efieldRampDurationSecs:1, efieldRampDurationSecs:0, 
+efieldHoldDurationSecs:0 efieldHoldDurationSecs:0 
+ 
+More specifically, the script was updated between testing on April 16 (GMT 18106) and April 23 (18113) 
+with the addition of the parameter nitrogenPrimingDurationSec.  The parameter was added because it 
+was observed that unwanted oscillations in the nitrogen flow often diminished with time.  Therefore, an 
+early start of the nitrogen flow could reduce or eliminate oscillations while the flame was burning.  This 
+feature can be seen in a simplified graphic of the test sequence (with constant flow rates) in Figure 2.  At 
+the same time, four bracketing parameters were updated to enable the bracketed exposures to increase 
+via multiplication by a specified constant rather than via addition of a constant  time.  The revised set of 
+parameters was retained through the second round of testing with the gas-jet burner that was carried out 
+in Sept. to Nov. 2018.  
+ 
+ 
+Figure 2.  Simplified schematic of the voltage sweep script sequence, featuring constant flow rates, from 
+April 2018, after the addition of the optional nitrogen priming (shown in gold).
+
+--- page 10 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+10 
+ 
+The voltage sweep parameters are briefly explained below, where many of them are common to all ACME 
+experiments because of th eir use of the same set of modular hardware.  In the section with bracketing 
+photography parameters for the ACME Data  Camera (DataCam) , both the original and replacement 
+parameters are explained. 
+ 
+testpointName 
+the test point name that will be used by the IPSUs and ACME Data File (in the image and data file 
+names and directories) 
+preIgnitionDataTimeSec 
+time ACME Data File records data before IPSUs open test point and start archiving images 
+postFlameDataTimeSec 
+time ACME Data File records data after the postFlameImagingTimeSec has elapsed which occurs 
+after command sent to close manifolds (i.e., stop gas flow) 
+useIPSUs 
+ indicates if IPSUs will be used for the test point 
+ipsuTimeoutSec 
+wait time for command responses from IPSUs and IPSUG when opening and starting test points 
+useAcmeCamera 
+ indicates if the ACME Camera will be used for the test point 
+useIntensifiedCamera 
+ indicates if the CIR Intensified Camera will be used for the test point 
+ipsu1ArchiveRate 
+indicates that every nth IPSU1 image is saved (archived) (e.g., 10 indicates every 10th image) 
+dataCameraPreIgnitionExposureUs 
+the exposure of the ACME Camera prior to ignition and igniter retraction (set for imaging the 
+igniter and ignition event) 
+this exposure is the length of time the sensor is exposed to light (time the shutter stays open) for 
+each image or frame 
+dataCameraTestExposureUs 
+the exposure of the ACME Camera after igniter retraction (set for imaging the flame) 
+analogCameraPreIgnitionShutter 
+the shutter speed of the ACME Chamber Insert Camera (no IPSU data recorded for this camera) 
+prior to ignition and igniter retraction (set for imaging the igniter and ignition event) 
+analogCameraTestShutter 
+the shutter speed of the ACM E Chamber Insert Camera (no IPSU data recorded for this camera) 
+after igniter retraction (set for imaging the flame) 
+intensifierGainAmplitude 
+the CIR Intensified Camera intensifer gain setting; commanded to this value after turning off 
+chamber LED lignts 
+The gain digitally amplifie s the camera's received light levels; increasing the gain raises the 
+intensity of the entire signal, but also can increase the noise level. 
+preIgnitionImageTimeSec 
+ time IPSUs record images before the CIR fuel manifold is commanded open 
+postFlameImagingTimeSec 
+time IPSUs record images after extinction is detected or after flowTimeoutSec has elapsed 
+useSideLedBank 
+indicates if the side LED lights in the chamber should be on for the initial test point setup
+
+--- page 11 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+11 
+ 
+useEndLedBank 
+ indicates if the end LED lights in the chamber should be on for the initial test point setup 
+useBracketedExposures 
+indicates if bracketed exposures on the ACME Camera will be used for the test point 
+Exposure bracketing is taking the same photo more than once using different settings for different 
+exposures (typically one under-exposed and one over-exposed). 
+bracketedExposureStartUsec 
+ the initial exposure for the ACME Camera when using bracketed exposure 
+bracketedExposureIncrementUsec 
+ the value the exposure changes for each increment when using bracketed exposure 
+bracketedExposureNumber 
+the total number of exposures (including the initial exposure) when using bracketed exposure 
+(e.g., using default values the exposures would change from 5000, 10000, 15000, 20 000, 5000, 
+etc.) 
+bracketedExposureCommandDelayMsec 
+ wait time between changing exposure when using bracketed exposure 
+bracketingImagesPerExposure 
+the number of images at each exposure before moving on to the next exposure when using 
+bracketed exposure 
+bracketingNumberOfExposures 
+ the actual number of exposures 
+bracketingExposureStartUsec 
+ the initial exposure for the ACME Camera when using bracketed exposure 
+bracketingExposureIncrementUsec 
+the value, divided by 100, that will get multiplied to the current exposure to determine the next 
+exposure   
+Ex: if value is 125, multiply current exposure by 1.25 to get next exposure.  5000, 6250, 7813, 
+9766, 5000 
+igniterIgnitionPosition 
+ the position of the igniter for ignition 
+igniterPreheatPowerV 
+ the igniter power during preheat (igniterPreheatTimeMs ) 
+igniterPreheatTimeMs 
+the time the igniter is powered during the preheat; igniter preheat starts before ACME valves 
+open 
+igniterIgnitionPowerV 
+ the igniter power during ignition (igniterIgnitionDurationMs) 
+igniterIgnitionDurationMs 
+the time the igniter is  powered for ignition; starts after primingAndPreIgnitionDurationSec 
+elapses, ends early if ignition is detected 
+igniterDelayBeforeRetractMs 
+the time the igniter stays in igniterIgnitionPosition before retracting; starts at the start of 
+igniterIgnitionDurationMs 
+useIgnitionDetection 
+indicates if Ignition Detection will be used; when ignition is detected (per the specified values), 
+the igniter turns off and retracts
+
+--- page 12 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+12 
+ 
+extinctionDetectionStopsTest 
+indicates if Extinction Detection will be used to detect flame e xtinction; when extinction is 
+detected (per the specified values or when commanded by operators), the script ends the gas 
+flow and IPSUs recording of images and continues to the end of the script 
+pmt1Gain 
+ the PMT1 gain during the script; set to 0 at end of script 
+pmt2Gain 
+ the PMT2 gain during the script; set to 0 at end of script 
+pmt3Gain 
+ the PMT3 gain during the script; set to 0 at end of script 
+useFoma 
+ indicates if gas flow will be used for test points 
+flowTimeoutSec 
+total time gas flows during script, starting with primingAndPreIgnitionDurationSec; must be more 
+than all times gas is flowing (including regular priming time but NOT N2 priming, flow for test, 
+ramp flow times) and E-Field step times; gas flow stops after this time if not at end of script 
+nitrogenPrimingDurationSec 
+time for nitrogen to flow in addition to primingAndPreIgnitionDurationSec; time starts before 
+IPSUs archiving and before opening fuel manifold 
+primingAndPreIgnitionDurationSec 
+time for all desired gas to flow before powering igniter for ignition; time starts after ACME valves 
+open 
+stabilizationTime1Sec 
+time after igniter turns off (igniterIgnitionDurationMs elapses or ignition is detecte d) before 
+continuing script 
+dilutionTimeSec 
+ time to dilute the fuel with nitrogen 
+stabilizationTime2Sec 
+ time to wait after dilutionTimeSec completes before continuing script 
+matchingCoflowRampTimeSec 
+time to ramp coflow  (outer flow) to match fuel flow rate (inner flow); starts after 
+stabilizationTime2Sec 
+stabilizationTime3Sec 
+ time to wait after matchingCoflowRampTimeSec completes before continuing script 
+fuelAndCoflowRampTimeSec 
+ time to ramp both the coflow (outer flow) and fuel flow (inner flow); ramps together 
+constantFlowTimeSec 
+time to wait after fuelAndCoflowRampTimeSec completes before continuing script; E-Field starts 
+after this time completes 
+velocityAirIgnitionMPerSec 
+velocity of the coflow (outer flow) at start of priming 
+velocityAirFinalMPerSec 
+ velocity of the coflow (outer flow) at end of test 
+velocityMixIgnitionMPerSec 
+ velocity of the fuel flow and the nitrogen (if used) flow (inner flows) at start of priming   
+velocityMixFinalMPerSec 
+velocity of the fuel flow and the nitrogen (if used) flow (inner flows) at end of test
+
+--- page 13 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+13 
+ 
+concentrationInitial 
+ concentration of fuel (diluted or not) at start priming 
+concentrationFinal 
+ concentration of fuel (diluted or not) at end of test 
+rampCount 
+ Total number of additional ramps 
+rampSizeMPerSec 
+ Flow Velocity, can be positive or negative 
+rampTimeSec 
+ how long it takes to get to the next velocity 
+rampConstantFlowTimeSec 
+ how long it sits at each level 
+efieldCommandManually 
+if true, script pauses to allow operator to run E-Field manually; should remain false because there 
+is no timeout for gas flow 
+efieldInitializeVolts 
+initial voltage for E-Field, goes to this voltage after stabilizationTime1Sec 
+efieldInitializeTimeSec 
+the time the E -Field is at intialize volts; sta rts after stabilizationTime1Sec, when time completes 
+the script proceeds to dilutionTimeSec, then holds until E-Field starts a cycle.   
+efieldMinVoltage 
+minimum voltage for the E-Field cycle(s); always has to be smaller than efieldMaxVoltage 
+efieldMaxVoltage 
+maximum voltage for the E-Field cycle(s); always has to be greater than efieldMinVoltage 
+efieldCycles 
+the number of times the E-Field changes between the two specified voltages (e.g., min to max = 
+1st cycle, max to min = 2nd cycle, min to max = 3rd cycle, etc.) 
+efieldStepVoltage 
+ voltage change between steps; should be negative when stepping down 
+efieldStepDurationSecs 
+time to wait at each voltage level before stepping again 
+efieldRampRatePerSec 
+indicates the slope (rate) of the diagonal ramp (i.e, how fast it's falling/climbing); also indicates if 
+a ramp or a step profile will be performed (if 0, a step profile will be performed) 
+efieldRampDurationSecs 
+time to get to the next voltage level of the ramp profile 
+efieldHoldDurationSecs 
+ time to wait at each voltage level before ramping again
+
+--- page 14 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+14 
+ 
+3. Voltage Sweep Script 
+For a deeper understanding of the experimental procedure, the JavaScript used to control the E-FIELD 
+Flames tests (after the revisions described in section 2) is presented here.  Note that it features a default 
+set of parameter values (beginning in the middle of this page) which are overwritten by values specified 
+for each test.  
+ 
+/** 
+ * EfieldVoltageSweepTest.js 
+ * Script which executes an E-Field step response test point. 
+ *  
+ * Assumptions: 
+ *    - Cameras are configured except that data camera exposure and analog camera shutter 
+ *      are set in this script. 
+ *    - Camera lens is configured. 
+ *    - IPSUs being used, as specified in SystemDefineSetup command, are ready 
+ *    - Mass flow controllers are enabled 
+ *    - PMTs are enabled 
+ *    - ExtinctionDetectionConfigure and one of the ExinctionDetectionSet Action commands 
+ *       has been issued and ExtinctinctionDetectionSetState(Disabled) 
+ *    - Ignition detection parameters are set as desired using the IgnitionDetectionConfigure command. 
+ */ 
+ 
+//Hook up to the runScript signal to show where to start execution 
+AcmeAvionicsController.runScript.connect(run); 
+ 
+//This variable must be named parameters so the ground and flight software can manipulate the values. 
+var parameters = { 
+    testpointName:"NONE", 
+ 
+    // data only recording 
+    preIgnitionDataTimeSec:0, 
+    postFlameDataTimeSec:5, 
+    
+    // IPSU imaging 
+    useIPSUs:true, 
+    ipsuTimeoutSec:40, 
+    useAcmeCamera:true, 
+    useIntensifiedCamera:true, 
+    ipsu1ArchiveRate:2, 
+    dataCameraPreIgnitionExposureUs:100000, 
+    dataCameraTestExposureUs:650000, 
+    analogCameraPreIgnitionShutter:2,  
+    analogCameraTestShutter:2, 
+    intensifierGainAmplitude:50000,  // not raw, 2500 - 80,000 
+    preIgnitionImageTimeSec:0, 
+    postFlameImagingTimeSec:3, 
+    useSideLedBank:true,
+
+--- page 15 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+15 
+ 
+    useEndLedBank:true, 
+ 
+    // exposure bracketing 
+    useBracketedExposures:false, 
+    bracketingImagesPerExposure:1, 
+    bracketingNumberOfExposures:4, 
+    bracketingExposureStartUsec:5000, 
+    bracketingExposureIncrementUsec:5000, 
+ 
+    // igniter 
+    igniterIgnitionPosition:0, 
+    igniterPreheatPowerV:0.0, 
+    igniterPreheatTimeMs:0, 
+    igniterIgnitionPowerV:0.0, 
+    igniterIgnitionDurationMs:0, 
+    igniterDelayBeforeRetractMs:0, 
+ 
+    // ignition detection to cut off igniter and send home 
+    useIgnitionDetection:true, 
+     
+    // exinction detection 
+    extinctionDetectionStopsTest:true, 
+     
+    // PMTs 
+    pmt1Gain:6.25, 
+    pmt2Gain:6.5, 
+    pmt3Gain:6.5, 
+ 
+    // gas flow 
+    useFoma:true, 
+    flowTimeoutSec: 120,  
+    nitrogenPrimingDurationSec:0, 
+    primingAndPreIgnitionDurationSec:6,       
+    stabilizationTime1Sec:4, 
+    dilutionTimeSec:0, 
+    stabilizationTime2Sec:0, 
+    matchingCoflowRampTimeSec:0, 
+    stabilizationTime3Sec:0,    
+    fuelAndCoflowRampTimeSec:0,     
+    constantFlowTimeSec:4, 
+    velocityAirIgnitionMPerSec:0.03125, 
+    velocityAirFinalMPerSec:0.03125, 
+    velocityMixIgnitionMPerSec:0.15, 
+    velocityMixFinalMPerSec:0.15, 
+    concentrationInitial:1.0, 
+    concentrationFinal:1.0, 
+    // ramp holds beyond the final velocity for Ops tests 
+    rampCount:0,
+
+--- page 16 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+16 
+ 
+    rampSizeMPerSec:0.05, 
+    rampTimeSec:10, 
+    rampConstantFlowTimeSec:10, 
+    
+    // E-Field.  If manual all E-Field operations, including enable/disable are by ground command. 
+    // Set efieldRampRatePerSec = 0 to step, otherwise it will ramp 
+    efieldCommandManually:false, 
+    efieldInitializeVolts:0, 
+    efieldInitializeTimeSec:0, 
+    efieldMinVoltage:-5000, 
+    efieldMaxVoltage:-200, 
+    efieldCycles:1, 
+    // step parameters.  Negative step voltage to go from max to min 
+    efieldStepVoltage:-100, 
+    efieldStepDurationSecs:1.0, 
+    // ramp parameters.  Negative ramp rate to go from max to min 
+    efieldRampRatePerSec:0, 
+    efieldRampDurationSecs:1, 
+    efieldHoldDurationSecs:0 
+ 
+    }; 
+ 
+// holds the exposure times to cycle through 
+var bracketedExposureTimesUsec = []; 
+var bracketedExposureTimeIndex = 0; 
+var bracketedExposureNumber = 0; 
+ 
+ 
+// Print out the parameters so the ground software can display and support changes 
+printParams(); 
+ 
+// Execution begins here when the RunScript command is issued 
+function run() 
+{   
+    // tell ACME telemetry that the script is running    
+    setScriptStateRunning(); 
+ 
+    // print parameters for a record of what was used after any changes 
+    printParams(); 
+ 
+    var cirManifoldsOpen = false; 
+    var ipsusStarted = false; 
+ 
+    try 
+    { 
+        print("E-Field Voltage Sweep test point " + parameters.testpointName + " STARTED");   
+      
+        // Check that all MFCS are in operate state
+
+--- page 17 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+17 
+ 
+        if ( FlowTelemetry.MFCA1StaticMixerState != 4) { print("WARNING: MFCA1 not in Operate state"); } 
+        if ( FlowTelemetry.MFCA2BypassState != 4) { print("WARNING: MFCA2 not in Operate state"); } 
+        if ( FlowTelemetry.MFCA3FuelState != 4) { print("WARNING: MFCA3 not in Operate state"); } 
+ 
+        if ( ExtinctionDetectionTelemetry.extinctionDetectionAveragingDuration <= 0 ) 
+        { throw "Extinction detection averaging duration must be greater than zero."; } 
+   
+        if ( DiagnosticTelemetry.PMTPower < 4.0) 
+        { print("WARNING: PMT's are not powered."); } 
+        print("Setting PMT gains"); 
+        PmtSetAllGains.PMT1Gain = parameters.pmt1Gain; 
+        PmtSetAllGains.PMT2Gain = parameters.pmt2Gain; 
+        PmtSetAllGains.PMT3Gain = parameters.pmt3Gain; 
+        sendCommand(PmtSetAllGains); 
+   
+        // Open the test point 
+        if(parameters.testpointName == "NONE") { throw "Must define a test point name."; } 
+        if(parameters.testpointName.length > 7) { throw "Test point name must be 7 characters or less." } 
+        SystemOpenTestPoint.testpointName = parameters.testpointName; 
+        sendCommand(SystemOpenTestPoint); 
+      
+        // convert flows from cm/s to N2-based SLPM 
+        var primingAndIgnitionFlowRates = convertFlowRates(parameters.concentrationInitial, 
+                                    parameters.velocityMixIgnitionMPerSec, 
+                                    parameters.velocityAirIgnitionMPerSec); 
+        var dilutedMatchedFlowRates = convertFlowRates(parameters.concentrationFinal, 
+                                    parameters.velocityMixIgnitionMPerSec,  // mix goes to ignition velocity with final 
+dilution 
+                                    parameters.velocityMixIgnitionMPerSec); // coflow matches mix 
+        var finalFlowRates = convertFlowRates(parameters.concentrationFinal, 
+                                    parameters.velocityMixFinalMPerSec, 
+                                    parameters.velocityAirFinalMPerSec); 
+        var rampFlowRates = convertFlowRates(parameters.concentrationFinal, 
+                                    parameters.rampSizeMPerSec, 
+                                    parameters.rampSizeMPerSec); 
+ 
+        var usingOxidizer = ((dilutedMatchedFlowRates.mfca1 N2Slpm>0) && 
+(parameters.matchingCoflowRampTimeSec >0)) || (finalFlowRates.mfca1N2Slpm>0); 
+        var usingNitrogen = (dilutedMatchedFlowRates.mfca2N2Slpm>0) || 
+(finalFlowRates.mfca2N2Slpm>0); 
+        var usingFuel = (dilutedMatchedFlowRates.mfca3N2Slpm>0) || (finalFlowRates.mfca3N2Slpm>0); 
+ 
+        print("priming/ignition flow mfca1/coflow = " + primingAndIgnitionFlowRates.mfca1N2Slpm + " N2 
+SLPM"); 
+        print("priming/ignition flow mfca2/inert = " + primingAndIgnitionFlowRates.mfca2N2Slpm + " N2 
+SLPM"); 
+        print("priming/ignition flo w mfca3/fuel = " + primingAndIgnitionFlowRates.mfca3N2Slpm + " N2 
+SLPM");
+
+--- page 18 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+18 
+ 
+          
+        print("matched flow mfca1/coflow = " + dilutedMatchedFlowRates.mfca1N2Slpm + " N2 SLPM"); 
+        print("diluted igntion flow mfca2/inert = " + dilutedMatchedFlowRates.mfca2N2Slpm + " N2 SLPM"); 
+        print("diluted ignition flow mfca3/fuel = " + dilutedMatchedFlowRates.mfca3N2Slpm + " N2 SLPM"); 
+         
+        if ( parameters.matchingCoflowRampTimeSec > 0) 
+            print("coflow acceleration = " + ((parameter s.velocityMixIgnitionMPerSec - 
+parameters.velocityAirIgnitionMPerSec) / parameters.matchingCoflowRampTimeSec) + " m/s2"); 
+        else 
+            print("coflow acceration = 0 m/s2") 
+ 
+        print("final flow mfca1/coflow = " + finalFlowRates.mfca1N2Slpm + " N2 SLPM"); 
+        print("final flow mfca2/inert = " + finalFlowRates.mfca2N2Slpm + " N2 SLPM"); 
+        print("final flow mfca3/fuel = " + finalFlowRates.mfca3N2Slpm + " N2 SLPM"); 
+      
+        print("ramp flow mfca1/coflow = " + rampFlowRates.mfca1N2Slpm + " N2 SLPM"); 
+        print("ramp flow mfca2/inert = " + rampFlowRates.mfca2N2Slpm + " N2 SLPM"); 
+        print("ramp flow mfca3/fuel = " + rampFlowRates.mfca3N2Slpm + " N2 SLPM"); 
+ 
+        // check that all of the flows are within the MFCs full scales. Throw exception if not. 
+        checkFlowRateLimits(primingAndIgnitionFlowRates, dilutedMatchedFlowRates, finalFlowRates); 
+ 
+        // Set camera settings 
+        print("Changing cameras to pre-ignition settings") 
+        if ( parameters.useIPSUs == true) 
+        { 
+            DataCameraSetManualExposure.integrationTimeUs = 
+parameters.dataCameraPreIgnitionExposureUs; 
+            sendCommand(DataCameraSetManualExposure); 
+        } 
+        AnalogCameraSetShutter.shutter = parameters.analogCameraPreIgnitionShutter; 
+        sendCommand(AnalogCameraSetShutter); 
+ 
+        // Put intensified camera in safe mode before turning on lights 
+        // gateType = 0 is pulsed mode 
+        print("Intensified camera to safe mode"); 
+        IntensifiedCameraGate.gateType = 0; 
+        IntensifiedCameraGate.pulsedGateWidthCounts = 0; 
+        sendCommand(IntensifiedCameraGate); 
+        mSleep(500); 
+        IntensifiedCameraGainAmplitude.gainAmplitudeCounts = 2048; 
+        sendCommand(IntensifiedCameraGainAmplitude); 
+        // delay to get to safed mode? 
+        mSleep(2000); 
+       
+        // Turn on chamber lights for viewing igniter insertion 
+        IlluminationConfigure.sideLEDBankState = 0; 
+        IlluminationConfigure.endLEDBankState = 0;
+
+--- page 19 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+19 
+ 
+        if(parameters.useSideLedBank) { IlluminationConfigure.sideLEDBankState = 1; } 
+        if(parameters.useEndLedBank) { IlluminationConfigure.endLEDBankState = 1; } 
+        sendCommand(IlluminationConfigure); 
+ 
+        // Insert the igniter 
+        if( parameters.igniterIgnitionPosition != 0) 
+        { 
+            print("Inserting igniter"); 
+            IgniterMove.position = parameters.igniterIgnitionPosition; 
+            sendCommand(IgniterMove); 
+        } 
+       
+        // Disable extinction detection 
+        ExtinctionDetectionSetState.state = 0; 
+        sendCommand(ExtinctionDetectionSetState); 
+ 
+        if ( parameters.useFoma ) 
+        { 
+            // clear and report initial MFC gas usage 
+            clearMfcIntegratedFlow(); 
+            reportMfcIntegratedFlow(true); 
+        } 
+ 
+        // Pause here to check the igniter position and CIR manifold states 
+        print("Test point PAUSED to check igniter. SystemResumeScript when ready.");    
+        pauseScript(); 
+ 
+        // make sure ACME valves are closed before opening CIR manifolds 
+        sendCommand(FlowCloseAll); 
+ 
+        if ( parameters.useFoma ) 
+        { 
+            print("Configuring CIR manifolds, except fuel"); 
+            // This function in helpers.js waits until complete or throws an error. 
+            // The parameters are (N2, O2, Diluent, Fuel, N2 Bypass) 
+            openManifolds(usingNitrogen, usingOxidizer, false, false, usingNitrogen,6000); 
+            cirManifoldsOpen = true; 
+        } 
+        var cirManifoldStartTime = new Date().getTime(); 
+  
+        if ( usingNitrogen && (parameters.nitrogenPrimingDurationSec > 0)) 
+        { 
+            // prime the nitrogen some before priming all 
+            FlowSetSolenoidValveState.solenoidValve = 7; 
+            FlowSetSolenoidValveState.state = 1; 
+            sendCommand(FlowSetSolenoidValveState); 
+             
+            mSleep(500);
+
+--- page 20 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+20 
+ 
+             
+            FlowSetMfcRate.massFlowController = 2; 
+            FlowSetMfcRate.flowSlm = primingAndIgnitionFlowRates.mfca2N2Slpm; 
+            sendCommand(FlowSetMfcRate); 
+             
+            print("Priming nitrogen line for " + parameters.nitrogenPrimingDurationSec + " sec"); 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.nitrogenPrimingDurationSec) > 0 ) 
+            { 
+                mSleep(1000); 
+            } 
+        } 
+ 
+        // Start pre-ignition data capture and wait the prescribed time. 
+        print("Recording pre-ignition data for " + parameters.preIgnitionDataTimeSec + " sec"); 
+        sendCommand(DataRecordingStart); 
+        var secsRemaining = parameters.preIgnitionDataTimeSec; 
+        SystemTelemetry.scriptDurationRemaining = secsRemaining; 
+        while ( secsRemaining > 0 ) 
+        { 
+            mSleep(1000); 
+            secsRemaining--; 
+            SystemTelemetry.scriptDurationRemaining = secsRemaining; 
+        } 
+ 
+        // Start the IPSU(s) recording images 
+        if ( parameters.useIPSUs ) 
+        { 
+            // set the archive rate for IPSU1 
+            IpsuSetArchiveRate.ipsu = 1; 
+            IpsuSetArchiveRate.archiveRate = parameters.ipsu1ArchiveRate; 
+            sendCommand(IpsuSetArchiveRate); 
+ 
+            // This is a flag that gets set by the ImagingController if there is trouble 
+            // talking to an IPSU 
+            ImagingController.ipsuErrorFlag = false; 
+             
+            sendStartIpsusCommand(); 
+        
+            print("Starting IPSU(s) archiving.  Waiting up to " + parameters.ipsuTimeoutSec + " sec"); 
+            var secsRemaining = parameters.ipsuTimeoutSec; 
+            while ( secsRemaining > 0 ) 
+            { 
+                SystemTelemetry.scriptDurationRemaining = secsRemaining; 
+                if ( IpsuTelemetry.ipsuPhase == 5 ) { break; } 
+                if ( ImagingController.ipsuErrorFlag == true ) { break; } 
+                mSleep(1000); 
+                secsRemaining--;
+
+--- page 21 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+21 
+ 
+            } 
+ 
+            if ( ImagingController.ipsuErrorFlag == true ) {  throw "IPSU error" }; 
+            if ( secsRemaining <= 0 ) {  throw "IPSU timeout error" }; 
+            ipsusStarted = true; 
+ 
+            print("Recording pre-ignition images for " + parameters.preIgnitionImageTimeSec + " sec"); 
+            secsRemaining = parameters.preIgnitionImageTimeSec; 
+            SystemTelemetry.scriptDurationRemaining = secsRemaining; 
+            while ( secsRemaining > 0 ) 
+            { 
+                mSleep(1000); 
+                secsRemaining--; 
+                SystemTelemetry.scriptDurationRemaining = secsRemaining; 
+            } 
+        } 
+                
+        if ( parameters.useFoma && usingFuel) 
+        { 
+            // under certain conditions a delay is needed between CIR scripts 
+            if ( cirManifoldsOpen == true &&  ( new Date().getTime() - cirManifoldStartTime < 6000 )) 
+            { 
+                print("Waiting 6 seconds between CIR manifold scripts"); 
+                // CIR open manifold script was run and 6 seconds have not yet elapsed 
+                mSleep(6000); 
+            } 
+ 
+            print("Opening CIR fuel manifold"); 
+            openFuelManifold(); 
+            cirManifoldsOpen = true; 
+        } 
+ 
+         // Turn off the lights 
+        IlluminationConfigure.sideLEDBankState = 0; 
+        IlluminationConfigure.endLEDBankState = 0; 
+        sendCommand(IlluminationConfigure); 
+ 
+        // Put intensified camera in continuous mode and set gain 
+        // gateType = 1 is continuous mode.  pulsed gate width parameter is ignored. 
+        print("Intensified camera to continuous mode"); 
+        IntensifiedCameraGate.gateType = 1; 
+        IntensifiedCameraGate.pulsedGateWidthCounts = 0; 
+        sendCommand(IntensifiedCameraGate); 
+        mSleep(500); 
+        IntensifiedCameraGainAmplitude.gainAmplitudeCounts = 
+intensifierGainToRaw(parameters.intensifierGainAmplitude); 
+        sendCommand(IntensifiedCameraGainAmplitude);
+
+--- page 22 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+22 
+ 
+        // start ignition detection 
+        if ( parameters.useIgnitionDetection) 
+        { 
+            IgnitionDetectionSetState.state = 1; 
+            sendCommand(IgnitionDetectionSetState); 
+        } 
+ 
+        // Preheat the igniter 
+        if(parameters.igniterPreheatTimeMs > 0 && parameters.igniterPreheatPowerV > 0) 
+        { 
+            print("Preheating igniter with " + parameters.igniterPreheatPowerV + "V for " +  
+parameters.igniterPreheatTimeMs + " Ms"); 
+            IgniterPulse.power      = parameters.igniterPreheatPowerV; 
+            IgniterPulse.durationMs = parameters.igniterPreheatTimeMs; 
+            sendCommand(IgniterPulse); 
+        } 
+            
+        // Set the igniter ready to retract after ignition 
+        IgniterSetupMove.position = 0; 
+        sendCommand(IgniterSetupMove); 
+ 
+        // Set ACME valves for gas flow 
+        FlowSetAllSolenoidValveStates.SVA1State = 0; 
+        FlowSetAllSolenoidValveStates.SVA2State = 0; 
+        FlowSetAllSolenoidValveStates.SVA3State = 0; 
+        // Oxidizer to coflow burner outer 
+        FlowSetAllSolenoidValveStates.SVA4State = usingOxidizer ? 1 : 0; 
+        FlowSetAllSolenoidValveStates.SVA5State = 0; 
+        FlowSetAllSolenoidValveStates.SVA6State = 0; 
+        // N2 to coflow burner inner 
+        FlowSetAllSolenoidValveStates.SVA7State = usingNitrogen ? 1 : 0; 
+        FlowSetAllSolenoidValveStates.SVA8State = 0; 
+        // Fuel to coflow burner inner 
+        FlowSetAllSolenoidValveStates.SVA9State = usingFuel ? 1 : 0; 
+        sendCommand(FlowSetAllSolenoidValveStates); 
+         
+        mSleep(500); 
+ 
+        // Set the MFCs to prime the gas lines at ignition flow rates 
+        FlowSetAllMfcRates.MFCA1StaticMixerFlowSlm = primingAndIgnitionFlowRates.mfca1N2Slpm; 
+        FlowSetAllMfcRates.MFCA2BypassFlowSlm = primingAndIgnitionFlowRates.mfca2N2Slpm; 
+        FlowSetAllMfcRates.MFCA3FuelFlowSlm = primingAndIgnitionFlowRates.mfca3N2Slpm; 
+        sendCommand(FlowSetAllMfcRates); 
+         
+        // Mark start time for flow timeout. 
+        print("Flow timeout in " + parameters.flowTimeoutSec + " sec");      
+        var flowStartTime = new Date().getTime(); 
+        var timedOut = false;
+
+--- page 23 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+23 
+ 
+      
+        // Wait until gas lines are primed 
+        print("Priming gas lines for " + parameters.primingAndPreIgnitionDurationSec + " sec"); 
+        var startTime = new Date().getTime(); 
+        while ( updateDurationRemaining(startTime, parameters.primingAndPreIgnitionDurationSec) > 0 ) 
+        { 
+            mSleep(1000); 
+        } 
+      
+        // Ignition 
+        print("Igniting with " + parameters.igniterIgnitionPowerV + "V for " + 
+parameters.igniterIgnitionDurationMs + " Ms"); 
+        IgniterPulse.power      = parameters.igniterIgnitionPowerV; 
+        IgniterPulse.durationMs = parameters.igniterIgnitionDurationMs; 
+        sendCommand(IgniterPulse); 
+          
+        // Retract the igniter after an optional delay 
+        if ( parameters.igniterDelayBeforeRetractMs > 0 ) 
+        { mSleep(parameters.igniterDelayBeforeRetractMs); } 
+        sendCommand(IgniterExecuteSetupMove); 
+         
+        // Change camera settings 
+        print("Changing cameras to test settings") 
+        if ( parameters.useIPSUs ) 
+        { 
+            if ( parameters.useBracketedExposures ) 
+            { 
+                print("Starting bracketed exposures on ACME camera"); 
+                DataCameraExposureBracketing.enable = true; 
+                DataCameraExposureBracketing.imagesPerExposure = 
+parameters.bracketingImagesPerExposure; 
+                DataCameraExposureBracketing.exposures = parameters.bracketingNumberOfExposures; 
+                DataCameraExposureBracketing.exposureStartUsec = 
+parameters.bracketingExposureStartUsec; 
+                DataCameraExposureBracketing.exposureIncrementUsec = 
+parameters.bracketingExposureIncrementUsec; 
+                sendCommand(DataCameraExposureBracketing); 
+            } 
+            else 
+            { 
+                DataCameraExposureBracketing.enable = false; 
+                sendCommand(DataCameraExposureBracketing); 
+ 
+                DataCameraSetManualExposure.integrationTimeUs = parameters.dataCameraTestExposureUs; 
+                sendCommand(DataCameraSetManualExposure); 
+            } 
+        } 
+        AnalogCameraSetShutter.shutter = parameters.analogCameraTestShutter;
+
+--- page 24 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+24 
+ 
+        sendCommand(AnalogCameraSetShutter); 
+   
+        // waiting stabilization time #1 
+        print("Waiting stabilization time #1 " + parameters.stabilizationTime1Sec + " sec"); 
+        var startTime = new Date().getTime(); 
+ 
+        while ( updateDurationRemaining(startTime, parameters.stabilizationTime1Sec) > 0 ) 
+        { 
+            checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+parameters.extinctionDetectionStopsTest ); 
+            mSleep(1000); 
+        } 
+         
+        print("Enabling and initializing E-Field to " + parameters.efieldInitializeVolts + " volts"); 
+        EFieldEnable.state = 1; 
+        sendCommand(EFieldEnable); 
+             
+        EFieldSetVoltage.voltage = parameters.efieldInitializeVolts; 
+        sendCommand(EFieldSetVoltage); 
+         
+        // Wait for E-Field initialize time 
+        print("Waiting E-Field initialize time " + parameters.efieldInitializeTimeSec + " sec"); 
+        if ( parameters.efieldInitializeTimeSec > 0 ) 
+        { 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.efieldInitializeTimeSec) > 0 ) 
+            { 
+                checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                      parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+            } 
+        } 
+ 
+        // Enable extinction detection 
+        // Assumes ExtinctionDetectionConfigure and one of the ExtinctionDetectionSetAction 
+        // commands has been issued prior to running script and state is disabled. 
+        ExtinctionDetectionSetState.state = 1; 
+        sendCommand(ExtinctionDetectionSetState); 
+        print("Extinction detection enabled"); 
+         
+        // Ramp gas flow from ignition rates to diluted rates 
+        // A rate of zero leaves that MFC at its last setting 
+        if ( parameters.dilutionTimeSec > 0 ) 
+        { 
+            FlowRamped.rampDurationSec = parameters.dilutionTimeSec; 
+            FlowRamped.holdDurationSec = 0; 
+             
+            // don't ramp coflow until the coflow matching phase
+
+--- page 25 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+25 
+ 
+            FlowRamped.MFCA1MinimumFlowSlm = 0; 
+            FlowRamped.MFCA1MaximumFlowSlm = 0; 
+            FlowRamped.MFCA1RampRateSlmPerSec = 0; 
+             
+            FlowRamped.MFCA2MinimumFlowSlm = ( dilutedMatchedFlowRates.mfca2N2Slpm >  
+primingAndIgnitionFlowRates.mfca2N2Slpm ) ? primingAndIgnitionFlowRates.mfca2N2Slpm : 
+dilutedMatchedFlowRates.mfca2N2Slpm; 
+            FlowRamped.MFCA2MaximumFlowSlm = ( dilutedMatchedFlowRates.mfca2N2Slpm > 
+primingAndIgnitionFlowRates.mfca2N2Slpm ) ? dil utedMatchedFlowRates.mfca2N2Slpm : 
+primingAndIgnitionFlowRates.mfca2N2Slpm; 
+            FlowRamped.MFCA2RampRateSlmPerSec = (dilutedMatchedFlowRates.mfca2N2Slpm - 
+primingAndIgnitionFlowRates.mfca2N2Slpm) / parameters.dilutionTimeSec; 
+             
+            FlowRamped.MFCA3MinimumFlowSlm = ( dilutedMatchedFlowRates.mfca3N2Slpm > 
+primingAndIgnitionFlowRates.mfca3N2Slpm ) ? primingAndIgnitionFlowRates.mfca3N2Slpm : 
+dilutedMatchedFlowRates.mfca3N2Slpm; 
+            FlowRamped.MFCA3MaximumFlowSlm = ( dilutedMat chedFlowRates.mfca3N2Slpm > 
+primingAndIgnitionFlowRates.mfca3N2Slpm ) ? dilutedMatchedFlowRates.mfca3N2Slpm : 
+primingAndIgnitionFlowRates.mfca3N2Slpm; 
+            FlowRamped.MFCA3RampRateSlmPerSec = (dilutedMatchedFlowRates.mfca3N2Slpm - 
+primingAndIgnitionFlowRates.mfca3N2Slpm) / parameters.dilutionTimeSec; 
+ 
+            print("Ramping for fuel and inert dilution");   
+            sendCommand(FlowRamped); 
+        } 
+      
+        print("Waiting for dilution time " + parameters.dilutionTimeSec + " secs"); 
+        if ( parameters.dilutionTimeSec > 0 ) 
+        { 
+            // Wait for gas flow ramping to complete 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.dilutionTimeSec) > 0 ) 
+            { 
+                checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                      parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+            } 
+        } 
+ 
+        // Wait for flame stability #2 
+        print("Waiting stabilization time #2 " + parameters.stabilizationTime2Sec + " sec"); 
+        if ( parameters.stabilizationTime2Sec > 0 ) 
+        { 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.stabilizationTime2Sec) > 0 ) 
+            { 
+                checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                      parameters.extinctionDetectionStopsTest );
+
+--- page 26 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+26 
+ 
+                mSleep(1000); 
+            } 
+        } 
+ 
+        //Ramp coflow to match test conditions 
+        if ( parameters.matchingCoflowRampTimeSec > 0 ) 
+        { 
+            FlowRamped.rampDurationSec = parameters.matchingCoflowRampTimeSec; 
+            FlowRamped.holdDurationSec = 0; 
+             
+            FlowRamped.MFCA1MinimumFlowSlm = ( dilutedMatchedFlowRates.mfca1N2Slpm > 
+primingAndIgnitionFlowRates.mfca1N2Slpm ) ? primingAndIgnitionFlowRates.mfca1N2Slpm : 
+dilutedMatchedFlowRates.mfca1N2Slpm; 
+            FlowRamped.MFCA1MaximumFlowSlm = ( dilutedMatchedFlowRates.mfca1N2Slpm > 
+primingAndIgnitionFlowRates.mfca1N2Slpm ) ? dilutedMatchedFlowRates.mfca1N2Slpm : 
+primingAndIgnitionFlowRates.mfca1N2Slpm; 
+            FlowRamped.MFCA1RampRateSlmPerSec = (dilutedMatchedFlowRates.mfca1N2Slpm - 
+primingAndIgnitionFlowRates.mfca1N2Slpm) / parameters.matchingCoflowRampTimeSec; 
+ 
+            FlowRamped.MFCA2MinimumFlowSlm = 0; 
+            FlowRamped.MFCA2MaximumFlowSlm = 0; 
+            FlowRamped.MFCA2RampRateSlmPerSec = 0; 
+             
+            FlowRamped.MFCA3MinimumFlowSlm = 0; 
+            FlowRamped.MFCA3MaximumFlowSlm = 0; 
+            FlowRamped.MFCA3RampRateSlmPerSec = 0; 
+ 
+            print("Ramping coflow to match test conditions"); 
+            sendCommand(FlowRamped); 
+        } 
+         
+        print("Waiting for coflow to match test conditions " + parameters.matchingCoflowRampTimeSec + " 
+sec"); 
+        if ( parameters.matchingCoflowRampTimeSec > 0 ) 
+        { 
+            // Wait for gas flow ramping to complete 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.matchingCoflowRampTimeSec) > 0 ) 
+            { 
+                checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                      parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+            } 
+ 
+            // make sure ramp is done 
+            while (FlowTelemetry.MFCA1StaticMixerWaveform != 0) 
+            { 
+                checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec,
+
+--- page 27 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+27 
+ 
+                                      parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+            } 
+        } 
+         
+         // Wait for flame stability #3 
+        print("Waiting stabilization time #3 " + parameters.stabilizationTime3Sec + " sec"); 
+        if ( parameters.stabilizationTime3Sec > 0 ) 
+        { 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.stabilizationTime3Sec) > 0 ) 
+            { 
+                checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                      parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+            } 
+        } 
+ 
+        if (parameters.fuelAndCoflowRampTimeSec > 0) 
+        { 
+            // a straight ramp to final 
+            FlowRamped.rampDurationSec = parameters.fuelAndCoflowRampTimeSec; 
+            FlowRamped.holdDurationSec = 0; 
+             
+            if ( parameters.matchingCoflowRampTimeSec > 0) 
+            { 
+                // ramp coflow from matched to final 
+                FlowRamped.MFCA1MinimumFlowSlm = (finalFlowRates.mfca1N2Slpm > 
+dilutedMatchedFlowRates.mfca1N2Slpm) ? dilutedMatchedFlowRates.mfca1N2Slpm : 
+finalFlowRates.mfca1N2Slpm; 
+                FlowRamped.MFCA1MaximumFlowSlm = (finalFlowRates.mfca1N2Slpm > 
+dilutedMatchedFlowRates.mfca1N2Slpm) ? finalFlowRates.mfca1N2Slpm : 
+dilutedMatchedFlowRates.mfca1N2Slpm; 
+                FlowRamped.MFCA1RampRateSlmPerSec = (finalFlowRates.mfca1N2Slpm - 
+dilutedMatchedFlowRates.mfca1N2Slpm) / FlowRamped.rampDurationSec; 
+            } 
+            else 
+            { 
+                // ramp coflow from initial to final 
+                FlowRamped.MFCA1MinimumFlowSlm = (finalFlowRates.mfca1N2Slpm > 
+primingAndIgnitionFlowRates.mfca1N2Slpm) ? primingAndIgnitionFlowRates.mfca1N2Slpm : 
+finalFlowRates.mfca1N2Slpm; 
+                FlowRamped.MFCA1MaximumFlowSlm = (finalFlowRates.mfca1N2Slpm > 
+primingAndIgnitionFlowRates.mfca1N2Slpm) ? finalFlowRates.mfca1N2Slpm : 
+primingAndIgnitionFlowRates.mfca1N2Slpm; 
+                FlowRamped.MFCA1RampRateSlmPerSec = (finalFlowRates.mfca1N2Slpm - 
+primingAndIgnitionFlowRates.mfca1N2Slpm) / FlowRamped.rampDurationSec; 
+            }
+
+--- page 28 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+28 
+ 
+             
+            FlowRamped.MFCA2MinimumFlowSlm = (fi nalFlowRates.mfca2N2Slpm > 
+dilutedMatchedFlowRates.mfca2N2Slpm) ? dilutedMatchedFlowRates.mfca2N2Slpm : 
+finalFlowRates.mfca2N2Slpm; 
+            FlowRamped.MFCA2MaximumFlowSlm = (finalFlowRates.mfca2N2Slpm > 
+dilutedMatchedFlowRates.mfca2N2Slpm) ? finalFlowR ates.mfca2N2Slpm: 
+dilutedMatchedFlowRates.mfca2N2Slpm; 
+            FlowRamped.MFCA2RampRateSlmPerSec = (finalFlowRates.mfca2N2Slpm - 
+dilutedMatchedFlowRates.mfca2N2Slpm) / FlowRamped.rampDurationSec; 
+                                             
+            FlowRamped.MFCA3MinimumFlowSlm = (finalFlowRates.mfca3N2Slpm > 
+dilutedMatchedFlowRates.mfca3N2Slpm) ? dilutedMatchedFlowRates.mfca3N2Slpm: 
+finalFlowRates.mfca3N2Slpm; 
+            FlowRamped.MFCA3MaximumFlowSlm = (finalFlowRates.mfca3N2Slpm > 
+dilutedMatchedFlowRates.mfca3N2Slpm) ? finalFlowRates.mfca3N2Slpm : 
+dilutedMatchedFlowRates.mfca3N2Slpm; 
+            FlowRamped.MFCA3RampRateSlmPerSec = (finalFlowRates.mfca3N2Slpm - 
+dilutedMatchedFlowRates.mfca3N2Slpm) / FlowRamped.rampDurationSec; 
+ 
+            print("Ramping to final velocity"); 
+            sendCommand(FlowRamped); 
+ 
+            // Wait for flow waveform to go back to None 
+            var startTime = new Date().getTime(); 
+            secsRemaining = parameters.flowTimeoutSec - Math.floor((startTime - flowStartTime) / 1000); 
+            print("Waiting for ramp to final velocity " + parameters.fuelAndCoflowRampTimeSec + " sec or flow 
+timeout in " + secsRemaining + " sec"); 
+            var waveformStarted = false; 
+            var waveformEnded = false; 
+            while ((updateDurationRemaining(startTime, secsRemaining) > 0) && (waveformEnded != true)) 
+            { 
+               checkExtinctionDetected(flowStartTime, parameters.flowTimeoutSec, 
+                                 parameters.extinctionDetectionStopsTest); 
+ 
+               mSleep(1000); 
+ 
+               // wait for waveform state to start then wait for it to end 
+               if ( waveformStarted == false ) 
+               { 
+                   if ((FlowTelemetry.MFCA3FuelWaveform != 0 ) || (FlowTelemetry.MFCA2BypassWaveform != 
+0) 
+                       || (FlowTelemetry.MFCA1StaticMixerWaveform != 0)) 
+                   {  waveformStarted = true;  } 
+               } 
+               else if (( FlowTelemetry.MFCA3FuelWaveform == 0) && (FlowTelemetry.MFCA2BypassWaveform 
+== 0) 
+                        && ( FlowTelemetry.MFCA1StaticMixerWaveform == 0)) 
+               {  waveformEnded = true; }
+
+--- page 29 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+29 
+ 
+            } 
+        } 
+         
+        print("Waiting constant flow time " + parameters.constantFlowTimeSec + " sec"); 
+        if ( parameters.constantFlowTimeSec > 0 ) 
+        { 
+           var startTime = new Date().getTime(); 
+           while ( updateDurationRemaining(startTime, parameters.constantFlowTimeSec) > 0 ) 
+           { 
+               checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                     parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+           } 
+        } 
+  
+        // ******************** 
+        // Operate the E-Field with flame 
+        // ******************** 
+        if( parameters.efieldCommandManually == false) 
+        { 
+            stepOrRampEfield(flowStartTime, true); 
+        } 
+        else 
+        { 
+            print("Send manual e-field commands now.  SystemResumeScript when done.") 
+            pauseScript(); 
+        } 
+ 
+        print("Waiting constant flow time #2 " + parameters.constantFlowTimeSec + " sec"); 
+        if ( parameters.constantFlowTimeSec > 0 ) 
+        { 
+           var startTime = new Date().getTime(); 
+           while ( updateDurationRemaining(startTime, parameters.constantFlowTimeSec) > 0 ) 
+           { 
+               checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                     parameters.extinctionDetectionStopsTest ); 
+                mSleep(1000); 
+           } 
+        } 
+ 
+        if ( parameters.rampCount > 0) 
+        { 
+            // extra ramp holds for Ops test points 
+            if ( parameters.rampTimeSec == 0) 
+            { FlowRamped.rampDurationSec = 0.1; } 
+            else { FlowRamped.rampDurationSec = parameters.rampTimeSec; } 
+         
+            FlowRamped.holdDurationSec = parameters.rampConstantFlowTimeSec;
+
+--- page 30 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+30 
+ 
+ 
+            FlowRamped.MFCA1MinimumFlowSlm = ( rampFlowRates.mfca1N2Slpm >= 0 ) ? 
+finalFlowRates.mfca1N2Slpm : finalFlowRates.mfca1N2Slpm + parameters.rampCount * 
+rampFlowRates.mfca1N2Slpm; 
+            FlowRamped.MFCA1MaximumFlowSlm = ( rampFlowRates.mfca 1N2Slpm >= 0 ) ? 
+finalFlowRates.mfca1N2Slpm + parameters.rampCount * rampFlowRates.mfca1N2Slpm : 
+finalFlowRates.mfca1N2Slpm; 
+            FlowRamped.MFCA1RampRateSlmPerSec = rampFlowRates.mfca1N2Slpm / 
+FlowRamped.rampDurationSec; 
+ 
+            FlowRamped.MFCA2MinimumFlowSlm = ( rampFlowRates.mfca2N2Slpm >= 0 ) ? 
+finalFlowRates.mfca2N2Slpm : finalFlowRates.mfca2N2Slpm + parameters.rampCount * 
+rampFlowRates.mfca2N2Slpm; 
+            FlowRamped.MFCA2MaximumFlowSlm = ( rampFlowRates.mfca2N2Slpm >= 0 ) ? 
+finalFlowRates.mfca2N2Slpm + parameters.rampCount * rampFlowRates.mfca2N2Slpm : 
+finalFlowRates.mfca2N2Slpm; 
+            FlowRamped.MFCA2RampRateSlmPerSec = rampFlowRates.mfca2N2Slpm / 
+FlowRamped.rampDurationSec; 
+              
+            FlowRamped.MFCA3MinimumFlowSlm = ( rampFlowRates.mfca3N2Slpm >= 0 ) ? 
+finalFlowRates.mfca3N2Slpm : finalFlowRates.mfca3N2Slpm + parameters.rampCount * 
+rampFlowRates.mfca3N2Slpm; 
+            FlowRamped.MFCA3MaximumFlowSlm = ( rampFlowRates.mfca3N2Slpm >= 0 ) ? 
+finalFlowRates.mfca3N2Slpm + parameters.rampCount * rampFlowRates.mfca3N2Slpm : 
+finalFlowRates.mfca3N2Slpm; 
+            FlowRamped.MFCA3RampRateSlmPerSec = rampFlowRates.mfca3N2Slpm / 
+FlowRamped.rampDurationSec; 
+ 
+            print("Ramp holding to extra final velocities"); 
+            sendCommand(FlowRamped); 
+ 
+            // Wait for flow waveform to go back to None 
+            var startTime = new Date().getTime(); 
+            secsRemaining = parameters.flowTimeoutSec - Math.floor((startTime - flowStartTime) / 1000); 
+            print("Waiting for ramps to extra final velocities or flow timeout in " + secsRemaining + " sec"); 
+            var waveformStarted = false; 
+            var waveformEnded = false; 
+            while ((updateDurationRemaining(startTime, secsRemaining) > 0) && (waveformEnded != true)) 
+            { 
+               checkExtinctionDetected(flowStartTime, parameters.flowTimeoutSec, 
+                                 parameters.extinctionDetectionStopsTest); 
+ 
+                mSleep(1000); 
+ 
+               // wait for waveform state to start then wait for it to end 
+               if ( waveformStarted == false ) 
+               {
+
+--- page 31 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+31 
+ 
+                   if ((FlowTelemetry.MFCA3FuelWaveform != 0 ) || (FlowTelemetry.MFCA2BypassWaveform != 
+0) 
+                       || (FlowTelemetry.MFCA1StaticMixerWaveform != 0)) 
+                   {  waveformStarted = true;  } 
+               } 
+               else if (( FlowTelemetry.MFCA3FuelWaveform == 0) && (FlowTelemetry.MFCA2BypassWaveform 
+== 0) 
+                        && ( FlowTelemetry.MFCA1StaticMixerWaveform == 0)) 
+               {  waveformEnded = true; } 
+            } 
+ 
+            // ramped command doesn't include a final hold 
+            print("Waiting final constant flow time " + parameters.constantFlowTimeSec + " sec"); 
+            if ( parameters.rampConstantFlowTimeSec > 0 ) 
+            { 
+               var startTime = new Date().getTime(); 
+               while ( updateDurationRemaining(startTime, parameters.rampConstantFlowTimeSec) > 0 ) 
+               { 
+                   checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+                                         parameters.extinctionDetectionStopsTest ); 
+                   mSleep(1000); 
+               } 
+            } 
+        } 
+ 
+      
+        if ( parameters.useIgnitionDetection) 
+        { 
+            // disable ignition detection 
+            IgnitionDetectionSetState.state = 0; 
+            sendCommand(IgnitionDetectionSetState); 
+        } 
+ 
+        // Disable extinction detection 
+        ExtinctionDetectionSetState.state = 0; 
+        sendCommand(ExtinctionDetectionSetState); 
+ 
+        print("Turning off gas flow"); 
+        sendCommand(FlowCloseAll); 
+ 
+        if ( parameters.useFoma ) 
+        { 
+            // this does not wait for complete 
+            closeManifolds(); 
+        } 
+      
+        // Post-flame imaging 
+        if ( ipsusStarted )
+
+--- page 32 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+32 
+ 
+        { 
+            print("Waiting post-flame imaging duration of " + parameters.postFlameImagingTimeSec + " sec"); 
+            var startTime = new Date().getTime(); 
+ 
+            while ( updateDurationRemaining(startTime, parameters.postFlameImagingTimeSec) > 0 ) 
+            { 
+                mSleep(1000); 
+            } 
+ 
+            print("Stopping IPSU(s)");             
+            sendCommand(StopIpsus); 
+        } 
+      
+        // Post-flame data 
+        print("Waiting post-flame data duration of " + parameters.postFlameDataTimeSec + " sec"); 
+        var startTime = new Date().getTime(); 
+        while ( updateDurationRemaining(startTime, parameters.postFlameDataTimeSec) > 0 ) 
+        { 
+            mSleep(1000); 
+        } 
+         
+        sendCommand(DataRecordingStop); 
+         
+        print("Test point PAUSED prior to leak check measurement. SystemResumeScript when ready.");    
+        pauseScript(); 
+       
+        sendCommand(DataRecordingStart); 
+        mSleep(1000); 
+         
+        // ******************** 
+        // Operate the E-Field to measure leak current  
+        // ******************** 
+        print("Measuring leak current"); 
+        if( parameters.efieldCommandManually == false) 
+        { 
+            stepOrRampEfield(flowStartTime, false); 
+        } 
+        else 
+        { 
+            print("Send manual e -field commands for leak check measurement now.  SystemResumeScript 
+when done.") 
+            pauseScript(); 
+        } 
+         
+        mSleep(6000); 
+ 
+        sendCommand(SystemCloseTestPoint);
+
+--- page 33 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+33 
+ 
+        // Put intensified camera back in safe mode 
+        print("Intensified camera to safe mode"); 
+        IntensifiedCameraGate.gateType = 0; 
+        IntensifiedCameraGate.pulsedGateWidthCounts = 0; 
+        sendCommand(IntensifiedCameraGate); 
+        mSleep(500); 
+        IntensifiedCameraGainAmplitude.gainAmplitudeCounts = 2048; 
+        sendCommand(IntensifiedCameraGainAmplitude); 
+         
+        if ( parameters.useBracketedExposures ) 
+        { 
+            // Turn off bracketed exposures 
+            DataCameraExposureBracketing.enable = false; 
+            sendCommand(DataCameraExposureBracketing); 
+        } 
+ 
+        print("Setting PMT gains to zero"); 
+        PmtSetAllGains.PMT1Gain = 0; 
+        PmtSetAllGains.PMT2Gain = 0; 
+        PmtSetAllGains.PMT3Gain = 0; 
+        sendCommand(PmtSetAllGains); 
+      
+        if ( parameters.useFoma ) 
+        { 
+            // report final MFC gas usage 
+            reportMfcIntegratedFlow(false); 
+        } 
+ 
+        print("E-Field Voltage Sweep test point " + parameters.testpointName + " COMPLETE"); 
+ 
+        setScriptStateComplete(); 
+    } 
+    catch(error) 
+    { 
+        print("E-Field Voltage Sweep test point " + parameters.testpointName + " ABORTED.  Reason: " + 
+error);   
+      
+        setScriptStateAborted(); 
+ 
+        EFieldEnable.state = 0; 
+        sendCommand(EFieldEnable); 
+        print("E-field disabled"); 
+ 
+        if ( parameters.useIgnitionDetection) 
+        { 
+            // disable ignition detection 
+            IgnitionDetectionSetState.state = 0; 
+            sendCommand(IgnitionDetectionSetState);
+
+--- page 34 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+34 
+ 
+        } 
+ 
+        // disable extinction detection and any action that may result 
+        ExtinctionDetectionSetState.state = 0; 
+        sendCommand(ExtinctionDetectionSetState); 
+ 
+        print("Turning off gas flow"); 
+        // close ACME valves 
+        sendCommand(FlowCloseAll); 
+      
+        // close CIR valves 
+        if ( cirManifoldsOpen ) 
+        { 
+            // this does not wait for complete 
+            closeManifolds(); 
+        } 
+         
+        if ((error == "EXTINCTION DETECTED") || (error == "Flow timeout reached")) 
+        { 
+             // Still do post-flame imaging 
+            if ( ipsusStarted ) 
+            { 
+                print("Waiting post -flame imaging duration of " + parameters.postFlameImagingTimeSec + " 
+sec"); 
+                var startTime = new Date().getTime(); 
+ 
+                while ( updateDurationRemaining(startTime, parameters.postFlameImagingTimeSec) > 0 ) 
+                { 
+                    mSleep(1000); 
+                } 
+ 
+                print("Stopping IPSU(s)");             
+                sendCommand(StopIpsus); 
+            } 
+          
+            // Still do post-flame data 
+            print("Waiting post-flame data duration of " + parameters.postFlameDataTimeSec + " sec"); 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.postFlameDataTimeSec) > 0 ) 
+            { 
+                mSleep(1000); 
+            } 
+             
+            sendCommand(DataRecordingStop); 
+         
+            // still do leak current measurement 
+            print("Test point PAUSED prior to leak check measurement. SystemResumeScript when ready.");    
+            pauseScript();
+
+--- page 35 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+35 
+ 
+           
+            sendCommand(DataRecordingStart); 
+            mSleep(1000); 
+             
+            // ******************** 
+            // Operate the E-Field to measure leak current  
+            // ******************** 
+            print("Measuring leak current"); 
+            if( parameters.efieldCommandManually == false) 
+            { 
+                stepOrRampEfield(flowStartTime, false); 
+            } 
+            else 
+            { 
+                print("Send manual e-field commands for leak check measurement now.  SystemResumeScript 
+when done.") 
+                pauseScript(); 
+            } 
+             
+            EFieldEnable.state = 0; 
+            sendCommand(EFieldEnable); 
+            print("E-field disabled"); 
+ 
+            mSleep(6000); 
+ 
+            sendCommand(SystemCloseTestPoint); 
+        } 
+        else 
+        { 
+            print("Stopping data and image collection"); 
+            // stop data collection 
+            sendCommand(SystemCloseTestPoint); 
+ 
+            // stop IPSUs from archiving images 
+            if ( ipsusStarted ) 
+            { 
+                sendCommand(StopIpsus); 
+            } 
+        } 
+      
+        // home the igniter 
+        print("Homing igniter"); 
+        IgniterMove.position = 0; 
+        sendCommand(IgniterMove); 
+      
+        // Put intensified camera back in safe mode 
+        print("Intensified camera to safe mode"); 
+        IntensifiedCameraGate.gateType = 0;
+
+--- page 36 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+36 
+ 
+        IntensifiedCameraGate.pulsedGateWidthCounts = 0; 
+        sendCommand(IntensifiedCameraGate); 
+        mSleep(500); 
+        IntensifiedCameraGainAmplitude.gainAmplitudeCounts = 2048; 
+        sendCommand(IntensifiedCameraGainAmplitude); 
+ 
+        if ( parameters.useBracketedExposures ) 
+        { 
+            // Turn off bracketed exposures 
+            DataCameraExposureBracketing.enable = false; 
+            sendCommand(DataCameraExposureBracketing); 
+        } 
+ 
+        print("Setting PMT gains to zero"); 
+        PmtSetAllGains.PMT1Gain = 0; 
+        PmtSetAllGains.PMT2Gain = 0; 
+        PmtSetAllGains.PMT3Gain = 0; 
+        sendCommand(PmtSetAllGains); 
+         
+        if ( parameters.useFoma ) 
+        { 
+            // report final MFC gas usage 
+            reportMfcIntegratedFlow(false); 
+        } 
+ 
+        setScriptStateAborted(); 
+ 
+        print("E-Field Voltage Sweep test point " + parameters.testpointName + " complete after abort"); 
+    }     
+ 
+} 
+ 
+function stepOrRampEfield(flowStartTime, withFlame) 
+{ 
+    // step from 0 to max volts by the step size with a delay between steps 
+    // if ramp rate != 0, ramp at rate for ramp time instead of stepping 
+    // withFlame=false: Includes enable and initialization period. 
+    // Disables at end. 
+     
+    if ( withFlame == false) 
+    { 
+        EFieldEnable.state = 1; 
+        sendCommand(EFieldEnable); 
+        print("E-field enabled"); 
+ 
+        // include initialization period in measurement 
+        print("Initializing E-Field to " + parameters.efieldInitializeVolts + " volts");
+
+--- page 37 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+37 
+ 
+        EFieldSetVoltage.voltage = parameters.efieldInitializeVolts; 
+        sendCommand(EFieldSetVoltage); 
+         
+        // Wait for E-Field initialize time 
+        print("Waiting E-Field initialize time " + parameters.efieldInitializeTimeSec + " sec"); 
+        if ( parameters.efieldInitializeTimeSec > 0 ) 
+        { 
+            var startTime = new Date().getTime(); 
+            while ( updateDurationRemaining(startTime, parameters.efieldInitializeTimeSec) > 0 ) 
+            { 
+                mSleep(1000); 
+            } 
+        } 
+    } 
+ 
+    if ( parameters.efieldRampRatePerSec != 0 ) 
+    { 
+        // perform a single ramp or a ramping staircase 
+        EFieldRampedSignal.minVoltage = parameters.efieldMinVoltage; 
+        EFieldRampedSignal.maxVoltage = parameters.efieldMaxVoltage; 
+        EFieldRampedSignal.rampRatePerSec = parameters.efieldRampRatePerSec; 
+        EFieldRampedSignal.rampDurationSecs = parameters.efieldRampDurationSecs; 
+        EFieldRampedSignal.holdDurationSecs = parameters.efieldHoldDurationSecs; 
+        EFieldRampedSignal.cycles = parameters.efieldCycles; 
+        sendCommand(EFieldRampedSignal); 
+        print("Ramping E-Field"); 
+    } 
+    else 
+    { 
+        // perform a single step or a staircase 
+        EFieldSteppedSignal.minVoltage = parameters.efieldMinVoltage; 
+        EFieldSteppedSignal.maxVoltage = parameters.efieldMaxVoltage; 
+        EFieldSteppedSignal.stepVoltage = parameters.efieldStepVoltage; 
+        EFieldSteppedSignal.stepDurationSecs = parameters.efieldStepDurationSecs; 
+        EFieldSteppedSignal.cycles = parameters.efieldCycles; 
+        sendCommand(EFieldSteppedSignal); 
+        print("Stepping E-Field"); 
+    } 
+       
+    // make sure waveform has started 
+    mSleep(2000); 
+       
+    // wait for waveform to complete 
+    while ( EFieldTelemetry.waveform != 0 ) 
+    { 
+        if ( withFlame ) 
+        {
+
+--- page 38 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+38 
+ 
+            checkExtinctionDetected( flowStartTime, parameters.flowTimeoutSec, 
+parameters.extinctionDetectionStopsTest ); 
+             
+            mSleep(1000); 
+        } 
+        else 
+        { 
+            mSleep(1000); 
+        } 
+    } 
+       
+    // Disable the E-Field 
+    EFieldEnable.state = 0; 
+    sendCommand(EFieldEnable); 
+    print("Waveform complete. E-Field disabled"); 
+} 
+ 
+function sendStartIpsusCommand() 
+{ 
+    // Start the sequence of commands sent to IPSU(s) to open a test point 
+    // and start archiving images 
+    StartIpsus.testpointName = parameters.testpointName; 
+    StartIpsus.ipsu5NumberCameras = 0; 
+    if ( parameters.useAcmeCamera == true ) 
+    { 
+        StartIpsus.ipsu5NumberCameras = 1; 
+        StartIpsus.ipsu5Camera1 = 3; 
+        if ( parameters.useIntensifiedCamera == true ) 
+        { 
+            StartIpsus.ipsu5NumberCameras = 2; 
+            StartIpsus.ipsu5Camera2 = 4; 
+        } 
+    } 
+    else if ( parameters.useIntensifiedCamera == true ) 
+    { 
+        StartIpsus.ipsu5NumberCameras = 1; 
+        StartIpsus.ipsu5Camera1 = 4; 
+    } 
+    sendCommand(StartIpsus); 
+ 
+} 
+ 
+ 
+function checkExtinctionDetected(flowStartTime, timeoutSec, abortTest) 
+{ 
+    // if abortTest is true this throws a message if extinction is detected 
+    // or if the timeout has been exceeded 
+    // if abortTest is false this returns 2 if extinction is detected, 0 if extinction
+
+--- page 39 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+39 
+ 
+    // is disabled, 3 if a timeout has been exceeded, and 1 if none of these is true.    
+    var currentTime = new Date().getTime(); 
+    
+    var timedOut = false; 
+    var detected = false; 
+    var disabled = false; 
+    if((currentTime - flowStartTime) >= (timeoutSec * 1000)) 
+    { 
+        timedOut = true; 
+    } 
+ 
+    if ( ExtinctionDetectionTelemetry.extinctionDetectionState == 2) 
+    { 
+        detected = true; 
+    } 
+    
+    if ( ExtinctionDetectionTelemetry.extinctionDetectionState == 0) 
+    { 
+        disabled = true; 
+    } 
+    
+    if (abortTest==true) 
+    { 
+        if (timedOut==true) 
+        { throw "Flow timeout reached"; } 
+    
+        if (detected==true) 
+        { throw "EXTINCTION DETECTED"; } 
+    } 
+ 
+    if ( detected == true) 
+    { return 2;} 
+    else if ( timedOut == true ) 
+    { return 3;} 
+    else if ( disabled == true ) 
+    { return 0; } 
+    else 
+    { return 1; } 
+ 
+} 
+ 
+function updateDurationRemaining(startTime, startDurationSecs) 
+{ 
+    var currentTime = new Date().getTime(); 
+    elapsedSecs = Math.floor((currentTime - startTime) / 1000); 
+    SystemTelemetry.scriptDurationRemaining = startDurationSecs - elapsedSecs; 
+    return SystemTelemetry.scriptDurationRemaining; 
+}
+
+--- page 40 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+40 
+ 
+4. Test Matrices 
+For all ACME experiments, including E -FIELD Flames, the test planning is refined in multiple  steps as 
+described in this section.  Despite refinement, the experiments are always expected to address the science 
+objectives approved in the ACME ISRD. 
+ 
+A. Test Matrices: Years in Advance 
+The test matrices found in section 5 of the ACME Integrated Science Re quirements Document 
+(ISRD, RDR version, Rev. B) were the basis for planning the equipment and resources, such as gas 
+bottles, needed to carry out each of the NASA -selected ACME experiments.  For E-FIELD Flames, 
+the test matrices are found in section 5.2.  The investigators were each directed to define matrices 
+with required testing which included at most one burner configuration and no more than 
+nominally 50 flames ignited.   Regarding these constraints specified by Project Scientist Dennis 
+Stocker, the inte nt was to conduct focused rather than comprehensive research given the 
+considerable resources required for testing on the International Space Station.    Meanwhile, there 
+were no limits put on desired or highly desired tests because of NASA’s plan to only carry out tests 
+designated as required. 
+ 
+However, in the case of E-FIELD Flames, the science loss associated with the slow response time 
+of the developed electric field system led to the decision to allow a second burner type and an 
+increased number of required tests .  Specifically, the matrix was expanded to 74 flames rather 
+than the planned 58, where it must be understood that voltage sweep tests as defined in the ISRD 
+require 2 flames, where the voltage is increased in one test and decreased in the other.  As a result 
+of this allowance, E-FIELD Flames was carried out with both the coflow burner (developed for the 
+CLD Flame experiment) and a gas-jet burner with the same tube size as the coflow burner’s inner 
+tube.  This enabled testing with and without the coflow and in the absence of the outer tube (i.e., 
+with the gas-jet burner) in order to assess latter’s coupled effect on the electric field distribution 
+and oxidizer entrainment. 
+ 
+NASA Glenn’s ISS Control Board later decided to limit ACME testing to nominally 4 months of ISS 
+testing per experiment which with preparatory operations, minor delays, repeat  testing due to 
+science loss, etc. were expected to typically occur in a total of 5 months.  This decision was made 
+with the expectation that the required testing, e.g., as specified in the ISRD, could at least mostly 
+be accomplished in that time period assuming the availability of crew and other needed 
+resources. 
+ 
+As part of his planning, Stocker instigated an alternating sequence of experiment testing, wherein 
+investigators would get a break in their testing in order to analyze early results in depth and with 
+that knowledge achieve higher science outcomes in their second round of testing.  As a result, 
+each experiment was expected to get 2 months of  testing per round, which meant nominally 8  
+test days per round of testing.  Within that time constraint and available resources, experiments 
+were ultimately permitted to plan for and conduct more tests than had been specified as required 
+in the ISRD, despite the initial planning which ignored desired and highly desired testing. 
+ 
+B. Test Matrices: Months in Advance 
+At least a few months in advance of testing, ACME investigators are directed to submit a refined 
+test matrix for the upcoming round  corresponding to available h ardware, gas bottles, and the 
+agreed number of test days.  The refinement can be based on what is learned from experimental,
+
+--- page 41 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+41 
+ 
+analytical, or computational efforts subsequent to the 2013 ISRD.  G enerally, this planning has 
+been done in det ail comparable to t hat found in the ISRD , with the important exception that it 
+must furthermore establish the required hardware, including the specific mass flow controllers 
+(and thus specification of the flow ranges) and gas bottles so that overall experiment operations, 
+including crew activity, can be adequately planned.  In this regard, it must establish operational 
+plans for the chamber atmosphere on each day of testing including filling, scrubbing (via 
+circulation through the adsorber cartrid ge), venting (whether partial  or complete ), and 
+measurements, if any, with the Gas Chromatograph Instrumentation Package (GCIP).   However, 
+GCIP measurements were not made during the E-FIELD Flames or CLD Flame experiments. 
+ 
+C. Test Matrices: Days in Advance 
+The investigators are requir ed to submit their test parameters for all planned tests by noon 
+Eastern a t least three business days in advance of each scheduled test day.  That submission 
+includes all of test parameters within the script and additional ones which are outside of the script  
+Most of the latter deal with camera settings which don’t change during a test, for example the 
+filters used with the ACME Data Camera (DataCam) and the Cool Flames Investigation (CFI) 
+intensified camera.  Outside of the scrip t, the investigators must again spec ify the chamber 
+atmosphere(s) and when GCIP measurements, if any, are planned where those must correspond 
+to the plan submitted months earlier .  The script parameters, e.g., specifications of flow rates, 
+don’t need to co rrespond to those previously specified, but they must correspond to the 
+hardware and gas bottles planned months earlier and generally the chamber atmospheres as well 
+by extension. 
+ 
+Some specific examples of non-script parameters are listed here. 
+chamber fill 
+IPSU1 (HiBMS) Exposure (ms) 
+IPSU1 (HiBMS) CIR Illumination 
+IPSU1 Gain (V) 
+IPSU1 Binning 
+HiBMs Archiving 
+Intensified camera frame rate 
+ 
+D. Test Matrices: As-Run 
+Within constraints, t he ACME tests conducted can use different parameter values than those 
+specified in advance.  While the planning is critically important, the plans themselves are not 
+particularly useful for interpreting the data .  This is because most tests were conducted with 
+parameters that differed in at least a few ways from those planned days earlier. 
+ 
+While it may seem obvious and simple enough to focus attention on the as-run parameter values 
+(where an example E-FIELD Flames file name is 18073A3_VoltageSweep.txt), that is unfortunately 
+not the case for ACME.  The record of the as -run script parameters was  initially reliant on the 
+console staff to record the values.  Th at didn’t always occur as planned and the values were 
+sometimes recreated from other records.  Given this shortcoming, the software was altered such 
+that the as -run parameters values would au tomatically be saved.  However, it has been found 
+that the software fails to save all parameter values.  The most assured way to get the as-run 
+parameter values is presumably from the test day’s automated ACME log file, where an example 
+name is 2018-10-17_12-26ACME.log.
+
+--- page 42 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+42 
+ 
+5. Nomenclature 
+ACME Advanced Combustion via Microgravity Experiments (project conducted in the CIR) 
+ADP Acceptance Data Package 
+AVP avionics package 
+BRE Burning Rate Emulator (an ACME experiment) 
+CASIS Center for the Advancement of Science in Space 
+CCD Charge-Coupled Device (such as a camera sensor) 
+CIA Chamber Insert Assembly (inserted into the CIR combustion chamber) 
+CIR Combustion Integrated Rack (ISS facility in which ACME experiments are conducted) 
+CFI Cool Flames Investigation (an MDCA experiment preceding ACME in the CIR) 
+CFIG Cool Flames Investigation with Gases (an ACME experiment selected by CASIS and NSF) 
+CLD Flame Coflow Laminar Diffusion Flame (an ACME experiments) 
+CM  Combustion Module (space shuttle precursor to the CIR) 
+CSV comma-separated values 
+DataCam Data Camera (developed for the ACME experiments, characterized for pyrometry, etc.) 
+E-FIELD Flames Electric-Field Effects on Laminar Diffusion Flames (an ACME experiment) 
+EMI electromagnetic interference 
+EMS Experiment Mounting Structure 
+ERD Engineering Requirements Document 
+Fiji Fiji Is Just ImageJ (a version of ImageJ preloaded with many plug-in features) 
+FOMA Fuel Oxidizer Management Assembly (CIR’s gas management subsystem) 
+FOV field of view 
+fps frames per second 
+GCIP Gas Chromatograph Instrumentation Package (a CIR subsystem) 
+GIPOC Glenn ISS Payload Operations Center (also known as the TSC) 
+GMT Greenwich Mean Time 
+HiBMs High Bit-depth Multi-spectral camera (developed for the CIR facility) 
+HOBJ Halcon object (binary uncompressed format; used for the DataCam)  
+HV high voltage 
+ImageJ Image Processing and Analysis in Java (open-source image processing software)  
+IPSU Image Processing and Storage Unit (a CIR subsystem) 
+IPSU-G IPSU for Gigabit ethernet cameras 
+ISRD Integrated Science Requirements Document (for a set of experiments) 
+ISS International Space Station 
+Js JavaScript 
+LLL-UV Low Light Level Ultraviolet camera ((developed for the CIR facility) 
+LSP Laminar Soot Processes (a shuttle experiment conducted in the Combustion Module) 
+MDCA  Multi-user Droplet Combustion Apparatus (CIR chamber insert preceding ACME) 
+MFC mass flow controller 
+Mist  Water-Mist Fire Suppression Experiment (a Combustion Module experiment) 
+MIUL Materials Identification/Usage List 
+NSF National Science Foundation 
+NTSC National Television System Committee 
+OMA2 Optical Multi-channel Analyzer 2 (open-source software for image processing and display) 
+ops operations 
+PaRIS Passive Rack Isolation System 
+PIMS Principal Investigator Microgravity Services
+
+--- page 43 ---
+ACME/E-FIELD Flames Experimental Procedure  23 July 2020 
+43 
+ 
+PMT Photomultiplier Tube (where ACME is equipped with three PMT modules) 
+PSI Physical Sciences Informatics System 
+PT pressure transducer 
+psia pounds per square inch 
+QD quick disconnect 
+RDR Requirements Definition Review 
+s-Flame Structure and Response of Spherical Diffusion Flames (an ACME experiment) 
+SAMS Space Acceleration Measurement System 
+SDP Safety Data Package 
+slpm standard liters per minute (a measure of the mass or molar flow rate of a gas) 
+SOFBALL  Structure Of Flame Balls At Low Lewis-number (a Combustion Module experiment) 
+SoFIE Solid Fuel Ignition and Extinction (project to be conducted in the CIR after ACME) 
+SORD Science Operations Requirements Document 
+SRD Science Requirements Document 
+TFP Thin-Filament Pyrometry (a technique for making gas-phase temperature measurements) 
+TIFF or TIF Tagged Image File Format (used for the CFI intensified, HiBMs, and LLL-UV cameras) 
+TM thermistor 
+TS Transport Stream (a video format) 
+TSC Telescience Support Center (also known as the GIPOC) 
+VCC voltage current characteristic (synonymous with voltage-current) 
+V-I voltage-current (e.g., plot of current as a function of the voltage or field strength)

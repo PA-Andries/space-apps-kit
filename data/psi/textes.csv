@@ -1,0 +1,99 @@
+investigation_id,categorie,fichier_source,fichier_texte,pages,caracteres
+PSI-10,Reports,PSI-10_Reports_FinalRpt_ACMEFlameDesign.pdf,data/psi/textes/PSI-10/PSI-10_Reports_FinalRpt_ACMEFlameDesign.pdf.txt,109.0,262175
+PSI-10,Reports,PSI-10_Reports_TaskbookPubsList_Feb2023.pdf,data/psi/textes/PSI-10/PSI-10_Reports_TaskbookPubsList_Feb2023.pdf.txt,3.0,9613
+PSI-10,Reports,PSI-10_Reports_TaskbookRpts.pdf,data/psi/textes/PSI-10/PSI-10_Reports_TaskbookRpts.pdf.txt,45.0,163447
+PSI-10,Science Documents,PSI-10_Science Documents_ACME_ISRD.pdf,data/psi/textes/PSI-10/PSI-10_Science_Documents_ACME_ISRD.pdf.txt,110.0,240202
+PSI-10,Science Documents,PSI-10_Science Documents_ACME_SORD.pdf,data/psi/textes/PSI-10/PSI-10_Science_Documents_ACME_SORD.pdf.txt,45.0,100923
+PSI-10,Science Documents,PSI-10_Science Documents_SRD_ACMEFlameDesign.pdf,data/psi/textes/PSI-10/PSI-10_Science_Documents_SRD_ACMEFlameDesign.pdf.txt,39.0,119194
+PSI-20,Reports,BRE_final_report_20220201.pdf,data/psi/textes/PSI-20/BRE_final_report_20220201.pdf.txt,181.0,366605
+PSI-20,Reports,Dissertation-PD-revised_.pdf,data/psi/textes/PSI-20/Dissertation-PD-revised_.pdf.txt,171.0,275898
+PSI-20,Science Documents,ACME CDR Presentation Package.pdf,data/psi/textes/PSI-20/ACME_CDR_Presentation_Package.pdf.txt,240.0,142166
+PSI-20,Science Documents,ACME-BRE_DoD.docx,data/psi/textes/PSI-20/ACME-BRE_DoD.docx.txt,,1326
+PSI-20,Science Documents,ACME-BRE_Test_Summary.docx,data/psi/textes/PSI-20/ACME-BRE_Test_Summary.docx.txt,,3
+PSI-20,Science Documents,ACME_Integrated_Science_Requirements_Definition_Review_20100505.pdf,data/psi/textes/PSI-20/ACME_Integrated_Science_Requirements_Definition_Review_20100505.pdf.txt,40.0,23307
+PSI-20,Science Documents,ACME_Integrated_Science_Requirements_RevB.pdf,data/psi/textes/PSI-20/ACME_Integrated_Science_Requirements_RevB.pdf.txt,110.0,240202
+PSI-20,Science Documents,ACME_Science_Operation_Requirements_revA_20111018.pdf,data/psi/textes/PSI-20/ACME_Science_Operation_Requirements_revA_20111018.pdf.txt,45.0,100923
+PSI-20,Science Documents,ACME_fact_sheet_20180519.pdf,data/psi/textes/PSI-20/ACME_fact_sheet_20180519.pdf.txt,1.0,2183
+PSI-20,Science Documents,ACME_fact_sheet_20180820.pdf,data/psi/textes/PSI-20/ACME_fact_sheet_20180820.pdf.txt,2.0,4152
+PSI-20,Science Documents,ACME_non-imaging_data_file_description.pdf,data/psi/textes/PSI-20/ACME_non-imaging_data_file_description.pdf.txt,18.0,25445
+PSI-20,Science Documents,BRE_SRD_201208.pdf,data/psi/textes/PSI-20/BRE_SRD_201208.pdf.txt,27.0,70839
+PSI-20,Science Documents,BRE_SRD_201306.pdf,data/psi/textes/PSI-20/BRE_SRD_201306.pdf.txt,63.0,150443
+PSI-20,Science Documents,BRE_data_interpretation_20220804.pdf,data/psi/textes/PSI-20/BRE_data_interpretation_20220804.pdf.txt,33.0,85273
+PSI-20,Science Documents,BRE_science_concept_RDR_201306.pdf,data/psi/textes/PSI-20/BRE_science_concept_RDR_201306.pdf.txt,80.0,27148
+PSI-20,Science Documents,BRE_science_concept_SCR_201208.pdf,data/psi/textes/PSI-20/BRE_science_concept_SCR_201208.pdf.txt,72.0,27287
+PSI-20,Science Documents,FLEX A Decisive Step Forward in NASAs Combustion Research Program.pdf,data/psi/textes/PSI-20/FLEX_A_Decisive_Step_Forward_in_NASAs_Combustion_Research_Program.pdf.txt,44.0,81864
+PSI-20,Science Documents,ISS_Researchers_Guide_-_Combustion_In_Reduced_Gravity.pdf,data/psi/textes/PSI-20/ISS_Researchers_Guide_-_Combustion_In_Reduced_Gravity.pdf.txt,56.0,107118
+PSI-20,Science Documents,PS-01548_ACME_info_sheet.pdf,data/psi/textes/PSI-20/PS-01548_ACME_info_sheet.pdf.txt,2.0,8058
+PSI-20,Science Documents,PS-02788_ACME_info_sheet.pdf,data/psi/textes/PSI-20/PS-02788_ACME_info_sheet.pdf.txt,2.0,3631
+PSI-20,Science Documents,PS-03055_ACME_info_sheet.pdf,data/psi/textes/PSI-20/PS-03055_ACME_info_sheet.pdf.txt,2.0,4130
+PSI-20,Science Documents,PS-03403_ACME_on_the_ISS.pdf,data/psi/textes/PSI-20/PS-03403_ACME_on_the_ISS.pdf.txt,1.0,15
+PSI-20,Science Documents,PS_00538__Unlocking_Mysteries.pdf,data/psi/textes/PSI-20/PS_00538__Unlocking_Mysteries.pdf.txt,4.0,14512
+PSI-22,Reports,ACME fact sheet 20180519.pdf,data/psi/textes/PSI-22/ACME_fact_sheet_20180519.pdf.txt,1.0,2183
+PSI-22,Reports,ACME fact sheet 20180820.pdf,data/psi/textes/PSI-22/ACME_fact_sheet_20180820.pdf.txt,2.0,4152
+PSI-22,Reports,E-FIELD Flames 30-day report Inc 55-56 20181115.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_30-day_report_Inc_55-56_20181115.pdf.txt,15.0,36389
+PSI-22,Reports,E-FIELD Flames 30-day report Inc 57-58 20190601.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_30-day_report_Inc_57-58_20190601.pdf.txt,16.0,38393
+PSI-22,Reports,E-FIELD Flames Final Report.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_Final_Report.pdf.txt,109.0,278244
+PSI-22,Reports,PS-01548 ACME info sheet.pdf,data/psi/textes/PSI-22/PS-01548_ACME_info_sheet.pdf.txt,2.0,8058
+PSI-22,Reports,PS-02788 ACME info sheet.pdf,data/psi/textes/PSI-22/PS-02788_ACME_info_sheet.pdf.txt,2.0,3631
+PSI-22,Reports,PS-03055 ACME info sheet.pdf,data/psi/textes/PSI-22/PS-03055_ACME_info_sheet.pdf.txt,2.0,4130
+PSI-22,Reports,PS_00538  Unlocking Mysteries.pdf,data/psi/textes/PSI-22/PS_00538_Unlocking_Mysteries.pdf.txt,4.0,14512
+PSI-22,Science Documents,ACME E-FIELD Flames DoD.pdf,data/psi/textes/PSI-22/ACME_E-FIELD_Flames_DoD.pdf.txt,2.0,2365
+PSI-22,Science Documents,ACME non-imaging data file description.pdf,data/psi/textes/PSI-22/ACME_non-imaging_data_file_description.pdf.txt,18.0,25445
+PSI-22,Science Documents,ACME_Integrated_Science_Requirements_Definition_Review_20100505.pdf,data/psi/textes/PSI-22/ACME_Integrated_Science_Requirements_Definition_Review_20100505.pdf.txt,40.0,23307
+PSI-22,Science Documents,ACME_Integrated_Science_Requirements_RevB.pdf,data/psi/textes/PSI-22/ACME_Integrated_Science_Requirements_RevB.pdf.txt,110.0,240202
+PSI-22,Science Documents,ACME_Science_Operation_Requirements_revA_20111018.pdf,data/psi/textes/PSI-22/ACME_Science_Operation_Requirements_revA_20111018.pdf.txt,45.0,100923
+PSI-22,Science Documents,E-FIELD Flames SCR 200802.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_SCR_200802.pdf.txt,59.0,21947
+PSI-22,Science Documents,E-FIELD Flames data interpretation document.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_data_interpretation_document.pdf.txt,39.0,99216
+PSI-22,Science Documents,E-FIELD_Flames_SRD_20100402.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_SRD_20100402.pdf.txt,55.0,144739
+PSI-22,Science Documents,E-FIELD_Flames_benefits_20200518.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_benefits_20200518.pdf.txt,1.0,1586
+PSI-22,Science Documents,E-FIELD_Flames_procedure_20200723.pdf,data/psi/textes/PSI-22/E-FIELD_Flames_procedure_20200723.pdf.txt,43.0,98657
+PSI-22,Science Documents,ISS Researchers Guide - Combustion In Reduced Gravity.pdf,data/psi/textes/PSI-22/ISS_Researchers_Guide_-_Combustion_In_Reduced_Gravity.pdf.txt,56.0,107118
+PSI-23,Reports,s-Flame 30-day report Inc 63 20201216.pdf,data/psi/textes/PSI-23/s-Flame_30-day_report_Inc_63_20201216.pdf.txt,15.0,44388
+PSI-23,Reports,s_Flame_final_report_20210729.pdf,data/psi/textes/PSI-23/s_Flame_final_report_20210729.pdf.txt,114.0,303339
+PSI-23,Science Documents,ACME Integrated Science Requirements Definition Review 20100505.pdf,data/psi/textes/PSI-23/ACME_Integrated_Science_Requirements_Definition_Review_20100505.pdf.txt,40.0,23307
+PSI-23,Science Documents,ACME Science Operation Requirements revA 20111018.pdf,data/psi/textes/PSI-23/ACME_Science_Operation_Requirements_revA_20111018.pdf.txt,45.0,100923
+PSI-23,Science Documents,ACME non-imaging data file description.pdf,data/psi/textes/PSI-23/ACME_non-imaging_data_file_description.pdf.txt,18.0,25445
+PSI-23,Science Documents,ACME s-Flame  DoD.pdf,data/psi/textes/PSI-23/ACME_s-Flame_DoD.pdf.txt,2.0,2550
+PSI-23,Science Documents,ACME_Integrated_Science_Requirements_RevB.pdf,data/psi/textes/PSI-23/ACME_Integrated_Science_Requirements_RevB.pdf.txt,110.0,240202
+PSI-23,Science Documents,s-Flame SCR 200802.pdf,data/psi/textes/PSI-23/s-Flame_SCR_200802.pdf.txt,99.0,40957
+PSI-23,Science Documents,s-Flame_SRD_20100125.pdf,data/psi/textes/PSI-23/s-Flame_SRD_20100125.pdf.txt,65.0,160063
+PSI-25,Reports,BASS-II Summary Report.pdf,data/psi/textes/PSI-25/BASS-II_Summary_Report.pdf.txt,144.0,340457
+PSI-25,Science Documents,BASS-II data FAQ.docx,data/psi/textes/PSI-25/BASS-II_data_FAQ.docx.txt,,17104
+PSI-25,Science Documents,SRD_BASS-II.pdf,data/psi/textes/PSI-25/SRD_BASS-II.pdf.txt,16.0,11913
+PSI-26,Science Documents,DLD_BASS.pdf,data/psi/textes/PSI-26/DLD_BASS.pdf.txt,1.0,1333
+PSI-26,Science Documents,SRD_BASS.pdf,data/psi/textes/PSI-26/SRD_BASS.pdf.txt,11.0,13598
+PSI-26,Science Documents,US National Meeting-070HE-0218-Final.docx,data/psi/textes/PSI-26/US_National_Meeting-070HE-0218-Final.docx.txt,,32235
+PSI-39,Reports,CFI Science Final Report.pdf,data/psi/textes/PSI-39/CFI_Science_Final_Report.pdf.txt,13.0,25064
+PSI-39,Science Documents,Pres_SCR_CFI.pdf,data/psi/textes/PSI-39/Pres_SCR_CFI.pdf.txt,17.0,12284
+PSI-39,Science Documents,SRD_CFI.pdf,data/psi/textes/PSI-39/SRD_CFI.pdf.txt,54.0,126182
+PSI-47,Reports,DAFT 1 year report 10 30 07 b.doc,data/psi/textes/PSI-47/DAFT_1_year_report_10_30_07_b.doc.txt,,47295
+PSI-47,Reports,DAFT final report 6 24 08 as submitted.doc,data/psi/textes/PSI-47/DAFT_final_report_6_24_08_as_submitted.doc.txt,,57859
+PSI-47,Reports,Exp_13_DAFT_30-Day_Postflight_Report.pdf,data/psi/textes/PSI-47/Exp_13_DAFT_30-Day_Postflight_Report.pdf.txt,14.0,32312
+PSI-68,Science Documents,FLEX-2 DoD.docx,data/psi/textes/PSI-68/FLEX-2_DoD.docx.txt,,1342
+PSI-68,Science Documents,FLEX-2 SRD Final _ No Hypertext .pdf,data/psi/textes/PSI-68/FLEX-2_SRD_Final___No_Hypertext_.pdf.txt,68.0,145334
+PSI-68,Science Documents,FLEX-2 SRD Final.pdf,data/psi/textes/PSI-68/FLEX-2_SRD_Final.pdf.txt,68.0,144888
+PSI-69,Science Documents,FLEX DoD.docx,data/psi/textes/PSI-69/FLEX_DoD.docx.txt,,1483
+PSI-69,Science Documents,FLEX_Test_Plan.pdf,data/psi/textes/PSI-69/FLEX_Test_Plan.pdf.txt,15.0,18407
+PSI-98,Science Documents,"SAFFIRE Objectives, Development and Status.pdf",data/psi/textes/PSI-98/SAFFIRE_Objectives_Development_and_Status.pdf.txt,6.0,26044
+PSI-98,Science Documents,SAFFIRE-I Image Directory Nomenclature.pdf,data/psi/textes/PSI-98/SAFFIRE-I_Image_Directory_Nomenclature.pdf.txt,1.0,1094
+PSI-98,Science Documents,SAFFIRE-I and SAFFIRE-III DoD.docx,data/psi/textes/PSI-98/SAFFIRE-I_and_SAFFIRE-III_DoD.docx.txt,,4907
+PSI-99,Science Documents,"SAFFIRE Objectives, Development and Status.pdf",data/psi/textes/PSI-99/SAFFIRE_Objectives_Development_and_Status.pdf.txt,6.0,26044
+PSI-99,Science Documents,SAFFIRE-II DoD.docx,data/psi/textes/PSI-99/SAFFIRE-II_DoD.docx.txt,,5064
+PSI-99,Science Documents,SAFFIRE-II_Image_Directory_Nomenclature_v3.0.pdf,data/psi/textes/PSI-99/SAFFIRE-II_Image_Directory_Nomenclature_v3.0.pdf.txt,2.0,1565
+PSI-100,Science Documents,"SAFFIRE Objectives, Development and Status.pdf",data/psi/textes/PSI-100/SAFFIRE_Objectives_Development_and_Status.pdf.txt,6.0,26044
+PSI-100,Science Documents,SAFFIRE-I and SAFFIRE-III DoD.docx,data/psi/textes/PSI-100/SAFFIRE-I_and_SAFFIRE-III_DoD.docx.txt,,4907
+PSI-100,Science Documents,SAFFIRE-III Image Directory Nomenclature_v3.0.pdf,data/psi/textes/PSI-100/SAFFIRE-III_Image_Directory_Nomenclature_v3.0.pdf.txt,1.0,1421
+PSI-101,Reports,SAMER_Final 0602 2014.pdf,data/psi/textes/PSI-101/SAMER_Final_0602_2014.pdf.txt,89.0,180763
+PSI-101,Science Documents,SAME_Baseline Concept Description Document_001 Rev A.pdf,data/psi/textes/PSI-101/SAME_Baseline_Concept_Description_Document_001_Rev_A.pdf.txt,15.0,40335
+PSI-101,Science Documents,SAME_Operations Manual_007.pdf,data/psi/textes/PSI-101/SAME_Operations_Manual_007.pdf.txt,33.0,52433
+PSI-102,Reports,SAME Final Science report  03 18 10 with papers attached.pdf,data/psi/textes/PSI-102/SAME_Final_Science_report_03_18_10_with_papers_attached.pdf.txt,68.0,183153
+PSI-102,Science Documents,SAME_Baseline Concept Description Document_001 Rev A.pdf,data/psi/textes/PSI-102/SAME_Baseline_Concept_Description_Document_001_Rev_A.pdf.txt,15.0,40335
+PSI-102,Science Documents,SAME_Operations Manual_007.pdf,data/psi/textes/PSI-102/SAME_Operations_Manual_007.pdf.txt,33.0,52433
+PSI-107,Reports,Dotson_umd_0117N_10980.pdf,data/psi/textes/PSI-107/Dotson_umd_0117N_10980.pdf.txt,92.0,117088
+PSI-107,Reports,Exp_19-20_SPICE_30-Day_PostFlight_Report.pdf,data/psi/textes/PSI-107/Exp_19-20_SPICE_30-Day_PostFlight_Report.pdf.txt,9.0,24786
+PSI-107,Reports,SPICE Final Report 12_2_2012.pdf,data/psi/textes/PSI-107/SPICE_Final_Report_12_2_2012.pdf.txt,28.0,56131
+PSI-107,Science Documents,SPICE SRD 8-23-07 with sigs.doc,data/psi/textes/PSI-107/SPICE_SRD_8-23-07_with_sigs.doc.txt,,7699
+PSI-115,Reports,NNX17AF08A_FinalReport.pdf,data/psi/textes/PSI-115/NNX17AF08A_FinalReport.pdf.txt,25.0,54608
+PSI-115,Science Documents,Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity DoD.pdf,data/psi/textes/PSI-115/Utilization_of_the_Smoke_Aerosol_Measurement_Experiment_Data_for_Advanced_Modeling_and_Simulation_of_Smoke_Generation_in_Micro-Gravity_DoD.pdf.txt,1.0,2029
+PSI-117,Reports,PSI-117_Reports_Dissertation_Combustion Behavior Of Sub-Millimeter Sized Oxygenated And N-Alka.pdf,data/psi/textes/PSI-117/PSI-117_Reports_Dissertation_Combustion_Behavior_Of_Sub-Millimeter_Sized_Oxygenated_And_N-Alka.pdf.txt,227.0,344278
+PSI-159,Reports,PSI-159_Reports_FinalRpt_ACME.CFI-G.pdf,data/psi/textes/PSI-159/PSI-159_Reports_FinalRpt_ACME.CFI-G.pdf.txt,93.0,209738

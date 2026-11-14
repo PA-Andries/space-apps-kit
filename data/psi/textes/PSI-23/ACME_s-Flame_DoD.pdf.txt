@@ -1,0 +1,47 @@
+Source : NASA PSI, PSI-23, Science Documents, ACME s-Flame  DoD.pdf
+
+--- page 1 ---
+PSI Data Organization Document 
+Advanced Combustion via Microgravity Experiments (ACME) Structure and Response of Spherical 
+Diffusion Flames (s-Flame) 
+ 
+1 
+ 
+To gain an initial understanding of this experiment, refer to the documents “ACME non-imaging data file 
+description.pdf” and “s-Flame_final_report_20210729.pdf” located in “Final Report” of the “Resulting Products” 
+section on the “Pubs & Docs” tab.  
+ 
+The s-Flame data is organized in PSI by diluent and fuel composition. Raw data, and video & image data are 
+available on the “Scientific Data and Information Tab” of each of the eight “Experiment Data” records:  
+ 
+ 1 Nitrogen-diluted Hydrogen and Oxygen 
+ 2 Nitrogen-diluted Methane and Oxygen 
+ 3 Nitrogen-diluted Hydrogen-Methane mixtures and Oxygen 
+ 4 Nitrogen-diluted Ethylene and Oxygen 
+ 5 Helium-diluted Hydrogen and Oxygen 
+ 6 Helium-diluted Methane and Oxygen 
+ 7 Helium-diluted Hydrogen-Methane mixtures and Oxygen 
+ 8 Helium-diluted Ethylene and Oxygen 
+ 
+Within each “Experiment Data” record, “Raw Data”, “Images” and “Audio/Video Files” are available on the 
+“Scientific Data and Information” tab. Test names are formatted YYDDDX# where YY identifies year, DDD identifies 
+day of year (GMT), X identifies a letter and # identifies a number  – where the different numbers can be for repeats 
+but are typically variants, e.g., with different flow rate(s) or instrumentation setting(s), e.g. 19308F1. Record 
+naming and listings are based on the detailed information in the test conditions table below (page 2). 
+ 
+Test specific raw data files are located on the “Raw Data and Information” tab of the “Raw & Analyzed Data” 
+record. The first row of the .csv files provides information about the test configuration. The headers of the basic 
+data in .csv files is explained in Section 10.1, beginning on page 126 of the “ACME-DOC-010 Rev D.pdf” located in 
+the “Data Organization Document(s)” section of the “Scientific Data and Information” section on the “Data” tab of 
+the ACME s-Flames “Investigations” record. Associated videos are located on the “General” tab and associated 
+images are located on the “Image Data and Information” tab of the “Videos & Images” record. 
+ 
+There are various other supporting engineering documents, videos, reports and publications available on the other 
+tabs of the “Investigations” record.
+
+--- page 2 ---
+PSI Data Organization Document 
+Advanced Combustion via Microgravity Experiments (ACME) Structure and Response of Spherical 
+Diffusion Flames (s-Flame) 
+ 
+2

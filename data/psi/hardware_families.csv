@@ -1,0 +1,7 @@
+hardware_family,facility,description,source,investigations
+ACME gas burner,Combustion Integrated Rack (CIR),Six ACME experiments burned gaseous fuels with the same modular ACME hardware in the CIR.,statement,PSI-10 ACME Flame Design; PSI-20 ACME BRE; PSI-21 ACME CLD Flame; PSI-22 ACME E-FIELD Flames; PSI-23 ACME s-Flame; PSI-159 ACME CFI-G
+MDCA droplet,Combustion Integrated Rack (CIR),"FLEX, FLEX-2 and CFI burned liquid fuel droplets with the Multi-user Droplet Combustion Apparatus in the CIR.",statement,PSI-39 CFI; PSI-68 FLEX-2; PSI-69 FLEX
+MSG flow duct,Microgravity Science Glovebox (MSG),"BASS, BASS-II, SPICE and SLICE (solid and gaseous fuels) used the modular fan-driven flow duct built for SPICE, inside the MSG.",statement,PSI-25 BASS-II; PSI-26 BASS; PSI-106 SLICE; PSI-107 SPICE
+Saffire (Cygnus),Cygnus cargo vehicle,Large-scale burns inside an uncrewed Cygnus after it left the ISS.,PSI,PSI-98 Saffire-I; PSI-99 Saffire-II; PSI-100 Saffire-III
+SAME smoke hardware,MSG / ISS cabin,SAME and SAME-R smoke experiments; one SAME instrument was first used to detect dust in DAFT and DAFT-2.,statement,PSI-47 DAFT / DAFT-2; PSI-101 SAME-R; PSI-102 SAME
+Ground study (reuses flight data),Earth laboratories and computers,Modeling or lab studies that reuse PSI flight data.,PSI,PSI-60 ; PSI-62 ; PSI-115 ; PSI-117 ; PSI-142

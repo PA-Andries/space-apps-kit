@@ -1,0 +1,21 @@
+Source : NASA PSI, PSI-98, Science Documents, SAFFIRE-I Image Directory Nomenclature.pdf
+
+--- page 1 ---
+SAFFIRE-I  Image Directory Nomenclature
+Xn_Raw_CamOriginal RAW Camera Original - contains 8 byte offset that must be corrected prior 
+to color interpolation.  
+Xn_Raw_DistroMaster RAW Distribution Master - 8 byte offset corrected using ImageJ.  Use this 
+file set to distribute RAW image files and color interpolation processing. 
+Xn_Raw2TIFF RAW_DistroMaster files color interpolated and saved as TIFF, using 
+IrfanView Batch Conversion process.  
+Xn_Raw2TIFF_icmad Raw2TIFF files annotated with ICMAD 'Exposure' and 'Gain' information.  
+Data is appended to the bottom of each frame using ImageMagick script.  
+Xn_jpeg Flight hardware generated jpeg images, created on-board from the RAW 
+Camera Original.  
+Xn_jpeg_corrupt Jpeg images received corrupted after downlink. 
+Xn_jpeg2png_icmad Flight hardware generated jpeg images annotated with ICMAD 'Exposure' 
+and 'Gain' information.  Data is appended to the bottom of each frame 
+using ImageMagick script and re-saved as .png format to prevent 
+additional compression artifacts.  
+"X" Denotes run type 
+"n" Denotes run number

@@ -1,0 +1,3080 @@
+Source : NASA PSI, PSI-20, Science Documents, BRE_SRD_201306.pdf
+
+--- page 1 ---
+Science Requirements Document 
+Version 2.11 
+6 June 2013 
+ 
+for 
+ 
+Burning Rate Emulator (BRE):  
+Material Burning and Extinction in Microgravity 
+ 
+an ACME experiment 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Principal Investigator 
+James Quintiere, Univ. of Maryland 
+ 
+Co-Investigator 
+Peter B. Sunderland, Univ. of Maryland 
+ 
+Project Scientist, BRE 
+Paul Ferkul 
+ 
+Project Scientist, ACME 
+Dennis P. Stocker
+
+--- page 2 ---
+1 
+EXECUTIVE SUMMARY  
+The goal of this research is to establish the burning conditions possible in a microgravity 
+quiescent environment. The approach is to do this using a burner to emulate (BRE, Burning Rate 
+Emulator) the burning for real condensed fuels, representative of com mon liquids and solids. 
+This will be done for quasi -steady burning conditions, albeit ideal in some cases, but the BRE 
+will range over a wide spectrum of real fuel properties.  The key properties governing steady 
+burning are (1) the heat of gasification, (2) the surface re -radiation heat flux, and (3) the heat of 
+combustion. Flame radiation is also relevant in general and can be represented in terms of the 
+laminar smoke point. Its importance in microgravity flames needs study, but the first three 
+properties are key. 
+ Currently NASA assesses the flammability hazard of materials  for use in space flight by 
+an upward flame spread “pass -fail” test (Test 1), and supplements with data from the Cone 
+Calorimeter (Test 2).  The latter test has the capability of measur ing the three properties listed 
+above. Hence, the successful application of the BRE in microgravity can enhance the usefulness 
+of Test 2. 
+ Fundamental and ad hoc testing in microgravity at quiescent conditions ha s shown that 
+quasi-steady flames can be supp orted on candle -wicks, droplets, jets and, at very low ambient 
+velocities, small plastic  samples and a burner flame.  The established flames tend to have 
+spherical or semi-ellipsoidal shapes. Our preliminary work burning ethanol on planar wicks of 1 
+× 4 cm suggest similar shapes in aircraft and dro p tower tests. But this work showed instabilities 
+in the drop tower, and needs  further exploration. Theoretical analysis based on microgravity jet 
+flame length correlations suggest s that a 50 mm diameter plan ar material could support quasi -
+steady combustion in microgravity for some liquid and plastic fuels. The analysis indicates that 
+burning depends on diameter, so several additional burner sizes will be needed to examine this 
+effect. 
+ Gas burners like the BR E have been used to successfully simulate burning of a wide 
+range of fuels in terms of their B numbers and configurations over a range of Grashof numbers.  
+We have successfully shown that for planar burning at different angle orientations that a burner 
+can emulate the flame standoff distribution, and even match the onset of unsteadiness to 
+turbulent flow. Theoretical analyses of such a problem are limited by the inability to accurately 
+deal with flame radiation, turbulence and variable properties. A burner s imulation can be far 
+superior as it inherently contains these effects.  
+ The construction of a 50 mm diameter prototype BRE burner with flame heat flux sensors 
+has enabled us to emulate both a  methanol and heptane pool fire of the 50 mm diameter, 
+reproducing its color, flame character and shape, and heat of gasification for nearly the same 
+surface temperatures. We show that the BRE is capable of  displaying the burning conditions in 
+terms of the fuel properties of heat of combustion, heat of gasific ation, and surface re -radiant 
+heat flux ( with some likely effect of smoke point). A preliminary 3 -D plot of steady burning 
+gives a flammability mapping in terms of these variables under conditions of gravity and 
+atmospheric variations. A mapping in microgravity can demonstrate the burning conditions for a 
+wide range of real materials in terms of these properties.  In addition the effect of external 
+radiation can indirectly be assessed. The 50 mm burner has been redesigned, along with a 25 mm 
+burner, to reduc e edge effects, provide improved heat flux sensors with temperatures, and 
+cooling water has been dropped from the both the burner and the heat flux sensors in 
+microgravity experiments.
+
+--- page 3 ---
+2 
+The primary objective is to observe the burning behavior (including ext inction) in long -
+duration microgravity for methane /nitrogen and ethylene/nitrogen mixtures on a porous circular 
+burner of 25 and 50 mm diameter at various pressures, ambient oxygen, and CO 2 (desired, to 
+assess extinguishment ). Ignition will not be directly studied in microgravity studies, as we 
+believe normal-gravity experiments are sufficient for its study. Another objective is to obtain 
+conditions that can be related to microgravity behavior of condensed fuels that embrace the  
+scope of real liquid and solid fuels.  
+We think these results can establish fuel properties that directly relate to the fire hazard in 
+spacecraft, and these properties can be derived from NASA Test 2. The BRE is an efficient, safe, 
+and comprehensive technique for achieving these results. 
+ This version of the Science Requirements Document has been refined since the Science 
+Concept Review (Aug 28, 2012). The panel wrote at that time that they “strongly encourage 
+continued development of the BRE experime nt for implementation into the ACME and testing 
+on the ISS.” We have tried to address most of their recommendations and suggestions. In 
+addition, work has progressed to include the development of two papers, and the commencement 
+of drop facility testing of  the BRE. Those results have shown quasi -steady flames, and are very 
+encouraging. 
+ 
+TABLE OF CONTENTS 
+ 
+1. INTRODUCTION................................................................................................................. 3 
+1.1 Goal of the study ..................................................................................................................................................... 3 
+1.2 Motivation for basing flammability in microgravity on material properties .......................................... 3 
+1.3 Background of combustion in microgravity .................................................................................................... 5 
+1.4 Overview of the use of burners to emulate burning of materials ............................................................... 6 
+1.5 Review of supporting work for BRE ................................................................................................................. 7 
+1.6 Issues for determining flammability in microgravity ................................................................................. 15 
+ 
+2. FLIGHT EXPERIMENT ................................................................................................... 21 
+2.1 Knowledge Lacking and Knowledge to be Gained by Flight Tests  ........................................................ 21 
+2.2 Experimental Objectives ................................................................................................................................... 22 
+2.3 Summary of Approach ....................................................................................................................................... 22 
+2.4 Science Data End Products ............................................................................................................................... 22 
+ 
+3. EXPERIMENT REQUIREMENTS.................................................................................. 25 
+3.1 Requirements Discussion ................................................................................................................................... 25 
+3.2 Operational Sequence [ISRD 4.5] .................................................................................................................... 29 
+3.3 Test Matrix [ISRD 5.5] ....................................................................................................................................... 30 
+3.4 Science Success Criteria [ISRD 6.5] ................................................................................................................ 30 
+3.5 Post Flight Data Analysis Plan ......................................................................................................................... 31 
+ 
+4. REFERENCES .................................................................................................................... 32 
+ 
+APPENDIX 1: APPENDED PAPERS. ..................................................................................... 33
+
+--- page 4 ---
+3 
+1. INTRODUCTION  
+1.1 Goal of the study 
+The goal of this study is to establish the burning conditions for materials in a quiescent 
+microgravity environment. The burning conditions will represent those of steady burning with 
+the heat of gasification of the material a s the principal fuel property that controls suc h burning. 
+In addition, the heat of combustion controlling flame extent, surface reradiation heat flux, and 
+flame radiation properties will influence the burning rate. We seek to define the burning in terms 
+of these properties  by using an emulator having a controlled gaseous fuel supply to simulate 
+steady burning of material with those properties . The burning rate emulator (BRE) can be 
+operated to represent a range of real solid and liquid fuels, and considering an effective heat of 
+gasification can also simulate an applied external heat flux.  
+Steady burning can be expressed as 
+ (1) 
+where  is the incident flame heat flux,  is the surface radiative loss heat flux to ambient,  
+is the incident external radiative heat flux, and   is the heat of gasification. An effective heat of 
+gasification can be defined as 
+ (2) 
+such that 
+ (3) 
+The flame heat flux will be controlled by diffusive and radiative components, and the 
+surface heat flux by the temperature of the vaporizing surface.  In the case of the emulator burner 
+(BRE), it is the surface burner temperature  that gives the surface re-radiation. Heat flux gages in 
+the surface will record the flame heat flux distribution. With the measured gas flow rate of the 
+burner, an effective heat of gasification can be determined for all steady burning conditions  
+according to Eq. (3) . Consequently, values of L , with and without assistance from an external 
+heat source, can be determined from Eq. (2). By varying the gaseous fuel, the heat of combustion 
+and the radiation character (notably the smoke point) can be varied. For a given configuration, a 
+wide range of burning conditions can be readily established with the emulator (BRE).  
+At first, the burner will confirm the burning of real materials in a normal gravity quiescent 
+atmosphere. Then it will be used to establish the burning conditions in microgravity . Its 
+advantage will be its efficiency to range through a spectrum of fuels, and its ease of operation.  
+The feasibility of the emulator will be established in the sections to follow.  
+  
+1.2 Motivation for basing flammability in microgravity on material properties 
+On Earth, gravity assists flow in fire to suppl y air and promote fire spread. For many solid and 
+some common liquid fuels, preheating  is needed to achieve burning. Materials have a critical 
+heat flux (CHF) below w hich ignition is not possible. This CHF depends on the heat loss from 
+the material on heating, and convective heat loss contribute s. The convective loss is purely 
+diffusive in microgravity, a nd therefore the CHF is lower. So ignition of materials in spacecraft 
+under microgravity conditions could be somewhat easier than on Earth in a quiescent atmosphere. 
+For comfort in a spacecraft environment there is likely to be some small am bient fl ow with 
+velocities of about 6 –  20 cm/s (Ross, 2001). Such flows are known to promote spread and 
+L
+qqqm errf ′′+′′−′′=′′ 
+fq′′ rrq′′ eq′′
+L
+eff
+f
+L
+qm ′′=′′ 
+
+--- page 5 ---
+4 
+burning in microgravity. But it is useful to examine, in the extreme, the conditions of burning in 
+a purely quiescent atmosphere. Results in quiescent conditions certainly set a flo or for the 
+burning conditions. For fire safety in space it is important to know the burning conditions of a 
+given fuel. Currently there is no  way to determine these conditions. The present study seeks to 
+express these conditions in terms of me asureable material properties, and to consider the role of 
+external heat addition, so important to fire growth on Earth.  
+Current flammability criteria for space flight applications are contained in  documents PSS-
+01-721 and NHB 8060-1 (1998) as prescribed, respectively, by ESA and NASA. The documents 
+are considered as equivalent.  The Upward Flame Propagation (Test 1) is the dominant test for 
+material flammability by NASA. It tests the flame propagation of a vertical sample 30 ×  6.4 – 
+7.5 cm wide, under a small electric source heat flux of 75 kW/m 2. The atmospheric conditions 
+are controlled. Burn length and time are recorded. It is considered a pass-fail type test, similar to 
+the UL-94 test, commonly used by industry for plastic components. The latter uses a premixed 
+flame source, and samples 12.5 × 1.3 cm. In UL-94 the pass-fail performance could be correlated 
+with the ratio of the heat of combustion to heat of gasification for a material (Downey, 2009).  
+Ohlemiller (1992) found that NASA Test 1 results for a material did not correlate with 
+NIST flammability tests that measure ignition, burning rate, and opposed flow flame spread. He 
+recommended that Test 1 be modified to include the addition of external radiant  heating. In fact, 
+the current NASA requirements use the Cone Calorimeter with external  heat fluxes of 25 –  
+75 kW/m2 (Test 2) to supplement information gained from Test 1. Test 1 with a  “pass-fail” 
+criteria, and even supplemental information gained from Test 2, do not explicitly give a basis for 
+predicting performance in microgravity. Indeed, Ohlemiller recommended the study of flame  
+spread in microgravity using a prescribed flow and heat flux. He said, “Without such information, 
+spacecraft designers are confronted with unquantifiable risks regarding fire safety.” The FIST 
+program with Fernandez-Pello at UC Berkeley (Ross, 2001) is the only current program aimed to 
+examine these combined effects  of radiation and flow . Nevertheless, the current NASA material 
+compliance by flammability testing does not give information  needed to predict performance in  
+microgravity. 
+There is a need to establish a basis for testing flammability on Earth to extrapolate to 
+microgravity applications.  First, there is a need to establish the conditio ns of burning in 
+microgravity. Secondly, it is essential to represent the condition of burning in terms of 
+established models and material properties. The correlatio n of performance in UL -94 with the 
+property ratio, heat of combustion to heat of gasification, shows a l inkage to the NASA Test 1 
+test. Both of these properties are determinable from the NASA Test 2 test, as demonstrated by 
+Tewarson ( 2002). Thirdly, as ste ady burning is directly related to the heat of gasification 
+property, the establishment of quiescent burning in microgravity would provide a direct 
+connection between a property and burning . Truly, some materials , such as those that char, do 
+not fit this s imple steady burning model , yet their burning character can still be approximately 
+represented by a relatively high heat of gasification . For example, while wood burns unsteadil y 
+with a char, its average burning rate can be represented by an effective heat  of gasification of 4 – 
+6 kJ/g. Fourthly, a burning rate emulator (BRE) can potentially display the conditions of burning 
+in microgravity experiments. Hence the BRE can be used to assess a range of burning conditions 
+to find a domain of burning and the pro perties that would allow it. Moreover, the simple burning 
+model indicated by Eqs.  (1) – (3) would allow the prediction of burning with the addition of 
+radiant heat flux. While we do not intend to vary the external heat flux, the results of the BRE 
+can be interpreted in terms of these relationships. The BRE can determine a range of burning
+
+--- page 6 ---
+5 
+conditions in microgravity  as a function of heat of gasification, reradiation heat fl ux, applied 
+radiant heat flux, heat of combustion and smoke point. The latter two properties can be varied by 
+changing the gaseous fuel supply of  the BRE. In addition, nitrogen can be added to the gaseous 
+fuel to extend a measurement range for heat of gasification. 
+The establishment of quasi -steady burning of materials in microgravity has not been fully 
+established. Anecdotal tests i ndicate that this is possible. The special nature of burning in a 
+purely diffusive environment must be  fraught with new effects. Some of these effects have been 
+seen among current fundamental research  studies on droplets and flame spread  over thin 
+materials. Other effects involve the small entrainment ambient oxidizer due to the velocity of the 
+vaporizing fuel, three - dimensional effects, and the propulsion of flaming droplets  and brands 
+caused by pressurization during vaporization. Also the effect of radiation feedback, so common 
+to fire growth on Earth, has not been fully explored, and is likely to be a factor.  
+A serious fire accident occurred on the MIR (Ross, 2001) when a solid propellant oxygen 
+generator ignited producing a “blowtorch-like white conical flame” that caused other materials to 
+become involved while extinguishment was initiated by the crew. The fire burned out and caused 
+extensive smoke damage.  Hopefully, a more serious event is not waiting to happen. Yet it is 
+likely that the “perfect storm” of conditions can be manifested to produce a serious and susta ined 
+spacecraft fire accident.  The role of  materials will be responsible.  We should fully understand 
+how these materials will behave, and how to relate them to Earth-bound testing. 
+ 
+1.3 Background of combustion in microgravity 
+Experiments in Skylab (Ross, 2001; Kimzey, 1974) indicated sustained burning of thin paper and 
+plastics. More recent experiments indicate flame spread  on thin paper and plastic thin cylinders  
+in microgravity (Ross, 2001). Spread on 4.5 mm diameter rods of Delrin, PMMA and HDPE in 
+the MIR was achieved in opposed flows down to 1 cm/s . Below that speed, the spread and 
+burning ceased (Ross, 2001). Opposed flow spread has been well documented, and appears more 
+favorable than concurrent spread. It is indicated that concurrent spread could be limited due to 
+upstream vitiation by the tra nsport of combustion products. Opposed flow spread in a quiescent 
+atmosphere has been shown to depend on material, thickness, and oxygen concentration (Ross, 
+2001). 
+Perhaps the most striking example of quasi -steady burning has been the burning of candle 
+flames on the MIR (Ross, 2001) for periods ranging from about 100 s to more than 45 minutes. 
+A spherical flame formed around the wick. Attempts to repeat this in shuttle flights led to similar, 
+but much shorter durations of burning. The MIR flights had atmospheres of 0.22 – 0.25 oxygen 
+mole fraction, with a metal mesh screen surrounding the experiment; while the Shuttle had 0.217 
+oxygen fraction and a perforated plastic box enclosing the experiment ( Dietrich et al., 2000) . 
+These differences in containment likely affected the input of fresh air to the candle flame and its 
+burning duration. It was noted that the wax melt at the base of the wick distorted into a ball, and 
+the flames oscillated before extinction.  
+The candle experiments clearly indicate the capability of quasi -steady sustained burning in 
+a quiescent  atmosphere of surface burning. This is also born out in droplet experiments by 
+Kumagai and others (Ross, 2001). The droplet flame can be considered quas i-steady as the 
+droplet diameter is reduced in burning. The droplet burning rates are slightly less than the ideal 
+theoretical thin flame spherical solutions, but the behavior has a similar dependence with droplet 
+diameter. Extinction occurs as the drop di ameter is decreased, with diffusive effects governing 
+small initial drops, and radiativ e effects for larger droplets. There are other instances of quasi -
+
+--- page 7 ---
+6 
+ 
+Figure 1. Regions of steady burner flames in microgravity  in terms of fuel Vf and oxidizer U ∞ 
+velocities from Brahmi et al. (2005). 
+steady diffusive flames in  microgravity. Small diameter jet flames of 0.4 – 2.7 mm yielded 
+spherical flames of durations from 150 – 300 s (Ross, 2001).  Also Sunderland et al . (1999) 
+recorded flames for port diameters up to 3.3 mm , and Reynolds ( Re) from about 10 – 1700 in 
+microgravity. Their low Re flames were spherical, and the higher Re flames elongated.  An 
+empirical relationship indicated the flame length to port diameter was linearly proportional to the 
+Re, with the constant of proporti onality depending on fuel type. The constant was about 30% 
+higher for the non-buoyant flames, perhaps due to the lower entrainment of air. 
+It would appear that a spherical flame shape forms  a stable quasi-steady flame for droplets, 
+jets at low Re, and the candle with the cylindrical wick.  Three-dimensional planar surfaces 
+burning in microgravity are likely to remain stable when achieving a similar flame shape. 
+Brahmi et al.  (2005) used a gaseous burner to simulate burning in microgravity under flow 
+conditions. They burned ethane over a 60 × 60 mm sintered bronze plate in oxygen- nitrogen 
+atmospheres flowing over the plate  at velocities of about 10 – 150 mm/s. They found, for 120 
+experiments under microgravity conditions, a mapping of fuel velocity with oxidizer velocity 
+indicated three regions of flame shapes during burning. These regions are shown in Figure 1. The 
+flames indicated an elliptical shape in Region I, parabolic in Regio n II and linear in Region III.  
+The elliptical flames for points the (a) and (b) location of the mapping  are shown in Figure 2. It 
+is noteworthy that quasi-steady elliptical flames were produced for this planar geometry at nearly 
+quiescent conditions (U∞ ~ 5 mm/s) in microgravity. Their establishment in quiescent flow needs 
+to be demonstrated. 
+Perhaps this evidence suggests a spherical-like flame can support quasi -steady diffusive 
+burning in microgravity quiescent conditions for other configurations. 
+1.4 Overview of the use of burners to emulate burning of materials  
+Orloff and deRis (1971), deRis et al . (1975) and Kim et al. (1971) pioneered the use of sintered 
+metal burners for studying the burning of planar condensed- phase steady burning. As with the 
+Brahmi et al . (2005) burner, the flow of the fuel is distributed uniformly over the burner. This 
+uniform flow is in contrast to the actual flow velocity of the supplied vapor that is governed by 
+the local heat transfer from the flame. As the flame shape changes, the vap or velocity does also.
+
+--- page 8 ---
+7 
+ 
+Figure 2. Elliptical flame shapes for (a) and (b) in Fig. 1a from Brahmi et al. (2005). 
+Yet despite this difference, deRis and co-workers successfully simulated burning conditions for a 
+wide range of B numbers. The B number is defined as 
+ (4) 
+where  is the ambient oxygen mass fraction,   is the heat of combustion,  is the 
+stoichiometric oxygen to fuel ratio,  is the specific heat of gas mixture,   is the surface 
+vaporization temperature, and  is the ambient temperature. 
+For a given ambient condition, the B  number is principally a function of the heat of 
+gasification, L. The burning rate per unit area is also principally a function of the B  number in 
+purely diffusive or convective burning. Of course flame radiation and sur face reradiation disturb 
+this simple dependence. Yet the relatively simple dependence could be emulated by the deRis 
+burner, and shown to follow laminar-burning theory. So despite the imperfection of a uniform 
+burner velocity, the results yielded theoretically supported results for burning and flame shape.  
+In the deRis burner, the heat of gasification was determined by Eq. (1) with no external 
+radiation and negligible reradiation. The latter was accomplished by cooling water through the 
+burner’s sintered metal matrix.  An energy balance on the cooling water, after considerable time 
+to achieve thermal equilibrium of the burner, allowed an average fla me heat flux to be 
+determined. Nitrogen addition to the gaseous fuel also allowed for variations in the suppli ed fuel 
+mixture mass flux.  
+Because we were to follow this burner approach, we sought to establish some further 
+support for its accuracy and to help allow us to develop a skilled approach. 
+ 
+1.5 Review of supporting work for BRE 
+We shall review our work to date, and show how it has evolved from our original objective to the 
+current application of quiescent microgravity burning. It will display our approach, exploration 
+of burning in microgravity, and the development of the burner concept and prototype. 
+ 
+1.5.1  Study of flat surface burning in microgravity 
+Initially this study was to consider burning in various gravity space applications, such as the 
+Moon and Mars environments. An early consideration was to explore such conditions i n aircraft 
+( )
+L
+TTcrhYB vpcox ∞−−∆≡ /
+oxY ch∆ r
+pc vT
+∞T
+
+--- page 9 ---
+8 
+ 
+Figure 3. Porous ceramic wick substrate for liquid fuels, l ranging from 1 to 10 cm. 
+ 
+Figure 4. Methanol flames in top galley at angles +90, 60, 30, 0, - 30, -60, and -90. Methane flames in 
+bottom galley at corresponding angles and burning rates. 
+gravity simulations. Thus, a test of the burner approach was to consider the burning on a flat 
+plate at various inclinations, with burning on top and the bottom. This work allowed us to 
+explore this burning configuration by tests with real fuels, with a burner, and through theoretical 
+analyses. In short, the results help to establish the credibility and accuracy of the emulation with 
+a burner, and the limitations of t heory to predict the results. A brief summary of this work 
+follows, and Bustamante et al. (2012) presented a recent paper covering it. 
+For the inclined plate burning experiments, laminar burning was primarily examined. 
+This was done using two liquid fuels, methanol and ethanol, each saturated into a porous ceramic 
+wick plate as shown in Figure 3. The plate was oriented at angles of 0º (vertical), and +/_ 30, 60 
+and 90º, with negative angles indicating burning on the bottom. Steady burning could be 
+achieved for each of these conditions; however, for top burning in particular, at flow distances 
+exceeding about 5 cm, the onset of unsteady instabilities occurred. This was not consider ed fully 
+developed turbulence. In Figure 4, the top galley shows methanol flames for a plate length of 10 
+cm and at  the various angles. Their color is not indicative of reality, as it was ren dered to gain 
+better clarity. The galley below shows methane  flames in a burner of same dimensions at each 
+corresponding angle and flow rate.  The burner consisted of a ceramic surface with 2 mm holes. 
+The methane flow rate was matched to  the average burning rate measured in the corresponding
+
+--- page 10 ---
+9 
+ 
+Figure 5. Trace renditions of the flame standoff position for the burner and methanol. 
+methanol wick test of the same configuration.  Images for flame standoff distances were taken 
+within 5 – 15 s of ignition to minimize the temperature rise of the surface. The surface 
+temperature of the burner yielded a maximum reading of 175 °C over this time period. This 
+temperature range is higher than the boiling point of methanol, but still gives a relatively small 
+reradiation loss compared to the flame heat flux. 
+A better comparison of the flame standoff position between the methanol and the methane 
+burner is shown in Figure 5 in which two instantaneous traces were made of each.  Their 
+similarity, even in the transition instabilities, is a measure of the accuracy of  the burner in 
+simulating the methanol flames.  Notably there are some differences, in particular at +30 and 0º 
+where the onset of the transition occurred early in the methanol flame. The onset of transition 
+appears to have had an upstream thickening effect  on the standoff position. The reason for the 
+difference at -90º is unclear. 
+Nevertheless, the ability of the burner to emulate the distributive aspects of the burning by 
+these flame stando ff comparisons is encouraging. It is noteworthy that theoretical an alyses to 
+achieve similar results are limited by the effects of transition instabilities, variable pro perties, 
+and flame radiation.  Even a DNS simulation (Raghavan  et al. , 2010) of this inclined plate 
+burning was confined to consi dering only a 1 cm long pl ate. Hence, a practical way to emulate 
+burning is using a burner, as it automatically accounts for the effects of instabilities, radiation, 
+and property variations. 
+We have explored the ability to measure the total heat flux to the burning surface of the 
+wick fuels. The heat flux was measured for the 10 x 10 cm methanol soaked wicks with a 3 mm 
+diameter thermopile sensor (Medtherm Schmidt-Boelter heat flux transducer ) located at the 
+center of the plate. This sensor requires cooling to maintain its back- face temperature.  Initial 
+cooling with normal ambient water gave erratic results, most likely due to condensation on the 
+sensor. This was eliminated by using water supp lied at temperatures above 65 ºC, the dew point
+
+--- page 11 ---
+10 
+ 
+Figure 6. Average mass burning flux and center heat flux for methanol at all angles. 
+0
+5
+10
+15
+20
+25
+0
+5
+10
+15
+20
+25
+-120 -90 -60 -30 0 30 60 90 120
+m" (g/m2-s)
+q" at x = 5 cm (kW/m2)
+θ (Degrees)
+Marker             Quantity
+Experimental q"
+Experimental m"
+of most fuels asso ciated with a diffusion flame. Figure 6 shows the measured heat flux at the 
+center of the 10 x 10 cm Methanol wick along with the corr esponding average burning flux. If 
+laminar burning persisted over the plate, the average heat flux could be estimated from the loc al 
+value at the center (5 cm). Since a transition to turbulence occurs for all angles except - 90º, a 
+simple estimation is not possible. However, for -90º where laminar conditions pre vailed and the 
+flame shape is nearly invariant from Figure 4, the flame flux measured could be tak en as 
+constant over the plate. Taking a small  re-radiation into account the heat of gasification can be 
+computed for the -90º case as (17.3-0.3) kW/m2 / 11 g/m2s = 1.55 kJ/g for methanol; actually it is 
+1.23 kJ/g. While this computation is approximate, it gives some confidence level that the mass 
+and heat flux measurements are in accord.  Further, it gives a good basis for incorporating such a 
+heat flux measurement into the BRE burner. 
+ 
+An MS thesis has been completed  on this work. A paper is to be presented at the Proc. of 
+the Seventh International Seminar on Fire and Explosion Hazards in May 2013, and a journal 
+paper has been submitted. That paper is appended herein. It includes additional data and 
+theoretical results that aid in generalizing the results. This work provided us with a basis of using 
+a burner to emulate the burning rate on flat plates of various orientations. 
+1.5.2 Preliminary results in microgravity 
+In addition to the normal gravity  wick burning experiment, several microgravity  experiments 
+were made. These were performed in the NASA Glenn 5 -second drop facility , and in aircraft 
+simulations of microgravity . These involved a wick 10 x 40 mm in size. In two drop -facility 
+experiments at NASA Glenn, a blue ellipsoidal flame was established; then appeared unstable 
+and extinguished during the 5 s drop. A photog raph is shown in Figure 7. It was speculated that 
+the instability may have been related to the wick placement as too close to the chamber wall.
+
+--- page 12 ---
+11 
+ 
+Figure 7. Ethanol flame in microgravity drop tower experiment before extinction (40 mm length). 
+ 
+Figure 8. Steady flame on ethanol wick in aircraft µ-g test (40 mm length). 
+  
+ 0 s 1 s   2 s 
+   
+ 3 s 4 s  5 s 
+ 
+Figure 9. Heptane on 50 mm diameter wick, NASA Glenn drop-tower at 30 % O2, 2 atm 
+ 
+Also, ethanol flames on the same size wick were used in aircraft simulations of 
+microgravity. We recognize that this simulation for microgravity will be less satisfactory than the 
+drop tower environment  of microgravity. In the 14- microgravity aircraft experiments, a quasi -
+steady flame persisted the duration of the burn ranging from 6 – 20 seconds. The flames were 
+mostly ignited in the “zero-g” period. A representative photograph of a quasi -steady flame in the 
+aircraft is shown in Figure 8. It closely r esembles the flame in Figure 7. The flame in the aircraft
+
+--- page 13 ---
+12 
+ 
+Figure 10. Heats of gasification at quasi-steady μg burning 
+ 
+ 
+microgravity test appears flatter than the one in the drop tower.  The video recording in the 
+aircraft, from which this photograph was cut, was handicapped. The video camera mounted in 
+the rig malfunctioned, and a hand-held camera was used looking through the chamber window. 
+Additional NASA Glenn drop facility testing (June 19- 22, 2012) used a circular flat 
+ethanol wick of 22 and 50 mm diameter. For a normal atmosphere, the 50 mm diameter ethanol 
+flame behaved similarly to the rectangular strip configuration of Figure 7. However, for the 22 
+mm diameter wick, the  flame appeared to lift on the left, but sustained through the 5 s drop. In 
+addition, a heptane flame in 30 % oxygen and 2 atm sustained almost quasi -steady burning for 
+the full 5 s drop period. This is illustrated in Figure 9. 
+In November 2012, experiments were performed with a 28 mm diameter burner using 
+methane and ethylene in the NASA 2 s drop facility. The results are reported by Takahashi et al., 
+(2013). They find that hemispherical flames were formed and appeared to increase in size except 
+for low flow rates. They also found the flames appeared to be more stable if the burner was 
+heated. This burner did not have heat flux sensors to measure the thermal feedback from the 
+flame. 
+Encouraged by these tests, the BRE 50 mm burner was used in the N ASA 5 s drop 
+facility commencing in February 2013. The burner surface temperatures were also recorded, but 
+the face temperature of the thermopile heat flux gages were allowed to achieve their equilibrium; 
+they were not measured or controlled by 65ºC water as in ground tests. The tests produced quasi-
+steady flames for ethylene, but had difficulties with methane.  Some of this type of difference of 
+stability and ignitability was also found by Takahashi et al (2013). Hemispherical flames were 
+found for the ethylene, and those results are summarized in Table 1. It is interesting to observe 
+that the heat of gasification, corresponding to the burner temperature and heat flux, drops as the 
+burning flux increases. This trend is shown more clearly in Fig. 10.  
+The results in Fig. 10 suggest that fires of 50 mm in diameter with liquid fuels having 
+typical L values of about 1 kJ/g or less and some plastic materials having high heats of 
+combustion are likely to sustain microgravity burning. However, the burning of such solids can 
+be problematic in microgravity as relatively long times will be necessary for ignition and to 
+achieve quasi-steady burning.
+
+--- page 14 ---
+13 
+Table 1. Summary of 5 s drop facility burning conditions at the end of the drop 
+Test No. D9023 D9024 
+(Extinguished) 
+D9027 D9028 D9029 D9030 
+Fuel C2H4 C2H4 C2H4 C2H4 C2H4 C2H4 
+Ht. of comb. (kJ/g) 41.5 41.5 41.5 41.5 41.5 41.5 
+Smoke Point (mm) 120 120 120 120 120 120 
+Ignition 1g 1g μg μg μg μg 
+Fuel Rate (ccm) 180 90 180 135 240 300 
+Burning Rate (g/m2-s) 1.76 0.88 1.76 1.3 2.32 2.9 
+HF_Center (kW/m2) 5.68  5.68 5.68 4.27 3.6 HF_Edge (kW/m2) 7.08  10 9.19 6.8 5.65 Average HF (kW/m2) 6.85  9.29 8.61 6.38 5.31 Center Ts (°C) 133  60 66 52 48 Outer Ts (°C) 150  55 60 56 54 Averaged Ts (°C) 147.20  55.83 60.99 55.34 53.01 L (kJ/g) 3.15  5.16 6.43 2.67 1.77 Re-radiation (kW/m2) 1.31  0.20 0.25 0.20 0.18  
+ The result using pure methane as a fuel have not produced stble flame as yet, and the 
+work is continuing. The heat of combustion of methane is a bit higher than the ethylene, but their 
+wide difference in smoke point is dramatic. It is suggested that the higher soot radiation tendency 
+of the ethylene might explain its ease in more stable burning over methane.  This difference is 
+key to further understanding these flames, and the suggest by the Review Panel to incl ude a 
+flame radiation measurement is proving prophetic. 
+It should be point out that these drop facility tests were performed with no cooling water 
+to the burner that would control its surface temperature, and no cooling water to the two heat flux 
+sensors. Temperature measurements of the surface indicated appropriate levels. The heat flux 
+gages also did not have temperature -measuring capability for the sensor, but new sensors will 
+have this ability. These tests suggest that there is no need for wa ter-cooling of the burner or the 
+heat flux sensors . We are continuing laboratory experiments to fully appreciate this mode of 
+operation. The ACME cannot accommodate water-cooling loops, so this operation is e ssential 
+for the BRE ISS experi ments. We are still analyzing all the burner testing in the drop fa cilities, 
+and will try to generalized these results in the future. 
+ 
+1.5.3 Burner design and validation in normal gravity 
+A BRE burner prototype has been designed and constructed. Its size has been selected based on 
+our flight and drop tower tests, and the burner size used by Brahmi et al.  The prototype BRE 
+burner was selected to have an operating face of 50 mm in diameter . Due to the anticipated heat 
+flux variation over the surface while burning in microgr avity or normal gravity, two sensors are 
+used. An appropriate averaging of the two heat fluxes should provide the needed average heat 
+flux for computing the heat of gasification. Experiments using three heat flux sensors have 
+evaluated several averaging techniques for two sensors to assess accuracy.  The surface burner  
+temperatures need to be measured at similar radii position to the heat flux sensors. Newly 
+acquired heat flux sensors allow for directly measuring the sensor temperature.  This is now 
+essential as we will not monitor or use cooling water to the sensors. The burner design is 
+discussed further in Section 3. W e will accept the temperatures we get with the burner, as we
+
+--- page 15 ---
+14 
+expect continued operation to approach the range of real fuel temperatures, roug hly 50 – 500 ºC. 
+As a flame persists on the burner it will increase the surface temperature, thus we obtain data 
+over a range of thermal feedback conditions.  
+ We have tested the 50 mm BRE prototype to see if it could emulate a pool of methanol 
+steadily burning. The mass loss rate of methanol was measured and the flame was photographed.  
+To match the methanol with the BRE we would need to use a fuel gas with the same flow rate.  
+Also to match the flame height and the consequently the heat flux, the fuel must have the same 
+heat of combustion. In addition a consideration of the soot tendency was made that led to 
+methane as the gaseous fuel.  However, nitrogen must be added to the fuel stream to make the 
+resulting fuel mixture have a heat of combustion to match that of methanol, 19.1 kJ/g (Tewarson). 
+The gas burner BRE used a fuel mixture of 52% (volume) methane with 48% nitrogen to achieve 
+the needed heat of combustion. The flow rate of the mixture was  33 cc/s flow rate to match the 
+measure steady burning rate of the methanol of 11g/m2-s.  
+If the BRE concept is correct, the two flames should be nearly identical in appearance, 
+and provide the same heat flux distribution. The measured heat flux in the BRE is 5.5 kW/m2 for 
+the heat flux gage located at the center , and is 21.3 kW/m 2 for the other  gage located at 1.5 cm 
+from the center . A weighted average over their area segments gives an average value of 15.6 
+kW/m2. Corresponding surface temperature measurements over these respective area segments 
+gave an average temperature of 160 ºC (141 – 170 ºC). Assuming an emissivity for the oxidized 
+porous brass surface of 1, the re-radiative heat flux is 2 kW/m 2. Consequently,  the heat of 
+gasification associated with the BRE is computed from Eq. (1) as  L = (15.6  - 2 kW/m2) / 
+(11g/m2-s) = 1.24  kJ/g. The literature value for methanol is 1.20 kJ/g (Quintiere  2006). The 
+slight mismatch is the surface temperature of the BRE compared to the boiling point of methanol 
+at 64 ºC. The visual confirmation of the BRE to emulate the methanol pool fire at 50 mm 
+diameter is shown in Figures 11 (a) and (b) in which the flames are compared when the slight ly 
+oscillating images are similar. 
+ We wanted to show that  the burner could emulate other burning conditions. We 
+considered a 50 mm diameter burning pool of heptane. Ethylene was selected to use as the 
+burner gas. The heat of combustion of ethylene is very close to that of heptane, which is 41.5 
+kJ/g compared to 41.2 kJ/g (Tewarson), as well as the smoke point, which is 120 mm compared 
+to 139 mm (Li and Sunderland, 2012). The gas burner  BRE used pure ethylene with 26.5 cc/s 
+flow rate to match the measured steady burning rate of the heptane of  15 g/m2-s. The measured 
+heat flux in the BRE was  7.64 kW/m2 for the heat flux gage located at the center , and is 12.74 
+kW/m2 for the other gage located at 1.5 cm from the center . A weighted average over their area 
+segments gives an average value of 10.9 kW/m2. Corresponding surface temperature 
+measurements over these respective area segments gave an average temperature of 211 ºC (160 – 
+240 ºC). Assuming an emissivity for the oxidized porous brass surface of 1, the rer adiative heat 
+flux is 3.12 kW/m2. Consequently, the heat of gasification associated with the BRE is L  = (10.9 - 
+3.12 kW/m2)/ 15.34 g/m2-s = 0.507 kJ/g. The literature value for heptane is 0.48 kJ/g (Quintiere 
+2006). A visual confirmation for the nature of these turbulent flames is shown in Figure 12. They 
+are remarkably similar. 
+In summary of the development work, a burner is suitable for emulating the burning 
+conditions of real materials. It has advantages over computational approaches, as it embodies 
+variable properties, radiation, and chemical kinetics naturally within a simulation. The burning of 
+a condensed phase liquid fuel in a planar geometry produced ellipsoidal flames in microgravity  
+environments, but the drop tower flames became unstable and extinguished after several seconds
+
+--- page 16 ---
+15 
+  
+(a) pool BRE (b) pool BRE 
+ 
+Figure 11. Comparison of 50 mm diameter methanol flame reproduced by the BRE burner. 
+while the ai rcraft flames remained quasi -steady for 20 s or more. It is suggested that fuels with 
+the properties of ethanol may achieve quasi -steady burning in microgravity. The BRE burner did 
+a remarkable job at reproducing a methanol flame for the same diameter pool  in normal gravity. 
+This successful reproduction lays a foundation for establish proof of the BRE concept. M ore 
+extensive tests with the  BRE burner in normal and microgravity can reveal the burning domain 
+for a range of real materials, including ignition a nd extinction determinations. Such testing can 
+map out a range of fuel properties that would support burning. 
+We have begun to test a 25 mm burner in a similar way, and found some initial 
+difficulties. The heat flux levels over the smaller burner, operating in a laminar range gave high 
+and varied values across the burner. The size of the heat flux sensors (1/8th inch, or about 3 mm) 
+was believed to have been too large for the 25 mm diameter burner. We are acquiring 1/16th inch 
+sensors. We believe the new sensors and better data for the burning of methanol at 25 mm will 
+establish the credibility of the smaller burner in emulating real fuels o n Earth. The Science 
+Concept Review Panel believed that a smaller burner would be better for microgravity 
+experiments. Our recent drop tower tests with the 50 mm burner appears to suggest its size is 
+adequate, but we plan to proceed with the use t he two si ze burners. A paper for the US 
+Combustion Meeting in May 2013, entitled “A Burning Rate Emulator for Study in Microgravity 
+“byY. Zhang, M.J. Bustamante, P.B. Sunderland, J.G. Quintiere  and P. Ferkul, summarizes our 
+progress in establishing the credibility of the BRE concept and its effect use in microgravity.  
+This paper is appended to more completely show our progress with the BRE. 
+  
+1.6 Issues for determining flammability in microgravity  
+It is interesting to examine the prospect of burning in microgravity . A theoretical analysis can be 
+put forth based on the relationship for steady burning, and its ability to exceed a critical flame 
+temperature to have the flame survive. A critical temperature needed for the survival of a 
+diffusion flame can be taken as 1300 ºC ( Quintiere and Rangwala, 2004).  This temperature is  a 
+reasonable criterion for extinction of a laminar flame under its environmental conditions, 
+including gravity effects. Following Eqns. (1) and (4), treating heat flux from the flame explicitly, 
+and considering small B number as would occur near extinction, we write:
+
+--- page 17 ---
+16 
+ 
+  (a) pool  BRE  (b) pool BRE 
+ 
+Figure 12. Comparison of 50 mm diameter heptane flame reproduced by the BRE burner. 
+  (5) 
+ (6) 
+where Lm is an effective heat of gasification , hc is the convective heat transfer coefficient, and X r 
+is the flame radiation loss fraction . The Review Panel was concerned about the change in the 
+oxygen concentration in the microgravity test chamber for ACME. Apparently it is not 
+continuously measured.  As the B number clearly shows that the burning rate is dependent on 
+oxygen, it is important to have this ambient value during any ISS testing. 
+The flame temperature (Tf) can be determined by (Quintiere, 2006): 
+.  (7) 
+ 
+These equations, (5), (6) and (7), can be combined by eliminating Lm to yield: 
+  (8) 
+where is the heat of combustion per unit ambient oxidizer, . To simplify, the 
+following approximations are made for a pure fuel (YF,o = 1): 
+h∞∆ ox cYhr∆
+
+--- page 18 ---
+17 
+ 
+  
+This allows Eq. (8) to be approximately represented at extinction as  
+ 
+ (9) 
+ 
+Combining Eq. (9) with Eq. (5) at extinction, and recognizing that flame radiation will be small 
+at extinction, a criterion for steady burning is established as 
+ 
+.  (10) 
+Materials cannot have burning ra tes below this critical value.  Note that the addition of external 
+radiant heating will reduce the critical burning flux. Note also that this estimate does not depend 
+on diffusive heating, although flame radiation has been omitted. 
+Let us ignore t he addition of external radiation, and estimate what materials are likely to 
+burn in microgravity . As would be difficult to estimate, flame radiation is neglected here, and 
+likely to be small in microgravity . Consequently, we apply Eq. (5) ignoring the small heat 
+capacity term, as 
+ 
+. (11) 
+The convective heat transfer coefficient must be estimated for microgravity. We treat this as pure 
+conduction, from a flame whose standoff distance is estimated from the low Re  jet study of 
+Sunderland et al. We choose a coefficient corresponding to methane, C f = 0.192, and a diameter 
+corresponding to our prototype burner, d = 50 mm.  In terms of the burning flux the flame 
+standoff is given as 
+ (12) 
+where is the fuel viscosity. The convective coefficient is given as  
+ (13) 
+where is the conductivity of the fuel. The following property selections are made: 
+ 
+k = 0.0257 W/m-K 
+µ = νρ = (15 x 10-6 m2/s) (1.2 kg/m3) 
+cp = 1.0 kJ/kg-K 
+and 
+( )
+( ) .extinctionat  0.4, 
+0.1, 
+0.3,  to0.1 
+air,ambient for  kJ/g 3
+≈∆ −
+≈∆ −
+≈
+≈∆
+∞
+∞
+∞
+∞
+∞
+h
+TTc
+h
+TTc
+r
+Y
+h
+fp
+vp
+ox
+( ) ( )[ ]
+5.0
+1 ∞∞ −−∆−
+≈∆′′
+TTchXchhm vprpcccrit
+µ
+c
+kh δ≈
+k
+
+--- page 19 ---
+18 
+Table 2. Estimated burning conditions in microgravity for a planar material of 50 mm diameter. 
+Parameter Liquids Thermoplastics High-temperature 
+Polymer 
+Halogenated 
+Polymer 
+Heat of Combustion, kJ/g 30 30 15 8 
+Heat of Gasification, kJ/g 0.5 3 5 3 
+Re-radiation Flux, kW/m2 0.5 10 20 30 
+Burning Flux, g/m2s 2 0.5 0.1 0.2 
+Critical burn flux, g/m2s 0.03 0.8 8 29 
+ 
+d = 50 mm. 
+ 
+Consequently . Equation (10) now becomes  
+. (14) 
+ 
+So Eq. (14) estimates the burning flux for a planar material of diameter 50 mm burning in 
+microgravity. Larger sizes reduce the convective coefficient by 1/ d2, and lower the burning flux.  
+Equation (10) gives the critical flux, below which, burning cannot occur for a material.  
+This analysis suggests that the estimated burning flux decreases with diameter . So as the 
+surface diameter increases, there is less chance of unassisted quasi -steady burning in 
+microgravity. This has implications on the BRE size that we employ. 
+Let us select representative properties for liquid fuels, thermoplastics, high temperature 
+polymers, and halogenated polymer.  Table 2 gives generic properties, the results of computing 
+the mass flux estimated for burning in microgravity, and the critical mass flux. It is seen from the 
+table that generic liquid fuels would burn in microgravity , while ordinary polymers are marginal  
+and high temperature and haloge nated polymers would not burn. Of course the addition of 
+external radiation would mitigate, and allow all to burn.  It is interesting to re -examine Figure 10 
+that shows for heat of combustion of 41.5 kJ/g, that quasi-steady burning was achieved for a heat 
+of gasification of about 1.8 to 6 kJ/g with a burning flux of about 2.9 to 1.3 g/m 2s, respectively. 
+With respect to Table 1, this microgravity burning is consistent with high heat of combustion 
+liquids and thermoplastics. 
+This analysis has been put forward to emphasize and demonstrate the role of material 
+properties for burning in microgravity. While it can be challenged that the heat of gasification is 
+an approximate property for char formers, it is precise for liquids and re asonable for many 
+thermoplastics. The BRE will operate on the basis of the heat of gasification. As Table 1 
+confirms the capability of generic liquids to burn, i t is noteworthy that ethanol on a 10 x 40 mm 
+wick did apparently support quasi-steady burning in the aircraft microgravity  environment. 
+Perhaps this lends data to support the overall analysis. It is the program of the BRE that will help 
+to establish the more complete data for Table 2. The BRE result would be more reliable, and 
+allow the effect of f lame radiation to be felt and varied by changing the gaseous fuel smoke  
+points.  
+Hence the BRE should be able to establish a flammability mapping in terms of heat of 
+combustion, heat of gasification, re-radiation heat flux, and smoke  point. It will give the burning 
+flux for a given fuel for a specific burner diameter, establish extinct ion limits, and also establish 
+the minimum flux for piloted ignition.  These results can be established in normal gravity as well 
+as microgravity. To illustrate how this might work we will show some preliminary results  for the
+
+--- page 20 ---
+19 
+ 
+Figure 13. Flammability map of material properties. 
+qrr , kW/m2
+, kJ/g
+, kJ/g
+BRE with
+Methane
+Extinction
+BRE with
+52% Methane, 
+48% Nitrogen
+Liquid Methanol
+Heptane
+Wood
+Filter Paper
+PE
+PS
+PMMA
+BRE with
+Ethylene
+prototype BRE burner at 50 mm  operating in normal gravity and air  with pure methane  and 
+ethylene as the fuels.  
+A three-dimensional plot is shown in Figure 13. The axes are the heat of combustion, the 
+heat of gasification, and the rer adiation surface heat flux.  Along with the smoke  point, these 
+parameters represent a set of distinct fuel properties that characterize steady burning of a material 
+– liquid or solid. The curves for methane and ethylene were established by varying the gas flow 
+rate from ignition to increasing values , then decreasing the flow until extinction  is reached. The 
+extinction limit is indicated on the graph. The critical mass flux for ignition and extinction are so 
+determined, and the heat of combustion, gasification and rer adiative heat flux define the material 
+at these corresponding points. Furthermore, t he plots for methane and ethylene correspond to a 
+set the fuel properties. Each point on the lines represents a distinct solid or liquid fuel.  Of course 
+those points may not all fit a real fuel.  
+In addition, some  real fuel data are plotted  in Figure 13, including the methanol  and 
+heptane that were simulated in Figure s 11 and 12. The values recorded for these fuels are 
+displayed in Table 3. Future work will try to emulate in  normal gravity some of the solid fuels 
+listed. A full exploration of the BRE can map the flammability range for the properties: heat of 
+combustion, heat of gasification, and  re-radiation heat flux in which burning is sustained from 
+ignition to extinction. It is noteworthy that NASA Test 2 is capable of measuring these properties 
+of materials evaluated for space flight.  We expect the smoke point, as it controls flame radiation 
+to also have a bearing more so in normal gravity.  
+ We intend to explore the range burning that holds in normal gravity for the three 
+parameters: ∆hc, L and qrr without any additional external heat flux. Of course, the smoke  point 
+would be a fourth parameter for consideration. The mapping can be done by operating the BRE 
+with different gaseous fuels, including dilution with nitrogen. Valuable information on the 
+conditions for ignition and extinction can be obtained as well, and their accuracy is superior to
+
+--- page 21 ---
+20 
+Table 3. Approximate Properties 
+ ∆ℎ𝑐, kJ/g 𝐿, kJ/g qrr , kW/m2 
+Realistic Materials 
+Heptane 41.4 0.5 1 
+PE 30.8 1.5 12 
+PMMA 24.2 1.6 11 
+PS 27 1.5 12 
+Filter Paper 15 3.6 10 
+Wood 12.5 5 18 
+Liquid Methanol 19.1 1.2 1 
+BRE Simulation 
+Methane 
+50 0.85 1.47 
+50 1.09 1.65 
+50 1.37 1.81 
+50 1.88 2.24 
+50 3.04 2.63 
+50 4.43 3.41 
+52% Methane 
+48% Nitrogen 19 1.22 2 
+Ethylene 
+41.5 0.37 2.74 
+41.5 0.51 3.12 
+41.5 0.74 3.67 
+41.5 1.21 4.60 
+41.5 1.93 5.69 
+41.5 2.74 5.81 
+41.5 3.89 6.95 
+41.5 5.75 7.78 
+ 
+unsteady mass loss measurements of real solid and liquid fuels. It would be interesting to test the 
+theoretical extinction condition governed by Eq. (10). Data for real materials that fall ou tside of 
+the BRE flammability range would not allow for steady burning without the ass istance of 
+additional heat flux. It is possible to use Eq. (2) to determine the needed external heat flux to 
+afford steady burning for these materials outside of the flammability range. In this way we can 
+test the BRE in normal gravity, and extend it to microgravity as well as examine the effects of 
+atmospheric concentrations and pressure. In short, the BRE is an efficient way to assess burning 
+under a variety of environmental conditions. Its exploration in microgravity  can give valuable 
+insight into material flammability in space flight.
+
+--- page 22 ---
+21 
+2. FLIGHT EXPERIMENT  
+2.1 Knowledge Lacking and Knowledge to be Gained by Flight Tests  
+Currently material selection for spacecraft is based on NASA Test 1 conducted in normal gravity.  
+There is no scientific basis to extrapolate this test result to flammability performance in a 
+spacecraft environment. The inherent material properties that control flammability should not 
+change as the gravity field changes.  It is known that forced convect ion can allow steady burning 
+and its inclusion in microgravity only extends our current knowledge. However, quiescent 
+burning on flat surfaces has been weakly explored in microgravity and is not predictable. There 
+is a lack of empirical or theoretical methods for prediction based on material properties that 
+govern steady burning. Indeed, the establishment of truly steady burning in microgravity has yet 
+to be achieved. Even apparent steady burning is short lived in drop experiments, and might more 
+aptly be dubbed “quasi -steady”. For now we shall use the terminology of “steady burning” 
+without distinction, but the reader should be aware that it is ideal.  
+The entire concept of the BRE is to identify the regime of quasi -steady burning in 
+microgravity as a f unction of materials properties . It may be so that steady burning is never 
+achieved, and only slowly changing unsteady flames are noted.  Only the available duration of 
+flight tests will establish what is possible.  In any case, Earth -based short duration mi crogravity 
+experiments have not been sufficient to establish the certainty of steady flames with the BRE.  In 
+microgravity, droplet flames exhibit quasi -steady burning as the droplet shrinks. This is a 
+diffusive extinction at small droplet diameter ; also there is a radiative extinction for large drops.  
+The latter could lead to cool quasi -steady flames.  For jet flames in microgravity, quasi -steady 
+flames have been observed but for much smaller diameters than the BRE burners.  Any 
+extrapolation from these fligh t experiments to the possibility of BRE quasi -steady flames is 
+speculative. However, recent 5 s drop experiments with ethylene in the 50 mm BRE burner 
+indicate slow sustained flame growth at the end of the test, and the prospect of a steady flame.  
+Below a critical flow rate, the flame could not be sustained, indicating a diffusive extinction limit. 
+Extinction at a larger flow rate, indicative of droplet radiative extinction, was not explored.  In 
+short, we will not know how the BRE flames will behave until a dequate flight duration tests are 
+done. Mathematical modeling will hopefully give us some guidance, but this phase of the project 
+has not begun yet. 
+The proposed tests aboard the ISS aims to establish the range  of quasi-steady burning 
+conditions for condensed fuels in microgravity . We will identify the associated material 
+properties and the real materials that are represented.  Once established based on fuel properties, 
+NASA Test 2 could be used as a basis for establishing comparable properties for real materials. 
+This is possible as NASA Test 2 has the ability to measure the heat of combustion, heat of 
+gasification and burning surface temperature. Only the smoke point would remain, and this too is 
+possible. Then the four properties characterizing the flammability map would define conditions 
+of burning in microgravity. This could elevate the role of NASA Test 2 over Test 1.  This would 
+close the loop for the use of  ground-based tests to assess the true flammability of materials in 
+microgravity.  
+The BRE mapping of material flammability in microgravity  would provide a scientific 
+rationale for assessing the fire hazard. We intend to explore the range of heats of combustion 
+from about 5 – 50 kJ/g, and heats of gasification from about 0.5 – 5 kJ/g.  These prop erties 
+embrace common materials including paper, plastics and liquids.  In addition, the BRE concept 
+could be exploited in follow-on tests concerned with flowing ambients and extinguishing agents.
+
+--- page 23 ---
+22 
+2.2 Experimental Objectives  
+The BRE flight program seeks to establish the burning conditions in a quiescent microgravity 
+ambient in terms of material properties. The specific flight objectives are as follows. 
+1. Observe burning behavior in long- duration microgravity for CH 4/N2 and C2H4/N2 mixtures 
+on porous circular burners of 25 and 50 mm diameter. Consider O2/N2 ambients with various 
+pressures and ambient  O2 concentrations and pressures . NASA-considered atmosphere for 
+human space missions will be examined: 14.7 psia, 21 % oxygen: 10.2 psia, 26.5 %; and 8.2 
+psia, 34 % oxygen. Emphasize fuel conditions that can be related to a diverse range of 
+condensed fuels. 
+2. Consider the conditions of Objective 1 for ambients of O2/CO2 (desired). 
+3. Consider the conditions of Objectives 1 – 2 for extinction limits. 
+ 
+2.3 Summary of Approach 
+To accomplish the above objectives, flight experiments are proposed. Additionally, preliminary 
+flight tests will be performed to verify the experiment operations and for comparison with 
+ground-based tests. 
+For each test, conditions will be established for the chamber contents , namely  choice of 
+diluent, oxygen concentration, and pressure. Fuel flow will commence followed by ignition. The 
+flames will initially be observed without varying the fuel flow rate. Because burner surface 
+temperature and heat flux will vary , this will allow a broad range of conditions to be observed 
+during a single test.  As the surface temperature of the burner increases, and the flame remains 
+steady, a continuous set of data is produced for the fla mmability map.  Eventually either the 
+flame will extinguish, the surface temperature of the burner  will equilibrate, or the temperature 
+limit of the heat flux sensor will be reached . At this time the fuel flow will be terminated . So a 
+test should terminate for a given flow rate at extinction,  and for continued burning when the 
+burner surface temperature has steadied or the temperature limit of the heat flux sensor is neared. 
+The extinction limit could be found once the burner temperature has steadied, and the heat 
+flux sensor has not exceeded it s limit. At that state, the flow rate can be reduced in small 
+increments, until extinction is observed and the flow rate shut off. Again, in this process, new 
+data is being produced for the flammability map.  
+Ignition limit tests are not proposed for microgravity, but we will explore these under 
+normal gravity. We believe there is better control on Earth- based ignition testing and that these 
+results should carry over to microgravity conditions. 
+In addition to the flight  experiments, in normal gravity  testing will continue. These tests 
+will involve gaseous, liquid, and solid fuels. These experiments will further establish the 
+validation of the BRE for 1- g applications and show its usefulness to establish 1- g ignition and 
+extinction limits.  As available, drop facility testing will be used to refine procedures, test 
+instrumentation, and help to establish viable flow conditions. 
+We will also pursue a CFD model for the quiescent microgravity burning. This will also 
+guide us in the flight experiments, and potentially provide a predictive methodology. 
+ 
+2.4 Science Data End Products 
+The science data end products (SDEP) are the tables, figures, and analyses that will be reported 
+in the archival literature (not the raw data from the  experiment). Table 4 indicates the planned 
+SDEP according to the BRE objectives. The science requirements and the experiment success 
+criteria (see below)  are developed from this list of SDEP. The principal delivery would be a
+
+--- page 24 ---
+23 
+complete flammability mapping  to indicate burning in microgravity.  This would include 
+extinction limits and effect of radiation through the smoke point . Perhaps a successful CFD 
+predictive model would expand the interpretation of the flammability map results.  Also such a 
+result would allow a prediction of burning for materials outside the mapping by allowing a 
+computation to indicate external heating they would need. 
+2.5 Justification for Extended-Duration Microgravity 
+Fire in a spacecraft microgravity environment is a likely event based on limited accident data, 
+tests to burn materials, and research that has explored simple burning scenarios. Indeed, NASA 
+screens the use of materials on spacecraft by its flammability Test 1.  
+Currently NASA Test 1 and T est 2 are incapable of directly analyzing  material fire 
+hazards in spacecraft. There is no predictive methodology to extrapolate from these tests.  
+However, NASA Test 2, the Cone Calorimeter, is capable of determining heats of combustion 
+and gasification, and surface reradiation in burning. Steady (or quasi-steady) burning rate data 
+from the BRE in flight experiments will establish a flammability mapping in terms of these 
+properties for microgravity. In addition, using Eq. (2), the results can establish the necessary heat 
+flux condition for other f uels to burn in microgravity. The BRE is an efficient way to achieve 
+quasi-steady burning. While microgravity tests of condensed fuels have been performed and are 
+planned, they are limited in their ability to reveal sufficient information about the diverse  
+condensed fuels that exist aboard the ISS. Moreover the time to achieve quasi -steady burning 
+rate of solid fuels can be of the order of minutes as dictated by the time response of the solid. 
+The BRE can be turned on and off quickly, and its quasi -steady condition is only dependent on 
+Table 4. Science data end products. 
+Objective Science Data End Products 
+1. Observe burning behavior 
+in long -duration 
+microgravity for CH 4/N2 
+and C 2H4/N2 mixtures on 
+porous circular burners of 
+25 and 50 mm diameter. 
+Consider O 2/N2 ambients 
+with various pressures and 
+ambient O 2 concentrations 
+and pressures.  Emphasize 
+conditions that can be 
+related to diverse 
+condensed fuels. 
+ 
+Color flame images and shapes. 
+UV images. 
+Surface temperatures and incident flame heat flux measurements. 
+Radiation from the flame to the surroundings to estimate radiative 
+flux. 
+Flammability mapping of quasi-steady burning as a function of heat 
+of combustion, heat of gasification, and surface temperature. 
+Quasi-steady burning flux (burning rate per unit area)  as a function 
+of significant properties, e.g., heat of gasification, heat of 
+combustion, and smoke point. 
+Contour plots of soot temperature and filament temperature. 
+Contour plots of soot volume fraction. 
+Plots of radiant emissions versus time. 
+Plots of chemiluminescent emissions versus time. 
+ 
+2. Consider the conditions of 
+Objective 1 for ambients 
+of O2/CO2 (desired). 
+Same as for Objective 1.  
+3. Consider the conditions of 
+Objectives 1 – 2 for 
+extinction limits. 
+Extinction limit map.
+
+--- page 25 ---
+24 
+the gas phase phenomenon. While this time is shorter, it can still be on the order of 10 seconds or 
+more.  
+The proposed tests cannot be performed in parabolic aircraft owing to considerable g -
+jitter disturbances. While limited testing is possible in drop facilities , the characteristic times for 
+the gas phase ( approximately 2 0 s) and the burner surface temperatu re (approximately 4 0 s) 
+preclude consideration of quasi -steady conditions. Preliminary testing in the NASA 5.2 s drop 
+facility indicated the approach to quasi -steady burning, but longer tests are needed to confirm 
+this tendency. The longer duration testing in the ISS with the  efficient operation of the BRE can  
+produce results only limited by the gas-phase response time.
+
+--- page 26 ---
+25 
+ 
+Figure 14. Burner with 50 mm porous surface. 
+3. EXPERIMENT REQUIREMENTS  
+This section does not include any requirements, but instead describes their importance in 
+achieving the experiment objectives. The requirements have been incorporated into the ACME -
+SRD-001 Integrated Science Requirements Document (ISRD) (Stocker, 2010). 
+ 
+3.1 Requirements Discussion 
+Most of the  BRE experiment requirements fall within the requirements established by the other 
+ACME experiments, as detailed in the ACME I SRD. This section emphasizes requirements that 
+are unique to BRE. 
+ 
+BRE Burners [ISRD 1.13] 
+The design of the BRE burners is critical to meeting the BRE objectives. The burners shall  
+involve round porous plates t hrough which gaseous fuel is fed and evenly distributed. These 
+porous plates  shall have diameters of 25 and 50 mm. Each burner shall contain two -heat flux 
+meters flush with the porous plate  surface and facing outward The burners shall be positioned 
+such that the burner axis is coincident with the CIR chamber axis  within ±2 mm (i.e., along its 
+length) and orthogonal to the CIR chamber window axes. The plane of the CIR chamber window 
+centers shall be 10±2 mm downstream of (i.e., above) the burner outlet. 
+The burners used by the PI team for their ground -based research are shown in Fig s. 14 
+and 15. It is suggested that the flight burners be mad e using a similar design. G lass beads of 4.8 
+mm diameter (50 mm burner) and 3.2 mm (25 mm burner) provide a porous matrix for the fuel 
+flow in the burner s. The beads are held between two perforated brass screens: one at the top of 
+burner as the operating face and the other one 25 mm below it.
+
+--- page 27 ---
+26 
+ 
+Figure 15. Burner with 25 mm porous surface. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Heat Flux Gages [ISRD 3.10] 
+Each burner should include two heat flux gages. For the 50 mm diameter burner these are 
+at the center and 15 mm from the center , with a maximum diameter of 3.1 mm. For the 25 mm 
+diameter burner, they are at the center and 1 0 mm from the center, with a maximum diameter of 
+1.5 mm. Each heat flux gage shall have a thermocouple at the senor surface to identify conditions 
+that could damage the sensor (200 ºC). The sensor temperature will also affect the calibration of 
+the device, the amount of re-radiation loss that occurs, and indicate possible water condensation.  
+The PI team is presently evaluating two models from Medtherm (models 8-1.8-10SB-4-0-
+36-20425AT and 4-10SB-1.4-0.43-4-36-21919T). O -rings are suggested to seal the heat flux 
+gages at the base of each burner. 
+The recommended Medtherm sensors are from their 64 Series: Heat Flux Transducers 
+and Infrared Radiometers for the Direct Measurement of Heat Transfer Rates. We used the 
+Schmidt-Boelter gage that uses a multi- junction thermopile. This is important, as we wa nt the 
+surface of the sensor to be of a uniform temperature (unlike the alternative Gardon gage). A 
+thermocouple also measures the temperature of the sensor. There is no transmitting window or 
+aperture. The Medtherm thermopile gage has an absorptance of 0.95 over a spectral range of 0.6 
+to 15.0 µm. Currently we are using 10 mV output at a full range of 100 kW/m2. Recent drop tests 
+indicate an initial heat flux of about 50 kW/m 2 at ignition and then dropping to values of 
+generally about 5 kW/m2. As the Medtherm sensors can easily over range by 150%, within their 
+linear calibration, we can exceed the 10 mV limit. The sensors have reported maximum non-
+linearity of +/ - 2 % of full range and a repeatability of +/ - ½ %. They are calibrated with an 
+uncertainty of +/- 3 %. The maximum operating temperature is 400 ºF (204ºC). The sensor has a 
+response time of less than 250 ms. For ground- based operation water -cooling is desired.
+
+--- page 28 ---
+27 
+However, the sensor thermocouple specification is sufficient for operation without water, 
+provided the sensor does not exceed about 200 ºC. 
+ Although 65-75 ºC circulating water  prevents possible water condensation and sensor 
+overheating, there is no requirement for circulating water for the proposed flight hardware. Tests 
+by the PI team have fo und that water condensation and sensor overheating are unlikely for the 
+proposed flight test matrix. 
+ 
+Summary of the ISRD Sections that were Changed Significantly with the Addition of BRE 
+ 
+Burner Gas Delivery [ISRD 1.9] 
+The specific flow rates for BRE given as: 
+Fuel 0 to 1 slpm (on a nitrogen basis) 
+Inert 0 to 1 slpm (on a nitrogen basis) 
+These requirements were established by observations of flames in normal gravity  and in 
+the NASA Glenn 5 s drop facility, and by comparing these flames with those burning liquid fuels 
+aboard the parabolic aircraft. 
+ 
+Ignition [ISRD 1.10] 
+It is suggested that ignition should occur at a distance of 3 mm from the rim of the porous burner 
+surface. A centered igniter presumably will not lead to ignition because of a lack of sufficient 
+oxygen. 
+ 
+Ambient Environment [ISRD 1.11] 
+Prior to each test, the chamber shall contain the  specified gas composition, consisting of O 2 and 
+inert (N2 and CO2, desired) within ±0.01 mole fraction of each concentration. A cylindrical free 
+area that is (1) at  least 200 mm and as lar ge as possible in diameter, (2)  extends at least 100 mm  
+and as far as possible downstream from the burner outlet, and (3)  extends at least 50 mm and as 
+far as possible upstream of the burner outl et shall be kept clear of  solid objects. A second 
+cylindrical free area ( with the same axis as the first) that is (1)  at least 150  mm and as large as 
+possible in diameter and (2) extends at least 200 mm and as far as possible downstream from the 
+burner outlet shall be kept clear  of solid objects. The temporary insertion of the igniter and the 
+presence of any  probes (including TFP fibers  and the gas -phase thermocouple ) are allowed 
+exceptions. Suggested methods to decrease bottled gas consumption rates include, as available, 
+partial venting and filling, and scrubbing for CO2 and H2O. 
+ 
+Data Recording [ISRD 1.12] 
+Accepted with addition of data recording of the 2 BRE burner heat fluxes, the 2 heat flux sensor 
+surface temperatures, and one more (i.e., total of 2) BRE burner temperature. 
+ 
+Monitoring Measurements [ISRD 2] 
+The BRE monitoring measurements shall include: chamber pressure; gas flow rates; burner 
+pressure differential; and acceleration. T hese shall be initiated before test operations begin and 
+continue sufficientl y past flame extinction to allow a baseline measurement.  In addition, the 
+oxygen concentration should be measured before and/or after each test.
+
+--- page 29 ---
+28 
+Science Diagnostics Requirements [ISRD 3] 
+The BRE science diagnostics measurements sha ll include: color imaging for operations; c olor 
+imaging for data analysis (with a field of view of at least 90 mm in diameter); ultraviolet imaging 
+(with a field of view of at least 75 mm in diameter); burner temperatures; gas phase 
+temperatures; soot volume fraction (with a field of view of at least 45 mm in diameter); radiant 
+emission; chemiluminescent emission; and post-test gas composition. 
+ 
+Color imaging [ISRD 3.1-3.2]  
+Color imaging will be used to determine flame size, shape, color, and existence. In addition, it 
+will provide confirmation of other diagnostics used for detecting extinction limits.  Visibly 
+luminous soot will be observed with color cameras. Because flames can be asymmet ric, a second 
+view would minimize ambiguity. The field of view will need to be sufficiently large to observe 
+the entire flame while at the same time be sufficiently small to allow for resolution of the fine 
+scale needed to identify the onset of soot incept ion. For this reason, zooming capability is 
+desired.  
+ 
+Burner Temperature [ISRD 3.4.1] 
+Accurate measurement of the burner surface is essential. For the burner surface, temperatures at 
+2 locations with a range of 30 – 500 °C are required to obtain the temperature of the exiting gas 
+and the reradiation of the burner surface. These thermocouples should be located on a radius, 
+opposite to the heat flux gages. One should be 5 mm from the burner center, and the other at a 
+radius of 15 mm (for the 50 mm burne r) and at a radius of 10 mm (for the 25 mm burner). The 
+thermocouples should be appropriately bonded, or held in good thermal contact, with the metal 
+surface. The thermocouples should be Type K and have a diameter of 0.010” or less.  
+ We have used bare thermocouple wire threaded to a point of contact on the burner, and 
+that has worked satisfactorily.  However, that implementation is tedious and subject to 
+misalignment. A bonded and insulated thermocouple should be used. 
+ In addition to the two burner surface  thermocouples, each heat flux sensor should have a 
+thermocouple, installed by the sensor manufacturer, on the sensor element. Each of the two 
+sensor thermocouples are required, so there are four burner thermocouples total. 
+ 
+Gas Temperature [ISRD 3.4.2-3.4.3] 
+Accurate measurement of the gas temperature is essential. In the gas phase, temperatures of hot 
+soot-containing regions in a 85 mm diameter region are required. Soot pyrometry [ISRD 3.4.2] 
+and thin- filament pyrometry [ISRD 3.4.3] are desired for comparisons with numerical 
+predictions. 
+ 
+Flame Radiation 
+Measurements of radiative losses from the flame are critical to establishing quasi -steady 
+conditions and to estimating the surface incident radiative flux. Because the metal burner’s 
+radiative emissions may be comparable to those of the flame, it is required that the radiative loss 
+sensor should not view hot portions of the burner.  This measurement is important to distinguish 
+any radiation differences among the flame, and to provide a mea ns to estimate the radiative 
+component of the heat flux to the burner sensors. 
+This sensor should view the flame above the burner, and not view any hot burner surfaces. 
+An aperture should define this viewing region. The sensor should not respond to heated gases by
+
+--- page 30 ---
+29 
+conduction, nor to changes in pressure. A wide spectrally transmitting window, or sufficient 
+distance from the burner, should avoid conduction effects.  
+ 
+Chemiluminescent Emission [ISRD 3.7] 
+Flame extinction will be inferred by photomultiplier tubes [ISRD 3.7] and imaging  [ISRD 3.1-
+3.3]. To ensure that extinction has occurred, flow rate will be changed  to a condition for which a 
+quasi-stable flame had previously been observed. If the flame doe s not reappear, it can be 
+assumed that the flame had extinguished.  UV emission [ISRD 3.3] will also be used to indicate 
+the presence of a flame. While it is generally believed that the existence of a hydrocarbon flame 
+can be detected by observation of blue  emission, this may not be the case with microgravity 
+flames because these flames are extremely weak and we are attempting to produce some of the 
+lowest temperature diffusion flames that have been produced. 
+ 
+3.2 Operational Sequence [ISRD 4.5] 
+The BRE operational sequence is shown in Table 5. Approximate times shown are at the start of 
+each step. A single operational test procedure can accomplish two objectives, (1) and (2) as listed 
+in 2.2. Both quasi-steady burning and extinction are accomplished by t he sequence in Table 5, 
+specifically item 6.  The ignition process should commence for a given fuel mixture at about 1 
+g/m2s of hydrocarbon fuel. It will be increased accordingly until ignition occurs. 
+ 
+  
+Table 5. BRE Operational Sequence  
+ 
+Action 
+Approx. 
+Time 
+1. Ensure that the appropriate burner is installed. Preflow the burner fluent gas at the 
+composition of the upcoming test point to flush the plumbing system. 
+2. Establish chamber conditions. These consist of a set point pressure and species 
+compositions, as specified in the test matrix. Conditions are obtained in four ways: from 
+cabin air (desired); from the preceding test; from scrubbing and replenishing; or from a 
+complete evacuation and recharge. 
+3. Allow chamber contents to reach equilibrium. A ho ld time of 5  minutes is required for 
+quiescent, isothermal, and well-mixed conditions. 
+4. Take reference images (if applicable). Establish framing rates for video cameras. Begin 
+color imaging. Begin monitoring measurements and wait 15 s. 
+5. Commence fluent flow at a value to be uplinked. The initial value should correspond to 
+about 1 g/m2-s of hydrocarbon fuel. Energize igniter to ignite the flame and then retract 
+the igniter. If ignition does not occur within 5 seconds, shut off the flow. A new value of 
+flow rate will be specified by uplink. If the flame ignites, proceed to Step 6. Otherwise 
+proceed to Step 7. 
+6.  Set the flow rate to the test flow rate.  Anytime during this step, i f the flame 
+extinguishes, or either heat flux sensor exceeds a critical temperature, stop the fuel flow. 
+Continue until the s urface burner temperatures become quasi-steady. Then reduce the 
+flow rate in 10 % increments of the test flow rate, hold for 15 s, and continue such 
+reductions until extinction. 
+7. Stop fluent flow. Record reference images (if applicable). After 60  s terminate color 
+imaging and monitoring measurements. Select data for downlink and downlink data. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0 s 
+ 
+5 s 
+ 
+ 
+ 
+ 
+60 s
+
+--- page 31 ---
+30 
+3.3 Test Matrix [ISRD 5.5] 
+The detailed test matrix is given in Table 6. Assuming a mean burn duration of 30 s, t he total 
+burn duration of the required matrix is 37 minutes. The tests will emphasize measurements of 
+two types of flames: quasi -steady burning and extinction. Tests will involve vari ous fuel 
+compositions and flow rates. This is necessary to map the range of conditions expected for 
+condensed fuel burning. These tests support Objectives 1 – 3. 
+ 
+Part of the rationale for the text matrix is to consider conditions associated with NASA’s planned 
+manned flight activities: 21% O 2 in N2 at 1.01 bar; 26.5% O 2 in N2 at 0.703 bar; and 34% O 2 in 
+N2 at 0.565 bar. 
+ 
+Table 6. BRE Test Matrix  
+ 
+Notes 
+1Different fuel and oxidizer mole fractions may be specified during uplink. 
+2It may be necessary to ignite at different flow rates and/or gas compositions than those specified above.  
+3Assuming scrubbing capability  is available , the CO 2 and H 2O will be scrubbed after some tests, and reactants 
+replenished as needed. 
+4All tests use the 25 mm burner except tests 50 – 97. 
+ 
+3.4 Science Success Criteria [ISRD 6.5]  
+The BRE Science Success Criteria are shown below. 
+• Obtain color video, burner surface temperature, and burner heat flux for two C2H4 flames that 
+burn for at least 20 s and then extinguish. 
+Minimum Success 
+ 
+ 
+Test 
+ 
+Ambient 
+ 
+Fluent 
+Pressure, 
+bar 
+Fuel flow 
+rate, 
+sccm N2 
+ 
+Notes 
+1 21% O2 in N2 C2H4 1.01 200 Test of system operation, diagnostics, and 
+burning and extinction test . Use cabin air if 
+possible. Use 25 mm burner. 
+     Evacuate and recharge chamber. 
+2 40% O2 in N2   200 Burning and extinction test. 
+3    400  
+4  C2H4  100  
+5  75% C2H4 in N2  200  
+6    400  
+7 40% O2 in N2 75% C2H4 in N2 1.01 100 Burning and extinction test. 
+8–13 34% O2 in N2 C2H4 in N2 0.565  Repeat Tests 2–7 for different ambient. 
+14–19 26.5% O2 in N2  0.703  Repeat Tests 2–7 for different ambient. 
+20–25 21% O2 in N2 C2H4 in N2 1.01  Repeat Tests 2–7 for different ambient. 
+26–49  CH4 in N2   Repeat Tests 2 –25 for CH4 at the same mole 
+fractions as C2H4. 
+50–73  C2H4 in N2   Repeat Tests 2–25 for 50 mm burner. 
+74–97  CH4 in N2   Repeat Tests 2–25 for CH4 at the same mole 
+fractions as C 2H4 and for 50 mm burner 
+(desired). 
+98–103   2.02  Repeat Tests 20–25 at 2.02 bar (desired). 
+104–115 O2 in CO2  1.01  Repeat Tests 2 –7 and 20 –25 for CO2 ambient at 
+the same mole fractions as N2 (desired).
+
+--- page 32 ---
+31 
+All of the above plus: 
+High Success 
+• Obtain a flammability map for C2H4. 
+Table 6. BRE flight test matrix. 
+Complete Success (i.e., completion of required test matrix) 
+ 
+All of the above plus: 
+• Obtain a flammability map for CH4. 
+• Measure peak temperatures (using filament and/or soot pyrometry) as a function of time for 
+at least 5 flames. 
+• Measure temperature distributions (using filament and/or soot pyrometry) at or near quasi -
+steady conditions for at least 5 flames.  
+• Measure temperature distributions (using filament pyrometry) near the extinction limit for at 
+least 5 flames. 
+• Measure soot v olume fraction profiles at (or near) quasi -steady conditions and near the 
+extinction limit for at least 5 flames. 
+ 
+All of the above plus: 
+Superior Success (desired) 
+• Complete the desired parts of the test matrix. 
+ 
+3.5 Post Flight Data Analysis Plan 
+The proposed test matrix is intended to shed light on the burning of condensed fuels in 
+microgravity. We plan to examine conditions that map out flammable conditions and burning 
+rates of diverse condensed fuels. This will result in extensive image data.  
+Much of t he post-flight data analysis will occur during m ission operations as the science 
+team evaluates each set of test runs in preparation for subsequent runs. Analysis of these tests 
+will include: tracking of flame size and shape; analysis of discrete signals ( e.g., thermocouples, 
+radiometers, photomultipliers, and pressure transducers) for evidence of the quasi -steadiness of 
+the flames; analysis of the temperature profiles (thin filament and soot temperature) to compare 
+with model predictions; and de-convolution of soot volume fraction measurements. The PI team 
+understands that NASA will furnish only raw data, and that the PI team will be responsible for 
+converting this to measurements of soot temperature, soot volume fraction, etc. 
+The flammability maps will be prepared on 3- axis plots where the axes are burner heat of 
+combustion, heat of gasification, re-radiation heat flux  (See Figure 13) . Alternatively these will 
+be presented as contour plots. Flame temperatures near extinction will be determined either by 
+de-convolution of the soot temperature data or by thin fiber pyrometry.
+
+--- page 33 ---
+32 
+4. REFERENCES  
+Ali, S. , Raghavan, V. and Rangwala,  A. 2010.  A Numerical Study of Q uasi-Steady Burning 
+Characteristics of a Condensed Fuel -  Effect of Angular Orientation. Combustion Theory 
+and Modeling, 14, 495-518.  
+Brahmi, L., Vietoris, T., Rouvreau, S., Joulain P., David L. and Torero, J.L. 2005. Microgravity 
+Laminar Diffusion Flame In A Perpendicular Fuel And Oxidizer Streams Configuration. 
+AIAA Journal, 43, 1725-1733. 
+Bustamante, M.J., Dotson, K.T., Zhang, Y., Sunderland, P.B. and Quintiere, J.Q. 2012. Laminar 
+Burning on Flat Wicks at Various Orientations . Spring Technical Meeting of the Central 
+States Section of the Combustion Institute. 
+de Ris, J. and Orloff, L. 1975. The role of buoyancy direction and radiation in turbulent diffusion 
+flames on surfaces. Symposium (Intl.) on Combustion, 15, 175-182. 
+Dietrich, D .L., Ross, H.D., Shu, Y., Chang, P. and T’ien, J.S. 2000. Candle Flames In Non-
+Buoyant Atmospheres. Combustion Science and Technology, 156, 1-24. 
+Downey, B. P. 2009.  An investigation of the UL -94V plastics flammability test. M.S. Thesis , 
+University of Maryland, College Park.  
+Kim, J.S, de Ris, J. and Kroesser, William F. 1971. Laminar free -convective burning of fuel 
+surfaces. Symposium (Intl.) on Combustion, 13, 949-961. 
+Kimzey, J. H. 1974. Skylab Results: Proceedings of the 3rd Space Processing Symposium Vol.1. 
+NASA TM-X-70752: Marshall Space Flight Center, 115-130. 
+Li, L. and Sunderland, P.B. An Improved Method of Smoke Point Normalization, Combustion 
+Science and Technology 184 (2012) 829-841. 
+NASA Marshall Space Flight Center. 1998. NASA STD-6001. 
+Ohlemiller, T. J. 1992. An Assessment of the NASA Flammability Screening Te st and Related 
+Aspects of Material Flammability. NISTIR 4882, NASA CR-189226.  
+Orloff, L. and deRis, J. Modeling of Ceiling Fires. Symposium (Intl.) on  Combustion, 13, 979-
+992. 
+Quintiere, J. Q. 2006. Fundamentals of Fire Phenomena. John Wiley & Sons Ltd., Chichester, 
+UK. 
+Quintiere, J.Q. and Rangwala, A.S. 2004. A theory for Extinc tion based on Flame Temperature.  
+Fire and Materials, 28, 387-402. 
+Ross, H.D. 2001. Microgravity Combustion. Academic Press, San Diego. 
+Stocker, D.P. ACME (Advanced Combustion via Microgravity Experiments ) Integrated Science 
+Requirements, Revision A, NASA Glenn Research Center, April 24, 2010. 
+Sunderland, P.B., Mendelson, B.J., Yuan, Z.–G. and Urban, D.L. 1999. Shapes of Buoyant and 
+Nonbuoyant Laminar Jet Diffusion Flames. Combustion and Flame, 116, 376-386. 
+Takahashi, F., Hennigan N ., Stocker ,D . P., Ferkul, P. V.,. Katta , V. R., “Characteristics of  
+Laminar Diffusion Flames in a Quiescent Microgravity Environment”, 8th U. S. National  
+Combustion Meeting, University of Utah, May 19-22, 2013. 
+Tewarson, A. 2002. Generation of Heat and Chemical Compounds in Fires. SFPE Handbook, 3-
+82.
+
+--- page 34 ---
+33 
+APPENDIX 1: Appended papers. 
+ 
+1. Y. Zhang, M.J. Bustamante, M.J. Gollner, P.B. Sunderland, J.G. Quintiere, Burning on Flat 
+Wicks at Various Orientations, Journal of Fire Sciences (accepted). 
+ 
+2. Y. Zhang, M.J. Bustamante, P.B. Sunderland, J.G. Quintiere, P. Ferkul, A Burning Rate 
+Emulator for Study in Microgravity , 8th U.S. National Combustion Meeting, Salt Lake City 
+(2013) 14 pp.
+
+--- page 35 ---
+1 
+ 
+Burning on Flat Wicks at Various Orientations 
+Zhang, Y., Bustamante, M.J., Gollner, M.J., Sunderland, P.B., Quintiere, J.G.*  
+Dept. of Fire Protection Engineering, University of Maryland, College Park, MD 20742, USA 
+*Corresponding author email: jimq@umd.edu 
+ABSTRACT 
+Burning on flat plates was studied at various orientations with respect to gravity. Flat wicks of ceramic ( Kaowool PM ) 
+board (10 cm wide and 1 – 10 cm long) were saturated with methanol or ethan ol. Steady flames were obtained  that ranged 
+from boundary layer flames to plume -type burning. The onset of unsteady flow and transition to turbulence commenced at 
+Grashof numbers of 10 6 – 107, increasing with decreasing angle (towards underside burning).  The average burning rate per 
+unit area was recorded along with t he flame location . Experiments on PMMA were used for comparison with the liquid -
+wick results. The results roughly correlated with laminar pure convective theory, and improved results were indicated when 
+the gravity term associated with the pressure gradient normal to the plate was included.  Theoretical results by the integral -
+method to reduce the PDE’s to ODE’s are presented. 
+ 
+KEYWORDS: Buoyancy, burning rate, combustion, flame standoff, inclined plate. 
+NOMENCLATURE
+B Spalding B number 
+        ⁄    
+  
+c Eq. (1c) 
+    specific heat of gas 
+  ̅   mean specific heat 
+    Grashof number 
+     modified Grashof number,          ̅̅̅̅        
+    heat of combustion 
+  thermal conductivity 
+  plate length 
+L heat of gasification 
+ ̇     mass flow per unit area 
+Pr Prandtl number, μcp/k 
+     modified Rayleigh number, Eq. (2b) 
+s oxygen to fuel stoichiometric ratio 
+S          ⁄  
+T temperature 
+x coordinate along plate 
+y coordinate normal to plate 
+   flame standoff distance 
+Y direction with gravity vector 
+Y mass fraction 
+Greek 
+   d mens on ess   ame  ocat on E       
+  angle between x and Y 
+ dynamic viscosity 
+ kinematic viscosity 
+  Eq. (2c) 
+  density 
+   
+  ̅̅̅̅       
+  
+  Eq. (1b) 
+Subscripts 
+0 initial 
+f flame 
+F fuel 
+T condensed phase 
+o  oxygen 
+w wall 
+  ambient 
+v vaporization 
+INTRODUCTION  
+This study examines steady burning on flat plates of lengths from 1 – 10 cm long with orientations ranging from 
+vertical (θ0) to horizontal, burning on the top (+) or bottom (-). While work has been performed for the purely 
+vertical and horizontal cases, little has been done for other orientations. Early work by Blackshear and Murty [1] 
+examined the effect of orientation for a squar e plate 15.9 cm ranging from horizontal botto m ( θ= –90) to top 
+burning ( θ = +90). For that arrang ement they found that the average burning rate achieved a maximum at –50º, 
+dropping off slightly to –90º, and much more steadily to +90º.  They and others [1-7] more thoroughly examined the 
+purely horizontal or vertical orientations. Blackshear and Murty [1, 2] explained their results through the B number 
+and the heat transfer coefficient. Kosdon and Williams [3] were the first to develop a laminar boundary layer theory  
+for the burning of a vertical  fuel surface. They noted that their prediction of the flame standoff position was about
+
+--- page 36 ---
+2 
+ 
+Figure 1. Sketch of a typical wick with a heat flux gauge located in the center. 
+1.5 times higher than their data. de Ris et al. [4, 5] extended their analysis to both vertical and horizontal underside 
+burning, obtaining analytic solutions by the Pohlhausen integral method. Ahmad and Faeth [6, 7] examined both the 
+laminar and turbulent cases following a similar theoretical appr oach. Investigators have conducted experiments that 
+included the use of solid materials, ceramic plates saturated with liquid fuels, and burners to simulate real materials.  
+Measurements on PMMA have been carried out by Ohtani et al [9] and Gollner et al [1 0].  More recently a direct 
+numerical solution (DNS) of the full equations by Ali et al. [8] was obtained for a 1 cm plate at various orientations.  
+The onset of instability from laminar flow over hot inclined plates has been reported by Lloyd and Sparrow [11] and 
+Al-Arabi et al [12].  The current work was motivated by considering the use o f burners to emulate the burning of 
+real materials, in a non-Earth-gravity environment. 
+This study follows the approach by Ahmad and Faeth [ 6, 7], extending their work to steady burning at multiple 
+orientations. We use their experimental technique of porous ceramic plates soaked with liquid fuels of methanol and 
+ethanol. We also adopt their theoretical integral model ing approach. In our model, however, we add an additional 
+term describing the role of cross flow buoyancy normal to the plate.  This term is the sole buoyancy term in the 
+ceiling burning orientation of Orloff and de Ris [5]. Except for the DNS solution of Ali et al. [8], all previous  
+boundary layer analyses  ignored this effect and  only consider ed the buoyancy component in the flow direction 
+parallel to the plate. This parallel component does not differentiate between top an d bottom burning for the same 
+plate angle. 
+EXPERIMENTAL 
+The experiments used ceramic wicks, as shown in Fig. 1. They were soaked with methanol or ethanol. The pyrolysis 
+region and surrounding border were constructed of 3.2 mm thick Kaowool PM and were backed with 12.7 mm thick 
+Kaowool 3000 to minimize heat loss to the sides and rear of the fuel laden area.  Sodium silicate was applied to the 
+interface of the plate with the border to eliminate leakage of the liquid fuel. 
+10 cm wide flat wicks of length 1, 2, 3, 4, 6, 8, and 10 cm were constructed. Wicks were affixed to a stand capable 
+of rotating 180° with respect to gravity. The mass of the wick was measured over time with a load cell, the mass -
+loss rate or burning rate  determined by the slope of the linear mass versus time curve. The flame standoff distance 
+was recorded during steady burning  using p hotographs recorded parallel to the plate.  The photographs were 
+analyzed to obtain instantaneous plots over the length of the plate.  Additional details of these measurements can be 
+found in Bustamante [13], along with heat flux results for 10×10 cm methanol soaked wicks with a 3 mm Schmidt -
+Boelter sensor heat flux transducer located at the center of the plate. 
+Flame Shape 
+Figure 2 shows an array of instantaneous methanol flame images for the various burning orientations and plate 
+lengths (with a fixed width of 10 cm). The images show that an increase in pyrolysis length increases fluctuations 
+downstream of the leading edge beginning a transition to turbulence . Top burning plates show that buoyancy can 
+cause separation of the boundary layer form the plate,  resembling a  plume-like f low. Beyond the plate, a wake 
+plume occurs. For the pool fire case, the flame behavio r changes from unsteady laminar flow to turbulent flow with 
+increasing distance from the base and increased pyrolysis length . For the bottom ceiling fire case, the flame is blue 
+and always laminar. Figure 3 shows these images in terms of digitized flame standoff locations at several instants of 
+t me when “steady average p ate burn ng” occurred. The flame clearly begins to become unsteady at some locations.
+
+--- page 37 ---
+3 
+In theory, for the boundary layer flow orientations, the flame location should only be  a function of the position  (x) 
+for all plate lengths. Figure 4 shows the methanol flame locations for a given angle for all of the plate lengths. In the  
+laminar steady regions, this behavior shows the similarity of the flame location with distance. The departure from 
+laminar flow to the onset of turbulence or plume flow is seen for the longer plates.  Data for ethanol indicates that, 
+for the laminar flows, the bottom flames are slightly thicker than the vertical or top flames. 
+ 
+ 
+Figure 2. Methanol flame shapes at various orientations and plate (pyrolysis) lengths. 
+  
+Figure 3. Measured methanol flame locations for the 10 cm long plate at all orientations.  S.L. means steady  laminar flow; U 
+indicates the onset of unsteady flow. From upper left and going clockwise these are Figs. a, b, c, d, e, and f. 
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+0 5 10
+yf (cm)
+x (cm)
++60 
+S. L.
+U
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+0 5 10
+x (cm)
++30°
+S. L.
+U
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+0 5 10
+x (cm)
+0°
+S. L.
+U
+0
+0.5
+1
+1.5
+2
+2.5
+0 5 10
+yf (cm)
+x (cm)
+-30°
+S. L. U 00.5
+1
+1.5
+2
+2.5
+0 5 10
+x (cm)
+-60°
+S. L.
+0
+0.5
+1
+1.5
+2
+2.5
+0 0.5 1
+x (cm)
+-90°
+
+--- page 38 ---
+4 
+These data can be analy zed in terms of a Grashof number (Gr) in order to generalize the departure from steady 
+laminar flow. The Gr at which the unsteady flow begins is seen to increase from about 10 6 to 107 as the orientation 
+of burning changes from the top to the bottom of the plate, as shown in Figure 5. Predominately steady laminar flow 
+is observed for plates at –60 and –90 for lengths up to 10 cm . For these angles, the Grashof number for transition 
+shall be greater than      . Some heat-transfer studies also found a decreasing Gr under which transition occurs 
+when inclining heated surfaces of a plate from top to bottom [ 11, 12]. Their Gr for the end of the laminar region , 
+however, are somewhat higher and follow a more extreme slope in comparison to this study, perhaps because they 
+were not reacting flows which may induce an earlier transition due to large temperature gradients in the boundary 
+layer. 
+ 
+Average Burning Rate 
+The average burning rate per unit area of the plate surface was determined for each plate length, orientation , and 
+fuel. The steady values are reported, and contain some results where periodic unsteadiness occurs due to the onset of 
+turbulence or plume-like flow. These data for all orientations and plate lengths of 1, 4 , and 10 cm are shown in Fig.  
+6a for methanol and Fig. 6b for ethanol. As the length of the plate decreases the burning rate increases, consistent 
+with increasingly laminar flow for shorter lengths. At very small lengt hs (l = 1 cm in Figure 6), the heat transfer to 
+the plate is predominant, and therefore fuel vaporization rates significantly increase as the flame anchors close to the 
+fuel surface over a large portion of the short length.  
+There is a distinct maximum at +30º (burning on the topside) for l = 1 cm, and this maximum diminishes with plate 
+length. Blackshear and Murty [1] , on the contrary, found a maximum at –50º (underside) for a plate of 15.9 cm.  
+ 
+Figure 4. Methanol flame locations for all plate lengths as a function of angle. 
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0 2.0 4.0 6.0 8.0 10.0
+yf (cm)
+x (cm)
+1 cm
+2 cm
+4 cm
+6cm
+8 cm
+10 cm
+Methanol -60 degree
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0 2.0 4.0 6.0 8.0 10.0 12.0
+yf (cm)
+x (cm)
+1 cm
+2 cm
+4 cm
+6cm
+8 cm
+10 cm
+Methanol -30 degree
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0 2.0 4.0 6.0 8.0 10.0 12.0
+yf (cm)
+x (cm)
+1 cm
+2 cm
+4 cm
+6cm
+8 cm
+10 cm
+Methanol 0 degree
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+0.0 2.0 4.0 6.0 8.0 10.0 12.0
+yf (cm)
+x (cm)
+1 cm
+2 cm
+4 cm
+6cm
+8 cm
+10 cm
+Methanol 30 degree
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6
+1.8
+0.0 2.0 4.0 6.0 8.0 10.0 12.0
+yf (cm)
+x (cm)
+1 cm
+2 cm
+4 cm
+6cm
+8 cm
+10 cm
+Methanol 60 degree
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0 2.0 4.0 6.0 8.0 10.0 12.0
+yf (cm)
+x (cm)
+10cm
+Methanol -90 degree
+
+--- page 39 ---
+5 
+Their plate length would primar ily result in turbulent flows (lower burning rates), except for burning on the 
+underside in which laminar burning would be highest, accounting for their differences.  
+There is little difference between the data for methanol and ethanol in this study. Figure 7 shows a more complete 
+set of data for all lengths and orientations.  The trend to larger lengths suggests why the m aximum could shift from 
+the topside to the bottom side in the data of Blackshear and Murty [1]. 
+ANALYSIS 
+In order to explain the behavior of the data, the theoretical results of Ahmad and Faeth (A-F) [6, 7] are examined. As 
+our flow is mostly laminar, with some unsteadiness, we use their laminar analytical solution.  We also use their 
+properties, as listed in Table 1.  Their solution applies to boundary layer flows ( -60º to +60º of our data), and 
+accounts for the angle of inclination  by the component of gravity along the plate  using co sθ, but does not 
+discriminate between top and bottom burning. 
+ 
+Their results follow for the average flame standoff distance,   
+ (
+  
+ )              , (1a) 
+ 
+Figure 5. The Grashof number at the onset of unsteady laminar flow as a function of plate angle. The Grashof number by Al-
+Arabi et al. is plotted based on a flame temperature of 2200 K.  
+1.E+00
+1.E+01
+1.E+02
+1.E+03
+1.E+04
+1.E+05
+1.E+06
+1.E+07
+1.E+08
+1.E+09
+1.E+10
+1.E+11
+-90 -60 -30 0 30 60 90
+Gr = gℓ3/ν2
+θ (Degrees)
+End of Laminar
+(Al-Arabi et al.)
+Unsteady Gr.
+(Exp.)
+   
+Figure 6. Burning rate per unit area as a function of orientation for plates 1, 4 and 10 cm. 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+-120 -90 -60 -30 0 30 60 90 120
+m" (g/m2-s)
+θ (Degrees)
+Methanol - Experimental (a)
+ℓ Symbol
+1 cm
+4 cm
+10 cm    
+0
+5
+10
+15
+20
+25
+30
+35
+-120 -90 -60 -30 0 30 60 90 120
+m" (g/m2-s)
+θ (Degrees)
+Ethanol - Experimental
+ℓ Symbol
+1 cm
+4 cm
+10 cm    
+(b)
+
+--- page 40 ---
+6 
+where 
+    [
+   
+         ]
+   
+[
+            
+              ]
+   
+, (1b)  
+   (
+ 
+   ̅̅̅̅  
+) [           [(    )
+ 
+  ]]     (1c) 
+and 
+      [(
+   
+ ) (
+ 
+   )]
+ ⁄ 
+ (1d) 
+with    
+    
+     
+ and         
+In the later part of this paper, it will be shown that for most non-charring materials,   is approximately 0.3. 
+The average mass burning rate per unit area is also given by A-F, 
+  ̇  ̅̅̅̅                            (2a) 
+Here the number on the right-hand-side (RHS) of Eq. 2a differs slightly from the A-F [6, 7] result of 0.66, which we 
+believe due to a computational error. The modified Rayleigh number in Eq. 2a is 
+ 
+                                    , (2b) 
+where 
+    
+   
+            [                       ]   .  (2c) 
+Table 1. Fuel properties from Refs [6, 7] 
+Property Methanol Ethanol PMMA 
+Molecular Weight (g/mol) 32.04 46.07 100 
+Boiling Temperature (K)  337.7 351.5 668 
+L (kJ/kg) b 1226 880 1600 
+cp (kJ/kg-K) b 1.37 1.43 1.19 
+μair (x 10-5) (N-s/m2) b 1.8 1.8 1.8 
+B 2.6 3.41 1.6 
+s 0.154 0.111 0.21 
+   0.044 0.087 0.082 
+Pr 0.73 0.73 0.73 
+ζf a 0.430 0.494 0.344 
+ ̅   ⁄  @ 1000   0.234 0.234 0.234 
+  0.78 0.628 1.16 
+  0.34 0.308 0.48 
+Ambient air taken to be at 298K:  
+ν∞ = 15.3 x 10-6 m2/s.    
+a Calculated parameter 
+b Taken at boiling point of fuel
+
+--- page 41 ---
+7 
+Full variable definitions are given in the nomenclature . The coordinate system is shown in Figure 8. In both 
+equations 1a and 2a, the RHS should depend on the angle if there are differences between top and bottom burning. 
+The dimensionless flame standoff distance is shown in Fig. 9 according to Eq. (1). The results contain orientations 
+of +60º (top burning) to -60º (bottom burning), for wick lengths including 1, 2, 3, 4, 6, 8, and 10 cm. The variation 
+bars represent differences from different sample lengths ( l = 1 – 10 cm). The dimensionless result should collapse 
+the two fuels, but some difference is observed. This could be due to property effects or from neglecting radiation in 
+the model. The correlation suggests an independenc e with angle within about 30 %, but the  theory is over twice as 
+high. Kosdon and Williams [3] similarly found their theory over-predicted experimental flame standoff distances by 
+about 1.5 times. Flame standoff measurements f rom experiments on PMMA [12] are not shown because they were 
+based on observation of a  yellow flame, not comparable to measurements in this study of the blue flame, closer to 
+the plate surface. 
+The dimensionless burning rates from this study are plotted in Figure 10, along with data for 10×20 cm PMMA (20 
+cm pyrolysis length) by Gollner et al.  [10] and 3-10 cm square sheets of PMMA by Ohtani et al . [9]. The Grashof 
+number for the wick lengths of 1 - 10 cm rang es from 104 to 107. For the 20 cm length of PMMA burning, the 
+Grashof number is about      , which falls within the range of transit ion from laminar to turbulence (10 8 – 1010). 
+Here the results indicate an increase in burning rate as the angle increases from -60º (bottom) to +60º (top burning). 
+The two liquid fuels show this same trend, but do no t collapse to within about 10%. The PMMA data, containing a 
+mostly laminar flame over its length, also shows a similar trend with angle , but lower in magnitude . Again the 
+theory over predicts the flame standoff distance and indicates an effect of the angle of inclination. A constant of 
+about 0.6 would embrace most of the  liquid wick data to within about 25% while ignoring the distinct trend with 
+angle. The numerically-solved burning rate is plotted along with the experimental data. As the experimental ones, 
+ 
+Figure 7. Average mass flux from integral model and experimental results of (a) methanol and (b) ethanol for wick lengths of 1, 
+2, 3, 4, 6, 8, and 10 cm at angles from -90 to +90. 
+0
+10
+20
+30
+40
+0 5 10 15
+ℓ (cm)
++90
++60
++30
+0
+-30
+-60
+-90
+m" (g/m2s)
+Methanol
+φ = 0⁰
+φ = +90⁰
+φ = -90⁰
+0
+10
+20
+30
+40
+0 5 10 15
+ℓ (cm)
++90
++60
++30
+0
+-30
+-60
+-90
+m" (g/m2s)
+Ethanol
+φ = 0⁰
+φ = +90⁰
+φ = -90⁰
+ 
+Figure 8. Coordinate system and gravity vector  
+ 
+ 
+x y 
+Y 
+ 
+  
+g 
+Flame Position
+
+--- page 42 ---
+8 
+they are solved for wick lengths of 1, 2, 3, 4, 6, 8, and 10 cm and the plotted result is the average over those multiple 
+lengths. Adding additional cross -flow term helps to deviate the top burning from bottom burning. The numerical 
+result almost follows the same trend as the averaged experimental data with respect to inclinations.  By including the 
+cross-flow effect, the theory yields a better prediction with respect to burning phenomena at different inclinations.  
+These numerical results will be discussed in detail later and address the cross -flow buoyancy term neglected in the 
+Ahmad and Faeth analytical solution. 
+ 
+ 
+Based on the data presented in Figure 10,  a trend line going through the average values of the data points can be 
+formulated as a function of the inclination 
+ 
+ ̇  ̅̅̅̅               
+  
+                                  (2d) 
+In the numerical study by Ali et al. [ 8], a fit by them of the effect of orientation  gives a dependence very similar to 
+our behavior in Fig. 10. The parameter ∑ is plotted as a function of B in Fig. 11. ∑ is calculated using parameters of 
+  
+Figure 9. Dimensionless flame standoff for the full set of data . Symbols indicate average dimensionless standoff for all lengths 
+with vertical bars indicating the variability with angle. Equation 1  (
+  
+ )               is derived  from Ah mad and Faeth . 
+Numerical calculation is based on modified equations from this study and a fit of experimental data is shown.  
+ 
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+-120 -90 -60 -30 0 30 60 90 120
+(yf/x)Grx1/4Ω
+θ (Degrees)
+Numerical
+Equation 1
+Methanol
+Ethanol
+Experimental Fit
+ 
+Figure 1 0. Dimensionless burning rate for the full set of data . Symbols indicate average burning rates with vertical bars 
+indicating the variability. Equation 2,   ̇  ̅̅̅̅   
+ 
+                   is derived from Ahmad and Faeth.  Numerical calculation 
+is based on modified equations from this study and a fit of experimental data is shown. 
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+1.2
+-120 -90 -60 -30 0 30 60 90 120
+m"ℓPr3/4∑Raℓ-1/4/μ∞
+θ (Degrees)
+Numerical
+Equation 2
+Methanol
+Ethanol
+PMMA(Ohtani)
+PMMA(Gollner et al.)
+Experimental Fit
+
+--- page 43 ---
+9 
+a range of materials given in Table 2. For non-charring materials (     ), a simpler expression for ∑ is found 
+solely depending on B, 
+            . (2e) 
+Together, a functional relationship for the burning rate based on the B number and angle of inclination is  
+ 
+ ̇  ̅̅̅̅              
+  
+ 
+                               
+         . (2f) 
+ 
+The parameter Ω  s p otted  n a similar way. For non-charring materials, Ω remains nearly constant with a value of 
+0.3 for most of the materials. Thus, equation (1a) becomes 
+ (
+  
+ )                   , for      .  (2g) 
+Table 2. Estimated dimensionless properties including   and  . 
+Material      (kJ/g)    (kJ/g)     ( )          
+Liquids 
+n-Hexane 42 0.45 69 6.7 0.28 0.41 
+n-Heptane 41 0.48 98 6.2 0.28 0.43 
+n-Octane 41 0.52 125 5.7 0.27 0.44 
+Benzene 28 0.48 80 6.2 0.31 0.44 
+Toulene 28 0.50 110 5.9 0.31 0.45 
+Naphthalene 30 0.55 218 5.2 0.29 0.47 
+Methanol 19 1.2 64 2.5 0.36 0.8 
+Ethanol 26 0.97 78 3.1 0.31 0.67 
+n-Butanol 35 0.82 117 3.6 0.28 0.59 
+Acetone 28 0.58 56 5.2 0.4 0.6 
+Solids 
+Polyethylene 38 3.6 360 0.75 0.27 2.02 
+Polypropylene 38 3.1 330 0.89 0.27 1.72 
+Nylon 27 3.8 500 0.68 0.32 2.25 
+Polymethylmethacylate 24 2.0 300 1.4 0.31 1.2 
+Polystyrene 27 3.0 350 0.91 0.31 1.73 
+Solids, charring 
+Polyurethane foam, 
+rigid 
+17 5.0 300 0.56 0.52 3.08 
+Redwood 12 9.4 380 0.29 3.62 8.26 
+Red oak 12 9.4 300 0.30 3.14 8.07 
+Maple 13 4.7 350 0.58 0.68 3.08 
+a. Quintiere, J. G., Fundamentals of Fire Phenomena [16] 
+b. Eq. 1b 
+c. Eq. 2c 
+MATHEMATICAL MODEL 
+Here the model of Ahmad and Faeth [6, 7] is considered, except now the pressure gradient of the normal momentum 
+equation is included. This effect produces an additional buoyancy term that aligns with the main flow direction.  It 
+w    be ca  ed “the cross -  ow e  ect (CF)”. Th s e  ect  of the fuel surface  is included to help differentiate between 
+burning at the top a nd the bottom for the same inclination. We wish to see if this inclusion explains the behavior of
+
+--- page 44 ---
+10 
+the correlations of Eq . (1) and (2) with the data.  The following assumptions are taken into account in the 
+development of the model:  
+ 
+ The ambient atmosphere has a constant temperature and composition. 
+ Density does not change strongly with x. 
+ The flame is laminar, two dimensional and steady. 
+ Boundary layer assumptions apply. 
+ The flow is a mixture of an ideal gas with a constant specific heat and unity Lewis number. 
+ Radiation and viscous dissipation are neglected. 
+ The combustion process is a single global chemical reaction. 
+ The flame sheet assumption is taken. 
+ 
+The pressure is decomposed into pertabation and static terms,    ̃    , where  
+    
+         (3) 
+The coordinate system given in Figure 9 may be written as                 Following these assumptions, the 
+boundary layer equations, 
+ 
+ 
+ 
+ 
+ 
+       
+             (4) 
+ 
+ (           )     (     )  (  ̃  )              (5) 
+ 
+ 
+   (  ̃  )              (6) 
+ 
+ (           )     (        )   ̇         (7)  
+  
+ 
+ (    
+         )     (       )   ̇      (8) 
+ 
+Figure 11. Dimensionless parameters fit as a function of B. 
+ 
+0.1
+1
+10
+0.1 1 10
+Σ
+B
+0.1
+1
+10
+0.1 1 10
+Ω
+B
+
+--- page 45 ---
+11 
+are written for the conservation of mass, momentum, energy and species, respectively, with    ∫     
+ 
+   
+  ̅       . 
+A one-step reaction is presented as the mass-based stoichiometric equation, 1 g Fuel + s g Oxygen   (1+s) g 
+Product. The pressure is constant, so that the perfect gas theory gives         or 
+     
+                (9) 
+These compressible equations are transformed into an incompressible form by introducing the Howarth-Dorodnitzyn 
+transformation [14]   ∫
+ 
+  
+  
+ 
+ , in which         .  Also,    is assumed to be constant. 
+The Shvab-Zel'dovich (S-Z) variables are introduced  
+ 
+      
+     
+  (10) 
+             (11) 
+ 
+            (12) 
+Furthermore, the Prandtl and Schmidt number are assumed to equal unity,    
+   
+    and    
+ 
+    . A 
+dimensionless mixture fraction is introduced, 
+           
+         
+, (13) 
+ n wh ch “w”  mp  es conditions at the wall,          and   implies ambient conditions, where     and 
+   . 
+The conservation equations then become: 
+      (     )         (  ̃  ) , (14) 
+where the operator L is    
+ 
+    
+ 
+   
+ 
+          and       ∫ (    )     . 
+The pressure gradient term in Eq. (17) can be expanded by the chain rule, 
+ 
+ 
+(  ̃  )  (  ̃  )  (  ̃  ) (    )  
+     ∫ (     )           (     )      ∫ (    )       (15) 
+Invoking slow variation of density in the x-direction allows the assumption: (
+  
+  )   ,        ̅, a mean density.  
+Then the operator over the velocity and mixture fraction becomes  
+ 
+ 
+     (     )             ̅    ∫ (     )      (16) 
+with        . The second term on the left-hand side of Eq. 19, containing sinθ,  s the “cross   ow e  ect”. 
+ 
+The boundary conditions follow as:
+
+--- page 46 ---
+12 
+                 
+                          (     )                          
+                                            
+From the relationship between density, temperature and enthalpy, along with the definition of S-Z variable it can be 
+shown that [6, 7] 
+     
+     ̅   [(     )     ]              (17) 
+ 
+    
+     ̅   (          )                (18)  
+ 
+    (    ) (     )            ⁄                     (19) 
+To facilitate an integral solution, the equations are integrated across the boundary layer to form ordinary differential 
+equations 
+  
+  ∫      
+ 
+ 
+(  
+  
+) (    )    ∫ (     )                 ̅   ⁄    ∫  (     )      (20) 
+  
+  ∫        
+ 
+ 
+   
+       (     )      (21) 
+in which 
+  
+    
+  
+  
+   , the kinematic viscosity. 
+A new z-variable is introduced and profile functions are introduced for   and  , 
+∫   
+ 
+ 
+  ∫   
+ 
+ 
+       (22) 
+The profiles satisfy the natural boundary conditions above and the derived conditions, 
+   
+                       
+and     
+   
+               
+The resulting profiles follow from [6, 7], 
+                and (23) 
+            (24) 
+Because the derived boundary condition on the velocity ignored mass transfer, a blowing correction term suggested 
+by Marxman [ 15] as           was included as a multiplying term for the diffusive transport terms at the wall. 
+The equations become
+
+--- page 47 ---
+13 
+ 
+(∫           
+ 
+ 
+)                         
+       ∫ (     )            ̅   ⁄  ∫ (     )               (25) 
+and (∫          
+ 
+ 
+)                                    (26) 
+Introducing dimensionless variables as   
+ 
+    
+   
+  
+   
+ 
+  gives 
+ 
+ 
+   
+      
+               (         ̅        ) (         ̅   ⁄      ) (27) 
+  
+  
+     
+                       (28)  
+with 
+ 
+                
+ 
+(29a) 
+and   (
+    
+ ) (          )              ̅̅̅̅        . (29b) 
+Using initial condition           , solutions for U and   with regard to   can be found.  The term containing 
+b above is the cross flow effect.  When b = 0, the analytical solutions given in Eq . (1) and (2) can be found, 
+otherwise a numerical solution must be rendered. 
+The burning rate and the flame standoff distance can be formulated as follows: 
+The local burning rate is 
+  ̇     
+  
+ 
+ 
+  
+       
+   , (30) 
+the average burning rate is 
+  ̇  ̅̅̅̅̅  
+  
+ 
+ 
+          ∫
+  
+ 
+ 
+    (31) 
+and the flame standoff distance is  
+ 
+              (     ̅   ) [           [(    )   ]]      (32) 
+For b = 0, by which the cross-flow effect is neglected, the equations are solved analytically as done previously by 
+Ahmad and Faeth [6, 7] giving 
+ 
+  [             
+         ]
+ 
+ 
+  
+ 
+  (33) 
+ 
+  [           ]
+ 
+ 
+[                         ]
+ 
+ 
+ 
+ 
+  (34) 
+in which                   ̅           
+Substituting   and   into the burning rate and flame standoff distance gives Eqns. (1) and (2).
+
+--- page 48 ---
+14 
+For the b term not equal to zero, the equations are solved numerically using Mathematica. Due to singularity issues 
+near the origin, the solution was problematic and is only solved for limited cases. The results of the experiments will 
+be compared to solutions with and without the cross flow term.  
+Figure 11 shows the results of the theory compared to methanol data of 10 cm in length.  Little difference is found 
+from the theoretical result with and without the cross flow effect. Also, the results vary little with angle, and the 
+flame standoff distance is again over-predicted, especially for burning on the underside. Moreover, the steady 
+laminar theory does not fully apply. 
+ 
+Figure 12 shows the burning rate per unit area  results for ethanol and methanol.  The burning rate is higher for top 
+burning at corresponding orientations than burning on the underside with the cross flow term (CF) included. Without 
+CF, the results are symmetrical. The CF results better  agree with the data of Figure 6 , and support the increase  in 
+burning rate with angle as depicted in Figure 10.  
+ 
+ 
+Figure 11.  Comparison of theoretical and experimental instantaneous results for flame standoff with methanol of l = 10 cm 
+ 
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+0 5 10
+yf (cm)
+x (cm)
++60°
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+0 5 10
+yf (cm)
+x (cm)
++30°
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+0 5 10
+yf (cm)
+x (cm)
+0°
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+0 5 10
+yf (cm)
+x (cm)
+-30°
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+0 5 10
+yf (cm)
+x (cm)
+Exp
+no CF
+CF
+-60°
+ 
+Figure 12.  Theoretical results for average burning flux for methanol and ethanol 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+-120 -90 -60 -30 0 30 60 90 120
+m" (g/m2-s)
+θ (Degrees)
+Methanol - Model
+ℓ p/y = 0     p/y ≠ 0
+1 cm
+4 cm
+10 cm    
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+-120 -90 -60 -30 0 30 60 90 120
+m" (g/m2-s)
+θ (Degrees)
+Ethanol - Model
+ℓ p/y = 0     p/y ≠ 0
+1 cm
+4 cm
+10 cm
+
+--- page 49 ---
+15 
+CONCLUSIONS 
+Measurements of flame location and burning rate were recorded for flat plate wicks of methanol and ethanol, 
+ranging in size from 1 to 10 cm, and oriented from 0º (vertical) to +/ - 90º (top/bottom). The dimensionless laminar 
+correlations of Ahmad and Faeth [6 , 7] roughly support the data for fl ame location and burning flux , however the 
+flame location is over predicted, and indicates no  additional dependence on the angle. In contrast, the results for the 
+burning rate  indicate increasing rates with angle. In addition,  there is a maximum burning rate at + 30º whose 
+location with angle appears to decrease as the length of the plate increases. While the theory only considers laminar 
+steady pure convection, issues related to the onset of turbulence and radiation is present. The inclusion of the cross 
+flow, or normal pressure term, in the theory gives improved results, especially in predicting the differences in the top 
+and bottom burning rate for the same plate orientation.  Simple fits for mass burning rates and flame  standoff, 
+equations (2f) and (2g)  were formed based on the theory which include dependence on the Grashof number, B 
+number and angle. 
+ACKNOWLEDGMENTS 
+The authors would like to thank M. Huis, M. Lutz, and M. Willnauer  for their contributions. This work was 
+supported by a NASA O   ce o  the Ch e  Techno og st’s Space Techno ogy Research Fe  owsh p (NASA Grant 
+NNX11AN68H with grant monitor D. Urban). This work was also funded by NASA Grant NNX10AD98G, with P. 
+Ferkul as technical contact. 
+REFERENCES 
+1. Blackshear Jr., P.L. and Murty, K.A., “Heat and mass transfer to, from, and within cellulosic solids burning in air ,” 
+Symposium (Intl.) on Combustion 10: 911-923 (1965). 
+2. Blackshear Jr., P.L. and Murty, K.A., “Some effects of size, orientation, and fuel molecular weight on the burning of fuel -
+soaked wicks,” Symposium (Intl.) on Combustion 11: 545-552 (1967). 
+3.  Kosdon, F.J., Williams, F.A. and Buman, C., “Combustion of vertical cellulosic cylinders in air ,” Symposium (Intl.) on 
+Combustion 12: 254-264 (1969). 
+4. K m, J.S, de R s, J. and Kroesser, W    am F., “Lam nar  ree -convective burning of fuel surfaces ,” Sympos um (Int .) on 
+Combustion 13: 949-961 (1971). 
+5. Orloff, L. and de R s, J., “Mode  ng o  Ce   ng F res,” Symposium (Intl.) on Combustion 13: 979-992 (1971). 
+6. Ahmad, T. and Faeth, G.M., “Turbulent wall fires,” Symposium (Intl.) on Combustion 17: 1149-1160 (1979). 
+7. Ahmad, T., “Invest gat on o  the Combust ng Reg on o  F re -Induced Plumes Along Upright Surfaces,” Ph.D. Thesis, The 
+Pennsylvania State University, 1978. 
+8. Ali, S., Raghavan, V.and Rangwala, A., “A numerical study of quasi -steady burning characteristics of a condensed fuel: 
+effect of angular orientation of fuel surface,” Combustion Theory and Modeling 14, No. 4: 495-518 (2010). 
+9.  Ohtan , H., Ohta, K. and Uehara, Y., “ Effect of orientation on burning rate of solid combustible ,” F re and Mater a s  8:  9 -
+193 (1991). 
+10. Gollner, M.J., Huang, X., Cobian, J., Rangwala, A.S. and Williams, F.A, “Experimental study of upward flame spread of an 
+inclined fuel surface,” Proceedings of the Combustion Institute 34: 2531-2538 (2013).  
+11. Lloyd J.R., Sparrow E.M., “On the Instability of natural convection flow on inclined plates,” Journal of Fluid Mechanics, No. 
+42, pp. 465-470 (1970).  
+12.  Al-Arabi, M. and Sakr, B., “Natura  convect on heat trans er  rom  nc  ned  sotherma  p ates ,” Internat ona  Journa  o  heat 
+and Mass Transfer, 31: 559–566 (1988). 
+13. Bustamante, M., “Experimental Investigation Of Liquid And Gas Fueled Flames Towards The Development Of A Burning 
+Rate Emulator (BRE) For Microgravity Applications ”, Master of Science Thesis, Dept. of Fire Protection Engineering, 
+University of Maryland, College Park, MD 20742, 2012. 
+14. Howarth, L., “Concern ng the e  ect compress b ility on laminar boundary layers and their separat on,” Proc. Roy. Soc. 
+London Ser. A 194: 16-42 (1948). 
+15. Marxman, G., Gilbert, M., “Combust on  n the Turbulent Boundary Layer on a Vapor zat on Sur ace,” Symposium (Intl.) on 
+Combustion 10: 1337-1349 (1965). 
+16. Quintiere, J.G., Fundamentals of Fire Phenomena. John Wiley & Sons Ltd., Chichester, UK, 2006.
+
+--- page 50 ---
+8th U. S. National Combustion Meeting 
+Organized by the Western States Section of the Combustion Institute 
+ and hosted by the University of Utah 
+May 19-22, 2013 
+ 
+A Burning Rate Emulator for Study in Microgravity 
+ 
+Y. Zhang, M.J. Bustamante,  P.B. Sunderland, J.G. Quintiere1  
+ 
+ P. Ferkul2 
+ 1Dept. of Fire Protection Engineering, University of Maryland, College Park, MD 20742, USA 2NCSER, Cleveland, OH 44135 
+ 
+A gas-fueled burner with embedded heat flux gages has been used to emulate the burning characteristics of 
+several liquid and solid fuels. Dubbed the Burning Rate Emulator (BRE), it establishes the heat of gasification 
+(L) in steady burning by measurements of surface temperature, incident flame heat flux, and flow rate of a 
+gaseous fuel mixture. The mixture is selected with appropriate properties such as the heat of combustion and 
+radiation character by the soot point. Results are shown to accurately emulate methanol, heptane, and PMMA 
+pool fires of 50 mm in diameter. Used in a microgravity environment, a BRE can readily identify stable and 
+steady burning conditions yielding relevant fuel properties: heat of gasification, surface temperature, heat of 
+combustion, and smoke point. These properties identify a potential real condensed-phase fuel that can burn in 
+microgravity. Repeated experiments identify a range of fuel conditions that can support microgravity burning. 
+The flammability region is bounded by extinction values, and critical conditions needed for ignition can also 
+be established. The plausibility of the BRE has been demonstrated for normal gravity conditions, and a burner 
+without heat-flux sensors has achieved an appearance of steady burning in the NASA 2 .2-s drop tower. 
+Recent tests with a 50-mm-diameter burner including heat flux measurements conducted in a 5.18-s drop 
+facility have indicated stable flames with ethylene.  
+ 
+1. Introduction 
+This study seeks to establish the burning conditions for condensed fuels in a quiescent environment. 
+The burning conditions represent those of steady burning with the heat of gasification of the material 
+as the principal fuel property. In addition, the heat of combustion controlling flame extent, surface 
+re-radiation heat flux, and flame radiation properties will influence the burning rate. We seek to 
+define the burning in terms of these properties by using an emulator having a controlled gaseous fuel 
+supply to simulate steady burning of material with those properties. The burning rate emulator 
+(BRE) can be operated to represent a range of real solid and liquid fuels, and can also simulate an 
+applied external heat flux when considering an effective heat of gasification.  
+Steady burning (rate per unit area or fuel flux) can be expressed as 
+   
+  (1) 
+L
+qqqm errf ′′+′′−′′=′′ 
+
+--- page 51 ---
+2 
+where is the incident flame heat flux,  is the surface radiative loss heat flux to ambient,  is 
+the incident external radiative heat flux, and L is the heat of gasification. The heat of gasification is 
+defined precisely for liquids as  
+ ()vap p vLh c T T ∞=+ − ,  (2) 
+where hvap is the heat of vaporization, cp is the specific heat, Tv is the surface vaporization 
+temperature, and T∞ is the ambient temperature. 
+The flame heat flux is controlled by diffusive and radiative components, and the surface re-radiation 
+heat flux by the temperature of the vaporizing surface. In the case of the emulator burner (BRE), it is 
+the burner surface temperature that gives the surface re-radiation. Heat flux gages in the surface 
+record the flame heat flux distribution. With the measured gas flow rate of the burner, values of L, 
+with and without an external heat source, can be determined from Eq. (1). By varying the gaseous 
+fuel, the heat of combustion and the radiation character (notably the smoke point) can be varied. For 
+a given configuration, a wide range of burning conditions can be readily established with the 
+emulator (BRE). The long term goal is to use BRE to study the microgravity burning behavior of the 
+condensed fuel. However, here we will mainly focus on establishing the feasibility of the emulator 
+and sharing preliminary results in drop tower testing. 
+2. Background 
+Orloff (1971) and de Ris, de Ris et al. (1975) and Kim et al. (1971) pioneered the use of sintered 
+metal burners for studying the burning of planar condensed -phase steady burning. As with the 
+Brahmi et al. (2005) burner, the flow of the fuel is distributed uniformly over the burner. This 
+uniform flow is in contrast to the actual flow velocity of the supplied vapor that is governed by the 
+local heat transfer from the flame. As the flame shape changes, so does the vapor velocity. 
+Nevertheless, de Ris and co-workers successfully simulated burning conditions for a wide range of B 
+numbers. The B number is defined as 
+   (3) 
+where Yox is the ambient oxygen mass fraction, Δhc is the heat of combustion, r is the stoichiometric 
+oxygen to fuel ratio, cp is the specific heat of gas mixture, Tv is the surface vaporization temperature, 
+and T∞ is the ambient temperature. 
+For a given ambient condition, the B number is principally a function of the heat of gasification, L. 
+The burning rate per unit area is also principally a function of the B number in purely diffusive or 
+convective burning. Flame radiation and surface re-radiation perturb this simple dependence. 
+However, the relatively simple dependence could be emulated by the de Ris burner, and is shown to 
+follow laminar flame theory. Thus, despite the imperfection of a uniform burner velocity, the results 
+yielded theoretically supported results for burning and flame shape. 
+In the de Ris burner, the heat of gasification was determined by Eq. (1) with no external radiation 
+and negligible re-radiation. The latter was accomplished by flowing water through the burner’s 
+sintered metal matrix. An energy balance on the water, after considerable time to achieve thermal 
+equilibrium of the burner, allowed an average flame heat flux to be determined. Nitrogen addition to 
+the gaseous fuel also allowed for variations in the supplied fuel mixture mass flux.  
+fq′′ rrq′′ eq′′
+( )
+L
+TTcrhYB vpcox ∞−−Δ≡ /
+
+--- page 52 ---
+3 
+Another proof of burner emulation was demonstrated by Bustamante et al. (2012) by comparing the 
+flame standoff distance in the laminar region for burning of inclined flat plates. A pure methane 
+flame was used in a porous plate burner and compared to a methanol flame on a fuel-soaked wick 
+plate. Results showed the similarity in the flame shape along the surface oriented at different angles 
+from a ceiling fire, to a vertical wall fire, to a pool fire. Also the onset of transition to turbulent flow 
+was matched. The paper noted a difference of fire size in the turbulent over -fire region due to a 
+mismatch between the heats combustion of methane and methanol. 
+3. Experimental Method 
+A BRE burner has been designed and constructed, inspired by the de Ris burner. Its size has been 
+selected based on our flight and drop tower tests, and the burner size used by Brahmi et al (2005). 
+The BRE burner has a face of 50 mm in diameter. Owing to the anticipated heat flux variation over 
+the surface while burning in microgravity or normal gravity, two sensors are used. An appropriate 
+averaging of the two heat fluxes provides the needed average heat flux for computing the heat of 
+gasification. The thermocouples at the operating face record the surface temperature, allowing the 
+re-radiation heat flux to be estimated. Glass beads provide a porous matrix for fuel flow, ensuring a 
+uniform fuel flux, and porous brass screen serves as its face and internal layers. Figure 1 shows the 
+BRE burner with heat flux sensors at the center and near the edge.  
+ 
+Validation in 1-g. A series of tests were performed to assess burner’s ability to emulate condensed-
+fuel combustion. It was reasoned that fuel properties that control the burning rate are (1) the heat of 
+combustion, especially controlling flame height; (2) the heat of gasification, an approximation to 
+evaporative condensed-phase fuels; (3) the surface temperature or corresponding re-radiation; and 
+(4) the smoke point, which determines flame radiation. These properties must reasonably match 
+those of the condensed fuel of interest.  
+The burning rate of the condensed fuel is determined by a load-cell measurement of a pool fire. Then 
+literature values are established for the four fuel properties as described above. Two of the four 
+properties – heat of combustion and smoke point – are matched by selecting the proper gaseous fuel. 
+  
+Figure 1. BRE burner with 50 mm diameter surface.
+
+--- page 53 ---
+4 
+The other two properties – heat of gasification and surface temperature – indicate the burning 
+condition. We wish to match these properties with a gaseous fuel mixture having the same mixture 
+flow rate as the pool fire to evaluate the concept of BRE.  
+We tested the BRE to see if it could emulate a 50 mm pool of methanol burning steadily. The mass 
+loss rate of methanol was measured and the flame was photographed. To match the methanol with 
+the BRE we would need to use a gaseous fuel with the same flow rate. To match the flame height 
+and consequently the heat flux, the fuel must have the same heat of combustion. In addition , 
+consideration of the sooting tendency led to the choice of methane as the gaseous fuel. Nitrogen was 
+added to the fuel stream to match the heat of combustion of methanol, 19.1 kJ/g (Tewarson, 2002). 
+The gas burner BRE used a fuel mixture of 52% (volume) methane with 48% nitrogen. The flow rate 
+of the mixture was 33 cc/s to match the burning rate of the methanol, 11g/m2-s.  
+If the BRE concept is correct, the two flames should be nearly identical in appearance and heat flux 
+distribution. The measured heat fluxes in the BRE are 5.5 and 21.3 kW/m2 for the heat flux gages 
+located at the center and at 1.5 cm from the center, respectively. A weighted average over their area 
+segments gives an average value of 15.6 kW/m2. Corresponding surface temperature measurements 
+yield an average temperature of 160 ºC (141 – 170 ºC). Assuming an emissivity of unity for the 
+oxidized porous brass surface, the re-radiative heat flux is 2 kW/m2. Consequently, the heat of 
+gasification associated with the BRE is computed from Eq. (1) as L = (15.6 – 2 kW/m2) / (11g/m2-s) 
+= 1.24 kJ/g. The literature value for methanol is 1.20 kJ/g (Quintiere, 2006). Besides the 
+approximations in the calculations, the slight difference possibly arises because the BRE surface is 
+hotter than the boiling point of methanol, 64 ºC. The visual confirmation of the BRE to emulate the 
+methanol pool fire at 50 mm diameter is shown in Fig. 2a and 2b, in which the flames are compared 
+when the slightly oscillating images are similar. 
+ 
+We sought to evaluate whether the burner could also emulate other burning conditions. We 
+considered a 50-mm-diameter burning pool of heptane and PMMA. The choice of the gaseous fuels 
+was similar to that of methanol. Ethylene was selected be used as the burner gas to simulate heptane. 
+The heat of combustion of ethylene is close to that of heptane (41.5 kJ/g compared to 41.2 kJ/g), as 
+is the smoke point (120 mm compared to 139 mm) (Li and Sunderland, 2012). The gas burner BRE 
+used pure ethylene with 26.5 cc/s flow rate to match the measured burning rate of the heptane of 15 
+ 
+            (a) pool                      BRE                 (b) pool                          BRE 
+Figure 2. Comparison of 50 mm diameter methanol flame reproduced by the BRE burner.
+
+--- page 54 ---
+5 
+g/m2-s. A visual confirmation for the nature of these turbulent flames is shown in Fig. 3.  
+ 
+Propylene and nitrogen (50% in mole fraction) were used to emulate PMMA. The resulting gas 
+mixture had a similar heat of combustion and smoke point as those of PMMA (24.3 kJ/g compared 
+to 24.2 kJ/g, smoke point is 105 mm compared to 116.6 mm). Steady burning of the PMMA was 
+achieved by igniting it in an inverted orientation (facing down) and allowing the flame to stabilize, 
+after which the sample was oriented as a pool fire where it sustained steady burning. The fuel flow 
+rate was matched to the mass-loss rate of 6.36 g/m2-s. A visual confirmation for the comparison of 
+PMMA and BRE is shown in Fig. 4.  
+  
+  
+ (a) pool BRE (b) pool BRE    
+Figure 3. Comparison of 50 mm diameter heptane flame reproduced by the BRE 
+burner. 
+ 
+  (a) pool BRE  (b) pool BRE  
+ Figure 4. Comparison of 50 mm diameter PMMA flame reproduced by the BRE burner.
+
+--- page 55 ---
+6 
+ 
+ 
+4. Applications of the BRE 
+Having demonstrated the BRE’s capability to emulate the combustion of various fuels in normal 
+gravity, extensions of its use can be considered. In addition to steady burning, the conditions of 
+ignition and extinction can be examined relative to condensed-phase fuels. By the determination of 
+these conditions, a mapping of the properties that allow burning with boundaries of ignition and 
+extinction can be produced. This conceivably can be done in normal as well as microgravity. 
+Moreover the conditions of burning can be efficiently established in microgravity using the BRE. 
+Some preliminary results in this regard are examined below. 
+Conditions at ignition or extinction. Mass-loss flux at ignition and extinction limits are important 
+properties of fires. Yet their evaluation for materials is difficult to capture with current experimental 
+methods. Materials experience a sudden jump in mass-loss rate when ignited or when they suddenly 
+extinguish. Such transients are difficult to accurately measure. By using the BRE, the mass-loss rate 
+could be clearly identified by increasing the flow rate of fuel gradually until the establishment of the 
+flame is observed, or decreasing it after a flame is sustained.  
+A theoretical analysis for extinction can be put forth based on the relationship for steady burning, 
+and its ability to exceed a critical flame temperature for the flame to survive. A critical temperature 
+needed for the survival of a diffusion flame can be taken as 1300 ºC (Quintiere and Rangwala, 
+2004). This temperature is a reasonable criterion for the extinction of a laminar flame under its 
+environmental conditions, including gravity effects. Following B-number theory for pure convective 
+burning, and considering a small B number as would occur near extinction, we write: 
+   (4) 
+  (5) 
+where Lm is an effective heat of gasification, hc is the convective heat transfer coefficient, and Xr is 
+the flame radiation loss fraction. 
+ 
+The flame temperature (Tf) can be determined e.g. Quintiere (2006): 
+!!!mLm=hccpYox1"Xr( )#hc/r"cpTv"T$( )%& '(
+Lm!L"
+!##qf,r+!##qe"!##qrr
+!##m
+ 
+Table 1. The literature and measured properties that determine the burning conditions 
+    ∆hc (kJ/g) Smoke Point (mm) Ts (°C) L (kJ/g) 
+ 
+Methanol 
+Pool 19 - 65 1.24 
+BRE (XCH4=52%, XN2=48%) 19 - 160 1.2 
+ 
+Heptane 
+Pool 41.2 139 98 0.48 
+BRE (C2H4) 41.5 120 211 0.51 
+ 
+PMMA 
+Pool 24.2 105 270 1.6 
+BRE (XC3H6=50%, XN2=50%) 24.3 116.6 312 1.8
+
+--- page 56 ---
+7 
+ .  (6) 
+These equations, (4), (5) and (6), can be combined by eliminating Lm to yield: 
+  (7) 
+where is the heat of combustion per unit ambient oxidizer, .  This theory is presented for 
+an hc of 14 W/m2-K in Fig.5 along with extinction data taken in the 50 mm BRE for various gaseous 
+fuels. Also plotted are data from Lyon et al. (2007) for actual solid fuels.  The theory does not 
+collapse onto a single curve for the various fuels used, perhaps due to the neglect of radiation. 
+ 
+ 
+  
+Flammability Map. The BRE can be used for various fuels, and their selection prescribes the heat 
+of combustion and smoke point. Over a range of flow rates where a steady flame is sustained, the 
+BRE establishes the corresponding heat of gasification and burning temperature.  These burning 
+points can be plotted in a three-dimensional graph with coordinates of heat of combustion, heat of 
+gasification, and re-radiation heat flux -- all fuel properties that allow steady burning. Many of these 
+points may correspond to fictitious condensed-phase fuels. Some preliminary results for normal 
+gravity conditions are displayed in Fig. 6.  
+cpTf!T"( )=YF,o1!Xr( )#hc!Lm+cpTv!T"( )1+rYF,o/Yox
+!!!m"hc=
+hc
+cp
+1#Xr( )"h$#cpTv#T$( )%& '(
+YF,o1#Xr( )+
+cpTv#T$( )"h$ Yoxr#cpTf#T$( )"h$ Yoxr+YF,o)*+ ,-.
+h∞Δ ox cYhrΔ
+ 
+Figure 5.  Extinction conditions for various solid fuels and data from the BRE for several gaseous 
+fuels
+
+--- page 57 ---
+8 
+ 
+ 
+Burning behavior is different in microgravity. However, the fuel fire properties, such as the heat of 
+gasification, remain the same. One can identify a fuel that burns in microgravity using the BRE 
+consistent with the heat of gasification and other fuel properties. By changing the heat of combustion 
+(via the type of fuel or its diluent concentration) and fuel flow rate, diverse burning conditions can 
+be identified in microgravity. This can yield a flammability map with respect to the heat of 
+gasification, which could be directly associated with a specific condensed fuel. This would provide a 
+better method to evaluate material flammability in microgravity than the current NASA flame spread 
+test, conducted in normal gravity. Other important burning behaviors, like the flame heat flux and 
+ 
+ 
+Figure 6.  Flammability map by BRE in normal gravity 
+ 
+ 
+ 
+Figure 7.  Illustration of the process in establishing a microgravity flammability map
+
+--- page 58 ---
+9 
+burning rate, could also be explored in microgravity with the BRE. The process is illustrated in Fig. 
+7.  
+ 
+Burning in Microgravity. Of course we have little evidence that condensed phase fuels can steadily 
+burn in microgravity conditions. Here we put forth an approximate analysis to estimate the 
+possibility for fuel to burn in microgravity. 
+ 
+Let us ignore the addition of external radiation and estimate what materials are likely to burn in 
+microgravity. As it would be difficult to estimate, the flame radiation is neglected here where it is 
+likely to be small in microgravity. Consequently, we apply Eq. (4) ignoring the small heat capacity 
+term, as 
+ 
+. (8) 
+The convective heat transfer coefficient must be estimated for microgravity. We treat this as pure 
+conduction, from a flame whose standoff distance is estimated from the low -Re jet study of 
+Sunderland et al. (1999). We choose a coefficient corresponding to methane, Cf = 0.192, and a 
+diameter corresponding to our prototype burner, d = 50 mm. In terms of the burning flux, the flame 
+standoff is given as 
+  (9) 
+whereis the fuel viscosity. The convective coefficient is given as  
+  (10) 
+where is the conductivity of the fuel. The following property selections are made: 
+ 
+k = 0.0257 W/m-K 
+m = nr = (15 x 10-6 m2/s) (1.2 kg/m3) 
+cp = 1.0 kJ/kg-K 
+and 
+d = 50 mm. 
+ 
+Consequently . Equation (8) now becomes  
+ . (11) 
+ 
+Eq. (11) estimates the burning flux for a planar material of diameter 50 mm burning in microgravity. 
+Larger sizes reduce the convective coefficient by 1/d2, and lower the burning flux. A simpler form of 
+the extinction equation (7) is used to estimate the extinction conditions in microgravity, i.e., let YF,o = 
+1 and 
+ 
+!!!mL"hc
+cp
+#h$%!!!qrr
+!=
+Cfd2 !!!m
+µ
+µ
+c
+kh δ≈
+k
+hc
+cp
+!1. (g/m2/s)2
+""!m
+!!!m2L+!!!qrr!!!m"#h$%0
+
+--- page 59 ---
+10 
+Table 2. Estimated burning conditions in microgravity for a planar material of 50 mm diameter. 
+Parameter Liquids Thermoplastics High-temperature 
+Polymer 
+Halogenated 
+Polymer 
+Heat of Combustion, kJ/g 30 30 15 8 
+Heat of Gasification, kJ/g 0.5 3 5 3 
+Re-radiation Flux, kW/m2 0.5 10 20 30 
+Burning Flux, g/m2s 2 0.5 0.1 0.2 
+Critical burn flux, g/m2s 0.03 0.8 8 29 
+ 
+  
+  
+Eq. (7) can be approximately represented at extinction as  
+ 
+ (12) 
+ 
+Combining Eq. (11) with Eq. (4) at extinction, and recognizing that flame radiation will be small at 
+extinction, a criterion for steady burning is established as 
+ 
+.  (13) 
+Materials cannot have burning rates below this critical value. Note that the addition of external 
+radiant heating will reduce the critical burning flux.  
+Let us select representative properties for liquid fuels, thermoplastics, high-temperature polymers, 
+and halogenated polymers. Table 2 gives generic properties, the results of computing the mass flux 
+estimated for burning in microgravity, and the critical mass flux. It is seen from the table that generic 
+liquid fuels would burn in microgravity, while ordinary polymers are marginal, and high-temperature 
+and halogenated polymers would not burn. Of course , the addition of external radiation would 
+mitigate the situation and allow all fuels to burn.  
+5. Drop Tower Results  
+For some conditions, preliminary NASA testing (Takahashi et al., 2012) in a 2s drop tower indicated 
+a trend toward stable flames for a burner without heat flux sensors to measure the flame thermal 
+feedback. Encouraged by these tests, the BRE 50 mm burner was used in the NASA 5 s drop facility. 
+The burner surface temperatures were also recorded, but the face temperature of the thermopile heat 
+flux gages were allowed to achieve their equilibrium; they were not measured or controlled by 65ºC 
+water as in ground tests. The current results are summarized in Fig. 8 showing the nature of the 
+flame under several flow conditions for pure ethylene. The photos were taken from video records at 
+( )
+( ) .extinctionat  0.4, 
+0.1, 
+0.3,  to0.1 
+air,ambient for  kJ/g 3
+≈Δ−
+≈Δ−
+≈
+≈Δ
+∞
+∞
+∞
+∞
+∞
+h
+TTc
+h
+TTc
+r
+Y
+h
+fp
+vp
+ox
+( ) ( )[ ]
+5.0
+1 ∞∞ −−Δ−
+≈Δ′′
+TTchXchhm vprpcccrit
+!!!mcrit= !!!qrr"!!!qe
+#hc/2( )"L
+
+--- page 60 ---
+11 
+the end of the drop. They show the side and top views for ethylene flow rate of 135 to 300 ccm. At 
+90 ccm, the flame was unstable and near extinction. At the higher flows, the flames appeared to be 
+stabilizing, and heat flux appeared to be asymptotically approaching steady state. Longer duration 
+tests, like those planned for the International Space Station, would confirm whether these are truly 
+steady flames. 
+ 
+Figure 8. Photos at the end of the drop for ethylene flames in the 50 mm BRE at flow rates from 135 
+to 300 ccm 
+ 
+Assuming that the photos display steady flames, the te mperature and heat flux data can be 
+interpreted to yield corresponding heats of gasification for each flow rate. The results, along with 
+other fuel properties, are summarized in Table 3.  It is interesting to observe that the heat of 
+gasification, corresponding to the burner temperature and heat flux, drops as the burning flux 
+increases. This trend is shown more clearly in Fig. 9.
+
+--- page 61 ---
+12 
+ 
+The results in Fig. 9 suggest that fires of 50 mm in diameter with liquid fuels having typical L values 
+of about 1 kJ/g or less and some plastic materials having high heats of combustion are likely to 
+sustain microgravity burning. However, the ignition of such solids can be problematic i n 
+microgravity, as recalling the procedure we used to sustain the burning of PMMA in normal gravity. 
+These drop test results are somewhat in accord with the estimates for burning of Table 2, suggesting 
+the ease of burning some liquid fuel in microgravity.  
+ 
+ 
+Figure 9. Heats of gasification at quasi-steady µg burning 
+ 
+ 
+Table 3.  Summary of 5 s drop tower burning conditions at the end of the drop 
+Test No. D9023 D9024 
+(Extinguished) 
+D9027 D9028 D9029 D9030 
+Fuel C2H4 C2H4 C2H4 C2H4 C2H4 C2H4 
+Heat of Combustion 
+(kJ/g) 41.5 41.5 41.5 41.5 41.5 41.5 
+Smoke Point (mm) 120 120 120 120 120 120 
+Ignition 1g 1g µg µg µg µg 
+Fuel Rate (ccm) 180 90 180 135 240 300 
+Burning Rate (g/m2-s) 1.76 0.88 1.76 1.3 2.32 2.9 
+HF_Center (kW/m2) 5.68  5.68 5.68 4.27 3.6 HF_Edge (kW/m2) 7.08  10 9.19 6.8 5.65 Average HF (kW/m2) 6.85  9.29 8.61 6.38 5.31 
+Center Ts (°C) 133  60 66 52 48 Outter Ts (°C) 150  55 60 56 54 Averaged Ts (°C) 147.20  55.83 60.99 55.34 53.01 L (kJ/g) 3.15  5.16 6.43 2.67 1.77 Re-radiation (kW/m2) 1.31  0.20 0.25 0.20 0.18
+
+--- page 62 ---
+13 
+6. Conclusions 
+1. We are able to match the burning rate and flame characteristic of a condensed -phase fuel by 
+matching the heat of combustion and smoke point of the condensed fuel with a gaseous fuel and 
+inert in the BRE. This has been demonstrated for pool fires of methanol, heptane and PMMA. 
+2. By adjusting the fuel flow rate to match the burning rate of the pool fire with the selected gas 
+mixture, the BRE flame yields similar burning conditions as the pool fire of 50 mm diameter, not 
+only in the fuel property (heat of gasification), but also in the flame appearance. Although the 
+surface temperature was not perfectly matched, the results were reasonable. 
+3. Extinction and ignition conditions for the burning of condensed-phase fuels can be studied much 
+more easily and accurately with the BRE. 
+4. The success in validating the emulation ability of BRE burner would justify its usage in studying 
+the burning behavior of condensed fuels of interest by using a simulation gaseous fuel. We hope 
+to use this to explore microgravity fires. 
+5. Preliminary drop test results using a 50 mm BRE appears to yield nearly steady burning 
+conditions. While these conditions may not all correspond to real condensed-phase fuels, they 
+contribute to a flammability mapping of possible fuels that can burn. 
+  
+7. Acknowledgments 
+The authors would like to thank M. Willnauer, E. Muller and P. Klaess for their contributions. This 
+work was funded by NASA Grant NNX10AD98G for which Dennis Stocker is the technical contact 
+and provided important support. Eric Neumann and his staff at NASA’s Zero-Gravity Research 
+Facility were instrumental in the successful conduct of the drop tests. 
+ 
+Nomenclature 
+  
+B  
+pc specific heat (J/kg-K) 
+fC flame standoff coefficient 
+d diameter of the burner (m) 
+vaph heat of vaporization (kJ/g) 
+ch convective heat transfer coefficient (W/ m2-K) 
+ heat of combustion (kJ/g) 
+h∞Δ heat of combustion per unit ambient oxidizer (kJ/g) 
+k conductivity (W/m-K) 
+!m"  burning rate (g/m2-s) 
+L  heat of gasification (kJ/g) 
+ incident external radiative heat flux (kW/m2) 
+ incident flame heat flux (kW/m2) 
+ surface radiative loss heat flux to ambient (kW/m2) 
+ stoichiometric oxygen to fuel ratio 
+( )
+L
+TTcrhYB vpcox ∞−−Δ≡ /
+chΔ
+eq′′
+fq′′
+rrq′′
+r
+
+--- page 63 ---
+14 
+sT surface temperature (°C) 
+fT flame temperature (°C) 
+vT surface vaporization temperature (°C) 
+T∞ ambient temperature (°C) 
+ ambient oxygen mass fraction 
+Greek 
+δ flame standoff distance (m) 
+µ dynamic viscosity (kg/m-s) 
+ρ density (kg/m3) 
+ν kinematic viscosity (m2-s) 
+ 
+References 
+ 
+1. Brahmi, L., Vietoris, T., Rouvreau, S., Joulain P., David L. and Torero, J.L. , “Microgravity Laminar 
+Diffusion Flame In A Perpendicular Fuel And Oxidizer Streams Configuration,” AIAA J. 43: 1725-1733 
+(2005). 
+2. Bustamante, M.J., Dotson, K.T., Zhang, Y., Sunderland, P.B. and Quintiere, J.G., “Laminar Burning on 
+Flat Wicks at Various Orientations,” Spring Technical Meeting of the Central States Section of the 
+Combustion Institute, 2012. 
+3. de Ris, J. and Orloff, L., “The role of buoyancy direction and radiation in turbulent diffusion flames on 
+surfaces,” Proc. Combust. Instit. 15: 175-182 (1975). 
+4. Kim, J.S, de Ris, J. and Kroesser, William F., “Laminar free-convective burning of fuel surfaces,” Proc. 
+Combust. Instit. 13: 949-961 (1971). 
+5. Li, L. and Sunderland, P.B., “An Improved Method of Smoke Point Normalization .” Combust. Sci. 
+Technol. 184: 829-841(2012). 
+6. Lyon, Richard E. and Quintiere, J.G. “Criteria for Piloted Ignition of Combustible Solids,” Combustion 
+and Flame 151:551-559 (2007). 
+7. Orloff, L. and de Ris, J., “Modeling of Ceiling Fires,” Proc. Combust. Instit. 13: 979-992 (1971). 
+8. Quintiere, J.G., Fundamentals of Fire Phenomena. John Wiley & Sons Ltd., Chichester, UK, 2006. 
+9. Quintiere, J.G. and Rangwala, A.S., “A theory for Extinction based on Flame Temperature ,” Fire and 
+Materials 28: 387-402 (2004). 
+10. Sunderland, P.B., Mendelson, B.J., Yuan, Z.–G. and Urban, D.L., “Shapes of Buoyant and Nonbuoyant 
+Laminar Jet Diffusion Flames,” Combustion and Flame 116: 376-386 (1999). 
+11. Takahashi, F. Hennigan N., and Ferkul P., Private Communications, NCSER, Cleveland, OH 44135 
+(2012). 
+12. Tewarson, A., “Generation of Heat and Chemical Compounds in Fires,” The SFPE Handbook of Fire 
+Protection Engineering (3rd ed), DiNenno P.J. (ed.), National Fire Protection Association, Quincy, MA 
+02269, 2002, p.3-82. 
+ 
+oxY

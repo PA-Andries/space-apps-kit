@@ -41,3 +41,29 @@ def charger_tests() -> pd.DataFrame:
 def charger_publications() -> pd.DataFrame:
     """Les rapports NTRS (colonnes : COLONNES_PUBLICATIONS)."""
     return _lire("publications.csv")
+
+
+# Tables complètes du jeu de données PSI, dans `data/psi/` (colonnes : `flame/pipeline/PSI_DATASET.md`).
+TABLES_PSI = [
+    "investigations",
+    "tests",
+    "measurements",
+    "hardware_families",
+    "relations",
+    "habitats",
+    "categories",
+    "relevance",
+    "raw_data_map",
+    "publications",
+    "documents",
+    "resources",
+]
+
+
+@st.cache_data
+def charger_table_psi(nom: str) -> pd.DataFrame:
+    """Une table complète du jeu de données PSI (`nom` dans `TABLES_PSI`), vide tant qu'elle n'existe pas."""
+    if nom not in TABLES_PSI:
+        raise ValueError(f"Table PSI inconnue : {nom}. Tables possibles : {', '.join(TABLES_PSI)}")
+    fichier = DOSSIER_DATA / "psi" / f"{nom}.csv"
+    return pd.read_csv(fichier) if fichier.exists() else pd.DataFrame()

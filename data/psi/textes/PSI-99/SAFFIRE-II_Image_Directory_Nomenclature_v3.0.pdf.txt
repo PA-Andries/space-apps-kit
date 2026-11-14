@@ -1,0 +1,36 @@
+Source : NASA PSI, PSI-99, Science Documents, SAFFIRE-II_Image_Directory_Nomenclature_v3.0.pdf
+
+--- page 1 ---
+SAFFIRE-II 
+Image Directory Nomenclature
+Version 3.0
+XnCn_Raw_CamOriginal Camera original RAW files recorded on-board and downlinked on command.  
+Contains 8-byte offset that must be processed prior to color interpolation and 
+distribution.  This data set is archived at NASA-GRC.  
+XnCn_Raw_DistroMaster RAW Camara Orginal files processed for 8-byte offset using ImageJ, and resaved 
+using originial file name. This is the RAW Distribution Master set for Science Team 
+distribution and color interpolation (demosaicing).
+Xn_Raw2TIFF TIFF images of the RAW Distribution Master files, color interpolated (demosaiced) 
+using IrfanView Batch Conversion process.    
+Xn_Raw2TIFF_icmad Raw2TIFF files annotated with ICMAD 'Exposure' and 'Gain' information. Data is 
+appended to the bottom of each frame using ImageMagick script and resaved as 
+TIFF.   
+Xn_jpeg Jpeg images created on-board SAFFIRE payload and downlinked by command
+Xn_jpeg_corrupt Jpeg images received corrupted after downlink. 
+Xn_jpeg2png_icmad Jpeg images annotated with ICMAD 'Exposure' and 'Gain' information.  Data is 
+appended to the bottom of each frame using ImageMagick script and re-saved as 
+.png format to minimize additional compression artifacts.  
+"Xn" Denotes run type and number
+"Cn" Denotes camera number (if sorted separately) 
+Page 1 of 2
+
+--- page 2 ---
+Bit F1 F2 S1 S2 S3 S4 S5 S6 S7 S8 S9
+X X X X X X X X X X X
+X X X X X X X X X X X
+X X X X X X X X X
+X X X X X X X X X X X
+X X X X X X X X X X X
+X X X X X X X X X
+SAFFIRE-II_Image_Data_Package  Contents
+Page 2 of 2

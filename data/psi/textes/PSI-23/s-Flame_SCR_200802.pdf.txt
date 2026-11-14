@@ -1,0 +1,2207 @@
+Source : NASA PSI, PSI-23, Science Documents, s-Flame SCR 200802.pdf
+
+--- page 1 ---
+0
+0
+s-Flame
+SCR at NASA Glenn
+Principal Investigator: Chung K. Law
+Princeton University
+Co-Investigator:  Stephen D. Tse
+Rutgers University
+Co-Investigator:  Kurt R. Sacksteder
+NASA-Glenn Research Center
+February 20, 2008
+
+--- page 2 ---
+1
+1
+s-Flame Outline
+• Goals
+• Scientific significance and justification 
+for mg experimentation
+– Merits of spherical diffusion flames
+– Elemental diffusion flame processes
+– Development of fundamental physical & 
+chemical database
+• Experimental plan
+
+--- page 3 ---
+2
+2
+s-Flame
+Goals
+• Use spherical diffusion flames in long-duration mg 
+environment to: 
+– obtain experimental data of exceptional quality in 
+simple, well-defined flow fields.
+– understand various key elemental diffusion flame 
+processes.
+• Compare these data with those obtained through 
+independent computational simulation with detailed 
+chemistry and transport in order to:
+– scrutinize and improve the accuracy and 
+comprehensiveness of these descriptions.
+
+--- page 4 ---
+3
+3
+s-Flame
+
+--- page 5 ---
+4
+4
+s-Flame Merits of One-Dimensional Flames 
+for Fundamental Studies
+• Flame structure fundamentally affected by 
+aerodynamics.
+• Simple flow and flame configuration facilitate 
+experimentation, computation, analysis, and 
+comparison, with enhanced accuracy and reliability.
+• Reduced effort in describing flows allows more 
+detailed study of other aspects of flames such as 
+chemistry.
+• A one-dimensional flame is the simplest possible 
+configuration.
+
+--- page 6 ---
+5
+5
+s-Flame
+• Only spherical (vs. planar and cylindrical) configuration admits 
+steady-state 1D behavior in semi-infinite domain.
+• Spherically symmetric droplet combustion complicated by 
+transient effects due to droplet heating and surface regression. 
+Kinetics of large HC fuels also less well established.
+• Burner generation assures
+steady-state surface boundary
+conditions.
+• Planar flame in counterflow is not 1D
+in terms of diffusion-convection as 
+well as radiation misalignment.
+Merits of Burner-Generated
+Spherical Diffusion Flames
+Spherical Burner Flame
+F
+O
+Burner
+F
+O
+Surface 
+regressing
+Droplet
+Droplet Flame
+Counterflow Flame
+F
+O
+Diffusion
+Stagnation 
+surface
+Flame
+•
+
+--- page 7 ---
+6
+6
+s-Flame Program Components
+Development of 
+fundamental 
+chemical & physical 
+database, especially 
+comprehensive 
+reaction mechanisms
+Experimentation on 
+and understanding of 
+elemental (diffusion) 
+flame processes
+FOCUS BFOCUS A
+
+--- page 8 ---
+7
+7
+s-Flame
+Focus A:
+Experimentation on Elemental 
+(Diffusion) Flame Processes
+I. Spreading of diffusion flame 
+sheets
+II. Dual extinction states
+III. Flamefront instabilities
+
+--- page 9 ---
+8
+8
+s-Flame
+I. Spreading of Diffusion Flame 
+Sheets: Phenomenology
+• Steady-state assumption ignores initial conditions.
+• An important process is fuel accumulation, i.e. scalar profile buildup, 
+leading to spreading of the flame sheet from the fuel source.
+• Relevant for all non-planar processes!
+Fuel Ejected
+Steady
+Fuel Burned
+Transient
+Time
+Low YO,
+Flame Size High YO,
+Droplet Flame Behavior
+• Previous observation of droplet flame complicated by far field 
+diffusion and surface regression.
+• Insensitive to chemistry, allows focus on diffusion.
+• Coupling to density and hence temperature fields allows assessment 
+of radiation effects.
+Fuel vapor 
+accumulation
+Flame 
+spreading
+Droplet
+
+--- page 10 ---
+9
+9
+s-Flame
+I. Spreading of Diffusion Flame 
+Sheets: Experimental
+• Fuel/diluent mixtures will be issued from the spherical 
+burner and ignited at flow rates expected to form flames that 
+evolve toward idealized steady-state conditions
+• As the flame spreads outward, transient measurements of 
+flame-front velocity and flame structure will be obtained 
+using imaging and radiometric systems
+• The flame characteristics will be compared with the 
+predictions of the transient numerical simulation of spherical 
+diffusion flames for evaluations of detailed chemical 
+kinetics and radiation models.
+
+--- page 11 ---
+10
+10
+s-Flame II. Flame Extinction: Phenomenology (1/3)
+• Unlike premixed flames, reactant leakage is the 
+root cause of diffusion flame extinction.
+• For thin reaction zones, effects of other loss 
+processes (radiation, diffusional stratification, 
+unsteadiness, multi-dimensional)
+can all be folded into 
+reactant leakage through
+flame temperature 
+reduction.
+Oxidizer 
+leakage
+F O
+Reaction zone
+Fuel 
+leakage
+
+--- page 12 ---
+11
+11
+s-Flame
+• Consequently practically all diffusion flame 
+extinction phenomena have been found to be 
+described by Linán’s canonical extinction 
+criterion:
+where d is (Linán’s) 
+flame Damköhler 
+number and 
+dE ~ e(1–|g |), 
+g =g (freestream 
+energy parameters).
+d < dE
+II. Flame Extinction: Phenomenology (2/3)
+dE
+Damköhler Number, d
+Flame Response
+~
+
+--- page 13 ---
+12
+12
+s-Flame
+• Flame can extinguish at both small & large Damköhler numbers
+• Kinetically limited extinction occurs for small Da.
+• Increasing Da implies longer residence
+time or large system dimension, leading 
+to increased radiation loss, reduced 
+flame temperature, and eventually 
+extinction through excessive leakage
+• Linán’s extinction criterion applies at both limits
+• Dual extinction observed in mg droplet burning (?)
+• Present experiment further facilitates interpretation (e.g. no 
+droplet heating, simpler fuels)
+II. Flame Extinction: Phenomenology (3/3)
+System Damköhler Number
+Max Temperature
+Purely kinetic 
+extinction
+Radiation-affected 
+extinction
+~
+
+--- page 14 ---
+13
+13
+s-Flame
+II. Flame Extinction: 
+Experimental, Low Da
+• Fuel/inert mixtures will be issued from the spherical burner and 
+ignited at initial flow rates expected (or known/observed) to form 
+flames that evolve toward idealized steady-state conditions
+• Following ignition and initial flame front movement, the fuel/inert 
+flow rate will be abruptly reduced to a second flow rate below the 
+expected extinction limit
+• Quasi-steady extinction is expected to occur as the flame adjusts to 
+the reduced flow rate
+• To refine the determination of the extinction flow rate for each 
+fuel/diluent mixture, repeated tests are to be conducted at 
+successively lower initial flow rates and higher secondary flow 
+rates.
+
+--- page 15 ---
+14
+14
+s-Flame II. Flame Extinction: 
+Experimental, High Da
+• Fuel/inert mixtures will be issued from the spherical burner 
+and ignited at flow rates slightly above and beyond that of 
+the radiation extinction limit.
+• Upon ignition the flame will grow and subsequently 
+extinguish at the radiation extinction limit. 
+• Rates of radiative emissions from the flame and radiative 
+reabsorption elsewhere are to be accentuated in some cases 
+by using a radiatively active diluent such as CO2.
+
+--- page 16 ---
+15
+15
+s-Flame III. Flamefront Instabilities: 
+Phenomenology
+• Stoichiometry constraint and lack of chemistry render 
+diffusion flame sheets absolutely stable.
+• However, chemistry becomes important for near-limit 
+burning. Will flame become unstable? 
+• Recent theories & experiments show instability 
+characteristics similar to those of premixed flames for 
+near-limit burning
+• Since (positive) stretch suppresses cellular instability 
+while promotes pulsating instability, the (stretchless) 
+spherical flame is well suited for such studies.
+
+--- page 17 ---
+16
+16
+s-Flame
+III. Flamefront Instabilities:
+Experimental
+• Manipulate fuel and oxidizer Le through inert substitution
+• Le<1: Cellularly unstable
+• Le>1: Pulsatingly unstable
+• Radiating diluents are used to further promote instability
+• Pulsating instabilities are predicted
+to occur near the extinction conditions
+at both low and high Da, thereby
+modifying the extinction mechanism
+and limit; also allows for extinction 
+detection and flame control
+ 
+0
+1
+2
+3
+4
+5
+100 400 700 1000 1300
+Da *
+SF
+G=1.6E-42.0E-42.3E-4
+Radiation 
+zone O() 
+Reaction 
+zone O() 
+   
+  
+x = x f   
+    
+  F uel   
+O xidizer  stream   
+x = 0   
+Oxidant stream 
+x=xf 
+Fuel
+
+--- page 18 ---
+17
+17
+s-Flame Focus B:
+Development of Fundamental Physical 
+& Chemical Database
+• Detailed fuel oxidation mechanisms
+• Reduced fuel oxidation mechanisms
+• Diffusion coefficients
+• Radiation models
+
+--- page 19 ---
+18
+18
+s-Flame Fundamental Needs in Computational 
+Aerothermochemistry
+• Satisfactory quantitative description of 
+combustion phenomena depends on: 
+– Accurate input of physics & chemistry
+– Computationally accessible
+• Components of input:
+– Turbulence (DNS & modeled)
+– Chemistry (detailed & reduced)
+– Diffusion (mixture & second order)
+– Radiation (various models)
+
+--- page 20 ---
+19
+19
+s-Flame
+Complexities in 
+Description of Chemistry
+• Fuel oxidation is highly nonlinear and nonmonotonic in terms 
+of temperature, pressure, and species concentrations
+• Oxidation mechanisms consist of large number of species and 
+reactions
+• Characteristic reaction rates span over many orders of 
+magnitude, hence computationally stiff
+• Multicomponent diffusive transport can also be 
+computationally expensive
+
+--- page 21 ---
+20
+20
+s-Flame
+Importance of Data Fidelity: 
+Methane-Air Flame Speeds
+=1 data by 1970s; 
+Stretch contaminated
+Year of Publication (A.D.)
+Burning Velocity (cm. sec) at 298°K
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5
+Present Work
+Hassan et al. (1998)
+Gu et al. (2000)
+Vagelopoulos et al. (1994)
+Van Maaren et al. (1994)
+Vagelopoulos & Egolfopoulos (1998)
+GRI-Mech 3.0
+GRI-Mech 1.2
+Present
+Laminar Flame Speed (cm/s)
+
+1 atm data after 1980s; 
+Stretch effect eliminated
+
+--- page 22 ---
+21
+21
+s-Flame
+(Inadequate) State of Detailed 
+Mechanisms
+• Hydrogen: Disagreement 
+between calculation & 
+experiment in ignition delay at 
+low temperatures & high 
+pressures
+• Methane: Disagreement in the 
+nature of ignition for 
+calculations with different 
+mechanisms (GRI-Mech 2.11 
+vs 3.0)
+
+--- page 23 ---
+22
+22
+s-Flame Targets for Comprehensiveness in 
+Experimental Data
+• Broad coverage of thermodynamic states: temperature, 
+pressure, concentration
+• Ignition (homogeneous and diffusive): low-temperature 
+chemistry
+• Steady burning & extinction: high-temperature chemistry
+• Premixed & diffusion flames: mixedness & time scale
+• Global responses (flame speeds and extinction strain rates)
+• Detailed flame structure (thermal and major/minor species)
+• Pollutant chemistry
+
+--- page 24 ---
+23
+23
+s-Flame
+The Role of mg Spherical Diffusion Flame in 
+Comprehensive Mechanism Development
+• Substantial research on homogeneous systems (shock 
+tubes, flow reactors, etc.) and premixed flames
+• Diffusion flame experiments mostly involve counter-
+and stagnation flows, and droplet flames
+• Burner-supported spherical flame is 1D and steady state
+• Experiments of interest to chemistry are those involving 
+ignition and extinction.
+• Experiments for situations away from extinction would 
+yield information on the diffusion and radiation 
+parameters.
+
+--- page 25 ---
+24
+24
+s-Flame
+Development of Reduced Mechanisms
+• Methodologies mostly in place for fast, systematic 
+& accurate mechanism reduction
+– Elimination of unimportant species & reactions
+– Time-scale analysis (steady-state and partial equilibrium 
+assumptions)
+– Diffusion coefficient lumping
+• Example: Detailed n-heptane mechanism with 561 
+species and 2539 elementary reactions reduced to 
+55 species and 51 lumped reactions
+
+--- page 26 ---
+25
+25
+s-Flame
+Validation of Reduced Heptane Mechanism
+Ignition Delay PSR Extinction
+1500
+1600
+1700
+1800
+1900
+2000
+1E-6 1E-4 1E-2 1E+0 1E+2
+Residence Time, sec
+   
+Detailed
+68-species
+55-species
+1200
+1300
+1400
+1500
+  
+    
+1400
+1800
+2200
+   
+Temperature, K
+n-heptane
+T1 = 300K
+ = 0.5
+ = 1.0
+ = 1.5
+p = 50 atm
+1
+5
+50
+5
+1
+50
+5
+1
+1E-7
+1E-5
+1E-3
+1E-1
+1E+1
+Detailed
+68-species
+55-species
+1E-7
+1E-5
+1E-3
+1E-1
+1E+1Ignition Delay, (sec)
+1E-7
+1E-5
+1E-3
+1E-1
+1E+1
+0.5 1 1.5
+1000/T, (1/K)
+ = 0.5
+ = 1.0
+ = 1.5
+n-heptane
+p = 1 atm
+5
+50
+5
+50
+50
+5
+1
+1
+
+--- page 27 ---
+26
+26
+s-Flame
+• mg experimentation facilitates understanding of three 
+important elemental flame processes:
+• Flame spread and fuel accumulation
+• Dual extinction limits: kinetic vs. radiation affected
+• Flame-front instabilities and extinction monitoring
+• Acquisition of diffusion flame data from the clean and well-
+controlled mg experiments allow scrutiny and development of 
+physical and chemical database, especially comprehensive 
+detailed reaction mechanisms. 
+Summarizing Comments
+
+--- page 28 ---
+27
+27
+s-Flame
+SCR at NASA Glenn
+Principal Investigator: Chung K. Law
+Princeton University
+Co-Investigator:  Stephen D. Tse
+Rutgers University
+Co-Investigator:  Kurt R. Sacksteder
+NASA-Glenn Research Center
+February 20, 2008
+
+--- page 29 ---
+28
+28
+s-Flame
+Experimental Objectives
+
+--- page 30 ---
+29
+29
+s-Flame
+• A series of experiments is proposed, in both soot-
+free and sooty flames, to compare with detailed 
+computational simulation to assess transport 
+properties and detailed chemical kinetics 
+(including chemiluminescence).
+Experimental Objectives
+
+--- page 31 ---
+30
+30
+s-Flame
+Experimental Objectives
+Objective A. Measure and characterize the transient 
+structure (such as temperature and species distribution) of
+diffusion flames established
+at initially non-steady,
+spherical flame structures
+for mixtures of different
+H2/CH4/diluent ratios
+(soot-free) and different
+C2H4/diluent ratios (sooty),
+for different flow rates.
+
+--- page 32 ---
+31
+31
+s-Flame
+Flame Structure Spread
+500
+1000
+1500
+2000
+0
+0.5
+1.0
+1.5
+2.0
+2.5
+Temperature (K)
+CH* Mass Fraction ( x 10-12)
+T (no radiation)
+T (SNB reabsorption)
+CH* (SNB reabsorption)
+CH* (no radiation)
+-1
+0
+1
+2
+3
+4
+5
+6
+7
+0 1 2 3 4 5 6 7 8
+Standoff Distance (cm)
+Heat Release Rate (MW/m3)
+no radiation
+SNB reabsorption
+1.0
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+0 0.5 1.0 1.5 2.0 2.5 3.0
+Mass Consumption Rate of CH4 and H2 (mg/s)
+Time (s)
+SNB reabsorption
+no radiation
+
+--- page 33 ---
+32
+32
+s-Flame
+Experimental Objectives
+Objective B. Determine the quasi-steady 
+convective/chemical-kinetic extinction limits (low system 
+Damkohler numbers) and radiative/chemical-kinetic 
+extinction limits (high system Damkohler numbers)
+for mixtures of different
+H2/CH4/diluent ratios (soot-free)
+and different C2H4/diluent
+ratios (sooty).
+Max Temperature
+System Damkohler NumberSystem Number
+Purely Kinetic
+Extinction RadiativeExtinction
+
+--- page 34 ---
+33
+33
+s-Flame
+The quasi-steady conservation equations, in the reference frame moving 
+with the reaction front, for mass, energy, and species are given by:
+,02 =+ fUrAxm 
+01
+11
+=++ −  == Kk kkkpKk kpkkpp WhcAxTcVYcAxTAxcxTm  
+( ) 0=−+ kkkkk WAVAYxxYm  
+where
+AUum f )( − 
+2π4 rA 
+tUrx f d-d  d 
+fU
+is the moving velocity of the flamefront.
+Quasi-Steady Equations
+
+--- page 35 ---
+34
+34
+s-Flame
+Analysis of Dual Extinction 
+Turning Points
+•
+• For given extinction Daf , Daf,e, there are two roots:
+me,1 :  Pure kinetic limit
+me,2 :  Radiation-affected limit
+Daf
+Daf,e
+me,1 me,2 m
+Daf
+Daf,e
+me,1 me,2 m
+Daf
+Daf,e
+me,1 me,2 m
+Adiabatic
+Radiative
+Kinetic 
+Extinction
+Radiation 
+Extinction
+Mass Flow Rate
+Maximum Temperature
+Adiabatic
+Radiative
+Kinetic 
+Extinction
+Radiation 
+Extinction
+Mass Flow Rate
+Maximum Temperature
+Maximum temperature in steady-state 
+spherical methane diffusion flames 
+versus mass flow rate, both adiabatic 
+and with radiative heat loss.
+)exp(~ 22 AmmDa f −
+
+--- page 36 ---
+35
+35
+s-Flame
+Experimental Objectives
+Objective C. Determine the existence (for different 
+Zeldovich number, Ze), onset (as a function Da), and
+nature (i.e. mode, frequency,
+amplitude) of pulsating
+instabilities theoretically
+predicted to occur in transient
+spherical diffusion flames
+using fuel/diluent mixtures
+that are above a critical
+Lewis number.
+
+--- page 37 ---
+36
+36
+s-Flame
+Oscillatory Response Prior to 
+Extinction
+ 
+• 50%CH4 / 50%He vs. air (LeF = 2.3, Leo = 1.9)
+• Oscillation observed at both kinetic and radiation extinction 
+limits
+Computation
+Kinetic Extinction Radiation Extinction
+
+--- page 38 ---
+37
+37
+s-Flame
+Proposed Experimental Approach
+
+--- page 39 ---
+38
+38
+s-Flame
+Experimental Approach  (1/6)
+• A series of experiments is proposed in which mixtures of various 
+gaseous fuels, diluents and oxygen will be issued into an 
+oxidizing environment through a spherical porous burner and 
+ignited to nominally obtain a spherical, one-dimensional stabilized 
+flame.  
+Fuel (Oxidizer)
+Diffusion Flame
+Oxidizing (Fuel) Environment
+Porous Burner
+T
+r-r0
+Fuel (Oxidizer)
+Diffusion Flame
+Oxidizing (Fuel) Environment
+Porous Burner
+T
+r-r0
+
+--- page 40 ---
+39
+39
+s-Flame
+Experimental Approach  (2/6)
+• Objective A – Flame Structure Evolution
+–Fuel/diluent mixtures will be issued from the spherical 
+burner and ignited at flow rates expected to form flames 
+that evolve toward idealized steady-state conditions.
+–As the flame spreads outward, transient measurements of 
+flame front velocity and flame structure will be obtained 
+using imaging and radiometric systems.  
+–The flame characteristics will be compared with the 
+predictions of the transient numerical simulation of 
+spherical diffusion flames for evaluations of detailed 
+chemical kinetic and transport models.
+
+--- page 41 ---
+40
+40
+s-Flame
+Experimental Approach  (3/6)
+• Objective B – Quasi-Steady Extinction Limits, Low Da
+– Fuel/inert mixtures will be issued from the spherical burner and 
+ignited at initial flow rates expected (or known/observed) to 
+form flames that evolve toward idealized steady-state conditions.  
+– Following ignition and initial flame front movement, the 
+fuel/inert flow rate will be abruptly reduced to a second flow 
+rate below the expected extinction limit.  
+– Quasi-steady extinction is expected to occur as the flame adjusts 
+to the reduced flow rate.  
+– To refine the determination of the extinction flow rate for each 
+fuel/diluent mixture, repeated tests are to be conducted at 
+successively lower initial flow rates and higher secondary flow 
+rates.
+
+--- page 42 ---
+41
+41
+s-Flame
+Experimental Approach  (4/6)
+• Objective B – Quasi-Steady Extinction Limits, Low Da
+–At the low Da extinction limit, chemical kinetic rates are 
+retarded with respect to flow rates by inert gas in the 
+fuel stream that decreases the flame temperature.
+–Based on theoretical predictions, fuel/inert mixtures are 
+to be chosen for which the extinction flame radius is 
+large enough to minimize the effects of heat loss to the 
+burner.
+–The surface temperature of the burner will be directly 
+measured to quantify this loss.
+
+--- page 43 ---
+42
+42
+s-Flame
+Experimental Approach  (5/6)
+• Objective B – Quasi-Steady Extinction Limits, High Da
+–Fuel/inert mixtures will be issued from the spherical 
+burner and ignited at flow rates above and beyond those 
+expected (or known/observed) to form steady flames 
+when radiative loss is considered.  
+–The quasi-steady extinction is expected to occur as the 
+flame moves outward before reaching the adiabatic
+steady-state radius.
+–Rates of radiative emissions from the flame and radiative 
+reabsorption elsewhere are to be accentuated in some 
+cases by using a radiatively active diluent such as CO2.
+
+--- page 44 ---
+43
+43
+s-Flame
+Experimental Approach  (6/6)
+• Objective C – Flame Front Instabilities
+–Pulsating flame front instabilities are predicted to occur 
+near the extinction conditions at both low and high Da.
+–The approach taken to observe the instabilities is similar to 
+the approach for observing extinction except fuel/diluent 
+mixtures with large system Lewis numbers (Le) are used.
+• Low Da: moderate initial flow rate, abrupt change to flow rate 
+below predicted extinction rate.
+• High Da: initial flow rate above predicted extinction flow rate 
+with radiation.
+• Instabilities are expected to appear before extinction.
+–Radiating diluents are used to further encourage the 
+instabilities.
+
+--- page 45 ---
+44
+44
+s-Flame
+Justification for Extended Duration 
+Microgravity
+
+--- page 46 ---
+45
+45
+s-Flame
+Limitations of Testing in n-g
+• Need truly one-dimensional flames 
+• Inverse-flame configuration is limited and 
+constrained
+Hydrogen Methane
+
+--- page 47 ---
+46
+46
+s-Flame
+Projection image (2.81um)
+• 9%O2/91%N2, m = 0.078 g/s, into 100%H2 at 0.079 atm 
+• AGEMA Thermovision 900 infrared camera with filter
+• H2O emission
+• Thermal radiation from CO2 (4.31mm) and H2O (1.87mm)
+• Flame structure and equilibrium chemistry
+Limitations of Testing in n-g
+
+--- page 48 ---
+47
+47
+s-Flame
+• Durations in 2.2-s and 5.0-s drop towers insufficient 
+to observe radiative extinction
+Limitations of Drop Towers
+Comparistion of Extinction Times for Different Mixtures
+300
+500
+700
+900
+1100
+1300
+1500
+1700
+1900
+2100
+0 5 10 15 20 25 30 35
+Time (s)
+Max Temp (K)
+25%H2-20%CH4-55%N2, 0.01055g/s
+50%H2-10%CH4-40%N2, 0.0081g/s
+45%H2-55%N2, 0.001g/s
+`
+
+--- page 49 ---
+48
+48
+s-Flame
+• Preliminary indications of local radiative extinction 
+observed in 5s drop tower, but
+• Need more time to observe quasi-steady flame 
+spread prior to TOTAL radiative extinction
+• Multi-staged flames → kinetic extinction
+Limitations of Drop Towers
+20%H2 / 25%CH4 / 55%N2
+
+--- page 50 ---
+49
+49
+s-Flame
+• Radiative extinction never observed in parabolic 
+aircraft (up to 10s low-g)  → g-jitter, Gr~l3
+Limitations of Aircraft 
+Fuel: 20%H2/25% CH4/ 55% N2 @ 22.6 mg/sec in Ambient Dry Air
+(a) t = 0.4 sec (b) t = 2.0 sec (c) t = 8.4 sec (d) t = 8.6 sec
+(e) t = 9.0 sec (f) t = 9.3 sec (g) t = 9.6 sec (h) t = 12.0 sec
+
+--- page 51 ---
+50
+50
+s-Flame
+Aircraft Experimentation
+• Over 120 free-floated 
+hardware experiments
+Acceleration
+20%H2-25%CH4-55%N2, 0.0226g/s (SFDAT604.DAT)
+-0.2
+-0.15
+-0.1
+-0.05
+0
+0.05
+0.1
+0.15
+0.2
+0 2 4 6 8 10 12 14 16
+Time (s)
+Acceleration (g)
+acc1(g)
+acc2(g)
+acc3(g)
+Burner and Ambient Temperatures
+20%H2-25%CH4-55%N2, 0.0226g/s (SFDAT604.DAT)
+0
+50
+100
+150
+200
+250
+0 2 4 6 8 10 12 14 16
+Time (s)
+Temperature (C)
+fuel tube
+burner
+ambient 1
+ambient 2
+• No extinction observed
+Limitations of Aircraft
+
+--- page 52 ---
+51
+51
+s-Flame
+• Need extended duration and high-quality microgravity 
+to study diffusion flame oscillations with “low” 
+characteristic frequency
+Limitations of Drop Towers and 
+Aircraft 
+ 
+50%CH4 / 50%He fuel stream 
+into 21%O2 / 79%He ambient
+Pulsating Instability at the Low 
+Mass Flow Rate Limit
+
+--- page 53 ---
+52
+52
+s-Flame
+Justification for Space-Flight
+Facility
+O2 Mole Fraction Profiles -- Constant Volume Chamber (100L)
+Adiabatic
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0 5 10 15 20 25 30
+Radius (cm)
+O2 Mole Fraction
+t=0.1s
+t=0.2s
+t=0.5s
+t=1.0s
+t=2.0s
+t=5.0s
+t=10s
+t=20s
+t=25s
+t=50s
+20%H2-25%CH4-55%N2 into air, m=15.72mg/s
+• Estimated that 25s is sufficient to observe the processes 
+investigated.
+
+--- page 54 ---
+53
+53
+s-Flame
+• High-quality and sufficient duration microgravity
+• Transient evolution to “steady-state”
+• Radiative extinction
+• Flame instability
+• Multi-staged flow for kinetic extinction
+• Computation comparison
+• Diagnostics afforded, KEY → Flame structure
+• UV imaging
+• Radiometer
+• Temperature profile
+Justification for Space-Flight
+Facility
+
+--- page 55 ---
+54
+54
+s-Flame
+Science Data End Products
+
+--- page 56 ---
+55
+55
+s-Flame
+Objective A) Flame Structure Evolution:  Measure 
+and characterize the transient structure of diffusion 
+flames established at initially non-steady, spherical 
+flame structures for mixtures of different 
+H2/CH4/diluent ratios (soot-free) and different 
+C2H4/diluent ratios (sooty), for different flow rates.
+SDEP
+
+--- page 57 ---
+56
+56
+s-Flame
+• Sequence of color and OH* images of the flame as a 
+function of time, flow rate, and fuel composition. 
+• Requirements
+• Color images
+• UV images
+SDEP A1
+
+--- page 58 ---
+57
+57
+s-Flame
+Direct Color (Visible) Imaging
+• Visible Chemiluminescence (CH*)
+• Soot Incandescence
+• Assess flame symmetry and influence of feed tube
+
+--- page 59 ---
+58
+58
+s-Flame
+    r - → r +
+UV Imaging
+Projection Image (310nm) Abel deconvoluted image
+• 9%O2/91%N2, m = 0.078 g/s, into 100%H2 at 0.079 atm 
+• Xybion IMC-201 intensified multispectral video camera with filter
+• OH* chemiluminescence 
+• Chemiluminescence from OH* (310nm) or CH* (431nm)
+• Chemistry
+• Indirect assessment of flame structure
+
+--- page 60 ---
+59
+59
+s-Flame
+UV Imaging
+• Comparison with computational modeling
+200
+400
+600
+800
+1000
+1200
+0 1 2 3 4 5
+D istance from Burner Surf ace, cm
+Temperature, K
+0
+0.05
+0.1
+0.15
+0.2
+0.25
+Mole Fraction
+(Tmax)exp
+H2/3
+H2O
+H2
+O
+OH2
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+0 0.25 0.5 0.75 1 1.25 1.5
+x, distance from the surface of the burner,cm
+Normalized OH* intensity, heat release rate
+Heat M ax=5.07J/cm3sec 
+OH*simulated 
+OH*ex p
+
+--- page 61 ---
+60
+60
+s-Flame
+• Visible flame radius as a function of time, flow rate, 
+and fuel composition. 
+• Requirements
+• Color images
+• UV images
+SDEP A2
+0
+0.5
+1.0
+1.5
+2.0
+0 0.5 1.0 1.5 2.0 2.5 3.0
+max T (no radiation)
+max CH* (no radiation)
+max T (SNB reabsorption)
+max CH* (SNB reabsorption)
+experimental data
+Radius (cm)
+Time (s)
+0
+0.5
+1.0
+1.5
+2.0
+0 0.5 1.0 1.5 2.0 2.5 3.0
+max T (no radiation)
+max CH* (no radiation)
+max T (SNB reabsorption)
+max CH* (SNB reabsorption)
+experimental data
+Radius (cm)
+Time (s)
+
+--- page 62 ---
+61
+61
+s-Flame
+• Temperature (and desired major species) radial 
+distribution as a function of time, flow rate, and fuel 
+composition.
+• Requirements
+• IR images
+• Temperature profiles
+SDEP A3
+Temperature Profiles -- Constant Pressure Chamber (100L)
+Adiabatic
+0
+500
+1000
+1500
+2000
+2500
+0 5 10 15 20 25 30
+Radius (cm)
+Temperature (K)
+t=0.1s
+t=0.2s
+t=0.5s
+t=1.0s
+t=2.0s
+t=5.0s
+t=10s
+t=20s
+t=50s
+Temperature Profiles -- Constant Volume Chamber (100L)
+Adiabatic
+0
+500
+1000
+1500
+2000
+2500
+0 5 10 15 20 25 30
+Radius (cm)
+Temperature (K)
+t=0.1s
+t=0.2s
+t=0.5s
+t=1.0s
+t=2.0s
+t=5.0s
+t=10s
+t=20s
+t=25s
+t=50s
+20%H2-25%CH4-55%N2 into air, m=15.72mg/s
+
+--- page 63 ---
+62
+62
+s-Flame
+• Soot onset (determined from visible luminescence 
+versus soot extinction measurements) as a function of 
+radii for different flow rates and fuel compositions.
+• Requirements
+• Color images
+• Soot volume fraction measurements
+• Temperature profiles
+SDEP A4
+
+--- page 64 ---
+63
+63
+s-Flame
+Sooty Formation
+2.2-s Drop Tower Experimentation
+• 25%C3H8 / 2%O2 / 49% Ar / 24% N2
+High flow rate
+Low flow rate
+
+--- page 65 ---
+64
+64
+s-Flame
+Objective B) Dual Extinction Limits at Low and 
+High System Da: Determine the quasi-steady 
+convective/chemical-kinetic extinction limits and 
+radiative/chemical-kinetic extinction limits  for 
+mixtures of different H2/CH4/diluent ratios (soot-free) 
+and different C2H4/diluent ratios (sooty).
+SDEP
+
+--- page 66 ---
+65
+65
+s-Flame
+• B1) Extinction limits as a function of system 
+Damkohler number.
+• B2) Total radiative loss as a function of radius for 
+different flow rates and fuel compositions.
+• B4) Radiation loss versus time for sooty flames, for 
+different flow rates and fuel compositions. 
+• Requirements
+• Temperature profiles
+• Color images
+• UV images
+• IR images (desired)
+• Mass flow rate
+• Radiometer
+SDEP B1, B2, B4
+Adiabatic
+Radiative
+Kinetic 
+Extinction
+Radiation 
+Extinction
+Mass Flow Rate
+Maximum Temperature
+Adiabatic
+Radiative
+Kinetic 
+Extinction
+Radiation 
+Extinction
+Mass Flow Rate
+Maximum Temperature
+
+--- page 67 ---
+66
+66
+s-Flame
+• Peak CH* or OH* chemiluminescence along with 
+peak temperature as a function of radius, for different 
+times, flow rates, and fuel compositions.
+• Requirements
+• UV images (CH* filter)
+• Temperature profiles
+SDEP B3
+
+--- page 68 ---
+67
+67
+s-Flame
+Extinction – Quasi-Steady
+0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+0 0.5 1.0 1.5 2.0 2.5 3.0
+max T (no radiation)
+max CH* (no radiation)
+max T (T&H thin)
+max CH* (T&H thin)
+max T (SNB reabsorption)
+max CH* (SNB reabsorption)
+experimental data
+Time (s)
+Standoff Distance (cm)
+SNB reabsorption
+T&H thin
+1000
+1200
+1400
+1600
+1800
+2000
+0 0.5 1.0 1.5 2.0 2.5 3.0
+Time (s)
+Maximum Temperature (K)
+no radiation
+SNB reabsorption
+SNB thin
+T&H thin
+20%H2-25%CH4-55%N2 (15.72mg/s) into STP air
+0
+5.0 10
+-10
+1.0 10
+-9
+1.5 10
+-9
+2.0 10
+-9
+2.5 10
+-9
+k[CH*] profiles (non-radiative)
+Peak k[CH*] (non-radiative)
+Peak k[CH*] (T&H-thin)
+Steady-state peak k[CH*] (non-radiative)
+Moles-of-photons / (cm3s)
+0
+500
+1000
+1500
+2000
+0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0
+T profiles (non-radiative)
+T at peak k[CH*] (non-radiative)
+T at peak k[CH*] (T&H-thin)
+Steady-state T at peak k[CH*] (non-radiative)
+Temperature (K)
+Radius (cm)
+Visible Luminosity Consideration
+•
+•
+
+--- page 69 ---
+68
+68
+s-Flame
+1-D Gas-Phase Temperature
+(or Density) Measurement
+• Assess evolving flame structure
+• Assess moment of LOCAL flame extinction (based on precipitous 
+drop in local peak temperature)
+• Track flamefront motion based on peak temperature
+• Rainbow schlieren preferred, but not required if radial temperature 
+profile can be otherwise provided, e.g. thin filament pyrometry
+ 
+Flame Height: 
+35 mm 
+Flame Base: 
+12 mm 
+ 
+20%H2/25%CH4/55%N2 coflow in normal-g
+
+--- page 70 ---
+69
+69
+s-Flame
+Objective C) Flame Front Instabilities in Non-
+Premixed Flames: Determine the existence, onset, 
+and nature  of pulsating instabilities theoretically 
+predicted to occur in transient spherical diffusion 
+flames using fuel/diluent mixtures that are above a 
+critical Le.
+SDEP
+
+--- page 71 ---
+70
+70
+s-Flame
+• C1) Total chemiluminescence as a function of time.
+• C2) Total radiative loss (based on radiation flux) as a function of 
+radius, for different flow rates and fuel compositions.
+• C3) Oscillation mode, frequency, and amplitude near extinction as 
+a function of flow rate for flames of different Le and mass flow 
+rates.
+• C4) Comparison of extinction times and extinction radii as a 
+function of flow rate, for different fuel compositions 
+• Requirements
+• PMT (chemiluminescence)
+• Radiometer
+• Color images
+• UV images
+• IR images (desired)
+• Temperature profiles
+• Mass flow rate
+SDEP C1, C2, C3, C4
+
+--- page 72 ---
+71
+71
+s-Flame
+Radiation Flux Measurement
+• Global/local flame radiation measured at faster rate than cameras to 
+capture “high” frequency oscillation
+ 
+• Assess radiative heat transfer
+• Flame movement often small
+• Help to assess extinction moment
+
+--- page 73 ---
+72
+72
+s-Flame
+Extinction - Oscillatory
+Micro-buoyancy Experimentation
+(Fuel: Hydrogen)
+Kinetic ExtinctionRadiation Extinction
+
+--- page 74 ---
+73
+73
+s-Flame
+Characteristic Flame Structure
+
+--- page 75 ---
+74
+74
+s-Flame
+• Soot radial distribution as a function of time for 
+different flow rates and fuel compositions during fully 
+transient flame front movement
+• Requirements
+• Color images
+• Temperature profiles
+• Soot volume fraction measurements
+SDEP C5
+
+--- page 76 ---
+75
+75
+s-Flame
+Other Requirements
+
+--- page 77 ---
+76
+76
+s-Flame
+Burner (1/3)
+• PI provided spherical porous bronze burner can presently provide 0.99 
+sphericity and 0.94 concentricity diffusion flames.
+50%H2/10%CH4/40%N2, 8.1mg/s into STP 
+air (2.2-s drop tower), ½” burner diameter
+
+--- page 78 ---
+77
+77
+s-Flame
+Burner (2/3)
+• Burner purpose is only to provide uniform, spherical flow
+The classical thin-flame approximation is invoked such that, at the flame sheet, fuel and 
+oxidizer are consumed completely and in stoichiometric proportion, as prescribed by the 
+stoichiometric fuel/oxygen ratio f.  Thus the flow field consists of an infinitesimally-thin 
+flame, located at rf, separating the chemically-frozen fuel and oxidizer regions.  Diffusion 
+of species into a spherical burner of porosity  is allowed for, except at  r=0 where the fuel 
+mass fraction is fixed at YFR .
+:0 bRr 
+:fb rrR 
+: rrf
+( )
+bR
+r
+bR
+F
+fr
+OF
+fr
+O
+fr
+O FR
+O
+FRF YfYYY g
+g
+−
+−−−
+−
+ 
+
+
+
+
+
+
+
+
+− −−+= − eeeeee1
+( )
+
+
+
+
+
+
+
+
+−
+−
+=
+−
+
+−−
+−
+ r
+F
+fr
+OF
+fr
+O
+fr
+O
+O
+F
+fYY eee
+e1
+ −−=  −−− frOrOfrOOO YY eee1
+ +
+=
+ 1ln
+FR
+O
+O
+f
+Y
+fY
+r
+OsO Dm π4=
+FsF Dm π4=
+Fs Dm g π4=
+Independent of burner size and porosity
+(rf >Rb)
+
+--- page 79 ---
+78
+78
+s-Flame
+Burner (3/3)
+• ¼” (0.635cm) diameter burner preferred to minimize burner effect (i.e. 
+achieve small flame dimensions, reduce heat loss to burner)
+0
+500
+1000
+1500
+2000
+0 0.2 0.4 0.6 0.8 1.0 1.2
+Radius (cm)
+Temperature (K)
+Burner Surface
+Adiabatic
+with heat loss to burner
+20%H2-25%CH4-55%N2 into air, m=15.72mg/s
+
+--- page 80 ---
+79
+79
+s-Flame
+Operation Sequence
+
+--- page 81 ---
+80
+80
+s-Flame
+I. Establish chamber at constant pressure and species
+concentration
+II. Discharge fuel mixture through porous burner at initial flow rate
+III. Ignite fuel mixture and retract upon successful ignition
+IV. Allow for spherical diffusion flame to evolve
+V. Apply one of the following:
+▪ Maintain flow rate with same initial mixture for duration of 
+experiment (25s) or until extinction
+▪ Single step decrease in flow rate with same initial mixture at 
+specified time, maintaining new flow rate for duration of 
+experiment (25s) or until extinction
+VI. Terminate fuel supply to burner after 25s.
+Experiment Plan (1/2)
+
+--- page 82 ---
+81
+81
+s-Flame
+Prioritization and Logic
+a) Transient phenomenon leading toward steady 
+flame
+b) Extinction phenomenon at “quasi-steady”-
+states
+c) Instability phenomenon, e.g. Le > 1 
+oscillations
+→ Non-Sooty and Sooty flames
+Experiment Plan (2/2)
+
+--- page 83 ---
+82
+82
+s-Flame
+Test Matrix
+
+--- page 84 ---
+83
+83
+s-Flame
+• All experimental sets will address transient 
+phenomenon, as flame evolves from localized ignition 
+towards “steady” behavior
+• Various mixtures to assess both chemical and transport 
+effects on flame behavior
+Experiment Setup
+Fuel (Oxidizer)
+Diffusion Flame
+Oxidizing (Fuel) Environment
+Porous Burner
+T
+r-r0
+Fuel (Oxidizer)
+Diffusion Flame
+Oxidizing (Fuel) Environment
+Porous Burner
+T
+r-r0
+Fuel Ejected
+Steady
+Fuel Burned
+Transient
+Flame spread behavior
+
+--- page 85 ---
+84
+84
+s-Flame
+Test Matrix (1/4)
+Exp 
+Set 
+Sub 
+Set 
+Fuel Mixture Ambient Flow rate (cc/s) No. of runs 
+1 
+ 
+(a) 
+ 
+ 
+ 
+ 
+ 
+(b) 
+ 
+ 
+(c) 
+ 
+(d) 
+ 
+ 
+ 
+(e) 
+25%H2/20%CH4/55%N2 
+ 
+ 
+ 
+ 
+ 
+20%H2/25%CH4/55%N2 
+ 
+ 
+30%H2/15%CH4/55%N2 
+ 
+45%H2/55%N2 
+ 
+ 
+ 
+45%CH4/55%N2 
+21%O2/79%N2 (i) 5 (entire duration, 25s) 
+(ii) 10 (entire duration, 25s) 
+(iii) 15 (entire duration, 25s) 
+(iv) 10 (5s)→2 (rest of duration) 
+(v) 5 (5s)→2 (rest of duration) 
+ 
+(i) through (v) as shown above 
+ 
+ 
+(i) through (v) as shown above 
+ 
+(x) 1 (entire duration, 25s) 
+(y) 2 (entire duration, 25s) 
+(z) 2 (5s)→0.5 (rest of duration) 
+ 
+(i) through (v) as shown in (a) 
+5 
+ 
+ 
+ 
+ 
+ 
+5 
+ 
+ 
+5 
+ 
+3 
+ 
+ 
+ 
+5 
+ 
+REQUIRED
+
+--- page 86 ---
+85
+85
+s-Flame
+Test Matrix (2/4)
+2 
+ 
+(a) 
+ 
+ 
+ 
+ 
+ 
+(b) 
+ 
+ 
+(c) 
+ 
+(d) 
+ 
+ 
+ 
+(e) 
+25%H2/20%CH4/55%He 
+ 
+ 
+ 
+ 
+ 
+20%H2/25%CH4/55%He  
+ 
+ 
+30%H2/15%CH4/55%He  
+ 
+45%H2/55%He 
+ 
+ 
+ 
+45%CH4/55%He 
+21%O2/79%He (i) 5 (entire duration, 25s) 
+(ii) 10 (entire duration, 25s) 
+(iii) 15 (entire duration, 25s) 
+(iv) 10 (5s)→2 (rest of duration) 
+(v) 5 (5s)→2 (rest of duration) 
+ 
+(i) through (v) as shown above 
+ 
+ 
+(i) through (v) as shown above 
+ 
+(x) 1 (entire duration, 25s) 
+(y) 2 (entire duration, 25s) 
+(z) 2 (5s)→0.5 (rest of duration) 
+ 
+(i) through (v) as shown in (a) 
+5 
+ 
+ 
+ 
+ 
+ 
+5 
+ 
+ 
+5 
+ 
+3 
+ 
+ 
+ 
+5 
+     Total:  46 
+ 
+REQUIRED Continued…
+
+--- page 87 ---
+86
+86
+s-Flame
+Test Matrix (3/4)
+Exp 
+Set 
+Sub 
+Set 
+Fuel Mixture Ambient Flow rate (cc/s) No. of runs 
+3 
+ 
+(a) 
+ 
+ 
+(b) 
+ 
+(c) 
+20%C2H4/80%N2 
+ 
+ 
+25%C2H4/75%N2 
+ 
+30%C2H4/70%N2 
+21%O2/79%N2 (i) 5 (entire duration, 25s) 
+(ii) 10 (entire duration, 25s) 
+ 
+(i) and (ii) as shown above 
+ 
+(i) and (ii) as shown above 
+2 
+ 
+ 
+2 
+ 
+2 
+4 
+ 
+(a) 
+ 
+ 
+(b) 
+ 
+(c) 
+20%C2H4/80%He  
+ 
+ 
+25%C2H4/75%He 
+ 
+30%C2H4/70%He 
+21%O2/79%He (i) 5 (entire duration, 25s) 
+(ii) 10 (entire duration, 25s) 
+ 
+(i) and (ii) as shown above 
+ 
+(i) and (ii) as shown above 
+2 
+ 
+ 
+2 
+ 
+2 
+     Total:  12 
+ 
+HIGHLY DESIRED
+
+--- page 88 ---
+87
+87
+s-Flame
+Test Matrix (4/4)
+Exp 
+Set 
+Sub 
+Set 
+Fuel Mixture Ambient Flow rate (cc/s) No. of runs 
+5 
+ 
+(a) 
+ 
+ 
+ 
+ 
+ 
+(b) 
+ 
+(c) 
+ 
+(d) 
+ 
+ 
+ 
+(e) 
+25%H2/20%CH4/55%CO2 
+ 
+ 
+ 
+ 
+ 
+20%H2/25%CH4/55%CO2 
+ 
+30%H2/15%CH4/55%CO2 
+ 
+45%H2/55%CO2 
+ 
+ 
+ 
+45%CH4/55%CO2 
+21%O2/79%CO2 (i) 5 (entire duration, 25s) 
+(ii) 10 (entire duration, 25s) 
+(iii) 15 (entire duration, 25s) 
+(iv) 10 (5s)→2 (rest of duration) 
+(v) 5 (5s)→2 (rest of duration) 
+ 
+(i) through (v) as shown above 
+ 
+(i) through (v) as shown above 
+ 
+(x) 1 (entire duration, 25s) 
+(y) 2 (entire duration, 25s) 
+(z) 2 (5s)→0.5 (rest of duration) 
+ 
+(i) through (v) as shown in (a) 
+5 
+ 
+ 
+ 
+ 
+ 
+5 
+ 
+5 
+ 
+3 
+ 
+ 
+ 
+5 
+6 
+ 
+(a) 
+ 
+ 
+(b) 
+ 
+(c) 
+20%C2H4/80%CO2 
+ 
+ 
+25%C2H4/75%CO2 
+ 
+30%C2H4/70%CO2 
+ (i) 5 (entire duration, 25s) 
+(ii) 10 (entire duration, 25s) 
+ 
+(i) and (ii) as shown above 
+ 
+(i) and (ii) as shown above  
+2 
+ 
+ 
+2 
+ 
+2 
+     Total:  29 
+ 
+DESIRED
+
+--- page 89 ---
+88
+88
+s-Flame
+• Deliver fuel, inert(s) to burner
+• Different flow rates
+• Small versus large characteristic flame sizes
+• Ignite at moderate flow rate, establish quasi-steady flame, step 
+flow rate down to examine kinetic extinction at small flame radii
+Flow Supply and Flow Rate
+• Different compositions as specified by Test Matrix
+• Provide gas at max flow rate for at least 25s
+m1
+m2
+time
+Max Temperature
+System Damkohler Number
+Purely Kinetic 
+Extinction Radiation-affected 
+Extinction
+Max Temperature
+System Damkohler Number
+Purely Kinetic 
+Extinction Radiation-affected 
+Extinction
+
+--- page 90 ---
+89
+89
+s-Flame
+• Different flow rates
+– Affect characteristic flame size (residence time)
+• Radiative extinction
+• Characteristic time to steady state
+– Kinetic extinction versus radiative extinction
+• Step in mass flow rates are utilized
+– Ensure ignition and establishment of quasi-steady 
+behavior
+– Inward flame evolution toward kinetic extinction
+Flow Supply and Flow Rate
+
+--- page 91 ---
+90
+90
+s-Flame
+• H2/Inert (Required)
+• Addresses pure hydrogen chemistry
+• Only H2O in radiation considerations
+• Only OH* chemiluminescence
+• CH4/Inert (Required)
+• Addresses methane chemistry, e.g. GRI-Mech
+• H2O, CO2, CO in radiation considerations
+• H2/CH4/Inert (Required)
+• Addresses chemical kinetics of blended mixture including kinetic 
+extinction
+• Different characteristic radiative extinction times
+• OH* and CH* chemiluminescence
+Fuel Mixtures
+
+--- page 92 ---
+91
+91
+s-Flame
+Fuel Mixtures
+– 20%H2/25%CH4/Inert, 25%H2/20%CH4/Inert, 30%H2/15%CH4/Inert
+• Addresses chemical kinetics of blended mixture including kinetic 
+extinction
+• Different characteristic radiative extinction times
+Comparison of Extinction Radius for Different Mixtures
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+0 5 10 15 20 25 30 35
+Time (s)
+Radius (cm)
+25%H2-20%CH4-55%N2, 0.01055g/s
+50%H2-10%CH4-40%N2, 0.0081g/s
+45%H2-55%N2, 0.001g/s
+Comparistion of Extinction Times for Different Mixtures
+300
+500
+700
+900
+1100
+1300
+1500
+1700
+1900
+2100
+0 5 10 15 20 25 30 35
+Time (s)
+Max Temp (K)
+25%H2-20%CH4-55%N2, 0.01055g/s
+50%H2-10%CH4-40%N2, 0.0081g/s
+45%H2-55%N2, 0.001g/s
+`
+
+--- page 93 ---
+92
+92
+s-Flame
+• C2H4 (Highly Desired)
+• Nominally sooty C2 fuel
+• Sooting tendencies depend on characteristic residence time, so 
+different flow rates must be examined
+Fuel Mixtures
+
+--- page 94 ---
+93
+93
+s-Flame
+Test Matrix Rationale
+• Different inerts to affect diffusive properties, radiative 
+properties, and flame temperature 
+– N2 (Required)
+• Moderate flame temperature
+• Radiatively transparent
+• Normal “air”
+– He (Required)
+• Higher flame temperature
+• Radiatively transparent
+• High-Lewis number promoting pulsating instability
+– CO2 (Desired)
+• Lower flame temperature
+• Optically participating medium (highly reabsorptive species)
+• All inerts fixed at 0.55 mole fraction for non C2H2 fuel 
+mixtures
+
+--- page 95 ---
+94
+94
+s-Flame
+Ambient Environment
+• STP
+• Different sets of ambient gas mixtures to alter characteristic flame 
+temperatures, diffusive transport, and radiative properties
+• “Air”:  0.21 O2, 0.79 N2 (Required)
+• “He-Air”:   0.21 O2, 0.79 He (Required)
+• “CO2-Air”:  0.21 O2, 0.79 CO2 (Desired)
+• Specified to within 1% mole fraction
+• Ambient gas may be scrubbed and recycled for subsequent tests
+
+--- page 96 ---
+95
+95
+s-Flame
+Success Criteria
+
+--- page 97 ---
+96
+96
+s-Flame
+Minimal Success
+• Observations of transient flame phenomena leading toward 
+steady state flames for 1 CH4 case and 1 C2H4 case; or
+• Observations of flame extinction at both low and high 
+system Damkohler number for 1 case; or
+• Observations of spherical soot formation in 1 C2H4 case.
+
+--- page 98 ---
+97
+97
+s-Flame
+Significant Success
+• Observations of at least two instances of flame front 
+instabilities including at least one hydrocarbon fuel; or
+• Combinations or extensions (in terms of number of 
+mixture ratios for a single hydrocarbon fuel or number of 
+hydrocarbon fuels) of at least two of items
+
+--- page 99 ---
+98
+98
+s-Flame
+Complete Success
+• Observations of transient flame phenomena leading toward 
+steady state flames for at least three different mixture 
+ratios of each of two hydrocarbon fuels and two diluents; 
+and
+• Observations of flame extinction at both low and high 
+system Damkohler number for at least three different 
+mixture ratios of each of two hydrocarbon fuels and two 
+diluents; and
+• Observations of at least two instances of flame front 
+instabilities each including at least one hydrocarbon fuel; 
+and
+• Observations of soot formation.

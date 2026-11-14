@@ -1,0 +1,1229 @@
+Source : NASA PSI, PSI-47, Reports, DAFT 1 year report 10 30 07 b.doc
+
+Dust Aerosol Measurement Feasibility Test (DAFT)
+
+
+
+
+
+Principal Investigators: Dr. David Urban, Dr. Gary Ruff
+NASA Glenn Research Center, Cleveland, OH.
+
+
+Co-authors: William Sheredy, NASA Glenn Research Center, Cleveland, OH.
+Greg Funk, Nathan Funk, Zin Technologies, Cleveland, OH.
+Final Research Report Template and Guidelines
+
+I.	Introduction
+	A.	Abstract
+
+In the wake of the Columbia disaster, NASA Headquarters put out a call for small experiments, designed to be launched aboard the Russian Progress, to be made available for launch within a six month period from the date of the request (March, 2003). 
+
+The Smoke Aerosol Measurement Experiment (SAME, formerly known as “Smoke”) required the utilization of a particulate counter that is designed to use gravity to facilitate its operation, and carried the question of its effectiveness in microgravity as a major risk. 
+
+The Dust Aerosol measurement Feasibility Test (DAFT) was designed as a risk mitigation experiment to test the improved the design of the TSI P-Trak, a COTS condensate nuclei counter, flight harden it and test its functionality in a microgravity environment. The experiment on-orbit operations were spread over 2 Increments (10 and 13).  The Increment 10 operations were performed by Leroy Chiao and consisted of the DAFT 1 and & 2 implementations which gave a preliminary look at the P-Trak functionality but did not provide full validation.  These tests did however provide the first measurement of the particulate air quality on the space station.  The Increment 13 operations were conducted by Jeff Williams and utilized the full DAFT 3 & 4 implementation.  In all, 3 sample bags were tested.  The results of both test sequences demonstrated the overall functionality of the modified Ptrak in a low-gravity environment, successfully mitigating the risk of the SAME experiment.
+
+	B. 	Hypothesis
+
+Given the gravitational sensitivity of the P-Trak, two failure modes were identified for the device: 1) that the particulate counting system, containing a nozzle, a laser diode and sensitive optics would clog or become obscured by the working fluid (isopropanol) and 2) that the internal dynamics of the optics chamber of the device would cause an over counting of the particulates and give unreliable (high) readings. To mitigate the condensate control problems, the condensing section was re-designed to mitigate the detrimental gravitational effects. To evaluate this design in low-gravity, an experiment was designed that would use a functionally flight-like design and test it against an aerosol standard and another device (the TSI DustTrak), that was analyzed to be unaffected by the lack of gravity.
+
+The choice of the aerosol and the method used to create it were key items. Ideally, a mono-disperse aerosol would be used (0.7 – 1.3 microns), which would allow an easy comparison of the readings from the devices. However, due to the lack of development time, it was proposed to use Arizona Road Dust (ARD, Fine), a reference particulate material, in combination with ISS GN2 to create an aerosol for measurement purposes. 
+
+Therefore, there are two basic hypothesis in DAFT: 1) that the TSI P-Trak, as modified for use in SAME, would function normally in microgravity, and 2) that the aerosol created and filtered per the experiment design would be within the measurement capabilities of the test devices
+
+	C.	Objectives of Investigation
+
+The objective of DAFT was to minimize the risks of its parent experiment, SAME, by demonstrating that the modified TSI P-Trak functioned effectively and predictably on orbit.
+
+Background
+
+The Dust and Aerosol measurement Feasibility Test (DAFT) is a risk mitigation experiment, created by its parent experiment, the Smoke Aerosol Measurement Experiment (SAME). The purpose of SAME is to create and measure the smokes of typical spacecraft materials when created in a microgravity environment, with the expressed goal of providing the data required for the development of the next generation of spacecraft smoke and fire detectors.
+
+The design of the smoke detectors currently in use aboard the ISS and the NASA Space Shuttle are based on test results from the measurement of the smoke particulate created in a 1-g environment. Previous experimental evidence, acquired by the Comparative Soot Diagnostics (CSD) experiment on board the Space Shuttle, showed that there can be an appreciable difference in the quality of the smokes created in microgravity versus those created on earth. Although it was highly successful, CSD was not designed to have the ability to thoroughly characterize the aerosols created on orbit. SAME does have this ability. 
+
+SAME relies on a COTS device, the TSI P-Trak (a Condensate Nuclei Counter), to quantify the count of the number concentration of the smoke aerosol, a critical measurement for the success of the SAME experiment. The P-Trak, as designed by the manufacturer, relies on gravity to aid in the recycling of the isopropyl alcohol used as a condensate; hence the concern that it may not function properly on orbit. This concern is the driving factor behind the development of the DAFT experiment.  The SAME project team developed a modification to the condenser of the P-Trak that should alleviate the problem but it could only be tested in a long-term low-gravity environment.
+
+The original concept for DAFT contained a P-Trak (which included the modification to aid in the alcohol recycling), a DustTrak (a laser scattering aerosol measurement device, also manufactured by TSI, to be used as a comparator), an aerosol generation system and an unmodified P-Trak. Due to constraints with regard to the allowable upmass, DAFT was divided into four ‘increments’ (DAFT-1 through -4, respectively) that could be launched separately.
+
+II.	Methods/Research Operations
+
+A.	Discussion of Method/Protocol
+	
+In order to prepare the P-Trak for operation in microgravity, an analysis of its operation was performed. The P-Trak uses a small pump to draw the sample aerosol through a chamber saturated with alcohol vapor by means of a wick. That vapor/aerosol mix then passes through a condenser tube that allows the alcohol to condense on the particles in the aerosol, making droplets that are large enough to count with a focused laser/photo cell combination. The condenser in the COTS device slopes down, enabling the alcohol from the droplets that adhere to the tube wall to be recycled back to the evaporator.
+
+In conjunction with the Microgravity Fluids Branch at the NASA Glenn Research Center, a modification to the condenser tube was developed that effectively moves liquid alcohol from the tip of the tube back upstream to the evaporator using capillary forces. This was the major modification made to the device. Other alterations involved the removal of the mercury switch (for gravitational orientation), flight hardening and covering the device with foil tape for flammability concerns.
+
+The TSI DustTrak, a laser scattering device based on Mie scattering and included as a measurement standard, was hardened in a similar fashion, but did not include a mercury switch. 
+
+After some consideration, it was decided to use a 15 liter Mylar bag for the containment of the aerosol. Several issues, including safety and the atomizing of the particulates (and the fluid that contained them), precluded the use of commercially available mono-dispersed particles. Therefore, Arizona Road Dust (ARD) (fine), a NIST standard, was selected due to its known constitution and ease of dispersion into a pressurized gas stream. 
+
+A flight design was created, the parameters tested and determined, and flight-like hardware was created and tested with the measurement instruments to develop the correlation curves discussed in the results section.
+
+One problem that exists with the ARD sample material is that it contains a substantial number of particles in sizes above 2.5 microns, which is above the measurement limit of the P-Trak. To mitigate this factor, the hardware included the DAFT Impactor which was developed by the project team based on particle impaction theory.  The DAFT Impactor is a particle separator for large particles (only) that was designed specifically for the given flow rate of the combined test devices.
+
+The P-Trak gives a number count of the particles in an aerosol, in readings of particles/cm3. DustTrak gives measurements of the total mass, in mg/m3. Since the distribution of the particulates in the aerosol is known to a certain confidence level, and the units had been correlated in testing on the ground, the experiment was conceived to create a similar aerosol on orbit and determine the device correlation in a microgravity environment to quantify the P-Trak’s measurement effectiveness. 
+
+B.	List & Description of All Functional Objectives
+
+As stated in previous sections, the objective of DAFT was to demonstrate the effective operation of the TSI P-Trak in a microgravity environment. This was intended to be accomplished utilizing no more than 15 test points of aerosolized ARD in conjunction with a TSI DustTrak to provide a correlation to the readings obtained from the P-Trak.
+
+Due to the limitations imposed to the allowable upmass for US based experiments, the DAFT hardware was divided into the following four sections:
+DAFT-1	Contained the modified P-Trak, an Alcohol Wick and batteries
+DAFT-2	Contained a DustTrak and batteries
+DAFT-3	Contained the sample generating and filtering equipment
+DAFT-4	Contained an unmodified (but flight hardened) P-Trak, another alcohol wick and more batteries
+
+Since all of the hardware was not launched simultaneously, the objectives were modified accordingly. DAFT-1 and -2 were launched aboard Progress mission 16P, and an opportunity to operate that hardware became available in February of 2005. Since the sample materials were not included, the team decided to operate the devices sampling ISS cabin air at various locations. It was also suggested that particulates could be created by mating and de-mating Velcro in front of the shared sample port, which was done as described in the Sessions section.
+
+Once DAFT-3 and -4 were brought on orbit, the original experiment objectives were utilized. 
+
+The nominal procedures or functional objectives were listed as 
+2.001 DAFT Set Up
+2.002 DAFT Sample Bag Fill
+2.003 DAFT Sample Extraction form Sample Bag
+2.004 DAFT Data Downlink
+2.005 DAFT Restow
+
+
+C.	List of All Hardware Items Used; Descriptions of PI-provided hardware
+	
+HW Name	Part Number	Comments		P-Trak-01	DAFT-0101	A modified COTS CNC unit manufactured by TSI; launched on 16P.		P-Trak Alcohol Wick-01	DAFT-0601-1	A custom made aluminum enclosure that contains the P-Trak alcohol wick. Launched on 16P 
+		DAFT Accessory Kit	DAFT-0700	Contained Impactors for DustTrak, cleaning tools, spare filters and misc. parts.		P-Track Batteries	DAFT-0701	6 - AA		DAFT Fill Assembly	DAFT-0301	A custom made device, consisting of tubing fittings, filters, a regulator and pressure relief valves used to control and direct ISS GN2 for use in filling the Sample Bags with aerosol.		DAFT Impactor	DAFT-0401	Another custom made device composed of fittings and filters, this device was used to extract the sample aerosol from the Sample Bags and eliminate most of the larger particles.		DAFT Sample Bag	DAFT-0501-01 thru -15	15 liter COTS Mylar bags with tubing fittings.		DAFT Dust Holder	DAFT-0516-01 thru -15	Each consists of two self sealing QD’s that encapsulate the ARD		P-Track Alcohol Wick -02	DAFT-0601-2	Same as -01		P-Track -02	DAFT-0102	An unmodified COTS unit.
+Launched on ULF1.1		Dust Trak	DAFT-0201	Another COTS TSI device, giving readings based on Mie scattering. Launched on 16P,
+Dust Trak Batteries	DAFT-0709	4 - C		
+Sessions Table 
+Session Name	FO #s	HW #	Actual Day	Parameters/Samples		D1	001, 004, 005	DAFT-0201, DAFT-0101	GMT 54, 2005	Sampled air near Express rack 4		D2	001, 004, 005	DAFT-0201, DAFT-0101	GMT 63, 2005	Sampled separated Velcro and the air near Port rack 6 and in Node 1		D3	001	DAFT-0201, -0101, -0301, -0401, 0501-01, 0516-01	GMT 229, 2006	Test aborted due to damage to DAFT-0401		D4	N/A	none	GMT 230, 2006	Testing deferred due to anomaly found in D3		D5	001, 002, 003, 004, 005	DAFT-0201, -0101, -0301, -0401, 0501-01, 0516-01, Grey Tape		Sample Bags 1,2,& 3		
+	DAFT 1 & 2, Session 1, GMT 54, 2005
+The first test point for DAFT was performed on February 22, 2005 during Increment 10. The hardware was set up per the procedure (nominal) in front of EXPRESS Rack 4. Leroy Chiao inserted the batteries to each device, activated them, and performed the zero check. No anomalies were noted (i.e.; warnings, beeping, unreasonable readings, blocked tubing, etc.). The P-Trak was operated for approximately 12 minutes, and continued taking readings for the entire time. Near Real Time (NRT) video was available for most of the test, including set up, and the run time could be approximately synchronized with GMT through its use.
+The Payload Operations Director (POD) allowed the call up of a request, and Leroy was asked to relay readings from the P-Trak verbally, which he did. Those readings were low (2 – 5 pt/cc).
+The data for that test point can be seen in Section III C. Figures 1 and 2. A review of that data shows that the readings on both devices were very low for the entire test time, but that upon initial startup, the addition and removal of the HEPA filter (zero check) is clearly indicated in the P-Trak data, and there appears to be some residual dust in the sampling tube that is drawn out during the test point. For the remainder of the point, some small variations can be observed.  The DustTrak also gave particularly low readings. Overall, the readings from these instruments are almost an order of magnitude below those that would normally be seen in a typical laboratory environment ( ~ 4,000 – 6,000 pt/cc for P-Trak), but were not totally unexpected, due to the presence of a HEPA filter on the ISS air handling system. 
+DAFT 1 & 2, Session 2, GMT 63, 2005
+On March 4, 2005, DAFT was given its second test opportunity and conducted three additional test points. The DAFT ground team had made prior arrangements to revise the test procedure to include alternate techniques and locations in an attempt to realize higher readings on both of the devices. Leroy was also asked to signal the ground team when he turned on the devices to allow more precise time synchronization between the devices’ internal clocks and GMT. (Note: although the units both have internal clocks powered by a coin battery, these clocks drift over time).
+Near Real Time (NRT) video was again provided, with a window that extended for approximately 25 minutes; enough to capture all but the last few minutes of test point #4. Leroy gave a ‘thumbs up’ when he turned on each device at the beginning of this session, and through PAYCOM there were some real time communications regarding the activities during the test points.
+For test point #2 Leroy was asked to mate and demate Velcro in front of the intake for the tubing that supplies samples to both of the devices. That data is provided in Section III C. Figures 3 and 4.Test points #3 and #4 were taken in Lab 1, adjacent to Port 6 and in the US Node 1, mid-cabin, respectively.
+
+DAFT-3, GMT 229, 2006
+The first test point for DAFT-3 and -4 was scheduled to be performed on August 18, 2006 (GMT 229), during Increment 13. DAFT required NRT Video. During the hardware set up procedure in front of EXPRESS Rack 5, while unpacking the experiment equipment, Jeff Williams held each item in front of the camera as he unpacked it. When he held up the DAFT Fill Assembly, the ground team noticed immediately that the HEPA filter that supports the pressure relief valves that protect the Sample Bag from being over filled, was missing.  The POD was notified and requested to ask Jeff to return the Fill Assembly into the field of view, which he did, confirming the observation. Jeff noted that the HEPA Filter Subassembly was still within the foam enclosure. He then held up that enclosure, and noted that it was permanently deformed. The DAFT Fill Assembly is a series of linear tubing connections with ‘appendages’ connected to it by tees. The foam that encased it (minicell) is approximately three times longer than it is wide, and it is about 2 inches thick. From the video, it was clear that the foam was deformed from flat by about one inch along the shorter axis, in line with the thickness. The foam is a ‘donut’ like cutout, with no strength in the direction of the deformation.
+At that point, the nominal test plan was aborted. Jeff was asked to restow the Fill Assembly, and to revert to the procedure that was used for DAFT-1 &-2, taking a cabin air sample, which he did. Later, when he attempted to download the data from the devices, another anomaly occurred. When he had attached the P-Trak and attempted the data transfer, the message: “Error Communicating” popped up. The transfer was attempted one more time with the P-Trak and also once with the DustTrak. Backing up in the procedure and attempting to select a com port revealed that the EXPRESS Laptop being used did not have a “Com Port 1” within its list of available choices, which was a problem, since the DAFT Software was configured to use that port.
+DAFT-3, GMT 230, 2006
+As a result of the discovery of the broken part on the previous day, a special Safety telecom was convened to determine if the experiment could be performed, and if so, what level of repair or modification would be required to provide the necessary protection for the crew. That telecom involved members of the PSRP, the ISS Cadre, DAFT Project Management and Safety, POIC Safety, the Crew Office and MER Safety.  Although crew operations were scheduled for this time, none were conducted due to the ongoing anomaly discussion.
+The DAFT engineering team provided several options for repair. They are briefly described as follows:
+Option 1: Cover the opening to the tubing system with a finger tip, or alternately, with gray tape, and perform the experiment nominally.
+Option 2: Remove the fitting that supports the Gage subassembly, remove the high pressure relief valve from that subassembly and replace it in that location; and use the remaining fitting to reinstall the low pressure relief valves, without the HEPA filter.
+Option 3: Disassemble the DAFT Impactor and remove the HEPA filter. Use that HEPA filter to replace the broken one on the Fill Assembly and scavenge the parts from the Impactor that are necessary to deliver the sample to the devices.
+After a significant discussion regarding the implications and ramifications of each potential fix, it was determined that Option 1, using gray tape to cover the opening, would be the most desirable and did not pose an undue Safety risk to the crew. 
+The engineering team worked with the designated Crew Procedures Engineer (Wayne Wright) to develop the procedures to support that activity, and it was approved for use.
+Also, the issue regarding the labeling of the com ports on the ELC was worked with the EXPRESS Software group. This issue was resolved when the EXPRESS group renamed the ports to be in compliance with the needs of the DAFT software.
+An ISS Payload Anomaly Report (PSR) number (DAFT-HW-01) was issued to describe, record and document the resolution of the broken DAFT Fill Assembly.
+DAFT-3, Session 1, GMT 233, 2006
+Jeff accomplished the repair without incident and proceeded to perform the nominal test procedures. Since the DAFT ground team realized that this might be the only opportunity to perform the experiment and in order to insure that the test points would have the maximum experimental value, POD was asked to direct PAYCOM to ask Jeff to voice down the real-time readings from the P-Trak and the DustTrak during the sampling period. This would allow the team to know immediately if the concentration of the aerosol within the Sample Bags was appropriate to keep both of the instruments within range. It was extremely fortunate that that opportunity was provided to the Science and Engineering team. Near Real Time Video was also made available whenever there was Ku Band coverage.
+The ground team requested that Alcohol Wick S/N 02 be used, to insure that there would be enough alcohol to run all of the test points. Jeff was unable to open the container that it was in. The reason for that is unknown. He was directed to revert to using Alcohol Wick S/N 01.
+The 2.5 micron Impactor was installed on the DustTrak from the Accessories kit.
+Jeff noted during set up that he could not make the DustTrak go into Log Mode 2. Using voice up messaging with POD and PAYCOM, the ground team asked Jeff to make a second attempt, which he did, but that did not help. He was instructed to ignore the problem and move forward. 
+The number of requested toggles of the fill valve (per the Execution Notes), once the DAFT Dust Holder was installed onto the Fill Assembly, was four.
+Both of the instrument’s count values went to zero when the HEPA filter was installed on the DAFT Impactor inlet, which is nominal.
+Once the devices were attached, while performing DAFT Sample Extract, Jeff gave a reading from each instrument at 30 second intervals for the entire time that sampling was occurring. The data was recorded manually by the DAFT ground team. That data has been transcribed to an Excel file and is included in Appendix C, labeled as ‘Bag  #1’.
+The operations proceeded nominally from this point forward, although the P-Trak reportedly started beeping sometime before Bag #2 was extracted. It is unknown if this was an actual low alcohol warning, or merely an artifact of drawing the Sample Low enough to cause a vacuum within the P-Trak.
+The HEPA filter was installed on the inlet of the DAFT Impactor before each test point and the devices were re-zeroed. Six toggles were used to introduce dust into Sample Bag #2. Eight toggles were used for Sample Bag #3. Jeff continued to provide call downs of the instrument readings every 30 seconds for all of the test points, and they were recorded in a similar fashion. The units were not turned off in between test points, and no removal or reinstallation of the P-Trak Alcohol Wick was performed until the end of the session. All of the used Sample Bags and Dust Holders were placed in the trash at the end of the test period. The DAFT hardware was all restowed at the end of the testing, since the scheduled Data Download would not be performed for several hours.
+When Jeff attached the P-Trak to the ELC to download the data, it was clear that the fix implemented by the EXPRESS team had worked, the device recognized the Com Port, and reported that there were four test points ready for downloading. This did not seem to be right, since it was the opinion of the ground team that the four test points from the previous testing (last year) should still have been stored, and the test numbers should have incremented starting at number 5. The devices were both queried for test points 5, 6 and 7, and no data was found. The DATA Download procedure was then performed nominally, transferring test points 1 – 4 and those four files were placed on the ELC for downlink as a part of their housekeeping data.
+Unfortunately, the only data received electronically once it was transferred from EXPRESS to the GRC TSC was the data obtained from the DAFT-1 and -2 over a year ago.
+
+III.	Results
+
+A.	List of Pre-, In-, Postflight Anomalies
+The in flight anomalies are listed below and are detailed in the Sessions section.
+DAFT-3, Session 1, GMT 229, 2006 
+Damage to fill assembly observed
+Error Communicating with P-Trak
+DAFT-3, Session 1, GMT 233, 2006
+	Failure to open Alcohol Wick S/N 02
+	Failure of DustTrak to enter into Log Mode 2
+
+Completeness/Quality of Data
+
+The data taken from DAFT 1 and 2 can be seen in Section III C. Figures 1 through 4. 
+Test point #1 data (Figures 1 and 2) shows that  the overall particulate levels in the US lab atmosphere are very low, about a factor of ten leaner than normal US office conditions. Test point #2 data (Figures 3 and 4) shows that the P-Trak responded to the Velcro dust quite well, with several readings above the 30,000 pt/cc mark (P-Trak has a maximum count of 500,000 pt/cc). Although there is no way to exactly correlate between the Velcro demates and the increases in the P-Trak readings, the observations that the unit’s readings increased and decreased in a logical fashion, were within the unit’s prescribed range and there were no observed anomalies serve to indicate that the unit was functioning normally. DustTrak also responded well to the Velcro dust, but did not reach readings above 10% of its overall capability.
+Test points #3 and #4 were not appreciably different from Test point #1 for either device. 
+Figure 6 contains a chart developed from the ground testing that was performed in May of 2003, using the crew training hardware in a flight like manner. It can be seen from that graph that although there is a wide variation in the amount of aerosol that is released from the various samples, the relationship between the DustTrak and P-Trak readings correlates very closely over a large number of test runs.  Demonstrating that the overall composition of the various aerosols created on the ground, regardless of concentration, is very similar with regard to the relationship between the number and the sizes of the particles entrained. Overall, in the 1-g testing scenario, the particulate levels drop together with time, consistent with gravitational rainout of the particles in the sample bag.
+A comparison between this chart and the one taken from the flight data (Figure 7) as voiced down by Jeff and in Figure 8 (as eventually downloaded from the devices when they were returned to earth), shows that the data acquired on orbit falls outside of this ground based relationship. The data points are clustered to the left of the line (area), in a region where the count/mass ratio is lower than what was determined from ground testing. This indicates then, that the mass of the average particle counted on orbit is higher than that determined on Earth. This observation makes sense since, on-orbit, without gravity to drive settling, more of the larger particles from the dust sample should remain entrained.
+It should be noted that, although the DAFT Impactor is designed to filter out the larger particles, it is only about 50% efficient; which implies that it is allowing a considerable number of larger particles to be drawn into the devices. 
+If the data collected on orbit had been to the lower right of the ground based testing line on the graph in Appendix D, it would have meant that more smaller particles would have been present; which is counter intuitive and would have indicated that the P-Trak may have been over counting the particles, one of the postulated failure modes.
+The analysis of the average particulate size and mass shown on the spreadsheet in Figure 5 (provided by Zengguang Yuan) shows a good uniformity between the particulates sampled from the various bags. The average mass (assuming a material density of water) is 2.5 E-12 grams, with a range from 2 – 3 E-12. The calculated average diameter is 1.65 micron, ranging from 1.56 – 1.7 micron.
+The sample material, Arizona Road Dust (Fine) is a standardized, homogenous material; but since it contains a wide distribution of sizes, it is a mixture. The amount of the material that is enclosed in each Dust Holder is small (0.25 gram). From ground testing, it is estimated that only about 10% of the material contained within the Dust Holder is introduced into the aerosol, due to the irregular interior surfaces within it, the surface adhesion of the dust and other factors. Therefore, the net amount of sample delivered to the Sample Bags is about 25 milligrams. Since this amount is so small and is coming from a mixture, some variation in the average particle size between samples is expected.
+
+C.	Tables, Graphs, Figures Index
+EMBED Excel.Chart.8 \s
+Figure 1: DAFT P-Trak data from Test Point #1
+EMBED Excel.Chart.8 \s
+Figure 2: DAFT DustTrak data from Test Point #1
+EMBED Excel.Chart.8 \s
+Figure 3: DAFT P-Trak data from Test Point #2
+EMBED Excel.Chart.8 \s
+Figure 4: DAFT DustTrak data from Test Point #2
+EMBED Excel.Sheet.8
+Figure 5: Tabular data from DAFT-3 and -4
+Figure 6: DAFT Ground Test data
+Figure 7: Graphed data voiced down from DAFT-3 and -4
+Figure 8: Graphed data from DAFT-3 and -4 downloaded from the instruments after they were returned
+
+
+D. Photographs
+On Orbit Photgraphs
+
+Increment 10:
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+P-Trak, Alcohol Wick (w/Container) and Batteries
+DustTrak and Batteries
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+DAFT Accessories Kit Items
+SHAPE  \* MERGEFORMAT
+SHAPE  \* MERGEFORMAT
+DAFT Hoses
+SHAPE  \* MERGEFORMAT
+DAFT Fill Assembly
+SHAPE  \* MERGEFORMAT
+DAFT Impactor
+
+
+E. Status of Data Analysis
+
+As detailed in the session log above, the data analysis is complete. 
+
+F.  Final Investigation results
+
+Ideally, DAFT would have collected electronic data from all of the planned 15 test points to establish a large body of consistent, repeated data. Several factors contributed to the decision to not pursue additional test points. They were:
+Crew Time: Although DAFT was planned for Increment 13, there was not enough crew time available to support all of the desired Payload activities and the prospects for actually performing the experiment at all were extremely uncertain. Fortunately for DAFT, ALTEA had some problems with their hardware and a small block of time came open. DAFT was allowed the opportunity to schedule 3 test points, with very little chance for another session.
+Isopropyl Alcohol: As mentioned in the Results section, Jeff Williams was unable to open the DAFT Alcohol Wick container -02. This limited the amount of alcohol available to support the operation of the P-Trak. Leroy Chiao used this alcohol wick when he performed DAFT-1 and -2 and both of those units were loaded with alcohol over 3 years ago, so the amount that is remaining is highly questionable. 
+Sample Build Up: Testing in the lab has shown that under some circumstances, especially when a significant amount of the larger ARD particles is sent to the devices, a buildup of particles can occur within the optics chamber of the P-Trak. Clearly, the data shows that the sample aerosol contained a greater proportion of larger particles than is experienced on Earth. It also shows that as the run time on the P-Trak is increasing, especially during Bag #3, the count/mass ratio is declining. Although it is not certain that this build up is occurring, the symptoms of that condition are consistent with the data.
+The lack of the electronic data collection initially limited the ability of the project team to perform a more detailed analysis of the data.  However when the Ptrak and Dusttrak were returned, the data sets were intact in their memory.  The stored data reproduced the read downs very closely giving confidence to the earlier conclusions.
+Based on the limited availability of the crew, it did not seem reasonable to think that time and procedures could be made available for Jeff or the follow on Increment 14 crew to troubleshoot the devices.
+That being said, DAFT was conceived and built as a Risk Mitigation experiment, not necessarily a Science experiment. It was delivered only 6 months after being proposed and accepted, and it was understood that in some respects, the sample material (the ARD, a poly disperse particulate) was less than ideal. 
+(Note: For those unfamiliar with the experiment, ideally, a mono disperse aerosol with particulates about 0.7 microns in size would have been created in a density of about 50,000 pt/cc in order to provide a more quantifiable relationship between the readings from the DustTrak and P-Trak. Unfortunately, an aerosol of this type is difficult to manufacture, and the project did not have time or resources to attempt such a development.)
+The data shows that the devices were able to operate in microgravity for an extended period of time with no apparent failure. One of the major concerns was that the P-Trak would accumulate alcohol in the optics chamber and obscure them, causing the unit to either read ‘0’ or display and error code. This did not happen. The units gave readings from zero well up into the middle of their operational ranges, and then back; in short, they performed as expected.
+DAFT-1 and -2 showed that the units were ‘apparently working’ and that the air aboard the ISS is almost unbelievably clean. The readings from the devices during that part of the overall experiment though, never crossed the 20% of the operational range threshold, leaving the results somewhat suspect.
+This latest experimental run, however, did. The project team feels that the optimal reading range for the P-Trak is from 30,000 – 100,000 pt/cc (although the published range goes up to 500,000 pt/cc) and for the DustTrak; 20 – 80 mg/m3. Clearly, the latest data was within this range.
+The count/mass ratio between the devices as measured on orbit, although well outside of the value determined on Earth, is both explainable and credible; and to the best of the team’s ability to analyze the data, seems very consistent.
+The problems with the equipment and the data have been discussed at some length, and although they do leave something to be desired, it does appear that there is enough consistency to determine that the readings recorded are believable and representative of the aerosol created, implying that the units both functioned nominally.
+Due to the constraints listed above, DAFT-4, using the ‘unmodified’ P-Trak, was not performed. Since the flight hardware for SAME has been manufactured to the same specifications as the unit that was tested (P-Trak-01), this is not considered to be a factor. 
+The Science team has examined the data and compared the results against the empirical data accumulated for polydisperse aerosols; and determined that the results do have a good basis for acceptance within the bounds of that analysis.
+For these reasons, the SAME (DAFT) project team feels that the DAFT experiment has been a complete success, and that it has confidence that the P-Traks as designed and manufactured for SAME will perform as accurately and effectively on-orbit as they have in the labs.
+
+
+G.	Conclusion
+The DAFT experiment adequately demonstrated the reliability of the modified Ptrak as operated in low-gravity. This retired a significant risk that was being carried by the SAME project.  It should be added at this point that SAME flew successfully in Increment 15 with flawless operation of the PTraks over the entire test matrix.
+
+Earth Benefits / Spin-off Applications 
+
+There are no tangible Earth benefits from this experiment.
+
+IV Bibliography
+
+Detection of Smoke from Microgravity Fires, David Urban, DeVon Griffin, Gary Ruff, Thomas Cleary, Jiann Yang, George Mulholland , Zeng-guang Yuan, 2005 International Conference on Environmental Systems, Rome Italy, Paper # 2005-01-2930 July 2005, SAE Transactions, pp 375-384.
+
+Particle and Smoke Detection on ISS for Next Generation Smoke Detectors, David Urban, Gary Ruff, William Sheredy, Greg Funk, International Space Development Conference 2007, Dallas, TX May 25, 2007
+ßPEÀÞî
+E
+“	ôÉÕáñÑfSsùÅ%Tè
+Ôi?uÆÈé u
+ÛÓÍÃÕ•åæäîìèæ KÖæ•
+FI` hÝàìÁ
+ïLìUèF qäð
+ÓSýy¹i >EÕuZFâC
+Ôæa1a þñ
+e
+iwi©ñhËiÌJa
+NÇJÊãÛzkñÛs
+}
+2ÒZSfLJÒ å+
+FìC ÑÙÕÖ
+åWÿù	ßyëÍWÚZ«
+qTÙ ùcl¼wi
+ëSÄf ¸Éúñ
+Õiº¡ÞµÝ
+üîIÄ
+Jd
+üÜøÌ
+¾ýOÙÖÇ*ëðLÈûK
+Ðµ
+HkÖ.îßAsþÁ£û ñÁÓ
+ýìáÇÐG DR
+}CYêì ÿàê
+ÔÄ ULVQÉ$7ã
+äâÌÔøPÿäÈ ¦äRzçô`
+ßøÕ	ñKFbÊ
+ê
+&EvzzÉÞàµõ
+whU »llg
+Â	ÚÃcÝêìX
+fê
+ÓKLeeÙX
+jÎyMu øù
+KÇÔxZiñÀÜÔÔÆ
+Ê]`ÒÚÅ
+è	wÈÎMiëjÃ
+¦ZWvÆIí GÄU
+Ëèú ´eëaC¾ÇÖÛ
+ñÄä ÷çðP÷ØhßðHÏØxÿø
+ÿGYÈÿî	ù5¿ÿôýòÉjÒ
+áÓÐxðü=' AÔs
+©ËphfT f
+ð	srâÐrØ
+hEEéqbhÈ±õõqYQ	2
+yfÆùgÄ>	zìäílåhÃH
+btÑ~Báp
+rsWg
+ùéO:	ºéìØÚÓJ
+Ä
+ÅòÄþÄXmUm°Ä
+RWîÍ! DËX
+ÆßÀaà]QÏ µ
+líhæîe	OÒÞÕ
+Ì	YjÈXiÊêË
+ÿ QÂRLðÙÛ Z*ÓB
+IÉÚãH
+Øê¦ÚÍ
+ç	ñpX¬)ãÃCädÈApf
+c
+âîãáéçÅv
+ìcåïaæî çé
+N|fbrfBym	K
+LSGFHÙÔù|
+ùE
+õÅÕMÕtG	tÔ
+ÆLP WrRtiIngGcK3ºy
+ÕÛÅÛÍÂÖÒÀÔð¹ÞK}3C	WGs
+åµÎÔDßT	X"W
+ÉY^áQëÁd~QLJz µG4ÂA
+otpsàêËæ ®©HÄ
+$bVxTÊBÈç êÇD
+ÃÂèCú {
+@ ýsrwqßìáµm“·Ïö
+le
+NAZîÿ
+ãÝ úFÕgéU¹øç
+Þÿäý÷ ØÀ
+µ .2BèíãhaÉwó
+KýR¨JVö 4XÀ
+ÌéìþÖ be
+IÙ~
+TåQóìÑò
+óÈa —DIÕ
+ÀäB]ÎLUÆfkñtyêxq" zÔ[ÁL4
+q OHÊ4âÓó
+Wàç/âB|xîð ü
+~Hp\TvEImW[ÿØ Rb
+hÖíO	ÝtD
+ÊÐÑÂVëlåádïãNJé¤Uyù Ïc
+@äÁÞþÜäÄñÞîùù	à\Þ
+ïÊÖxÿèhï0Ù ½
+ÒÓÅÔÉ
+CgÄJe
+OaûUáøäXVV:AÜúúúÍ
+á´ntj
+DHwnc©a oëê
+@ºù	çVÔðSíÜÔ
+R óOÿôOþôOE
+ÔxHÑÿ LBïÐÍ
+JÑÏôc	T Êý
+¿ ãb£ãéÙÎÞþêñÉÎîÞÚîîÆ
+ÅÒðùâÐÉü µ
+äýEÛç öà`kðâ~
+5ëgÆo jÒê
+2ÈwEÈUáÆ	DÅ
+bbI 	YEô
+ß]©ïinXÓµûäþM	wW
+)ÆJøîµ m
+äVCÂN±ª ]ÍgÂÅ
+IØÈ òIUV
+µD
+,fòCê ÓNÄ
+¬é_µnxxí SËÜ
+UEáf% cuyhà
+SOÙÿ, ÿí¥Nñ
+\J sòàhá
+¢;ÇãÔÊLÿä X
+ö*
+ÕQ“æâíæÎòtpwrñv
+EÏ.O äãÉsuð¶áò
+í/fÙxÙ Ö
+ÜýÃ	ÿfau
+zeÔI 0òèüxyceb~ÊTd
+ÝÃÃÂËËJàï&	ôE
+éïîí Ñ
+ÅÁ	LbÙ
+ÏÓÙÕIj“ËóïEÈO
+k(Ê ù{ãéOmÍómßdcg
+ÒSÃãb0Ì éeïf
+ª	mçÆqÕÌJïÞ%
+ù	óý½íýíUeoKî
+C	xtvru
+Sr EÓSyT>
+á	îQI%íýÍcê
+“X  ÌÎAs
+LMOâöäéîÌ	övðuµÊ
+;ÙÌh¨Ëqrxicú ÌßÖÅò
+Dk	pòHúä
+!æìjåæaÃÑÅÍÚÕ]Æ	Æ
+êÇgFF&	Ûû[ëÛkiSî
+æ'ÍuØW E
+JÜØÝD	VÛ
+AoNMKUECYZn
+l!DC`å
+ÃQâ mVRÊa
+J ³zãR’CãââÒÒ
+ótrô‘bE A¸qxë
+ÜÛÞÁúüÒEFb¡ Q]WDZRè Q
+Ôãæ%§M—lÿèÔÀØô áÛøä
+KäUõîÑÀ
+ß
+ÇGëT Zww
+¬h¶ ÕëmÅóuÓ
+ÿ 	ÐèéãäêÎ
+ÝhÆóDÎÃÌA
+L
+ÊPä¡ÇsE ÕLä
+jWGÛèð FÇ
+ÎØ ¨ªÑäV
+FYa6xÆ ãïÏó
+EÇsfÙqL,l
+ånBw
+ï g£ìHiÿ
+x–BnÿÌ4n Lj
+ðãÎâÊD~QZNAbAI*z” ½ÖØÝê
+lAfzêÆÚÊáþîÄØHK}
+d
+F	ÛÔÔBÇÖÉ
+rLnqZF^rIU>
+ËáQA
+ìFÅÄ OåêðÔÍñ
+Æ“þzÛ$ñÍ âÛî
+©ïÅÍÙõýe Åã
+ÔõmµeõEU
+E]C
+×ªódFÊfÑÂÒ à¼
+û-Ü ÿäOþä
+HUmÝ5 y
+ttDÊªfïCÓ .GØÁØB
+ÜÒßKîý	b
+îµx
+ ÅRTo
+ØèHÜQWgSMu	h
+XÛQÉT	JVÍÝ
+öêïÁÜö»FÅDfæ¤ £q
+wÄº&Öc çðùö
+MÌ% utõñ
+C ÝÒÙÚÁÕÞÄÒ
+ÝßìûÚxßNSýÝ ÑÜào
+bvüÁØPm}UJZbzf
+ª:P
+oîÎ Äºµ½
+é	ÈüâÜØÄ
+“ËK« myyyrr
+åÕU4X ÄBÓíÄ
+kGPgkgúðx	R[
+ìæåìáï
+zié<Ê
+HDJÁ!²üÈý Ý
+A ¶ÈCÚql
+QÇ° EanrvFth
+K#hãFeÿüâ JüÑ
+Ø½pû{zQiLT f7Ózc
+p éüuLpMK
+µÅcÝ
+bzÉ/éâf
+Ç /cwgs
+õP	wÀïbD
+Æ
+nsqíHhQ*L
+Èä ºÓ×ÓÛÞÚ
+üøohêÜZ	à
+ÅZºZLnø	Ðí
+o ÇÚÇÏÒËÇÞÇ
+ÚldlP	ñâ
+nQñÖþ! ÑÆÙÆÐÜÐÂÞÂÊÑÆ
+tHÇD	ÁÉôôØÉ:
+xxàø±CÃÃ	FG
+ºØØ(ÉåHÏ	ÅE
+oMèrÿ" õÒ
+ÖfæV ÑÂÒf
+HÏÑùññÅ	Ò
+ª
+Îýèx{csqo
+3µ	ÖûÙÖÉÎàD
+WÖ—EÆG xÓÔ
+õëÒkRqâu0 ÑÀB
+d ¿ÔËÕÆÃÃÙÇ
+µåØ
+câMP
+ìvXé ë@êZ
+WÖdtõVÎÌõOÏö¡	ÍÌLßôÜ
+ÅHuz ª!acØ
+äåãN
+ééí
+ÎÂÔ’ éhçdkå`enkgëÀ
+uÍmyï
+jëV
+T—ZLÎÅã
+ªçÚë
+ýÒÊ
+ÃhÑZ
+ÿîoIÛfÖæ U
+Ë
+ÍñÚÀÜPõXoMuaRRLpL
+÷fcCåÐ`×üÜøÄø ÒÕ
+gØðð Ï
+ö
+DðÜüeDXP[KCccMII>
+$ÖÐÖÌÐÑÒÈÉ
+Ï
+Ãéìö:R NÐq
+ÒÏÛNøF G
+COSqMuA[kUs]uGsCs]mSm
+Ìr
+øF`éêj
+IÀÒFÃÑÅ  Ø:$ÜÞÆEÛÒQC×ô
+ÈlïªÛÚ]DJ, Ø
+ëêë° ÐÔÜ
+XØy²ù ÔÂÝKÕÌ
+æðxÞyW¯ ·ðøPÐHå]
+Rb ÈÐ(ìDê
+qÛ RÅ7ÚÚÛXX
+à3tÈâªÒÂ
+æÖKrË
+IÔÊ
+CêCÊ
+lÝºEùTèÐKIããÓÝ;Çk	»
+d ¿uvzHUYrD
+èèpmow	Ôíîo
+Ùðane ”Z
+ÍOjÈÐ$Ð ÄÍÒAF¡
+Êa ÞîÏßÍsw(ñF
+ÒÅÅ	Â<ÙÑÃCéæ
+9< ëËÁþÊÊòÄÉ
+CwúîÆvÖÆÕÜ	@
+=–DËV iåpÛÜÖÀÖNÛÂÒ
+ÌÎúÒäèî
+LH¤ïp
+àÓÔÖø¶Þ- ðâÍs
+¡ æMvAgÅ
+Î:øåF,S QÏÖPÛJOÍ
+f*Ú
+GFzÚðLLlu
+ë	ÊÁìÆlEc
+ÿHX
+hqså/üß
+GÎÛiÌÍ!Dá ðÀäÔÔ
+¥zûVÿ6Ðx-èrbSäBbXL %Ë
+VPÌ	pBGA
+ú
+¨ÇKòêoÞûÇ
+kªÊ
+`òQVVLâÊÁ
+LôIM
+NO	Å•EÅdDNf
+Ab CHÐÉ5d
+OCS=dwäªØá B&Åú'Dû&FÚÄ
+—ëîáÒÖîâòÚÔþÑÚñÙ–è	]Òé
+ÔCÊ
+ sKòÑ
+ii
+ªÍÈ"ssgS
+ÉêúÂØÄ 7wû
+æh}OwZÑæ äÔ
+ÃÌÍÍÊÎÎ ©#z
+ëê
+kjòsó
+Îð
+rcÁéìi
+Âì
+BrâUÖ
+VÖv ‘-FÑÕÊNmGÖÔÁ
+OLYMPUS DIGITAL CAMERA
+OLYMPUS OPTICAL CO.,LTD
+[pictureInfo] Resolution=2 [Camera Info] Type=SR955
+OLYMPUS DIGITAL CAMERA
+ì=+HZÀÅêÜcùPOÌ	n
+áy úúÓIÜ
+£ðªiXZ e
+éøv¡Wß8ÁÍCNjÈ<Å òq
+sYØaÁõ	ØÑÐò
+ÁÁôÅ
+ëíÅi
+»
+lñÏOOåMdÁÈ
+sß þ”hKÜ6õÏ
+JöeØi‘Ïv	ÜsJK
+ZâüÍÏ#éHW
+ÇoîÓåVº
+µQÏï·nÁôúPìõd5 ã
+àl ãiëÆqIÁì
+Ý¥Ï ç qÓ
+zv
+JCnÆv
+ÉÞUÏ
+Xtú
+Á>ÛFhä¯ ñÏÿ
+pàîç ýåÏ
+n	ÛúÑÌÖãK
+AééLXRF'a	ÜóW
+uÅd—w õLnÑÇ
+îyªïÁç öªq¸‘
+µ	uccIÎA
+N”mBpwqÛn	ãQd
+OSIï`Z» ûJn
+u5V ÒüJÚT
+ÓnÇu øV(ícy
+gqãÔsWêPõ}È	ÏÐ
+fAÊ
+OjÊöz
+ÆÚ
+áÐäõÏ	Öº
+ö FÜç#vz
+Æ?ÄSã HÃ
+JtçëNñjè• ª
+qÇJ{ lPC
+ÒÒO
+ÚEfñ
+øçÅ	SvHî
+çNÎ	ÞÈþt7aGM
+jö
+ndêÚÒ³Íko
+Ýöc~É ÀÉU
+Eü¹«iJÄ6Ñ xváÝÉëÛùS\Æy
+' dvôúÓkQz
+î z
+MÙÈÚ@éÓ¥båvU
+ÔÎtå
+YÐCáû
+òîcfÀÎ8qèGùÍ
+ô
+k
+ÚMèPÂÙ
+uÏøÔÖñ²0 lÿ
+'n	HöíÇåQÙFÁÊ
+ÎkHÙ òdr
+øãñKû
+ÎM
+ü%[KxõÝr òÈs
+rÊ	aÇni²xÊÕ
+ÇJnÝÇ± pzÓw
+øGCôÇzRm­
+vGK
+iMXæþÃs
+Àò‘
+Ö¤ïOYwc½ô ñ
+RM­Á \oÏAùUØ
+ÎîNO ©iZèJÌ
+ÇÜþtÔt	ä
+Õ´í ÞÖfTÖÛe
+Äp `îlúãùÓË²ã
+öØld— ñéèju#
+wúSwKRú	ú>p
+ýê¥ÌíÊI dln|
+4ùSØIè b
+I6õ iÒcÈ	paØ
+fÄàp	PAæ
+Ã ^HÇøÔúº<þ
+îÇ'§ßÝxgT ä
+hù ñèpjeyy
+éÐýiíÃårI?LÖrRß Û×A
+OÆÍyouh4ÈÉò-Ææ
+x
+ÜãÞºû
+vÇMMá
+ªâµØö
+CÇ
+ÊÀrsß?á_ ýéÛk
+WÖM Ëg ã
+Ë1fSÎz
+PºVEÉÙ´GryQ
+EY& m¹çnOÞë
+ØÈã ÷5MGfCÐwÍ
+ÂH9çµA b
+È ôQQÖìzßAH
+¹ cëÍiÍtSÑ
+LÔsG ÕÄeWWûÛ¿
+ävoçNövhOm	n
+µfâÖ¬wê fà
+_äiÈùSÀ c
+ã åAù½sNiC¯A
+äEKÇ9ÎáÀ Ö¾ëÓvE
+ô*pEJI ÜVÔFâwn
+ónÎIúíâ k
+OLYMPUS DIGITAL CAMERA
+OLYMPUS OPTICAL CO.,LTD
+[pictureInfo] Resolution=2 [Camera Info] Type=SR955
+OLYMPUS DIGITAL CAMERA
+cfRà ÎÜóÔÿ
+ì¬RW
+ß(V sÇËýiKd
+ÆirsjVãN	Ýäã
+rØ	êOÍÏñSXc
+z’GÐRµåw îú
+NÜN@ zóüª9ùc`cÖvSÇSÆAäU
+ÉÎOjxÏ<cpÁõÅJSr³Øiè.y ªã
+ÎâxÉâ—Ë 
+áy
+îñßüiÀm “À<
+*TÚÙXmh ÜpJcÜÐ3ÎW<ñÏ
+S´äç zÒò
+lµï	SîÙªævÜ
+I àwÀ¨øl
+ä‘ÐsAÚÇ ªãý
+Ê£ÚIBÈw|ÇA øzÛUÓ
+À,TqéÇãYÅY	K
+Õ>VìÁ5qwc ã
+wb– uÉþt
+KdgpàóJ	Ê
+MÀóU+ËtTm`V ã
+ã ÆqKÞäm
+BMÜSó1 ¹osÒ
+åÊdNNâ
+Z
+E gh9àzÒ
+ÒÍl
+¡ÀeNÐrN
+pzñÓÞ¶µÕË²î ëÄ
+ÉÜi
+ÉÏÍÓ=qÒ
+Jã	hð>SÆHëI
+áí
+ÁSMÕï
+ÈñîÎ	ltÿ
+B$ðüóec
+ý	mÝGµjÿ
+zñMÛÏ ’z
+ÙÄÛhAb
+AÉ
+ÍÔz çwcÜP©·åÁËzÒæKR
+ÉëÐñJRÐ9PÐ_	iÎÓÜq
+vÈ üÝ+NICá¹
+qÅHÚÄ ácØ£ Í
+Þ2	RÀdTrjHN
+Dä
+ìÜõPiçDVá®1ôCSì§mF
+RØ zcúÓ”o
+ýjÁIÉé 9tFQñö°òfMFä
+•ÇsÍbäõÐjìf	r
+øûÕr OBÒ
+ØëSxÃâÜI6ÄÆ	Êàýy
+êÉVnÃ	oL
+gnÜÓ|Æ áÈ}ØÀ
+ÆFÚ>féøSC 8rÁ
+0éïíDbÑVV
+ØÛ
+Àã– dvÇOz
+¶ùûéô qJÑ–l
+OùÍ ïÁÇ~çÿ
+íëõªÒ 2Ü
+Änãh ç©¨Ûæä· àäc
+Å¿ýuËøËã	Äß
+ÛÅ  pÞ¼S
+üÕ
+NñôÉa
+r÷ØNÓºHÊuÚ;ÔrYa	r
+A#ùVJ
+îÃLÐðå
+ÓgÈÄu	åj
+²ºAÛrü ÕrÊöhE
+ö³9 åþcéRñR
+ýzní
+Øvö
+óH3ËýÖÏ ýj“ºÔ-dFÀI
+RÜKÌFÁ	Ðuâ
+HÈè
+bæÜtvBjWÑ
+ÛúT ùñÎ­"áû
+õ$coãOD Æ
+GÝ ñÉ_éLRNHç
+náw nùéHªF7
+íÚáùô c?JRU
+ÖÅy
+ÍÇÚf
+RüáHäñÔûQa qßpô§¤
+vpó ó>ðÀí
+ôïYñ	ûTÛÎ
+ÁìMZJORuÝ	n¨Ó
+ä
+ç¤bnImÞøç
+b
+IüsõíCz
+íÇ
+GpsOãvN
+üè½ãy mt
+Ã'cdgïg Q
+íÔVPy ä6
+ÓUNðÃ
+1ÉôúÐÓ
+UËT4 mÝwu
+qÏãYÙóm î9QZÜ
+ZN
+lRwÐS
+æb ýèÈïëÍ+îAË
+ÔqFö,G àqíëMÔ
+òrr	aëSïEÜj¢ê
+OLYMPUS DIGITAL CAMERA
+OLYMPUS OPTICAL CO.,LTD
+[pictureInfo] Resolution=1 [Camera Info] Type=SR955
+OLYMPUS DIGITAL CAMERA
+Í+ ØzòFG
+SÉõ dsêx¤ía
+@ÀÏµE äÕ
+Ç zSÔã9è}ñÍ
+Æç¦hlöÏ	ëGP
+ÔRz Òã”ä
+þ4Ä ãéJHç×µ
+ÎzôëN
+Î
+=iù cÆsÔçÞ
+êi ñÈ=èõ
+ÏQúÒg ñÖ
+OLYMPUS DIGITAL CAMERA
+OLYMPUS OPTICAL CO.,LTD
+[pictureInfo] Resolution=1 [Camera Info] Type=SR955
+OLYMPUS DIGITAL CAMERA
+pHýsM óÉÿ
+rHô C¹õÏãBúÔÜ
+i?7OéM rzÓëa
+ÕUnàDü}	Jaç
+úÓóD
+vÞä
+aÇùâ”c ç‘éÞ
+æ“îÀ	ÏøÒõèyª
+éëJ	LóØÐ
+Àh<wëØSX
+Àö
+isÁô=sMl ,r
+ãëHc	ÏøÓAõíE
+! ÔoÆxÅW
+Ïô btõúS
+Microsoft Office
+uçæËÞ
+õW
+Üq	ÂJàúoÄª
+vßüÆ»úÜNúQ­ Õ f3îëp
+ø	ýÌnç*ÃBycCÄ
+Áö1ôlÄ yêßê
+eEzÂf ª£AR
+úHÉRÕå “
+ßée
+yR¬atgJ
+ãOuÄMFÀFUå -
+µ	gàïîïÂõõÙª
+Kñ1á êTtõzL
+ÜCùïÃlâ½	hþñ
+0Õòr ãÚRÎl
+ÆúáèÓ	mþ
+f	ÉªïnëýxòQÞÊ
+hRUûQ
+fSô
+ÁL–òçTÄel|Ö; løOµáp
+Ü&OÊ VÚÖ
+hþÐm	Çû»gS$QÜÕïÔ
+tNc$ Nðg
+Âü MUôi	½Nl
+ñÝ÷ÿA TGà
+g YOlÁë9t
+klrÉ
+øÓµ
+ì‘nìp jIÜiÞD
+ÙÊqßïõú
+«GµÛZ
+òL|ôaÄ èwßìóSâ
+XVlð	ªQáö
+uXpnös
+a
+WJTøRõÔElGåë”
+Ö
+G nbÔªðXùÑ
+V‘Ur´ü kõgcðbk
+õë5OîND AÍ
+ÓZõÁVÏßnúH ô
+ÐÄßóâ	Aõ
+ë°õÖºÃÌç ËOá
+ðñÃßÐåió	Ù–q
+ê <AlÞHÝ
+Ó÷Á’û	ÛýsÕAºSÕÑÉ
+Microsoft Office
+B
+ÐXLOÜÈ
+GchÞBþµ êö
+þôoÖ	)þàÍ î
+4¶VREzîpb p
+Þ
+ÁBSDKx
+Ëµ¢ ÕÎuâµw
+su §EQÖUn
+Æ°ÒFuØèYáÌ0 ó
+!óKsèyñÈPd±XÒ[ÝüÕÇd
+z
+ÃDz btfZ°Å¯
+ÊÙcZôñë l¾û
+åõÓa`Ö ìÂ
+ùëðVÜ
+vÿ
+ÚÏëËTFL ò
+Fçaò	qmÂ
+ÔòÝ ÐÚg4
+Æksfÿ¥ð ìHg
+LÛJKwql DH’ëÐ
+ðdêä ÍçU!j{
+x¤ä
+QâAghyØ
+X mÜDyêf
+DÀ_Ã ÈÉIê
+ÑAPDÈHéa ºÑÑJ`5Ðô
+kËs XÐ¡
+nNWÅ àFæ _Ý
+DP¥«óï¬µhÖ§éSÑ ÂúOtâI
+Áø
+kiHmä®ÃÔ
+ËùÎÍ AÁä
+Microsoft Office Excel Chart
+Zin Tech
+Zin Tech                                                                                                     B
+Instrument: DustTrak
+Number of points: 771
+Instrument: P-Trak
+Units: particles/cc
+Number of points: 724
+Time (sec)ÿ
+HEPA Filter ON: 59 sec<
+HEPA Filter OFF: 88 sec<
+HEPA Filter ON: 68 sec<
+Microsoft Office Excel Chart
+Zin Tech                                                                                                     B
+Instrument: DustTrak
+Number of points: 771
+Instrument: P-Trak
+Units: particles/cc
+Number of points: 724
+Time (sec)ÿ
+HEPA Filter ON: 59 sec<
+HEPA Filter OFF: 88 sec<
+HEPA Filter ON: 68 sec<
+Zin Tech
+DÖ	Öd*µmeÌ0dLeFw
+zðâ± xQAj
+Gæ@”ÌAWæ eÌì
+Microsoft Office Excel Chart
+Zin Tech
+Zin Tech                                                                                                     B
+Instrument: DustTrak
+Number of points: 778
+Instrument: P-Trak
+Units: particles/cc
+Number of points: 707
+Number of points: 724
+Number of points: 754
+Number of points: 545
+Number of points: 455
+HEPA off
+hose off
+Seconds into the video
+Loctaion: ER4 (Velcro)
+Location: Lab 1 Port 6
+velcro start
+velcro stop
+seconds after logÿ
+Microsoft Office Excel Chart
+ãÄ
+º	ÓXÙÒXQ
+ÝMpâ«º	ÓØÔÒØH
+ÝïâÄNº	ÓØÕÒØY
+ãÛº	ÓØÅÒø
+ÍõBã
+Í
+bÜFs
+È Vo¢ãëä
+G	ÆáÈ VÃÑq(ù
+XÍAÇLò	cT
+w
+ÆmÈ VÛÐq3ù
+ÇýjMòå	cD
+Zin Tech
+Zin Tech                                                                                                     B
+Instrument: DustTrak
+Number of points: 778
+Instrument: P-Trak
+Units: particles/cc
+Number of points: 707
+Number of points: 724
+Number of points: 754
+Number of points: 545
+Number of points: 455
+HEPA off
+hose off
+Seconds into the video
+Loctaion: ER4 (Velcro)
+Location: Lab 1 Port 6
+velcro start
+velcro stop
+seconds after logÿ
+Microsoft Office Excel Worksheet
+slop 0g
+slop 1g
+slop ratio
+Mass Per Partivle (gram)
+Volume Per Particle (cm3)
+DustTrak mg/m3
+Mass Per Particle (gram)ÿ
+DustTrak mg/m3
+DustTrak mg/m3
+Mass Per Particle (gram)
+Volume Per Particle (cm3)
+slop ratio
+Zeng-Guang Yuan
+Zin Tech
+Microsoft Excel
+ÌÙ¦vð9»ÜßßúXêÂËõ
+éiji
+ÍßBs3ù O
+wÖã%nEÆún
+ð
+ÑÞµþ	ßµÎ
+rÙFÔe	êr
+þóRøÏK
+ËZû÷
+êÕN©zõ êÕr¨OÏE½ªó
+ùúÄxó»
+cîüîØXáün
+j ZöJHZ–
+vSVqúò yb
+ï	Aç²êãËËËã
+DfåI•nÉÛþw ¥jÉòp
+TÑ•Y
+ÍÆZêñNh
+vÁ
+Eíáûîv$MÆ¼peaõ
+º! óKîIGzÅÌð
+ñn	âËÚuÔ
+nüËYÝVî 
+Õ×N
+sÿìäñÕÅá	Ï
+ÆøÝH/løDçÌ ­
+ÓËGÔp
+eÛ-çl
+ýËçïÄ	Nt ‘ð
+MÍamì#áZI º
+à
+Iäú’kyúÌæav
+ÉjîVAxV
+J
+ÖW
+þZÍÁh
+4mß­cîdþÊNÓôÊ	äc
+iìQòÅGW^¹rüuV
+tf
+MÍÌâúm º
+êFtÖaî
+ò
+¨ÛÇ ôÈUöQ
+þpÀª¿jÅg	rf
+sætvÚyJªÐ¢ A¯HÎ
+iºhÐÍa1þñ	ßý
+0ÓÑÃM bÅ
+»ÅiVqÙà wåN
+v¹	iÕõEËEþØ
+WEIwËê	t
+r ó=¬ØæSKìE
+ÛHò
+ÂÜÛE
+Ö wugxöz+µpgfáH
+KrÆÖfÑ	Æ5èþ
+S¢NìDcFö T¨ÛoôC
+XnìÞìT	G
+ªUyE	ðøD
+wÞSªÌæó3	ÖækÕuÂ
+1ÜÜüJeq	ÝÝhÕÉÄÂE
+ê+PnálÔj
+ÊràÌ
+þùóó	ïÝmçJ
+µX*è õúÂÊ*õÖó
+á3âîª
+XÈ GeOÉñU
+L•yNñHÿ –fZùàý
+ÅC—íyëÚ
+Úìj
+~ èïðeXr$ÉF
+ßÕB6ð sGÉJþ
+xyÐ	êìcÃ#jÍDG
+ÐjmcuÍ	x
+ëÌtcs
+nròÌÉ¹
+Ì÷VÖk
+XÇäîÞ
+ìÑ	ÒuIFq
+Ä	ôGEéJI
+ZÞFæ4ZíYÜ üåð
+KLÌä iIëCÕì
+U
+Vóæðlou
+µDDÀSqºÙØÞÞq/äCÅRP?lw	1
+õðhæ	;oËÁàjÖàÆÆ
+!õËëgëk
+ªÒdHâx¹Ûïb
+Q
+jØ ªCé8Îu
+spð QBu
+YúÉ£ævªg
+EÃõ
+ßYÛÒµi Ñ
+íýJoGB'OÊ *yzv
+þ×WÄHCèHeýùà
+ÅN¼
+J9LCÁÕrìpÊpÆ@ Ü( ÿ
+ãÌäº ïèÍ
+¢ä ÇÁrxvùætöîìb
+Sÿ
+Ö“ÀÉäáôÂ
+AxÕIÔuaså ÌQ
+ÄÂÄµTjº
+léW
+H)óPÚCèõîdËø	EÓÆ³s
+ÈnfOi	îo
+È¡vóêjOfwOê Ú
+LÊLrðU
+L
+Ò ziÂ Ëâë
+æ Ï-Xâµê
+kEoýÏÊ	hl
+pzMÔêÀþS
+wóÄ
+eÈbI”æ ù
+x•ÝÜ*ÚýÂÓø RX
+Ït ÙÅååeÙ¶
+ÐFÑ
+hûðQ
+á ó/ÃccF
+t ûNúµSI
+µUGÄº& D
+EûÊÒ ómÚw
+&FJ	GílÞYÝÃ
+Ú	cwïÉªÖË.Ê
+øBFiÎ ªLpó
+ÐÐ>IWev	êrIËvºÊ
+Í ODºÂ²Þ
+S (õÈWL¤ÔsP
+hçg	øµûõîÁ®
+smu
+aÛLn
+efOð	äèÙòF"kÞAÝ
+ûÈGOÜ}ïÚêí	î
+oâtöl Þ
+à
+ÛnÜÜml Ñ¨ß
+ß=yºÓn MùS
+Asqgû6Z  t
+Héõj
+kmü
+ç7W¯ xyùêÊùwo¿þÊ
+mNTè
+önÄðMØ
+Ô’ EþãýF
+;fYO ÛV7épMjþí
+ÁÂäÄäÑcG/|úÙÊÚÚ	ï
+ó[Mò ETÃ
+ÅÇ
+èFöµG QWmüÑ9
+UsóRóN9nV EådóÆ
+Èµrc|lêÁÂòÐ í
+ÉVSÙ	ÅOX
+NLMï	SÉg
+äeQ²Ñ üE
+woÝkÕÚßüú·ÿîßþ	ÿè
+õÍÒÏ
+wæSÒ
+Hu«IQ­ ûàíO
+¨ij¢ýíäôtÿà PBDk ü
+H×JyýþÝ	uÆiFý
+âÏÔ=ÉOi VâèÈëÀqÙb
+ts	jJKãøÄxwOéè±£KËKL{
+xqyaßþý "ÁåÙÕ×
+La¹g*[ óbVcwÆÝãÍ
+ÿêÿja	oSKW
+ð6ßµú Ø&ÿÑCÚtNnÝ
+HGÆ ÒRøî±ºÁ
+T´HÜQq Í¬IEË
+Ç,Ðè puÒíêêìéé
+Aßúú
+løèÑq*Z
+J
+ÊNugnf
+yxÿîðÀ £ºsëîìì<ì
+oS	dbbbyy
+L@
+ÖÃÔµGzÊæÄÈ`kË
+ï	ïÀÙÚw*èçC
+pÇw
+ß%fÕsWíbI
+aêíÈ Úøë
+kSÅB9p n
+ÕÝÚX	þçç
+GÉ Ù\GPàò^éÇø
+Xgç–Hw¥m É²ÄGÏMM
+]CÏ ¨èYÚÑQø
+Òy asÁýtlÐ
+mÇO`UQsï@øèùõé	á
+mª mÀMü
+ÝÜHºxØÙ^½	OËÜpçRçàå
+YD± ònvv
+¤íjeofrjsk
+Åµ
+KJ
+Oüëÿù
+`TdødFÇÆQwéÖí[ èè
+dAhiB UV
+ø[NæUÕÊ gYv
+wrRaj	?úÎ·PmêÛßþ
+Ýé”}ÁæÕøÉ U
+K	ÃåjûÎíûÈ_
+Ïtºuh^ y–hÉG
+Ùj©DkõÎÛÓ	íc
+ÁÜbyMÁ jµ
+mvè zOÀî
+ClB	âwÄàÃ
+ãxíÜâLF ÐêTrÄ¢§Õ
+øqP ³MjëïÆ÷e
+éêÀÕë	ÂÀG
+txNÀôô 
+àðâi
+Ã w?ßB aê
+ïñG}æz	åÂvcø
+v:RÔçÝ¤ úÂñ
+ëå	vkåBâFlæF
+ÜÞRÌÍÝ º
+]dõöà ¯wstñ
+VÉ	KPÉÀcçAx
+rì	SJoHØ
+Éªà
+tÙÔnu
+õÞÎpjÍô ·
+wbµT ÐÎ³âLo
+_ÁÀQ ÍÆv
+KÁUÀ BËNT
+äÑÕõÁõÕá5	Ú
+Òmã SGij
+aÿ´íÃSºÇ•ZzJ VHZg
+UÌ
+ZîoêX
+ù	fCQRxG÷üâ
+hÎÛÝQ	Pë
+PJîÞP
+l¡yøPâ
+á jaîáw?ý
+nasa logo stationery
+Microsoft Office Word
+Microsoft Office Word Document
+le
+NAZîÿ
+HP Color LaserJet 5500 PS
+HP Color LaserJet 5500 PS

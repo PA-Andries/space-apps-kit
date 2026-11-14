@@ -1,4 +1,9 @@
-# Apparence du site. Propriétaire : rôle F (Interface et 3D).
+# Look of the site. Owner: role F (Interface and 3D).
+# Soft light theme: blue-grey page, slate text, a warm orange as the main colour. The 3D scenes are
+# twilight-blue "portholes" on space, close enough in tone to the page to avoid a harsh contrast.
 [theme]
-base = "dark"
-primaryColor = "#f97316"
+base = "light"
+primaryColor = "#e0662a"
+backgroundColor = "#e8ecf4"
+secondaryBackgroundColor = "#dde3ee"
+textColor = "#26314d"

@@ -1,0 +1,70 @@
+Source : NASA PSI, PSI-22, Reports, PS-02788 ACME info sheet.pdf
+
+--- page 1 ---
+PURPOSE:  ACME is focused on advanced combustion 
+technology via fundamental microgravity research. The 
+primary goal is to improve efficiency and reduce pollutant 
+emission in practical terrestrial combustion. A secondary 
+objective is fire prevention, especially for spacecraft.
+ 
+German astronaut Alex Gerst exchanging the nitrogen mass ﬂow 
+controller on the ACME chamber insert within the CIR facility.
+RESEARCH: ACME includes six independent experiments 
+investigating laminar, nonpremixed flames of gaseous 
+fuels. The experiments are being conducted with a single 
+set of modular hardware in the Combustion Integrated 
+Rack (CIR) on the International Space Station (ISS).  
+While the ISS astronauts set up the experimental hardware, 
+the ACME tests are remotely commanded from NASA’s 
+Glenn ISS Payload Operations Center.
+ 
+Example ﬂame from the Burning Rate Emulator (BRE) experiment 
+led by Prof. Jim Quintiere (University of Maryland).
+U.S. astronaut Joe Acaba and Russian cosmonaut Alexander 
+Misurkin exchanging the CIR oxidizer bottle.
+STATUS: ACME was setup by the ISS crew in Sept.-Oct. 
+2017 where thus far sixteen astronauts from Canada, 
+Germany, Italy, Japan, Russia, and the United States have 
+supported the research.  Since November 2017, over 550 
+flames have been ignited for the Coflow Laminar Diffusion 
+Flame (CLD Flame), Electric-Field Effects on Laminar 
+Diffusion Flames (E-FIELD Flames), and Burning Rate 
+Emulator (BRE) experiments. They are respectively led by 
+Profs. Marshall Long (Yale University), Derek Dunn-Rankin 
+(University of California, Irvine), and Jim Quintiere 
+(University of Maryland).  Russian collaborators on those 
+experiments are with the Far Eastern Federal University 
+and Peter the Great St. Petersburg Polytechnic University.
+ 
+U.S. astronaut Ricky Arnold carrying out CIR maintenance tasks 
+during CLD Flame experiment operations.
+Advanced Combustion via Microgravity Experiments (ACME)
+National Aeronautics and
+Space Administration
+NASA GLENN RESEARCH CENTER
+www.nasa.gov
+
+--- page 2 ---
+PS–02788–0319
+Advanced Combustion via Microgravity Experiments
+Diffusion flames with a weak air coflow as a function of the electric field strength, where an open copper mesh above the 
+flame is negatively and positively charged in the top and bottom rows, respectively. Flames naturally include ions which can 
+be affected by a powerful electric or magnetic field. In ACME’s E-FIELD Flames experiment, the copper mesh is energized 
+up to 10,000 volts. This technology could be used to stabilize fuel-lean flames under conditions which are less polluting.
+Canadian astronaut David Saint-Jacques preparing the 
+ACME chamber insert for the BRE experiment.
+ACME chamber insert within the CIR facility (above left) and two 
+examples (above middle and right) of lifted flames that are 
+detached from CLD Flame’s coflow burner, as a function of the 
+fuel and air velocities. The false color in the image to the right 
+indicates the CH* concentration as function of the radius and 
+height above the burner. CH* is an excited species and emits blue 
+light as it drops to a lower energy level in a process known as 
+chemiluminescence. It is the primary source of the blue that is the 
+natural color of hydrocarbon flames (neglecting the broadband 
+thermal radiation from the soot).
+WEB SITE:  http://spaceflightsystems.grc.nasa.gov/acme/
+UPDATES:  www.facebook.com/space.flames 
+PHOTOGRAPHS:  www.flickr.com/photos/space-flames 
+EDUCATION:  https://tinyurl.com/space-flames  
+CONTACT: Dennis Stocker, ACME Project Scientist, NASA Glenn, 216-433-2166, dennis.p.stocker@nasa.gov

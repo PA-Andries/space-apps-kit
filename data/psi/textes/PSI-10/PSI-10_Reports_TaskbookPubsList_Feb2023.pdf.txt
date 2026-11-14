@@ -1,0 +1,111 @@
+Source : NASA PSI, PSI-10, Reports, PSI-10_Reports_TaskbookPubsList_Feb2023.pdf
+
+--- page 1 ---
+Irace PH, Waddell K, Constales D, Yablonsky G, Kim M, Sunderland PB, Axelbaum RL. "On the existence of steady 
+state gaseous microgravity spherical diffusion flames in the presence of radiation heat loss." Proc. Combust. Inst, in 
+revision as of May 2022. , Sep-2022  
+Irace PH, Waddell K, Constales D, Sunderland PB, Axelbaum RL. "Critical temperature and reactant mass flux for 
+radiative extinction of ethylene microgravity spherical diffusion flames at 1 bar." Proc. Combust. Inst, in revision as of 
+May 2022. , Sep-2022  
+Irace PH, Lee H, Waddell K, Tan L, Stocker DP, Sunderland PB, Axelbaum RL. "Observations of long duration 
+microgravity spherical diffusion flames aboard the International Space Station. " Combustion and Flame. 2021 Mar 
+7;229:111373. https://doi.org/10.1016/j.combustflame.2021.02.019 , Mar-2021  
+Wang Z, Sunderland PB, Axelbaum RL. "Double blue zones in inverse and normal laminar jet diffusion flames. " 
+Combustion and Flame. 2020 Jan; 211:253-9. https://doi.org/10.1016/j.combustflame.2019.09.014 , Jan-2020  
+Irace PH, Yang Z, Gopan A, Axelbaum RL. "Soot Formation and Radiation Heat Transfer in Tri-axial Diffusion Flames." 
+11th U.S. National Combustion Meeting, Pasadena, CA, March 24-27, 2019.Meeting papers.11th U.S. National 
+Combustion Meeting, Pasadena, CA, March 24-27, 2019. , Mar-2019  
+Wang Z, Sunderland PB, Axelbaum RL. "Double Luminous Zones in Laminar Jet Diffusion Flames." 11th U.S. National 
+Combustion Meeting, Pasadena, CA, March 24-27, 2019.Meeting papers.11th U.S. National Combustion Meeting, 
+Pasadena, CA, March 24-27, 2019. 9 p. , Mar-2019  
+Wang Z, Sunderland PB, Axelbaum RL. "Dilution effects on laminar jet diffusion flame lengths." Proceedings of the 
+Combustion Institute. 2019 Jan;37(2):1547-53. https://doi.org/10.1016/j.proci.2018.06.085 , Jan-2019  
+Wu W, Adeosun A, Axelbaum RL. "A new method of flame temperature measurement utilizing the acoustic emissions 
+from laser-induced plasmas." Proceedings of the Combustion Institute. 2019 Jan;37(2):1409-
+15. https://doi.org/10.1016/j.proci.2018.07.096 , Jan-2019  
+Irace P, Lee HJ, Waddell K, Tan L, Stocker DP, Urban DL, Sunderland PB, Axelbaum RL. "Steady-State and 
+Radiatively Extinguishing Spherical Diffusion Flames in Microgravity." 35th Annual Meeting of the American Society for 
+Gravitational and Space Research, Denver, CO, November 20-23, 2019. Abstracts. 35th Annual Meeting of the 
+American Society for Gravitational and Space Research, Denver, CO, November 20-23, 2019. , Nov-2019  
+Irace P, Tan L, Waddell K, Lee HJ, Stocker DP, Urban DL, Sunderland PB, Axelbaum RL. "A Galaxy of Soot Particles." 
+Art Competition Entry, 35th Annual Meeting of the American Society for Gravitational and Space Research, Denver, 
+CO, November 20-23, 2019. 35th Annual Meeting of the American Society for Gravitational and Space Research, 
+Denver, CO, November 20-23, 2019. , Nov-2019  
+Wang Z, Sunderland PB, Axelbaum RL. "Double Luminous Zones in Inverse Laminar Jet Diffusion Flames." 2018 
+Eastern States Section of the Combustion Institute Spring Technical Meeting, State College, PA, March 04-07, 
+2018.2018 Eastern States Section of the Combustion Institute Spring Technical Meeting, State College, PA, March 04-
+07, 2018. , Mar-2018  
+Rodenhurst MK 3rd, Chao B-H, Sunderland PB, Axelbaum RL. "Structure and extinction of spherical burner-stabilized 
+diffusion flames that are attached to the burner surface." Combustion and Flame. 2018 Jan;187:22-9. Available online 
+21 September 2017. https://doi.org/10.1016/j.combustflame.2017.08.024 (copy and paste URL for valid connectivity) , 
+Jan-2018 
+Wang Z, Sunderland PB, Axelbaum RL. "Dilution effects on laminar jet diffusion flame lengths." Proceedings of the 
+Combustion Institute. Available online 11 September 2018. In Press, Corrected 
+Proof. https://doi.org/10.1016/j.proci.2018.06.085 , Sep-2018 
+Wu W, Adeosun A, Axelbaum RL. "A new method of flame temperature measurement utilizing the acoustic emissions 
+from laser-induced plasmas." Proceedings of the Combustion Institute. Available online 16 August 2018. In Press, 
+Corrected Proof. https://doi.org/10.1016/j.proci.2018.07.096 , Aug-2018 
+Wang Z, Sunderland PB, Axelbaum RL. "Double Blue Zones in Inverse Laminar Jet Diffusion Flames." Poster, 37th 
+International Symposium on Combustion, Dublin, Ireland, July 29-August 3, 2018. 
+37th International Symposium on Combustion, Dublin, Ireland, July 29-August 3, 2018. , Jul-2018 
+Wang Z, Sunderland PB, Axelbaum RL. "Observations of Double Flames in Inverse Gas Jet Diffusion Flames." 2017 
+10th US National Combustion Meeting, College Park, MD, April 23-26, 2017. 
+2017 10th US National Combustion Meeting, College Park, MD, April 23-26, 2017. 6 p. , Apr-2017 
+Wang Z, Sunderland PB, Axelbaum RL "The Effects of Reactant Dilution on Lengths of Laminar Jet Diffusion Flames." 
+2017 10th US National Combustion Meeting, College Park, MD, April 23-26, 2017.
+
+--- page 2 ---
+2017 10th US National Combustion Meeting, College Park, MD, April 23-26, 2017. 6 pp. , Apr-2017 
+Wu W (Wendong Wu). "Fundamental Studies of Flame Structure Through Laser Plasma Diagnostics." Ph.D. 
+Dissertation, Washington University in St. Louis, May, 2017. , May-2017 
+Gopan A, Yang Z, Kumfer BM, Axelabaum RL. "Effects of inert-placement (Zst) on soot and radiative heat flux in 
+turbulent diffusion flames." Energy and Fuels. 2017 Jul 20;31(7):7617-
+23. https://doi.org/10.1021/acs.energyfuels.7b01092 , Jul-2017 
+Wang Z, Sunderland PB, Axelbaum RL. "Images of Co-Axial Gas Jet Diffusion Flames." Art Competition Poster. 2017 
+10th US National Combustion Meeting, College Park, MD, April 23-26, 2017. 
+2017 10th US National Combustion Meeting, College Park, MD, April 23-26, 2017. , Apr-2017 
+Wang Z, Wu W, Sunderland PB, Axelbaum RL. "Ground-Based Research Supporting Flame Design." 33rd Annual 
+Meeting of the American Society for Gravitational and Space Research, Seattle, WA, October 25-28, 2017. 
+33rd Annual Meeting of the American Society for Gravitational and Space Research, Seattle, WA, October 25-28, 2017. 
+, Oct-2017 
+Wu W, Axelbaum RL. "Interpreting Flame Structure by Conserved Scalar Measurement Using Laser-Induced 
+Breakdown Spectroscopy." Combustion Institute Central States Meeting, Knoxville, TN, May 15-17, 2016. 
+Combustion Institute Central States Meeting, Knoxville, TN, May 15-17, 2016. , May-2016 
+El Makawy MH (Mohamed H. El Makawy). "The Effects of Reactant Dilution on Lengths of Laminar Jet Diffusion 
+Flames." M.S. Thesis, Ghent Univ., Department of Flow, Heat and Combustion, 54 p., Aug. 2016. , Aug-2016 
+Wu W, Yablonsky G, Axelbaum RL. "Observation of water–gas shift equilibrium in diffusion flames." Combustion and 
+Flame. 2016 Nov;173:57-64. http://dx.doi.org/10.1016/j.combustflame.2016.07.025 , Nov-2016 
+Wang Z, El Makawy M, Sunderland PB, Chao B, Axelbaum RL. "The Effects of Reactant Dilution on Lengths of Laminar 
+Jet Diffusion Flames" 32nd Annual Meeting of the American Society for Gravitational and Space Research, Cleveland, 
+Ohio, October 26-29, 2016. 
+32nd Annual Meeting of the American Society for Gravitational and Space Research, Cleveland, Ohio, October 26-29, 
+2016. , Oct-2016 
+Wu W, Axelbaum RL. "Interpreting Flame Structure by Mixture Fraction Measurement Using Laser-Induced Breakdown 
+Spectroscopy," 32nd Annual Meeting of the American Society for Gravitational and Space Research, Cleveland, Ohio, 
+October 26-29, 2016. 
+32nd Annual Meeting of the American Society for Gravitational and Space Research, Cleveland, Ohio, October 26-29, 
+2016. , Oct-2016 
+Lecoustre VR, Sunderland PB, Chao B-H, Axelbaum RL. "Numerical Investigations of Temperature Effects on Soot 
+Precursors in Ethylene Premixed Flames." 9th U.S. National Combustion Meeting, Cincinnati, OH, May 17-20, 2015. 
+9th U.S. National Combustion Meeting, Cincinnati, OH, May 17-20, 2015. Paper IE09. , May-2015 
+Wu W, Axelbaum RL. "Interpreting Diffusion Flame Structure by Measuring C/O Ratio Using Laser-Induced Breakdown 
+Spectroscopy." 9th U.S. National Combustion Meeting, Cincinnati, OH, May 17-20, 2015. 
+9th U.S. National Combustion Meeting, Cincinnati, OH, May 17-20, 2015. Paper IA20. , May-2015 
+Wu W, Axelbaum RL. "Simultaneous Measurement of Conserved Scalars in Flames Using LIBS." SciX 2015, The Great 
+Scientific Exchange, Providence, Rhode Island, September 27-October 2, 2015. 
+SciX 2015, The Great Scientific Exchange, Providence, Rhode Island, September 27-October 2, 2015. , Oct-2015 
+Wu W, Sunderland PB, Chao B-H, Urban DL, Axelbaum RL. "Recent Advances in Flame Design, A Spaceflight 
+Combustion Experiment." To be presented at 31st Annual Meeting of the American Society for Gravitational and Space 
+Research, Alexandria, VA, November 11-14, 2015.
+
+--- page 3 ---
+31st Annual Meeting of the American Society for Gravitational and Space Research, Alexandria, VA, November 11-14, 
+2015. , Nov-2015 
+Wu W, Yablonsky G, Axelbaum RL. "New Observation of Water Gas Shift Equilibrium in Flames." 9th International 
+Conference on Chemical Kinetics, Ghent, Belgium, June 28-July 2, 2015. 
+9th International Conference on Chemical Kinetics, Ghent, Belgium, June 28-July 2, 2015. , Jul-2015 
+Lecoustre VR, Sunderland PB, Chao B-H, Axelbaum RL. "Study of Temperature Effects on Soot Precursor Formation in 
+Nonbuoyant, Laminar Ethylene Premixed Flames." 30th Annual Meeting of the American Society for Gravitational and 
+Space Research, Pasadena, CA, October 22-26, 2014. 
+30th Annual Meeting of the American Society for Gravitational and Space Research, Pasadena, CA, October 22-26, 
+2014. , Oct-2014

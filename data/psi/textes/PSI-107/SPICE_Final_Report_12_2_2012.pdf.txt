@@ -1,0 +1,974 @@
+Source : NASA PSI, PSI-107, Reports, SPICE Final Report 12_2_2012.pdf
+
+--- page 1 ---
+i 
+ 
+ 
+ 
+ 
+ 
+ 
+Smoke Point in Co-flow Experiment (SPICE) 
+ 
+Laminar Smoke Point Properties of Non-buoyant Round -Jet Diffusion Flames 
+ 
+by 
+ 
+Dr. David L. Urban 1 
+NASA Glenn Research Center, Cleveland, Ohio 44135 
+ 
+Professor Peter B. Sunderland 2 
+University of Maryland, College Park, MD 20742 
+ 
+and 
+ 
+Dr. Zeng-Guang Yuan 3 
+National Center for Space Exploration Research, Cle veland, Ohio 44135  
+ 
+ 
+ 
+ 
+Final Report 
+ 
+ 
+2 December 2011 
+ 
+Need to show PI, Co-I and PS? 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+----------------------------------------- 
+1 Branch Chief, Combustion and Reacting Systems Branc h, 21000 Brookpark Road, MS 77-5.  
+2 Prof>>>>>  
+3 Staff Scientist, 21000 Brookpark Road, MS 110-3.
+
+--- page 2 ---
+ii 
+ 
+Smoke Point in Co-flow Experiment (SPICE) 
+Abstract 
+The laminar smoke point is the condition (and the l uminous flame length) where a flame begins 
+to emit soot. Smoke points indicate the sooting pro pensity of a fuel in diffusion flames. In normal 
+gravity, laminar smoke points have been measured fo r many gaseous and condensed fuels. 
+Laminar smoke points have been found to correlate with soot volume fractions and radiative loss 
+fractions of turbulent diffusion flames.  SPICE pro ject measured laminar smoke points in non)
+buoyant laminar jet diffusion flames in co)flowing air aboard the International Space Station. 
+Fifty)two smoke points were found for ethylene, pro pane, propylene, and propylene/nitrogen 
+mixtures. Burner diameters were 0.41, 0.76, and 1.6  mm and co)flow velocities varied from 5.4 – 
+65 cm/s. These flames afford extensive control over  residence time via variations in dilution, 
+burner diameter, and co)flow velocity. Increasing c o)flow velocity decreases luminous flame 
+lengths, but moves smoke points to higher fuel flow  rates and longer luminous flame lengths. 
+Smaller burners have longer smoke points for co)flo wing flames. These trends can be explained 
+qualitatively by considering total residence time e ffects. The luminous flame lengths generally 
+correlate with fuel mass flow rate divided by stoic hiometric mixture fraction, although they 
+increase slightly as air velocity decreases. The me asured smoke point lengths were found to 
+correlate with burner diameter to the –0.91 power t imes coflow velocity to the 0.41 power. The 
+measurements allow estimates of pseudo threshold so ot indices (TSI) for microgravity diffusion 
+flames, indicating an unusually high sooting propen sity for propane in microgravity. A model of 
+residence times in coflowing flames is developed, a nd although residence time helps explain 
+many of the observations, it does not correlate the  measured smoke points. The measurements 
+yielded estimates of sooting propensities of the present fuels in microgravity diffusion flames.  
+ 
+Acknowledgments  
+ 
+The authors acknowledge G.M. Faeth for conceiving this work, the SPICE engineering team, and 
+the astronauts that conducted the tests (M. Barratt , E.M. Fincke, S.H. Magnus, and K. Wakata). 
+The SPICE project was conducted through the ISS Exploration Research Project of the 
+Exploration Technology Development Program. The sup port of this program is also 
+acknowledged. 
+ 
+Certain commercial entities, equipment, or material s may be identified in this document in order 
+to describe an experimental procedure or concept ad equately. Such identification is neither 
+intended to imply recommendation or endorsement by the National Aeronautics and Space 
+Administration, nor intended to imply that the enti ties, materials, or equipment are necessarily 
+the best available for the purpose.
+
+--- page 3 ---
+iii 
+ 
+Table of Contents (will fix this page later)  
+ 
+Abstract……………………………………………………………………………..ii 
+Acknowledgments……………………………………….…………………………iii 
+Table of Contents…………………………………………………………………...iv 
+List of Tables…………………………………………………………………...……v 
+List of Figures……………………………………..…………………………………v 
+Nomenclature……………………………………………………………………….vi 
+Acronyms…………………………….……………………………………………..vi 
+ 
+INTRODUCTION…………………………………………………………………...1 
+SPICE EXPERIMENT SETUP…………………………………………………….4 
+A.  The SPICE Apparatus………………………………………………………..4 
+B.  Air velocity distribution in the flow duct……….…………………..9 
+ 
+SPICE FLIGHT TESTS………………………………………………………….14 
+TEST RESULTS                                 ……………………………………..15 
+DISCUSSION …………………………………………………………………?? 
+CLOSING REMARKS………………………………………………………………19 
+ 
+References…………………………………………………………………………..20 
+ 
+Appendix A. ( Spice Flight Test data II.xls )………………………………………..A-1 
+ 
+Appendix B. (2009, Eastern State Combustion Meeting, paper A  )……….………B-1 
+ 
+Appendix C. (2010 AIAA Paper, paper B )………… …………………………….C-1 
+ 
+Appendix D. (2010 33 rd  Symposium Paper, paper C )………… ……  …… …….D-1 
+ 
+Appendix E. (2010 Leeds Paper, paper D )…………… ……………   … ……….E-1 
+ 
+Appendix F. (2010 Fire safety J. Paper, paper E )……………………   …    …….F-1
+
+--- page 4 ---
+iv 
+ 
+List of Tables 
+ 
+Table 1. Summary of smoke points observed. 
+ 
+ 
+ 
+ 
+ 
+List of figures 
+ 
+Figure 1. Soot path lines through buoyant and non-b uoyant flames 
+ 
+Figure 2. Schematic of SPICE experiment apparatus a nd its connection with SMG. The upper-
+right portion separated by dash lines are the SPICE apparatus. 
+ 
+Figure 3. A photo of the SPICE apparatus.  Air flow s from left to right. 
+ 
+Figure 4. This photo shows three nozzles and six ig niters are stored in the storage case for 
+being uploaded to the ISS. 
+ 
+Figure 5. A sketch of the fuel supply system includ ing a fuel bottle, a pressure regulator and a 
+mass flow controller. 
+ 
+Figure 6. The photo on the left shows six fuel bott le assemblies in the storage case and the 
+photo on the right shows a single fuel bottle assem bly including a diaphragm valve 
+and a quick connect. The green label on the bottle describes the fuel type and 
+pressure. 
+ 
+Figure 7. A side view of the SPICE apparatus shows a red quick connect to the fuel bottle 
+assemblies.  
+ 
+Figure 8. A front view of SPICE apparatus inside of  the MSG and positions of the still camera 
+and the video camera. Note that because of limited space, the video camera views 
+the flame through a 45 o angled mirror. 
+  
+Figure 9. The still camera, Nikon D100, that views the flame from the top window. 
+ 
+Figure 10. The video camera and the mounting struct ure with a reflecting mirror on it. 
+ 
+Figure 11. The control box to control air and fuel flow rates and ignition, etc. 
+ 
+Figure 12. A photo shows the two avionics enclosure s for power supply and a video titling and 
+signal processing. 
+ 
+Figure 13. A photo of the SPICE apparatus with flow  measurement locations marked on the top 
+and front windows. 
+ 
+Figure 14. Air velocity distribution on the center vertical plane of the flow duct for 6 different 
+fan settings.
+
+--- page 5 ---
+v 
+ 
+Figure 15. Air velocity distribution on the center horizontal plane of the flow duct for 6 
+different fan settings. 
+ 
+Figure 16. Numerical simulation of air flow in the region near the nozzle exit for a fixed 
+velocity at nozzle exit and three co-flow velocities. 
+ 
+Figure 17. Still camera images of 75% C 3H6 flames with (top) decreasing coflow velocity, and 
+(bottom) increasing fuel flow rate. Images were tak en at f/11 with a shutter speed of 
+3.1 ms, except the rightmost image in the top row a nd 3 rd  image in the bottom row, 
+which used a shutter speed of 1.3 ms in original color. 
+ 
+Figure 18. Smoke point luminous length plotted with  respect to coflow velocity. The lines 
+shown are fits for each pairing of fuel and burner diameter for present data. 
+ 
+Figure 19. Smoke point luminous length plotted with  respect to fuel mass flow rate divided by 
+stoichiometric mixture fraction. A linear fit that intersects the origin is shown.
+
+--- page 6 ---
+vi 
+ 
+ 
+ 
+Nomenclature 
+ 
+d = jet exit diameter 
+LSP  = smoke point luminous flame length 
+m ˙f = fuel mass flow rate 
+Re  = jet Reynolds number, 4 m ˙  / (π d µ) 
+Tad  = adiabatic flame temperature. 
+ua = streamwise velocity of co-flow air 
+uf = streamwise velocity of fuel gas. 
+Zst  = stoichiometric mixture fraction 
+φ = fuel-equivalence ratios. 
+ 
+ 
+ 
+Acronyms  
+ 
+ISS International Space Station 
+MSG Microgravity Science Glovebox  
+STS Space Transportation System 
+GRC NASA John Glenn Research Center 
+LSP Laminar Soot Processes experiment 
+KSC NASA John Kennedy Research Center 
+ULF-2 An ISS assembly mission carried out by Space Shuttle Endeavour on Nov. 14, 2008.
+
+--- page 7 ---
+1 
+ 
+ 
+INTRODUCTION 
+ 
+SPICE project, from it was rewarded in 1997 to it w as conducted onboard ISS in 2009, covered 
+more than a decade time span. During these years, t he project experienced a few cycles of active and 
+inactive status. A brief project history is given b elow. SPICE project was awarded on December 3, 
+1997 by the Microgravity Science and Application Di vision of NASA Headquarters to Professor 
+Gerard M. Faeth of the University of Michigan for h is proposal titled as Laminar Smoke Point 
+Properties of Nonbuoyant Round-Jet Diffusion Flames  in response to NASA’s 1996 Solicitation for 
+Glovebox Investigations issued in late 1996. The or iginal proposal of Professor Faeth was meant to 
+be a supplement to the Laminar Soot Processes Exper iment which was a combustion project under 
+NASA Grant No. NAG3-1245, conducted onboard STS-73 and STS-94 in 1997. In the awarding 
+letter, the experiment was planned to be carried out onboard STS-107, for which the launch date was 
+then scheduled in May 2000. From December 1997 to t he end of 1999 was the first phase of the 
+project. In this period, the experiment was planned  to be conducted in the Middle Deck Glove Box 
+of a Space Shuttle and the SPICE hardware was fabri cated and assembled in GRC. Various project 
+reviews necessary for the flight project, were comp leted. In addition, significant efforts on science 
+side were made to explore proper camera settings fo r different flame conditions by conducting 
+reduced gravity experiment in parabolic flight on board the KC-135 aircraft. From the end of 1999 to 
+March 2002, the project was inactive.  The second p hase of the project was from March 2002 to 
+January 2005. In this period, SPICE was a part of MRDOC contract to ZIN Inc., for a potential UF-1 
+Flight. Since the target facility of SPICE was swit ched from Space Shuttle’s Middle Deck Glove 
+Box to the ISS Microgravity Science Glovebox (MSG),  ZIN’s major effort was to retro-fit hardware 
+for use with MSG in International Space Station (IS S), which included: designed and assembled 
+Power/Video Unit to support MSG video interfaces, d esigned and fabricated a new mechanical 
+camera supports, redesigned fuel bottle assemblies and developed new cabling. Project was 
+cancelled again at the end of 2004. ZIN developed s torage plan for hardware which was presented to 
+NASA in December, 2004. The SPICE apparatus was put  in storage in January 2005 and all the 
+documents were archived waiting for future flight o pportunities. At that time, the LSP project and 
+the re-flight LSP-2 were completed, thus the object ives of SPICE were later changed to a stand-
+alone investigation of smoke point of jet diffusion  flames with coexistence of air flows. One 
+important event soon after the SPICE became inactive again was the sudden death of Professor Faeth 
+of the University of Michigan, the PI of the projec t. It was not until March 2006 that the SPICE was  
+resurrected in May, 2006 as part of the Small Paylo ads Projects Task under MRDOC that Dr. David 
+Urban, the Co-I of the project, succeeded Professor  Faeth as the PI of the project. In addition, 
+Professor Peter Sunderland of University of Marylan d, former Ph.D. student of Prof. Faeth was 
+recruited as a Co-I of the project. An updated Scie nce Requirement Document was edited. The test 
+matrix was finalized. Additional tests in camera were conducted. 
+ 
+Minor hardware modifications were made and a number  of project reviews were conducted. The 
+SPICE hardware was shipped to KSC on June 18, 2008 and later lifted up to ISS by ULF-2 in 
+October 2008. SPICE experiments were finally conduc ted in ISS MSG from February through June 
+of 2009. What Follows is the science significance and justification of the SPICE project. 
+ 
+Soot formation in hydrocarbon-fueled flames is an i mportant unresolved problem in combustion 
+science. Soot is estimated to be responsible for up  to 52,000 premature deaths annually in the U.S. 1 
+and is believed to contribute to climate change and  glacial melting. 2 Radiation from soot in flames is 
+beneficial in many applications but also contributes to unwanted heat loads in engines and the spread 
+of fires. Carbon monoxide emitted by smoking flames  is the major cause of death in fires. 3 
+Knowledge of Soot formation is needed for developing computational combustion.
+
+--- page 8 ---
+2 
+ 
+The differences between soot processes in buoyant a nd nonbuoyant laminar jet diffusion flames can 
+be seen by comparing their soot production regions as plotted in Fig. 1.  Soot formation in diffusion 
+flames generally is limited to fuel-equivalence rat ios, φ, in the range 1-2, which are marked on the 
+plots.  Unlike gases, which both convect and diffus e, soot mainly convects with the flow velocity so 
+that it moves along the streamline.  For buoyant fl ames, the dividing streamline generally is inside 
+the soot formation region so that most of the soot initially forms near the flame sheet, where φ, =1, 
+and then moves radially inward toward cooler region s having higher fuel concentrations.  The soot 
+formation process for nonbuoyant flames is complete ly different: most of the soot initially forms 
+near the cool core of the flame, where φ is close to 2, and is drawn directly toward the fl ame sheet.  
+Results from an MSL-1 combustion project, the Lamin ar Soot Processes (LSP), revealed that the 
+smoke height phenomenon in microgravity can be subs tantially different form that seen in normal 
+gravity.  The removal of buoyancy induced accelerat ion can cause the smoke point phenomenon to 
+be dominated by radiative heat losses for condition s of low overall flame velocity.  Under these 
+conditions the flame extinguishes at the flame tip allowing soot to be emitted.  In spite of this effe ct, 
+it is still possible to have flames that either emi t soot along all stream lines or do not emit soot 
+anywhere, for conditions where radiation losses do not dominate. 
+ 
+ 
+ 
+Figure 1. Soot path lines through buoyant and non-b uoyant flames 
+ 
+The information of smoke-point properties and flame shapes is needed to improve our understanding 
+of heat and mass transfer mechanisms for different flame conditions. Unfortunately, while the 
+laminar smoke-point properties of buoyant jet diffu sion flames at normal gravity are well known, 
+corresponding information for nonbuoyant flames is limited and questionable. Thus the insights of 
+soot generation and oxidation processes under micro gravity conditions are critical to devise better 
+fire safety strategy in spacecraft needed for long term space travels and other space exploration 
+activities. In addition, the improved understanding  of soot processes in laminar flames will help us, 
+by analogy, to gain better understanding of soot processes in practical turbulent flames. 
+ 
+ 
+The objectives of the SPICE experiments is to find the laminar smoke-point properties of non-
+buoyant jet diffusion flames for several fuels unde r different nozzle diameter/co-flow velocity 
+configurations.  Luminous flame shape measurements would also be made to verify models of the
+
+--- page 9 ---
+3 
+ 
+flame shapes under co-flow conditions. In particula r, the experiments are planned to be conducted 
+under the following conditions: six types of fuels:  methane, ethylene, propane, propylene, 75% 
+propylene mixed with 25% nitrogen in moles, and 50% propylene mixed with 50% nitrogen in moles; 
+three nozzles: 0.4, 0.8 and 1.6 mm ID and two air v elocities: 100% and 50% of the maximum air 
+flow velocity (near 50cm/s). The operation procedur es are as such that the air velocity is set first, 
+then start the fuel flow and ignite the flame. Fuel  flow rate is adjusted until the smoke point is 
+reached. Thus, for each combination of a fuel and a  nozzle size, two smoke point fuel flow rates are 
+obtained. One is under 100% air velocity and the ot her is under 50% air velocity. Then in the case of 
+50% air velocity, the fuel flow rate is reduced to 50% of the smoke point fuel flow rate to get a flame 
+length with that fuel flow rate.  
+ 
+SPICE EXPERIMENT SETUP 
+A.  The SPICE Apparatus 
+The SPICE project utilized and modified an apparatu s constructed for a previous project, Enclosed 
+Laminar Flames (ELF), which was conducted in the Mi ddle Deck Glovebox of Space Shuttle 
+Columbia during mission USMP-4/STS-87 in November, 1997. The SPICE apparatus configuration 
+and the connection to the MSG power supply are show n in Figure 2. The upper right portion in the 
+figure, separated by dashed lines includes the part s placed inside the Glovebox, whereas the rest 
+parts are outside the Glovebox, either for astronauts to control or monitor the experiment inside. 
+ 
+ 
+ 
+ 
+Figure 2. Schematic of SPICE experiment apparatus a nd its connection with SMG. The 
+upper-right portion separated by dash lines are the SPICE apparatus.
+
+--- page 10 ---
+4 
+ 
+Inside the Glovebox, the core of the apparatus is t he Experimental Assembly which consists of a 
+flow duct and its accessories. In this flow duct bu rns the flame under investigation. More detailed 
+discuss of this part will be given below.  An imagi ng system, including a still digital camera and a 
+video camera is mounted outside the flow duct to re cord the flame images. Inside the Glovbox there 
+are two additional enclosures. One is the Power Uni t that converts the electrical power provided by 
+the Glovebox Power Supply (single voltage) to vario us voltages needed by different part of the 
+SPICE apparatus. The second enclosure is the Video Unit which has the following functions: a) 
+controls the shutter of the still cameras based on the signal received from the control box, and b) 
+merges the video camera signal with the signal from  a title generator which includes air and fuel 
+flow rates and outputs the merged signal to a VCR o utside the Glovebox for recording and 
+displaying on a monitor. The feature of merging fla me image and the flow rates to a single video 
+image is very important improvement of SPICE over E LF. With the real time flow rates stamped on 
+the flame image, the data reduction process, after the experiment, is greatly simplified by eliminating 
+the need of synchronizing the flame image and the f low data manually, which would be very tedious 
+and time consuming. 
+ 
+As shown in Fig. 2, outside the Glovebox there are two parts: a control box that astronauts hold to 
+control the experiment in the flow duct and a video  recording and display part for astronauts to 
+watch the flame during burn, because astronauts need to determine when the flame starts to emit soot 
+and when a still image should be taken. More detailed discussion of each part is given below. 
+ 
+Experiment Assembly: Figure 3 shows a photo of the Experiment Assembly.  
+ 
+ 
+ 
+The flow duct is the core of the Assembly. The inte rior dimensions of the flow duct are 172mm x 
+43mm x 43mm. It has two Lexan windows on its top an d front sides through which the still camera 
+and the video camera can image the flame. 
+ 
+A retractable ruler 105mm in length is placed insid e the flow duct. It is used to generate a reference  
+image for flame length measurement. This ruler is n ormally rests at the far, bottom corner of the 
+flow duct. When a reference image is taken, it is m oved in line with the nozzle tip. Since its surface  
+is 45 degree tilted, it can be seen both by the sti ll camera and the video camera. After the reference  
+ 
+Figure 3. A photo of the SPICE apparatus.  Air 
+flows from left to right.
+
+--- page 11 ---
+5 
+ 
+image is taken, the ruler is moved back to its home  position. The ruler is mechanically linked to and 
+controlled by a handle outside of the flow duct, at its front right corner. 
+ 
+A hot wire igniter, a coiled Kanthal wire, was used  to ignite the flame. During ignition, it is moved 
+to the nozzle tip through a handle next to the rule r handle and electrically powered up with about 4 
+amps of electric current that makes the wire bright  red hot. Once the flame ignition is confirmed, the  
+igniter is then moved away from the nozzle tip to i ts home position. The two handles are designed in 
+such that only one of the two, the igniter and the ruler, can be moved to the nozzle at a certain time . 
+This provides a safety feature of the system that p revents the ruler from being burned by the igniter.  
+There is a small magnet mounted on the linkage to t he igniter and a Hall-effect sensor mounted on 
+the hinge of the front door. This sensor controls t he igniter power circuits that when the front door is 
+in open position or when the igniter is at its home  position, the igniter power circuit is disabled. I n 
+other words, the igniter can be powered only if the front door is closed and the igniter is at the nozzle 
+tip. The igniter is replaceable. When replacing the  igniter, the astronaut must open the front door so  
+that the igniter will not be powered during the replacement. 
+ 
+There are 3 fuel nozzles made for the SPICE experim ent. They all have the same length; 50 mm, 
+with different inner diameters: 0.41 mm, 0.76 mm an d 1.6 mm, respectively. Only one of the three 
+nozzles is installed during a burn. Figure 4 is a p hoto of the igniters and nozzles in a storage box 
+shipped to ISS. It can be seen that a nozzle has tw o parts: a thicker base with female threads in it and 
+a piece of thin tubing extended from the base.  Thu s the nozzle is threaded on a connector inside the 
+flow duct, on the left hand side in Fig. 3. After installation, the nozzle is along the center line of flow 
+duct. Its tip is about 54 mm from the screen at the left end of the flow duct. 
+ 
+ 
+ 
+A thermopile radiometer, Oriel Model 71768, is plac ed in the far right corner downstream of the 
+duct. It has a 90 degree view angle that can bracke t the entire flame length. Since the radiometer 
+signal is an integrated result of flame radiation, which is a complicated function of flame shape and 
+temperature distribution in the flame, it can only provide a qualitative measurement of flame 
+radiation. The flame radiation varies in a wide ran ge depending on flame conditions so that the 
+radiometer amplifier is equipped with a gain contro l switch to ensure the signal is detected with 
+proper accuracy.  
+ 
+ 
+ 
+Figure 4. This photo shows three nozzles 
+and six igniters are stored in the storage case for 
+being  uploaded to the ISS.
+
+--- page 12 ---
+6 
+ 
+As shown in Fig 3, there are two rectangular boxes attached to the each end of the flow duct. The 
+box on the left hand side has a 3” diameter electri cal fan, Panasonic Model FBA08A12H1A, that 
+blows air into the flow duct. A ceramic honeycomb f low strainer is installed downstream of the fan 
+in the fan housing to break swirls.  An omni-direct ional anemometer, TSI model 8475-3-xx, is 
+located inside the flow duct near the nozzle connec ter to measure the air velocity. Several screens 
+are located at the inlet of the fan, downstream of the anemometer and at the exhaust end of the 
+chamber, respectively.  Note that the fan is instal led upstream of the flame so that it will not be 
+heated by the flame gases. The box at the right end  of the flow duct contains a heat sink/hand guard 
+and a fine screen that prevents excessive soot particles from entering the ISS MSG flow system.  
+ 
+Attached to the flow duct is a fuel supply system i llustrated in Fig. 5. As marked in the figure, 
+items1 to 7 are the pre-assembled fuel bottle assem bly each of which includes a DOT 150 ml 
+stainless steel single end cylinder (SWAGELOK, 304L -055MS6-150), a ¼” diaphragm valve 
+(SWAGELOK NUPRO # SS-DLS4), a quick connect, a Lany ard® clip, and connecting tubes. There 
+was a long storage time from the delivery of fuel b ottles from GRC to the actual execution of the 
+experiments on ISS. Thus, a very low leak rate of f uel bottle assemblies is a critical requirement. 
+There are total 12 fuel bottle assemblies which are  stored in two separate containers.  The photo on 
+the left of Figure 6 shows one of the fuel bottle c ontainers that holds six fuel bottle assemblies and  
+the photo on the right shows a single assembly. The  six bottles in one container are filled with six 
+different fuel gases to the maximum safety pressure  for that fuel: ethylene (210 psia), methane (210 
+psia), propane (110 psia), propylene (135 psia), 75% propylene (180 psia), 50% propylene (180 psia). 
+The connection between the fuel bottle assembly and  the rest of the flow system is through a couple 
+of a ¼” Swagelok® quick-connect, items 7 and 8 in F ig. 5. Item 8 through 16 are the plumbing 
+system included in the Experiment Assembly, underneath the flow duct in Fig. 3. Components in the 
+plumbing include the male half of the quick-connect  (item 8), a filter (item 10), a compact stainless 
+steel pressure regulator (item 13, Process Valve, C PR1-1B01A3E178, 0-50 psig, P/N: 106153), a 
+mass flow controller (item 15, MKS, Type 2179 MFC w ith a Positive Shutoff Valve, Model #: 
+1179A52CS1BV-S, 0 - 500 SCCM, Standard Conditions: 0 oC and 760 Torr), and stainless steel 
+tubings. The mass flow controller sets the flow rat e of the fuel gas based on the signal from the 
+control box that astronaut holds during experiment.
+
+--- page 13 ---
+7 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 5. A sketch of the fuel supply system includ ing a fuel bottle,  a 
+pressure regulator and a mass flow controller. 
+ 
+Figure 6. The photo on the left shows six fuel bott le assemblies in the storage case 
+and the photo on the right shows a single fuel bottle assembly including a diaphragm 
+valve and a quick connect. The green label on the bottle describes the fuel type and 
+pressure.
+
+--- page 14 ---
+8 
+ 
+  
+The fuel bottles are exchangeable. Once a bottle is  used up, it can be disconnected from the 
+Experiment Assembly and a new bottle can be install ed. Figure 7 is a side view of the Experiment 
+Assembly showing the connector to the gas bottle, a  male Swagelok® Quick Connect in red. Also 
+seen in the photo is the toggle switch that turns t he mass flow controller on and off which prevents 
+fuel from being incidentally released to the flow duct.  
+ 
+ 
+ 
+Figure 7. A side view of the 
+SPICE apparatus shows a red connect to 
+the fuel bottle assemblies.  
+ 
+ 
+Figure 8. A front view of SPICE apparatus inside of  the MSG and positions of the still 
+camera and the video camera. Note that because of limited space, the video camera views the 
+flame through a 45 o angled mirror.  
+Avionic boxes
+
+--- page 15 ---
+9 
+ 
+ 
+Figure 8 illustrates the installation of the SPICE apparatus inside the MSG. The still camera, a 
+modified Nikon D100 (Fig. 9), acquires flame images  from the top window of the flow duct. The 
+video camera, Panasonic WV-CP 654 (Fig. 10), is ins talled in front of the flow duct providing the 
+front view the flame. Since it is round jet flame, the top view and the front view are expected to be 
+the same. 
+ 
+     
+ 
+Figure 11 is a photo of the control box that astron aut holds in hand to manually control the 
+experiment. There are seven controls in this control box: upper left is a 4-throw switch for setting the 
+gain of the radiometer amplifier, which can be 10, 50, 250 or 1000.  The toggle switch on the left 
+bottom is an igniter enabling switch, which must be  at “on” position for igniter to be turned on. The 
+toggle switch next to this one is the fuel enabling  switch, which must be at “on” position for fuel to  
+flow. The toggle switch in the middle of the top ro w is the igniter on/off switch. The two knobs on 
+the right are multi-turn potentiometers. The upper one controls the fuel flow rate whereas the bottom 
+one controls the fan speed, thus the air velocity i n the flow duct. On the very right side of the cont rol 
+box, attached is a remote shutter control of the Ni kon D100 camera. When the astronaut wants to 
+take a picture of the flame, he/she can push the button at the top of this box.  
+ 
+ 
+ 
+ 
+Figure 9. The still 
+camera, Nikon D100, that 
+views the flame from the top 
+window.  
+ 
+Figure 10. The video 
+camera and the mounting 
+structure with a reflecting 
+mirror on it. 
+ 
+Figure 11. The control 
+box to control air and fuel 
+flow rates and ignition, etc. 
+ 
+Figure 12. A photo shows the two avionics 
+enclosures for power supply and a video titling and  
+signal processing.
+
+--- page 16 ---
+10 
+ 
+Figure 12 is a photo of the two avionic box used in  SPICE. The one labeled as “Power Box” 
+converts ISS electric power supply (28 VDC) to vari ous power sources needed by different parts of 
+the SPICE apparatus. The “Video Titler Box” include s a titler that can display fuel flow rate, fan 
+speed, air velocity, and radiometer gain on the sam e video screen as the flame, and circuits to 
+process video output signal and still camera images  to digital data for downlink and data storage. 
+The module is also equipped with data logger and PCMCIA storage. 
+ 
+B.  Air velocity distribution in the flow duct 
+An important feature of SPICE is that it has air co -flow surrounding the flames. SPICE is the first 
+experiment that studies soot processes of laminar j et diffusion flame under long term microgravity 
+condition with air coflow. Because the velocity dis tribution in or near the flame is complicated by 
+the varying gas property and thermal expansion, the  coflow air velocity can only be specified in far 
+field and the inlet of the flow duct as boundary co nditions of the flame under investigation. For this  
+reason, the information of air velocity distributio n before igniting of the flame is needed.  The air 
+velocity was measured with an anemometer at differe nt locations in the flow duct at different fan 
+speed. The top window and the front window were rep laced by two windows with holes on them to 
+accommodate anemometer prob.  Figure 13 shows vario us hole locations through which air 
+velocities were measured. Some expressions used in describing a spatial location are explained as 
+follows. A “Station” refers to a plane perpendicula r to the flow direction. The value of a “Station” 
+indicates the distance between the nozzle tip and t he plane. There are only two Stations in use: 13 
+mm and 56 mm, defining two planes 13 mm and 56 mm d ownstream of the nozzle tip. “Height Off 
+Floor” refers to the distance above the floor of th e flow duct. The Floor of the flow duct is the lowe r 
+wall of the flow duct, perpendicular to the front w indow. The three positions in Height Off Floor in 
+use are 19 mm, 36 mm, and 57 mm define three planes  in parallel with the flow duct floor. The 36 
+mm one is in the middle of the flow duct so that it  includes the nozzle. The third direction is 
+expressed in terms of “Centerline”, “20 mm to the Inside” and “20 mm to the Outside,” which define 
+three planes in parallel with the front window of t he flow duct. There are totally 18 intersections of  
+these three sets of planes. Air velocities were mea sured at these 18 locations at 6 different fan dial  
+settings. Note that for the safety concern, even at  0 fan dial setting, there is a minimum DC voltage 
+applied to the fan to maintain a low velocity air f low which prevents fuel gas from accumulating in 
+the flow duct.
+
+--- page 17 ---
+11 
+ 
+ 
+ 
+Four air velocity profiles are presented below in Figs. 14 and 15. Figure 14 show the air velocities on 
+a vertical plane in parallel with the front window and at the center of the duct. 
+ 
+ 
+ 
+Figure 13.  A photo of the SPICE apparatus with flo w 
+measurement locations marked on the top and front windows.  
+ 
+Figure 14. Air velocity distribution on the center vertical plane 
+of the flow duct for 6 different fan settings. 
+0
+25 
+50 
+75 
+0 10 20 30 40 50 60 70 80 
+Vertical Position Off Floor (mm) 
+Velocity (cm/s) 
+Thin lines are for 13 mm station and thick lines 56 mm station 
+0                 2                4                6               8             10 
+SPICE Duct Velocity Profile, Center Vertical Profile 
+Fan Dial Settings
+
+--- page 18 ---
+12 
+ 
+The measurement was carried out by inserting the pr obe into the two holes, 13 mm Station and 56 
+mm Station, on the centerline of the top window. An d three Height Off Floor locations were used in 
+each hole. At each measuring point, 6 Fan Dial Sett ings on the control box were selected. It can be 
+seen that at the 13 mm Station, the air velocity on  the centerline (downstream of the nozzle) is lower  
+than those above and below. 
+ 
+ 
+The velocity difference increases with fan settings  (average air velocity), whereas at the 56 mm 
+Station, this center-dipping velocity profile evolves to a near linear profile with higher velocity at the 
+bottom. This center-dipping is caused by the bounda ry layer around the nozzle.  Figure 15 shows the 
+air velocity distribution in a horizontal plane at the center of the flow duct. The phenomenon of 
+lower velocity along the center line can be seen in  this plane too. Different from the velocity profil e 
+on the vertical plane, the center-dipping also shows at 56 mm Station.  
+ 
+The flow field was further modeled with COMSOL, a c ommercial software. The air flow near the 
+nozzle exit was shown in Fig. 16 for three differen t combinations of the nozzle velocity and co-flow 
+velocity. The white lines in the plots are streamli nes. The colors show the velocity map. Blue is for 
+low velocity whereas red indicates high velocity. A lthough in each plot, velocity varies from blue to 
+red, the absolute value of certain color is different between these velocity maps.  The nozzle ID in all 
+the three cases is 1.6 mm and the average air veloc ity in the nozzle remains to be 50 cm/s whereas 
+the coflow velocities are 0, 25 and 100 cm/s, respe ctively as stated below each plot. It can be seen 
+that for the case of zero co-flow, the lateral air velocity profile becomes monotonically decay with 
+its maximum value being at the center line. When th e coflow velocity increases to 25 cm/s, a 
+boundary layer around the nozzle becomes significan t. Near the nozzle, in the radial direction the air  
+velocity decreases with radius and then increases. As radius further increases to get near to the flow  
+duct wall, the air velocity drops again. This type of velocity profile extends to quite large distance  
+downstream of the nozzle. When coflow velocity incr eases to 100 cm/s, the coflow is significantly 
+Figure 15. Air velocity distribution on the center horizontal 
+plane of the flow duct for 6 different fan settings. 
+-25 
+0
+25 
+0 10 20 30 40 50 60 70 80 
+Horizontal Position Off Centerline (mm) 
+Velocity (cm/s) 
+0                2               4              6             8           10 
+SPICE Duct Velocity Profile, Center Horizontal Profile 
+Fan Dial Settings 
+Thin lines are for 13 mm station and thick lines 56 mm station (Back) 
+(Front)
+
+--- page 19 ---
+13 
+ 
+faster than jet flow. Under this condition, the are a affected by the nozzle boundary layer becomes 
+small. In relative short distance downstream the no zzle, the velocity profile in radial direction 
+becomes monotonically increasing with radius. 
+ 
+ 
+Thus the actual velocity distribution in the flow d uct is quite complicated. It not only depends on th e 
+jet velocity and the coflow velocity, but also is a ffected by the heat released from the flame. The 
+above discussion gives us a qualitative insight of the velocity field. Limited by the space in the MSG , 
+SPICE experiment does not have velocity diagnostic capability to reveal the actual velocity in the 
+presence of flame. 
+ 
+SPICE FLIGHT TESTS 
+The actual SPICE tests were conducted in SMG in twelve sessions from February 14, 2009 to June 
+23, 2009. In each session, the SPICE science team and engineering team were in the TeleScience 
+Center (TSC) in GRC to support the tests conducted on MSG. Real-time flame images were 
+available as long as air-to-ground communication channel was available. In addition, the team was 
+able to communicate with the astronaut who conducted the experiment to answer questions or to 
+clarify any ambiguities. 
+ 
+Most tests were conducted by setting the coflow vel ocity, igniting the flame, and adjusting the fuel 
+flow rate. Approximate smoke points were identified  in the video by the flight crew and 
+simultaneously by the ground support team in TSC. Typical burn times were 60 s, and after each two 
+such burns the MSG contents were flushed with ISS c abin air. The oxygen mole fraction of this 
+cabin air is maintained within 19 – 24%. 
+ 
+After the tests the video record was analyzed to id entify smoke points. The smoke point lengths, LSP , 
+(and the flow conditions) were obtained from the vi deo record and are the measured distance from 
+the burner to the tip of the luminous flame on the flame axis. The luminous flame tips were not 
+sharply defined in most images, but rather transiti oned from bright yellow to black over an axial 
+distance of 2 – 5 mm. Luminous lengths were measure d to the point where the centerline grayscale 
+     
+      
+  
+               0 co-flow                                  25 cm/s co-flow                           100 cm/s co-flow 
+ 
+Figure 16. Numerical simulation of air flow in the region near the nozzle exit for a fixed 
+velocity at nozzle exit and three co-flow velocities.
+
+--- page 20 ---
+14 
+ 
+intensity changed most rapidly between these yellow  and black regions. This helped reduce the 
+sensitivity of the measured lengths to camera exposures. 
+ 
+Totally 526 flames were ignited and studied, which were much more than originally planned. The 
+reason more flames can be studied was owing to the increasing familiarization for astronauts to the 
+apparatus, so that the flame adjusting time and smo ke point realization time became shorter and 
+shorter. This leads to plenty unused fuel for new t est points.  The entire test matrix and measured 
+flame data are listed in Appendix A. 
+  
+The flames generally reached steady conditions within 5 s of ignition or a change in flow rate of fuel  
+or air. Flames of propylene and propylene mixtures were generally more luminous than the others, 
+attributed to increased soot volume fractions. Peri odic flame motion was observed in some flames, 
+especially those with high air velocity, large burn ers, and long flames, and is attributed to coflow 
+perturbations. This increased slightly the uncertainties in smoke points for these conditions. 
+ 
+TEST RESULTS  
+Smoke points were attempted for all fuels. The cond itions for which smoke points were found are 
+summarized in Table 1. In some cases (e.g., tests i nvolving ethylene) the fuel supply was depleted 
+before all desired conditions could be tested, as t he supply was limited to two 150 cc bottles of each  
+fuel at gage pressures of 760 – 1440 kPa. Smoke poi nts were attempted with methane, but could not 
+be obtained before the flames impinged on the copper plate at the end of the duct. 
+ 
+ 
+ 
+Some smoke points (particularly for propane and eth ylene) were identified by the onset of gradual 
+dimming, reddening, and rounding of the luminous fl ame tip. Conversely, the brightest flames 
+(particularly for propylene and propylene mixtures)  normally did not display significant dimming 
+and reddening near their tips, except when much lon ger than their smoke points. For these flames, 
+smoke points were identified by the rapid transitio n to open-tipped flames. Open-tipped flames are 
+common in microgravity when smoke points are far ex ceeded 4 and are associated with flame 
+extinguishment along the centerline and soot that e scapes in an annular shell. For conditions 
+sufficiently above the smoke points, quenched soot could be seen leaving the flames despite the dark 
+background in the video. 
+Table 1. Summary of smoke points observed a 
+Parameter C 2H4 C 3H8 C 3H6 75% C 3H6 50% C 3H6 
+Zst  0.0637 0.0603 0.0637 0.0768 0.1018 
+Tad , K  2367 2264 2332 2317 2288 
+d, mm  0.76 – 1.6 0.76 – 1.6 0.41 – 1.6 0.76 – 1.6 0.76 – 1.6 
+ua, cm/s  18 – 58 16 – 45 5.4 – 57 13 – 65 11 – 49 
+LSP , mm  37 – 105 46 – 105 13 – 59 15 – 44 22 – 50 
+uf, cm/s  69.6 – 734 48.9 – 460 11.2 – 763 19.9 – 272 49.6 – 112 
+/g1865/g4662 f, mg/s  1.62 – 3.89 1.80 – 3.84 0.39 – 1.73 0.64 – 1.98 1.4 5 – 3.29 
+Re 127 – 636 176 – 788 36.4 – 630 49.8 – 324 89.4 – 20 7 
+# smoke points 6 6 20 13 7 
+aAll smoke point flames were attached to the burner, i.e., not lifted. For mixtures the fuel mole 
+fraction is shown and the inert is N 2. Parameters ua, uf, and Re  assume conditions of 298 K, 101 
+kPa and 21 ±1% O 2, and uniform velocity profiles. Viscosities used to calculate Re  involve burner 
+gas properties at 298 K and 101 kPa.
+
+--- page 21 ---
+15 
+ 
+Figure 17 shows images for representative flames ne ar their smoke points. Two sequences are 
+shown, and in both, the smoke point occurs between the third and fourth images. In the top row, 
+coflow velocity decreases from left to right at a c onstant fuel flow rate. This increases luminous 
+flame length and leads to soot emission in the four th image. The luminous length decreases in the 
+fourth image owing to flame extinction and extensiv e reactant leakage. In the bottom row, fuel flow 
+rate is increased at a constant coflow velocity, in creasing luminous lengths. The luminous lengths of 
+the flames in Fig. 17 are more sensitive to changes  in fuel flow rate than to changes in coflow 
+velocity. For a jet diffusion flame, the fuel flow rate is the limiting factor of the flame length because 
+there is almost unlimited amount of oxidant (air in  this case) available. This is why the flame length  
+is more sensitive to the change of fuel flow rate. 
+ 
+  
+In Fig. 18 the measured smoke point lengths are plo tted with respect to coflow velocity. For a given 
+choice of fuel and burner diameter, an increase in coflow velocity generally increases the smoke 
+point length. This behavior is attributed to decrea sed residence times and radiative losses as coflow 
+velocity increases, and is an important issue for f urther consideration. The slope of the correlations  
+in Fig. 18 generally decreases with increased sooting propensity. Figure 18 reveals that smoke points 
+of nonbuoyant coflowing flames decrease with increasing burner diameter. This behavior also can be 
+attributed to effects of residence time, as fuel velocity is proportional to d–2 when fuel mass flow rate 
+is constant. 
+ 
+ 
+Figure 17. Still camera images of 75% C 3H6 flames 
+with (top) decreasing coflow velocity, and (bottom)  
+increasing fuel flow rate. Images were taken at f/1 1 with 
+a shutter speed of 3.1 ms, except the rightmost ima ge in 
+the top row and 3 rd  image in the bottom row, which used 
+a shutter speed of 1.3 ms in original color.
+
+--- page 22 ---
+16 
+ 
+Also shown in Fig. 18 are smoke points of microgravity flames in still air. 5 The limited smoke points 
+at different diameters actually increase with burne r diameter. When the present measurements are 
+extrapolated to zero coflow velocity, the dependenc e on burner diameter diminishes. Normal gravity 
+smoke points are also generally found to have only a weak dependence on burner diameter. 5,6  
+However, testing in normal gravity 8 has shown that coflowing normal gravity smoke poin ts for 
+propylene  decrease with increasing burner diameter  for the present range of diameters. The present 
+smoke points generally were repeatable. An exceptio n was the tests with the 0.41 mm burner (for 
+which only propylene smoke points were possible). T esting on different days yielded different 
+smoke points for this burner. 
+ 
+The sooting propensity of the present fuels, identi fied from the smoke point lengths for fixed burner 
+diameter and coflow velocity, generally increases f rom propane to ethylene, to 50% propylene, to 
+75% propylene, and to propylene. This is consistent  with normal gravity results in the same 
+apparatus. 7 The only exception was that, for the 0.76 mm burne r, ethylene has a longer smoke point 
+length than propane. The lower density of ethylene results in a decreased residence time, but this is 
+unlikely to explain such a long smoke point relative to that of propane.  
+ 
+ 
+ 
+ 
+In Fig. 19 the smoke point flame lengths are plotte d with respect to   m ˙f / Zst . This is motivated by 
+Eq. (2) for stoichiometric lengths and the past obs ervations that flames at their smoke points 
+typically have luminous lengths that are twice as l ong as their stoichiometric lengths. This choice of  
+axes yields a reasonably good single correlation of  the luminous lengths of all fuels. These results 
+are similar to those of Lin and Faeth 1 in that flames with low ua / u f are generally longer than those at 
+otherwise matched conditions. This occurs in Fig. 1 9 for propylene, propane, and ethylene flames 
+with the smallest burner, for which ua / u f < 0.08. 
+Figure 18. Smoke point luminous length plotted with 
+respect to coflow velocity. The lines shown are fit s for each 
+pairing of fuel and burner diameter for present data.
+
+--- page 23 ---
+17 
+ 
+ 
+ 
+DISCUSSION 
+ 
+Although it is convenient to classified all flames,  laminar vs. turbulent and diffusion vs. premixed, 
+into two categories based on their soot emission co nditions, i.e., soot emitting flames and non-soot 
+emitting flames, the conditions delineating the two  or the conditions of onset of soot emission are 
+difficult to define. Up to date, these conditions h ave been documented solely based on experimental 
+observations.    Many efforts have been made to dev elop a universal method of defining the onset of 
+soot emission, i.e., smoke point, conditions, in terms of primary parameters of the flame. But none of 
+these efforts has been quite successful yet. The primary parameters of the flame mentioned here refer 
+to parameters used to set the flame, not those gene rated by the flame. The primary parameters of jet 
+diffusion flames include fuel type, fuel and oxidiz er supply rates, ambient temperature and pressure, 
+and configuration of the device where the flame takes place, such as nozzle diameter and dimensions 
+of the combustion chamber. The flame temperature, g as velocity and species distributions as well as 
+flame shapes and derived parameters such as heat ge neration and heat loss, are the parameters 
+generated by the flame which is not considered as p rimary parameters.  If a method that relates 
+smoke point to those primary parameters were found,  we would be able to predict whether a flame 
+emits soot or not based on the planned flame condit ions.  In the course of pursuing such a universal 
+method, a number of surmises of the mechanism of so ot emission have been proposed to associate 
+smoke point with certain flame generated parameters . Those surmises served as a middle step in 
+hoping to help further development of the aforement ioned method. The first surmise, and least 
+controversial, is that smoke points occur when soot  temperature drops below a critical temperature 
+prior to soot burnout. This temperature is about 13 00 K in normal gravity 8,9  and 1000 K in 
+microgravity.10,11  The second is that smoke point occurs when radiati ve loss fraction reaches 0.2 – 
+0.4 for normal-gravity flames 12-16  or 0.4 – 0.6 for microgravity flames. 17  Since the radiative fraction 
+of heat loss increases with fuel flow rate, smoke p oint will occur as the fuel flow rate is higher tha n 
+ 
+Figure 19. Smoke point luminous length plotted with 
+respect to fuel mass flow rate divided by stoichiom etric mixture 
+fraction. A linear fit that intersects the origin is shown. 
+Urban et al. (2000) 
+at ua = 0.
+
+--- page 24 ---
+18 
+ 
+certain value. This is consistent with experimental  observations. The third surmise is that the smoke 
+point correlates to the ratio of luminous length di vided by stoichiometric length. This ratio increase s 
+with flow rate. Once it reaches about 2, smoke poin t occurs. 15,18,19  The last surmise suggests that 
+smoke point correlates with the centerline flame re sidence time.  This is the most complex 8-11,17,18,20-
+24 surmise because flame residence time affects the s oot processes in twofold. An increase in 
+residence time can lead to soot emissions by increa sing the time available for soot formation. 
+Because this generally also increases the time avai lable for soot oxidation, it has been proposed that  
+smoke points are associated with conditions where t he time available for soot formation exceeds that 
+for soot oxidation to certain extent. 21  This is difficult to prove because to evaluate the  flame 
+residence time requires the velocity distribution a lone the centerline and the flame length, both of 
+which are resulted flame parameters, not readily av ailable from primary parameters of the 
+experiment. In addition, the soot formation time an d oxidation time are conceptually defined. 
+Practically, these times are not measurable and the y might be overlapped, i.e., for the same soot 
+aggregate, adding and oxidizing carbon particles ma y happen simultaneously. Because of these 
+difficulties and ambiguities, the fame residence ti me theory cannot be proved or disproved 
+rigorously.  However, these obstacles do not preven t us from checking the residence time theory 
+against the observed smoke point data with the help  of some approximated velocity distribution and 
+flame length information. More detailed discussion of this effort can be found in the publications 
+resulted from the SPICE project listed in Appendice s B through F. The results showed that although 
+residence time is helpful in understanding the pres ent smoke points, it does not yield quantitative 
+correlations. 
+ 
+ 
+CLOSING REMARKS 
+Smoke points of 55 microgravity gas-jet diffusion f lames in coflowing air were measured in earth 
+orbit. The conditions emphasized small burners and the effects of coflow velocity. These flames 
+allow extensive control over residence time, which is important in smoke point phenomena. The 
+major conclusions are as follows: 
+1.  An increase in coflow velocity increases the smoke point length. 
+2.  A decrease in burner diameter increases the smoke point length. 
+3.  These two effects can be explained qualitatively by  considering residence times; increased 
+fuel and/or coflow velocities yield increased smoke point lengths. 
+4.  The sooting propensities of the present fuel mixtur es in microgravity increase according to 
+ethylene < propane < 50% propylene < 75% propylene < propylene. This is the same as in 
+normal gravity except for the exchanged positions of ethylene and propane. 
+5.  Consistent with past theory and experiments, lumino us length at the smoke point is 
+proportional to fuel mass flow rate. However there is a slight increase in luminous length as 
+ua / u f decreases. 
+6.  Although residence time is helpful in understanding  the present smoke points, it does not 
+yield quantitative correlations of smoke points. 
+7.  The present smoke point lengths scale with d –0.91  uair 0.41 . Either a decrease in diameter or an 
+increase in coflow velocity decreases residence time and radiative loss fraction, which in turn 
+leads to a longer smoke point. 
+ 
+References 
+1Mokdad, A. H., Marks, J. S., Stroup, D. F., and Ger berding, J. L., “Actual Causes of Death in the Unit ed States, 2000,” The 
+Journal of the American Medical Association , Vol. 291, No. 10, 2004, pp. 1238-1245. 
+2Ramanathan, V. and Carmichael, G., “Global and Regi onal Climate Change Due to Black Carbon,” Nature Geoscience , Vol. 1, 
+No. 4, 2008, pp. 221-227.
+
+--- page 25 ---
+19 
+ 
+3Purser, D. A., “Assessment of Hazards to Occupants from Smoke, Toxic Gases, and Heat,” SFPE Handbook of Fire Protection 
+Engineering , 4 th  ed., edited by Dinenno, P. J., et al., National Fire Protection Association, Quincy, MA, 2008, pp. 2-96-2-193. 
+4Urban, D. L., Yuan, Z.-Y., Sunderland, P., B., Lin,  K.-C., Dai, Z., and Faeth, G. M., “Smoke-Point Pro perties of Non-Buoyant 
+Round Laminar Jet Diffusion Flames,” Proceedings of the Combustion Institute , Vol. 28, No. 2, 2000, pp. 1965-1972. 
+5Urban, D. L., Yuan, Z.-Y., Sunderland, P., B., Lin,  K.-C., Dai, Z., and Faeth, G. M., “Smoke-Point Pro perties of Non-Buoyant 
+Round Laminar Jet Diffusion Flames,” Proceedings of the Combustion Institute , Vol. 28, No. 2, 2000, pp. 1965-1972. 
+6Sunderland, P. B., Mortazavi, S., Faeth, G. M., and  Urban, D. L., “Laminar Smoke Points of Nonbuoyant Jet Diffusion Flames,” 
+Combustion and Flame , Vol. 96, No. 1-2, 1994, pp. 97-103. 
+7Dotson, K.T., “Smoke Points of Microgravity and Nor mal Gravity Coflow Diffusion Flames,” M.S. Thesis, Fire Protection 
+Engineering Dept., Univ. of Maryland, College Park, MD, 2009. 
+8J.H. Kent, H.G. Wagner, “Why do diffusion flames emit smoke?,” Combust. Sci. Tech.  41 (1984) 245-269. 
+9I. Glassman, “Soot formation in combustion processes,” Proc. Combust. Inst.  22 (1988) 295-311. 
+10 D.L. Urban, Z.-G. Yuan, P.B. Sunderland, G.T. Linte ris, J.E. Voss, K.-C. Lin, Z. Dai, K. Sun, G.M. Fae th, “Structure and soot 
+properties of nonbuoyant ethylene/air laminar jet diffusion flames,” AIAA J.  36(8) (1998) 1346-1360. 
+11 G.M. Faeth, in H.D. Ross (Ed.), Microgravity combustion: fire in freefall, combusti on treatise , Academic Press, San Diego, CA, 
+USA, 2001, p. 83. 
+12 G.H. Markstein, “Relationship between smoke point a nd radiant emission from buoyant turbulent and lami nar diffusion flames,” 
+Proc. Combust. Inst.  20 (1984) 1055-1061. 
+13 M.A. Delichatsios, “Smoke yields from turbulent buoyant jet flames,” Fire Safety J. , 20(4) (1993) 299-311. 
+14 M.A. Delichatsios, “A phenomenological model for smoke-point and soot formation in laminar flames,” Combust. Sci. Tech.  100 
+(1994) 283-298. 
+15 F.G. Roper, C. Smith, “Soot escape from laminar air-starved hydrocarbon flames,” Combust. Flame  36 (1979) 125-138. 
+16 G.H. Markstein, “Radiant emission and smoke points for laminar diffusion flames of fuel mixtures,” Proc. Combust. Inst.  21 
+(1986) 1107-1114. 
+17 D.L. Urban, Z.-G. Yuan, P.B. Sunderland, K.-C. Lin,  Z. Dai, G.M. Faeth, “Smoke-point properties of non buoyant round laminar 
+jet diffusion flames,” Proc. Combust. Inst.  28 (2000) 1965-1972. 
+18 F.G. Roper, “Soot escape from diffusion flames: a c omparison of recent work in this field,” Combust. Sci. Tech.  40 (1984) 323-
+329. 
+19 K.-C. Lin, G.M. Faeth, P.B. Sunderland, D.L. Urban,  Z.-G. Yuan, “Shapes of nonbuoyant round luminous h ydrocarbon/air 
+laminar jet diffusion flames,” Combust. Flame  116 (1999) 415-431. 
+20 Y.R. Sivathanu, G.M. Faeth, “Soot volume fractions in the overfire region of turbulent-diffusion flame s,” Combust. Flame  81 
+(1990) 133-149. 
+21 P.B. Sunderland, S. Mortazavi, G.M. Faeth, D.L. Urb an, “Laminar smoke points of nonbuoyant jet diffusi on flames,” Combust. 
+Flame  96 (1994) 97-103. 
+22 K.-C. Lin, G.M. Faeth, “Hydrodynamic suppression of  soot emissions in laminar diffusion flames,” J. Propul. Power  12(1) 
+(1996) 10-17. 
+23 Z. Dai, G.M. Faeth, “Hydrodynamic suppression of so ot formation in laminar coflowing jet diffusion fla mes,” Proc. Combust. 
+Inst . 28 (2000) 2085-2092. 
+24 T.L. Berry, W.L. Roberts, “Measurement of smoke poi nt in velocity-matched coflow laminar diffusion fla mes with pure fuels at 
+elevated pressures,” Combust. Flame 145 (2006) 571-578.
+
+--- page 26 ---
+B-1 
+ 
+ 
+Appendix A. ( Spice Flight Test data II.xls )………………………………………..A-1 
+ 
+Appendix B. (2009, Eastern State Combustion Meeting, paper A  )……….………B-1 
+ 
+Appendix C. (2010 AIAA Paper, paper B )………… …………………………….C-1 
+ 
+Appendix D. (2010 33 rd  Symposium Paper, paper C )………… ……  …… …….D-1 
+ 
+Appendix E. (2010 Leeds Paper, paper D )…………… ……………   … ……….E-1 
+ 
+Appendix F. (2010 Fire safety J. Paper, paper E )……………………   …    …….F-1
+
+--- page 27 ---
+C-1 
+ 
+Appendix C 
+Appendix D
+
+--- page 28 ---
+E-1 
+ 
+Appendix E

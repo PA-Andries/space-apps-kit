@@ -1,0 +1,26 @@
+Source : NASA PSI, PSI-20, Science Documents, ACME-BRE_DoD.docx
+
+
+The BRE data is organized in PSI by burner and fuel composition. Raw data, Video and Images Data, and Experiment Documents are available on the “Scientific Data and Information Tab” of each of the four “Experiment Data” records:
+1. 25-mm burner, 50% ethylene (balance nitrogen)
+2. 25-mm burner, 100% ethylene
+3. 25-mm burner, 100% methane
+4. 50-mm burner, 100% ethylene
+Within each “Experiment Data” record, “Raw Data”, “Images” and “Audio/Video Files” are available on the “Scientific Data and Information” tab. Test names are formatted YYDDDX# where YY identifies year, DDD identifies day of year (GMT), X identifies a letter and # identifies a number – where the different numbers can be for repeats but are typically variants. Record naming and listings are based on the detailed information in the test conditions table below (page 2). 
+
+Test specific raw data files are located on the “Raw Data and Information” tab of the “Raw & Analyzed Data” record. The first row of the .csv files provides information about the test configuration. 
+
+Associated Images are located on the “Image Data and Information” tab of the “Videos & Images” record. Videos can be found of the “Video Data and Information” tab as well. 
+There are other supporting reports available on the other tabs of the “Investigations” record.
+
+
+
+
+
+
+
+
+
+
+
+

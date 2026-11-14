@@ -1,0 +1,111 @@
+Source : NASA PSI, PSI-22, Reports, ACME fact sheet 20180820.pdf
+
+--- page 1 ---
+20 August 2018   
+Advanced Combustion via Microgravity Experiments (ACME) 
+ 
+PURPOSE:  ACME is focused on advanced combustion 
+technology via fundamental microgravity research.  The 
+primary goal is to improve efficiency and reduce pollutant 
+emission in practical terrestrial c ombustion.  A secondary 
+objective is fire prevention, especially for spacecraft. 
+ 
+RESEARCH:  ACME includes six independent experiment s 
+investigating laminar, non-premixed flames of gaseous fuels .  
+The experiments are being conducted with a single set o f 
+modular hardware in the Combustion Integrated Rack (CIR) 
+on the International Space Station (ISS) .  While the ISS 
+astronauts set up the experimental hardware, the ACME tests 
+are remotely commanded from NASA’s Glenn ISS Payload 
+Operations Center. 
+STATUS:  ACME setup and checkout were carried out by the 
+ISS crew in Sept. -Oct. 2017 .  Thus far, a dozen astronauts 
+from Germany, Italy, Japan, Russia and the United States 
+have supported the ACME research.  Since November 2017, 
+over 300 flames have been ignited  for the Coflow Laminar 
+Diffusion Flame (CLD Flame) and Electric-Field Effects on 
+Laminar Diffusion Flames (E -FIELD Flames)  experiments led 
+respectively by Profs. Marshall B. Long (Yale University) and 
+Derek Dunn-Rankin (University of California, Irvine).   
+ 
+A second round of CLD Flame tests is currently underway and 
+should end in September when the testing will transition 
+back to the E-FIELD Flames experiment.  In late 2018, the 
+hardware will be reconfigured for the Burning Rate Emulator 
+(BRE) experiment led by Prof. Jim Qui ntiere (University of 
+Maryland).  While the first two ACME experiments are 
+focused on improving practical combustion on Earth, BRE is 
+aimed at improving spacecraft fire safety. 
+Italian astronaut Paolo Nesp oli installing the ACME 
+chamber insert into the CIR’s combustion chamber. 
+U.S. astronaut Joe Acaba aligning the retracting hot -wire 
+igniter to the burner on the ACME chamber insert. 
+Example image of a lifted coflow flame from the CLD Flame 
+experiment led by Prof. Marshall B. Long (Yale University). 
+ 
+German astronaut Alex Gerst exchanging a mass flow 
+controller (for the nitrogen used to dilute the gaseous fuel) 
+on the ACME chamber insert.
+
+--- page 2 ---
+20 August 2018   
+Advanced Combustion via Microgravity Experiments (ACME) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+WEB SITE:  http://spaceflightsystems.grc.nasa.gov/acme/ 
+UPDATES:  www.facebook.com/space.flames  
+PHOTOGRAPHS:  www.flickr.com/photos/space-flames 
+EDUCATION:  https://tinyurl.com/space-flames  
+Russian cosmonauts Anton Shkaplerov (left) and Oleg 
+Artemyev exchanging a CIR gas bottle. 
+U.S. astronaut Ricky Arnold cleaning soot from the coflow 
+burner used by both the CLD Flame and E -FIELD Flames 
+experiments.  The cleaning was carried out with a 
+toothbrush, piece of insulated wire, vacuum sweeper , 
+flashlight (for burner inspection), dust mask, and gloves. 
+ 
+CONTACT: 
+Dennis Stocker, ACME Project Scientist 
+NASA Glenn Research Center, Cleveland, OH 
+216-433-2166, dennis.p.stocker@nasa.gov 
+Lifted flames (detached from the burner) as a function of the 
+matched fuel and air velocity  from the CLD Flame experiment.  
+The false  color indicate s the CH* concentration  as function of 
+the radius and height above the burner .  CH* is an excited 
+species and emits blue light as it  drops to a lower energy level in 
+a process known as chemiluminescence.  It is the primary source 
+of the blue that is the natural color of hydrocarbon flames  
+(neglecting the broadband thermal radiation from the soot). 
+Diffusion flames with a weak air coflow as a function of the electric field strength, where an open copper mesh above the flame is 
+negatively and positively charged  in the top and bottom rows, respectively .  Flames naturally include  ions which can be affected 
+by a powerful electric or magnetic field.  In ACME’s E-FIELD Flames experiment, the copper mesh is energized up to 10,000 volts.  
+This technology could be used to stabilize fuel-lean flames under conditions which are less polluting.

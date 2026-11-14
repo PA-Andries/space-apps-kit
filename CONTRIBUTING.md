@@ -97,7 +97,7 @@ On ne contourne pas un garde-fou (`--no-verify`). S'il bloque à tort, on appell
 ## Les règles de code
 
 - **La mise en forme n'est pas un sujet.** Ruff s'en charge ; on ne la discute pas et on ne la corrige pas à la main. Lignes de 120 caractères au plus.
-- **Noms en français, sans accents, en minuscules avec des tirets bas :** `charger_fiches`, `oxygene_min`. Les constantes sont en majuscules : `PILIERS`. Les accents restent permis dans les textes affichés et les commentaires.
+- **Noms en minuscules avec des tirets bas :** `charger_fiches`, `oxygene_min`. Les constantes sont en majuscules : `PILIERS`.
 - **Les unités sont dans le nom :** `pression_kpa`, `debit_air_cm_s`, `oxygene_pct`.
 - **Une fonction partagée a des types et une phrase d'explication :**
 

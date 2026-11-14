@@ -1,0 +1,405 @@
+Source : NASA PSI, PSI-107, Reports, Exp_19-20_SPICE_30-Day_PostFlight_Report.pdf
+
+--- page 1 ---
+Smoke Point In Coflow Experiment 
+“SPICE” 
+Microgravity Science Glovebox 
+Increment 19-20 (30 Day Report) 
+Investigators: David Urban NASA GRC, Peter Sunderland: Univ. Maryland 
+Project Scientist:  Zengguang Yuan, National Center for Space Exploration Research 
+Project Manager: Robert Hawersaat NASA GRC 
+ 
+I.  Introduction 
+ 
+A. Hypothesis 
+The hypothesis of the SPICE investi gation is that smoke point behavior 
+will be observed for co-flowing flames and that it will show 
+dependence on nozzle diameter and coflow velocity. 
+ 
+B. Objectives of Investigation 
+The objective of the SPICE experiment is to find the laminar smoke-point 
+properties of nonbuoyant jet diffusion flames (i.e., the properties of the 
+largest laminar jet diffusion flames that do not emit soot) for several fuels 
+under different nozzle diameter/ co-flow velocity configurations.  
+Luminous flame shape measurements would also be made to verify 
+models of the flame shapes under co-flow conditions.  
+ 
+C. Previous Mission Experience 
+ N/A 
+ 
+D. Background/History of Project (Optional) 
+ The SPICE experiment was an outgrow th of the Laminar Soot Processes 
+Experiment (LSP) which flew on STS 83, 94, and 107.  SPICE utilized the 
+design heritage and modified the hardware from the Enclosed Laminar Flames 
+Experiment (ELF) which flew in the Middeck Glovebox on STS 87. 
+ 
+II.  Methods/Research Operations 
+ 
+A. Discussion of Method/Protocol 
+ Most tests were conducted  by setting the coflow velo city, igniting the flame, 
+and adjusting the fuel flow rate. Appr oximate smoke points were identified in 
+the video by the flight crew and simultaneously by the ground support crew in 
+Cleveland. Typical burn times were 60 s, and after each two such burns the 
+MSG contents were flushed with ISS cabin air.  After the tests the video 
+record was analyzed to identify sm oke point conditions. The associated 
+coflow and fuel flow rates were obtain ed from digital data  recorded in the 
+video. The smoke point lengths, LSP, we re obtained from the video record 
+and are the measured distance from the burner tip to the tip of the luminous 
+flame on the flame axis.
+
+--- page 2 ---
+III.  Results 
+ 
+A. List of Preflight, In-f light, Postflight Anomalies 
+ SPICE operated very successfully with the only significant anomaly being the 
+accumulation of soot in the outlet screen which changed the flow behavior in 
+the duct.  This was corrected by a crew member using the vacuum to clean the 
+outlet screen on June 15. 
+B. Completeness/Quality of Data 
+During Increment 18 SPICE conducted 108 test points completing its nominal 
+test matrix. During Increments 19/20 SPICE conducted 155 additional test 
+points the provided improved resolution of the smoke points and allowed us to 
+explore further limits in the parameter space. 
+C. Status of Data Analysis:  The data from the down linked video have been analyzed 
+for flame length and smoke point flow rate.  These have resulted in a meeting apper 
+and a draft journal paper.  More work will be conducted with analysis of the digital 
+luminance data from the Nikon.   
+ 
+D. Preliminary Research Findings: 
+ See attached paper below
+
+--- page 3 ---
+1 
+2009 Fall Technical Meeting  
+Organized by the Eastern States Section of the Combustion Institute  
+and Hosted by the University of Maryland College Park 
+October 18-21, 2009 
+Laminar Smoke Points of  
+Microgravity Coflow Diffusion Flames 
+K.T. Dotsona, P.B. Sunderlanda, Z.–G. Yuanb, D.L. Urbanc 
+aDepartment of Fire Protection Engineering, University of Maryland, College Park, MD, USA 
+bNational Center for Space Exploration Research, Cleveland, OH, USA 
+cNASA Glenn Research Center, Cleveland, OH, USA 
+ 
+Laminar smoke points were measured in nonbuoyant laminar jet diffusion flames in air coflow aboard the 
+International Space Station as part of the Smoke Points in Coflow Experiment  (SPICE). Smoke points were found 
+for ethylene, propane, propylene, and mixtures of 50 and 75% propylene by volume in nitrogen. Burner diameters 
+were 0.41, 0.76 and 1.6 mm and coflow velocities varied from 5.4 – 65 cm/s. These flames afford good control over 
+residence time via variations in dilution, burner diameter , and coflow velocity. Increasing coflow velocity decreases 
+luminous flame lengths, but moves smoke points to higher fuel flow rates and longer luminous flame lengths. 
+Smaller burners have longer smoke points for coflowing flames. These trends can be explained qualitatively by 
+considering total residence time effects. The luminous flame lengths generally correlate with fuel mass flow rate 
+divided by stoichiometric mixture fraction, although they increase slightly as air velocity decreases.  
+1. Introduction 
+Soot formation is an important unresolved problem  in combustion science. Soot is estimated to 
+be responsible for up to 50,000 prem ature deaths in the U.S. [1] a nd is believed to contribute to 
+climate change and glacial melting [2]. Radiation from soot in flames allows reading by candle-
+light but also contributes to he at loads in engines and the spread of unwanted fires. Smoking 
+flames emit carbon monoxide, which is the major cause of death in fires [3].  
+The smoke point is the condition (or length) where a flame begi ns to emit soot. Smoke points 
+indicate the sooting propensity of a fuel in diffusion flames. In normal gravity, laminar smoke 
+points have been measured for many gaseous a nd condensed fuels [4–9]. Laminar smoke points 
+have been found to correl ate with soot volume frac tions [10] and radiative loss factions [11] of 
+turbulent diffusion flames. Yang et al. [12] found that gas turbine soot em issions correlate very 
+well with a threshold sooting i ndex (TSI) based on fuel molecula r weight divided by the laminar 
+smoke point. Smoke points have been shown to co rrelate with the smoke release from turbulent 
+buoyant flames [13] and have been  applied to developing general soot models for computational 
+combustion simulations [14] and heat release measurements [15]. 
+In a 1988 paper [16], Glassman predicted that smoke points would not occur in nonbuoyant gas-
+jet flames. He based this on the assumption that residence time scales with the square root of fuel 
+flow rate in normal gravity but is independent of flow rate in  microgravity flames. Subsequent 
+work [17] observed smoke points of nonbuoyant fl ames aboard a parabolic aircraft and used 
+numerical predictions to show that residence time increases with flame length for nonbuoyant 
+flames without co-flow. Urban et al. [18] reported smoke points of microgravity flames observed 
+on a space shuttle. Microgravity smoke point meas urements are difficult in parabolic aircraft
+
+--- page 4 ---
+2 
+owing to g-jitter and in drop facilities owing to limited test times. 
+Attributing smoke point behavior to total resi dence time helps with qualitative explanations of 
+smoke point behavior but to date  has not yielded successful quant itative correlations [8]. This 
+may be because smoke points arise from a comp etition between the times available for soot 
+formation and soot oxidation. De lichatsios and co-workers suggest ed that smoke point length is 
+proportional to soot formation time [19–20]. Quantitative correlations may also be possible from 
+an examination of radiative losses, which have been observed to be 20 – 30% for normal-gravity 
+smoke point flames and to increase with adiabatic flame temperature [5]. 
+Soot is transported in flames by convection and thermophoresis. By varying the burner diameter, 
+coflow velocity, and fuel dilution, flame shape and residence times in the soot formation and 
+soot oxidation regions can be changed. A decrease in coflow velocity will generally increase 
+entrainment of flow towards the flame axis. 
+Kent and Wagner [21] found that  smoke burn out in the oxidat ive region of the flame ceases 
+when the tip of a buoyant diffusion flame cools to approximately 1300 K. Urban et al. [22] found 
+that the tip of a nonbuoyant (microgravity) fl ame reaches 1000 K at its smoke point. In buoyant 
+flames this decrease in temperature is attr ibuted primarily to he at conduction, while in 
+nonbuoyant flames it is attributed largely to ra diative quenching [23]. The radiative quenching 
+effect causes a visible tip openi ng in nonbuoyant smoke points of flames of relatively long 
+residence time [22]. 
+A recent 2.5 s drop tower study by Jeon et al. [24] found that for small coflow velocities the soot 
+volume fraction increases with coflow velocit y. This was attributed to an increase in 
+temperature. Lin and Faeth [7,25] studied the effects of coflow velocity on weakly-buoyant 
+flames near the smoke point. They observed flam es in normal gravity, but at low pressures to 
+reduce the effects of gravity. They found that increasing the coflow velocity reduced soot 
+volume fractions and increased the smoke point le ngth. This was attributed to decreased flame 
+residence time and modified soot  pathlines. Refs. [7 and 24] both showed that luminous flame 
+lengths decrease with increasi ng coflow velocity. Their bur ner diameters, 7 and 10 mm, 
+respectively, were much larger than those considered here. 
+Faeth and co-workers [25–27] applied the fl ame shape analyses of Spalding [28] and 
+Mahalingam et al. [29] to nonbuoyant gas-jet flames to obtain 
+ ( L f – Lo ) / d = Cf Re Sc / 16 Zst ,  (1) 
+and 
+ ( L f – Lo ) / d = 3 Cf Re Sc / 32 Zst ,  (2) 
+for coflowing and non-coflowing cases, respectively, where Lf is luminous flame length, Lo is a 
+virtual origin correction, d is burner diameter, Cf is an empirical coefficient, Re is the jet 
+Reynolds number, Sc is the Schmidt number, and Zst is the stoichiometric mixture fraction. The 
+Reynolds number is defined as ρ d u / μ, where ρ is density, d is burner diameter, u is velocity, 
+and μ is dynamic viscosity. The Schmidt number and vi scosity in Eqs. (1–2) were those of air at 
+the mean of the adiabatic flame temperature and the ambient temperature. 
+Schmidt number and viscosity, defined in this fashion, do not vary substantially for the flames in 
+this study, and are not considered significant. In addition the virtual origin correction was 
+neglected. With this in mind, Eqs. (1–2) can be rearranged to
+
+--- page 5 ---
+3 
+ L f = C m˙ f / Zst ,  (3)  
+where C is a constant and m˙ f is the fuel mass flow rate. 
+Thus motivated, the objectives of this study are: 
+1. to measure nonbuoyant smoke points of propane, ethylene, propylene, and 
+propylene/nitrogen mixtures, 
+2. to identify the effects of coflow velocity and burner diameter on the smoke points, and 
+3. to correlate the luminous flame lengths. 
+2. Experimental 
+The Smoke Points in Coflow Experiment (SPI CE) module was brought to the International 
+Space Station (ISS) in 2008. It was operated in  the Microgravity Science Glovebox (MSG) by 
+various crew members in 2009. Smoke points were at tempted for all fuels for fuel jet diameters 
+of 0.41, 0.76, and 1.6 mm. The conditions for which smoke points were found are summarized in 
+Table 1. In some cases (e.g., te sts involving ethylene) the fuel  supply was depleted before 
+desired smoke points could be found, as the supply  was limited to two 75 cc bottles of each fuel 
+at gage pressures of 760 – 1440 kPa, depending on the fuel. 
+ The SPICE module contains a rectangular duct th at has an approximately 76 mm square cross 
+section with rounded corners. A DC fan supplie s coflowing air from the glovebox contents. The 
+air passes through a honeycomb and screen to reduce swirl and then  enters the duct. The air and 
+combustion products leave the duct through a pe rforated copper plate followed by a copper 
+screen. The screen is 50 mm upstream of th e burner discharge and the plate is 120 mm 
+downstream. Fan voltage is varied to control the coflow velocity, which is measured with a hot-
+wire anemometer between the inlet honeycomb a nd screen. This anemometer was calibrated in 
+normal gravity using a hot-wire anemometer 36 mm downstream of the duct entrance. Fuel flow 
+rate was adjusted manually and controlled with a mass flow meter. The flames were ignited with 
+a hot-wire ignitor. Video was recorded with an analog color video camera and downlinked in real 
+time. Still images were recorded with a 12 bit Nikon™ D100 single-lens reflex color digital still 
+camera (with 3008 × 2000 pixels) with a 60 mm lens. 
+Most of the tests were conducted by setting the coflow velocity, igniting the flame, and adjusting 
+the fuel flow rate. Approximate smoke points were  identified in the video by the flight crew and 
+simultaneously by the ground support crew in Cleveland. Typical burn times were 60 s, and after 
+each two such burns the MSG contents were flushed with ISS cabin air.  
+After the tests the video record was analyzed to  identify smoke point conditions. The associated 
+coflow and fuel flow rates were  obtained from digital data r ecorded in the video. The smoke 
+point lengths, LSP, were obtained from the vi deo record and are the measured distance from the 
+burner tip to the tip of  the luminous flame on the flame axis. The luminous flame tips were not 
+sharply defined in most images, but rather involved a transition from bright yellow to black 
+across an axial distance of 2 – 5 mm. Flame hei ght was thus measured to the point where the 
+centerline grayscale intensity changed most rapidly between these yellow and black regions. This 
+helped reduce the sensitivity of measured flame height to camera exposure settings. 
+Smoke points were obtained for five fuels, as summarized in Table 1. Smoke points were
+
+--- page 6 ---
+4 
+attempted with methane, but could not be obtained before the flames impinged on the plate at the 
+end of the duct. Also shown in Table 1 are the ranges of various parameters for which 
+microgravity smoke points were observed. 
+3. Results and Discussion 
+Some smoke points, propane and ethylene in part icular, were identified by the onset of gradual 
+(rather than sharp) dimming and reddening of the luminous flame tip in the downstream 
+direction. Rounding of the tip al so was associated with th e smoke point. For conditions 
+sufficiently above the smoke point, quenched soot could be seen leaving the flame. The brightest 
+flames did not always display significant redden ing or darkening near their tips, except well 
+above the smoke point. This occurred for the pu re propylene and propylene mixtures, and the 
+smoke point was identified by the rapid transition to an open-tipped, soot emitting flame.  
+The flames generally reached steady conditions within 5 s of ignition or a change in flow rate of 
+fuel or air. Flames of propylene and propylene mixtures were generally more luminous than 
+those of methane, ethylene, and propane, attribut ed to their higher propensity to form soot. The 
+smoke point transition was more abrupt in th e propylene-based fuels than for propane or 
+ethylene. Periodic flame motion was observed in some flames, especially those with high coflow, 
+long length, and low fuel velocity, and is attributed to non-uniform coflow. This effect was small 
+and did not prevent clear measurement of flame length. 
+Figure 1 shows images for representative flames  near their smoke points. Two sequences are 
+shown, and in both the smoke point occurs betw een the third and fourth flames. In the top 
+sequence, coflow velocity decreases from left to right at constant fuel flow rate. This increases 
+luminous flame length and reduces the smoke poi nt leading to soot emission. The luminous 
+length decreases in the fourth image owing to incomplete  combustion. In the bottom sequence 
+fuel flow rate is increased at constant coflow velocity, increasing flame length as expected. As 
+seen in Fig. 1, luminous length is more sensitive to changes in fuel flow rate than to changes in 
+coflow velocity. 
+ 
+Table 1. Summary of smoke points observed.a 
+Parameter C 2H4 C 3H8 C3H6 75% C 3H6 50% C3H6 
+Zst 0.0637 0.0603 0.0637 0.0768 0.1018 
+Tad, K 2367 2264 2332 2317 2288 
+d, mm 0.76 – 1.6 0.76 – 1.6 0.41 – 1.6 0.76 – 1.6 0.76 – 1.6 
+ua, cm/s 18 – 58 16 – 45 5.4 – 57 13 – 65 11 – 49 
+LSP, mm 37 – 105 46 – 105 13 – 59 15 – 44 22 – 50 
+uf, cm/s 69.6 – 734 48.9 – 460 11.2 – 763 19.9 – 272 49.6 – 112 
+m˙ f, mg/s 1.62 – 3.89 1.80 – 3.84 0.39 – 1.73 0.64 – 1.98 1.45 – 3.29 
+Re 127 – 636 176 – 788 36.4 – 630 49.8 – 324 89.4 – 207 
+# smoke points 6 6 20 13 7 
+aAll smoke point flames were attached to the burner, i.e., not lifted. For mixtures the 
+fuel mole fraction is shown and the inert is N 2. Parameters ua, uf, and Re assume 
+conditions of 298 K, 101 kPa and 21 ±1% O 2, and uniform velocity profiles. 
+Viscosities used to calculate Re involve burner gas properties at 298 K and 101 kPa.
+
+--- page 7 ---
+5 
+In Fig. 2 the measured smoke 
+point lengths are plotted with 
+respect to coflow velocity. For 
+a given choice of fuel and 
+burner diameter, an increase 
+in coflow velocity generally 
+increases the smoke point 
+length. This behavior is 
+attributed to decreased 
+residence times in the soot 
+formation region when coflow 
+velocity is increased. The 
+variation of smoke point with 
+coflow velocity is greater for 
+longer flames. 
+Figure 2 reveals that smoke 
+points of coflowing 
+nonbuoyant flames increase 
+with decreasing burner 
+diameter. This differs from 
+previous observations of 
+microgravity flames in still air 
+[17,18], whose smoke points 
+are only weakly dependent on 
+burner diameter. However, 
+when the data of Fig. 2 are 
+extrapolated to ua = 0, a weak 
+dependence on burner 
+diameter results. Normal 
+gravity smoke points also are 
+found to have only a weak dependence on burner diameter [17,18].  
+The present smoke points were found to be repeatable, except for propylene with a 0.41 mm 
+burner. Testing on different days  yielded different smoke points for this combination. This is 
+attributed to a change in the duct exit system , which became partially clogged with soot and 
+required a higher fan voltage to obtain a given hot-wire duct air velocity reading. The lower 
+smoke points were obtained with a relatively cl ogged filter and the highest smoke point was 
+found after the filter was vacuumed clean. For all of these tests, th e flow rate was set based on 
+the hot-wire duct velocity reading, however it app ears that the flow restriction in the filter 
+changed the coflow. Other smoke points collected  on these two dates did not exhibit this same 
+discrepancy so this coflow quality effect may only affect flames of this smallest burner diameter. 
+The sooting propensity of the present fuels, id entified from changes in smoke point length for 
+fixed burner diameter and coflow velocity, is generally propane < ethylene < 50% propylene < 
+75% propylene < propylene. (This is consistent with unpublished normal gravity results in the 
+same apparatus.) The only exception was th at for the 0.76 mm burner ethylene has a longer 
+smoke point length than propane. This could be a result of residence time effects associated with 
+ 
+Figure 1. Color still camera images of 75% C 3H6 flames with (top) 
+decreasing coflow velocity at a cons tant fuel flow rate, and (bottom) 
+increasing fuel flow rate at a constant  coflow velocity. Images were taken 
+at f/11 with a shutter speed of 3.1 ms (except the 4 th top and 3 rd bottom 
+pictures, which involved a shutter speed of 1.3 ms).
+
+--- page 8 ---
+6 
+the lower density of ethylene. 
+In Fig. 3 the smoke point flame 
+lengths are plotted with respect to 
+fm& / Zst. This is motivated by 
+Eq. (3). This choice of axes yields a 
+reasonably good single correlation 
+of the luminous leng ths of all fuels. 
+Although this plot is for conditions 
+at smoke points, data for flames not 
+at their smoke points are expected to 
+generally follow this correlation. 
+This plot does not account for the 
+decrease of flame length with 
+increased coflow velocity (see 
+Fig. 1). These results are similar to 
+those of Lin and Faeth [25] in that 
+the proportionality between LSP and 
+fm& / Zst increases for flames with 
+low ua / uf velocity ratios (see Eqs. 1 
+and 2). This effect on lengths is 
+observed for propylene, propane, 
+and ethylene flames with the 
+smallest burner, for which 
+ua / uf < 0.08. 
+4. Conclusions 
+Smoke points of microgravity gas-jet 
+diffusion flames were observed. 
+Conditions emphasized small burners 
+and effects of coflow velocity. These 
+flames allow extensive control of 
+residence time, which is important in 
+smoke point phenomena. The major 
+conclusions are as follows. 
+1. An increase in coflow velocity 
+increases the smoke point length. 
+2. A decrease in burner diameter 
+increases the smoke point length. 
+3. These two effects can be 
+explained qualitatively by 
+considering residence times; 
+increased fuel and/or coflow 
+velocities yield increased smoke 
+point lengths. 
+Figure 2. Smoke point luminous flame length ( LSP) plotted with respec t 
+to coflow velocity ( ua). The lines shown are fits for each pairing of fuel 
+and burner diameter.  
+ 
+Figure 3. Smoke point luminous flame length plotted with respect to
+fuel mass flow rate divided by stoichiometric mixture fraction. A
+linear fit that intersects the origin is shown.
+
+--- page 9 ---
+7 
+4. The fuel sooting propensities in these flames are propane < ethylene < 50% propylene < 75% 
+propylene < propylene, however ethylene is less sooty than propane for the 0.76 mm burner. 
+5. To first order, luminous length at the smoke po int is proportional to fuel mass flow rate, 
+consistent with past theory and experiments. A second-order effect is that this length 
+increases for low ua / uf velocity ratios. 
+5. Acknowledgments 
+This research at the University of Mary land was supported by NAS A cooperative agreement 
+NNX07AO91A and the Department of Fire Pr otection Engineering. The authors acknowledge 
+Gerard M. Faeth for inspiring this work; the s upport of the SPICE engineering team; the ISS and 
+MSG Operations teams; and the ISS crew members that conducted the tests (Michael Barratt, E. 
+Michael Fincke, Sandra H. Magnus, and Koichi Wakata) for their careful work.  
+6. References 
+[1] A. C. Revkin, New York Times, April 21, 2001. 
+[2] V. Ramanathan, G. Carmichael, Nature Geoscience 1 (2008) 221 – 227. 
+[3] D. A. Purser, in: P. J. Dinenno, et al. (Eds.), Assessment of Hazards to Occupants from Smoke, Toxic Gases, 
+and Heat, SFPE Handbook of Fire Protection Engineering, 4th ed., National Fire Protection Association, 
+Quincy, 2008, pp. 2-96 – 2-193. 
+[4] K.P. Schug, Y. Manheimer-Timat, P.  Yaccarino, I. Glassman, I., Combust. Sci. Technol. 22 (1980) 235 – 250. 
+[5] G.H. Markstein, Proc. Combust. Instit. 22 (1988) 363 – 370. 
+[6] Y.R. Sivathanu, G.M. Faeth, Combust. Flame 81 (1990) 133 – 149. 
+[7] K.-C. Lin, G. M. Faeth, J. Propulsion Power 12 (1996) 10 – 17. 
+[8] T.L. Berry, W.L. Roberts, Combust. Flame 145 (2006) 571 – 578. 
+[9] K.M. Allan, J.R. Kaminski, J.C. Bertrand, J. Head, P.B. Sunderland, Combust. Sci. Technol. 181 (2009) 800 – 
+811. 
+[10] J. H. Kent, Combust. Flame 67 (1987) 223 – 233. 
+[11] G. H. Markstein, Proc. Combust. Inst. 20 (1984) 1055 – 1061. 
+[12] Y. Yang, A. L. Boehman, R. J. Santoro, Combust. Flame 149 (2007) 191 – 205. 
+[13] M. A. Delichatsios, Fire Safety J.20 (1993) 299 – 311. 
+[14] C. W. Lautenberger, J. L. de Ris, N. A. Dembsey, J.  R. Barnett, H. R. Baum, Fire Safety J. 40 (2005) 141 – 
+176. 
+[15]  G.T. Linteris, I.P. Rafferty, Fire Safety Journal, 43 (2008) 442 – 450.  
+[16] I. Glassman, Proc. Combust. Instit. 22 (1988) 291 – 311. 
+[17] P.B. Sunderland, S. Mortazavi, G.M. Faeth, D.L. Urban, Combust. Flame 96 (1994) 97 – 103. 
+[18] D.L. Urban, Z.–G. Yuan, P.B. Su nderland, K.–C. Lin, Z. Dai, G.M. Fa eth, Proc. Combust. Instit. 28 (2000) 
+1965 – 1972. 
+[19] M.A. Delichatsios, Combust. Sci. Technol. 100 (1994) 293 – 298. 
+[20] T. Beji, J.P. Zhang, M. Delichatsios, Combust. Sci. Technol. 180 (2008) 927 – 940. 
+[21] J. H. Kent, H. G. Wagner, Com bust. Sci. Technol. (1984) 245 – 269. 
+[22] D. L. Urban, Z.-G. Yuan, P. B. Sunderland, G. T. Linteris, J. E. Voss, K.-C. Lin, Z. Dai, K. Sun, and G.M. 
+Faeth, AIAA J. 36 (1998) 1346 – 1360. 
+[23] G. M. Faeth, in: H. D. Ross (Ed.), Laminar and Turbulent Gaseous Diffusion Flames, Microgravity 
+Combustion: Fire in Freefall, San Diego, CA, 2001, Ch. 3, pp. 83 – 182. 
+[24] B.-H. Jeon, O. Fujita, Y. Nakamura, H. Ito, J. Thermal Science Technol. 2 (2007) 281 – 290. 
+[25] K.-C. Lin, G. M. Faeth, AIAA J.37 (1999) 750 – 765. 
+[26] K.–C. Lin, G.M. Faeth, P.B. Sunderland, D.L. Urban, Z.–G. Yuan, Combust. Flame 116 (1999) 415 – 431. 
+[27] Z. Dai, G.M. Faeth, Proc. Combust. Inst. 28 (2000) 2085 – 2092. 
+[28] D.B. Spalding, Combustion and Mass Transfer, Pergamon, New York, 1979, pp. 185 – 195. 
+[29] S. Mahalingam, J. H. Ferziger, B. J. Cantwell, Combust. Flame 82 (1990) 231 – 234.

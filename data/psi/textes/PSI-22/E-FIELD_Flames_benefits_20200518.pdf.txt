@@ -1,0 +1,29 @@
+Source : NASA PSI, PSI-22, Science Documents, E-FIELD_Flames_benefits_20200518.pdf
+
+--- page 1 ---
+18 May 2020 
+Advanced Combustion via Microgravity Experiments (ACME) 
+Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) 
+ACME/E-FIELD Flames - Impacts, Benefits, and Products 
+ Prepared by Dennis Stocker, ACME Project Scientist, dennis.p.stocker@nasa.gov, 216-433-2166 
+ 
+Impacts, Benefits, and Products 
+This text is the ‘Impacts, Benefits, and Products’ section from the 2019 version of the final report. 
+ 
+The impact of this work is, as the original objectives identified, the delivery of a unique data set of chemi-
+ion behavior in flames under sufficiently stable and symmetric conditions that models and theories can 
+be evaluated against the results.  As an example, the very distinctive shape of the V-I curve in microgravity, 
+when matched in models, will give a very good indication that the feedback between ion driven wind and 
+changes in flame shape and burning behavior that then further change the ion current is captured 
+accurately. 
+ 
+These results have already garnered the interest of other groups working on electric field effects on 
+flames.  
+ 
+The use of electric field effects on flames can be as sensor (variations of ion current as associated with 
+combustion behavior) or actuator (ion -driven wind changes the flame shape and characteristics).  This 
+work, as was originally planned, provides quantitative evaluation of the sensing and response potential of 
+electric fields in combustion.  The applications can include the control of flames. 
+ 
+Patents 
+Thus far, no patents have resulted from the E-FIELD Flames research.
