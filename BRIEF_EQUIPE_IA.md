@@ -225,18 +225,14 @@ Le calcul est dans `flame/<dossier>/`, l'affichage dans `pages/`. Un fichier de 
 
 ## 7. Les six rôles
 
-Prénoms à compléter par l'équipe avant d'envoyer ce fichier.
-
 | Rôle | Prénom | Mission | Binôme |
 | --- | --- | --- | --- |
-| A. Intégration et pitch | (à compléter) | Fusionne les PR, garde le site en ligne, tient `flame/commun/` et les garde-fous, valide chaque fiche, règle les poids du score, prépare les 20 questions de référence, la vidéo, la page projet et le README | B |
-| B. Données | (à compléter) | Interroge l'API NTRS, lit les pages PSI, produit `investigations.csv`, `tests.csv` et `publications.csv` | A |
-| C. Recherche | (à compléter) | Le moteur de recherche, le score du scénario et la page Recherche, avec le détail de chaque fiche | E |
-| D. Comparateur | (à compléter) | La page Comparateur et la carte oxygène × pression, en supposant les données présentes | F |
-| E. Assistant | (à compléter) | Le chatbot d'aide : consignes, appel du LLM, réponses qui citent les fiches | C |
-| F. Interface et 3D | (à compléter) | L'habillage Streamlit, les composants partagés, la scène three.js et la page d'accueil | D |
-
-Si l'équipe est à cinq, le rôle D reprend l'intégration du rôle A, et le pitch se partage dimanche après le gel.
+| A. Intégration et pitch | Clément | Fusionne les PR, garde le site en ligne, tient `flame/commun/` et les garde-fous, valide chaque fiche, règle les poids du score, prépare les 20 questions de référence, la vidéo, la page projet et le README | B |
+| B. Données | PA | Interroge l'API NTRS, lit les pages PSI, produit `investigations.csv`, `tests.csv` et `publications.csv` | A |
+| C. Recherche | Martin | Le moteur de recherche, le score du scénario et la page Recherche, avec le détail de chaque fiche | E |
+| D. Comparateur | Hugo | La page Comparateur et la carte oxygène × pression, en supposant les données présentes | F |
+| E. Assistant | Ethan | Le chatbot d'aide : consignes, appel du LLM, réponses qui citent les fiches | C |
+| F. Interface et 3D | Mathéo | L'habillage Streamlit, les composants partagés, la scène three.js et la page d'accueil | D |
 
 Pourquoi ces binômes : A valide les fiches que B produit ; l'assistant de E s'appuie sur le moteur de C pour retrouver les bonnes fiches ; le comparateur de D a besoin des composants et des graphiques de F.
 

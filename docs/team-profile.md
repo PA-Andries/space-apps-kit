@@ -6,12 +6,14 @@ Fill this in first. Every skill reads it.
 
 | Name | Role on the team | Strong skills | Tools/stacks | Available hours on the weekend | Sleeps on site? |
 |---|---|---|---|---|---|
-| PA (@PA-Andries) | | | | | |
-| Clément Batonnier (@clementbatonnier-hue) | | | | | |
-| Hugo (@hugovlst) | | | | | |
-| Ethan Samson, aka Dadax (@Ethan-111) | | | | | |
+| Clément Batonnier (@cbatonnier-wq) | A. Intégration et pitch | | | | |
+| PA (@PA-Andries) | B. Données | | | | |
+| Martin (@martinleducq) | C. Recherche | | | | |
+| Hugo (@hugovlst) | D. Comparateur | | | | |
+| Ethan Samson, aka Dadax (@Ethan-111) | E. Assistant | | | | |
+| Mathéo (@matheocail4) | F. Interface et 3D | | | | |
 
-Roles to cover: front/full-stack dev · data/ML dev · science/domain · designer/storyteller (owns video + project page) · pitcher/PM (owns scope and time).
+Six members, one role each. What each role owns is in `CONTRIBUTING.md`.
 
 ## Questions
 
