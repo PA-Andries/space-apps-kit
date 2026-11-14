@@ -159,6 +159,15 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_chatbot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
+/* The whole button opens the chatbot, not only the word « Flamy »: the link gets an invisible layer over the
+   whole card. The mascot's frame lets the clicks through (it does not react to the mouse), and the elements
+   between the card and the link are not positioned, so that the layer covers the card. */
+.st-key-ui_chatbot {{ cursor: pointer; }}
+.st-key-ui_chatbot iframe {{ pointer-events: none; }}
+.st-key-ui_chatbot [data-testid="stElementContainer"], .st-key-ui_chatbot [data-testid="stPageLink"],
+.st-key-ui_chatbot [data-testid="stPageLink"] * {{ position: static; }}
+.st-key-ui_chatbot [data-testid="stPageLink"] a::after {{ content: ""; position: absolute; inset: 0;
+  border-radius: 24px; z-index: 1; }}
 
 /* The mascot of the Assistant page, as in a messaging app: on the left, its lower half hidden behind the
    chat box, so that it seems to stand behind it. The chat box is drawn on top of it. */
