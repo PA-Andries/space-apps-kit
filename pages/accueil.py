@@ -163,11 +163,11 @@ if st.session_state.get("ui_analysed"):
     if found is not None:
         with st.container(key="ui_card_outcomes"):
             card_title(
-                "What NASA's tests show",
-                f"How the flames behaved in the NASA tests that match {label(shown_place)}.",
-                tag="Danger",
+                "Can a flame burn in these conditions?",
+                f"What the NASA tests that match {label(shown_place)} show.",
+                tag="What NASA's tests show",
             )
-            outcomes_card(found)
+            outcomes_card(found, scenario)
     best_column, gaps_column = st.columns([7, 5], gap="medium")
     with best_column, st.container(key="ui_card_compare", height="stretch"):
         card_title("The 3 most relevant investigations", f"For {label(shown_place)}.")

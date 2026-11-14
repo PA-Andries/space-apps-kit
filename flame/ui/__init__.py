@@ -19,7 +19,7 @@ from flame.ui.home import (
     talking,
 )
 from flame.ui.labels import label
-from flame.ui.outcomes import count_outcomes, kind_of_result, outcomes_card
+from flame.ui.outcomes import answer, count_outcomes, kind_of_result, outcomes_card
 from flame.ui.places import EARTH, body_of, place_conditions
 from flame.ui.scene import flame_scene
 from flame.ui.top_bar import fold_sidebar_after_home, show_environment_in_sidebar, show_top_bar
@@ -31,6 +31,7 @@ carte_fiche = investigation_card
 scene_3d = flame_scene
 
 __all__ = [
+    "answer",
     "count_outcomes",
     "kind_of_result",
     "outcomes_card",

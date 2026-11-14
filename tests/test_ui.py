@@ -397,9 +397,18 @@ def test_outcomes_sort_nasa_results_and_show_after_analyse():
     tests = pd.DataFrame({"resultat": ["Extinction", "Completion", None, "hot ignition: no; end: -"]})
     assert count_outcomes(tests) == {"burned": 1, "went_out": 1, "no_ignition": 1, "unknown": 1}
 
+    from flame.ui import answer
+
+    moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
+    assert answer({"burned": 3, "went_out": 1, "no_ignition": 0, "unknown": 5}, moon)[0] == "yes"
+    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    assert answer({"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 4}, moon)[1] == "No data"
+    mars = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}  # no atmosphere bounds: no answer
+    assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"
+
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.button(key="ui_analyse_button").click().run()
     assert not site.exception
     # The card's sentence and its caption, from the matching tests' results.
     texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
-    assert "match your environment" in texts and "team's reading" in texts
+    assert "match your environment" in texts and "not fires" in texts

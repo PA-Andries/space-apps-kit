@@ -180,6 +180,13 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 /* The invisible page that folds the sidebar takes no room. */
 .st-key-ui_fold_sidebar {{ position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }}
 
+/* The answer to "can a flame burn here?": a short headline, the accent only for "Yes". */
+.ff-answer {{ display: flex; flex-direction: column; gap: 0.2rem; margin: 0.2rem 0 0.8rem; }}
+.ff-answer strong {{ font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: {INK}; }}
+.ff-answer.ff-yes strong {{ color: {ACCENT}; }}
+.ff-answer.ff-no_answer strong {{ color: {MUTED}; }}
+.ff-answer span {{ color: {MUTED}; font-size: 0.95rem; }}
+
 /* What NASA's tests show (after ANALYSE): one bar split by outcome, and its legend. */
 .ff-outcomes .ff-bar {{ display: flex; height: 16px; border-radius: 980px; overflow: hidden; gap: 2px;
   margin: 0.3rem 0 0.7rem; }}

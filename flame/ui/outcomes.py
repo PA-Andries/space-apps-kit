@@ -1,4 +1,4 @@
-"""What NASA's tests show for an environment: how the flames behaved in the tests that match it.
+"""Can a flame burn in an environment? What NASA's tests that match it show, and nothing more.
 
 Only the `resultat` column of NASA's tests is read. Sorting its wording into four kinds is the team's reading
 of NASA's labels, and the card says so; a test with no recorded result stays "no result recorded".
@@ -50,34 +50,68 @@ def count_outcomes(tests: pd.DataFrame) -> dict[str, int]:
     return {kind: int((kinds == kind).sum()) for kind in KINDS}
 
 
-def outcomes_card(tests: pd.DataFrame) -> None:
-    """A bar of the four kinds for `tests` (the tests that match the environment), with the counts."""
-    counts = count_outcomes(tests)
-    total = sum(counts.values())
-    if total == 0:
-        st.info("No NASA test matches this environment, so there is nothing to show yet.")
-        return
-    recorded = total - counts[UNKNOWN]
-    bar = "".join(
-        f'<span style="flex: {count}; background: {KINDS[kind][1]};" title="{escape(KINDS[kind][0])}: {count}"></span>'
-        for kind, count in counts.items()
-        if count
-    )
-    legend = "".join(
-        f'<li><i style="background: {KINDS[kind][1]};"></i>{escape(KINDS[kind][0])} <b>{count:,}</b></li>'
-        for kind, count in counts.items()
-    )
-    st.html(f'<div class="ff-outcomes"><div class="ff-bar">{bar}</div><ul>{legend}</ul></div>')
-    if recorded:
-        share = round(100 * counts[BURNED] / recorded)
-        st.markdown(
-            f"**A flame burned in {counts[BURNED]:,} of the {recorded:,} matching tests with a recorded result "
-            f"({share} %).** Under these conditions, NASA's tests show that a fire can start and keep burning."
-            if counts[BURNED]
-            else f"**No flame burned in the {recorded:,} matching tests with a recorded result.** "
-            "That is what these tests show, not a proof that a fire cannot start."
+def _has_atmosphere_bounds(scenario: dict) -> bool:
+    """True when the environment gives at least one oxygen or pressure bound (the Mars base gives none)."""
+    bounds = [*(scenario.get("oxygene_pct") or (None, None)), *(scenario.get("pression_kpa") or (None, None))]
+    return any(bound is not None for bound in bounds)
+
+
+def answer(counts: dict[str, int], scenario: dict) -> tuple[str, str, str]:
+    """The short answer to "can a flame burn here?": (level, headline, explanation).
+
+    level: "yes", "not_seen" or "no_answer". Only what the matching tests show, never a safety judgement.
+    """
+    recorded = counts[BURNED] + counts[WENT_OUT] + counts[NO_IGNITION]
+    if not _has_atmosphere_bounds(scenario):
+        return (
+            "no_answer",
+            "No answer",
+            "This environment gives no oxygen or pressure bounds, so every NASA test matches it and they say "
+            "nothing about it.",
         )
+    if counts[BURNED]:
+        return (
+            "yes",
+            "Yes",
+            f"A flame burned in {counts[BURNED]:,} of the {recorded:,} NASA tests run in these conditions "
+            "that have a recorded result.",
+        )
+    if recorded:
+        return (
+            "not_seen",
+            "Not seen in NASA's tests",
+            f"No flame burned in the {recorded:,} matching tests with a recorded result. "
+            "That is what these tests show, not a proof that a fire cannot start.",
+        )
+    return "no_answer", "No data", "None of the NASA tests that match these conditions has a recorded result."
+
+
+def outcomes_card(tests: pd.DataFrame, scenario: dict) -> None:
+    """The answer, then a bar of the recorded outcomes of `tests` (the tests that match the environment).
+
+    The tests with no recorded result are counted apart, outside the bar.
+    """
+    counts = count_outcomes(tests)
+    level, headline, explanation = answer(counts, scenario)
+    st.html(
+        f'<div class="ff-answer ff-{level}"><strong>{escape(headline)}</strong><span>{escape(explanation)}</span></div>'
+    )
+    recorded = {kind: count for kind, count in counts.items() if kind != UNKNOWN}
+    # The bar: only when the answer rests on tests with a recorded result.
+    if level != "no_answer" and sum(recorded.values()):
+        bar = "".join(
+            f'<span style="flex: {count}; background: {KINDS[kind][1]};" '
+            f'title="{escape(KINDS[kind][0])}: {count}"></span>'
+            for kind, count in recorded.items()
+            if count
+        )
+        legend = "".join(
+            f'<li><i style="background: {KINDS[kind][1]};"></i>{escape(KINDS[kind][0])} <b>{count:,}</b></li>'
+            for kind, count in recorded.items()
+        )
+        st.html(f'<div class="ff-outcomes"><div class="ff-bar">{bar}</div><ul>{legend}</ul></div>')
     st.caption(
-        f"{total:,} NASA PSI tests match your environment; {counts[UNKNOWN]:,} have no recorded result. "
-        "Sorting NASA's result wording into these four kinds is the team's reading. Not a safety certification."
+        f"{sum(counts.values()):,} NASA PSI tests match your environment; {counts[UNKNOWN]:,} of them have no "
+        "recorded result and are left out of the bar. These are controlled combustion experiments, not fires; "
+        "sorting NASA's result wording into kinds is the team's reading. Not a safety certification."
     )
