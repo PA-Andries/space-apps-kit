@@ -11,9 +11,11 @@ st.set_page_config(page_title="Flame in Freefall", page_icon=":material/local_fi
 
 page = st.navigation(
     [
-        st.Page("pages/accueil.py", title="Mon scénario", icon=":material/home:", default=True),
-        st.Page("pages/recherche.py", title="Recherche", icon=":material/search:"),
-        st.Page("pages/comparateur.py", title="Comparateur", icon=":material/compare_arrows:"),
+        st.Page("pages/accueil.py", title="My environment", icon=":material/home:", default=True),
+        st.Page("pages/recherche.py", title="Investigations", icon=":material/search:"),
+        st.Page("pages/donnees.py", title="Data", icon=":material/scatter_plot:"),
+        st.Page("pages/comparateur.py", title="Compare", icon=":material/compare_arrows:"),
+        st.Page("pages/equipements.py", title="Equipment and Earth", icon=":material/fire_extinguisher:"),
         st.Page("pages/assistant.py", title="Assistant", icon=":material/chat:"),
     ]
 )

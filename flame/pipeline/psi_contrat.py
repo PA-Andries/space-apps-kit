@@ -36,7 +36,6 @@ TABLES_PSI = [
     "hardware_families",
     "relations",
     "habitats",
-    "categories",
     "relevance",
     "raw_data_map",
     "publications",
@@ -46,6 +45,8 @@ TABLES_PSI = [
 KPA_PAR_ATM = 101.325
 # Un essai à 21,5 % d'oxygène compte pour un habitat à 21 % : écart toléré, en points de pourcentage.
 TOLERANCE_OXYGENE_PCT = 1.0
+# Habitats dont l'énoncé ne donne pas l'atmosphère : on ne les rattache à aucune investigation par l'oxygène.
+HABITATS_SANS_ATMOSPHERE = ("Base martienne",)
 PILIER_FR = {"Prevention": "Prévenir", "Detection": "Détecter", "Suppression": "Éteindre"}
 CATEGORIE_FR = {"prevent": "Prévenir", "detect": "Détecter", "react": "Éteindre"}
 TYPES_COMBUSTIBLE = [
@@ -67,6 +68,9 @@ def _pilier(fiche: pd.Series, pertinence: pd.DataFrame) -> str:
     premier = str(fiche["fire_safety_pillar"]).split(";")[0]
     if premier in PILIER_FR:
         return PILIER_FR[premier]
+    # Depuis l'abandon des piliers (décision de PA, 14 novembre), `relevance` n'a plus de catégorie.
+    if "category_weight" not in pertinence.columns:
+        return ""
     notes = pertinence[pertinence["investigation_id"] == fiche["investigation_id"]]
     if notes.empty:
         return ""
@@ -102,7 +106,9 @@ def _habitats(oxygene_min: float, oxygene_max: float) -> str:
     proches = [
         nom
         for nom, (oxygene, _) in ATMOSPHERES.items()
-        if oxygene_min - TOLERANCE_OXYGENE_PCT <= oxygene <= oxygene_max + TOLERANCE_OXYGENE_PCT
+        if nom not in HABITATS_SANS_ATMOSPHERE
+        and oxygene is not None
+        and oxygene_min - TOLERANCE_OXYGENE_PCT <= oxygene <= oxygene_max + TOLERANCE_OXYGENE_PCT
     ]
     return ";".join(proches)
 
