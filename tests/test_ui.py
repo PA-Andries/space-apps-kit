@@ -477,12 +477,19 @@ def test_page_one_explains_each_of_the_three_investigations():
     assert "Atmosphere:" in shown and "Gravity:" in shown
 
 
-def test_the_ranking_explains_every_investigation():
+def test_the_investigation_search_follows_the_ranking():
+    """Une seule vue, la fiche ; la liste de recherche suit le classement, la plus pertinente en premier."""
+    from flame.commun import charger_fiches, get_scenario
+    from flame.recherche import les_plus_pertinentes
+
     site = AppTest.from_file(APP, default_timeout=60).run()
     site.switch_page("pages/recherche.py").run()
     assert not site.exception
-    shown = " ".join(str(block.value) for block in site.get("html"))
-    assert shown.count("Why it matters for Moon base") >= 3
+    assert len(site.tabs) == 0  # no Ranking or What we don't know tab any more
+    search = site.selectbox(key="recherche_fiche")
+    ranked = list(les_plus_pertinentes(charger_fiches(), get_scenario())["id"])
+    assert [option.split(" · ")[-1] for option in search.options] == ranked  # "1. Name · PSI-10"
+    assert search.options[0].startswith("1. ")
 
 
 def test_within_reads_a_missing_bound_as_the_end_of_the_scale():
