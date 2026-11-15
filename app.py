@@ -8,7 +8,7 @@ import streamlit as st
 from flame.assistant import repondre
 from flame.ui import afficher_cadre
 
-st.set_page_config(page_title="Flame in Freefall", page_icon=":material/local_fire_department:", layout="wide")
+st.set_page_config(page_title="Flamy", page_icon=":material/local_fire_department:", layout="wide")
 
 page = st.navigation(
     [
