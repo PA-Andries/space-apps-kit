@@ -17,7 +17,7 @@ VERT = ("rgba(74, 222, 128, 0.14)", "#86efac")
 ORANGE = ("rgba(251, 191, 36, 0.14)", "#fcd34d")
 ROUGE = ("rgba(248, 113, 113, 0.16)", "#fca5a5")
 GRIS = ("rgba(255, 255, 255, 0.06)", "#a3a9c4")
-ACCENT = "#ff7a3d"
+ACCENT = "#e8622a"
 
 
 def _case(couleur: tuple[str, str], ligne1: str, ligne2: str = "") -> str:

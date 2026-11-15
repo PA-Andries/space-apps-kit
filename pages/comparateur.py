@@ -47,23 +47,23 @@ LIBELLES = {
     "debit_air_cm_s": "Air flow (cm/s)",
 }
 # Une couleur par investigation, lisibles sur le thème sombre : l'orange du site pour celle de départ.
-COULEURS = ["#ff7a3d", "#6fb1ff"]
+COULEURS = ["#e8622a", "#6fb1ff"]
 LETTRES = ["a", "b"]
 
 STYLE = f"""<style>
 .cmp-a, .stApp h3.cmp-a {{ color: {COULEURS[0]}; }} .cmp-b, .stApp h3.cmp-b {{ color: {COULEURS[1]}; }}
 .cmp-legend {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1.5rem; margin-top: 0.9rem;
-  padding-top: 0.7rem; border-top: 1px solid rgba(160, 175, 255, 0.14); color: #a3abc9; font-size: 0.8rem;
+  padding-top: 0.7rem; border-top: 1px solid rgba(160, 175, 255, 0.14); color: #d0d5ec; font-size: 0.8rem;
   line-height: 1.45; }}
 .cmp-legend > b {{ color: #8790b3; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; }}
 .cmp-legend span b {{ color: #dfe3f5; font-weight: 600; }}
 .cmp-legend i {{ display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 0.4rem; }}
 .cmp-legend i.l1 {{ background: {COULEURS[0]}; }}
-.cmp-legend i.l2 {{ background: rgba(255, 122, 61, 0.16); border: 1px solid rgba(255, 122, 61, 0.7); }}
+.cmp-legend i.l2 {{ background: rgba(232, 98, 42, 0.16); border: 1px solid rgba(232, 98, 42, 0.7); }}
 .cmp-badge {{ display: inline-block; border-radius: 980px; padding: 0.2rem 0.7rem; font-size: 0.78rem;
   font-weight: 700; letter-spacing: 0.02em; }}
 .cmp-badge.l1 {{ background: {COULEURS[0]}; color: #fff; }}
-.cmp-badge.l2 {{ background: rgba(255, 122, 61, 0.16); color: #ffb08a; border: 1px solid rgba(255, 122, 61, 0.5); }}
+.cmp-badge.l2 {{ background: rgba(232, 98, 42, 0.16); color: #f5a07a; border: 1px solid rgba(232, 98, 42, 0.5); }}
 .cmp-band, .st-key-cmp_card_a, .st-key-cmp_card_b, .st-key-cmp_details, .cmp-panel {{
   background: rgba(26, 33, 80, 0.6); border: 1px solid rgba(160, 175, 255, 0.14) !important; border-radius: 24px;
   backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
@@ -71,30 +71,30 @@ STYLE = f"""<style>
 }}
 .cmp-band {{ padding: 1.1rem 1.3rem; margin: 0.4rem 0 0.2rem; }}
 .cmp-band h2 {{ font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.5rem 0 0.3rem; padding: 0; }}
-.cmp-band h2 i {{ color: #a3abc9; font-style: normal; font-weight: 500; font-size: 1.1rem; margin: 0 0.4rem; }}
+.cmp-band h2 i {{ color: #d0d5ec; font-style: normal; font-weight: 500; font-size: 1.1rem; margin: 0 0.4rem; }}
 .cmp-band p {{ margin: 0.15rem 0 0; font-size: 0.95rem; line-height: 1.5; }}
-.cmp-band p.cmp-quiet {{ color: #a3abc9; font-size: 0.86rem; }}
+.cmp-band p.cmp-quiet {{ color: #d0d5ec; font-size: 0.86rem; }}
 .st-key-cmp_card_a, .st-key-cmp_card_b, .st-key-cmp_details {{ padding: 1rem 1.1rem 1.1rem; }}
 .st-key-cmp_card_a {{ border-top: 3px solid {COULEURS[0]} !important; }}
 .st-key-cmp_card_b {{ border-top: 3px solid {COULEURS[1]} !important; }}
 .cmp-card h3 {{ font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; padding: 0; }}
-.cmp-card h3 small {{ color: #a3abc9; font-size: 0.82rem; font-weight: 500; margin-left: 0.4rem; }}
-.cmp-card .cmp-title {{ color: #a3abc9; font-size: 0.88rem; margin: 0.15rem 0 0.5rem; }}
+.cmp-card h3 small {{ color: #d0d5ec; font-size: 0.82rem; font-weight: 500; margin-left: 0.4rem; }}
+.cmp-card .cmp-title {{ color: #d0d5ec; font-size: 0.88rem; margin: 0.15rem 0 0.5rem; }}
 .cmp-card .cmp-lead {{ font-weight: 700; font-size: 0.95rem; line-height: 1.45; margin: 0; }}
-.cmp-label {{ display: block; color: #ff7a3d; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+.cmp-label {{ display: block; color: #e8622a; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin: 0.7rem 0 0.2rem; }}
 .cmp-card .cmp-text {{ font-size: 0.9rem; line-height: 1.5; margin: 0; color: #dfe3f5; }}
 .cmp-chips {{ display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }}
 .cmp-chip {{ background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(160, 175, 255, 0.16);
   border-radius: 980px; padding: 0.25rem 0.7rem; font-size: 0.8rem; }}
-.cmp-chip b {{ color: #a3abc9; font-weight: 500; margin-right: 0.3rem; }}
+.cmp-chip b {{ color: #d0d5ec; font-weight: 500; margin-right: 0.3rem; }}
 .cmp-panel {{ padding: 1.1rem 1.3rem 1.2rem; margin: 0.2rem 0; }}
 .cmp-panel h3 {{ font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; padding: 0; }}
-.cmp-panel > p {{ color: #a3abc9; font-size: 0.88rem; margin: 0.15rem 0 0.7rem; }}
+.cmp-panel > p {{ color: #d0d5ec; font-size: 0.88rem; margin: 0.15rem 0 0.7rem; }}
 .cmp-range {{ margin: 0.9rem 0 1.1rem; }}
 .cmp-range-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }}
-.cmp-range-head b {{ font-size: 0.98rem; }} .cmp-range-head b small {{ color: #a3abc9; font-weight: 500; }}
-.cmp-range-head em {{ color: #a3abc9; font-style: normal; font-size: 0.85rem; }}
+.cmp-range-head b {{ font-size: 0.98rem; }} .cmp-range-head b small {{ color: #d0d5ec; font-weight: 500; }}
+.cmp-range-head em {{ color: #d0d5ec; font-style: normal; font-size: 0.85rem; }}
 .cmp-track {{ position: relative; height: 34px; margin-top: 0.4rem; border-radius: 10px;
   background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(160, 175, 255, 0.10); overflow: hidden; }}
 .cmp-zone {{ position: absolute; top: 0; bottom: 0; background: rgba(255, 255, 255, 0.10);
@@ -106,7 +106,7 @@ STYLE = f"""<style>
 .cmp-themes {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }}
 .cmp-theme {{ background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(160, 175, 255, 0.10);
   border-radius: 18px; padding: 0.8rem 1rem 0.9rem; }}
-.cmp-theme h4 {{ color: #ff7a3d; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+.cmp-theme h4 {{ color: #e8622a; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin: 0 0 0.4rem; padding: 0; }}
 .cmp-theme ul {{ margin: 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.5; }}
 .cmp-theme li {{ margin: 0.15rem 0; }}

@@ -239,27 +239,27 @@ PLACE_BUTTONS_STYLE = """<style>
 .st-key-ui_places button > div > span { flex-direction: column; gap: 1rem; }
 .st-key-ui_places button > div > span > span:first-child { width: auto; height: auto; display: flex; margin: 0; }
 .st-key-ui_places button [data-testid="stIconMaterial"] {
-  font-size: 4.2rem; width: auto; height: auto; line-height: 1; margin: 0; color: #ff7a3d; }
+  font-size: 4.2rem; width: auto; height: auto; line-height: 1; margin: 0; color: #e8622a; }
 .st-key-ui_places button [data-testid="stMarkdownContainer"] { white-space: normal; overflow: visible; }
 .st-key-ui_places button p {
   font-weight: 700; font-size: 1.25rem; line-height: 1.25; white-space: normal; text-align: center; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] [data-testid="stIconMaterial"] { color: #fff; }
-.st-key-ui_places button:hover { border-color: #ff7a3d; background: rgba(255, 255, 255, 0.1); color: inherit; }
+.st-key-ui_places button:hover { border-color: #e8622a; background: rgba(255, 255, 255, 0.1); color: inherit; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] {
-  background: #ff7a3d; border-color: transparent;
-  box-shadow: 0 0 28px rgba(255, 122, 61, 0.35);
+  background: #e8622a; border-color: transparent;
+  box-shadow: 0 0 28px rgba(232, 98, 42, 0.35);
 }
-.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #ff8c55; color: #fff; }
+.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #f2733a; color: #fff; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
 /* The Mars block: a dashed orange frame, a title as large as a button's name, and its "Future feature" tag. */
 .st-key-ui_mars_note { margin-top: 0.5rem; padding: 1rem 1.2rem 1.1rem; border-radius: 20px; gap: 0.35rem;
-  border: 1.5px dashed rgba(255, 122, 61, 0.6); background: rgba(255, 122, 61, 0.07); }
+  border: 1.5px dashed rgba(232, 98, 42, 0.6); background: rgba(232, 98, 42, 0.07); }
 /* Streamlit pulls each markdown block up by the margin of its last paragraph: both are set to zero here. */
 .st-key-ui_mars_note [data-testid="stMarkdownContainer"] { margin-bottom: 0; }
 .st-key-ui_mars_note p { color: #dfe3f5; font-size: 1rem; line-height: 1.5; margin: 0; }
 .st-key-ui_mars_note .stElementContainer:first-child p { font-size: 1.25rem; line-height: 1.3; }
 .st-key-ui_mars_note .stElementContainer:first-child p > span[role="img"] {
-  color: #ff7a3d; font-size: 1.7rem; margin-right: 0.3rem; }
+  color: #e8622a; font-size: 1.7rem; margin-right: 0.3rem; }
 .st-key-ui_mars_note strong { color: #fff; font-weight: 700; margin-right: 0.5rem; }
 .st-key-ui_mars_note .stMarkdownBadge { vertical-align: middle; font-weight: 700; letter-spacing: 0.02em; }
 /* On a narrow screen the three tiles stack and the card is as tall as it needs: each tile keeps its height. */
@@ -327,7 +327,7 @@ def place_picker() -> tuple[str | None, str | None]:
 # "Back" as a plain flame-coloured text link with a chevron, not a framed button.
 BACK_STYLE = """<style>
 .st-key-ui_back_row button { border: none; background: transparent; padding: 0; min-height: 0; }
-.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #ff7a3d; font-size: 1.05rem; }
+.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #e8622a; font-size: 1.05rem; }
 .st-key-ui_back_row button:hover p { text-decoration: underline; }
 .st-key-ui_back_row { margin-bottom: 0.4rem; }
 </style>"""

@@ -47,7 +47,7 @@ INTRO_STYLE = f"""<style>
 .st-key-ui_intro_show button:hover p {{ text-decoration: underline; }}
 /* "Got it, hide this" is the action of the card: an orange pill, filled when the pointer is on it. */
 .st-key-ui_intro_hide button {{
-  border: 1.5px solid {FLAME}; background: rgba(255, 122, 61, 0.14); border-radius: 980px;
+  border: 1.5px solid {FLAME}; background: rgba(232, 98, 42, 0.14); border-radius: 980px;
   padding: 0.4rem 1.15rem; min-height: 0; margin-top: 0.3rem; }}
 .st-key-ui_intro_hide button p, .st-key-ui_intro_hide button [data-testid="stIconMaterial"] {{
   color: {FLAME}; font-size: 0.95rem; font-weight: 700; }}

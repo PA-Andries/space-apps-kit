@@ -427,8 +427,8 @@ def test_colours_follow_the_60_30_10_rule():
     interface = Path("flame/ui/style.py").read_text() + Path("flame/ui/components.py").read_text()
     for colour in ("#d9365e", "#f0457a", "#e44a70", "22, 163, 74", "124, 58, 237"):
         assert colour not in interface
-    assert style.FLAME == style.ACCENT == "#ff7a3d"
-    assert chart.SELECTION_COLOR == "255, 122, 61"  # the user's selection is the accent
+    assert style.FLAME == style.ACCENT == "#e8622a"
+    assert chart.SELECTION_COLOR == "232, 98, 42"  # the user's selection is the accent
 
 
 def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
@@ -757,3 +757,14 @@ def test_the_selection_box_always_holds_the_circled_tests():
         if grey_inside:  # only a filter that is not on the axes may leave a test of the box grey
             other = flow if view == "pression" else kpa
             assert fuel or any(bound is not None for bound in other), (o2, kpa, flow, fuel, view)
+
+
+def test_setting_an_air_flow_moves_the_chart_to_the_air_flow_view():
+    """No NASA test records both pressure and air flow: the pressure view would turn all grey (PA, 15 Nov)."""
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    assert site.session_state["ui_chart_view"] == "pression"
+    site.slider(key="ui_air_flow").set_range(0.0, 100.0).run()
+    assert not site.exception
+    assert site.session_state["ui_chart_view"] == "debit"
+    site.slider(key="ui_air_flow").set_range(-10.0, 100.0).run()
+    assert site.session_state["ui_chart_view"] == "pression"

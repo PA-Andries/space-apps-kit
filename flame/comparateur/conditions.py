@@ -70,7 +70,7 @@ OPACITE_ESTOMPEE = 0.25
 PAS_REPARTITION = 5  # largeur d'une tranche d'oxygène, en points de pourcentage
 BORNES_REPARTITION = list(range(0, 105, PAS_REPARTITION))
 COULEUR_STRUCTURE = "#7d86a8"  # 30 % : tous les tests (le gris-bleu du site, lisible sur la page de nuit)
-COULEUR_ACCENT = "#ff7a3d"  # 10 % : les tests de l'environnement (le même orange que primaryColor)
+COULEUR_ACCENT = "#e8622a"  # 10 % : les tests de l'environnement (le même orange que primaryColor)
 COULEUR_ENCRE = "#e9ecf8"  # le trait de la frontière et ses mots (le textColor du thème sombre)
 
 
