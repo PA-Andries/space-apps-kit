@@ -19,11 +19,6 @@ def _edges(bounds: tuple | None, axis: tuple) -> tuple:
     return (axis[0] if low is None else low, axis[1] if high is None else high)
 
 
-def _extent(values: list) -> tuple:
-    """The smallest and largest of `values`."""
-    return (min(values), max(values))
-
-
 def _matches_the_environment(trace: go.Scatter) -> bool:
     """True for the tests that match the environment: role D draws those, and only those, with an outline."""
     outline = getattr(trace.marker, "line", None)
@@ -35,7 +30,8 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
 
     `view`: "pression" (oxygen × pressure) or "debit" (oxygen × air flow), as in `graphique_conditions`.
     Only the tests that match the environment stay in colour; the others turn grey.
-    No box is drawn, and no test is greyed, when the scenario gives no bound at all.
+    No box is drawn, and no test is greyed, when the scenario gives no bound and no fuel at all.
+    A range with no bound on one side reaches the edge of the axis.
     """
     # The reference zones are the only filled shapes of the chart (Earth and ISS, Moon base and rover).
     zones = [trace for trace in figure.data if trace.fill == "toself"]
@@ -48,10 +44,10 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
     # A transparent chart, so that the glass card and the stars show through.
     figure.update_layout(paper_bgcolor="rgba(0, 0, 0, 0)", plot_bgcolor="rgba(0, 0, 0, 0)")
 
-    key = "pression_kpa" if view == "pression" else "debit_air_cm_s"
-    oxygen = scenario.get("oxygene_pct") or (None, None)
-    other = scenario.get(key) or (None, None)
-    if all(bound is None for bound in (*oxygen, *other)):
+    # The chart itself says which ranges chose its circled tests and where its axes end (`layout.meta`):
+    # the box is drawn from those same values, so a circled test can never sit outside it.
+    meta = figure.layout.meta or {}
+    if not meta.get("defini"):
         return figure
 
     # Only the tests that match the environment keep their investigation's colour; the others turn grey,
@@ -69,11 +65,8 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
             showlegend=rank == 0,
         )
 
-    # The axis edges: set by the chart, else the extent of the zones (they reach the edges where unbounded).
-    x_axis = tuple(figure.layout.xaxis.range or _extent([x for trace in zones for x in trace.x]))
-    y_axis = tuple(figure.layout.yaxis.range or _extent([y for trace in zones for y in trace.y]))
-    x0, x1 = _edges(oxygen, x_axis)
-    y0, y1 = _edges(other, y_axis)
+    x0, x1 = selection_box(meta)["x"]
+    y0, y1 = selection_box(meta)["y"]
     box = go.Scatter(
         x=[x0, x1, x1, x0, x0],
         y=[y0, y0, y1, y1, y0],
@@ -88,3 +81,45 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
     figure.add_trace(box)
     figure.data = (figure.data[-1], *figure.data[:-1])
     return figure
+
+
+def selection_box(meta: dict) -> dict:
+    """The box of the selection: {"x": (low, high), "y": (low, high)}, in the units of the axes.
+
+    A missing bound reaches the edge of the axis, and a bound beyond the axis stops at its edge.
+    """
+
+    def side(bounds: list, axis: list) -> tuple:
+        low, high = _edges(tuple(bounds), tuple(axis))
+        return (min(max(low, axis[0]), axis[1]), min(max(high, axis[0]), axis[1]))
+
+    return {"x": side(meta["plage_x"], meta["axe_x"]), "y": side(meta["plage_y"], meta["axe_y"])}
+
+
+def grey_tests_in_the_box(figure: go.Figure) -> str:
+    """One sentence on the grey tests that sit inside the box, or "" when there is none.
+
+    A test inside the box stays grey only when a filter that is not on the axes excludes it: the chosen
+    fuels, or the range of the other view. The sentence counts them and names that filter.
+    """
+    meta = figure.layout.meta or {}
+    if not meta.get("defini"):
+        return ""
+    box = selection_box(meta)
+    count = 0
+    for trace in figure.data:
+        if trace.mode != "markers" or trace.marker.symbol == "star" or _matches_the_environment(trace):
+            continue
+        count += sum(
+            box["x"][0] <= x <= box["x"][1] and box["y"][0] <= y <= box["y"][1]
+            for x, y in zip(trace.x, trace.y, strict=True)
+        )
+    if not count:
+        return ""
+    reasons = []
+    if meta.get("combustibles"):
+        reasons.append("their fuel is not one you chose")
+    if any(bound is not None for bound in meta.get("autre_plage", [])):
+        other = "air-flow" if figure.layout.yaxis.type == "log" else "pressure"
+        reasons.append(f"they are outside your {other} range or do not record it")
+    return f"{count:,} tests inside the box stay grey: {' or '.join(reasons)}."
