@@ -8,13 +8,14 @@ from flame.recherche.lacunes import ce_quon_ne_sait_pas, champs_inconnus, fronti
 from flame.recherche.lacunes_visuelles import couverture, mesures_notees, regle_de_l_oxygene
 from flame.recherche.moteur import les_plus_pertinentes, rechercher
 from flame.recherche.score import detail_du_score
-from flame.recherche.synthese import synthese_des_plus_pertinentes
+from flame.recherche.synthese import citations_des_plus_pertinentes, synthese_des_plus_pertinentes
 from flame.recherche.vue_lacunes import afficher_ce_quon_ne_sait_pas
 
 __all__ = [
     "afficher_ce_quon_ne_sait_pas",
     "ce_quon_ne_sait_pas",
     "champs_inconnus",
+    "citations_des_plus_pertinentes",
     "couverture",
     "descriptif",
     "detail_du_score",
