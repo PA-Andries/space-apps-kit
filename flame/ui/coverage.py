@@ -48,6 +48,14 @@ def _no_bounds(bounds: tuple | None) -> bool:
     return all(bound is None for bound in (bounds or (None, None)))
 
 
+def _sources(tests: pd.DataFrame, keep: pd.Series) -> list[tuple[str, str]]:
+    """The NASA investigations behind some tests: (PSI id, its page on psi.nasa.gov), to check them by hand."""
+    if "source" not in tests.columns:
+        return []
+    found = tests.loc[keep, ["investigation_id", "source"]].dropna().drop_duplicates("investigation_id")
+    return sorted(zip(found["investigation_id"], found["source"], strict=False))
+
+
 def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[dict]:
     """One row per condition: {condition, nasa, yours, status, detail}. status is Tested, Partly, Not tested
     or No bounds given; detail says how many tests, or what is missing."""
@@ -93,6 +101,7 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
         ("Pressure", "pression_kpa", pressure, "kPa", in_pressure),
     ):
         count = int(inside.sum())
+        found = _sources(tests, inside) if count else []
         if _no_bounds(bounds):
             status, detail = NO_BOUNDS, f"Your environment gives no {name.lower()} bound."
         elif count:
@@ -106,6 +115,7 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
                 yours=_range_text(bounds, unit),
                 status=status,
                 detail=detail,
+                sources=found if status == TESTED and len(found) <= 6 else [],  # a long list of links says nothing
             )
         )
 
@@ -127,6 +137,7 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
             yours=(f"{_range_text(oxygen, '%')}, {_range_text(pressure, 'kPa')}"),
             status=status,
             detail=detail,
+            sources=_sources(tests, both) if not _no_bounds(oxygen) or not _no_bounds(pressure) else [],
         )
     )
 
@@ -142,6 +153,7 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
                 detail=f"{count:,} of those tests also had your air flow."
                 if count
                 else "None of those tests had your air flow.",
+                sources=_sources(tests, both & _inside(tests["debit_air_cm_s"], flow)),
             )
         )
 
@@ -153,6 +165,7 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
         of_type = types.str.contains(key)
         count = int((both & of_type).sum())
         unknown = int((pressure_unknown & of_type).sum())
+        sources = _sources(tests, (both | pressure_unknown) & of_type)
         if count:
             status, detail = TESTED, f"{count:,} tests."
         elif unknown:
@@ -168,19 +181,32 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
                 yours="in your oxygen and pressure",
                 status=status,
                 detail=detail,
+                sources=sources,
             )
         )
     return rows
 
 
 def coverage_card(rows: list[dict]) -> None:
-    """The rows as a compact table: condition, what NASA covers, your environment, and a status chip."""
+    """The rows as a compact table: condition, what NASA covers, your environment, and a status chip.
+    Each row links the NASA investigations its tests come from, so the numbers can be checked on psi.nasa.gov."""
+
+    def links(row: dict) -> str:
+        found = row.get("sources") or []
+        if not found:
+            return ""
+        return (
+            " From "
+            + ", ".join(f'<a href="{escape(url)}" target="_blank">{escape(name)}</a>' for name, url in found)
+            + "."
+        )
+
     lines = "".join(
         f'<div class="ff-cov-row"><span class="ff-cov-name">{escape(row["condition"])}</span>'
         f'<span class="ff-cov-nasa">{escape(row["nasa"])}</span>'
         f'<span class="ff-cov-yours">{escape(row["yours"])}</span>'
         f'<span class="ff-cov-status ff-{row["status"].lower().replace(" ", "-")}">{escape(row["status"])}</span>'
-        f'<span class="ff-cov-detail">{escape(row["detail"])}</span></div>'
+        f'<span class="ff-cov-detail">{escape(row["detail"])}{links(row)}</span></div>'
         for row in rows
     )
     head = (
@@ -189,6 +215,7 @@ def coverage_card(rows: list[dict]) -> None:
     )
     st.html(f'<div class="ff-coverage">{head}{lines}</div>')
     st.caption(
-        "Counted from NASA PSI test rows; a test counts when its recorded value falls in your range. "
+        "Counted from the test rows of NASA's Physical Sciences Informatics (psi.nasa.gov); a test counts when its "
+        "recorded value falls in your range. Each link opens the investigation, with its test list and data files. "
         "Fuel types are the team's classification of each investigation."
     )

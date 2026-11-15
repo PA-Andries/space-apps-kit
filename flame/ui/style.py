@@ -273,9 +273,10 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
   letter-spacing: 0.04em; }}
 .ff-cov-name {{ font-weight: 700; }}
 .ff-cov-nasa, .ff-cov-detail {{ color: {MUTED}; }}
+.ff-cov-detail a {{ color: {ACCENT}; font-weight: 600; }}
 .ff-cov-status {{ justify-self: start; border-radius: 980px; padding: 0.15rem 0.65rem; font-size: 0.78rem;
   font-weight: 700; border: 1px solid {SECONDARY_LINE}; background: rgba(255, 255, 255, 0.06); }}
-.ff-cov-status.ff-not-tested {{ background: {ACCENT}; border-color: {ACCENT}; color: #fff; }}
+.ff-cov-status.ff-tested {{ background: {ACCENT}; border-color: {ACCENT}; color: #fff; }}
 .ff-cov-status.ff-partly {{ border-color: {ACCENT}; color: {ACCENT}; }}
 @media (max-width: 760px) {{ .ff-cov-row {{ grid-template-columns: 1fr 1fr; }} .ff-cov-head {{ display: none; }} }}
 
