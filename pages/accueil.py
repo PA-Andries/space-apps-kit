@@ -2,10 +2,11 @@
 
 The page reads from the choice to its consequences (Ethan's ask of Sun 15 Nov):
  1. the environment: one button per place, then the sliders that refine it;
- 2. three figures: tests, investigations, and how many are independent measurements;
+ 2. two figures, right underneath: the tests that match, and the investigations behind them;
  3. the chart of NASA's tests against those conditions;
- 4. what we don't know, then the three most relevant investigations;
- 5. folded away: the hardware and the shape of the samples.
+ 4. under which conditions NASA ran its tests (role F's coverage card);
+ 5. what we don't know, then the three most relevant investigations;
+ 6. folded away: the hardware and the shape of the samples.
 Every page of the site is in the menu bar at the top.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
@@ -47,9 +48,12 @@ from flame.ui import (
     style_conditions_chart,
 )
 
-# The contract's three fuel types first; PSI's tables hold two more families (smoke, dust), and they get
-# a pill too. Otherwise ticking every pill silently drops them, and "all" covers less than "none chosen".
-FUEL_ORDER = ["solide", "liquide", "gaz"]
+# The three states of matter, and nothing else: one pill each. The team's `type_combustible` also holds
+# "fumée" and "poussière", but what burns in those investigations is a solid — PSI's own wording is
+# "smoke aerosol (overheated solids)", and the dust experiment disperses solid particles. They are folded
+# into "solid" instead of getting a pill: a fourth state of matter would be invented, and leaving them out
+# made "tick everything" cover less than "tick nothing" (Ethan, Sun 15 Nov).
+FUEL_GROUPS = {"solide": ("solide", "fumée", "poussière"), "liquide": ("liquide",), "gaz": ("gaz",)}
 # Slider scales. A handle left at the end of its scale means "no bound" on that side, so each scale must
 # reach past the most extreme test: otherwise a test exists that no selection can ever include.
 OXYGEN_SCALE = (0.0, 100.0)  # NASA's tests run from 12 to 85 %
@@ -75,14 +79,21 @@ def title_label(place: str) -> str:
     return f"{name[:1].upper()}{name[1:]}"
 
 
-def fuel_families(fiches) -> list[str]:
-    """Every fuel family PSI's investigations actually hold, the contract's three first.
+def fuel_pills(fiches) -> list[str]:
+    """The pills to offer: a state of matter that the data holds, plus any family no group covers.
 
-    Ticking them all must cover every investigation: a family that exists in the data but has no pill
-    would be dropped by the filter with no way for the user to get it back.
+    Ticking them all must cover every investigation. A family that exists in the data but belongs to no
+    pill would be dropped by the filter with no way to get it back, so it gets a pill of its own.
     """
     familles = {comparateur.famille_combustible(valeur) for valeur in fiches["type_combustible"]} - {INCONNU}
-    return [famille for famille in FUEL_ORDER if famille in familles] + sorted(familles - set(FUEL_ORDER))
+    groupees = {famille for groupe in FUEL_GROUPS.values() for famille in groupe}
+    offertes = [etat for etat, groupe in FUEL_GROUPS.items() if familles & set(groupe)]
+    return offertes + sorted(familles - groupees)
+
+
+def fuel_filter(chosen: list[str]) -> list[str]:
+    """The families behind the chosen pills: "solid" also stands for the smoke and dust investigations."""
+    return sorted({famille for choix in chosen for famille in FUEL_GROUPS.get(choix, (choix,))})
 
 
 fiches = charger_fiches()
@@ -172,7 +183,7 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     st.caption(f"NASA's PSI tests are run at 0 g, in orbit, or at 1 g, on the ground. {own_gravity}")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills(
-        "Fuel (none chosen = all)", fuel_families(fiches), selection_mode="multi", format_func=label, key="ui_fuels"
+        "Fuel (none chosen = all)", fuel_pills(fiches), selection_mode="multi", format_func=label, key="ui_fuels"
     )
     air_flow = from_slider(
         st.slider("Air flow (cm/s, optional)", *AIR_FLOW_SCALE, step=0.5, key="ui_air_flow"), AIR_FLOW_SCALE
@@ -192,7 +203,7 @@ environment = {
     "oxygene_pct": oxygen,
     "pression_kpa": pressure,
     "gravite": gravity,
-    "type_combustible": list(fuels),
+    "type_combustible": fuel_filter(list(fuels)),
     "debit_air_cm_s": air_flow,
 }
 # The habitat the other pages read: the place, or "Personnalisé" once the values left its range.
@@ -214,16 +225,21 @@ elif shown_place == SPACESUIT:
 
 matching = comparateur.tests_correspondants(tests, fiches, scenario)
 
-# --- Level 2: the three figures, right under the choice that produces them ---------------------------------
-independance = recherche.independance(matching["investigation_id"].unique())
+# --- Level 2: the figures, right under the choice that produces them ---------------------------------------
+# Each tile says what it counts: the first figure was the tests whose pressure is recorded, which read as
+# a missing third of the data (Ethan, Sun 15 Nov). The whole count comes first, the sure ones underneath.
 sure = matching[matching["pression_notee"]]
+ran_tests = tests["investigation_id"].nunique()
+without_tests = len(fiches) - ran_tests
 stat_tiles(
     [
-        (f"{len(sure):,}", "Tests in your environment", "pressure recorded"),
-        (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
-        (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
+        (f"{len(matching):,}", "Tests in your environment", f"{len(sure):,} with pressure recorded"),
+        (f"{matching['investigation_id'].nunique()}", "Investigations", f"of the {ran_tests} that ran tests"),
     ],
-    note=independance["phrase"],
+    note=(
+        f"{without_tests} of the {len(fiches)} investigations ran no test of their own: they reanalyse "
+        "data from other flights, so no test row can be counted for them."
+    ),
     compact=True,
 )
 

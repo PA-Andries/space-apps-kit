@@ -330,15 +330,11 @@ def test_ticking_every_fuel_covers_as_much_as_ticking_none():
     Smoke and dust had no pill, so the filter dropped them with no way to get them back. Every family of
     the data has a pill now, and ticking them all must come back to the same figures as ticking none.
     """
-    from flame.commun import INCONNU, charger_fiches
-    from flame.comparateur import famille_combustible
-
     site = AppTest.from_file(APP, default_timeout=30).run()
     aucune = _investigations_tile(site)
 
-    familles = {famille_combustible(valeur) for valeur in charger_fiches()["type_combustible"]} - {INCONNU}
-    site.session_state["ui_fuels"] = sorted(familles)
-    site.run()
+    pastilles = site.pills(key="ui_fuels")
+    site.pills(key="ui_fuels").set_value(list(pastilles.options)).run()
     assert not site.exception
     assert _investigations_tile(site) == aucune
 
