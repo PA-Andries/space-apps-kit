@@ -544,3 +544,32 @@ def test_flamy_sits_on_every_page_and_opens_a_chat_window():
     assert site.button(key="ui_flamy_open")  # Flamy's button, bottom right
     site.button(key="ui_flamy_open").click().run()
     assert not site.exception
+
+
+def test_flamy_stays_calm_and_looks_at_the_visitor_on_the_assistant_page():
+    from flame.ui.scene import _fill
+
+    page = _fill("mascot.html", {"calm": True})
+    assert '{"calm": true}' in page and "pointermove" in page  # the eyes follow the pointer
+    assert "mascot_scene(height=170, calm=True)" in Path("flame/ui/home.py").read_text()
+    assert '{"calm": false}' in _fill("mascot.html", {"calm": False})  # elsewhere he still waves
+
+
+def test_the_flamy_window_opens_and_answers():
+    def corner():
+        import streamlit as st
+
+        from flame.ui import flamy_corner
+
+        def fake_answer(question, history, fiches):
+            st.session_state["asked"] = question
+            return "An answer from the records."
+
+        flamy_corner(fake_answer)
+
+    page = AppTest.from_function(corner, default_timeout=30).run()
+    page.button(key="ui_flamy_open").click().run()
+    assert not page.exception  # the window opens without error (it once failed on a missing argument)
+    # The window's content is drawn: the conversation and the question box.
+    assert page.chat_input(key="ui_flamy_question") is not None
+    # (Typing a question reruns the window as a fragment in a real browser; AppTest cannot replay that.)

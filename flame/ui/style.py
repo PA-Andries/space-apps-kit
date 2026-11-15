@@ -52,7 +52,7 @@ GLOBAL_STYLE = f"""<style>
 [data-testid="stPageLink"] a {{ justify-content: center; }}
 [data-testid="stPageLink"] a p {{ color: {FLAME}; font-size: 1.15rem; font-weight: 500; }}
 [data-testid="stPageLink"] a:hover {{ background: transparent; }}
-[data-testid="stPageLink"] a:hover p {{ text-decoration: underline; }}
+[data-testid="stPageLink"] a:hover p {{ text-decoration: none; opacity: 0.8; }}
 
 /* 3D scenes: large round-cornered windows on space, with a soft, wide shadow. The dark background
    shows while a scene loads, instead of a white flash. */
@@ -100,7 +100,7 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-cta:hover {{ background: #c9541c; }}
 .ff-more {{ color: {FLAME} !important; text-decoration: none !important; font-size: 1.1rem; font-weight: 500; }}
 .ff-more::after {{ content: " \\203A"; }}
-.ff-more:hover {{ text-decoration: underline !important; }}
+.ff-more:hover {{ text-decoration: none !important; opacity: 0.8; }}
 
 .ff-section {{ text-align: center; margin: 6rem 0 2rem; scroll-margin-top: 6rem; }}
 .ff-section .ff-step {{ color: {FLAME}; font-weight: 600; font-size: 1rem; margin: 0 0 0.5rem !important; }}
@@ -228,6 +228,10 @@ div[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; right:
   -webkit-backdrop-filter: blur(18px); border: 1px solid {SECONDARY_LINE}; border-radius: 22px; }}
 .st-key-ui_flamy_face {{ align-items: center; margin-bottom: -0.6rem; }}
 .st-key-ui_flamy_face iframe {{ width: 130px !important; }}
+
+/* No underline on any link or button text, even on hover: the site should not look like a back office. */
+.stApp a, .stApp a:hover, .stApp a:focus, .stApp a p, .stApp a:hover p, .stApp a span, .stApp a:hover span,
+.stApp button p, .stApp button:hover p {{ text-decoration: none !important; }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
