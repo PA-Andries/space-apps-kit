@@ -16,7 +16,7 @@ import streamlit as st
 
 import flame.comparateur as comparateur
 import flame.recherche as recherche
-from flame.commun import charger_fiches, charger_table_psi, charger_tests, get_scenario
+from flame.commun import HABITAT_PERSONNALISE, charger_fiches, charger_table_psi, charger_tests, get_scenario
 from flame.ui import (
     EARTH,
     REFERENCE_PLACES,
@@ -30,10 +30,12 @@ from flame.ui import (
     how_to_use,
     investigation_details,
     label,
+    left_the_place,
     outcomes_card,
     place_buttons,
     save_environment,
     show_environment_in_sidebar,
+    single_value_style,
     source_name,
     stat_tiles,
     style_conditions_chart,
@@ -92,17 +94,14 @@ def from_slider(handles: tuple, scale: tuple) -> tuple:
 
 
 # --- Level 3: the crew environment, its sliders, and where NASA's tests sit --------------------------------
-picker_column, sliders_column = st.columns([7, 5], gap="medium")
-
-with picker_column, st.container(key="ui_card_destination", height="stretch"):
-    card_title(
-        "Habitable crew environment",
-        "Space station, spacecraft, lunar base, pressurized rover or Mars base. "
-        "Earth and the spacesuit are references, not habitats.",
-    )
-    shown_place = place_buttons(habitat)
-
-values = environment_values(shown_place)
+# The place whose button was clicked last (the scenario's habitat until the first click). It stays the
+# place of the sliders even when the user's values leave its range and the environment becomes custom.
+if habitat != HABITAT_PERSONNALISE:
+    st.session_state.setdefault("ui_place", habitat)
+shown_place = st.session_state.get("ui_place") or habitat
+# Back from another page with a custom environment: the sliders take the user's values, not the place's.
+was_custom = habitat == HABITAT_PERSONNALISE and shown_place not in REFERENCE_PLACES
+values = environment_values(HABITAT_PERSONNALISE if was_custom else shown_place)
 sources = conditions(shown_place)["sources"]
 
 # The sliders start from the scenario: what the user typed stays, even after a visit to another page.
@@ -115,8 +114,30 @@ if st.session_state.get("ui_form_place") != shown_place or "ui_oxygen" not in st
     st.session_state["ui_air_flow"] = to_slider(values["debit_air_cm_s"], AIR_FLOW_SCALE)
     st.session_state["ui_form_place"] = shown_place
 
+# Oxygen or pressure moved out of the place's range: the place is no longer selected, the environment is custom.
+custom = left_the_place(
+    shown_place, {"oxygene_pct": ("ui_oxygen", OXYGEN_SCALE), "pression_kpa": ("ui_pressure", PRESSURE_SCALE)}
+)
+shown_name = "Custom" if custom else title_label(shown_place)
+environment_name = "your custom environment" if custom else title_label(shown_place)  # inside a sentence
+
+picker_column, sliders_column = st.columns([7, 5], gap="medium")
+
+with picker_column, st.container(key="ui_card_destination", height="stretch"):
+    card_title(
+        "Habitable crew environment",
+        "Space station, spacecraft, lunar base, pressurized rover or Mars base. "
+        "Earth and the spacesuit are references, not habitats.",
+    )
+    place_buttons(habitat, selected=not custom)
+    if custom:
+        st.caption(
+            f"Your oxygen or pressure is outside the range of {title_label(shown_place)}: no environment is "
+            "selected. Move the sliders back, or click a button, to return to one."
+        )
+
 with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
-    card_title(f"Parameters · {title_label(shown_place)}", "Filled in by the environment. Move a slider to change it.")
+    card_title(f"Parameters · {shown_name}", "Filled in by the environment. Move a slider to change it.")
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
     gravity = st.segmented_control(
         "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
@@ -132,11 +153,15 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
         st.slider("Air flow (cm/s, optional)", *AIR_FLOW_SCALE, step=0.5, key="ui_air_flow"), AIR_FLOW_SCALE
     )
     # Each value keeps its source visible: the statement gives some of them, the team assumes the others.
+    # Once the environment is custom, oxygen and pressure are the user's own.
+    oxygen_source = "your choice" if custom else source_name(sources["oxygene_pct"])
+    pressure_source = "your choice" if custom else source_name(sources["pression_kpa"])
     st.caption(
-        f"O₂ {source_name(sources['oxygene_pct'])} · pressure {source_name(sources['pression_kpa'])} · "
+        f"O₂ {oxygen_source} · pressure {pressure_source} · "
         f"gravity {source_name(sources['gravite'])} · fuel your choice. "
         "A handle left at the end of its scale means no bound on that side."
     )
+    single_value_style(["ui_oxygen", "ui_pressure", "ui_air_flow"])  # one number when both handles meet
 
 environment = {
     "oxygene_pct": oxygen,
@@ -145,11 +170,14 @@ environment = {
     "type_combustible": list(fuels),
     "debit_air_cm_s": air_flow,
 }
+# The habitat the other pages read: the place, or "Personnalisé" once the values left its range.
+scenario_place = HABITAT_PERSONNALISE if custom else shown_place
 if shown_place not in REFERENCE_PLACES:
-    save_environment(habitat=shown_place, **environment)
+    st.session_state["ui_habitat"] = scenario_place  # the top bar keeps it on the other pages
+    save_environment(habitat=scenario_place, **environment)
     show_environment_in_sidebar()
 # The scenario as the other pages read it. A reference place is explored here without replacing the habitat.
-scenario = {**get_scenario(), "habitat": shown_place, **environment}
+scenario = {**get_scenario(), "habitat": scenario_place, **environment}
 
 if shown_place == EARTH:
     st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
@@ -207,7 +235,7 @@ with figures_zone:
 with st.container(key="ui_card_outcomes"):
     card_title(
         "Can a flame burn in these conditions?",
-        f"What the NASA tests that match {title_label(shown_place)} show.",
+        f"What the NASA tests that match {environment_name} show.",
         tag="What NASA's tests show",
     )
     outcomes_card(matching, scenario)
@@ -220,12 +248,12 @@ with st.container(key="ui_card_gaps"):
 
 best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
 with st.container(key="ui_card_compare"):
-    card_title("The 3 most relevant investigations", f"For {title_label(shown_place)}.")
+    card_title("The 3 most relevant investigations", f"For {environment_name}.")
     if best.empty:
         st.info("No investigation scores for this environment yet.")
     # Each one with what the experiment studied and why it matters here (role C's `descriptif`).
     for rank, (_, fiche) in enumerate(best.iterrows(), start=1):
-        investigation_details(fiche, recherche.descriptif(fiche, scenario, tests), rank, title_label(shown_place))
+        investigation_details(fiche, recherche.descriptif(fiche, scenario, tests), rank, environment_name)
     # The 3 compared with each other (role C): where they agree, where to be careful.
     compared = recherche.synthese_des_plus_pertinentes(fiches, tests, scenario)
     if compared and compared["investigations"]:

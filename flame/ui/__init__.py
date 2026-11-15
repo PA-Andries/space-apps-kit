@@ -5,6 +5,7 @@ Other roles may use everything listed here.
 
 from flame.ui.chart import style_conditions_chart
 from flame.ui.components import investigation_card, place_buttons, place_picker
+from flame.ui.custom import left_the_place, single_value_style
 from flame.ui.environment import (
     REFERENCE_PLACES,
     bounds_text,
@@ -71,6 +72,7 @@ __all__ = [
     "investigation_details",
     "how_to_use",
     "label",
+    "left_the_place",
     "mascot",
     "place_buttons",
     "place_conditions",
@@ -78,5 +80,6 @@ __all__ = [
     "scene_3d",
     "section",
     "show_top_bar",
+    "single_value_style",
     "stat_tiles",
 ]

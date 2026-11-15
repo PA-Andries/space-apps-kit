@@ -99,7 +99,11 @@ def go_back() -> None:
 
 
 def choose_place(place: str) -> None:
-    """Remember the place; a habitat also becomes the scenario habitat (top bar)."""
+    """Remember the place; a habitat also becomes the scenario habitat (top bar).
+
+    A click, even on the place already shown, gives the sliders of page 1 the place's own values again.
+    """
     st.session_state["ui_place"] = place
+    st.session_state.pop("ui_form_place", None)
     if place not in REFERENCE_PLACES:
         st.session_state["ui_habitat"] = place

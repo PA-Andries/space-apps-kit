@@ -457,3 +457,80 @@ def test_the_ranking_explains_every_investigation():
     assert not site.exception
     shown = " ".join(str(block.value) for block in site.get("html"))
     assert shown.count("Why it matters for Moon base") >= 3
+
+
+def test_within_reads_a_missing_bound_as_the_end_of_the_scale():
+    from flame.ui.custom import within
+
+    scale = (0.0, 100.0)
+    assert within((30.0, 100.0), (30.0, None), scale)  # "30 % or more": the Moon base as it is filled in
+    assert within((35.0, 50.0), (30.0, None), scale)  # a narrower choice stays inside
+    assert not within((25.0, 100.0), (30.0, None), scale)
+    assert not within((19.0, 30.0), (19.0, 23.0), scale)
+    assert within((100.0, 100.0), (100.0, 100.0), scale)  # the spacesuit: a single point
+    assert within((0.0, 100.0), (None, None), scale)  # Mars: no bound, nothing can leave it
+
+
+def test_sliders_out_of_the_range_unselect_the_environment():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()  # under the Moon base's 30 %
+    assert not site.exception
+    assert [b.key for b in site.button if b.key.startswith("ui_place_") and b.proto.type == "primary"] == []
+    assert site.session_state["ui_habitat"] == "Personnalisé"
+    assert site.session_state["habitat"] == "Personnalisé"  # what the other pages read
+    assert site.session_state["scenario_oxygene_pct"] == (25.0, None)  # the user's values are kept
+    assert any("no environment is selected" in caption.value for caption in site.caption)
+
+
+def test_sliders_back_in_the_range_select_the_environment_again():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    site.slider(key="ui_oxygen").set_value((35.0, 100.0)).run()  # inside "30 % or more" again
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"
+    assert site.session_state["ui_habitat"] == "Base lunaire"
+    assert site.session_state["scenario_oxygene_pct"] == (35.0, None)
+
+
+def test_a_narrower_choice_keeps_the_environment_selected():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_pressure").set_value((40.0, 60.0)).run()  # still under the Moon base's 70.3 kPa
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"
+    assert site.session_state["ui_habitat"] == "Base lunaire"
+
+
+def test_a_click_on_the_same_button_brings_its_values_back():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    site.button(key="ui_place_Base lunaire").click().run()
+    assert site.slider(key="ui_oxygen").value == (30.0, 100.0)
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"
+
+
+def test_a_custom_environment_survives_a_visit_to_another_page():
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
+    site.switch_page("pages/donnees.py").run()
+    assert not site.exception
+    assert site.session_state["habitat"] == "Personnalisé"
+    assert site.session_state["scenario_oxygene_pct"] == (25.0, None)
+    site.switch_page("pages/accueil.py").run()
+    assert site.slider(key="ui_oxygen").value == (25.0, 100.0)
+    assert [b.key for b in site.button if b.key.startswith("ui_place_") and b.proto.type == "primary"] == []
+
+
+def _spacesuit_sliders():
+    import streamlit as st
+
+    from flame.ui.custom import single_value_style
+
+    st.session_state["ui_oxygen"] = (100.0, 100.0)  # the spacesuit: both handles on 100 %
+    st.session_state["ui_pressure"] = (0.0, 70.3)
+    single_value_style(["ui_oxygen", "ui_pressure", "ui_missing"])
+
+
+def test_two_handles_on_the_same_point_show_one_number():
+    site = AppTest.from_function(_spacesuit_sliders).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert ".st-key-ui_oxygen" in shown and ".st-key-ui_pressure" not in shown
