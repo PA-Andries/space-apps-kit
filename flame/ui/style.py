@@ -294,8 +294,12 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 .ff-rank-title {{ color: {MUTED}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.04em; margin: 0 0 0.3rem; }}
 .st-key-recherche_classement button {{ justify-content: flex-start; text-align: left; min-height: 0;
-  padding: 0.45rem 0.7rem; }}
-.st-key-recherche_classement button p {{ font-size: 0.85rem; white-space: normal; }}
+  padding: 0.45rem 0.8rem; border-radius: 12px; }}
+/* A long name is cut after two lines, with « … »; the whole name shows on hover. */
+.st-key-recherche_classement button p {{ font-size: 0.85rem; line-height: 1.3; white-space: normal;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
+.st-key-recherche_classement button > div, .st-key-recherche_classement button [data-testid="stMarkdownContainer"] {{
+  min-width: 0; overflow: hidden; }}
 .st-key-recherche_classement button > div {{ justify-content: flex-start; width: 100%; }}
 /* Room at the end of the list, so that Flamy's card in the corner never hides the last investigations. */
 .st-key-recherche_classement {{ padding-bottom: 7rem; }}
