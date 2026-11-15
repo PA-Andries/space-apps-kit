@@ -12,7 +12,7 @@ import streamlit as st
 
 from flame.commun import charger_fiches, charger_tests, get_scenario
 from flame.recherche import (
-    ce_quon_ne_sait_pas,
+    afficher_ce_quon_ne_sait_pas,
     champs_inconnus,
     descriptif,
     les_plus_pertinentes,
@@ -136,5 +136,4 @@ with onglet_fiche:
 
 with onglet_inconnu:
     st.caption("Gaps in NASA's data for your environment. Counted on PSI's test tables: nothing is guessed.")
-    for constat in ce_quon_ne_sait_pas(fiches, tests, scenario):
-        st.markdown(f"- {constat}")
+    afficher_ce_quon_ne_sait_pas(fiches, tests, scenario, cle="recherche")

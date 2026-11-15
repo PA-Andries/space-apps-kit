@@ -15,13 +15,16 @@ from flame.commun import INCONNU, charger_fiches, charger_tests
 from flame.recherche import (
     ce_quon_ne_sait_pas,
     champs_inconnus,
+    couverture,
     descriptif,
     detail_du_score,
     filtrer,
     frontiere_des_solides,
     independance,
     les_plus_pertinentes,
+    mesures_notees,
     rechercher,
+    regle_de_l_oxygene,
     synthese_des_plus_pertinentes,
     valeurs_possibles,
     verdict,
@@ -404,3 +407,40 @@ def test_l_independance_sans_table_ne_replie_personne(monkeypatch):
     monkeypatch.setattr(module, "charger_table_psi", lambda nom: pd.DataFrame())
     resultat = independance(["PSI-69", "PSI-117"])
     assert resultat["independantes"] == 2 and resultat["reanalyses"] == {}
+
+
+# --- Les visuels de « What we don't know » ---
+
+
+def test_la_grille_compte_les_tests_de_chaque_combustible_dans_l_atmosphere():
+    grille = couverture(charger_fiches(), charger_tests(), LUNE)
+    assert grille["atmosphere"] == "O2 ≥ 30 %, pressure ≤ 70.3 kPa"
+    cases = {case["type"]: (case["tests"], case["investigations"]) for case in grille["cases"]}
+    assert cases == {"solide": (0, 0), "liquide": (1, 1), "gaz": (0, 0)}  # seul C-03 (40 %, 70 kPa)
+
+
+def test_la_grille_d_une_atmosphere_inconnue_ne_compte_rien():
+    grille = couverture(charger_fiches(), charger_tests(), MARS)
+    assert grille["atmosphere"] is None
+    assert all(case["tests"] is None for case in grille["cases"])
+
+
+def test_la_regle_de_l_oxygene_mesure_le_trou_de_chaque_combustible():
+    regle = regle_de_l_oxygene(charger_fiches(), charger_tests(), LUNE)
+    assert regle["environnement"] == (30.0, None)
+    lignes = {ligne["type"]: (ligne["plage"], ligne["ecart"]) for ligne in regle["combustibles"]}
+    assert lignes == {"solide": ((16.0, 21.0), 9.0), "liquide": ((10.0, 40.0), None), "gaz": ((21.0, 40.0), None)}
+    assert all(
+        ligne["ecart"] is None
+        for ligne in regle_de_l_oxygene(charger_fiches(), charger_tests(), STATION)["combustibles"]
+    )
+
+
+def test_mesures_notees_dit_pour_chaque_investigation_si_l_oxygene_et_la_pression_sont_notes():
+    fiches = charger_fiches()
+    fiches.loc[fiches["id"] == "EXEMPLE-B", "pression_kpa"] = None
+    mesures = mesures_notees(fiches)
+    assert set(mesures) == {"Oxygen range", "Pressure"}
+    assert len(mesures["Pressure"]) == len(fiches)
+    nom_b = fiches.loc[fiches["id"] == "EXEMPLE-B", "nom"].iloc[0]
+    assert (nom_b, False) in mesures["Pressure"]

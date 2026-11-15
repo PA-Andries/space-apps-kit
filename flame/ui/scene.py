@@ -87,6 +87,9 @@ def places_scene(objects: list[str], zones: list[dict], pick_key: str, zoom_from
     st.iframe(places_page(objects, zones, pick_key, zoom_from), height=height)
 
 
-def mascot_scene(height: int = 260) -> None:
-    """Show the cartoon flame mascot, on a transparent background."""
-    st.iframe(_fill("mascot.html", {}), height=height)
+def mascot_scene(height: int = 260, calm: bool = False) -> None:
+    """Show the cartoon flame mascot, on a transparent background.
+
+    `calm`: almost still, no waving, its eyes following the visitor's pointer (the Assistant page).
+    """
+    st.iframe(_fill("mascot.html", {"calm": calm}), height=height)
