@@ -15,8 +15,8 @@ from flame.ui.style import FLAME, MUTED, SECONDARY, SECONDARY_LINE
 STEPS = [
     ("Choose your environment", "Space station, spacecraft, Moon base, pressurized rover or Mars base."),
     ("Refine the conditions", "Oxygen, pressure, fuel and air flow. Your values follow you on every page."),
-    ("Read the chart", "Grey: every NASA test on the oxygen axis. Orange: the ones inside your environment."),
-    ("Read the results", "What those tests show, the 3 most relevant investigations, and what NASA's data lacks."),
+    ("Read the chart", "Each point is one NASA test. The circled ones are inside your environment."),
+    ("Read the results", "What NASA's data lacks for you, then the 3 most relevant investigations."),
 ]
 NEXT = (
     "Then go further with the menu at the top: Investigations, Data and export, Compare, "

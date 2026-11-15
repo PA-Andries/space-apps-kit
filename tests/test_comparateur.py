@@ -46,29 +46,92 @@ def _tests_vides() -> pd.DataFrame:
     return pd.DataFrame(columns=["investigation_id", *VARIABLES])
 
 
-def test_les_trois_niveaux_et_leur_ordre():
+def _table_nasa(*lignes: tuple[str, str, str]) -> pd.DataFrame:
+    """Une table `investigations` de NASA minimale : (id, famille de matériel, type d'étude)."""
+    return pd.DataFrame(lignes, columns=["investigation_id", "hardware_family", "project_type"])
+
+
+def _liens(*lignes: tuple[str, str, str]) -> pd.DataFrame:
+    """Une table `relations` minimale : (de, vers, relation)."""
+    return pd.DataFrame(lignes, columns=["from_id", "to_id", "relation"])
+
+
+VOL = "Microgravity Investigation"
+SOL = "Ground Investigation"
+
+
+def test_les_niveaux_et_leur_ordre():
     fiches = _fiches(
-        ("DEPART", "solide", "MSG"),
-        ("AUTRE-PHENOMENE", "fumée", "MSG"),
-        ("AUTRE-ECHELLE", "solide", "Cygnus"),
-        ("MEME-FAMILLE", "solide", "MSG"),
+        ("DEPART", "solide", "x"),
+        ("MEME-MATERIEL", "gaz", "x"),
+        ("LIEE-PAR-NASA", "solide", "x"),
+        ("RIEN-DE-COMMUN", "solide", "x"),
     )
-    resultat = comparables(fiches, _tests_vides(), "DEPART")
-    assert list(resultat["id"]) == ["MEME-FAMILLE", "AUTRE-ECHELLE", "AUTRE-PHENOMENE"]
+    table = _table_nasa(
+        ("DEPART", "MSG flow duct", VOL),
+        ("MEME-MATERIEL", "MSG flow duct", VOL),
+        ("LIEE-PAR-NASA", "Saffire (Cygnus)", VOL),
+        ("RIEN-DE-COMMUN", "ACME gas burner", VOL),
+    )
+    liens = _liens(("LIEE-PAR-NASA", "DEPART", "related to"))
+    resultat = comparables(fiches, _tests_vides(), "DEPART", table, liens)
+    assert list(resultat["id"]) == ["MEME-MATERIEL", "LIEE-PAR-NASA", "RIEN-DE-COMMUN"]
     assert list(resultat["niveau"]) == [1, 2, 3]
-    assert resultat["raison"].iloc[2] == "Same hardware, different fuel type"
+    assert list(resultat["raison"]) == [
+        "Same hardware (MSG flow duct)",
+        "Listed as related in NASA's PSI",
+        "No shared hardware and no link given by NASA",
+    ]
 
 
-def test_un_modele_garde_le_combustible_de_son_etude():
-    fiches = _fiches(("VOL", "liquide", "MDCA"), ("MODELE", "liquide (modèle)", "Computer simulation"))
-    assert comparables(fiches, _tests_vides(), "VOL")["niveau"].iloc[0] == 2
+def test_le_type_de_combustible_de_l_equipe_ne_compte_pas():
+    # Même type de combustible, mais ni matériel commun ni lien de NASA : rien ne les rapproche.
+    fiches = _fiches(("A", "solide", "x"), ("B", "solide", "y"), ("SANS-TYPE", None, "x"))
+    table = _table_nasa(
+        ("A", "MSG flow duct", VOL), ("B", "Saffire (Cygnus)", VOL), ("SANS-TYPE", "MSG flow duct", VOL)
+    )
+    resultat = comparables(fiches, _tests_vides(), "A", table, _liens()).set_index("id")
+    assert resultat.loc["B", "niveau"] == 3
+    assert resultat.loc["SANS-TYPE", "niveau"] == 1  # un type de combustible absent ne change rien non plus
 
 
-def test_un_combustible_inconnu_n_est_jamais_devine():
-    fiches = _fiches(("VOL", "solide", "MSG"), ("SANS-TYPE", None, "MSG"))
-    resultat = comparables(fiches, _tests_vides(), "VOL")
-    assert resultat["niveau"].iloc[0] == 3
-    assert resultat["raison"].iloc[0] == "Fuel type unknown"
+def test_une_etude_au_sol_ne_se_compare_que_par_ses_liens():
+    fiches = _fiches(
+        ("VOL", "liquide", "x"), ("MODELE", "liquide (modèle)", "y"), ("AUTRE-MODELE", "gaz (modèle)", "y")
+    )
+    table = _table_nasa(
+        ("VOL", "MDCA droplet", VOL), ("MODELE", "Ground study", SOL), ("AUTRE-MODELE", "Ground study", SOL)
+    )
+    liens = _liens(("MODELE", "VOL", "reuses data from"))
+    resultat = comparables(fiches, _tests_vides(), "MODELE", table, liens).set_index("id")
+    assert resultat.loc["VOL", "niveau"] == 2
+    assert resultat.loc["VOL", "raison"] == "One reuses the other's data, according to NASA's PSI"
+    assert resultat.loc["AUTRE-MODELE", "niveau"] == 3  # deux études au sol ne partagent pas un matériel
+
+
+def test_ce_que_dit_l_enonce_passe_avant_la_famille_de_materiel():
+    fiches = _fiches(("FUMEE", "fumée", "x"), ("POUSSIERE", "poussière", "y"))
+    table = _table_nasa(("FUMEE", "SAME smoke hardware", VOL), ("POUSSIERE", "SAME smoke hardware", VOL))
+    liens = _liens(("POUSSIERE", "FUMEE", "related to"), ("POUSSIERE", "FUMEE", "shared instrument"))
+    resultat = comparables(fiches, _tests_vides(), "FUMEE", table, liens)
+    assert list(resultat["niveau"]) == [2]
+    assert resultat["raison"].iloc[0] == "Linked by the challenge statement: shared instrument"
+
+
+def test_sans_les_tables_de_nasa_seul_le_materiel_des_fiches_sert():
+    fiches = _fiches(("A", "solide", "MSG"), ("B", "fumée", "MSG"), ("C", "solide", "Cygnus"))
+    resultat = comparables(fiches, _tests_vides(), "A", pd.DataFrame(), pd.DataFrame())
+    assert list(resultat["niveau"]) == [1, 3]
+    assert resultat["raison"].iloc[0] == "Same hardware (MSG)"
+
+
+def test_la_page_ne_propose_que_les_niveaux_comparables():
+    from flame.comparateur import EXPLICATIONS, NIVEAUX, NIVEAUX_PROPOSES
+
+    assert NIVEAUX_PROPOSES == (1, 2)
+    assert [NIVEAUX[niveau] for niveau in NIVEAUX_PROPOSES] == ["Directly comparable", "Comparable in principle"]
+    assert all(EXPLICATIONS[niveau] for niveau in NIVEAUX_PROPOSES)
+    assert not any("fuel" in EXPLICATIONS[niveau].lower() for niveau in NIVEAUX_PROPOSES)
 
 
 def test_l_investigation_de_depart_n_est_pas_proposee():
@@ -137,7 +200,7 @@ def test_resume_range_les_phrases_par_theme():
         "Fuels and results",
         "Data and instruments",
     ]
-    assert themes["How they relate"][0].startswith("Exemple C (fictif) : gouttes de carburant is complementary to")
+    assert themes["How they relate"][0].startswith("Exemple C (fictif) : gouttes de carburant is not comparable to")
     assert "has 1 test row(s) at or above the Moon base oxygen level (30 %), up to 40 %." in _phrases(themes)
     assert "stops at 21 % oxygen, below the Moon base oxygen level (30 %)." in _phrases(themes)
     assert "Oxygen ranges overlap at 16 to 21 % (test rows there:" in _phrases(themes)
@@ -198,7 +261,7 @@ def test_cote_a_cote_dit_ce_qui_est_pareil():
     tableau = cote_a_cote(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-B"], pd.DataFrame())
     assert list(tableau.columns) == ["same", "EXEMPLE-A", "EXEMPLE-B"]
     assert tableau.loc["Hardware", "same"] == "same"
-    assert tableau.loc["type_combustible", "same"] == "different"
+    assert "type_combustible" not in tableau.index  # le rangement de l'équipe n'est pas montré comme une donnée
     assert tableau.loc["Where", "same"] == ABSENT
 
 
@@ -253,10 +316,16 @@ def _traces(figure) -> dict[str, int]:
     return {trace.name: len(trace.x) for trace in figure.data}
 
 
+def _correspond(trace) -> bool:
+    """Les tests qui correspondent à l'environnement sont les seuls cerclés (la légende ne les nomme plus)."""
+    contour = getattr(trace.marker, "line", None)
+    return bool(contour is not None and contour.width)
+
+
 def _tests_traces(figure) -> tuple[int, int]:
     """Le nombre de tests tracés qui correspondent à l'environnement, puis le nombre des autres."""
     points = [trace for trace in figure.data if trace.mode == "markers" and not trace.name.startswith("Spacesuit")]
-    correspondent = sum(len(trace.x) for trace in points if trace.name.endswith("(matches)"))
+    correspondent = sum(len(trace.x) for trace in points if _correspond(trace))
     return correspondent, sum(len(trace.x) for trace in points) - correspondent
 
 
@@ -299,7 +368,7 @@ def test_la_zone_lunaire_contient_66_tests_de_2_investigations():
     assert set(surs["investigation_id"]) == {"PSI-10", "PSI-159"}  # ACME Flame Design et ACME CFI-G
     figure = graphique_conditions(tests, fiches, LUNE, vue="pression")
     assert _tests_traces(figure) == (66, 1022 - 66)
-    assert {"ACME Flame Design (matches)", "ACME CFI-G (matches)"} <= set(_traces(figure))
+    assert {"ACME Flame Design", "ACME CFI-G"} <= set(_traces(figure))  # pas de « (matches) » en légende
 
 
 def test_la_vue_du_debit_montre_les_131_tests_de_solides():
@@ -327,11 +396,44 @@ def test_le_graphique_n_a_aucune_zone_pour_mars():
     assert not [nom for nom in sans_plage if nom.endswith("(matches)")]  # rien à surligner sans plage
 
 
+def test_cocher_toutes_les_familles_garde_tous_les_tests():
+    """Bug d'Ethan : « fumée » et « poussière » n'avaient pas de pastille, donc tout cocher écartait 119 tests.
+
+    Un filtre qui offre toutes les familles présentes doit, quand elles sont toutes cochées, rendre
+    exactement ce que rend « aucune cochée ». Sinon « tout sélectionner » couvre moins que ne rien choisir.
+    """
+    from flame.commun import INCONNU
+    from flame.comparateur import famille_combustible
+
+    fiches, tests = _vraies_donnees()
+    ouvert = {
+        "habitat": "Station",
+        "oxygene_pct": (None, None),
+        "pression_kpa": (None, None),
+        "debit_air_cm_s": (None, None),
+    }
+    familles = sorted({famille_combustible(valeur) for valeur in fiches["type_combustible"]} - {INCONNU})
+    assert {"solide", "liquide", "gaz", "fumée", "poussière"} <= set(familles)
+
+    sans_filtre = correspondants_du_scenario(tests, fiches, {**ouvert, "type_combustible": []})
+    tout_coche = correspondants_du_scenario(tests, fiches, {**ouvert, "type_combustible": familles})
+    assert len(tout_coche) == len(sans_filtre) == len(tests)
+    # 20 des 24 investigations ont des lignes de test ; les 4 autres sont des études de calcul.
+    assert tout_coche["investigation_id"].nunique() == 20
+
+
 def test_les_zones_disent_d_ou_viennent_leurs_chiffres():
-    traces = _traces(graphique_conditions(charger_tests(), charger_fiches(), LUNE))
-    assert "Moon base and rover (statement)" in traces
-    assert "Earth and ISS (to be sourced)" in traces
-    assert "Spacesuit (statement)" in traces
+    """La légende ne porte que le nom (demande d'Ethan) ; la provenance reste, au survol."""
+    figure = graphique_conditions(charger_tests(), charger_fiches(), LUNE)
+    traces = _traces(figure)
+    reperes = ["Moon base and rover", "Earth and ISS", "Spacesuit"]
+    assert set(reperes) <= set(traces)
+    # Plus de « (statement) » ni de « (to be sourced) » : aucune de ces entrées n'ouvre de parenthèse.
+    assert not any(nom.startswith(repere) and "(" in nom for nom in traces for repere in reperes)
+    survols = " ".join(str(trace.hovertext or "") + str(trace.hovertemplate or "") for trace in figure.data)
+    assert "Moon base and rover — statement" in survols
+    assert "Earth and ISS — to be sourced" in survols
+    assert "Spacesuit: 100 % oxygen, 29.6 kPa — statement" in survols
 
 
 def test_resume_compte_les_tests_dans_l_environnement():
@@ -374,12 +476,92 @@ def test_la_page_ignore_un_identifiant_inconnu():
     assert site.selectbox(key="comparateur_depart").value == "EXEMPLE-A"
 
 
-def test_la_page_accepte_une_troisieme_investigation():
+def _html(site) -> str:
+    return " ".join(str(bloc.value) for bloc in site.get("html"))
+
+
+def test_la_page_compare_deux_investigations_pas_trois():
     site = _page()
-    site.selectbox(key="comparateur_avec_EXEMPLE-A").set_value("EXEMPLE-C").run()
-    site.selectbox(key="comparateur_troisieme_EXEMPLE-A_EXEMPLE-C").set_value("EXEMPLE-B").run()
     assert not site.exception
-    assert any("vs" in titre.value and "Exemple B" in titre.value for titre in site.subheader)
+    assert [menu.key for menu in site.selectbox] == ["comparateur_depart", "comparateur_avec_EXEMPLE-A"]
+
+
+def test_la_page_ne_propose_que_des_investigations_comparables():
+    site = _page()
+    # EXEMPLE-B partage le matériel d'EXEMPLE-A ; EXEMPLE-C et EXEMPLE-D ne partagent rien avec elle.
+    assert site.selectbox(key="comparateur_avec_EXEMPLE-A").options == [
+        "EXEMPLE-B · Exemple B (fictif) : fumées de matériaux — directly comparable"
+    ]
+    assert "Directly comparable" in _html(site) and "Comparable in principle" in _html(site)
+    assert "Complementary" not in _html(site)
+
+
+def test_la_page_dit_quand_rien_n_est_comparable():
+    site = _page("EXEMPLE-C")  # le matériel d'EXEMPLE-C ne se retrouve nulle part ailleurs
+    assert not site.exception
+    assert any("nothing to compare it with" in bloc.value for bloc in site.info)
+    assert not any("What stands out" in bloc.value for bloc in site.markdown)
+
+
+def test_la_page_montre_les_barres_les_chiffres_et_les_textes():
+    site = _page()
+    assert not site.exception
+    html = _html(site)
+    for titre in ("At a glance", "Where NASA tested each one", "How the tests ended"):
+        assert titre in html, titre
+    assert html.count('<div class="cmp-range-head">') == 3  # oxygène, pression, débit d'air
+    assert not any("guessing" in bloc.value for bloc in site.caption)
+
+
+def test_les_barres_des_plages_disent_ou_elles_se_croisent():
+    from flame.comparateur import barres_des_plages
+
+    scenario = {"habitat": "Base lunaire", "oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
+    barres = {
+        barre["variable"]: barre for barre in barres_des_plages(charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], scenario)
+    }
+    oxygene = barres["oxygene_pct"]
+    assert oxygene["echelle"] == (0.0, 100.0)
+    assert oxygene["plages"] == {"EXEMPLE-A": (16.0, 21.0), "EXEMPLE-C": (10.0, 40.0)}
+    assert oxygene["recouvrement"] == (16.0, 21.0)
+    assert oxygene["environnement"] == (30.0, 100.0)  # « 30 % ou plus » va jusqu'au bout de l'échelle
+    assert barres["pression_kpa"]["recouvrement"] is None  # 101 kPa d'un côté, 70 kPa de l'autre
+    assert barres["debit_air_cm_s"]["environnement"] is None  # le scénario ne borne pas le débit d'air
+
+
+def test_une_condition_absente_reste_absente_dans_les_barres():
+    from flame.comparateur import barres_des_plages, texte_de_plage
+
+    tests = pd.DataFrame({"investigation_id": ["A", "B"], "oxygene_pct": [21.0, None]})
+    tests = tests.assign(pression_kpa=None, debit_air_cm_s=None)
+    oxygene = barres_des_plages(tests, ["A", "B"])[0]
+    assert oxygene["plages"] == {"A": (21.0, 21.0), "B": None}
+    assert oxygene["recouvrement"] is None and oxygene["environnement"] is None
+    assert texte_de_plage(None, "%") == ABSENT and texte_de_plage((21.0, 21.0), "%") == "21 %"
+
+
+def test_les_fins_de_test_sont_comptees_par_investigation():
+    from flame.comparateur import ISSUES, issues
+
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "A", "B"],
+            "resultat": ["Hot ignition: yes", "extinction at 12 s", None, None],
+        }
+    )
+    comptes = issues(tests, ["A", "B"])
+    assert comptes["A"] == {"burned": 1, "went_out": 1, "no_ignition": 0, "unknown": 1}
+    assert comptes["B"] == {"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 1}
+    assert list(comptes["A"]) == list(ISSUES)
+
+
+def test_les_chiffres_cles_ne_comptent_que_ce_qui_existe():
+    from flame.comparateur import chiffres_cles
+
+    fiches, tests = charger_fiches(), charger_tests()
+    lignes = dict(chiffres_cles(fiches, tests, ["EXEMPLE-A", "EXEMPLE-C"]))
+    assert set(lignes) == {"Test rows", "Fuel or sample descriptions"}  # sans scénario ni table PSI, rien de plus
+    assert lignes["Test rows"]["EXEMPLE-A"] == str(int((tests["investigation_id"] == "EXEMPLE-A").sum()))
 
 
 def test_un_nouveau_lien_remplace_l_investigation_choisie_a_la_main():

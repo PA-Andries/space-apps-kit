@@ -4,10 +4,12 @@ from flame.comparateur.comparaison import (
     CRITERES,
     EXPLICATIONS,
     NIVEAUX,
+    NIVEAUX_PROPOSES,
     VARIABLES,
     carte,
     comparables,
     comparer,
+    famille_combustible,
     instruments_communs,
     plages,
     points,
@@ -33,14 +35,21 @@ from flame.comparateur.details import (
     resume,
 )
 from flame.comparateur.tableau import capteurs, ce_qui_varie, tableau_des_tests
+from flame.comparateur.visuel import ISSUES, barres_des_plages, chiffres_cles, issues, texte_de_plage
 
 __all__ = [
     "ABSENT",
     "CRITERES",
     "EXPLICATIONS",
+    "ISSUES",
     "NIVEAUX",
+    "NIVEAUX_PROPOSES",
     "VARIABLES",
+    "barres_des_plages",
     "capteurs",
+    "chiffres_cles",
+    "issues",
+    "texte_de_plage",
     "carte",
     "ce_qui_varie",
     "comparables",
@@ -49,6 +58,7 @@ __all__ = [
     "decrire_environnement",
     "environnement_defini",
     "explication_carte",
+    "famille_combustible",
     "frequents",
     "graphique_conditions",
     "graphique_repartition",

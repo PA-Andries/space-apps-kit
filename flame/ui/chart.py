@@ -24,6 +24,12 @@ def _extent(values: list) -> tuple:
     return (min(values), max(values))
 
 
+def _matches_the_environment(trace: go.Scatter) -> bool:
+    """True for the tests that match the environment: role D draws those, and only those, with an outline."""
+    outline = getattr(trace.marker, "line", None)
+    return bool(outline is not None and outline.width)
+
+
 def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.Figure:
     """Draw the Earth and Moon zones as dotted outlines, and the scenario's ranges as a filled coloured box.
 
@@ -53,7 +59,7 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
     others = [
         trace
         for trace in figure.data
-        if trace.mode == "markers" and trace.marker.symbol != "star" and not (trace.name or "").endswith("(matches)")
+        if trace.mode == "markers" and trace.marker.symbol != "star" and not _matches_the_environment(trace)
     ]
     for rank, trace in enumerate(others):
         trace.update(

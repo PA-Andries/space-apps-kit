@@ -231,6 +231,8 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; ri
 section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ padding-bottom: 0; }}
 .st-key-ui_flamy_header {{ flex-wrap: nowrap; margin-top: -2.6rem; padding-bottom: 0.6rem;
   border-bottom: 1px solid {SECONDARY_LINE}; }}
+/* The header is pulled up beside the window's close cross: let clicks go through it, so the cross works. */
+.st-key-ui_flamy_header {{ pointer-events: none; }}
 .st-key-ui_flamy_face {{ flex: 0 0 64px; width: 64px; }}
 .st-key-ui_flamy_header [data-testid="stElementContainer"]:has(.ff-chat-who) {{ flex: 1 1 auto;
   width: auto; }}

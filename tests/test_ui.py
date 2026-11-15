@@ -314,6 +314,31 @@ def test_stat_tiles_show_unknown_instead_of_a_guess():
     assert not site.exception
 
 
+def _investigations_tile(site) -> str:
+    """The figure on the "Investigations" tile of page 1."""
+    import re
+
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    found = re.search(r"<span>Investigations</span><strong>([^<]+)</strong>", shown)
+    assert found, "the Investigations tile is not on the page"
+    return found.group(1)
+
+
+def test_ticking_every_fuel_covers_as_much_as_ticking_none():
+    """Ethan's bug (Sun 15 Nov): with three pills only, ticking them all covered less than ticking none.
+
+    Smoke and dust had no pill, so the filter dropped them with no way to get them back. Every family of
+    the data has a pill now, and ticking them all must come back to the same figures as ticking none.
+    """
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    aucune = _investigations_tile(site)
+
+    pastilles = site.pills(key="ui_fuels")
+    site.pills(key="ui_fuels").set_value(list(pastilles.options)).run()
+    assert not site.exception
+    assert _investigations_tile(site) == aucune
+
+
 def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
     import flame.comparateur as comparateur
     from flame.commun import charger_fiches, charger_tests
@@ -333,7 +358,8 @@ def test_chart_draws_dotted_zones_and_the_selection_as_a_box():
         points = [trace for trace in others if trace.mode == "markers" and trace.marker.symbol != "star"]
         grey = [trace for trace in points if trace.name == "Other tests"]
         assert grey and all(trace.marker.color == "#7d86a8" for trace in grey)
-        assert all(trace.name.endswith("(matches)") for trace in points if trace not in grey)
+        # Les tests qui correspondent gardent le nom de leur investigation et sont cerclés.
+        assert all(trace.marker.line.width for trace in points if trace not in grey)
     empty = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}
     figure = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, empty), empty, "pression")
     assert "Your selection" not in [trace.name for trace in figure.data]
@@ -417,12 +443,7 @@ def test_outcomes_sort_nasa_results_and_show_on_arrival():
     assert answer({"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 4}, moon)[1] == "No data"
     mars = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}  # no atmosphere bounds: no answer
     assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"
-
-    site = AppTest.from_file(APP, default_timeout=30).run()
-    assert not site.exception
-    # The card's sentence and its caption, from the matching tests' results.
-    texts = str([element.value for element in site.main.markdown]) + str([c.value for c in site.main.caption])
-    assert "match your environment" in texts and "not fires" in texts
+    # The card itself left page 1 (Ethan, Sun 15 Nov): the sorting it rests on is still tested here.
 
 
 def test_page_one_explains_how_to_use_the_dashboard():
