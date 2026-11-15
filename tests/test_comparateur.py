@@ -46,23 +46,83 @@ def _tests_vides() -> pd.DataFrame:
     return pd.DataFrame(columns=["investigation_id", *VARIABLES])
 
 
+def _table_nasa(*lignes: tuple[str, str, str]) -> pd.DataFrame:
+    """Une table `investigations` de NASA minimale : (id, famille de matériel, type d'étude)."""
+    return pd.DataFrame(lignes, columns=["investigation_id", "hardware_family", "project_type"])
+
+
+def _liens(*lignes: tuple[str, str, str]) -> pd.DataFrame:
+    """Une table `relations` minimale : (de, vers, relation)."""
+    return pd.DataFrame(lignes, columns=["from_id", "to_id", "relation"])
+
+
+VOL = "Microgravity Investigation"
+SOL = "Ground Investigation"
+
+
 def test_les_niveaux_et_leur_ordre():
     fiches = _fiches(
-        ("DEPART", "solide", "MSG"),
-        ("AUTRE-PHENOMENE", "fumée", "MSG"),
-        ("AUTRE-ECHELLE", "solide", "Cygnus"),
-        ("MEME-FAMILLE", "solide", "MSG"),
-        ("RIEN-DE-COMMUN", "gaz", "CIR"),
+        ("DEPART", "solide", "x"),
+        ("MEME-MATERIEL", "gaz", "x"),
+        ("LIEE-PAR-NASA", "solide", "x"),
+        ("RIEN-DE-COMMUN", "solide", "x"),
     )
-    resultat = comparables(fiches, _tests_vides(), "DEPART")
-    # Les deux en commun, puis un seul des deux (combustible ou matériel), puis rien en commun.
-    assert list(resultat["id"]) == ["MEME-FAMILLE", "AUTRE-ECHELLE", "AUTRE-PHENOMENE", "RIEN-DE-COMMUN"]
-    assert list(resultat["niveau"]) == [1, 2, 2, 3]
-    assert list(resultat["raison"])[1:] == [
-        "Same fuel type, different hardware",
-        "Same hardware, different fuel type",
-        "Different fuel type and hardware",
+    table = _table_nasa(
+        ("DEPART", "MSG flow duct", VOL),
+        ("MEME-MATERIEL", "MSG flow duct", VOL),
+        ("LIEE-PAR-NASA", "Saffire (Cygnus)", VOL),
+        ("RIEN-DE-COMMUN", "ACME gas burner", VOL),
+    )
+    liens = _liens(("LIEE-PAR-NASA", "DEPART", "related to"))
+    resultat = comparables(fiches, _tests_vides(), "DEPART", table, liens)
+    assert list(resultat["id"]) == ["MEME-MATERIEL", "LIEE-PAR-NASA", "RIEN-DE-COMMUN"]
+    assert list(resultat["niveau"]) == [1, 2, 3]
+    assert list(resultat["raison"]) == [
+        "Same hardware (MSG flow duct)",
+        "Listed as related in NASA's PSI",
+        "No shared hardware and no link given by NASA",
     ]
+
+
+def test_le_type_de_combustible_de_l_equipe_ne_compte_pas():
+    # Même type de combustible, mais ni matériel commun ni lien de NASA : rien ne les rapproche.
+    fiches = _fiches(("A", "solide", "x"), ("B", "solide", "y"), ("SANS-TYPE", None, "x"))
+    table = _table_nasa(
+        ("A", "MSG flow duct", VOL), ("B", "Saffire (Cygnus)", VOL), ("SANS-TYPE", "MSG flow duct", VOL)
+    )
+    resultat = comparables(fiches, _tests_vides(), "A", table, _liens()).set_index("id")
+    assert resultat.loc["B", "niveau"] == 3
+    assert resultat.loc["SANS-TYPE", "niveau"] == 1  # un type de combustible absent ne change rien non plus
+
+
+def test_une_etude_au_sol_ne_se_compare_que_par_ses_liens():
+    fiches = _fiches(
+        ("VOL", "liquide", "x"), ("MODELE", "liquide (modèle)", "y"), ("AUTRE-MODELE", "gaz (modèle)", "y")
+    )
+    table = _table_nasa(
+        ("VOL", "MDCA droplet", VOL), ("MODELE", "Ground study", SOL), ("AUTRE-MODELE", "Ground study", SOL)
+    )
+    liens = _liens(("MODELE", "VOL", "reuses data from"))
+    resultat = comparables(fiches, _tests_vides(), "MODELE", table, liens).set_index("id")
+    assert resultat.loc["VOL", "niveau"] == 2
+    assert resultat.loc["VOL", "raison"] == "One reuses the other's data, according to NASA's PSI"
+    assert resultat.loc["AUTRE-MODELE", "niveau"] == 3  # deux études au sol ne partagent pas un matériel
+
+
+def test_ce_que_dit_l_enonce_passe_avant_la_famille_de_materiel():
+    fiches = _fiches(("FUMEE", "fumée", "x"), ("POUSSIERE", "poussière", "y"))
+    table = _table_nasa(("FUMEE", "SAME smoke hardware", VOL), ("POUSSIERE", "SAME smoke hardware", VOL))
+    liens = _liens(("POUSSIERE", "FUMEE", "related to"), ("POUSSIERE", "FUMEE", "shared instrument"))
+    resultat = comparables(fiches, _tests_vides(), "FUMEE", table, liens)
+    assert list(resultat["niveau"]) == [2]
+    assert resultat["raison"].iloc[0] == "Linked by the challenge statement: shared instrument"
+
+
+def test_sans_les_tables_de_nasa_seul_le_materiel_des_fiches_sert():
+    fiches = _fiches(("A", "solide", "MSG"), ("B", "fumée", "MSG"), ("C", "solide", "Cygnus"))
+    resultat = comparables(fiches, _tests_vides(), "A", pd.DataFrame(), pd.DataFrame())
+    assert list(resultat["niveau"]) == [1, 3]
+    assert resultat["raison"].iloc[0] == "Same hardware (MSG)"
 
 
 def test_la_page_ne_propose_que_les_niveaux_comparables():
@@ -71,18 +131,7 @@ def test_la_page_ne_propose_que_les_niveaux_comparables():
     assert NIVEAUX_PROPOSES == (1, 2)
     assert [NIVEAUX[niveau] for niveau in NIVEAUX_PROPOSES] == ["Directly comparable", "Comparable in principle"]
     assert all(EXPLICATIONS[niveau] for niveau in NIVEAUX_PROPOSES)
-
-
-def test_un_modele_garde_le_combustible_de_son_etude():
-    fiches = _fiches(("VOL", "liquide", "MDCA"), ("MODELE", "liquide (modèle)", "Computer simulation"))
-    assert comparables(fiches, _tests_vides(), "VOL")["niveau"].iloc[0] == 2
-
-
-def test_un_combustible_inconnu_n_est_jamais_devine():
-    fiches = _fiches(("VOL", "solide", "MSG"), ("SANS-TYPE", None, "MSG"))
-    resultat = comparables(fiches, _tests_vides(), "VOL")
-    assert resultat["niveau"].iloc[0] == 3
-    assert resultat["raison"].iloc[0] == "Fuel type unknown"
+    assert not any("fuel" in EXPLICATIONS[niveau].lower() for niveau in NIVEAUX_PROPOSES)
 
 
 def test_l_investigation_de_depart_n_est_pas_proposee():
@@ -212,7 +261,7 @@ def test_cote_a_cote_dit_ce_qui_est_pareil():
     tableau = cote_a_cote(charger_fiches(), charger_tests(), ["EXEMPLE-A", "EXEMPLE-B"], pd.DataFrame())
     assert list(tableau.columns) == ["same", "EXEMPLE-A", "EXEMPLE-B"]
     assert tableau.loc["Hardware", "same"] == "same"
-    assert tableau.loc["type_combustible", "same"] == "different"
+    assert "type_combustible" not in tableau.index  # le rangement de l'équipe n'est pas montré comme une donnée
     assert tableau.loc["Where", "same"] == ABSENT
 
 
@@ -402,14 +451,14 @@ def test_la_page_ne_propose_que_des_investigations_comparables():
     site = _page()
     # EXEMPLE-B partage le matériel d'EXEMPLE-A ; EXEMPLE-C et EXEMPLE-D ne partagent rien avec elle.
     assert site.selectbox(key="comparateur_avec_EXEMPLE-A").options == [
-        "EXEMPLE-B · Exemple B (fictif) : fumées de matériaux — comparable in principle"
+        "EXEMPLE-B · Exemple B (fictif) : fumées de matériaux — directly comparable"
     ]
     assert "Directly comparable" in _html(site) and "Comparable in principle" in _html(site)
     assert "Complementary" not in _html(site)
 
 
 def test_la_page_dit_quand_rien_n_est_comparable():
-    site = _page("EXEMPLE-C")  # ni le combustible ni le matériel d'EXEMPLE-C ne se retrouvent ailleurs
+    site = _page("EXEMPLE-C")  # le matériel d'EXEMPLE-C ne se retrouve nulle part ailleurs
     assert not site.exception
     assert any("nothing to compare it with" in bloc.value for bloc in site.info)
     assert not any("What stands out" in bloc.value for bloc in site.markdown)

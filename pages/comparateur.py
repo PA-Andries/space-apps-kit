@@ -1,8 +1,9 @@
 """Page Compare. Propriétaire : rôle D (Comparateur). Les textes affichés sont en anglais.
 
-La page part d'une investigation et propose celles qui lui sont comparables : même type de combustible et
-même matériel (directement comparables), ou un seul des deux (comparables en principe). Elle montre ensuite
-la comparaison de haut en bas, du plus visuel au plus détaillé :
+La page part d'une investigation et propose celles qui lui sont comparables, d'après NASA et l'énoncé du défi
+seulement : même matériel (directement comparables), ou un lien donné par NASA (comparables en principe).
+Le type de combustible rangé par l'équipe (solide, liquide, gaz) n'est ni utilisé ni affiché ici.
+Elle montre ensuite la comparaison de haut en bas, du plus visuel au plus détaillé :
  1. le lien entre les deux, en une ligne ;
  2. le portrait de chacune, avec les textes de NASA (objectifs, approche, hypothèse) ;
  3. les chiffres côte à côte, puis les plages testées en barres (oxygène, pression, débit d'air) ;
@@ -42,17 +43,13 @@ from flame.comparateur import (
     texte_de_plage,
 )
 from flame.recherche import descriptif
-from flame.ui import label
 
 LIBELLES = {
     "same": "Same?",
-    "type_combustible": "Fuel type",
     "oxygene_pct": "Oxygen (%)",
     "pression_kpa": "Pressure (kPa)",
     "debit_air_cm_s": "Air flow (cm/s)",
 }
-# Les valeurs du contrat que `label()` ne traduit pas encore.
-AUTRES_LIBELLES = {"fumée": "smoke", "poussière": "dust"}
 # Une couleur par investigation, lisibles sur le thème sombre : l'orange du site pour celle de départ.
 COULEURS = ["#ff7a3d", "#6fb1ff"]
 LETTRES = ["a", "b"]
@@ -148,20 +145,9 @@ def nom_affiche(identifiant: str) -> str:
     return f"{identifiant} · {noms[identifiant]}"
 
 
-def en_anglais(valeur: object) -> str:
-    """Une valeur du contrat en anglais : « gaz (modèle) » devient « gas (model) »."""
-    base, _, precision = str(valeur).partition(" (")
-    texte = AUTRES_LIBELLES.get(base, label(base))
-    return f"{texte} (model)" if precision.startswith("modèle") else texte
-
-
 def tableau_lisible(tableau: pd.DataFrame) -> pd.DataFrame:
-    lisible = tableau.copy()
-    if "type_combustible" in lisible.index:
-        valeurs = lisible.columns != "same"
-        lisible.loc["type_combustible", valeurs] = lisible.loc["type_combustible", valeurs].map(en_anglais)
     colonnes = {identifiant: nom_affiche(identifiant) for identifiant in noms}
-    return lisible.rename(index=LIBELLES, columns={**colonnes, **LIBELLES}).rename_axis("Criterion")
+    return tableau.rename(index=LIBELLES, columns={**colonnes, **LIBELLES}).rename_axis("Criterion")
 
 
 def liste(lignes: list[str], sinon: str) -> None:
@@ -181,7 +167,8 @@ def carte_portrait(identifiant: str, lettre: str, scenario: dict) -> None:
     nasa = descriptif(fiche, scenario, tests, investigations_psi)
     with st.container(key=f"cmp_card_{lettre}"):
         titre = f'<p class="cmp-title">{escape(nasa["titre"])}</p>' if nasa["titre"] else ""
-        etiquettes = [("Fuel type", en_anglais(fiche["type_combustible"]))]
+        # Les combustibles sont ceux que NASA écrit dans ses tables de tests, pas une catégorie de l'équipe.
+        etiquettes = [("Fuels in NASA's tables", faits["Fuels tested"])] if faits["Fuels tested"] != ABSENT else []
         etiquettes += [(nom, faits[nom]) for nom in ("Where", "Project dates", "Hardware") if faits[nom] != ABSENT]
         puces = "".join(
             f'<span class="cmp-chip"><b>{escape(nom)}</b>{escape(valeur)}</span>' for nom, valeur in etiquettes
@@ -427,8 +414,8 @@ colonne_depart, colonne_avec = st.columns(2, gap="medium")
 depart = colonne_depart.selectbox("Start from", list(noms), format_func=nom_affiche, key="comparateur_depart")
 st.query_params["id"] = depart
 st.session_state["comparateur_id_adresse"] = depart
-# Seules les investigations comparables sont proposées : même type de combustible, même matériel, ou les deux.
-candidats = comparables(fiches, tests, depart)
+# Seules les investigations comparables sont proposées : même matériel, ou un lien donné par NASA.
+candidats = comparables(fiches, tests, depart, investigations_psi, relations)
 candidats = candidats[candidats["niveau"].isin(NIVEAUX_PROPOSES)].reset_index(drop=True)
 niveaux = dict(zip(candidats["id"], candidats["niveau"], strict=True))
 
@@ -458,7 +445,7 @@ st.html(
 
 if candidats.empty:
     st.info(
-        f"No other investigation shares the fuel type or the hardware of {noms[depart]}, "
+        f"No other investigation shares the hardware of {noms[depart]} or is linked to it by NASA, "
         "so there is nothing to compare it with. Here is what it studied."
     )
     carte_portrait(depart, "a", get_scenario())
@@ -466,6 +453,7 @@ else:
     afficher_comparaison([depart, avec], int(niveaux[avec]))
 
 st.caption(
-    "Solid, liquid, gas, smoke and dust are the team's own grouping of NASA's fuels. "
-    "Every other value on this page comes from NASA's PSI database."
+    "Every value on this page comes from NASA's PSI database; the hardware groups and some links between "
+    "investigations come from the challenge statement. The one-line summary in bold on each card is written "
+    "by the team from NASA's record."
 )
