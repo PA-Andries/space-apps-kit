@@ -663,7 +663,7 @@ def test_le_graphique_de_repartition_tient_en_trois_couleurs():
     barres = [trace for trace in figure.data if trace.type == "bar"]
     assert len(barres) == 2
     assert [trace.marker.color for trace in barres] == [COULEUR_STRUCTURE, COULEUR_ACCENT]
-    assert COULEUR_ACCENT == "#ff7a3d"  # l'accent du site (primaryColor), et lui seul
+    assert COULEUR_ACCENT == "#e8622a"  # l'accent du site (primaryColor), et lui seul
     assert all(trace.showlegend is False for trace in barres)
     assert figure.layout.barmode == "stack"
     formes = [forme for forme in figure.layout.shapes]

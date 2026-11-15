@@ -51,11 +51,11 @@ LIBELLES = {
     "debit_air_cm_s": "Air flow (cm/s)",
 }
 # Une couleur par investigation, lisibles sur le thème sombre : l'orange du site pour celle de départ.
-COULEURS = ["#ff7a3d", "#6fb1ff"]
+COULEURS = ["#e8622a", "#6fb1ff"]
 LETTRES = ["a", "b"]
 # Les couleurs des fins de test, les mêmes que sur la page 1 (rôle F).
 COULEURS_ISSUES = {
-    "burned": "#ff7a3d",
+    "burned": "#e8622a",
     "went_out": "#8fa3d9",
     "no_ignition": "#c9ccd8",
     "unknown": "rgba(160, 175, 255, 0.18)",
@@ -70,7 +70,7 @@ STYLE = f"""<style>
 .cmp-badge {{ display: inline-block; border-radius: 980px; padding: 0.2rem 0.7rem; font-size: 0.78rem;
   font-weight: 700; letter-spacing: 0.02em; }}
 .cmp-badge.l1 {{ background: {COULEURS[0]}; color: #fff; }}
-.cmp-badge.l2 {{ background: rgba(255, 122, 61, 0.16); color: #ffb08a; border: 1px solid rgba(255, 122, 61, 0.5); }}
+.cmp-badge.l2 {{ background: rgba(232, 98, 42, 0.16); color: #f5a07a; border: 1px solid rgba(232, 98, 42, 0.5); }}
 .cmp-band, .st-key-cmp_card_a, .st-key-cmp_card_b, .st-key-cmp_details, .cmp-panel {{
   background: rgba(26, 33, 80, 0.6); border: 1px solid rgba(160, 175, 255, 0.14) !important; border-radius: 24px;
   backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
@@ -88,7 +88,7 @@ STYLE = f"""<style>
 .cmp-card h3 small {{ color: #a3abc9; font-size: 0.82rem; font-weight: 500; margin-left: 0.4rem; }}
 .cmp-card .cmp-title {{ color: #a3abc9; font-size: 0.88rem; margin: 0.15rem 0 0.5rem; }}
 .cmp-card .cmp-lead {{ font-weight: 700; font-size: 0.95rem; line-height: 1.45; margin: 0; }}
-.cmp-label {{ display: block; color: #ff7a3d; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+.cmp-label {{ display: block; color: #e8622a; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin: 0.7rem 0 0.2rem; }}
 .cmp-card .cmp-text {{ font-size: 0.9rem; line-height: 1.5; margin: 0; color: #dfe3f5; }}
 .cmp-chips {{ display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }}
@@ -127,7 +127,7 @@ STYLE = f"""<style>
 .cmp-themes {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }}
 .cmp-theme {{ background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(160, 175, 255, 0.10);
   border-radius: 18px; padding: 0.8rem 1rem 0.9rem; }}
-.cmp-theme h4 {{ color: #ff7a3d; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+.cmp-theme h4 {{ color: #e8622a; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin: 0 0 0.4rem; padding: 0; }}
 .cmp-theme ul {{ margin: 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.5; }}
 .cmp-theme li {{ margin: 0.15rem 0; }}
