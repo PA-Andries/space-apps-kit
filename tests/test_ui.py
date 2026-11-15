@@ -830,3 +830,68 @@ def test_the_page_carries_the_script_that_hides_the_host_badge():
     assert "page.parent" in HOST_CHROME_SCRIPT and "display: none !important" in HOST_CHROME_SCRIPT
     site = AppTest.from_file(APP, default_timeout=60).run()
     assert not site.exception
+
+
+# --- The phone version: only for narrow screens, the desktop version is not touched --------------------------
+ANDROID = "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/130.0 Mobile Safari/537.36"
+IPHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148"
+MAC = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/130.0 Safari/537.36"
+
+
+def test_every_phone_rule_sits_inside_one_narrow_screen_block():
+    from flame.ui.phone import PHONE_STYLE, PHONE_WIDTH
+
+    assert PHONE_WIDTH == 640
+    body = PHONE_STYLE.removeprefix("<style>").removesuffix("</style>").strip()
+    assert body.startswith("@media (max-width: 640px) {") and body.endswith("}")
+    # One block only: its braces close at the very end, so no rule can reach a wide window.
+    depth = 0
+    for position, character in enumerate(body[body.index("{") :], start=body.index("{")):
+        depth += character == "{"
+        depth -= character == "}"
+        assert depth > 0 or position == len(body) - 1, body[position - 40 : position + 40]
+    assert depth == 0
+
+
+def test_a_phone_is_told_from_a_computer_by_its_browser(monkeypatch):
+    from flame.ui import phone
+
+    assert phone.on_phone() is False  # no browser behind a test: the desktop version
+    for agent, expected in [(ANDROID, True), (IPHONE, True), (MAC, False), ("", False)]:
+        monkeypatch.setattr(phone, "user_agent", lambda agent=agent: agent)
+        assert phone.on_phone() is expected, agent
+
+
+def test_the_chart_keeps_its_legend_on_a_computer_and_moves_it_under_the_plot_on_a_phone(monkeypatch):
+    import plotly.graph_objects as go
+
+    from flame.ui import phone
+
+    figure = go.Figure(go.Scatter(x=[1], y=[1], name="a test"))
+    figure.update_layout(height=480)
+    monkeypatch.setattr(phone, "user_agent", lambda: MAC)
+    on_computer = phone.chart_for_phone(figure)
+    assert on_computer.layout.legend.orientation is None and on_computer.layout.height == 480
+    monkeypatch.setattr(phone, "user_agent", lambda: ANDROID)
+    on_a_phone = phone.chart_for_phone(figure)
+    assert on_a_phone.layout.legend.orientation == "h" and on_a_phone.layout.legend.y < 0
+
+
+def test_on_a_phone_the_place_buttons_take_the_height_they_need():
+    """With the fixed height of the row of three, the third stacked tile covered the Mars block on a phone."""
+    from flame.ui.components import PLACE_BUTTONS_STYLE
+
+    desktop, _, narrow = PLACE_BUTTONS_STYLE.partition("@media (max-width: 640px)")
+    assert "height: 15rem" in desktop  # the desktop row keeps its fixed height
+    assert "height: auto" in narrow
+
+
+def test_page_one_carries_the_phone_style_and_the_desktop_chart():
+    from flame.ui.phone import PHONE_STYLE
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    assert PHONE_STYLE in [str(block.value) for block in site.get("html")]
+    chart = site.get("plotly_chart")[0]
+    drawn = str(chart.proto).replace(" ", "").replace("\\", "")
+    assert "legend" in drawn and '"orientation":"h"' not in drawn  # no phone behind a test: the desktop legend

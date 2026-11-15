@@ -111,6 +111,11 @@ STYLE = f"""<style>
 .cmp-theme ul {{ margin: 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.5; }}
 .cmp-theme li {{ margin: 0.15rem 0; }}
 @media (max-width: 760px) {{ .cmp-themes {{ grid-template-columns: 1fr; }} }}
+/* Sur téléphone : les deux noms du bandeau tiennent sur moins de lignes, et les cartes gardent plus de largeur. */
+@media (max-width: 640px) {{
+  .cmp-band h2 {{ font-size: 1.3rem; line-height: 1.3; }}
+  .cmp-band, .cmp-panel {{ padding: 0.9rem 1rem 1rem; }}
+}}
 </style>"""
 
 fiches = charger_fiches()

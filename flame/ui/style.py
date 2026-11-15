@@ -11,6 +11,8 @@ from pathlib import Path
 
 import streamlit as st
 
+from flame.ui.phone import PHONE_STYLE
+
 # Colours follow the 60-30-10 rule:
 # 60 % DOMINANT, the night-blue page and its background; 30 % SECONDARY, the slate-blue glass of cards,
 # chips, sidebar and the secondary text; 10 % ACCENT, flame orange, kept for actions and highlights only
@@ -488,5 +490,6 @@ HOST_CHROME_SCRIPT = f"""<script>
 def apply_style() -> None:
     """Add the site-wide style to the current page, and hide what the host draws around it."""
     st.html(GLOBAL_STYLE)
+    st.html(PHONE_STYLE)  # narrow screens only: see `phone.py`
     with st.container(key="ui_no_chrome"):
         st.iframe(HOST_CHROME_SCRIPT, height=1)

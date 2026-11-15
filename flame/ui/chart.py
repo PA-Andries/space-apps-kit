@@ -5,6 +5,8 @@ The chart itself comes from `flame.comparateur.graphique_conditions` (role D); o
 
 import plotly.graph_objects as go
 
+from flame.ui.phone import chart_for_phone
+
 SELECTION_COLOR = "232, 98, 42"  # the accent: the user's selection is what the page highlights
 SELECTION_NAME = "Your selection"
 OTHER_COLOR = "#7d86a8"  # the tests outside the environment, in the secondary family
@@ -48,7 +50,7 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
     # the box is drawn from those same values, so a circled test can never sit outside it.
     meta = figure.layout.meta or {}
     if not meta.get("defini"):
-        return figure
+        return chart_for_phone(figure)
 
     # Only the tests that match the environment keep their investigation's colour; the others turn grey,
     # grouped under one legend line.
@@ -80,7 +82,7 @@ def style_conditions_chart(figure: go.Figure, scenario: dict, view: str) -> go.F
     # Drawn first, so that the test points stay on top of the box.
     figure.add_trace(box)
     figure.data = (figure.data[-1], *figure.data[:-1])
-    return figure
+    return chart_for_phone(figure)  # the legend goes under the plot on a phone; unchanged on a computer
 
 
 def selection_box(meta: dict) -> dict:
