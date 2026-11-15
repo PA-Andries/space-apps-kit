@@ -298,6 +298,23 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 .ff-cov-status.ff-partly {{ border-color: {ACCENT}; color: {ACCENT}; }}
 @media (max-width: 760px) {{ .ff-cov-row {{ grid-template-columns: 1fr 1fr; }} .ff-cov-head {{ display: none; }} }}
 
+/* Investigations: the ranking in a column on the right, one button per investigation, the chosen one in accent. */
+.ff-rank-title {{ color: {MUTED}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; margin: 0 0 0.3rem; }}
+.st-key-recherche_classement button {{ justify-content: flex-start; text-align: left; min-height: 0;
+  padding: 0.45rem 0.8rem; border-radius: 12px; }}
+/* A long name is cut after two lines, with « … »; the whole name shows on hover. */
+.st-key-recherche_classement button p {{ font-size: 0.85rem; line-height: 1.3; white-space: normal;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
+.st-key-recherche_classement button > div, .st-key-recherche_classement button [data-testid="stMarkdownContainer"] {{
+  min-width: 0; overflow: hidden; }}
+.st-key-recherche_classement button > div {{ justify-content: flex-start; width: 100%; }}
+/* Room at the end of the list, so that Flamy's card in the corner never hides the last investigations. */
+.st-key-recherche_classement {{ padding-bottom: 7rem; }}
+/* The list stays within the window and follows the page as it scrolls, so it is always at hand. */
+[data-testid="stColumn"]:has(.st-key-recherche_classement) {{ position: sticky; top: 4.6rem; align-self: flex-start; }}
+.st-key-recherche_classement {{ height: calc(100vh - 7rem) !important; max-height: calc(100vh - 7rem); }}
+
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
   padding: 0.6rem 2.2rem; }}

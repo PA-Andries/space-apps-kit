@@ -69,21 +69,37 @@ scenario = get_scenario()
 habitat = scenario.get("habitat")
 st.caption(
     f"Sorted for your environment, {label(habitat)}: the most relevant first (the tests nearest your oxygen and "
-    "pressure, your fuels and your gravity). Change it on the first page."
+    "pressure, your fuels and your gravity). Pick one in the ranking. Change your environment on the first page."
 )
 
-# Le classement range la liste de recherche ; le score n'est pas affiché, seulement le rang.
+# Le classement complet, dans une colonne à droite : un clic sur une investigation l'affiche à gauche.
+# Le score n'est pas affiché, seulement le rang.
 classement = les_plus_pertinentes(fiches, scenario)
-rangs = {id_fiche: rang for rang, id_fiche in enumerate(classement["id"], start=1)}
-noms = dict(zip(classement["id"], classement["nom"], strict=True))
-choix = st.selectbox(
-    "Search an investigation, the most relevant first",
-    list(noms),
-    format_func=lambda id_fiche: f"{rangs[id_fiche]}. {noms[id_fiche]} · {id_fiche}",
-    key="recherche_fiche",
-    placeholder="Type a name or a PSI number",
-)
-if choix is not None:
+if st.session_state.get("recherche_fiche") not in set(classement["id"]):
+    st.session_state["recherche_fiche"] = classement["id"].iloc[0]  # la plus pertinente, au départ
+choix = st.session_state["recherche_fiche"]
+
+
+def _choisir(id_fiche: str) -> None:
+    st.session_state["recherche_fiche"] = id_fiche
+
+
+colonne_fiche, colonne_classement = st.columns([3, 1.15], gap="large")
+with colonne_classement:
+    st.html('<p class="ff-rank-title">Ranking</p>')
+    with st.container(key="recherche_classement", height=720, border=False):
+        for rang, (id_fiche, nom) in enumerate(zip(classement["id"], classement["nom"], strict=True), start=1):
+            st.button(
+                f"{rang}. {nom}",
+                key=f"recherche_rang_{id_fiche}",
+                help=f"{nom} · {id_fiche}",  # le nom entier au survol : la liste le coupe après deux lignes
+                type="primary" if id_fiche == choix else "secondary",
+                width="stretch",
+                on_click=_choisir,
+                args=(id_fiche,),
+            )
+
+with colonne_fiche:
     fiche = classement[classement["id"] == choix].iloc[0]
     siens = tests[tests["investigation_id"] == fiche["id"]]
     resultats = siens["resultat"].dropna().value_counts()

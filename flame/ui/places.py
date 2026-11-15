@@ -24,13 +24,22 @@ PLACES_BY_BODY = {
     "Mars": ["Base martienne"],
 }
 
-# Page 1 offers one button per place, two per row: in orbit, on the Moon, then Mars, and the two references.
+# Page 1 offers one button per atmosphere, two per row: the two crew environments, then the two references.
+# Places that share their conditions share a button (Hugo, Sun 15 Nov): the spacecraft has the station's
+# conditions and the pressurized rover has the Moon base's (`conditions_habitat`, role A), so a second
+# button changed nothing on the page. The Mars base has no button: see `MARS_NOTE`.
 PLACE_ROWS = [
-    ["Station", "Vaisseau"],
-    ["Base lunaire", "Rover pressurisé"],
-    ["Base martienne", EARTH],
-    [SPACESUIT],
+    ["Station", "Base lunaire"],
+    [EARTH, SPACESUIT],
 ]
+# A place without a button of its own, and the button that stands for it.
+SAME_CONDITIONS_AS = {"Vaisseau": "Station", "Rover pressurisé": "Base lunaire"}
+# Why Mars is not offered. Both facts are checked: the statement lists Martian bases among the crew
+# environments but gives no oxygen or pressure for them, and it says PSI holds no partial-gravity data.
+MARS_NOTE = (
+    "Mars base: not offered. NASA's challenge statement gives no atmosphere for it, and no PSI experiment "
+    "was run in Martian conditions or in partial gravity."
+)
 # The small logo of each button: a Material icon drawn by Streamlit (no NASA logo or insignia).
 PLACE_ICONS = {
     "Station": ":material/satellite_alt:",
@@ -41,7 +50,13 @@ PLACE_ICONS = {
     EARTH: ":material/public:",
     SPACESUIT: ":material/accessibility_new:",
 }
-PLACE_NAMES = {EARTH: "Earth (reference)", SPACESUIT: "Spacesuit (EVA)"}  # the other places use `label()`
+# The text of each button; a place that is not listed here uses `label()`.
+PLACE_NAMES = {
+    "Station": "Station & spacecraft",
+    "Base lunaire": "Moon base & rover",
+    EARTH: "Earth (reference)",
+    SPACESUIT: "Spacesuit (EVA)",
+}
 
 # Atmospheres attributed to the challenge statement by BRIEF_EQUIPE_IA.md: Earth 21 % / 14.7 psi (about
 # 101 kPa); "lunar base and pressurized rovers" 30 % / 10.2 psi (about 70 kPa, as in the contract ATMOSPHERES).

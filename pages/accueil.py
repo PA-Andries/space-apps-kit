@@ -4,9 +4,8 @@ The page reads from the choice to its consequences (Ethan's ask of Sun 15 Nov):
  1. the environment: one button per place, then the sliders that refine it;
  2. two figures, right underneath: the tests that match, and the investigations behind them;
  3. the chart of NASA's tests against those conditions;
- 4. has your combination been tested, then under which conditions NASA ran its tests (role F's coverage card);
- 5. what we don't know, then the three most relevant investigations;
- 6. folded away: the hardware and the shape of the samples.
+ 4. what we don't know, then the three most relevant investigations;
+ 5. folded away: the hardware and the shape of the samples.
 Every page of the site is in the menu bar at the top.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
@@ -29,10 +28,7 @@ from flame.ui import (
     REFERENCE_PLACES,
     SPACESUIT,
     card_title,
-    combination,
     conditions,
-    coverage,
-    coverage_card,
     dashboard_header,
     environment_values,
     footer,
@@ -156,7 +152,7 @@ picker_column, sliders_column = st.columns([7, 5], gap="medium")
 with picker_column, st.container(key="ui_card_destination", height="stretch"):
     card_title(
         "Habitable crew environment",
-        "Space station, spacecraft, lunar base, pressurized rover or Mars base. "
+        "One button per atmosphere: places that share their conditions share a button. "
         "Earth and the spacesuit are references, not habitats.",
     )
     place_buttons(habitat, selected=not custom)
@@ -268,10 +264,16 @@ with st.container(key="ui_card_ranking"):
         "Each point is one NASA PSI test; the ones inside your environment are circled. Dotted: the Earth "
         "and Moon zones. Star: the spacesuit. Hover a shape to see where its figures come from.",
     )
+    # No NASA test records both pressure and air flow. As soon as an air-flow range is set, no test of the
+    # pressure view can match it: the chart moves to the air-flow view, where the matching tests are, and
+    # comes back when the air-flow range is cleared. The user can still switch by hand afterwards.
+    air_flow_set = air_flow != (None, None)
+    if st.session_state.get("ui_chart_air_flow_set") != air_flow_set:
+        st.session_state["ui_chart_air_flow_set"] = air_flow_set
+        st.session_state["ui_chart_view"] = "debit" if air_flow_set else "pression"
     view = st.segmented_control(
         "View",
         ["pression", "debit"],
-        default="pression",
         format_func={"pression": "O₂ × pressure", "debit": "O₂ × air flow"}.get,
         key="ui_chart_view",
     )
@@ -280,19 +282,14 @@ with st.container(key="ui_card_ranking"):
     st.plotly_chart(chart, key="ui_conditions_chart")
     # The orange box is your oxygen range and the range of this view's other axis. A circled test is always
     # inside it; a test inside it stays grey only when a filter that is not on the axes excludes it.
-    if grey_tests_in_the_box(chart):
+    if view == "pression" and air_flow_set:
+        st.caption(
+            "Every test of this view is grey because you set an air-flow range, and no NASA test records "
+            "both pressure and air flow. The tests that match are in the O₂ × air flow view."
+        )
+    elif grey_tests_in_the_box(chart):
         st.caption(grey_tests_in_the_box(chart))
     st.caption("No test records oxygen, pressure and air flow together, so the two views share the oxygen axis.")
-
-# --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
-with st.container(key="ui_card_coverage"):
-    card_title(
-        "Has your combination been tested?",
-        f"All the settings of {title_label(shown_place)} together, against NASA's tests; then each setting "
-        "on its own: what was tested, and what never was.",
-        tag="Research conditions",
-    )
-    coverage_card(coverage(tests, fiches, scenario), combination(tests, fiches, scenario))
 
 # --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):

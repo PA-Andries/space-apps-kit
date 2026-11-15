@@ -180,12 +180,12 @@ def test_page_one_keeps_the_environment_and_the_top_three():
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
     assert not site.dataframe  # the full ranking lives on the Investigations page now
-    site.button(key="ui_place_Base martienne").click().run()
-    assert site.session_state["ui_habitat"] == "Base martienne"  # app.py turns it into the scenario
+    site.button(key="ui_place_Station").click().run()
+    assert site.session_state["ui_habitat"] == "Station"  # app.py turns it into the scenario
     assert not site.exception
 
 
-def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
+def test_moon_base_fills_the_statement_bounds():
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.button(key="ui_place_Base lunaire").click().run()
     assert not site.exception
@@ -193,11 +193,6 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     assert site.slider(key="ui_oxygen").value == (30.0, 100.0)
     assert site.slider(key="ui_pressure").value == (0.0, 70.3)
     assert site.session_state["ui_gravity"] is None  # no Moon button: the base keeps its 0.165 g
-    # Mars: the statement gives no atmosphere, so no bound at all.
-    site.button(key="ui_place_Base martienne").click().run()
-    assert site.session_state["ui_gravity"] is None  # no Mars button either; its 0.38 g is kept
-    assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
-    assert site.slider(key="ui_pressure").value == (0.0, 520.0)
 
 
 def test_a_typed_value_stays_while_the_habitat_does_not_change():
@@ -219,16 +214,16 @@ def test_a_typed_value_survives_a_visit_to_another_page():
 
 
 def test_every_page_receives_the_environment_of_page_one():
-    # Lot F is done when "Moon base" (here the rover, same statement values) fills O2 >= 30 % and <= 70.3 kPa
+    # Lot F is done when "Moon base & rover" fills O2 >= 30 % and <= 70.3 kPa
     # and the other pages receive this scenario (they read it with get_scenario(), lot A).
     pages = re.findall(r'st\.Page\("([^"]+)"', Path(APP).read_text(encoding="utf-8"))
     site = AppTest.from_file(APP, default_timeout=60).run()
-    site.button(key="ui_place_Rover pressurisé").click().run()
+    site.button(key="ui_place_Base lunaire").click().run()
     site.slider(key="ui_oxygen").set_value((32.0, 100.0)).run()
     for page in pages:
         site.switch_page(page).run()
         assert not site.exception, page
-        assert site.session_state["habitat"] == "Rover pressurisé", page
+        assert site.session_state["habitat"] == "Base lunaire", page
         assert site.session_state["scenario_oxygene_pct"] == (32.0, None), page
         assert site.session_state["scenario_pression_kpa"] == (None, 70.3), page
 
@@ -257,17 +252,48 @@ def test_mars_conditions_contain_no_atmosphere_figure():
     assert mars["sources"]["oxygene_pct"] == "inconnu"
 
 
-def test_page_one_has_one_button_per_crew_environment():
-    from flame.commun import HABITATS
-    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS, SPACESUIT
+def test_page_one_has_one_button_per_atmosphere():
+    from flame.commun import HABITATS, conditions_habitat
+    from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS, SAME_CONDITIONS_AS, SPACESUIT
 
     offered = [place for row in PLACE_ROWS for place in row]
-    # Every habitat of the contract, plus the two references the statement gives: Earth air and the suit.
-    assert sorted(offered) == sorted([*HABITATS, EARTH, SPACESUIT])
-    assert set(PLACE_ICONS) == set(offered)  # each button has its small logo
+    # Two crew environments, then the two references the statement gives: Earth air and the suit.
+    assert offered == ["Station", "Base lunaire", EARTH, SPACESUIT]
+    assert set(offered) <= set(PLACE_ICONS)  # each button has its small logo
+    # A habitat of the contract without a button either has exactly the conditions of a button's place...
+    without_button = [habitat for habitat in HABITATS if habitat not in offered]
+    assert sorted(without_button) == ["Base martienne", "Rover pressurisé", "Vaisseau"]
+    for habitat, button in SAME_CONDITIONS_AS.items():
+        assert button in offered and conditions_habitat(habitat) == conditions_habitat(button), habitat
+    # ... or is the Mars base, for which the statement gives no atmosphere at all.
+    assert set(without_button) - set(SAME_CONDITIONS_AS) == {"Base martienne"}
+    assert conditions_habitat("Base martienne")["oxygene_pct"] == (None, None)
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [f"ui_place_{place}" for place in offered]
+    assert [b.label for b in site.button if b.key.startswith("ui_place_")][:2] == [
+        "Station & spacecraft",
+        "Moon base & rover",
+    ]
     assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []  # no planet to tap first
+
+
+def test_page_one_says_why_mars_is_not_offered():
+    from flame.ui.places import MARS_NOTE
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    notes = [block.value for block in site.markdown if "Mars base" in block.value]
+    assert len(notes) == 1
+    assert "no atmosphere" in notes[0] and "partial gravity" in notes[0]
+    assert "no atmosphere" in MARS_NOTE
+
+
+def test_a_place_without_a_button_highlights_the_button_that_stands_for_it():
+    site = AppTest.from_file(APP, default_timeout=30)
+    site.session_state["ui_habitat"] = "Rover pressurisé"  # a scenario kept from before the buttons merged
+    site.run()
+    assert not site.exception
+    assert site.button(key="ui_place_Base lunaire").proto.type == "primary"
 
 
 def test_the_button_of_the_current_habitat_is_highlighted():
@@ -478,7 +504,7 @@ def test_page_one_explains_each_of_the_three_investigations():
 
 
 def test_the_investigation_search_follows_the_ranking():
-    """Une seule vue, la fiche ; la liste de recherche suit le classement, la plus pertinente en premier."""
+    """Une seule vue, la fiche ; le classement complet à droite, la plus pertinente en premier, un clic l'affiche."""
     from flame.commun import charger_fiches, get_scenario
     from flame.recherche import les_plus_pertinentes
 
@@ -486,10 +512,16 @@ def test_the_investigation_search_follows_the_ranking():
     site.switch_page("pages/recherche.py").run()
     assert not site.exception
     assert len(site.tabs) == 0  # no Ranking or What we don't know tab any more
-    search = site.selectbox(key="recherche_fiche")
     ranked = list(les_plus_pertinentes(charger_fiches(), get_scenario())["id"])
-    assert [option.split(" · ")[-1] for option in search.options] == ranked  # "1. Name · PSI-10"
-    assert search.options[0].startswith("1. ")
+    # The ranking on the right: one button per investigation, in the order of the ranking ("1. Name").
+    buttons = [button for button in site.button if button.key.startswith("recherche_rang_")]
+    assert [button.key.removeprefix("recherche_rang_") for button in buttons] == ranked
+    assert all(button.help.endswith(identifier) for button, identifier in zip(buttons, ranked, strict=True))
+    assert buttons[0].label.startswith("1. ") and buttons[0].proto.type == "primary"  # the first shown at start
+    # A click on another one shows it.
+    site.button(key=f"recherche_rang_{ranked[2]}").click().run()
+    assert site.session_state["recherche_fiche"] == ranked[2]
+    assert site.button(key=f"recherche_rang_{ranked[2]}").proto.type == "primary"
 
 
 def test_within_reads_a_missing_bound_as_the_end_of_the_scale():
@@ -720,3 +752,14 @@ def test_the_selection_box_always_holds_the_circled_tests():
         if grey_inside:  # only a filter that is not on the axes may leave a test of the box grey
             other = flow if view == "pression" else kpa
             assert fuel or any(bound is not None for bound in other), (o2, kpa, flow, fuel, view)
+
+
+def test_setting_an_air_flow_moves_the_chart_to_the_air_flow_view():
+    """No NASA test records both pressure and air flow: the pressure view would turn all grey (PA, 15 Nov)."""
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    assert site.session_state["ui_chart_view"] == "pression"
+    site.slider(key="ui_air_flow").set_range(0.0, 100.0).run()
+    assert not site.exception
+    assert site.session_state["ui_chart_view"] == "debit"
+    site.slider(key="ui_air_flow").set_range(-10.0, 100.0).run()
+    assert site.session_state["ui_chart_view"] == "pression"

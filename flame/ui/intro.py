@@ -13,7 +13,7 @@ from flame.ui.style import FLAME, MUTED, SECONDARY, SECONDARY_LINE
 
 # The steps, in the order of the page: (short title, one sentence).
 STEPS = [
-    ("Choose your environment", "Space station, spacecraft, Moon base, pressurized rover or Mars base."),
+    ("Choose your environment", "Station and spacecraft, or Moon base and rover: one button per atmosphere."),
     ("Refine the conditions", "Oxygen, pressure, fuel and air flow. Your values follow you on every page."),
     ("Read the chart", "Each point is one NASA test. The circled ones are inside your environment."),
     ("Read the results", "What NASA's data lacks for you, then the 3 most relevant investigations."),
@@ -41,11 +41,19 @@ INTRO_STYLE = f"""<style>
 .ff-step-head strong {{ font-size: 0.98rem; font-weight: 700; line-height: 1.25; }}
 .ff-step-tile span {{ display: block; color: {MUTED}; font-size: 0.85rem; line-height: 1.4; }}
 .ff-steps-next {{ color: {MUTED}; font-size: 0.85rem; margin: 0.5rem 0 0; }}
-.st-key-ui_intro_hide button, .st-key-ui_intro_show button {{
-  border: none; background: transparent; padding: 0; min-height: 0; }}
-.st-key-ui_intro_hide button p, .st-key-ui_intro_show button p,
+.st-key-ui_intro_show button {{ border: none; background: transparent; padding: 0; min-height: 0; }}
+.st-key-ui_intro_show button p,
 .st-key-ui_intro_show button [data-testid="stIconMaterial"] {{ color: {FLAME}; font-size: 0.9rem; }}
-.st-key-ui_intro_hide button:hover p, .st-key-ui_intro_show button:hover p {{ text-decoration: underline; }}
+.st-key-ui_intro_show button:hover p {{ text-decoration: underline; }}
+/* "Got it, hide this" is the action of the card: an orange pill, filled when the pointer is on it. */
+.st-key-ui_intro_hide button {{
+  border: 1.5px solid {FLAME}; background: rgba(232, 98, 42, 0.14); border-radius: 980px;
+  padding: 0.4rem 1.15rem; min-height: 0; margin-top: 0.3rem; }}
+.st-key-ui_intro_hide button p, .st-key-ui_intro_hide button [data-testid="stIconMaterial"] {{
+  color: {FLAME}; font-size: 0.95rem; font-weight: 700; }}
+.st-key-ui_intro_hide button:hover {{ background: {FLAME}; border-color: {FLAME}; }}
+.st-key-ui_intro_hide button:hover p,
+.st-key-ui_intro_hide button:hover [data-testid="stIconMaterial"] {{ color: #fff; }}
 @media (max-width: 900px) {{ .ff-steps {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }} }}
 @media (max-width: 520px) {{ .ff-steps {{ grid-template-columns: 1fr; }} }}
 </style>"""
@@ -73,4 +81,4 @@ def how_to_use() -> None:
             for number, (title, sentence) in enumerate(STEPS, start=1)
         )
         st.html(f'<div class="ff-steps">{tiles}</div><p class="ff-steps-next">{escape(NEXT)}</p>')
-        st.button("Got it, hide this", key="ui_intro_hide", on_click=_hide)
+        st.button("Got it, hide this", icon=":material/check:", key="ui_intro_hide", on_click=_hide)
