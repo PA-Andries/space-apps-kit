@@ -2,12 +2,12 @@
 
 Sketch 1 of the team's whiteboard, built in five levels so that one thing is read first (hierarchy,
 Ethan's ask of Sat 14 Nov):
- 1. the verdict: the most serious gap in NASA's data for this environment, with its figure and its source;
+ 1. (the verdict banner is removed at Mathéo's request, Sun 15 Nov);
  2. three figures: tests, investigations, and how many are independent measurements;
  3. the environment (one button per place, then the sliders) and where NASA's tests sit on the oxygen axis;
- 4. what NASA's tests show, the three most relevant investigations, and what we don't know;
+ 4. what NASA's tests show, what we don't know, then the three most relevant investigations;
  5. folded away: the detailed chart, the hardware and the shape of the samples.
-Every page of the site is one click away under the verdict, so nothing is more than three clicks deep.
+Every page of the site is in the menu bar at the top.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
 """
@@ -37,7 +37,6 @@ from flame.ui import (
     source_name,
     stat_tiles,
     style_conditions_chart,
-    verdict_banner,
 )
 
 FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen = all
@@ -75,11 +74,8 @@ dashboard_header(
     [f"{len(fiches)} NASA investigations", f"{len(tests):,} test rows", "Source: NASA PSI"],
     eyebrow="My environment",
 )
-# Levels 1 and 2 are printed at the top but need the environment chosen below: they are filled in later.
-# The verdict comes before the cover: the finding is the first thing the page says, the how-to explains it.
-verdict_zone = st.container()
 how_to_use()  # a light cover: how the dashboard works, in four steps (can be folded away)
-links_zone = st.container()
+# Level 2 is printed at the top but needs the environment chosen below: it is filled in later.
 figures_zone = st.container()
 
 
@@ -193,24 +189,7 @@ with st.container(key="ui_card_ranking"):
             key="ui_conditions_chart",
         )
 
-# --- Level 1: the verdict, and Level 2: the three figures --------------------------------------------------
-verdict = recherche.verdict(fiches, tests, scenario)
-with verdict_zone:
-    verdict_banner(
-        verdict["chiffre"],
-        verdict["titre"],
-        verdict["phrase"],
-        verdict["source"],
-        note=verdict["comblement"],
-        severe=verdict["grave"],
-    )
-with links_zone:
-    investigations_link, data_link, equipment_link, assistant_link = st.columns(4)
-    investigations_link.page_link("pages/recherche.py", label="Investigations", icon=":material/science:")
-    data_link.page_link("pages/donnees.py", label="Data and export", icon=":material/table_rows:")
-    equipment_link.page_link("pages/equipements.py", label="Equipment", icon=":material/build:")
-    assistant_link.page_link("pages/assistant.py", label="Ask the assistant", icon=":material/forum:")
-
+# --- Level 2: the three figures ---------------------------------------------------------------------------
 independance = recherche.independance(matching["investigation_id"].unique())
 with figures_zone:
     sure = matching[matching["pression_notee"]]
@@ -224,7 +203,7 @@ with figures_zone:
         compact=True,
     )
 
-# --- Level 4: what the tests show, the 3 most relevant investigations, and what we don't know --------------
+# --- Level 4: what the tests show, what we don't know, then the 3 most relevant investigations ------------
 with st.container(key="ui_card_outcomes"):
     card_title(
         "Can a flame burn in these conditions?",
@@ -233,9 +212,14 @@ with st.container(key="ui_card_outcomes"):
     )
     outcomes_card(matching, scenario)
 
-best_column, gaps_column = st.columns([7, 5], gap="medium")
+# What we don't know comes first, as a full-width banner; then the 3 most relevant investigations.
+with st.container(key="ui_card_gaps"):
+    card_title("What we don't know", "Where NASA's data stops, for this environment.")
+    for sentence in recherche.ce_quon_ne_sait_pas(fiches, tests, scenario):
+        st.markdown(f"- {sentence}")
+
 best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
-with best_column, st.container(key="ui_card_compare", height="stretch"):
+with st.container(key="ui_card_compare"):
     card_title("The 3 most relevant investigations", f"For {title_label(shown_place)}.")
     if best.empty:
         st.info("No investigation scores for this environment yet.")
@@ -258,11 +242,6 @@ with best_column, st.container(key="ui_card_compare", height="stretch"):
         # The orange pill of sketch 1 of the whiteboard, kept as the page's main action.
         if st.button("ANALYSE ALL 24", key="ui_analyse_button"):
             st.switch_page("pages/recherche.py")
-
-with gaps_column, st.container(key="ui_card_gaps", height="stretch"):
-    card_title("What we don't know", "Where NASA's data stops, for this environment.")
-    for sentence in recherche.ce_quon_ne_sait_pas(fiches, tests, scenario):
-        st.markdown(f"- {sentence}")
 
 # --- Level 5: folded away — the hardware and the shape of the samples -------------------------------------
 psi_investigations = charger_table_psi("investigations")
