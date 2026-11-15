@@ -36,6 +36,7 @@ from flame.ui import (
     dashboard_header,
     environment_values,
     footer,
+    grey_tests_in_the_box,
     how_to_use,
     investigation_details,
     label,
@@ -275,10 +276,12 @@ with st.container(key="ui_card_ranking"):
         key="ui_chart_view",
     )
     view = view or "pression"
-    st.plotly_chart(
-        style_conditions_chart(comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view),
-        key="ui_conditions_chart",
-    )
+    chart = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view)
+    st.plotly_chart(chart, key="ui_conditions_chart")
+    # The orange box is your oxygen range and the range of this view's other axis. A circled test is always
+    # inside it; a test inside it stays grey only when a filter that is not on the axes excludes it.
+    if grey_tests_in_the_box(chart):
+        st.caption(grey_tests_in_the_box(chart))
     st.caption("No test records oxygen, pressure and air flow together, so the two views share the oxygen axis.")
 
 # --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------

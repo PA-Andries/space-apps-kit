@@ -664,3 +664,52 @@ def test_the_combination_verdict_checks_every_setting_at_once():
     # À la gravité lunaire : jamais testé, et le verdict dit ce qui s'en approche en microgravité.
     moon = combination(tests, fiches, {**station, "gravite": 0.165})
     assert moon["status"] == "Not tested" and "0.165 g" in moon["headline"] and "3 tests" in moon["detail"]
+
+
+def test_the_selection_box_always_holds_the_circled_tests():
+    """Every circled test is inside the orange box, and a grey test inside it is explained (PA, 15 Nov)."""
+    from itertools import product
+
+    from flame import comparateur
+    from flame.commun import charger_fiches, charger_tests
+    from flame.ui import grey_tests_in_the_box, selection_box, style_conditions_chart
+
+    tests, fiches = charger_tests(), charger_fiches()
+    oxygen = [(None, None), (19, 23), (30, None), (None, 21), (21, 21)]
+    pressure = [(None, None), (90, 110), (None, 70.3), (300, None), (None, 10)]
+    air_flow = [(None, None), (0, None), (10, 30)]
+    fuels = [[], ["solide"], ["gaz"]]
+    for o2, kpa, flow, fuel, view in product(oxygen, pressure, air_flow, fuels, ["pression", "debit"]):
+        scenario = {
+            "habitat": "Personnalisé",
+            "oxygene_pct": o2,
+            "pression_kpa": kpa,
+            "debit_air_cm_s": flow,
+            "type_combustible": fuel,
+        }
+        chart = style_conditions_chart(
+            comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view
+        )
+        points = [t for t in chart.data if t.mode == "markers" and t.marker.symbol != "star"]
+        circled = [(x, y) for t in points if t.marker.line.width for x, y in zip(t.x, t.y, strict=True)]
+        grey = [(x, y) for t in points if not t.marker.line.width for x, y in zip(t.x, t.y, strict=True)]
+        if not any(bound is not None for bound in (*o2, *kpa, *flow)) and not fuel:
+            assert not [t for t in chart.data if t.name == "Your selection"] and not circled
+            continue
+        box = selection_box(chart.layout.meta)
+        drawn = next(t for t in chart.data if t.name == "Your selection")
+        assert (min(drawn.x), max(drawn.x)) == box["x"] and (min(drawn.y), max(drawn.y)) == box["y"]
+
+        def inside(point, box=box):
+            return box["x"][0] <= point[0] <= box["x"][1] and box["y"][0] <= point[1] <= box["y"][1]
+
+        assert all(inside(point) for point in circled), (o2, kpa, flow, fuel, view)
+        column = "pression_kpa" if view == "pression" else "debit_air_cm_s"
+        matching = comparateur.tests_correspondants(tests, fiches, scenario).dropna(subset=["oxygene_pct", column])
+        assert len(circled) == len(matching)
+        grey_inside = sum(inside(point) for point in grey)
+        caption = grey_tests_in_the_box(chart)
+        assert caption.startswith(f"{grey_inside:,} tests inside the box") if grey_inside else caption == ""
+        if grey_inside:  # only a filter that is not on the axes may leave a test of the box grey
+            other = flow if view == "pression" else kpa
+            assert fuel or any(bound is not None for bound in other), (o2, kpa, flow, fuel, view)
