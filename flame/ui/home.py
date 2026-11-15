@@ -134,7 +134,7 @@ def assistant_mascot() -> None:
     # The bottom bar of the page (where the chat box lives); the main page if this Streamlit has none.
     bottom = getattr(st, "bottom", st)
     with bottom.container(key="ui_assistant_mascot"):
-        mascot_scene(height=170)
+        mascot_scene(height=170, calm=True)  # almost still: Flamy just looks at the visitor
 
 
 @contextmanager
