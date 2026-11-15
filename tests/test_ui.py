@@ -408,7 +408,12 @@ def test_outcomes_sort_nasa_results_and_show_on_arrival():
 
     moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
     assert answer({"burned": 3, "went_out": 1, "no_ignition": 0, "unknown": 5}, moon)[0] == "yes"
-    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    # NASA's "Extinction" is a flame that burned and then went out by itself: it still burned.
+    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "yes"
+    assert answer({"burned": 0, "went_out": 0, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    # Saffire-II: only the microgravity length says whether the sample burned in space.
+    assert kind_of_result("microgravity burn length 5 cm & 0 (note 2); 1-g burn length ~ 0 (Nomex)") == "burned"
+    assert kind_of_result("microgravity burn length ~ 0; 1-g burn length Complete") == "no_ignition"
     assert answer({"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 4}, moon)[1] == "No data"
     mars = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}  # no atmosphere bounds: no answer
     assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"

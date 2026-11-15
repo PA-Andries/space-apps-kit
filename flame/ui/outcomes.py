@@ -17,7 +17,8 @@ UNKNOWN = "unknown"
 # Order, wording and colour of each kind (60-30-10: the accent marks the flames that burned).
 KINDS = {
     BURNED: ("A flame burned", "#ff7a3d"),
-    WENT_OUT: ("The flame went out", "#8fa3d9"),
+    # NASA's "Extinction" (FLEX droplets): the droplet was lit and burned, then the flame went out by itself.
+    WENT_OUT: ("Burned, then went out by itself", "#8fa3d9"),
     NO_IGNITION: ("No ignition", "#c9ccd8"),
     UNKNOWN: ("No result recorded", "rgba(160, 175, 255, 0.18)"),
 }
@@ -30,7 +31,10 @@ def kind_of_result(result: object) -> str:
     text = result.lower()
     if "extinction" in text:
         return WENT_OUT
-    if "hot ignition: no" in text or "burn length ~ 0" in text:
+    # Saffire-II gives two lengths, "microgravity burn length ...; 1-g burn length ...": only the first one,
+    # the microgravity one, says whether the sample burned in space.
+    in_space = text.split(";")[0]
+    if "hot ignition: no" in text or "burn length ~ 0" in in_space:
         return NO_IGNITION
     if (
         "hot ignition: yes" in text
@@ -69,12 +73,18 @@ def answer(counts: dict[str, int], scenario: dict) -> tuple[str, str, str]:
             "This environment gives no oxygen or pressure bounds, so every NASA test matches it and they say "
             "nothing about it.",
         )
-    if counts[BURNED]:
+    flames = counts[BURNED] + counts[WENT_OUT]
+    if flames:
+        went_out = (
+            f" In {counts[WENT_OUT]:,} of them it went out by itself before the fuel was used up."
+            if counts[WENT_OUT]
+            else ""
+        )
         return (
             "yes",
             "Yes",
-            f"A flame burned in {counts[BURNED]:,} of the {recorded:,} NASA tests run in these conditions "
-            "that have a recorded result.",
+            f"A flame burned in {flames:,} of the {recorded:,} NASA tests run in these conditions "
+            f"that have a recorded result.{went_out}",
         )
     if recorded:
         return (

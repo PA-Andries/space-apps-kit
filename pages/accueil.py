@@ -147,6 +147,13 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     # The spacesuit has no gravity of its own: the statement gives none, and nothing is invented here.
     own_gravity = "not given" if values["gravite"] is None else f"{float(values['gravite']):g} g"
     st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: {own_gravity}.")
+    # Gravity does not filter the tests: PSI's test tables have no gravity column, and the flight
+    # investigations ran in microgravity. Saying so avoids reading 0 g tests as Moon, Mars or Earth tests.
+    if gravity > 0:
+        st.caption(
+            f"NASA's PSI tables hold no test row at {gravity:g} g: the tests counted on this page were run in "
+            "microgravity (0 g). Gravity changes the notes below, not the tests."
+        )
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
     air_flow = from_slider(
@@ -221,15 +228,32 @@ with st.container(key="ui_card_ranking"):
 independance = recherche.independance(matching["investigation_id"].unique())
 with figures_zone:
     sure = matching[matching["pression_notee"]]
-    stat_tiles(
-        [
-            (f"{len(sure):,}", "Tests in your environment", "pressure recorded"),
-            (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
-            (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
-        ],
-        note=independance["phrase"],
-        compact=True,
-    )
+    if oxygen == (None, None) and pressure == (None, None):
+        # No atmosphere given (Mars base): every test would "match", so no count is shown.
+        stat_tiles(
+            [
+                ("—", "Tests in your environment", "no oxygen or pressure given"),
+                ("—", "Investigations", "none can be placed"),
+                ("—", "Independent measurements", "none can be placed"),
+            ],
+            note="Give an oxygen or a pressure range with the sliders to see the NASA tests that match it.",
+            compact=True,
+        )
+    else:
+        unsure = len(matching) - len(sure)
+        stat_tiles(
+            [
+                (
+                    f"{len(matching):,}",
+                    "Test rows in your environment",
+                    f"{unsure:,} of them with no recorded pressure" if unsure else "pressure recorded",
+                ),
+                (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
+                (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
+            ],
+            note=independance["phrase"],
+            compact=True,
+        )
 
 # --- Level 4: what the tests show, what we don't know, then the 3 most relevant investigations ------------
 with st.container(key="ui_card_outcomes"):
