@@ -46,17 +46,31 @@ def _tests_vides() -> pd.DataFrame:
     return pd.DataFrame(columns=["investigation_id", *VARIABLES])
 
 
-def test_les_trois_niveaux_et_leur_ordre():
+def test_les_niveaux_et_leur_ordre():
     fiches = _fiches(
         ("DEPART", "solide", "MSG"),
         ("AUTRE-PHENOMENE", "fumée", "MSG"),
         ("AUTRE-ECHELLE", "solide", "Cygnus"),
         ("MEME-FAMILLE", "solide", "MSG"),
+        ("RIEN-DE-COMMUN", "gaz", "CIR"),
     )
     resultat = comparables(fiches, _tests_vides(), "DEPART")
-    assert list(resultat["id"]) == ["MEME-FAMILLE", "AUTRE-ECHELLE", "AUTRE-PHENOMENE"]
-    assert list(resultat["niveau"]) == [1, 2, 3]
-    assert resultat["raison"].iloc[2] == "Same hardware, different fuel type"
+    # Les deux en commun, puis un seul des deux (combustible ou matériel), puis rien en commun.
+    assert list(resultat["id"]) == ["MEME-FAMILLE", "AUTRE-ECHELLE", "AUTRE-PHENOMENE", "RIEN-DE-COMMUN"]
+    assert list(resultat["niveau"]) == [1, 2, 2, 3]
+    assert list(resultat["raison"])[1:] == [
+        "Same fuel type, different hardware",
+        "Same hardware, different fuel type",
+        "Different fuel type and hardware",
+    ]
+
+
+def test_la_page_ne_propose_que_les_niveaux_comparables():
+    from flame.comparateur import EXPLICATIONS, NIVEAUX, NIVEAUX_PROPOSES
+
+    assert NIVEAUX_PROPOSES == (1, 2)
+    assert [NIVEAUX[niveau] for niveau in NIVEAUX_PROPOSES] == ["Directly comparable", "Comparable in principle"]
+    assert all(EXPLICATIONS[niveau] for niveau in NIVEAUX_PROPOSES)
 
 
 def test_un_modele_garde_le_combustible_de_son_etude():
@@ -137,7 +151,7 @@ def test_resume_range_les_phrases_par_theme():
         "Fuels and results",
         "Data and instruments",
     ]
-    assert themes["How they relate"][0].startswith("Exemple C (fictif) : gouttes de carburant is complementary to")
+    assert themes["How they relate"][0].startswith("Exemple C (fictif) : gouttes de carburant is not comparable to")
     assert "has 1 test row(s) at or above the Moon base oxygen level (30 %), up to 40 %." in _phrases(themes)
     assert "stops at 21 % oxygen, below the Moon base oxygen level (30 %)." in _phrases(themes)
     assert "Oxygen ranges overlap at 16 to 21 % (test rows there:" in _phrases(themes)
@@ -374,12 +388,92 @@ def test_la_page_ignore_un_identifiant_inconnu():
     assert site.selectbox(key="comparateur_depart").value == "EXEMPLE-A"
 
 
-def test_la_page_accepte_une_troisieme_investigation():
+def _html(site) -> str:
+    return " ".join(str(bloc.value) for bloc in site.get("html"))
+
+
+def test_la_page_compare_deux_investigations_pas_trois():
     site = _page()
-    site.selectbox(key="comparateur_avec_EXEMPLE-A").set_value("EXEMPLE-C").run()
-    site.selectbox(key="comparateur_troisieme_EXEMPLE-A_EXEMPLE-C").set_value("EXEMPLE-B").run()
     assert not site.exception
-    assert any("vs" in titre.value and "Exemple B" in titre.value for titre in site.subheader)
+    assert [menu.key for menu in site.selectbox] == ["comparateur_depart", "comparateur_avec_EXEMPLE-A"]
+
+
+def test_la_page_ne_propose_que_des_investigations_comparables():
+    site = _page()
+    # EXEMPLE-B partage le matériel d'EXEMPLE-A ; EXEMPLE-C et EXEMPLE-D ne partagent rien avec elle.
+    assert site.selectbox(key="comparateur_avec_EXEMPLE-A").options == [
+        "EXEMPLE-B · Exemple B (fictif) : fumées de matériaux — comparable in principle"
+    ]
+    assert "Directly comparable" in _html(site) and "Comparable in principle" in _html(site)
+    assert "Complementary" not in _html(site)
+
+
+def test_la_page_dit_quand_rien_n_est_comparable():
+    site = _page("EXEMPLE-C")  # ni le combustible ni le matériel d'EXEMPLE-C ne se retrouvent ailleurs
+    assert not site.exception
+    assert any("nothing to compare it with" in bloc.value for bloc in site.info)
+    assert not any("What stands out" in bloc.value for bloc in site.markdown)
+
+
+def test_la_page_montre_les_barres_les_chiffres_et_les_textes():
+    site = _page()
+    assert not site.exception
+    html = _html(site)
+    for titre in ("At a glance", "Where NASA tested each one", "How the tests ended"):
+        assert titre in html, titre
+    assert html.count('<div class="cmp-range-head">') == 3  # oxygène, pression, débit d'air
+    assert not any("guessing" in bloc.value for bloc in site.caption)
+
+
+def test_les_barres_des_plages_disent_ou_elles_se_croisent():
+    from flame.comparateur import barres_des_plages
+
+    scenario = {"habitat": "Base lunaire", "oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
+    barres = {
+        barre["variable"]: barre for barre in barres_des_plages(charger_tests(), ["EXEMPLE-A", "EXEMPLE-C"], scenario)
+    }
+    oxygene = barres["oxygene_pct"]
+    assert oxygene["echelle"] == (0.0, 100.0)
+    assert oxygene["plages"] == {"EXEMPLE-A": (16.0, 21.0), "EXEMPLE-C": (10.0, 40.0)}
+    assert oxygene["recouvrement"] == (16.0, 21.0)
+    assert oxygene["environnement"] == (30.0, 100.0)  # « 30 % ou plus » va jusqu'au bout de l'échelle
+    assert barres["pression_kpa"]["recouvrement"] is None  # 101 kPa d'un côté, 70 kPa de l'autre
+    assert barres["debit_air_cm_s"]["environnement"] is None  # le scénario ne borne pas le débit d'air
+
+
+def test_une_condition_absente_reste_absente_dans_les_barres():
+    from flame.comparateur import barres_des_plages, texte_de_plage
+
+    tests = pd.DataFrame({"investigation_id": ["A", "B"], "oxygene_pct": [21.0, None]})
+    tests = tests.assign(pression_kpa=None, debit_air_cm_s=None)
+    oxygene = barres_des_plages(tests, ["A", "B"])[0]
+    assert oxygene["plages"] == {"A": (21.0, 21.0), "B": None}
+    assert oxygene["recouvrement"] is None and oxygene["environnement"] is None
+    assert texte_de_plage(None, "%") == ABSENT and texte_de_plage((21.0, 21.0), "%") == "21 %"
+
+
+def test_les_fins_de_test_sont_comptees_par_investigation():
+    from flame.comparateur import ISSUES, issues
+
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "A", "B"],
+            "resultat": ["Hot ignition: yes", "extinction at 12 s", None, None],
+        }
+    )
+    comptes = issues(tests, ["A", "B"])
+    assert comptes["A"] == {"burned": 1, "went_out": 1, "no_ignition": 0, "unknown": 1}
+    assert comptes["B"] == {"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 1}
+    assert list(comptes["A"]) == list(ISSUES)
+
+
+def test_les_chiffres_cles_ne_comptent_que_ce_qui_existe():
+    from flame.comparateur import chiffres_cles
+
+    fiches, tests = charger_fiches(), charger_tests()
+    lignes = dict(chiffres_cles(fiches, tests, ["EXEMPLE-A", "EXEMPLE-C"]))
+    assert set(lignes) == {"Test rows", "Different fuels"}  # sans scénario ni table PSI, rien de plus
+    assert lignes["Test rows"]["EXEMPLE-A"] == str(int((tests["investigation_id"] == "EXEMPLE-A").sum()))
 
 
 def test_un_nouveau_lien_remplace_l_investigation_choisie_a_la_main():

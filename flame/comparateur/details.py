@@ -32,8 +32,8 @@ SENS_D_UNE_LIGNE = {
 }
 CONSEQUENCES = {
     1: "Their results can be read side by side.",
-    2: "Comparing them shows whether a result holds in other hardware or at another scale.",
-    3: "They answer different questions: compare what they study rather than their numbers.",
+    2: "Comparing them shows whether a result holds with another set-up or another fuel.",
+    3: "They share neither the fuel type nor the hardware: compare what they study, not their numbers.",
 }
 ABSENT = "not recorded"
 

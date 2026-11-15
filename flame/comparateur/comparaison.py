@@ -1,7 +1,10 @@
 """Les calculs du comparateur : quelles investigations se comparent, et sur quoi.
 
 Deux investigations sont d'autant plus comparables qu'elles brûlent le même type de
-combustible dans le même matériel. Les textes renvoyés pour l'affichage sont en anglais.
+combustible dans le même matériel. Avec les deux en commun, elles sont directement comparables ;
+avec un seul des deux, comparables en principe ; sans aucun des deux, la page ne les propose pas.
+Le matériel compte parce que l'énoncé du défi regroupe lui-même les expériences par matériel partagé.
+Les textes renvoyés pour l'affichage sont en anglais.
 """
 
 import pandas as pd
@@ -17,8 +20,10 @@ VARIABLES = ["oxygene_pct", "pression_kpa", "debit_air_cm_s"]
 NIVEAUX = {
     1: "Directly comparable",
     2: "Comparable in principle",
-    3: "Complementary",
+    3: "Not comparable",
 }
+# Les niveaux que la page propose : au niveau 3, rien n'est commun et la comparaison n'apprend rien.
+NIVEAUX_PROPOSES = (1, 2)
 # Nom et unité de chaque condition de test, pour les phrases du résumé.
 NOMS_VARIABLES = {
     "oxygene_pct": ("oxygen", "%"),
@@ -30,8 +35,8 @@ MINIMUM_DE_POINTS = 5
 
 EXPLICATIONS = {
     1: "Same fuel type in the same hardware: results can be read side by side.",
-    2: "Same fuel type in different hardware: useful to see whether a result holds at another scale.",
-    3: "Different fuel types: they answer different questions and share few or no numbers.",
+    2: "Same fuel type or same hardware, not both: shows whether a result holds with another set-up or fuel.",
+    3: "Neither the fuel type nor the hardware is shared: not offered for comparison.",
 }
 
 
@@ -49,7 +54,9 @@ def niveau_et_raison(depart: pd.Series, autre: pd.Series) -> tuple[int, str]:
     if INCONNU in (combustible_depart, famille_combustible(autre["type_combustible"])):
         return 3, "Fuel type unknown"
     if combustible_depart != famille_combustible(autre["type_combustible"]):
-        return 3, "Same hardware, different fuel type" if meme_materiel else "Different fuel type and hardware"
+        if meme_materiel:
+            return 2, "Same hardware, different fuel type"
+        return 3, "Different fuel type and hardware"
     if meme_materiel:
         return 1, "Same fuel type and same hardware"
     return 2, "Same fuel type, different hardware"
@@ -66,6 +73,7 @@ def comparables(fiches: pd.DataFrame, tests: pd.DataFrame, id_depart: str) -> pd
     """Les autres investigations, de la plus comparable à la moins comparable à `id_depart`.
 
     Ajoute les colonnes `niveau` (1 à 3), `raison` et `variables_communes` (liste de noms de colonnes).
+    La page ne propose que les niveaux de `NIVEAUX_PROPOSES`.
     """
     depart = fiches[fiches["id"] == id_depart].iloc[0]
     autres = fiches[fiches["id"] != id_depart].copy()
