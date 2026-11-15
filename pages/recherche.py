@@ -112,7 +112,7 @@ with onglet_fiche:
         resultats = siens["resultat"].dropna().value_counts()
         carte_fiche(fiche)
 
-        st.subheader("Behaviour")
+        st.subheader("Summary")
         st.markdown(_texte(fiche.get("resume")))
         if not resultats.empty:
             st.markdown(
@@ -120,16 +120,16 @@ with onglet_fiche:
                 + ", ".join(f"{issue} ({nombre})" for issue, nombre in resultats.head(5).items())
             )
 
-        st.subheader("Hazards")
+        st.subheader("Fuel and test conditions")
         st.markdown(f"**Fuel:** {_texte(fiche.get('combustible'))} ({label(fiche.get('type_combustible', ''))})")
         st.markdown(
             f"**Conditions tested:** {_plage_testee(fiche)} · **What varies:** {_en_anglais(fiche.get('ce_qui_varie'))}"
         )
 
-        st.subheader("Prevention")
+        st.subheader("Objective")
         st.markdown(f"**What the investigation set out to learn:** {_texte(fiche.get('objectif'))}")
 
-        st.subheader("Data trace")
+        st.subheader("Measurements and tests")
         dedans = tests_dans_les_plages(siens, scenario)
         st.markdown(
             f"**Measurements:** {_texte(fiche.get('capteurs'))} · **Tests:** {len(siens)}, "

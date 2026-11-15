@@ -552,3 +552,21 @@ def test_chaque_plage_des_rapports_est_ecrite_dans_son_rapport_nasa():
         assert rapport["citation"] in " ".join(page.split())
         bas, haut = rapport["plage"]
         assert f"{bas:g}" in rapport["citation"] and f"{haut:g}" in rapport["citation"]
+
+
+def test_les_titres_de_la_fiche_disent_ce_qui_est_ecrit_dessous():
+    """Les rubriques de la fiche portent le vocabulaire de l'énoncé, pas « Hazards » ni « Prevention ».
+
+    « Hazards » coiffait le combustible et les conditions testées, « Prevention » l'objectif de l'investigation,
+    y compris pour celles qui portent sur la détection ou l'extinction (remarque de Hugo, dimanche 15 nov.).
+    """
+    from pathlib import Path
+
+    from streamlit.testing.v1 import AppTest
+
+    app = str(Path(__file__).resolve().parents[1] / "app.py")
+    site = AppTest.from_file(app, default_timeout=30).run()
+    site = site.switch_page("pages/recherche.py").run()
+    assert not site.exception
+    titres = [titre.value for titre in site.subheader]
+    assert titres == ["Summary", "Fuel and test conditions", "Objective", "Measurements and tests", "Compare"]
