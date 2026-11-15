@@ -8,6 +8,7 @@ import pandas as pd
 
 from flame.commun import INCONNU
 from flame.comparateur.comparaison import (
+    LIENS_DE_PSI,
     MINIMUM_DE_POINTS,
     NIVEAUX,
     NOMS_VARIABLES,
@@ -137,10 +138,16 @@ def mesures(fiches: pd.DataFrame, ids: list[str]) -> tuple[list[str], dict[str, 
 
 
 def liens_nasa(relations: pd.DataFrame, ids: list[str], noms: dict[str, str]) -> list[str]:
-    """Les liens que NASA indique entre ces investigations, en phrases."""
+    """Les liens que la base PSI de NASA indique entre ces investigations, en phrases.
+
+    Un lien qui vient de l'énoncé (« shared instrument ») n'est pas repris ici : la phrase du niveau le dit
+    déjà, et l'écrire « listed by NASA as related to » doublait la phrase du lien de PSI (SAME et DAFT).
+    """
     if relations.empty:
         return []
-    entre_elles = relations[relations["from_id"].isin(ids) & relations["to_id"].isin(ids)]
+    entre_elles = relations[
+        relations["from_id"].isin(ids) & relations["to_id"].isin(ids) & relations["relation"].isin(LIENS_DE_PSI)
+    ]
     paires = {(ligne["from_id"], ligne["to_id"], ligne["relation"]) for _, ligne in entre_elles.iterrows()}
     phrases = []
     for depart, arrivee, relation in sorted(paires):

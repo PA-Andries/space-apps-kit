@@ -726,3 +726,27 @@ def test_le_graphique_de_repartition_compte_tous_les_tests_notes():
     figure = graphique_repartition(tests, fiches, LUNE)
     total = sum(int(valeur) for trace in figure.data for valeur in trace.y)
     assert total == int(tests["oxygene_pct"].notna().sum())
+
+
+def test_un_lien_de_l_enonce_ne_double_pas_la_phrase_du_lien_de_psi():
+    """SAME et DAFT : PSI les dit « related », l'énoncé leur donne un instrument commun. Une seule phrase de lien."""
+    from flame.comparateur.details import liens_nasa
+
+    noms = {"A": "Alpha", "B": "Beta", "C": "Gamma"}
+    relations = pd.DataFrame(
+        [
+            {"from_id": "A", "to_id": "B", "relation": "related to"},
+            {"from_id": "A", "to_id": "B", "relation": "shared instrument (smoke detector used for dust)"},
+            {"from_id": "C", "to_id": "B", "relation": "reuses data from"},
+            {"from_id": "B", "to_id": "C", "relation": "related to"},
+            {"from_id": "C", "to_id": "B", "relation": "related to"},
+        ]
+    )
+    assert liens_nasa(relations, ["A", "B"], noms) == ["Alpha is listed by NASA as related to Beta."]
+    # Le lien de l'énoncé seul ne donne aucune phrase ici : c'est la phrase du niveau qui le dit.
+    assert liens_nasa(relations.iloc[[1]], ["A", "B"], noms) == []
+    # « reuses data from » garde sa phrase, et deux « related to » croisés n'en font qu'une.
+    assert liens_nasa(relations, ["B", "C"], noms) == [
+        "Beta is listed by NASA as related to Gamma.",
+        "Gamma reuses data from Beta.",
+    ]
