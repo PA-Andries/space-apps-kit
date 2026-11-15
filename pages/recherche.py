@@ -2,74 +2,21 @@
 
 Deux onglets depuis le 15 novembre.
 « Investigation » (rôle F, accord de Martin) : la fiche d'une investigation, et le classement complet dans
-une colonne à droite. Les onglets Classement et Ce qu'on ne sait pas sont retirés ; la page 1 montre déjà
-ce qu'on ne sait pas. Le classement repose sur les preuves pour l'environnement choisi en page 1 ; le score
-sert à trier mais n'est pas affiché, seulement le rang. Chaque fiche montre les rubriques du tableau blanc
-(comportement, dangers, prévention, trace des données, comparer), tirées des fiches et des tests sans rien
-inventer.
+une colonne à droite. Le classement repose sur les preuves pour l'environnement choisi en page 1 ; le score
+sert à trier mais n'est pas affiché, seulement le rang.
+La fiche est la même carte que sur la page 1 (demande de Hugo, 15 novembre) : ce que l'expérience a étudié,
+pourquoi elle compte pour l'environnement, puis la description complète de NASA. Pour les huit investigations
+que l'énoncé range sous prevention, detection ou suppression, la ligne « Statement » de la carte le dit.
 « Tests + CSV » (demande d'Ethan) : le tableau des tests de l'environnement et son export, qui arrivent de
 la page Data and export, retirée du menu.
 """
 
-import pandas as pd
 import streamlit as st
 
-from flame.commun import charger_fiches, charger_tests, get_scenario
+from flame.commun import HABITAT_PERSONNALISE, charger_fiches, charger_tests, get_scenario
 from flame.comparateur import tableau_des_tests
-from flame.recherche import (
-    SOURCE_DES_AXES,
-    axe_de_securite,
-    champs_inconnus,
-    les_plus_pertinentes,
-    tests_dans_les_plages,
-)
-from flame.ui import carte_fiche, label
-
-TITRES_TESTS = {
-    "investigation_id": "Investigation",
-    "test_id": "Test",
-    "combustible": "Fuel",
-    "oxygene_pct": "Oxygen (%)",
-    "pression_kpa": "Pressure (kPa)",
-    "debit_air_cm_s": "Air flow (cm/s)",
-    "resultat": "Result",
-    "source": "Source",
-}
-NON_NOTE = "Not recorded for this investigation."
-
-
-def _texte(valeur: object) -> str:
-    """Le texte d'une case de la fiche, ou « Not recorded » si elle est vide."""
-    return NON_NOTE if pd.isna(valeur) or not str(valeur).strip() else str(valeur)
-
-
-def _plage_testee(fiche: pd.Series) -> str:
-    oxygene_min, oxygene_max, pression = (
-        pd.to_numeric(fiche.get(colonne), errors="coerce") for colonne in ("oxygene_min", "oxygene_max", "pression_kpa")
-    )
-    morceaux = []
-    if pd.notna(oxygene_min) and pd.notna(oxygene_max):
-        morceaux.append(f"{oxygene_min:g} to {oxygene_max:g} % oxygen")
-    if pd.notna(pression):
-        morceaux.append(f"pressure from {pression:g} kPa (the lowest tested)")
-    return ", ".join(morceaux) or "oxygen and pressure not recorded"
-
-
-def _en_anglais(ce_qui_varie: object) -> str:
-    """« oxygène de 12 à 34 % ; combustible (2 différents) » en anglais : la fiche est écrite en français."""
-    texte = _texte(ce_qui_varie)
-    for francais, anglais in (
-        ("débit d'air", "air flow"),
-        ("oxygène", "oxygen"),
-        ("pression", "pressure"),
-        ("combustible", "fuel"),
-        ("différents", "different"),
-        (" de ", " from "),
-        (" à ", " to "),
-    ):
-        texte = texte.replace(francais, anglais)
-    return texte
-
+from flame.recherche import descriptif, les_plus_pertinentes
+from flame.ui import investigation_details, label
 
 st.title("Investigations")
 
@@ -114,52 +61,14 @@ with onglet_fiche:
 
     with colonne_fiche:
         fiche = classement[classement["id"] == choix].iloc[0]
-        siens = tests[tests["investigation_id"] == fiche["id"]]
-        resultats = siens["resultat"].dropna().value_counts()
-        carte_fiche(fiche)
-
-        st.subheader("Summary")
-        st.markdown(_texte(fiche.get("resume")))
-        if not resultats.empty:
-            st.markdown(
-                "Recorded test outcomes: "
-                + ", ".join(f"{issue} ({nombre})" for issue, nombre in resultats.head(5).items())
-            )
-
-        st.subheader("Fuel and test conditions")
-        st.markdown(f"**Fuel:** {_texte(fiche.get('combustible'))} ({label(fiche.get('type_combustible', ''))})")
-        st.markdown(
-            f"**Conditions tested:** {_plage_testee(fiche)} · **What varies:** {_en_anglais(fiche.get('ce_qui_varie'))}"
+        rang = list(classement["id"]).index(choix) + 1
+        # Le nom de l'environnement dans une phrase, comme sur la page 1 : « Why it matters for Moon base ».
+        nom_habitat = label(habitat)
+        environnement = (
+            "your custom environment" if habitat == HABITAT_PERSONNALISE else nom_habitat[:1].upper() + nom_habitat[1:]
         )
-
-        st.subheader("Objective")
-        st.markdown(f"**What the investigation set out to learn:** {_texte(fiche.get('objectif'))}")
-
-        # Prevention, detection ou suppression : seulement quand l'énoncé range lui-même l'investigation
-        # sous cet axe (huit investigations), avec sa phrase. Rien n'est déduit pour les autres.
-        axe = axe_de_securite(fiche["id"])
-        if axe:
-            st.subheader(f"NASA fire-safety axis: {axe[0]}")
-            st.markdown(axe[1])
-            st.caption(SOURCE_DES_AXES)
-
-        st.subheader("Measurements and tests")
-        dedans = tests_dans_les_plages(siens, scenario)
-        st.markdown(
-            f"**Measurements:** {_texte(fiche.get('capteurs'))} · **Tests:** {len(siens)}, "
-            f"of which {len(dedans)} in your environment."
-        )
-        inconnus = champs_inconnus(fiche)
-        if inconnus:
-            st.caption(f"Not recorded by NASA for this investigation: {', '.join(inconnus)}.")
-        st.dataframe(siens, hide_index=True, column_config=TITRES_TESTS, key="recherche_tests_fiche")
-        if pd.notna(fiche.get("source_psi")):
-            st.markdown(f"Source: [PSI]({fiche['source_psi']})")
-
-        st.subheader("Compare")
-        st.page_link(
-            "pages/comparateur.py", label="Compare with similar investigations", query_params={"id": fiche["id"]}
-        )
+        # La même carte que sur la page 1, avec les mêmes textes : rien n'est ajouté ni retiré ici.
+        investigation_details(fiche, descriptif(fiche, scenario, tests), rang, environnement)
 
 
 with onglet_tests:
