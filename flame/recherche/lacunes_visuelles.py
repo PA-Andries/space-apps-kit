@@ -12,6 +12,19 @@ from flame.recherche.lacunes import EMULATEURS_DE_SOLIDE
 from flame.recherche.score import type_de_base
 from flame.ui import label
 
+# Les plages qu'un rapport NASA écrit noir sur blanc quand les tableaux de tests de PSI n'en donnent aucune.
+# Clé : (colonne, type de combustible). `citation` est recopiée telle quelle du rapport (vérifiée par un test).
+PLAGES_DES_RAPPORTS = {
+    ("pression_kpa", "solide"): {
+        "plage": (99.2, 99.5),
+        "investigation": "PSI-25",
+        "fichier": "BASS-II_Summary_Report.pdf.txt",
+        "page": 46,
+        "source": "BASS-II report, p. 46",
+        "citation": "varied from 99.2 to 99.5 kPa in the tests reported",
+    },
+}
+
 
 def _types_des_tests(fiches: pd.DataFrame, tests: pd.DataFrame) -> pd.Series:
     types = fiches.set_index("id")["type_combustible"].map(type_de_base)
@@ -72,9 +85,11 @@ def regle(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None, colo
     combustible face à celle de l'environnement.
 
     {"environnement": (min, max) de l'environnement (None = pas de borne), ou (None, None) s'il est inconnu,
-     "combustibles": [{"type", "nom", "plage": (min, max) ou None, "trous": [(de, à)]}],
+     "combustibles": [{"type", "nom", "plage": (min, max) ou None, "source": None ou un rapport, "trous": [(de, à)]}],
      "emule": la valeur la plus haute d'un émulateur de solide, ou None, "emulateurs": leurs noms}
     Les émulateurs de solide (des brûleurs à gaz) ne comptent pas dans la plage des solides.
+    Quand aucun test n'a de valeur mais qu'un rapport NASA en donne une (`PLAGES_DES_RAPPORTS`), la plage vient
+    du rapport et `source` le nomme ; sinon `source` vaut None.
     `trous` : ce que l'environnement demande et qu'aucun test du combustible n'a atteint (voir `_trous`) ;
     vide si l'environnement est inconnu.
     """
@@ -88,11 +103,16 @@ def regle(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None, colo
     for type_combustible in _combustibles(scenario):
         valeurs = valeurs_tests[types == type_combustible].dropna()
         plage = (float(valeurs.min()), float(valeurs.max())) if len(valeurs) else None
+        source = None
+        rapport = PLAGES_DES_RAPPORTS.get((colonne, type_combustible))
+        if plage is None and rapport is not None:
+            plage, source = rapport["plage"], rapport["source"]
         combustibles.append(
             {
                 "type": type_combustible,
                 "nom": label(type_combustible),
                 "plage": plage,
+                "source": source,
                 "trous": _trous(plage, environnement) if plage is not None and connu else [],
             }
         )
@@ -112,5 +132,6 @@ def regle_de_l_oxygene(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict
 
 
 def regle_de_la_pression(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None) -> dict:
-    """La règle de la pression (kPa) : voir `regle`. Beaucoup de tests de solides n'ont pas de pression notée."""
+    """La règle de la pression (kPa) : voir `regle`. Aucun test de solide n'a de pression dans les tableaux de
+    PSI : celle des solides vient du rapport de BASS-II (`PLAGES_DES_RAPPORTS`)."""
     return regle(fiches, tests, scenario, "pression_kpa")

@@ -521,3 +521,34 @@ def test_la_regle_de_la_pression_marche_comme_celle_de_l_oxygene():
     assert all(
         ligne["trous"] == [] for ligne in regle_de_la_pression(charger_fiches(), charger_tests(), MARS)["combustibles"]
     )
+    assert all(ligne["source"] is None for ligne in regle["combustibles"])  # les tests ont une pression
+
+
+def test_sans_pression_dans_les_tests_les_solides_prennent_celle_du_rapport_nasa():
+    # Les vrais tableaux de PSI n'ont aucune pression pour les solides : la plage vient du rapport de BASS-II.
+    sans_pression = charger_tests().assign(pression_kpa=None)
+    regle = regle_de_la_pression(charger_fiches(), sans_pression, LUNE)
+    solide = next(ligne for ligne in regle["combustibles"] if ligne["type"] == "solide")
+    assert solide["plage"] == (99.2, 99.5) and solide["source"] == "BASS-II report, p. 46"
+    assert solide["trous"] == [(None, 99.2)]  # la base lunaire (≤ 70.3 kPa) est dans la zone jamais testée
+    liquide = next(ligne for ligne in regle["combustibles"] if ligne["type"] == "liquide")
+    assert liquide["plage"] is None and liquide["source"] is None  # aucun rapport pour lui : rien n'est inventé
+    # L'oxygène n'est pas touché : seule la pression des solides a un rapport.
+    oxygene = regle_de_l_oxygene(charger_fiches(), sans_pression, LUNE)
+    assert all(ligne["source"] is None for ligne in oxygene["combustibles"])
+
+
+def test_chaque_plage_des_rapports_est_ecrite_dans_son_rapport_nasa():
+    from pathlib import Path
+
+    from flame.recherche.lacunes_visuelles import PLAGES_DES_RAPPORTS
+
+    textes = Path(__file__).resolve().parents[1] / "data" / "psi" / "textes"
+    if not textes.exists():
+        pytest.skip("pas les textes des rapports NASA")
+    for rapport in PLAGES_DES_RAPPORTS.values():
+        texte = (textes / rapport["investigation"] / rapport["fichier"]).read_text(encoding="utf-8")
+        page = texte.split(f"--- page {rapport['page']} ---")[1].split("--- page")[0]
+        assert rapport["citation"] in " ".join(page.split())
+        bas, haut = rapport["plage"]
+        assert f"{bas:g}" in rapport["citation"] and f"{haut:g}" in rapport["citation"]
