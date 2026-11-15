@@ -326,6 +326,10 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 [data-testid="stColumn"]:has(.st-key-recherche_classement) {{ position: sticky; top: 4.6rem; align-self: flex-start; }}
 .st-key-recherche_classement {{ height: calc(100vh - 7rem) !important; max-height: calc(100vh - 7rem); }}
 
+/* No small grey line in Home's cards: the block of role C in « What we don't know » keeps its code, its grey
+   lines are only hidden here. */
+.st-key-ui_card_gaps [data-testid="stCaptionContainer"], .st-key-ui_card_gaps small {{ display: none; }}
+
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
   padding: 0.6rem 2.2rem; }}

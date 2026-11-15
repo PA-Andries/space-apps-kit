@@ -29,8 +29,6 @@ from flame.ui import (
     conditions,
     dashboard_header,
     environment_values,
-    footer,
-    grey_tests_in_the_box,
     how_to_use,
     investigation_details,
     label,
@@ -190,37 +188,32 @@ matching = comparateur.tests_correspondants(tests, fiches, scenario)
 
 # --- Level 2: the figures, right under the choice that produces them ---------------------------------------
 # Each tile says what it counts: the first figure was the tests whose pressure is recorded, which read as
-# a missing third of the data (Ethan, Sun 15 Nov). The whole count comes first, the sure ones underneath.
+# a missing third of the data (Ethan, Sun 15 Nov). The whole count stays; the small grey line under it is gone.
 # The second counts investigations the way role D's `investigations_correspondantes` does, so the four
 # computational studies — no test rows of their own — are reachable and the figure can reach 24.
-sure = matching[matching["pression_notee"]]
 investigations = comparateur.investigations_correspondantes(tests, fiches, scenario, charger_table_psi("relations"))
 if oxygen == (None, None) and pressure == (None, None):
     # No atmosphere given (Mars base): no test can be placed against this environment, so the tiles say
     # what NASA holds in all rather than claiming every test matches it (fact-check of #66).
     stat_tiles(
         [
-            (f"{len(tests):,}", "NASA tests in all", "none can be placed without an atmosphere"),
-            (f"{len(fiches)}", "Investigations in all", "move a slider to match them to a range"),
+            (f"{len(tests):,}", "NASA tests in all"),
+            (f"{len(fiches)}", "Investigations in all"),
         ],
         compact=True,
     )
 else:
     stat_tiles(
         [
-            (f"{len(matching):,}", "Tests in your environment", f"{len(sure):,} with pressure recorded"),
-            (f"{len(investigations)}", "Investigations", f"of the {len(fiches)} in NASA's tables"),
+            (f"{len(matching):,}", "Tests in your environment"),
+            (f"{len(investigations)}", "Investigations"),
         ],
         compact=True,
     )
 
 # --- Level 3: NASA's tests against those conditions --------------------------------------------------------
 with st.container(key="ui_card_ranking"):
-    card_title(
-        "NASA tests against your conditions",
-        "Each point is one NASA PSI test; the ones inside your environment are circled. Dotted: the Earth "
-        "and Moon zones. Star: the spacesuit. Hover a shape to see where its figures come from.",
-    )
+    card_title("NASA tests against your conditions")
     # No NASA test records both pressure and air flow. As soon as an air-flow range is set, no test of the
     # pressure view can match it: the chart moves to the air-flow view, where the matching tests are, and
     # comes back when the air-flow range is cleared. The user can still switch by hand afterwards.
@@ -237,26 +230,16 @@ with st.container(key="ui_card_ranking"):
     view = view or "pression"
     chart = style_conditions_chart(comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view)
     st.plotly_chart(chart, key="ui_conditions_chart")
-    # The orange box is your oxygen range and the range of this view's other axis. A circled test is always
-    # inside it; a test inside it stays grey only when a filter that is not on the axes excludes it.
-    if view == "pression" and air_flow_set:
-        st.caption(
-            "Every test of this view is grey because you set an air-flow range, and no NASA test records "
-            "both pressure and air flow. The tests that match are in the O₂ × air flow view."
-        )
-    elif grey_tests_in_the_box(chart):
-        st.caption(grey_tests_in_the_box(chart))
-    st.caption("No test records oxygen, pressure and air flow together, so the two views share the oxygen axis.")
 
 # --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):
-    card_title("What we don't know", "Where NASA's data stops, for this environment.")
+    card_title("What we don't know")
     # Role C's visuals: tests by fuel in your conditions, then the oxygen and pressure rulers.
     recherche.afficher_ce_quon_ne_sait_pas(fiches, tests, scenario, cle="ui")
 
 best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
 with st.container(key="ui_card_compare"):
-    card_title("The 3 most relevant investigations", f"For {environment_name}.")
+    card_title("The 3 most relevant investigations")
     if best.empty:
         st.info("No investigation scores for this environment yet.")
     # Each one with what the experiment studied and why it matters here (role C's `descriptif`).
@@ -274,32 +257,14 @@ with st.expander("Hardware and samples: what these tests were run with"):
     if psi_investigations.empty:
         st.info("The PSI investigations table is not in `data/psi/` yet.")
     else:
-        st.caption(
-            "The statement groups the experiments by the hardware they share: results from the same "
-            "hardware can be read side by side, results from different hardware compare questions, not numbers."
-        )
         familles = psi_investigations.dropna(subset=["hardware_family"]).groupby("hardware_family")
         rang = {famille: index for index, famille in enumerate(HARDWARE_ORDER)}
         for famille, groupe in sorted(familles, key=lambda item: rang.get(item[0], len(HARDWARE_ORDER))):
             acronymes = ", ".join(sorted(str(nom) for nom in groupe["acronym"].dropna()))
             st.markdown(f"**{famille}** · {len(groupe)} investigation(s){f' — {acronymes}' if acronymes else ''}")
-            installations = sorted({str(lieu) for lieu in groupe["facility"].dropna()})
-            if installations:
-                st.caption(" · ".join(installations))
         if not psi_tests.empty and not best.empty:
             st.markdown("**Shape and size of the samples, for the three investigations above**")
             for _, fiche in best.iterrows():
                 formes = comparateur.frequents(psi_tests, fiche["id"], "fuel_form")
                 detail = ", ".join(f"{forme} ({nombre} rows)" for forme, nombre in formes) or "not recorded"
                 st.markdown(f"- **{fiche['nom']}** — {detail}")
-
-
-footer(
-    [
-        "Flamy is a student project for the NASA Space Apps Challenge 2026 (challenge: Flame in Freefall). "
-        "It is not affiliated with or endorsed by NASA. Fuel types are the team's classification; "
-        "scores are the team's judgement, not NASA data.",
-        "Experiments: NASA Physical Sciences Informatics. Button icons: Google Material Symbols (Apache 2.0). "
-        "The mascot and the space background are original drawings.",
-    ]
-)

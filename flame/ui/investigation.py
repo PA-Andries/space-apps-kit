@@ -9,7 +9,6 @@ from html import escape
 import pandas as pd
 import streamlit as st
 
-from flame.ui.labels import label
 from flame.ui.style import FLAME, MUTED
 
 DETAILS_STYLE = f"""<style>
@@ -40,15 +39,8 @@ def investigation_details(row: pd.Series, details: dict, rank: int | None = None
     with st.container(border=True):
         badge = f'<span class="ff-inv-rank">{rank}</span>' if rank else ""
         title = f'<p class="ff-inv-title">{escape(details["titre"])}</p>' if details.get("titre") else ""
-        fuel = "" if pd.isna(row.get("type_combustible")) else label(row["type_combustible"]).capitalize() + " fuel"
-        fuel = details.get("combustible_affiche") or fuel
-        meta = " · ".join(part for part in (fuel, details.get("cadre")) if part)
-        figures = f" · {escape(details['chiffres'])}" if details.get("chiffres") else ""
-        blocks = [
-            f'<div class="ff-inv-head">{badge}<h4>{escape(str(row["nom"]))}</h4>'
-            f"<small>{escape(str(row['id']))}</small></div>{title}"
-            f'<p class="ff-inv-meta">{escape(meta)}{figures}</p>'
-        ]
+        # No small grey line (PSI number, fuel and hardware): Mathéo wants none in the cards.
+        blocks = [f'<div class="ff-inv-head">{badge}<h4>{escape(str(row["nom"]))}</h4></div>{title}']
         studied = "".join(
             f'<p class="ff-inv-text">{text}</p>'
             for text in (
