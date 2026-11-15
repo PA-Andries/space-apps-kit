@@ -132,7 +132,7 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_after_scene [data-testid="stElementContainer"]:has([data-testid="stPageLink"]) {{ align-self: center; }}
 /* Dashboard (see flame/ui/home.py): a header line, then white cards in a grid. */
 .ff-header {{ display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap;
-  margin: 0.4rem 0 0.6rem; }}
+  margin: 0 0 0.6rem; }}
 .ff-header h1 {{ font-size: 1.9rem; font-weight: 800; letter-spacing: -0.035em; margin: 0; padding: 0;
   display: flex; align-items: center; gap: 0.6rem; }}
 .ff-header p {{ color: {MUTED}; margin: 0.2rem 0 0; font-size: 0.98rem; font-weight: 500; }}
@@ -425,7 +425,9 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 .ff-stat strong.ff-unknown {{ -webkit-text-fill-color: #8790b3; color: #8790b3; }}
 .ff-chip {{ background: rgba(255, 255, 255, 0.07); color: {INK}; border: 1px solid rgba(160, 175, 255, 0.16);
   box-shadow: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }}
-.ff-header h1 {{ font-size: 2.9rem; }}
+.ff-header h1 {{ font-size: 2.9rem; line-height: 1.1; }}
+/* Flamy's corner is pinned to the window: its slot leaves the page's flow, so it adds no gap above the title. */
+[data-testid="stLayoutWrapper"]:has(> .st-key-ui_flamy) {{ position: absolute; height: 0; margin: 0; }}
 .ff-header .ff-mark {{ box-shadow: 0 0 18px rgba(232, 98, 42, 0.8); }}
 .ff-bubble, .ff-bubble::before {{ background: rgba(255, 255, 255, 0.08); }}
 .ff-disclaimer, .ff-footer p {{ color: #8790b3; }}
