@@ -316,10 +316,16 @@ def _traces(figure) -> dict[str, int]:
     return {trace.name: len(trace.x) for trace in figure.data}
 
 
+def _correspond(trace) -> bool:
+    """Les tests qui correspondent à l'environnement sont les seuls cerclés (la légende ne les nomme plus)."""
+    contour = getattr(trace.marker, "line", None)
+    return bool(contour is not None and contour.width)
+
+
 def _tests_traces(figure) -> tuple[int, int]:
     """Le nombre de tests tracés qui correspondent à l'environnement, puis le nombre des autres."""
     points = [trace for trace in figure.data if trace.mode == "markers" and not trace.name.startswith("Spacesuit")]
-    correspondent = sum(len(trace.x) for trace in points if trace.name.endswith("(matches)"))
+    correspondent = sum(len(trace.x) for trace in points if _correspond(trace))
     return correspondent, sum(len(trace.x) for trace in points) - correspondent
 
 
@@ -362,7 +368,7 @@ def test_la_zone_lunaire_contient_66_tests_de_2_investigations():
     assert set(surs["investigation_id"]) == {"PSI-10", "PSI-159"}  # ACME Flame Design et ACME CFI-G
     figure = graphique_conditions(tests, fiches, LUNE, vue="pression")
     assert _tests_traces(figure) == (66, 1022 - 66)
-    assert {"ACME Flame Design (matches)", "ACME CFI-G (matches)"} <= set(_traces(figure))
+    assert {"ACME Flame Design", "ACME CFI-G"} <= set(_traces(figure))  # pas de « (matches) » en légende
 
 
 def test_la_vue_du_debit_montre_les_131_tests_de_solides():
@@ -390,11 +396,44 @@ def test_le_graphique_n_a_aucune_zone_pour_mars():
     assert not [nom for nom in sans_plage if nom.endswith("(matches)")]  # rien à surligner sans plage
 
 
+def test_cocher_toutes_les_familles_garde_tous_les_tests():
+    """Bug d'Ethan : « fumée » et « poussière » n'avaient pas de pastille, donc tout cocher écartait 119 tests.
+
+    Un filtre qui offre toutes les familles présentes doit, quand elles sont toutes cochées, rendre
+    exactement ce que rend « aucune cochée ». Sinon « tout sélectionner » couvre moins que ne rien choisir.
+    """
+    from flame.commun import INCONNU
+    from flame.comparateur import famille_combustible
+
+    fiches, tests = _vraies_donnees()
+    ouvert = {
+        "habitat": "Station",
+        "oxygene_pct": (None, None),
+        "pression_kpa": (None, None),
+        "debit_air_cm_s": (None, None),
+    }
+    familles = sorted({famille_combustible(valeur) for valeur in fiches["type_combustible"]} - {INCONNU})
+    assert {"solide", "liquide", "gaz", "fumée", "poussière"} <= set(familles)
+
+    sans_filtre = correspondants_du_scenario(tests, fiches, {**ouvert, "type_combustible": []})
+    tout_coche = correspondants_du_scenario(tests, fiches, {**ouvert, "type_combustible": familles})
+    assert len(tout_coche) == len(sans_filtre) == len(tests)
+    # 20 des 24 investigations ont des lignes de test ; les 4 autres sont des études de calcul.
+    assert tout_coche["investigation_id"].nunique() == 20
+
+
 def test_les_zones_disent_d_ou_viennent_leurs_chiffres():
-    traces = _traces(graphique_conditions(charger_tests(), charger_fiches(), LUNE))
-    assert "Moon base and rover (statement)" in traces
-    assert "Earth and ISS (to be sourced)" in traces
-    assert "Spacesuit (statement)" in traces
+    """La légende ne porte que le nom (demande d'Ethan) ; la provenance reste, au survol."""
+    figure = graphique_conditions(charger_tests(), charger_fiches(), LUNE)
+    traces = _traces(figure)
+    reperes = ["Moon base and rover", "Earth and ISS", "Spacesuit"]
+    assert set(reperes) <= set(traces)
+    # Plus de « (statement) » ni de « (to be sourced) » : aucune de ces entrées n'ouvre de parenthèse.
+    assert not any(nom.startswith(repere) and "(" in nom for nom in traces for repere in reperes)
+    survols = " ".join(str(trace.hovertext or "") + str(trace.hovertemplate or "") for trace in figure.data)
+    assert "Moon base and rover — statement" in survols
+    assert "Earth and ISS — to be sourced" in survols
+    assert "Spacesuit: 100 % oxygen, 29.6 kPa — statement" in survols
 
 
 def test_resume_compte_les_tests_dans_l_environnement():

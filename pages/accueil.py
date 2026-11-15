@@ -1,12 +1,11 @@
 """Page 1 « My environment ». Owner: role F (Interface and 3D); the conditions chart comes from role D.
 
-Sketch 1 of the team's whiteboard, built in five levels so that one thing is read first (hierarchy,
-Ethan's ask of Sat 14 Nov):
- 1. (the verdict banner is removed at Mathéo's request, Sun 15 Nov);
+The page reads from the choice to its consequences (Ethan's ask of Sun 15 Nov):
+ 1. the environment: one button per place, then the sliders that refine it;
  2. three figures: tests, investigations, and how many are independent measurements;
- 3. the environment (one button per place, then the sliders) and where NASA's tests sit on the oxygen axis;
- 4. what NASA's tests show, what we don't know, then the three most relevant investigations;
- 5. folded away: the detailed chart, the hardware and the shape of the samples.
+ 3. the chart of NASA's tests against those conditions;
+ 4. what we don't know, then the three most relevant investigations;
+ 5. folded away: the hardware and the shape of the samples.
 Every page of the site is in the menu bar at the top.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
@@ -16,7 +15,14 @@ import streamlit as st
 
 import flame.comparateur as comparateur
 import flame.recherche as recherche
-from flame.commun import HABITAT_PERSONNALISE, charger_fiches, charger_table_psi, charger_tests, get_scenario
+from flame.commun import (
+    HABITAT_PERSONNALISE,
+    INCONNU,
+    charger_fiches,
+    charger_table_psi,
+    charger_tests,
+    get_scenario,
+)
 from flame.ui import (
     EARTH,
     REFERENCE_PLACES,
@@ -32,7 +38,6 @@ from flame.ui import (
     investigation_details,
     label,
     left_the_place,
-    outcomes_card,
     place_buttons,
     save_environment,
     show_environment_in_sidebar,
@@ -42,11 +47,14 @@ from flame.ui import (
     style_conditions_chart,
 )
 
-FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen = all
-# Slider scales. A handle left at the end of its scale means "no bound" on that side.
-OXYGEN_SCALE = (0.0, 100.0)
-PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
-AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
+# The contract's three fuel types first; PSI's tables hold two more families (smoke, dust), and they get
+# a pill too. Otherwise ticking every pill silently drops them, and "all" covers less than "none chosen".
+FUEL_ORDER = ["solide", "liquide", "gaz"]
+# Slider scales. A handle left at the end of its scale means "no bound" on that side, so each scale must
+# reach past the most extreme test: otherwise a test exists that no selection can ever include.
+OXYGEN_SCALE = (0.0, 100.0)  # NASA's tests run from 12 to 85 %
+PRESSURE_SCALE = (0.0, 520.0)  # up to 506.6 kPa in NASA's tests
+AIR_FLOW_SCALE = (-10.0, 100.0)  # from -5.92 (flow against the flame) to 85.28 cm/s
 # Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
 # Partial gravity (Moon 0.165 g, Mars 0.38 g) has no button: NASA's PSI tests have none. The Moon base,
 # the rover and the Mars base keep their own gravity, with no button selected.
@@ -67,6 +75,16 @@ def title_label(place: str) -> str:
     return f"{name[:1].upper()}{name[1:]}"
 
 
+def fuel_families(fiches) -> list[str]:
+    """Every fuel family PSI's investigations actually hold, the contract's three first.
+
+    Ticking them all must cover every investigation: a family that exists in the data but has no pill
+    would be dropped by the filter with no way for the user to get it back.
+    """
+    familles = {comparateur.famille_combustible(valeur) for valeur in fiches["type_combustible"]} - {INCONNU}
+    return [famille for famille in FUEL_ORDER if famille in familles] + sorted(familles - set(FUEL_ORDER))
+
+
 fiches = charger_fiches()
 tests = charger_tests()
 habitat = st.session_state.get("ui_habitat", get_scenario()["habitat"])
@@ -78,8 +96,6 @@ dashboard_header(
     eyebrow="My environment",
 )
 how_to_use()  # a light cover: how the dashboard works, in four steps (can be folded away)
-# Level 2 is printed at the top but needs the environment chosen below: it is filled in later.
-figures_zone = st.container()
 
 
 def to_slider(bounds: tuple, scale: tuple) -> tuple:
@@ -145,11 +161,19 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     )
     if gravity is None:  # no button chosen (Moon, Mars): keep the environment's own gravity
         gravity = float(values["gravite"] or 0.0)
-    # The spacesuit has no gravity of its own: the statement gives none, and nothing is invented here.
-    own_gravity = "not given" if values["gravite"] is None else f"{float(values['gravite']):g} g"
-    st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: {own_gravity}.")
+    # Two buttons only, because PSI has no test in between. The spacesuit has no gravity of its own:
+    # the statement gives none, and nothing is invented here.
+    if values["gravite"] is None:
+        own_gravity = f"{title_label(shown_place)}: not given by the statement."
+    elif gravity_choice(values["gravite"]) is None:
+        own_gravity = f"{title_label(shown_place)}: {float(values['gravite']):g} g, which no PSI test was run at."
+    else:
+        own_gravity = f"{title_label(shown_place)}: {float(values['gravite']):g} g."
+    st.caption(f"NASA's PSI tests are run at 0 g, in orbit, or at 1 g, on the ground. {own_gravity}")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
-    fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
+    fuels = st.pills(
+        "Fuel (none chosen = all)", fuel_families(fiches), selection_mode="multi", format_func=label, key="ui_fuels"
+    )
     air_flow = from_slider(
         st.slider("Air flow (cm/s, optional)", *AIR_FLOW_SCALE, step=0.5, key="ui_air_flow"), AIR_FLOW_SCALE
     )
@@ -188,49 +212,41 @@ elif shown_place == SPACESUIT:
         f"bound that explains the lunar atmosphere. The other pages keep your habitat, {label(habitat)}."
     )
 
-frontiere = recherche.frontiere_des_solides(fiches, tests)
 matching = comparateur.tests_correspondants(tests, fiches, scenario)
 
+# --- Level 2: the three figures, right under the choice that produces them ---------------------------------
+independance = recherche.independance(matching["investigation_id"].unique())
+sure = matching[matching["pression_notee"]]
+stat_tiles(
+    [
+        (f"{len(sure):,}", "Tests in your environment", "pressure recorded"),
+        (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
+        (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
+    ],
+    note=independance["phrase"],
+    compact=True,
+)
+
+# --- Level 3: NASA's tests against those conditions --------------------------------------------------------
 with st.container(key="ui_card_ranking"):
     card_title(
-        "Where NASA's tests sit on the oxygen axis",
-        "Grey: every test whose oxygen is recorded. Orange: the tests inside your environment.",
+        "NASA tests against your conditions",
+        "Each point is one NASA PSI test; the ones inside your environment are circled. Dotted: the Earth "
+        "and Moon zones. Star: the spacesuit. Hover a shape to see where its figures come from.",
     )
+    view = st.segmented_control(
+        "View",
+        ["pression", "debit"],
+        default="pression",
+        format_func={"pression": "O₂ × pressure", "debit": "O₂ × air flow"}.get,
+        key="ui_chart_view",
+    )
+    view = view or "pression"
     st.plotly_chart(
-        comparateur.graphique_repartition(tests, fiches, scenario, frontiere=frontiere["reel"]),
-        key="ui_distribution_chart",
+        style_conditions_chart(comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view),
+        key="ui_conditions_chart",
     )
-    with st.expander("Detailed view: oxygen × pressure, oxygen × air flow"):
-        st.caption(
-            "Each point is one NASA PSI test. Dotted: the Earth and Moon zones. Star: the spacesuit. "
-            "No test records oxygen, pressure and air flow together, so the two views share the oxygen axis."
-        )
-        view = st.segmented_control(
-            "View",
-            ["pression", "debit"],
-            default="pression",
-            format_func={"pression": "O₂ × pressure", "debit": "O₂ × air flow"}.get,
-            key="ui_chart_view",
-        )
-        view = view or "pression"
-        st.plotly_chart(
-            style_conditions_chart(comparateur.graphique_conditions(tests, fiches, scenario, vue=view), scenario, view),
-            key="ui_conditions_chart",
-        )
-
-# --- Level 2: the three figures ---------------------------------------------------------------------------
-independance = recherche.independance(matching["investigation_id"].unique())
-with figures_zone:
-    sure = matching[matching["pression_notee"]]
-    stat_tiles(
-        [
-            (f"{len(sure):,}", "Tests in your environment", "pressure recorded"),
-            (f"{matching['investigation_id'].nunique()}", "Investigations", "that ran them"),
-            (f"{independance['independantes']}", "Independent measurements", "reanalyses folded in"),
-        ],
-        note=independance["phrase"],
-        compact=True,
-    )
+    st.caption("No test records oxygen, pressure and air flow together, so the two views share the oxygen axis.")
 
 # --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
 with st.container(key="ui_card_coverage"):
@@ -242,16 +258,7 @@ with st.container(key="ui_card_coverage"):
     )
     coverage_card(coverage(tests, fiches, scenario))
 
-# --- Level 4: what the tests show, what we don't know, then the 3 most relevant investigations ------------
-with st.container(key="ui_card_outcomes"):
-    card_title(
-        "Can a flame burn in these conditions?",
-        f"What the NASA tests that match {environment_name} show.",
-        tag="What NASA's tests show",
-    )
-    outcomes_card(matching, scenario)
-
-# What we don't know comes first, as a full-width banner; then the 3 most relevant investigations.
+# --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):
     card_title("What we don't know", "Where NASA's data stops, for this environment.")
     # Role C's visuals: tests by fuel in your conditions, the oxygen ruler, what NASA did not record.
