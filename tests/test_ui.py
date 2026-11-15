@@ -534,3 +534,12 @@ def test_two_handles_on_the_same_point_show_one_number():
     assert not site.exception
     shown = " ".join(str(block.value) for block in site.get("html"))
     assert ".st-key-ui_oxygen" in shown and ".st-key-ui_pressure" not in shown
+
+
+def test_the_fuel_choices_are_the_contract_ones():
+    from flame.commun import TYPES_COMBUSTIBLE
+    from flame.ui import label
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    fuels = next(group for group in site.get("button_group") if group.key == "ui_fuels")
+    assert list(fuels.options) == [label(fuel) for fuel in TYPES_COMBUSTIBLE]

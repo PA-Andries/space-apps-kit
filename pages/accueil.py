@@ -16,7 +16,14 @@ import streamlit as st
 
 import flame.comparateur as comparateur
 import flame.recherche as recherche
-from flame.commun import HABITAT_PERSONNALISE, charger_fiches, charger_table_psi, charger_tests, get_scenario
+from flame.commun import (
+    HABITAT_PERSONNALISE,
+    TYPES_COMBUSTIBLE,
+    charger_fiches,
+    charger_table_psi,
+    charger_tests,
+    get_scenario,
+)
 from flame.ui import (
     EARTH,
     REFERENCE_PLACES,
@@ -41,7 +48,6 @@ from flame.ui import (
     style_conditions_chart,
 )
 
-FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen = all
 # Slider scales. A handle left at the end of its scale means "no bound" on that side.
 OXYGEN_SCALE = (0.0, 100.0)
 PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
@@ -148,7 +154,9 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
     own_gravity = "not given" if values["gravite"] is None else f"{float(values['gravite']):g} g"
     st.caption(f"0 g: spacecraft and station · 1 g: Earth. {title_label(shown_place)}: {own_gravity}.")
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
-    fuels = st.pills("Fuel (none chosen = all)", FUELS, selection_mode="multi", format_func=label, key="ui_fuels")
+    fuels = st.pills(
+        "Fuel (none chosen = all)", TYPES_COMBUSTIBLE, selection_mode="multi", format_func=label, key="ui_fuels"
+    )
     air_flow = from_slider(
         st.slider("Air flow (cm/s, optional)", *AIR_FLOW_SCALE, step=0.5, key="ui_air_flow"), AIR_FLOW_SCALE
     )
