@@ -4,6 +4,8 @@ Aucun test n'a à la fois l'oxygène, la pression et le débit d'air : le graphi
 qui partagent l'axe de l'oxygène. Les textes renvoyés pour l'affichage sont en anglais.
 """
 
+import math
+
 import pandas as pd
 import plotly.graph_objects as go
 
@@ -225,10 +227,33 @@ def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
 
     figure.update_xaxes(title_text="Oxygen (%)", range=list(AXE_OXYGENE))
     if vue == "pression":
-        figure.update_yaxes(title_text=titre_y, type="log", tickvals=[20, 30, 50, 70, 100, 200, 300, 500])
+        # L'axe est fixé (en log10) : le cadre de la sélection s'arrête exactement au bord du graphique.
+        figure.update_yaxes(
+            title_text=titre_y,
+            type="log",
+            range=[math.log10(borne) for borne in axe_y],
+            tickvals=[20, 30, 50, 70, 100, 200, 300, 500],
+        )
     else:
         figure.update_yaxes(title_text=titre_y, range=list(axe_y))
-    figure.update_layout(legend_title_text="", margin={"t": 30, "b": 40, "l": 50, "r": 10}, height=480)
+    # Une seule source pour le cadre dessiné par la page 1 : les plages qui ont servi à choisir les tests
+    # surlignés, et les bords des axes. Le cadre et les points ne peuvent donc pas se contredire.
+    plages = plages_du_scenario(scenario)
+    figure.update_layout(
+        legend_title_text="",
+        margin={"t": 30, "b": 40, "l": 50, "r": 10},
+        height=480,
+        meta={
+            "defini": environnement_defini(scenario),
+            "plage_x": list(plages["oxygene_pct"]),
+            "plage_y": list(plages[colonne]),
+            "axe_x": [float(borne) for borne in AXE_OXYGENE],
+            "axe_y": [float(borne) for borne in axe_y],
+            # Les filtres qui ne sont pas sur les axes de cette vue : ils peuvent laisser gris un point du cadre.
+            "combustibles": list(plages["type_combustible"]),
+            "autre_plage": list(plages["debit_air_cm_s" if vue == "pression" else "pression_kpa"]),
+        },
+    )
     return figure
 
 

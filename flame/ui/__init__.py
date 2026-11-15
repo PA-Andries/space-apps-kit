@@ -3,7 +3,7 @@
 Other roles may use everything listed here.
 """
 
-from flame.ui.chart import style_conditions_chart
+from flame.ui.chart import grey_tests_in_the_box, selection_box, style_conditions_chart
 from flame.ui.chatbot import flamy_corner
 from flame.ui.components import investigation_card, place_buttons, place_picker
 from flame.ui.coverage import combination, coverage, coverage_card
@@ -54,6 +54,8 @@ __all__ = [
     "outcomes_card",
     "assistant_mascot",
     "talking",
+    "grey_tests_in_the_box",
+    "selection_box",
     "style_conditions_chart",
     "show_environment_in_sidebar",
     "source_name",
