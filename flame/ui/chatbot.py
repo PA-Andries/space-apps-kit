@@ -25,17 +25,19 @@ def _word_by_word(text: str):
         time.sleep(0.02)
 
 
-@st.dialog("Flamy", width="small")
+@st.dialog(" ", width="small")  # the header below names Flamy
 def _chat_window(answer: Callable) -> None:
     """The small chat window: Flamy, the conversation, and a box to ask a question."""
-    with st.container(key="ui_flamy_face"):
-        mascot_scene(height=110, calm=True)
-    st.caption(
-        "Flamy answers from the NASA investigation records and your environment, cites the investigations it "
-        'uses, and says "I don\'t know" when the records do not hold the answer.'
-    )
+    # A compact header, as in a messaging app: a small Flamy and one line on where its answers come from.
+    with st.container(key="ui_flamy_header", horizontal=True, vertical_alignment="center", gap="small"):
+        with st.container(key="ui_flamy_face", width=64):
+            mascot_scene(height=64, calm=True)
+        st.html(
+            '<div class="ff-chat-who"><b>Flamy</b><span>Answers from NASA\'s investigation records, '
+            "with its sources</span></div>"
+        )
     history = st.session_state.setdefault(HISTORY, [])
-    conversation = st.container(height=320, key="ui_flamy_conversation")
+    conversation = st.container(height=380, key="ui_flamy_conversation", border=False)
     with conversation:
         if not history:
             st.chat_message("assistant", avatar=AVATARS["assistant"]).write(

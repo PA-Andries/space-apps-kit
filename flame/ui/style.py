@@ -223,11 +223,41 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
 .st-key-ui_flamy button {{ width: 100%; padding: 0.15rem 0.4rem; min-height: 0; border: none; background: transparent;
   color: {ACCENT}; }}
 .st-key-ui_flamy button p {{ font-size: 0.82rem; font-weight: 700; }}
-div[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; right: 24px; bottom: 24px; margin: 0;
+section[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; right: 24px; bottom: 24px; margin: 0;
   width: min(420px, calc(100vw - 32px)); background: rgba(14, 18, 44, 0.92); backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px); border: 1px solid {SECONDARY_LINE}; border-radius: 22px; }}
-.st-key-ui_flamy_face {{ align-items: center; margin-bottom: -0.6rem; }}
-.st-key-ui_flamy_face iframe {{ width: 130px !important; }}
+/* The chat window, laid out like a messaging app. */
+section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ padding-bottom: 0; }}
+.st-key-ui_flamy_header {{ flex-wrap: nowrap; margin-top: -2.6rem; padding-bottom: 0.6rem;
+  border-bottom: 1px solid {SECONDARY_LINE}; }}
+.st-key-ui_flamy_face {{ flex: 0 0 64px; width: 64px; }}
+.st-key-ui_flamy_header [data-testid="stElementContainer"]:has(.ff-chat-who) {{ flex: 1 1 auto;
+  width: auto; }}
+.st-key-ui_flamy_face iframe {{ width: 64px !important; }}
+.ff-chat-who {{ display: flex; flex-direction: column; line-height: 1.25; }}
+.ff-chat-who b {{ font-size: 1.05rem; color: {INK}; }}
+.ff-chat-who span {{ font-size: 0.78rem; color: {MUTED}; }}
+.st-key-ui_flamy_conversation {{ gap: 0.5rem; padding: 0.4rem 0.1rem; }}
+/* Bubbles: no avatars; Flamy on the left in glass, the visitor on the right in the accent. */
+.st-key-ui_flamy_conversation [data-testid^="stChatMessageAvatar"] {{ display: none; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessage"] {{ width: fit-content; max-width: 85%; gap: 0;
+  padding: 0.55rem 0.85rem; border-radius: 18px 18px 18px 6px; background: rgba(255, 255, 255, 0.07);
+  border: 1px solid {SECONDARY_LINE}; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] {{ padding: 0; margin: 0; min-width: 0;
+  height: auto !important; display: flow-root !important; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] div {{ margin: 0 !important; }}
+/* Inside a bubble, plain blocks: Streamlit's flex boxes would keep the text at one line's height. */
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] div {{ display: block !important;
+  height: auto !important; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] p {{ font-size: 0.92rem; line-height: 1.45;
+  margin: 0 0 0.3rem; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] p:last-child {{ margin-bottom: 0; }}
+.st-key-ui_flamy_conversation [data-testid="stElementContainer"]:has([data-testid="stChatMessageAvatarUser"]) {{
+  align-self: flex-end; display: flex; justify-content: flex-end; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {{
+  margin-left: auto; background: {ACCENT}; border-color: {ACCENT}; border-radius: 18px 18px 6px 18px; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p {{
+  color: #fff; }}
 
 /* No underline on any link or button text, even on hover: the site should not look like a back office. */
 .stApp a, .stApp a:hover, .stApp a:focus, .stApp a p, .stApp a:hover p, .stApp a span, .stApp a:hover span,
