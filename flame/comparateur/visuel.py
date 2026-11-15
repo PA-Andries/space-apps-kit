@@ -98,7 +98,8 @@ def chiffres_cles(
     """Les chiffres à lire côte à côte : [(libellé, {id: valeur en texte}), ...]."""
     lignes = [
         ("Test rows", {i: f"{int((tests['investigation_id'] == i).sum()):,}" for i in ids}),
-        ("Different fuels", {i: str(nombre_de_valeurs(tests, i, "combustible")) for i in ids}),
+        # Une valeur de la colonne des combustibles est parfois un échantillon précis, pas un combustible.
+        ("Fuel or sample descriptions", {i: str(nombre_de_valeurs(tests, i, "combustible")) for i in ids}),
     ]
     if scenario is not None and environnement_defini(scenario):
         dedans = tests_correspondants(tests, fiches, scenario)

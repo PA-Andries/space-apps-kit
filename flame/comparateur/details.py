@@ -252,7 +252,9 @@ def resume(
         if nombre:
             exemples = ", ".join(nom for nom, _ in frequents(tests, identifiant, "combustible"))
             combustibles.append(
-                f"{noms[identifiant]} burned {nombre} fuel(s): {exemples}{' and others' if nombre > 3 else ''}."
+                # NASA écrit tantôt un combustible, tantôt un échantillon (« 1 cm wide PMMA 1 mm thick »).
+                f"{noms[identifiant]} lists {nombre} fuel or sample description(s) in NASA's table: "
+                f"{exemples}{' and others' if nombre > 3 else ''}."
             )
     fins = {identifiant: frequents(tests, identifiant, "resultat", 1) for identifiant in ids}
     for identifiant, plus_frequent in fins.items():

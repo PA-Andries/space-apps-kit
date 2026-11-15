@@ -521,7 +521,7 @@ def test_les_chiffres_cles_ne_comptent_que_ce_qui_existe():
 
     fiches, tests = charger_fiches(), charger_tests()
     lignes = dict(chiffres_cles(fiches, tests, ["EXEMPLE-A", "EXEMPLE-C"]))
-    assert set(lignes) == {"Test rows", "Different fuels"}  # sans scénario ni table PSI, rien de plus
+    assert set(lignes) == {"Test rows", "Fuel or sample descriptions"}  # sans scénario ni table PSI, rien de plus
     assert lignes["Test rows"]["EXEMPLE-A"] == str(int((tests["investigation_id"] == "EXEMPLE-A").sum()))
 
 
