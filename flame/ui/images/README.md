@@ -14,4 +14,5 @@ neutralised towards grey ground and a dark sky; Mars gets a little more contrast
 resized and saved as JPEG.
 
 `space_background.svg`: the site's background (stars, small spiral galaxies, planets, nebulae). An original
-drawing made of simple shapes by `make_space_background.py`, no outside image; run that script to redraw it.
+drawing made of simple shapes by `make_space_background.py`, no outside image; run that script to redraw it. The script was written with AI assistance (no
+image-generation model, no NASA logo); the site's footer says so.
