@@ -98,9 +98,9 @@ All figures come from NASA's Physical Sciences Informatics (PSI) repository, Com
 
 ### Use of Artificial Intelligence
 
-- **Claude Code (Anthropic)**: each team member worked with an AI coding agent. The agents wrote most of the code, tests and documentation under each member's direction, coordinated through a shared GitHub issue, and checked each other's work. The pull requests say what the agent did. The choice of the challenge, the scope, the scoring weights and every decision recorded in `DECISIONS.md` are the team's.
-- **Assistant inside the site** [À CONFIRMER: Gemini (Google), model `gemini-3.5-flash`, today]: answers questions from the NASA records shown on the site and can call two counting tools; its answers are generated text.
-- **Images**: the planet maps are NASA images, not AI-generated. [À CONFIRMER: the starry background, the mascot and the habitat icons were drawn with code written with an AI agent; if they appear in the video or slides, they carry a visible "AI-generated" mention.]
+- **Claude Code (Anthropic)**: each team member worked with an AI coding assistant, which wrote most of the code, tests and documentation under that member's direction and review. The pull requests say what the AI did. The choice of the challenge, the scope, the scoring weights and every decision recorded in `DECISIONS.md` are the team's.
+- **Assistant inside the site** (Claude, Anthropic, model `claude-haiku-5-5`; Gemini, Google, as backup): answers questions from the NASA records shown on the site and can call two counting tools; its answers are generated text.
+- **Images**: the planet maps are NASA images, not AI-generated. The starry background and the Flamy mascot are drawings made by code written with AI assistance (no image-generation model); the site's footer says so. The button icons are Google Material Symbols.
 - No NASA logo, flag or mission insignia is used.
 
 ### Credits
@@ -116,4 +116,4 @@ All figures come from NASA's Physical Sciences Informatics (PSI) repository, Com
 - [ ] Vidéo tournée, montée, mise en ligne, testée en fenêtre privée
 - [ ] Champ « Use of Artificial Intelligence » relu par chaque membre (chacun confirme ses outils)
 - [ ] Texte officiel de l'énoncé collé dans `challenges/flame-in-freefall.md`, puis relecture de la diapositive 2 et du résumé
-- [ ] `/submission-checker` lancé sur le brouillon de la page projet avant de cliquer sur Submit
+- [ ] `uv run check-submission` lancé sur le brouillon de la page projet avant de cliquer sur Submit

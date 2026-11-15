@@ -63,7 +63,7 @@ PLACE_NAMES = {
     SPACESUIT: "Spacesuit (EVA)",  # no button any more; kept for the place's name elsewhere
 }
 
-# Atmospheres attributed to the challenge statement by BRIEF_EQUIPE_IA.md: Earth 21 % / 14.7 psi (about
+# Atmospheres given by the challenge statement: Earth 21 % / 14.7 psi (about
 # 101 kPa); "lunar base and pressurized rovers" 30 % / 10.2 psi (about 70 kPa, as in the contract ATMOSPHERES).
 # For any other place the statement gives nothing: the site shows no figure rather than a guess.
 STATEMENT_ATMOSPHERES = {

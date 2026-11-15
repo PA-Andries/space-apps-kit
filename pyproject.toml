@@ -17,7 +17,6 @@ dependencies = [
 [project.scripts]
 check-submission = "space_apps_kit.submission:main"
 verifier = "space_apps_kit.verifier:main"
-regles = "space_apps_kit.regles:main"
 
 [dependency-groups]
 # Installed by default with `uv sync`: what `uv run verifier` needs.
@@ -25,7 +24,7 @@ dev = [
     "pytest>=8",
     "ruff>=0.14",
 ]
-# NASA data sampling stack for /data-recon: `uv sync --group data`.
+# NASA data sampling stack: `uv sync --group data`.
 data = [
     "earthaccess",
     "geopandas",

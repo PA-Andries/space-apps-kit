@@ -37,7 +37,7 @@ from flame.ui.places import EARTH, SPACESUIT, body_of, place_conditions
 from flame.ui.scene import flame_scene
 from flame.ui.top_bar import show_environment_in_sidebar, show_top_bar
 
-# French names from the team contract (BRIEF_EQUIPE_IA.md, section 5), still used by app.py
+# French names from the team contract, still used by app.py
 # and pages/recherche.py. Keep them until their owners switch to the English names.
 afficher_cadre = show_top_bar
 carte_fiche = investigation_card
