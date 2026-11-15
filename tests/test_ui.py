@@ -751,3 +751,14 @@ def test_the_selection_box_always_holds_the_circled_tests():
         if grey_inside:  # only a filter that is not on the axes may leave a test of the box grey
             other = flow if view == "pression" else kpa
             assert fuel or any(bound is not None for bound in other), (o2, kpa, flow, fuel, view)
+
+
+def test_setting_an_air_flow_moves_the_chart_to_the_air_flow_view():
+    """No NASA test records both pressure and air flow: the pressure view would turn all grey (PA, 15 Nov)."""
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    assert site.session_state["ui_chart_view"] == "pression"
+    site.slider(key="ui_air_flow").set_range(0.0, 100.0).run()
+    assert not site.exception
+    assert site.session_state["ui_chart_view"] == "debit"
+    site.slider(key="ui_air_flow").set_range(-10.0, 100.0).run()
+    assert site.session_state["ui_chart_view"] == "pression"
