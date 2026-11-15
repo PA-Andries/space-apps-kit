@@ -36,9 +36,17 @@ NOMS_VARIABLES = {
 # En dessous de ce nombre de points distincts, un graphique n'apprend rien de plus que le résumé.
 MINIMUM_DE_POINTS = 5
 
+# Chaque phrase dit d'abord ce qui relie les deux investigations, puis ce qu'on peut comparer : c'est toute la
+# différence entre les deux niveaux (Hugo, dimanche 15 nov. : la première version ne la faisait pas comprendre).
 EXPLICATIONS = {
-    1: "Run with the same hardware, as the challenge statement or NASA's database groups them.",
-    2: "Linked by NASA without shared hardware: listed as related, reusing the other's data, or sharing an instrument.",
+    1: (
+        "Same hardware. Both ran in the same NASA equipment, as the challenge statement or NASA's database "
+        "groups them: their measurements can be read side by side."
+    ),
+    2: (
+        "Related, but different hardware. NASA lists them as related, one reuses the other's data, or they "
+        "share an instrument: compare their questions and findings, not their numbers one by one."
+    ),
     3: "No shared hardware and no link given by NASA: not offered for comparison.",
 }
 # Une étude au sol (modèle, laboratoire) n'a pas de matériel de vol à partager : seuls ses liens comptent.
