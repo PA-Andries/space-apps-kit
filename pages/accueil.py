@@ -262,12 +262,10 @@ with st.container(key="ui_card_compare"):
     card_title("The 3 most relevant investigations", f"For {environment_name}.")
     if best.empty:
         st.info("No investigation scores for this environment yet.")
-    # Each one with what the experiment studied and why it matters here (role C's `descriptif`).
-    for rank, (_, fiche) in enumerate(best.iterrows(), start=1):
-        investigation_details(fiche, recherche.descriptif(fiche, scenario, tests), rank, environment_name)
-    # The 3 compared with each other (role C): where they agree, where to be careful.
+    # First the 3 compared with each other, from their NASA reports (role C): where they agree, where to be careful.
     compared = recherche.synthese_des_plus_pertinentes(fiches, tests, scenario)
     if compared and compared["investigations"]:
+        st.caption("Compared from their NASA final reports and PSI test tables; each finding gives its source.")
         agree_column, careful_column = st.columns(2, gap="medium")
         with agree_column:
             st.markdown("**Where they agree**")
@@ -277,6 +275,14 @@ with st.container(key="ui_card_compare"):
             st.markdown("**Be careful**")
             for sentence in compared["attention"] or ["Nothing to flag."]:
                 st.markdown(f"- {sentence}")
+        quotes = recherche.citations_des_plus_pertinentes(fiches, scenario)
+        if not quotes.empty:
+            with st.expander("What the NASA reports say, word for word"):
+                for _, quote in quotes.iterrows():
+                    st.markdown(f"**{quote['investigation']}** · {quote['reference']}  \n> {quote['citation']}")
+    # Then each one with what the experiment studied and why it matters here (role C's `descriptif`).
+    for rank, (_, fiche) in enumerate(best.iterrows(), start=1):
+        investigation_details(fiche, recherche.descriptif(fiche, scenario, tests), rank, environment_name)
     with st.container(key="ui_analyse"):
         # The orange pill of sketch 1 of the whiteboard, kept as the page's main action.
         if st.button("ANALYSE ALL 24", key="ui_analyse_button"):
