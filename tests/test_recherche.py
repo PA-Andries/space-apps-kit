@@ -313,7 +313,10 @@ def investigations_psi():
 def test_le_descriptif_reprend_les_textes_de_nasa_sans_les_changer(investigations_psi, pertinence):
     detail = descriptif(fiche("EXEMPLE-A"), LUNE, charger_tests(), investigations_psi, pertinence)
     assert detail["titre"] == "Example Burning of Solids"
-    assert detail["cadre"] == "Microgravity investigation · International Space Station (ISS) · 2010–2012"
+    assert (
+        detail["cadre"]
+        == "Microgravity investigation · International Space Station (ISS) · project dates in PSI: 2010–2012"
+    )
     assert "3 publications" in detail["chiffres"]
     assert detail["textes"]["Objectives"] == investigations_psi.iloc[0]["objectives"].strip()
     assert detail["textes"]["Approach"] == "How the tests were run."

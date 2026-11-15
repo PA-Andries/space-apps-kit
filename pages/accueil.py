@@ -44,7 +44,7 @@ from flame.ui import (
 FUELS = ["solide", "liquide", "gaz"]  # the contract's fuel types; none chosen = all
 # Slider scales. A handle left at the end of its scale means "no bound" on that side.
 OXYGEN_SCALE = (0.0, 100.0)
-PRESSURE_SCALE = (0.0, 350.0)  # NASA's tests go up to about 306 kPa
+PRESSURE_SCALE = (0.0, 520.0)  # NASA's tests go up to 506.6 kPa (CFI, 5 atm)
 AIR_FLOW_SCALE = (0.0, 100.0)  # up to 85 cm/s in NASA's tests
 # Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
 # Partial gravity (Moon 0.165 g, Mars 0.38 g) has no button: NASA's PSI tests have none. The Moon base,

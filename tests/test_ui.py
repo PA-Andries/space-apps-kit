@@ -197,7 +197,7 @@ def test_moon_base_fills_the_statement_bounds_and_mars_stays_unknown():
     site.button(key="ui_place_Base martienne").click().run()
     assert site.session_state["ui_gravity"] is None  # no Mars button either; its 0.38 g is kept
     assert site.slider(key="ui_oxygen").value == (0.0, 100.0)
-    assert site.slider(key="ui_pressure").value == (0.0, 350.0)
+    assert site.slider(key="ui_pressure").value == (0.0, 520.0)
 
 
 def test_a_typed_value_stays_while_the_habitat_does_not_change():

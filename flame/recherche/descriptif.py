@@ -9,7 +9,7 @@ Les textes renvoyés s'affichent sur le site : ils sont en anglais.
 import pandas as pd
 
 from flame.commun import charger_table_psi
-from flame.recherche.score import detail_du_score
+from flame.recherche.score import EMULATEURS_DE_SOLIDE, detail_du_score
 
 # Les textes de NASA montrés en entier, dans cet ordre : colonne de la table PSI, titre affiché.
 TEXTES_NASA = {
@@ -19,7 +19,7 @@ TEXTES_NASA = {
     "impacts_earth_benefits": "Benefits on Earth",
 }
 LONGUEUR_COURTE = 380  # longueur maximale du début des objectifs montré sur la carte
-CITEE = "Named in NASA's challenge statement as fire-safety work."
+CITEE = "Named in NASA's challenge statement."
 
 
 def _texte(valeur: object) -> str:
@@ -46,9 +46,11 @@ def _annee(date: object) -> str:
 
 def _periode(ligne: pd.Series) -> str:
     debut_annee, fin_annee = _annee(ligne.get("start_date")), _annee(ligne.get("end_date"))
+    # Ce sont les dates du projet dans la fiche PSI, pas celles du vol (Saffire-I : 2001–2008, vol en 2016).
     if debut_annee and fin_annee:
-        return debut_annee if debut_annee == fin_annee else f"{debut_annee}–{fin_annee}"
-    return f"since {debut_annee}" if debut_annee else ""
+        annees = debut_annee if debut_annee == fin_annee else f"{debut_annee}–{fin_annee}"
+        return f"project dates in PSI: {annees}"
+    return f"project start in PSI: {debut_annee}" if debut_annee else ""
 
 
 def _cadre(ligne: pd.Series) -> str:
@@ -108,6 +110,8 @@ def descriptif(
     citee = pd.to_numeric(ligne.get("cited_in_statement_as_fire_safety"), errors="coerce") == 1
     return {
         "titre": _texte(ligne.get("title")),
+        # Un brûleur à gaz qui imite un solide n'est pas affiché « Solid fuel ».
+        "combustible_affiche": "Gas burner emulating a solid" if fiche.get("id") in EMULATEURS_DE_SOLIDE else "",
         "cadre": _cadre(ligne),
         "chiffres": _chiffres(fiche, ligne),
         "en_bref": _texte(fiche.get("resume")) or _texte(ligne.get("one_liner")),

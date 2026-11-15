@@ -41,6 +41,7 @@ def investigation_details(row: pd.Series, details: dict, rank: int | None = None
         badge = f'<span class="ff-inv-rank">{rank}</span>' if rank else ""
         title = f'<p class="ff-inv-title">{escape(details["titre"])}</p>' if details.get("titre") else ""
         fuel = "" if pd.isna(row.get("type_combustible")) else label(row["type_combustible"]).capitalize() + " fuel"
+        fuel = details.get("combustible_affiche") or fuel
         meta = " · ".join(part for part in (fuel, details.get("cadre")) if part)
         figures = f" · {escape(details['chiffres'])}" if details.get("chiffres") else ""
         blocks = [

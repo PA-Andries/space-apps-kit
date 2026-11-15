@@ -14,11 +14,9 @@ from flame.recherche.conditions import (
     plages_du_scenario,
     tests_dans_les_plages,
 )
-from flame.recherche.score import type_de_base
+from flame.recherche.score import EMULATEURS_DE_SOLIDE, type_de_base
 from flame.ui import label
 
-# Classé « solide », mais sa fiche dit « Gas burner that emulates a burning material » : pas un vrai échantillon.
-EMULATEURS_DE_SOLIDE = {"PSI-20": "ACME BRE"}
 # Pour dire « des fiches sans oxygène » : les colonnes vérifiées et leur nom affiché.
 CHAMPS_SUIVIS = {"oxygene_min": "oxygen range", "pression_kpa": "pressure", "nb_tests": "number of tests"}
 
@@ -119,7 +117,8 @@ def ce_quon_ne_sait_pas(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dic
     elif 0 < gravite < 1:
         constats.append(
             f"No test at the partial gravity of {nom} ({gravite:g} g): PSI has microgravity and Earth-gravity "
-            "data only. E-FIELD Flames mimics partial gravity with an electric field."
+            "data only. According to the challenge statement, E-FIELD Flames mimics partial gravity with an "
+            "electric field."
         )
 
     for colonne, nom_champ in CHAMPS_SUIVIS.items():
