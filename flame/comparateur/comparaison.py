@@ -1,12 +1,18 @@
 """Les calculs du comparateur : quelles investigations se comparent, et sur quoi.
 
-Deux investigations sont d'autant plus comparables qu'elles brûlent le même type de
-combustible dans le même matériel. Les textes renvoyés pour l'affichage sont en anglais.
+La règle ne s'appuie que sur ce que NASA ou l'énoncé du défi donnent, jamais sur un classement de l'équipe :
+- directement comparables : le même matériel. L'énoncé regroupe lui-même les expériences par matériel partagé
+  (colonne `hardware_family` de `data/psi/investigations.csv`) ;
+- comparables en principe : NASA les relie sans matériel commun (champ « Related Investigations » de PSI,
+  réutilisation de données, ou instrument partagé cité par l'énoncé, dans `data/psi/relations.csv`) ;
+- sinon, la page ne les propose pas.
+Le type de combustible (solide, liquide, gaz) est un rangement de l'équipe : il n'entre pas dans la règle.
+Les textes renvoyés pour l'affichage sont en anglais.
 """
 
 import pandas as pd
 
-from flame.commun import INCONNU
+from flame.commun import INCONNU, charger_table_psi
 
 # Les critères lus dans la fiche de chaque investigation.
 CRITERES = ["type_combustible", "materiel", "nb_tests"]
@@ -17,8 +23,10 @@ VARIABLES = ["oxygene_pct", "pression_kpa", "debit_air_cm_s"]
 NIVEAUX = {
     1: "Directly comparable",
     2: "Comparable in principle",
-    3: "Complementary",
+    3: "Not comparable",
 }
+# Les niveaux que la page propose : au niveau 3, rien n'est commun et la comparaison n'apprend rien.
+NIVEAUX_PROPOSES = (1, 2)
 # Nom et unité de chaque condition de test, pour les phrases du résumé.
 NOMS_VARIABLES = {
     "oxygene_pct": ("oxygen", "%"),
@@ -29,30 +37,91 @@ NOMS_VARIABLES = {
 MINIMUM_DE_POINTS = 5
 
 EXPLICATIONS = {
-    1: "Same fuel type in the same hardware: results can be read side by side.",
-    2: "Same fuel type in different hardware: useful to see whether a result holds at another scale.",
-    3: "Different fuel types: they answer different questions and share few or no numbers.",
+    1: "Run with the same hardware, as the challenge statement or NASA's database groups them.",
+    2: "Linked by NASA without shared hardware: listed as related, reusing the other's data, or sharing an instrument.",
+    3: "No shared hardware and no link given by NASA: not offered for comparison.",
 }
+# Une étude au sol (modèle, laboratoire) n'a pas de matériel de vol à partager : seuls ses liens comptent.
+ETUDE_AU_SOL = "Ground Investigation"
+LIENS_DE_PSI = {"related to", "reuses data from"}
+LIEN_DE_L_ENONCE = "Linked by the challenge statement"
 
 
 def famille_combustible(type_combustible: object) -> str:
-    """Le type de combustible sans sa précision : « gaz (modèle) » devient « gaz »."""
+    """Le type de combustible sans sa précision : « gaz (modèle) » devient « gaz ».
+
+    Sert au filtre de combustible de l'environnement (page Data), pas à la règle de comparabilité.
+    """
     if pd.isna(type_combustible):
         return INCONNU
     return str(type_combustible).split("(")[0].strip().lower() or INCONNU
 
 
-def niveau_et_raison(depart: pd.Series, autre: pd.Series) -> tuple[int, str]:
-    """Le niveau de comparabilité (1 à 3) de deux fiches, et la phrase qui l'explique."""
-    meme_materiel = pd.notna(depart["materiel"]) and depart["materiel"] == autre["materiel"]
-    combustible_depart = famille_combustible(depart["type_combustible"])
-    if INCONNU in (combustible_depart, famille_combustible(autre["type_combustible"])):
-        return 3, "Fuel type unknown"
-    if combustible_depart != famille_combustible(autre["type_combustible"]):
-        return 3, "Same hardware, different fuel type" if meme_materiel else "Different fuel type and hardware"
-    if meme_materiel:
-        return 1, "Same fuel type and same hardware"
-    return 2, "Same fuel type, different hardware"
+def _ligne(table: pd.DataFrame, identifiant: object) -> pd.Series | None:
+    """La ligne d'une investigation dans une table de PSI, ou None si la table ne l'a pas."""
+    if table.empty or "investigation_id" not in table.columns:
+        return None
+    lignes = table[table["investigation_id"] == identifiant]
+    return None if lignes.empty else lignes.iloc[0]
+
+
+def materiel_commun(depart: pd.Series, autre: pd.Series, investigations_psi: pd.DataFrame) -> str:
+    """Le nom du matériel que deux investigations partagent, ou une chaîne vide.
+
+    Avec la table de NASA : la même famille de matériel (`hardware_family`), pour deux expériences en vol.
+    Sans elle (données d'exemple) : le même `materiel` dans les deux fiches.
+    """
+    lignes = [_ligne(investigations_psi, fiche.get("id")) for fiche in (depart, autre)]
+    if all(ligne is not None and "hardware_family" in ligne.index for ligne in lignes):
+        if any(str(ligne.get("project_type")) == ETUDE_AU_SOL for ligne in lignes):
+            return ""
+        famille = lignes[0]["hardware_family"]
+        return str(famille) if pd.notna(famille) and famille == lignes[1]["hardware_family"] else ""
+    materiel = depart.get("materiel")
+    return str(materiel) if pd.notna(materiel) and materiel == autre.get("materiel") else ""
+
+
+def lien_donne_par_nasa(id_depart: object, id_autre: object, relations: pd.DataFrame) -> str:
+    """Le lien que NASA ou l'énoncé donne entre deux investigations, en une phrase, ou une chaîne vide."""
+    if relations.empty or not {"from_id", "to_id", "relation"} <= set(relations.columns):
+        return ""
+    aller = (relations["from_id"] == id_depart) & (relations["to_id"] == id_autre)
+    retour = (relations["from_id"] == id_autre) & (relations["to_id"] == id_depart)
+    liens = set(relations[aller | retour]["relation"])
+    if not liens:
+        return ""
+    # Ce que l'énoncé dit de précis passe d'abord, puis les deux liens du champ « Related Investigations » de PSI.
+    de_l_enonce = sorted(liens - LIENS_DE_PSI)
+    if de_l_enonce:
+        return f"{LIEN_DE_L_ENONCE}: {de_l_enonce[0]}"
+    if "reuses data from" in liens:
+        return "One reuses the other's data, according to NASA's PSI"
+    return "Listed as related in NASA's PSI"
+
+
+def niveau_et_raison(
+    depart: pd.Series,
+    autre: pd.Series,
+    investigations_psi: pd.DataFrame | None = None,
+    relations: pd.DataFrame | None = None,
+) -> tuple[int, str]:
+    """Le niveau de comparabilité (1 à 3) de deux fiches, et la phrase qui l'explique.
+
+    Sans les tables de NASA, seul le `materiel` des fiches sert, et aucun lien n'est connu.
+    """
+    investigations_psi = pd.DataFrame() if investigations_psi is None else investigations_psi
+    relations = pd.DataFrame() if relations is None else relations
+    lien = lien_donne_par_nasa(depart.get("id"), autre.get("id"), relations)
+    # Quand l'énoncé dit précisément ce qui est partagé (un seul instrument, par exemple), on le répète tel quel
+    # plutôt que d'annoncer « le même matériel ».
+    if lien.startswith(LIEN_DE_L_ENONCE):
+        return 2, lien
+    materiel = materiel_commun(depart, autre, investigations_psi)
+    if materiel:
+        return 1, f"Same hardware ({materiel})"
+    if lien:
+        return 2, lien
+    return 3, "No shared hardware and no link given by NASA"
 
 
 def variables_communes(tests: pd.DataFrame, ids: list[str]) -> list[str]:
@@ -62,14 +131,24 @@ def variables_communes(tests: pd.DataFrame, ids: list[str]) -> list[str]:
     return [variable for variable in VARIABLES if (remplies[variable] > 0).all()]
 
 
-def comparables(fiches: pd.DataFrame, tests: pd.DataFrame, id_depart: str) -> pd.DataFrame:
+def comparables(
+    fiches: pd.DataFrame,
+    tests: pd.DataFrame,
+    id_depart: str,
+    investigations_psi: pd.DataFrame | None = None,
+    relations: pd.DataFrame | None = None,
+) -> pd.DataFrame:
     """Les autres investigations, de la plus comparable à la moins comparable à `id_depart`.
 
     Ajoute les colonnes `niveau` (1 à 3), `raison` et `variables_communes` (liste de noms de colonnes).
+    La page ne propose que les niveaux de `NIVEAUX_PROPOSES`. Les tables `investigations` et `relations`
+    de NASA sont lues sur le disque quand on ne les donne pas.
     """
+    investigations_psi = charger_table_psi("investigations") if investigations_psi is None else investigations_psi
+    relations = charger_table_psi("relations") if relations is None else relations
     depart = fiches[fiches["id"] == id_depart].iloc[0]
     autres = fiches[fiches["id"] != id_depart].copy()
-    jugements = [niveau_et_raison(depart, autre) for _, autre in autres.iterrows()]
+    jugements = [niveau_et_raison(depart, autre, investigations_psi, relations) for _, autre in autres.iterrows()]
     autres["niveau"] = [niveau for niveau, _ in jugements]
     autres["raison"] = [raison for _, raison in jugements]
     autres["variables_communes"] = [variables_communes(tests, [id_depart, autre]) for autre in autres["id"]]
