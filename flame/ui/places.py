@@ -24,21 +24,26 @@ PLACES_BY_BODY = {
     "Mars": ["Base martienne"],
 }
 
-# Page 1 offers one button per atmosphere, two per row: the two crew environments, then the two references.
-# Places that share their conditions share a button (Hugo, Sun 15 Nov): the spacecraft has the station's
-# conditions and the pressurized rover has the Moon base's (`conditions_habitat`, role A), so a second
-# button changed nothing on the page. The Mars base has no button: see `MARS_NOTE`.
+# Page 1 offers one button per atmosphere, in one row, from the ground outwards: Earth (the reference),
+# then the two crew environments. Places that share their conditions share a button (Hugo, Sun 15 Nov):
+# the spacecraft has the station's conditions and the pressurized rover has the Moon base's
+# (`conditions_habitat`, role A), so a second button changed nothing on the page.
+# The spacesuit has no button any more (Hugo, Sun 15 Nov): it is not a place a crew lives in. It stays on
+# the chart as a star. The Mars base has no button either: see `MARS_NOTE`.
 PLACE_ROWS = [
-    ["Station", "Base lunaire"],
-    [EARTH, SPACESUIT],
+    [EARTH, "Station", "Base lunaire"],
 ]
 # A place without a button of its own, and the button that stands for it.
 SAME_CONDITIONS_AS = {"Vaisseau": "Station", "Rover pressurisé": "Base lunaire"}
-# Why Mars is not offered. Both facts are checked: the statement lists Martian bases among the crew
+# Why Mars is not offered yet. Both facts are checked: the statement lists Martian bases among the crew
 # environments but gives no oxygen or pressure for them, and it says PSI holds no partial-gravity data.
+# "Future feature" is the team's intention, not a NASA announcement: the sentence does not promise data.
+MARS_TITLE = "Mars base"
+MARS_TAG = "Future feature"
 MARS_NOTE = (
-    "Mars base: not offered. NASA's challenge statement gives no atmosphere for it, and no PSI experiment "
-    "was run in Martian conditions or in partial gravity."
+    "Not available yet. NASA's challenge statement gives no atmosphere for a Mars base, and no PSI "
+    "experiment was run in Martian conditions or in partial gravity. This environment will be added "
+    "once such data exists."
 )
 # The small logo of each button: a Material icon drawn by Streamlit (no NASA logo or insignia).
 PLACE_ICONS = {
@@ -54,8 +59,8 @@ PLACE_ICONS = {
 PLACE_NAMES = {
     "Station": "Station & spacecraft",
     "Base lunaire": "Moon base & rover",
-    EARTH: "Earth (reference)",
-    SPACESUIT: "Spacesuit (EVA)",
+    EARTH: "Earth",
+    SPACESUIT: "Spacesuit (EVA)",  # no button any more; kept for the place's name elsewhere
 }
 
 # Atmospheres attributed to the challenge statement by BRIEF_EQUIPE_IA.md: Earth 21 % / 14.7 psi (about

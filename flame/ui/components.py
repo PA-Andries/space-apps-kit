@@ -11,6 +11,8 @@ from flame.ui.places import (
     BODIES,
     EARTH,
     MARS_NOTE,
+    MARS_TAG,
+    MARS_TITLE,
     PLACE_ICONS,
     PLACE_NAMES,
     PLACE_ROWS,
@@ -215,15 +217,32 @@ def _pick_on_image(body: str, chosen: str | None) -> None:
     st.caption(credit)
 
 
-# The place buttons of page 1: large frosted-glass tiles, the logo in the flame colour; the chosen one is filled.
+# The place buttons of page 1: three tall frosted-glass tiles that fill the card, the logo above the name,
+# in the flame colour; the chosen one is filled. Under them, the Mars block: not a button, but easy to see.
 PLACE_BUTTONS_STYLE = """<style>
-.st-key-ui_places { gap: 0.7rem; margin-top: 0.4rem; }
+/* The buttons take all the height the card has left; the Mars block keeps its own. */
+.st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_places) {
+  flex: 1 1 0; min-height: 13rem; }
+.st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_mars_note) { flex: none; }
+.st-key-ui_places { flex: 1 1 auto; margin-top: 0.4rem; }
+.st-key-ui_places > [data-testid="stLayoutWrapper"], .st-key-ui_places [data-testid="stHorizontalBlock"] {
+  flex: 1 1 auto; }
+.st-key-ui_places [data-testid="stHorizontalBlock"] { align-items: stretch; gap: 0.8rem; }
+.st-key-ui_places [data-testid="stColumn"] { display: flex; }
+.st-key-ui_places [data-testid="stColumn"] > [data-testid="stVerticalBlock"] { flex: 1 1 auto; }
+.st-key-ui_places .stElementContainer, .st-key-ui_places .stButton { flex: 1 1 auto; display: flex; }
 .st-key-ui_places button {
-  min-height: 8rem; border-radius: 18px; padding: 0.6rem 1rem;
+  flex: 1 1 auto; height: auto; min-height: 0; border-radius: 22px; padding: 1.2rem 0.8rem;
   background: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(160, 175, 255, 0.14);
 }
-.st-key-ui_places button p { font-weight: 600; font-size: 1rem; }
-.st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 1.6rem; color: #ff7a3d; margin-right: 0.2rem; }
+/* The logo sits above the name. */
+.st-key-ui_places button > div > span { flex-direction: column; gap: 1rem; }
+.st-key-ui_places button > div > span > span:first-child { width: auto; height: auto; display: flex; margin: 0; }
+.st-key-ui_places button [data-testid="stIconMaterial"] {
+  font-size: 4.2rem; width: auto; height: auto; line-height: 1; margin: 0; color: #ff7a3d; }
+.st-key-ui_places button [data-testid="stMarkdownContainer"] { white-space: normal; overflow: visible; }
+.st-key-ui_places button p {
+  font-weight: 700; font-size: 1.25rem; line-height: 1.25; white-space: normal; text-align: center; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] [data-testid="stIconMaterial"] { color: #fff; }
 .st-key-ui_places button:hover { border-color: #ff7a3d; background: rgba(255, 255, 255, 0.1); color: inherit; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] {
@@ -232,18 +251,31 @@ PLACE_BUTTONS_STYLE = """<style>
 }
 .st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #ff8c55; color: #fff; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
-.st-key-ui_mars_note { margin-top: 0.3rem; padding: 0.55rem 0.85rem; border-radius: 14px;
-  border: 1px dashed rgba(160, 175, 255, 0.3); }
-.st-key-ui_mars_note p { color: #a3abc9; font-size: 0.84rem; line-height: 1.45; margin: 0; }
-.st-key-ui_mars_note strong { color: #dfe3f5; font-weight: 600; }
+/* The Mars block: a dashed orange frame, a title as large as a button's name, and its "Future feature" tag. */
+.st-key-ui_mars_note { margin-top: 0.5rem; padding: 1rem 1.2rem 1.1rem; border-radius: 20px; gap: 0.35rem;
+  border: 1.5px dashed rgba(255, 122, 61, 0.6); background: rgba(255, 122, 61, 0.07); }
+/* Streamlit pulls each markdown block up by the margin of its last paragraph: both are set to zero here. */
+.st-key-ui_mars_note [data-testid="stMarkdownContainer"] { margin-bottom: 0; }
+.st-key-ui_mars_note p { color: #dfe3f5; font-size: 1rem; line-height: 1.5; margin: 0; }
+.st-key-ui_mars_note .stElementContainer:first-child p { font-size: 1.25rem; line-height: 1.3; }
+.st-key-ui_mars_note .stElementContainer:first-child p > span[role="img"] {
+  color: #ff7a3d; font-size: 1.7rem; margin-right: 0.3rem; }
+.st-key-ui_mars_note strong { color: #fff; font-weight: 700; margin-right: 0.5rem; }
+.st-key-ui_mars_note .stMarkdownBadge { vertical-align: middle; font-weight: 700; letter-spacing: 0.02em; }
+/* On a narrow screen the three tiles stack and the card is as tall as it needs: each tile keeps its height. */
+@media (max-width: 640px) {
+  .st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_places) { flex: none; }
+  .st-key-ui_places button { min-height: 7rem; }
+  .st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 2.6rem; }
+}
 </style>"""
 
 
 def place_buttons(current: str, selected: bool = True) -> str:
-    """One button per atmosphere, each with a small logo: two crew environments, then the two references.
+    """One large button per atmosphere, each with its logo: Earth (the reference), then the two crew environments.
 
     The spacecraft shares the station's button and the rover the Moon base's (same conditions). Mars has
-    no button: a note under the buttons says why.
+    no button: a block under the buttons says why, and that it will come once the data exists.
     `current`: the place to show while the user has not clicked yet (the scenario's habitat).
     `selected`: False when the user's values left the place's range: no button is highlighted then.
     Returns the place to show; its button is highlighted.
@@ -254,15 +286,15 @@ def place_buttons(current: str, selected: bool = True) -> str:
     with st.container(key="ui_places"):
         for row in PLACE_ROWS:
             _button_row(row, highlighted if selected else None, choose_place, "ui_place", place_name, PLACE_ICONS)
-    # Mars keeps a place on the page, as a note and not as a button: nothing can be shown for it.
-    title, _, reason = MARS_NOTE.partition(": ")
+    # Mars keeps a place on the page, as a block and not as a button: nothing can be shown for it yet.
     with st.container(key="ui_mars_note"):
-        st.markdown(f":material/landscape: **{title}:** {reason}")
+        st.markdown(f":material/landscape: **{MARS_TITLE}** :orange-badge[{MARS_TAG}]")
+        st.markdown(MARS_NOTE)
     return chosen
 
 
 def place_name(place: str) -> str:
-    """The text of a place's button: "Moon base", or "Earth (reference)"."""
+    """The text of a place's button: "Moon base & rover", "Earth"."""
     return PLACE_NAMES.get(place, label(place))
 
 
