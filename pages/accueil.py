@@ -99,7 +99,7 @@ tests = charger_tests()
 habitat = st.session_state.get("ui_habitat", get_scenario()["habitat"])
 
 dashboard_header(
-    "Flame in Freefall · Fire-safety dashboard",
+    "Flamy · Fire-safety dashboard",
     "Describe your habitable crew environment: see where NASA's microgravity combustion data stops.",
     [f"{len(fiches)} NASA investigations", f"{len(tests):,} test rows", "Source: NASA PSI"],
     eyebrow="My environment",
@@ -336,9 +336,9 @@ with st.expander("Hardware and samples: what these tests were run with"):
 
 footer(
     [
-        "Flame in Freefall is a student project for the NASA Space Apps Challenge 2026. It is not affiliated "
-        "with or endorsed by NASA. Fuel types are the team's classification; scores are the team's judgement, "
-        "not NASA data.",
+        "Flamy is a student project for the NASA Space Apps Challenge 2026 (challenge: Flame in Freefall). "
+        "It is not affiliated with or endorsed by NASA. Fuel types are the team's classification; "
+        "scores are the team's judgement, not NASA data.",
         "Experiments: NASA Physical Sciences Informatics. Button icons: Google Material Symbols (Apache 2.0). "
         "The mascot and the space background are original drawings.",
     ]
