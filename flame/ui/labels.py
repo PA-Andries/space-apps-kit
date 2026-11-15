@@ -31,6 +31,7 @@ LABELS = {
     "aucun": "none",
     "fumée": "smoke",
     "poussière": "dust",
+    "Personnalisé": "custom",
     INCONNU: "unknown",
 }
 

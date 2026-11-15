@@ -233,17 +233,18 @@ PLACE_BUTTONS_STYLE = """<style>
 </style>"""
 
 
-def place_buttons(current: str) -> str:
+def place_buttons(current: str, selected: bool = True) -> str:
     """One button per habitable crew environment, each with a small logo, and Earth as the reference.
 
     `current`: the place to show while the user has not clicked yet (the scenario's habitat).
+    `selected`: False when the user's values left the place's range: no button is highlighted then.
     Returns the place to show; its button is highlighted.
     """
     chosen = current_place() or current
     st.html(PLACE_BUTTONS_STYLE)
     with st.container(key="ui_places"):
         for row in PLACE_ROWS:
-            _button_row(row, chosen, choose_place, "ui_place", place_name, PLACE_ICONS)
+            _button_row(row, chosen if selected else None, choose_place, "ui_place", place_name, PLACE_ICONS)
     return chosen
 
 
