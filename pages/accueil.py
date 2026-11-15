@@ -4,9 +4,8 @@ The page reads from the choice to its consequences (Ethan's ask of Sun 15 Nov):
  1. the environment: one button per place, then the sliders that refine it;
  2. two figures, right underneath: the tests that match, and the investigations behind them;
  3. the chart of NASA's tests against those conditions;
- 4. has your combination been tested, then under which conditions NASA ran its tests (role F's coverage card);
- 5. what we don't know, then the three most relevant investigations;
- 6. folded away: the hardware and the shape of the samples.
+ 4. what we don't know, then the three most relevant investigations;
+ 5. folded away: the hardware and the shape of the samples.
 Every page of the site is in the menu bar at the top.
 The habitat fills the values; what the user changes is kept in the scenario (lot A) for every page.
 The file name stays `accueil.py` because `app.py` (role A) points to it.
@@ -29,10 +28,7 @@ from flame.ui import (
     REFERENCE_PLACES,
     SPACESUIT,
     card_title,
-    combination,
     conditions,
-    coverage,
-    coverage_card,
     dashboard_header,
     environment_values,
     footer,
@@ -283,16 +279,6 @@ with st.container(key="ui_card_ranking"):
     if grey_tests_in_the_box(chart):
         st.caption(grey_tests_in_the_box(chart))
     st.caption("No test records oxygen, pressure and air flow together, so the two views share the oxygen axis.")
-
-# --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
-with st.container(key="ui_card_coverage"):
-    card_title(
-        "Has your combination been tested?",
-        f"All the settings of {title_label(shown_place)} together, against NASA's tests; then each setting "
-        "on its own: what was tested, and what never was.",
-        tag="Research conditions",
-    )
-    coverage_card(coverage(tests, fiches, scenario), combination(tests, fiches, scenario))
 
 # --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):
