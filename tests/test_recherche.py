@@ -569,4 +569,73 @@ def test_les_titres_de_la_fiche_disent_ce_qui_est_ecrit_dessous():
     site = site.switch_page("pages/recherche.py").run()
     assert not site.exception
     titres = [titre.value for titre in site.subheader]
+    # Les fiches d'exemple ne sont sous aucun axe de l'énoncé : pas de rubrique d'axe.
     assert titres == ["Summary", "Fuel and test conditions", "Objective", "Measurements and tests", "Compare"]
+
+
+IDS_D_EXEMPLE = ("EXEMPLE-A", "EXEMPLE-B", "EXEMPLE-C", "EXEMPLE-D")
+
+
+def test_seules_les_huit_investigations_nommees_par_l_enonce_ont_un_axe():
+    from flame.recherche import AXES, axe_de_securite
+
+    # L'énoncé : « BASS and BASS-II », « Saffire-I, -II, and -III » ; « SAME and SAME-R » ; « FLEX ».
+    assert {axe: set(contenu["ids"]) for axe, contenu in AXES.items()} == {
+        "Prevention": {"PSI-25", "PSI-26", "PSI-98", "PSI-99", "PSI-100"},
+        "Detection": {"PSI-101", "PSI-102"},
+        "Suppression": {"PSI-69"},
+    }
+    assert axe_de_securite("PSI-69")[0] == "Suppression" and axe_de_securite("PSI-102")[0] == "Detection"
+    # ACME BRE (PSI-20) est citée par l'énoncé, mais sous aucun des trois axes : elle n'en reçoit pas.
+    assert axe_de_securite("PSI-20") is None and axe_de_securite(None) is None
+    for axe, contenu in AXES.items():
+        assert axe.lower() in contenu["texte"].lower(), axe  # la phrase parle bien de son axe
+
+
+def test_le_descriptif_nomme_l_axe_de_l_enonce_ou_garde_la_phrase_generale(monkeypatch):
+    from flame.recherche import AXES
+    from flame.recherche.descriptif import CITEE
+
+    fiches, tests = charger_fiches(), charger_tests()
+    investigations_psi = pd.DataFrame(
+        {"investigation_id": list(IDS_D_EXEMPLE), "cited_in_statement_as_fire_safety": [1, 1, 0, 0]}
+    )
+    monkeypatch.setitem(AXES["Suppression"], "ids", ("EXEMPLE-A",))
+
+    def detail(identifiant: str) -> dict:
+        fiche = fiches[fiches["id"] == identifiant].iloc[0]
+        return descriptif(fiche, LUNE, tests, investigations_psi)
+
+    sous_un_axe = detail("EXEMPLE-A")
+    assert sous_un_axe["axe"] == "Suppression"
+    assert sous_un_axe["citee"].startswith("named under suppression.")
+    assert "carbon dioxide and helium" in sous_un_axe["citee"]
+    citee_sans_axe = detail("EXEMPLE-B")
+    assert citee_sans_axe["axe"] == "" and citee_sans_axe["citee"] == CITEE
+    assert detail("EXEMPLE-C")["citee"] == ""  # ni citée ni sous un axe
+
+
+def test_la_fiche_montre_l_axe_et_la_phrase_de_l_enonce(monkeypatch):
+    from pathlib import Path
+
+    from streamlit.testing.v1 import AppTest
+
+    from flame.recherche import AXES, SOURCE_DES_AXES
+
+    monkeypatch.setitem(AXES["Detection"], "ids", IDS_D_EXEMPLE)
+    app = str(Path(__file__).resolve().parents[1] / "app.py")
+    site = AppTest.from_file(app, default_timeout=30).run()
+    site = site.switch_page("pages/recherche.py").run()
+    assert not site.exception
+    assert "NASA fire-safety axis: Detection" in [titre.value for titre in site.subheader]
+    assert AXES["Detection"]["texte"] in [bloc.value for bloc in site.markdown]
+    assert SOURCE_DES_AXES in [bloc.value for bloc in site.caption]
+
+
+def test_la_page_ne_dit_pas_fiche_a_l_ecran():
+    """« fiche » est un mot français : une valeur absente s'affiche « Not recorded for this investigation. »."""
+    from pathlib import Path
+
+    page = (Path(__file__).resolve().parents[1] / "pages" / "recherche.py").read_text(encoding="utf-8")
+    assert 'NON_NOTE = "Not recorded for this investigation."' in page
+    assert "in the fiche" not in page
