@@ -47,6 +47,8 @@ GLOBAL_STYLE = f"""<style>
 [data-testid="stToolbarActions"], [data-testid="stAppDeployButton"], [data-testid="stMainMenu"],
 [data-testid="stStatusWidget"], [data-testid="stDecoration"], #MainMenu, .stApp > footer,
 [class*="viewerBadge"], [class*="_profileContainer"], [class*="_profilePreview"] {{ display: none !important; }}
+/* The frame that carries the script hiding the host's badge: it takes no room on the page. */
+.st-key-ui_no_chrome {{ position: absolute; width: 0; height: 0; overflow: hidden; }}
 [data-testid="stMain"] {{ scroll-behavior: smooth; }}
 
 /* A centred column with room to breathe. */
@@ -448,6 +450,39 @@ iframe {{ box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }}
 </style>"""
 
 
+# What the host draws around the page on Streamlit Community Cloud: the "Hosted with Streamlit" badge, the
+# author's picture and the "Manage app" button. They live in the host's own page, outside this one, so
+# the style above cannot reach them. The host's page has the same origin as the app, so a small script
+# can add a style to it. Class names carry a random suffix there, hence the `*=` selectors.
+HOST_CHROME = (
+    '[class*="viewerBadge"], [class*="profileContainer"], [class*="profilePreview"], '
+    '[data-testid="manage-app-button"], [class*="terminalButton"], a[href*="streamlit.io/cloud"], '
+    '[data-testid="stToolbarActions"], [data-testid="stAppDeployButton"], [data-testid="stMainMenu"], '
+    '[data-testid="stStatusWidget"], [data-testid="stDecoration"]'
+)
+HOST_CHROME_SCRIPT = f"""<script>
+(function () {{
+  var css = '{HOST_CHROME} {{ display: none !important; }}';
+  var page = window;
+  for (var level = 0; level < 5; level++) {{
+    try {{
+      var doc = page.document;
+      if (!doc.getElementById("ff-no-chrome")) {{
+        var style = doc.createElement("style");
+        style.id = "ff-no-chrome";
+        style.textContent = css;
+        doc.head.appendChild(style);
+      }}
+    }} catch (error) {{ break; }}  // another origin: nothing can be done from here
+    if (page === page.parent) break;
+    page = page.parent;
+  }}
+}})();
+</script>"""
+
+
 def apply_style() -> None:
-    """Add the site-wide style to the current page."""
+    """Add the site-wide style to the current page, and hide what the host draws around it."""
     st.html(GLOBAL_STYLE)
+    with st.container(key="ui_no_chrome"):
+        st.iframe(HOST_CHROME_SCRIPT, height=1)
