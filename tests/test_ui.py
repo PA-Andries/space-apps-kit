@@ -382,7 +382,7 @@ def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
 def test_the_menu_is_a_bar_at_the_top_and_the_environment_shows_under_it():
     app = Path("app.py").read_text()
     assert 'position="top"' in app
-    for title in ("Home", "Investigations", "Data and export", "Compare", "Equipment"):
+    for title in ("Home", "Investigations", "Data and export", "Compare"):
         assert f'title="{title}"' in app
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
@@ -573,3 +573,28 @@ def test_the_flamy_window_opens_and_answers():
     # The window's content is drawn: the conversation and the question box.
     assert page.chat_input(key="ui_flamy_question") is not None
     # (Typing a question reruns the window as a fragment in a real browser; AppTest cannot replay that.)
+
+
+def test_the_research_conditions_say_what_was_tested_and_what_never_was():
+    import pandas as pd
+
+    from flame.ui import coverage
+
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "B", "C"],
+            "oxygene_pct": [21.0, 35.0, 21.0, 21.0],
+            "pression_kpa": [101.0, 60.0, 101.0, None],
+            "debit_air_cm_s": [None, None, None, None],
+        }
+    )
+    fiches = pd.DataFrame({"id": ["A", "B", "C"], "type_combustible": ["gaz", "liquide", "solide"]})
+    moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3), "gravite": 0.165}
+    rows = {row["condition"]: row for row in coverage(tests, fiches, moon)}
+    assert rows["Gravity"]["status"] == "Not tested"  # partial gravity: never tested, and said so
+    assert rows["Oxygen and pressure together"]["status"] == "Partly"  # 1 test only
+    assert rows["Gas fuels"]["status"] == "Tested" and rows["Liquid fuels"]["status"] == "Not tested"
+    station = {"oxygene_pct": (19.0, 23.0), "pression_kpa": (90.0, 110.0), "gravite": 0.0}
+    rows = {row["condition"]: row for row in coverage(tests, fiches, station)}
+    assert rows["Gravity"]["status"] == "Tested"
+    assert rows["Solid fuels"]["status"] == "Partly"  # tested at that oxygen, but its pressure is not recorded

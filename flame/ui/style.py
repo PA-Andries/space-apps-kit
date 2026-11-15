@@ -196,7 +196,8 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-outcomes li {{ color: {MUTED}; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; margin: 0; }}
 .ff-outcomes li b {{ color: {INK}; }}
 .ff-outcomes i {{ width: 10px; height: 10px; border-radius: 3px; display: inline-block; }}
-.st-key-ui_card_outcomes {{ background: {SECONDARY}; border: 1px solid {SECONDARY_LINE} !important;
+.st-key-ui_card_outcomes, .st-key-ui_card_coverage {{ background: {SECONDARY};
+  border: 1px solid {SECONDARY_LINE} !important;
   border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem; backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%); }}
 
@@ -262,6 +263,21 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 /* No underline on any link or button text, even on hover: the site should not look like a back office. */
 .stApp a, .stApp a:hover, .stApp a:focus, .stApp a p, .stApp a:hover p, .stApp a span, .stApp a:hover span,
 .stApp button p, .stApp button:hover p {{ text-decoration: none !important; }}
+
+/* Under which conditions NASA ran its tests: a compact table with a status chip per condition. */
+.ff-coverage {{ display: flex; flex-direction: column; }}
+.ff-cov-row {{ display: grid; grid-template-columns: 1.3fr 1.4fr 1.3fr 0.9fr 2.6fr; gap: 0.8rem; align-items: center;
+  padding: 0.55rem 0.2rem; border-bottom: 1px solid {SECONDARY_LINE}; font-size: 0.9rem; color: {INK}; }}
+.ff-cov-row:last-child {{ border-bottom: none; }}
+.ff-cov-head {{ color: {MUTED}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; }}
+.ff-cov-name {{ font-weight: 700; }}
+.ff-cov-nasa, .ff-cov-detail {{ color: {MUTED}; }}
+.ff-cov-status {{ justify-self: start; border-radius: 980px; padding: 0.15rem 0.65rem; font-size: 0.78rem;
+  font-weight: 700; border: 1px solid {SECONDARY_LINE}; background: rgba(255, 255, 255, 0.06); }}
+.ff-cov-status.ff-not-tested {{ background: {ACCENT}; border-color: {ACCENT}; color: #fff; }}
+.ff-cov-status.ff-partly {{ border-color: {ACCENT}; color: {ACCENT}; }}
+@media (max-width: 760px) {{ .ff-cov-row {{ grid-template-columns: 1fr 1fr; }} .ff-cov-head {{ display: none; }} }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;

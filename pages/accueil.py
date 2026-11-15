@@ -23,6 +23,8 @@ from flame.ui import (
     SPACESUIT,
     card_title,
     conditions,
+    coverage,
+    coverage_card,
     dashboard_header,
     environment_values,
     footer,
@@ -229,6 +231,16 @@ with figures_zone:
         note=independance["phrase"],
         compact=True,
     )
+
+# --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
+with st.container(key="ui_card_coverage"):
+    card_title(
+        "Under which conditions NASA ran its tests",
+        "Gravity, oxygen, pressure, air flow and fuels: what was tested, and what never was, "
+        f"for {title_label(shown_place)}.",
+        tag="Research conditions",
+    )
+    coverage_card(coverage(tests, fiches, scenario))
 
 # --- Level 4: what the tests show, what we don't know, then the 3 most relevant investigations ------------
 with st.container(key="ui_card_outcomes"):

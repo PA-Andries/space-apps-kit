@@ -16,7 +16,6 @@ page = st.navigation(
         st.Page("pages/recherche.py", title="Investigations", icon=":material/search:"),
         st.Page("pages/donnees.py", title="Data and export", icon=":material/scatter_plot:"),
         st.Page("pages/comparateur.py", title="Compare", icon=":material/compare_arrows:"),
-        st.Page("pages/equipements.py", title="Equipment", icon=":material/fire_extinguisher:"),
     ],
     position="top",  # the menu is a bar at the top of the page, not a sidebar
 )

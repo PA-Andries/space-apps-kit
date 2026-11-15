@@ -6,6 +6,7 @@ Other roles may use everything listed here.
 from flame.ui.chart import style_conditions_chart
 from flame.ui.chatbot import flamy_corner
 from flame.ui.components import investigation_card, place_buttons, place_picker
+from flame.ui.coverage import coverage, coverage_card
 from flame.ui.custom import left_the_place, single_value_style
 from flame.ui.environment import (
     REFERENCE_PLACES,
@@ -43,6 +44,8 @@ carte_fiche = investigation_card
 scene_3d = flame_scene
 
 __all__ = [
+    "coverage",
+    "coverage_card",
     "flamy_corner",
     "answer",
     "count_outcomes",
