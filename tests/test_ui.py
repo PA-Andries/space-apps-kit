@@ -478,7 +478,7 @@ def test_page_one_explains_each_of_the_three_investigations():
 
 
 def test_the_investigation_search_follows_the_ranking():
-    """Une seule vue, la fiche ; la liste de recherche suit le classement, la plus pertinente en premier."""
+    """Une seule vue, la fiche ; le classement complet à droite, la plus pertinente en premier, un clic l'affiche."""
     from flame.commun import charger_fiches, get_scenario
     from flame.recherche import les_plus_pertinentes
 
@@ -486,10 +486,15 @@ def test_the_investigation_search_follows_the_ranking():
     site.switch_page("pages/recherche.py").run()
     assert not site.exception
     assert len(site.tabs) == 0  # no Ranking or What we don't know tab any more
-    search = site.selectbox(key="recherche_fiche")
     ranked = list(les_plus_pertinentes(charger_fiches(), get_scenario())["id"])
-    assert [option.split(" · ")[-1] for option in search.options] == ranked  # "1. Name · PSI-10"
-    assert search.options[0].startswith("1. ")
+    # The ranking on the right: one button per investigation, in the order of the ranking ("1. Name · PSI-10").
+    buttons = [button for button in site.button if button.key.startswith("recherche_rang_")]
+    assert [button.label.split(" · ")[-1] for button in buttons] == ranked
+    assert buttons[0].label.startswith("1. ") and buttons[0].proto.type == "primary"  # the first shown at start
+    # A click on another one shows it.
+    site.button(key=f"recherche_rang_{ranked[2]}").click().run()
+    assert site.session_state["recherche_fiche"] == ranked[2]
+    assert site.button(key=f"recherche_rang_{ranked[2]}").proto.type == "primary"
 
 
 def test_within_reads_a_missing_bound_as_the_end_of_the_scale():
