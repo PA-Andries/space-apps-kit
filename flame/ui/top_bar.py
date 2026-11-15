@@ -14,6 +14,7 @@ from streamlit.runtime.scriptrunner import get_script_run_ctx
 from flame.commun import PROFILS, donnees_exemple, get_scenario, set_scenario
 from flame.ui.chatbot import flamy_corner
 from flame.ui.environment import environment_summary
+from flame.ui.labels import label
 from flame.ui.style import apply_style
 
 # Profiles the site uses. "Étudiant" is removed at role F's request;
@@ -46,17 +47,24 @@ def show_top_bar(answer: Callable | None = None) -> None:
     flamy_corner(answer)
 
 
-def show_environment_in_sidebar() -> None:
+def show_environment_in_sidebar(reference: str | None = None, values: dict | None = None) -> None:
     """Write the current environment in the slot under the top menu, made by `show_top_bar`.
 
-    (The name stays from the time the environment was recalled in the sidebar.)
+    `reference`: a reference place explored on page 1 (Earth, the spacesuit), with the `values` on screen.
+    The line then shows that place, so that it agrees with the selected button and the sliders, and names
+    the habitat the other pages keep. (The name stays from the time the environment was in the sidebar.)
     """
     slot, made_in = st.session_state.get("ui_sidebar_environment", (None, None))
     # Only a slot made in this very run: an older one points to a page that is no longer on screen.
     if slot is not None and made_in == _this_run():
-        summary = escape(environment_summary(get_scenario()["habitat"]))
+        habitat = get_scenario()["habitat"]
+        if reference is None:
+            title, summary = "My environment", environment_summary(habitat)
+        else:
+            title = "Reference shown"
+            summary = f"{environment_summary(reference, values)} · the other pages keep {label(habitat)}"
         with slot.container():
-            st.html(f'<p class="ff-env-line"><span>My environment</span>{summary}</p>')
+            st.html(f'<p class="ff-env-line"><span>{title}</span>{escape(summary)}</p>')
 
 
 def _this_run() -> int | None:
