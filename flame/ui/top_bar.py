@@ -21,6 +21,14 @@ from flame.ui.style import apply_style
 # it stays in the contract (PROFILS) until role A changes it.
 PROFILES_OFFERED = [profile for profile in PROFILS if profile != "Étudiant"]
 
+# The pages of the top menu, as in `app.py`. Under 768 px wide, Streamlit replaces its top menu with a
+# button on the left that opens a sidebar; this copy of the menu stays centred at the top instead.
+SMALL_SCREEN_MENU = [
+    ("pages/accueil.py", "Home", ":material/home:"),
+    ("pages/recherche.py", "Investigations", ":material/search:"),
+    ("pages/comparateur.py", "Compare", ":material/compare_arrows:"),
+]
+
 
 def show_top_bar(answer: Callable | None = None) -> None:
     """Call once, in `app.py` (as `afficher_cadre`): style and scenario of every page.
@@ -34,6 +42,10 @@ def show_top_bar(answer: Callable | None = None) -> None:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]
     apply_style()
+    # The centred menu of narrow windows: hidden by the style above 768 px, where Streamlit's own shows.
+    with st.container(key="ui_small_menu", horizontal=True, horizontal_alignment="center", gap="small"):
+        for path, title, icon in SMALL_SCREEN_MENU:
+            st.page_link(path, label=title, icon=icon, width="content")
     # Under the menu: the user's environment.
     with st.container(key="ui_status_line", horizontal=True, vertical_alignment="center"):
         st.session_state["ui_sidebar_environment"] = (st.empty(), _this_run())

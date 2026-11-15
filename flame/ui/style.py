@@ -224,6 +224,20 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid {SECONDARY_LINE}; }}
 [data-testid="stTopNav"] {{ justify-content: center; gap: 0.2rem; }}
+/* Narrow windows: Streamlit swaps its top menu for a button on the left and a sidebar. The same menu,
+   made in `top_bar.py`, takes its place, centred in the top bar; the button and the sidebar are hidden. */
+.st-key-ui_small_menu {{ display: none !important; }}
+@media (max-width: 767.98px) {{
+  .st-key-ui_small_menu {{ display: flex !important; position: fixed; top: 0; left: 0; right: 0; height: 3.75rem;
+    align-items: center; justify-content: center; z-index: 999995; margin: 0; }}
+  .st-key-ui_small_menu a {{ border-radius: 980px; padding: 0.3rem 0.7rem; }}
+  .st-key-ui_small_menu a p, .st-key-ui_small_menu a span {{ font-size: 0.85rem; font-weight: 500; color: {MUTED}; }}
+  .st-key-ui_small_menu a[aria-current="page"], .st-key-ui_small_menu a.active {{
+    background: rgba(255, 255, 255, 0.08); }}
+  .st-key-ui_small_menu a[aria-current="page"] p, .st-key-ui_small_menu a[aria-current="page"] span {{ color: {INK}; }}
+  [data-testid="stExpandSidebarButton"], [data-testid="stSidebarCollapsedControl"],
+  section[data-testid="stSidebar"] {{ display: none !important; }}
+}}
 [data-testid="stTopNav"] a {{ border-radius: 980px; padding: 0.3rem 0.85rem; }}
 [data-testid="stTopNav"] a p, [data-testid="stTopNav"] a span {{ font-size: 0.9rem; font-weight: 500; color: {MUTED}; }}
 [data-testid="stTopNav"] a:hover p, [data-testid="stTopNav"] a:hover span {{ color: {INK}; }}
