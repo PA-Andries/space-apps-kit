@@ -254,8 +254,8 @@ with st.container(key="ui_card_outcomes"):
 # What we don't know comes first, as a full-width banner; then the 3 most relevant investigations.
 with st.container(key="ui_card_gaps"):
     card_title("What we don't know", "Where NASA's data stops, for this environment.")
-    for sentence in recherche.ce_quon_ne_sait_pas(fiches, tests, scenario):
-        st.markdown(f"- {sentence}")
+    # Role C's visuals: tests by fuel in your conditions, the oxygen ruler, what NASA did not record.
+    recherche.afficher_ce_quon_ne_sait_pas(fiches, tests, scenario, cle="ui")
 
 best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
 with st.container(key="ui_card_compare"):

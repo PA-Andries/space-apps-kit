@@ -239,7 +239,7 @@ def test_the_three_most_relevant_are_shown_without_a_click():
     assert not site.exception
     textes = [block.value for block in site.markdown]
     assert any("Where they agree" in texte for texte in textes)  # the comparison of the three
-    assert any("PSI's tables" in texte for texte in textes)  # the data gaps, on arrival
+    assert any("Tests in your conditions, by fuel" in texte for texte in textes)  # the data gaps, on arrival
     assert site.button(key="ui_analyse_button").label == "ANALYSE ALL 24"
 
 
