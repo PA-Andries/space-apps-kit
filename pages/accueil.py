@@ -99,7 +99,6 @@ dashboard_header(
     "Flamy · Fire-safety dashboard",
     "Describe your habitable crew environment: see where NASA's microgravity combustion data stops.",
     [f"{len(fiches)} NASA investigations", f"{len(tests):,} test rows", "Source: NASA PSI"],
-    eyebrow="My environment",
 )
 how_to_use()  # a light cover: how the dashboard works, in four steps (can be folded away)
 

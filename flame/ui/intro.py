@@ -71,7 +71,7 @@ def how_to_use() -> None:
         st.button("How to use this dashboard", icon=":material/help:", key="ui_intro_show", on_click=_show)
         return
     with st.container(key="ui_card_intro"):
-        card_title("How to use this dashboard", "Four steps, from your environment to NASA's evidence.")
+        card_title("How to use this dashboard")
         tiles = "".join(
             f'<div class="ff-step-tile"><div class="ff-step-head"><b>{number}</b><strong>{escape(title)}</strong></div>'
             f"<span>{escape(sentence)}</span></div>"

@@ -253,7 +253,9 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
 /* Under the menu: the user's environment on the left, the disclaimer on the right. */
 .st-key-ui_status_line {{ justify-content: space-between; flex-wrap: wrap; gap: 0.4rem 1rem; margin: 0.2rem 0 0.4rem; }}
 .st-key-ui_status_line .ff-disclaimer {{ margin: 0; }}
-.ff-env-line {{ margin: 0; font-size: 0.88rem; color: {INK}; font-weight: 600; background: {SECONDARY};
+/* The bar is drawn above the background's planets: none shows through it or over its label. */
+.st-key-ui_status_line {{ position: relative; z-index: 2; }}
+.ff-env-line {{ margin: 0; font-size: 0.88rem; color: {INK}; font-weight: 600; background: rgba(20, 26, 66, 0.96);
   border: 1px solid {SECONDARY_LINE}; border-radius: 980px; padding: 0.3rem 0.9rem; }}
 .ff-env-line span {{ color: {ACCENT}; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin-right: 0.5rem; }}
