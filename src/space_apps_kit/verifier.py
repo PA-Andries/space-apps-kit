@@ -1,13 +1,10 @@
 """`uv run verifier` : met le code en forme, puis lance les vérifications du dépôt.
 
-Ce sont ces vérifications qui font foi. Le hook `pre-push`
-les relance, sans rien modifier, et bloque l'envoi si l'une d'elles échoue.
+Ce sont ces vérifications qui font foi : à lancer avant chaque envoi.
 """
 
 import subprocess
 import sys
-
-from space_apps_kit.regles import installer
 
 ETAPES = [
     ("Mise en forme", ["ruff", "format", "."], ["ruff", "format", "--check", "."]),
@@ -32,8 +29,6 @@ def verifier(corriger: bool = True) -> int:
 
 
 def main() -> int:
-    if installer():
-        print("Hooks du dépôt activés : les règles sont vérifiées à chaque commit et à chaque envoi.")
     return verifier(corriger=True)
 
 

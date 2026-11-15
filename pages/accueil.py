@@ -29,6 +29,7 @@ from flame.ui import (
     conditions,
     dashboard_header,
     environment_values,
+    footer,
     how_to_use,
     investigation_details,
     label,
@@ -272,3 +273,15 @@ with st.expander("Hardware and samples: what these tests were run with"):
                 formes = comparateur.frequents(psi_tests, fiche["id"], "fuel_form")
                 detail = ", ".join(f"{forme} ({nombre} rows)" for forme, nombre in formes) or "not recorded"
                 st.markdown(f"- **{fiche['nom']}** — {detail}")
+
+# --- Credits: required by the event rules (sources, AI use, no affiliation), kept small and grey -------------
+footer(
+    [
+        "Flamy is a student project for the NASA Space Apps Challenge 2026 (challenge: Flame in Freefall), "
+        "not affiliated with or endorsed by NASA. Data: NASA Physical Sciences Informatics (PSI). "
+        "Planet maps and Moon and Mars illustrations: NASA. Icons: Google Material Symbols (Apache 2.0).",
+        "Partly generated with the help of AI: the code was written with AI assistants, Flamy's answers are "
+        "AI-generated text, and the mascot and the space background are drawn by AI-assisted code. "
+        "Fuel types and scores are the team's judgement, not NASA data.",
+    ]
+)

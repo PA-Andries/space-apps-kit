@@ -387,7 +387,7 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
   .ff-verdict-figure {{ font-size: 2.8rem; min-width: 0; text-align: left; }}
 }}
 
-.ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 2rem; padding-top: 1rem; }}
+.ff-footer {{ border-top: 1px solid #d2d2d7; margin-top: 2rem; padding: 1rem 9rem 0 0; }}  /* right: room for Flamy */
 .ff-footer p {{ color: #86868b; font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.5rem; }}
 
 

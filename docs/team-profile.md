@@ -1,7 +1,5 @@
 # Team profile
 
-Fill this in first. Every skill reads it.
-
 ## Members
 
 | Name | Role on the team | Strong skills | Tools/stacks | Available hours on the weekend | Sleeps on site? |
