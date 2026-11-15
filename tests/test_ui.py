@@ -783,10 +783,10 @@ def test_setting_an_air_flow_moves_the_chart_to_the_air_flow_view():
     """No NASA test records both pressure and air flow: the pressure view would turn all grey (PA, 15 Nov)."""
     site = AppTest.from_file(APP, default_timeout=60).run()
     assert site.session_state["ui_chart_view"] == "pression"
-    site.slider(key="ui_air_flow").set_range(0.0, 100.0).run()
+    site.slider(key="ui_air_flow").set_range(0.0, 85.5).run()
     assert not site.exception
     assert site.session_state["ui_chart_view"] == "debit"
-    site.slider(key="ui_air_flow").set_range(-10.0, 100.0).run()
+    site.slider(key="ui_air_flow").set_range(-6.0, 85.5).run()
     assert site.session_state["ui_chart_view"] == "pression"
 
 
@@ -808,3 +808,14 @@ def test_the_environment_line_follows_a_reference_place_and_hides_streamlit_chro
     assert "<span>Reference shown</span>Earth · O₂ 19–23 % · 90–110 kPa · 1 g" in shown
     assert "the other pages keep Moon base" in shown
     assert '[data-testid="stToolbarActions"]' in shown  # the host's toolbar is hidden for visitors
+
+
+def test_the_air_flow_slider_stops_at_the_extremes_of_nasa_tests():
+    """The scale ends at the lowest and highest air flow in NASA's tests, rounded to its 0.5 step (PA, 15 Nov)."""
+    import pandas as pd
+
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    slider = site.slider(key="ui_air_flow")
+    flows = pd.read_csv("data/tests.csv")["debit_air_cm_s"].dropna()
+    assert slider.min <= flows.min() < slider.min + 0.5
+    assert slider.max - 0.5 < flows.max() <= slider.max

@@ -51,7 +51,9 @@ FUEL_GROUPS = {"solide": ("solide", "fumée", "poussière"), "liquide": ("liquid
 # reach past the most extreme test: otherwise a test exists that no selection can ever include.
 OXYGEN_SCALE = (0.0, 100.0)  # NASA's tests run from 12 to 85 %
 PRESSURE_SCALE = (0.0, 520.0)  # up to 506.6 kPa in NASA's tests
-AIR_FLOW_SCALE = (-10.0, 100.0)  # from -5.92 (flow against the flame) to 85.28 cm/s
+# Capped at the extremes of NASA's tests (PA, Sun 15 Nov): -5.92 (flow against the flame) to 85.28 cm/s,
+# rounded outwards to the slider's 0.5 step so that both extreme tests stay inside the scale.
+AIR_FLOW_SCALE = (-6.0, 85.5)
 # Gravity takes only a few values in the crew environments: one button each (lot A's habitats).
 # Partial gravity (Moon 0.165 g, Mars 0.38 g) has no button: NASA's PSI tests have none. The Moon base,
 # the rover and the Mars base keep their own gravity, with no button selected.
