@@ -40,6 +40,13 @@ GLOBAL_STYLE = f"""<style>
 }}
 .stApp h1, .stApp h2, .stApp h3 {{ color: {INK}; letter-spacing: -0.03em; font-weight: 700; }}
 .stApp header[data-testid="stHeader"] {{ background: transparent; }}
+/* No Streamlit chrome for visitors: the host's toolbar (Share, star, edit, GitHub), the deploy button, the
+   developer menu, the running indicator, the coloured line at the top and the "hosted with" badge. Only the
+   site's own menu stays in the header. The host's "Manage app" button is outside the page and only its
+   owner sees it. */
+[data-testid="stToolbarActions"], [data-testid="stAppDeployButton"], [data-testid="stMainMenu"],
+[data-testid="stStatusWidget"], [data-testid="stDecoration"], #MainMenu, .stApp > footer,
+[class*="viewerBadge"], [class*="_profileContainer"], [class*="_profilePreview"] {{ display: none !important; }}
 [data-testid="stMain"] {{ scroll-behavior: smooth; }}
 
 /* A centred column with room to breathe. */

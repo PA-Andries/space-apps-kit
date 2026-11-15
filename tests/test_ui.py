@@ -796,3 +796,15 @@ def test_the_environment_line_says_partial_gravity_has_no_nasa_test():
 
     assert environment_summary("Base lunaire").endswith("0.165 g (no NASA test at this gravity)")
     assert environment_summary("Station").endswith("0 g")
+
+
+def test_the_environment_line_follows_a_reference_place_and_hides_streamlit_chrome():
+    """With Earth selected the line showed the station: it now shows Earth and names the kept habitat."""
+    site = AppTest.from_file(APP, default_timeout=60)
+    site.session_state["ui_place"] = "Terre"
+    site.run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert "<span>Reference shown</span>Earth · O₂ 19–23 % · 90–110 kPa · 1 g" in shown
+    assert "the other pages keep Moon base" in shown
+    assert '[data-testid="stToolbarActions"]' in shown  # the host's toolbar is hidden for visitors

@@ -182,6 +182,9 @@ if shown_place not in REFERENCE_PLACES:
     st.session_state["ui_habitat"] = scenario_place  # the top bar keeps it on the other pages
     save_environment(habitat=scenario_place, **environment)
     show_environment_in_sidebar()
+else:
+    # A reference place (Earth, the spacesuit): the line under the menu shows it, with the values on screen.
+    show_environment_in_sidebar(reference=shown_place, values=environment)
 # The scenario as the other pages read it. A reference place is explored here without replacing the habitat.
 scenario = {**get_scenario(), "habitat": scenario_place, **environment}
 
