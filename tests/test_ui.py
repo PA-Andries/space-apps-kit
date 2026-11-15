@@ -819,3 +819,14 @@ def test_the_air_flow_slider_stops_at_the_extremes_of_nasa_tests():
     flows = pd.read_csv("data/tests.csv")["debit_air_cm_s"].dropna()
     assert slider.min <= flows.min() < slider.min + 0.5
     assert slider.max - 0.5 < flows.max() <= slider.max
+
+
+def test_the_page_carries_the_script_that_hides_the_host_badge():
+    """Community Cloud draws its badge and "Manage app" outside the page: a script reaches the host's page."""
+    from flame.ui.style import HOST_CHROME, HOST_CHROME_SCRIPT
+
+    for target in ("viewerBadge", "profileContainer", "manage-app-button", "stToolbarActions"):
+        assert target in HOST_CHROME
+    assert "page.parent" in HOST_CHROME_SCRIPT and "display: none !important" in HOST_CHROME_SCRIPT
+    site = AppTest.from_file(APP, default_timeout=60).run()
+    assert not site.exception
