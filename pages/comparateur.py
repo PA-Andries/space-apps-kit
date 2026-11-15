@@ -4,12 +4,11 @@ La page part d'une investigation et propose celles qui lui sont comparables, d'a
 seulement : même matériel (directement comparables), ou un lien donné par NASA (comparables en principe).
 Le type de combustible rangé par l'équipe (solide, liquide, gaz) n'est ni utilisé ni affiché ici.
 Elle montre ensuite la comparaison de haut en bas, du plus visuel au plus détaillé :
- 1. le lien entre les deux, en une ligne ;
+ 1. le lien entre les deux, en une ligne, avec la légende des deux niveaux de comparaison ;
  2. le portrait de chacune, avec les textes de NASA (objectifs, approche, hypothèse) ;
- 3. les chiffres côte à côte, puis les plages testées en barres (oxygène, pression, débit d'air) ;
- 4. les fins de test en barres, quand NASA les note ;
- 5. ce qui ressort, en phrases rangées par thème ;
- 6. les tableaux complets, repliés dans des onglets.
+ 3. les plages testées en barres (oxygène, pression, débit d'air) ;
+ 4. ce qui ressort, en phrases rangées par thème ;
+ 5. les tableaux complets, repliés dans des onglets.
 Une autre page peut y envoyer l'utilisateur avec l'adresse `comparateur?id=<identifiant>`.
 """
 
@@ -23,18 +22,15 @@ from flame.commun import charger_fiches, charger_table_psi, charger_tests, get_s
 from flame.comparateur import (
     ABSENT,
     EXPLICATIONS,
-    ISSUES,
     NIVEAUX,
     NIVEAUX_PROPOSES,
     barres_des_plages,
     carte,
-    chiffres_cles,
     comparables,
     cote_a_cote,
     decrire_environnement,
     explication_carte,
     frequents,
-    issues,
     ligne_psi,
     mesures,
     plages_du_scenario,
@@ -53,20 +49,17 @@ LIBELLES = {
 # Une couleur par investigation, lisibles sur le thème sombre : l'orange du site pour celle de départ.
 COULEURS = ["#ff7a3d", "#6fb1ff"]
 LETTRES = ["a", "b"]
-# Les couleurs des fins de test, les mêmes que sur la page 1 (rôle F).
-COULEURS_ISSUES = {
-    "burned": "#ff7a3d",
-    "went_out": "#8fa3d9",
-    "no_ignition": "#c9ccd8",
-    "unknown": "rgba(160, 175, 255, 0.18)",
-}
 
 STYLE = f"""<style>
 .cmp-a, .stApp h3.cmp-a {{ color: {COULEURS[0]}; }} .cmp-b, .stApp h3.cmp-b {{ color: {COULEURS[1]}; }}
-.cmp-levels {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin: 0.2rem 0 0.6rem; }}
-.cmp-level {{ background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(160, 175, 255, 0.12);
-  border-radius: 16px; padding: 0.7rem 0.9rem; }}
-.cmp-level p {{ color: #a3abc9; font-size: 0.86rem; margin: 0.35rem 0 0; line-height: 1.4; }}
+.cmp-legend {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1.5rem; margin-top: 0.9rem;
+  padding-top: 0.7rem; border-top: 1px solid rgba(160, 175, 255, 0.14); color: #a3abc9; font-size: 0.8rem;
+  line-height: 1.45; }}
+.cmp-legend > b {{ color: #8790b3; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; }}
+.cmp-legend span b {{ color: #dfe3f5; font-weight: 600; }}
+.cmp-legend i {{ display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 0.4rem; }}
+.cmp-legend i.l1 {{ background: {COULEURS[0]}; }}
+.cmp-legend i.l2 {{ background: rgba(255, 122, 61, 0.16); border: 1px solid rgba(255, 122, 61, 0.7); }}
 .cmp-badge {{ display: inline-block; border-radius: 980px; padding: 0.2rem 0.7rem; font-size: 0.78rem;
   font-weight: 700; letter-spacing: 0.02em; }}
 .cmp-badge.l1 {{ background: {COULEURS[0]}; color: #fff; }}
@@ -98,13 +91,6 @@ STYLE = f"""<style>
 .cmp-panel {{ padding: 1.1rem 1.3rem 1.2rem; margin: 0.2rem 0; }}
 .cmp-panel h3 {{ font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; padding: 0; }}
 .cmp-panel > p {{ color: #a3abc9; font-size: 0.88rem; margin: 0.15rem 0 0.7rem; }}
-.cmp-figures {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.7rem; }}
-.cmp-figure {{ background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(160, 175, 255, 0.10);
-  border-radius: 18px; padding: 0.8rem 0.9rem; text-align: center; }}
-.cmp-figure span {{ display: block; color: #a3abc9; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; }}
-.cmp-figure div {{ display: flex; justify-content: center; align-items: baseline; gap: 1.1rem; }}
-.cmp-figure b {{ font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; }}
-.cmp-figure b.cmp-small {{ font-size: 0.95rem; font-weight: 600; }}
 .cmp-range {{ margin: 0.9rem 0 1.1rem; }}
 .cmp-range-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }}
 .cmp-range-head b {{ font-size: 0.98rem; }} .cmp-range-head b small {{ color: #a3abc9; font-weight: 500; }}
@@ -117,13 +103,6 @@ STYLE = f"""<style>
 .cmp-bar.a {{ top: 5px; background: {COULEURS[0]}; }} .cmp-bar.b {{ top: 18px; background: {COULEURS[1]}; }}
 .cmp-scale {{ display: flex; justify-content: space-between; color: #8790b3; font-size: 0.72rem; margin-top: 0.15rem; }}
 .cmp-values {{ display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: 0.85rem; margin-top: 0.15rem; }}
-.cmp-key {{ display: flex; gap: 1.2rem; flex-wrap: wrap; color: #a3abc9; font-size: 0.82rem; margin-top: 0.2rem; }}
-.cmp-key i {{ display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 0.35rem; }}
-.cmp-outcome {{ margin: 0.7rem 0 0.9rem; }}
-.cmp-outcome > b {{ font-size: 0.95rem; }} .cmp-outcome > small {{ color: #a3abc9; margin-left: 0.4rem; }}
-.cmp-stack {{ display: flex; height: 16px; border-radius: 8px; overflow: hidden; margin-top: 0.35rem;
-  background: rgba(160, 175, 255, 0.10); }}
-.cmp-stack i {{ display: block; height: 100%; }}
 .cmp-themes {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }}
 .cmp-theme {{ background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(160, 175, 255, 0.10);
   border-radius: 18px; padding: 0.8rem 1rem 0.9rem; }}
@@ -131,7 +110,7 @@ STYLE = f"""<style>
   letter-spacing: 0.05em; margin: 0 0 0.4rem; padding: 0; }}
 .cmp-theme ul {{ margin: 0; padding-left: 1.1rem; font-size: 0.9rem; line-height: 1.5; }}
 .cmp-theme li {{ margin: 0.15rem 0; }}
-@media (max-width: 760px) {{ .cmp-levels, .cmp-themes {{ grid-template-columns: 1fr; }} }}
+@media (max-width: 760px) {{ .cmp-themes {{ grid-template-columns: 1fr; }} }}
 </style>"""
 
 fiches = charger_fiches()
@@ -198,19 +177,6 @@ def carte_portrait(identifiant: str, lettre: str, scenario: dict) -> None:
         st.link_button("View on PSI", fiche["source_psi"], key=f"comparateur_psi_{identifiant}")
 
 
-def panneau_chiffres(ids: list[str], scenario: dict) -> str:
-    """Les chiffres à lire côte à côte, une tuile par chiffre."""
-    tuiles = []
-    for libelle, valeurs in chiffres_cles(fiches, tests, ids, scenario, investigations_psi):
-        nombres = "".join(
-            f'<b class="cmp-{lettre}{" cmp-small" if valeurs[identifiant] == ABSENT else ""}">'
-            f"{escape(valeurs[identifiant])}</b>"
-            for identifiant, lettre in zip(ids, LETTRES, strict=True)
-        )
-        tuiles.append(f'<div class="cmp-figure"><span>{escape(libelle)}</span><div>{nombres}</div></div>')
-    return f'<div class="cmp-figures">{"".join(tuiles)}</div>'
-
-
 def panneau_plages(ids: list[str], scenario: dict) -> str:
     """Une barre par condition et par investigation : où NASA a testé, où les plages se croisent."""
     blocs = []
@@ -251,39 +217,13 @@ def panneau_plages(ids: list[str], scenario: dict) -> str:
     return "".join(blocs)
 
 
-def panneau_issues(ids: list[str]) -> str:
-    """Les fins de test de chaque investigation en une barre, ou une phrase quand NASA n'en note aucune."""
-    comptes = issues(tests, ids)
-    notees = {
-        identifiant: sum(nombre for fin, nombre in fins.items() if fin != "unknown")
-        for identifiant, fins in comptes.items()
-    }
-    if not any(notees.values()):
-        return "<p>NASA's tables record how the tests ended for neither of them.</p>"
-    blocs = []
-    for identifiant, lettre in zip(ids, LETTRES, strict=True):
-        fins, total = comptes[identifiant], sum(comptes[identifiant].values())
-        if not notees[identifiant]:
-            blocs.append(
-                f'<div class="cmp-outcome"><b class="cmp-{lettre}">{escape(noms[identifiant])}</b>'
-                f"<small>no test outcome recorded in NASA's tables ({total} rows)</small></div>"
-            )
-            continue
-        segments = "".join(
-            f'<i style="width:{nombre / total * 100:.2f}%;background:{COULEURS_ISSUES[fin]}"></i>'
-            for fin, nombre in fins.items()
-            if nombre
-        )
-        detail = " · ".join(f"{ISSUES[fin].lower()} {nombre}" for fin, nombre in fins.items() if nombre)
-        blocs.append(
-            f'<div class="cmp-outcome"><b class="cmp-{lettre}">{escape(noms[identifiant])}</b>'
-            f'<small>{escape(detail)}</small><div class="cmp-stack">{segments}</div></div>'
-        )
-    legende = "".join(
-        f'<span><i style="background:{COULEURS_ISSUES[fin]}"></i>{escape(texte)}</span>'
-        for fin, texte in ISSUES.items()
+def legende_des_niveaux() -> str:
+    """Ce que veulent dire les deux niveaux, en petite légende au bas du bandeau qui porte le niveau."""
+    entrees = "".join(
+        f'<span><i class="l{niveau}"></i><b>{escape(NIVEAUX[niveau])}</b>: {escape(EXPLICATIONS[niveau])}</span>'
+        for niveau in NIVEAUX_PROPOSES
     )
-    return "".join(blocs) + f'<div class="cmp-key">{legende}</div>'
+    return f'<div class="cmp-legend"><b>Legend</b>{entrees}</div>'
 
 
 def afficher_comparaison(ids: list[str], niveau: int) -> None:
@@ -291,7 +231,7 @@ def afficher_comparaison(ids: list[str], niveau: int) -> None:
     scenario = get_scenario()
     themes = resume(fiches, tests, ids, relations=relations, investigations_psi=investigations_psi, scenario=scenario)
 
-    # 1. Le lien entre les deux, en une ligne.
+    # 1. Le lien entre les deux, en une ligne ; la légende des niveaux ferme le bandeau.
     liens = themes.pop("How they relate", [])
     phrases = "".join(
         f'<p class="{"cmp-quiet" if rang else ""}">{escape(phrase)}</p>' for rang, phrase in enumerate(liens)
@@ -299,7 +239,7 @@ def afficher_comparaison(ids: list[str], niveau: int) -> None:
     st.html(
         f'<div class="cmp-band"><span class="cmp-badge l{niveau}">{escape(NIVEAUX[niveau])}</span>'
         f'<h2><span class="cmp-a">{escape(noms[ids[0]])}</span><i>vs</i>'
-        f'<span class="cmp-b">{escape(noms[ids[1]])}</span></h2>{phrases}</div>'
+        f'<span class="cmp-b">{escape(noms[ids[1]])}</span></h2>{phrases}{legende_des_niveaux()}</div>'
     )
 
     # 2. Le portrait de chacune.
@@ -307,12 +247,7 @@ def afficher_comparaison(ids: list[str], niveau: int) -> None:
         with colonne:
             carte_portrait(identifiant, lettre, scenario)
 
-    # 3. Les chiffres côte à côte, puis les plages testées en barres.
-    st.html(
-        '<div class="cmp-panel"><h3>At a glance</h3>'
-        f'<p><span class="cmp-a">{escape(noms[ids[0]])}</span> on the left, '
-        f'<span class="cmp-b">{escape(noms[ids[1]])}</span> on the right.</p>{panneau_chiffres(ids, scenario)}</div>'
-    )
+    # 3. Les plages testées en barres.
     environnement = decrire_environnement(scenario)
     ombre = f" Shaded: your environment ({escape(environnement)})." if environnement else ""
     st.html(
@@ -321,14 +256,7 @@ def afficher_comparaison(ids: list[str], niveau: int) -> None:
         f"{panneau_plages(ids, scenario)}</div>"
     )
 
-    # 4. Les fins de test, quand NASA les note.
-    st.html(
-        '<div class="cmp-panel"><h3>How the tests ended</h3>'
-        "<p>Share of each investigation's test rows. Sorting NASA's wording into these kinds is the team's reading.</p>"
-        f"{panneau_issues(ids)}</div>"
-    )
-
-    # 5. Ce qui ressort, en phrases rangées par thème.
+    # 4. Ce qui ressort, en phrases rangées par thème.
     st.markdown("#### What stands out")
     cartes = "".join(
         f'<div class="cmp-theme"><h4>{escape(theme)}</h4><ul>'
@@ -338,7 +266,7 @@ def afficher_comparaison(ids: list[str], niveau: int) -> None:
     )
     st.html(f'<div class="cmp-themes">{cartes}</div>')
 
-    # 6. Les tableaux complets, dans une carte pour rester lisibles sur le fond étoilé.
+    # 5. Les tableaux complets, dans une carte pour rester lisibles sur le fond étoilé.
     with st.container(key="cmp_details"):
         onglet_tableau, onglet_points, onglet_combustibles, onglet_mesures = st.tabs(
             ["Side by side", "Every test point", "Fuels and raw results", "Measurements"]
@@ -431,17 +359,6 @@ else:
         key=f"comparateur_avec_{depart}",
         help="The most comparable investigations come first.",
     )
-
-# Ce que veulent dire les deux niveaux, toujours visible.
-st.html(
-    '<div class="cmp-levels">'
-    + "".join(
-        f'<div class="cmp-level"><span class="cmp-badge l{niveau}">{escape(NIVEAUX[niveau])}</span>'
-        f"<p>{escape(EXPLICATIONS[niveau])}</p></div>"
-        for niveau in NIVEAUX_PROPOSES
-    )
-    + "</div>"
-)
 
 if candidats.empty:
     st.info(

@@ -503,14 +503,27 @@ def test_la_page_dit_quand_rien_n_est_comparable():
     assert not any("What stands out" in bloc.value for bloc in site.markdown)
 
 
-def test_la_page_montre_les_barres_les_chiffres_et_les_textes():
+def test_la_page_montre_les_barres_et_les_textes_sans_chiffres_ni_fins_de_test():
     site = _page()
     assert not site.exception
     html = _html(site)
-    for titre in ("At a glance", "Where NASA tested each one", "How the tests ended"):
-        assert titre in html, titre
+    assert "Where NASA tested each one" in html
+    # Retirés à la demande de Hugo (dimanche 15 nov.) : ils chargeaient la page sans aider à comparer.
+    for titre in ("At a glance", "How the tests ended"):
+        assert titre not in html, titre
     assert html.count('<div class="cmp-range-head">') == 3  # oxygène, pression, débit d'air
     assert not any("guessing" in bloc.value for bloc in site.caption)
+
+
+def test_les_niveaux_sont_une_legende_dans_le_bandeau_pas_des_cartes_sous_le_choix():
+    site = _page()
+    assert not site.exception
+    bandeau = next(str(bloc.value) for bloc in site.get("html") if '<div class="cmp-band">' in str(bloc.value))
+    assert '<div class="cmp-legend"><b>Legend</b>' in bandeau
+    assert "Directly comparable" in bandeau and "Comparable in principle" in bandeau
+    assert '<div class="cmp-level">' not in _html(site)
+    # Sans investigation comparable, il n'y a ni bandeau ni légende : la phrase d'information suffit.
+    assert '<div class="cmp-legend">' not in _html(_page("EXEMPLE-C"))
 
 
 def test_les_barres_des_plages_disent_ou_elles_se_croisent():
