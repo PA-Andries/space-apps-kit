@@ -5,7 +5,7 @@ The chart itself comes from `flame.comparateur.graphique_conditions` (role D); o
 
 import plotly.graph_objects as go
 
-SELECTION_COLOR = "255, 122, 61"  # the accent: the user's selection is what the page highlights
+SELECTION_COLOR = "232, 98, 42"  # the accent: the user's selection is what the page highlights
 SELECTION_NAME = "Your selection"
 OTHER_COLOR = "#7d86a8"  # the tests outside the environment, in the secondary family
 # Reference zones in light secondary tones (60-30-10: the accent stays for the selection).

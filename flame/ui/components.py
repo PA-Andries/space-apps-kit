@@ -223,18 +223,18 @@ PLACE_BUTTONS_STYLE = """<style>
   background: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(160, 175, 255, 0.14);
 }
 .st-key-ui_places button p { font-weight: 600; font-size: 1rem; }
-.st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 1.6rem; color: #ff7a3d; margin-right: 0.2rem; }
+.st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 1.6rem; color: #e8622a; margin-right: 0.2rem; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] [data-testid="stIconMaterial"] { color: #fff; }
-.st-key-ui_places button:hover { border-color: #ff7a3d; background: rgba(255, 255, 255, 0.1); color: inherit; }
+.st-key-ui_places button:hover { border-color: #e8622a; background: rgba(255, 255, 255, 0.1); color: inherit; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] {
-  background: #ff7a3d; border-color: transparent;
-  box-shadow: 0 0 28px rgba(255, 122, 61, 0.35);
+  background: #e8622a; border-color: transparent;
+  box-shadow: 0 0 28px rgba(232, 98, 42, 0.35);
 }
-.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #ff8c55; color: #fff; }
+.st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #f2733a; color: #fff; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
 .st-key-ui_mars_note { margin-top: 0.3rem; padding: 0.55rem 0.85rem; border-radius: 14px;
   border: 1px dashed rgba(160, 175, 255, 0.3); }
-.st-key-ui_mars_note p { color: #a3abc9; font-size: 0.84rem; line-height: 1.45; margin: 0; }
+.st-key-ui_mars_note p { color: #d0d5ec; font-size: 0.84rem; line-height: 1.45; margin: 0; }
 .st-key-ui_mars_note strong { color: #dfe3f5; font-weight: 600; }
 </style>"""
 
@@ -295,7 +295,7 @@ def place_picker() -> tuple[str | None, str | None]:
 # "Back" as a plain flame-coloured text link with a chevron, not a framed button.
 BACK_STYLE = """<style>
 .st-key-ui_back_row button { border: none; background: transparent; padding: 0; min-height: 0; }
-.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #ff7a3d; font-size: 1.05rem; }
+.st-key-ui_back_row button p, .st-key-ui_back_row button span { color: #e8622a; font-size: 1.05rem; }
 .st-key-ui_back_row button:hover p { text-decoration: underline; }
 .st-key-ui_back_row { margin-bottom: 0.4rem; }
 </style>"""
