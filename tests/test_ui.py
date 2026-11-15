@@ -635,3 +635,32 @@ def test_coverage_at_1_g_counts_only_rows_with_a_1_g_result():
     gravity = coverage(charger_tests(), charger_fiches(), earth)[0]
     assert gravity["condition"] == "Gravity" and gravity["status"] != "Tested"
     assert "microgravity" in gravity["detail"]
+
+
+def test_the_combination_verdict_checks_every_setting_at_once():
+    """Le verdict compte les tests qui ont tous les réglages ensemble ; hors microgravité, jamais testé."""
+    import pandas as pd
+
+    from flame.ui import combination
+
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "B", "D"],
+            "oxygene_pct": [35.0, 35.0, 35.0, 35.0],
+            "pression_kpa": [60.0, 101.0, 60.0, 60.0],
+            "debit_air_cm_s": [None, None, None, None],
+            "source": ["https://psi.nasa.gov/A", "https://psi.nasa.gov/A", "https://psi.nasa.gov/B", None],
+        }
+    )
+    fiches = pd.DataFrame({"id": ["A", "B", "D"], "type_combustible": ["gaz", "liquide", "fumée"]})
+    station = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3), "gravite": 0.0}
+    verdict = combination(tests, fiches, station)
+    assert verdict["status"] == "Tested" and verdict["headline"].startswith("Yes: 3 ")
+    assert [name for name, _ in verdict["sources"]] == ["A", "B"]
+    # Le combustible choisi compte aussi ; la fumée est un solide, comme dans le filtre de Home.
+    assert combination(tests, fiches, {**station, "type_combustible": ["liquide"]})["headline"].startswith("Yes: 1 ")
+    solids = ["solide", "fumée", "poussière"]
+    assert combination(tests, fiches, {**station, "type_combustible": solids})["status"] == "Tested"
+    # À la gravité lunaire : jamais testé, et le verdict dit ce qui s'en approche en microgravité.
+    moon = combination(tests, fiches, {**station, "gravite": 0.165})
+    assert moon["status"] == "Not tested" and "0.165 g" in moon["headline"] and "3 tests" in moon["detail"]
