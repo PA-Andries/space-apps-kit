@@ -314,7 +314,7 @@ def test_earth_button_shows_the_reference():
     site.button(key="ui_place_Terre").click().run()
     assert not site.exception
     assert site.session_state["ui_place"] == "Terre"
-    assert any("Earth is the reference" in caption.value for caption in site.caption)
+    assert not any("Earth is the reference" in caption.value for caption in site.caption)  # no grey line (Mathéo)
 
 
 def test_no_scenario_bar_and_student_is_not_offered():
@@ -570,7 +570,7 @@ def test_sliders_out_of_the_range_unselect_the_environment():
     assert site.session_state["ui_habitat"] == "Personnalisé"
     assert site.session_state["habitat"] == "Personnalisé"  # what the other pages read
     assert site.session_state["scenario_oxygene_pct"] == (25.0, None)  # the user's values are kept
-    assert any("no environment is selected" in caption.value for caption in site.caption)
+    assert not any("no environment is selected" in caption.value for caption in site.caption)  # no grey line
 
 
 def test_sliders_back_in_the_range_select_the_environment_again():

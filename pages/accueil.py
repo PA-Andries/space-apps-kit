@@ -24,9 +24,7 @@ from flame.commun import (
     get_scenario,
 )
 from flame.ui import (
-    EARTH,
     REFERENCE_PLACES,
-    SPACESUIT,
     card_title,
     conditions,
     dashboard_header,
@@ -41,7 +39,6 @@ from flame.ui import (
     save_environment,
     show_environment_in_sidebar,
     single_value_style,
-    source_name,
     stat_tiles,
     style_conditions_chart,
 )
@@ -150,55 +147,25 @@ environment_name = "your custom environment" if custom else title_label(shown_pl
 picker_column, sliders_column = st.columns([7, 5], gap="medium")
 
 with picker_column, st.container(key="ui_card_destination", height="stretch"):
-    card_title(
-        "Habitable crew environment",
-        "One button per atmosphere: places that share their conditions share a button. "
-        "Earth is the reference, not a habitat.",
-    )
+    card_title("Habitable crew environment")
     place_buttons(habitat, selected=not custom)
-    if custom:
-        st.caption(
-            f"Your oxygen or pressure is outside the range of {title_label(shown_place)}: no environment is "
-            "selected. Move the sliders back, or click a button, to return to one."
-        )
 
 with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
-    card_title(f"Parameters · {shown_name}", "Filled in by the environment. Move a slider to change it.")
+    card_title(f"Parameters · {shown_name}")
     oxygen = from_slider(st.slider("O₂ (%)", *OXYGEN_SCALE, step=0.5, key="ui_oxygen"), OXYGEN_SCALE)
     gravity = st.segmented_control(
         "g (gravity)", list(GRAVITY_CHOICES), format_func=GRAVITY_CHOICES.get, key="ui_gravity"
     )
     if gravity is None:  # no button chosen (Moon, Mars): keep the environment's own gravity
         gravity = float(values["gravite"] or 0.0)
-    # Two buttons only, because PSI has no test in between. The spacesuit has no gravity of its own:
-    # the statement gives none, and nothing is invented here.
-    if values["gravite"] is None:
-        own_gravity = f"{title_label(shown_place)}: not given by the statement."
-    elif gravity_choice(values["gravite"]) is None:
-        own_gravity = f"{title_label(shown_place)}: {float(values['gravite']):g} g, which no PSI test was run at."
-    else:
-        own_gravity = f"{title_label(shown_place)}: {float(values['gravite']):g} g."
-    # PSI's test tables have no gravity column: the flights ran in microgravity, and only Saffire-II's rows
-    # also record a 1-g burn length. Gravity therefore filters no test, and the page says so.
-    st.caption(
-        "NASA's PSI tests were run in microgravity (0 g), in orbit; only a few rows also record a result "
-        f"at 1 g. Gravity does not filter the tests counted here. {own_gravity}"
-    )
+    # Two buttons only, because PSI has no test in between. Gravity filters no test (PSI's tables have no
+    # gravity column): the « Has your combination been tested? » card says so, not a grey line here.
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills(
         "Fuel (none chosen = all)", fuel_pills(fiches), selection_mode="multi", format_func=label, key="ui_fuels"
     )
     air_flow = from_slider(
         st.slider("Air flow (cm/s, optional)", *AIR_FLOW_SCALE, step=0.5, key="ui_air_flow"), AIR_FLOW_SCALE
-    )
-    # Each value keeps its source visible: the statement gives some of them, the team assumes the others.
-    # Once the environment is custom, oxygen and pressure are the user's own.
-    oxygen_source = "your choice" if custom else source_name(sources["oxygene_pct"])
-    pressure_source = "your choice" if custom else source_name(sources["pression_kpa"])
-    st.caption(
-        f"O₂ {oxygen_source} · pressure {pressure_source} · "
-        f"gravity {source_name(sources['gravite'])} · fuel your choice. "
-        "A handle left at the end of its scale means no bound on that side."
     )
     single_value_style(["ui_oxygen", "ui_pressure", "ui_air_flow"])  # one number when both handles meet
 
@@ -218,13 +185,6 @@ if shown_place not in REFERENCE_PLACES:
 # The scenario as the other pages read it. A reference place is explored here without replacing the habitat.
 scenario = {**get_scenario(), "habitat": scenario_place, **environment}
 
-if shown_place == EARTH:
-    st.caption(f"Earth is the reference: the other pages keep your space habitat, {label(habitat)}.")
-elif shown_place == SPACESUIT:
-    st.caption(
-        "The spacesuit is the reference at the other end: 100 % oxygen at 4.3 psi, the statement's lower "
-        f"bound that explains the lunar atmosphere. The other pages keep your habitat, {label(habitat)}."
-    )
 
 matching = comparateur.tests_correspondants(tests, fiches, scenario)
 

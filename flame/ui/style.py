@@ -393,7 +393,7 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 .ff-stat strong.ff-unknown {{ -webkit-text-fill-color: #8790b3; color: #8790b3; }}
 .ff-chip {{ background: rgba(255, 255, 255, 0.07); color: {INK}; border: 1px solid rgba(160, 175, 255, 0.16);
   box-shadow: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }}
-.ff-header h1 {{ font-size: 2.2rem; }}
+.ff-header h1 {{ font-size: 2.9rem; }}
 .ff-header .ff-mark {{ box-shadow: 0 0 18px rgba(232, 98, 42, 0.8); }}
 .ff-bubble, .ff-bubble::before {{ background: rgba(255, 255, 255, 0.08); }}
 .ff-disclaimer, .ff-footer p {{ color: #8790b3; }}

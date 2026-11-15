@@ -220,9 +220,10 @@ def _pick_on_image(body: str, chosen: str | None) -> None:
 # The place buttons of page 1: three tall frosted-glass tiles that fill the card, the logo above the name,
 # in the flame colour; the chosen one is filled. Under them, the Mars block: not a button, but easy to see.
 PLACE_BUTTONS_STYLE = """<style>
-/* The buttons take all the height the card has left; the Mars block keeps its own. */
+/* The buttons keep one fixed height: moving a slider, which changes the parameters card next to them,
+   never resizes them. The Mars block keeps its own height. */
 .st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_places) {
-  flex: 1 1 0; min-height: 13rem; }
+  flex: none; height: 15rem; }
 .st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_mars_note) { flex: none; }
 .st-key-ui_places { flex: 1 1 auto; margin-top: 0.4rem; }
 .st-key-ui_places > [data-testid="stLayoutWrapper"], .st-key-ui_places [data-testid="stHorizontalBlock"] {
