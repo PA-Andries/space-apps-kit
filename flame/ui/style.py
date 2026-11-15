@@ -18,11 +18,11 @@ import streamlit as st
 DOMINANT = "#070a1c"
 SECONDARY = "rgba(26, 33, 80, 0.6)"  # card glass, over the dominant page
 SECONDARY_LINE = "rgba(160, 175, 255, 0.14)"  # thin rims of the glass
-ACCENT = "#ff7a3d"
+ACCENT = "#e8622a"
 INK = "#eef1fb"  # main text, on the dark page
-MUTED = "#a3abc9"  # secondary text, still readable on the dark glass
+MUTED = "#d0d5ec"  # secondary text, still readable on the dark glass
 FLAME = ACCENT  # same as primaryColor in config.toml
-GRADIENT = "linear-gradient(90deg, #ffa066 0%, #ff7a3d 100%)"  # the accent, a little lighter on the left
+GRADIENT = "linear-gradient(90deg, #f5894f 0%, #e8622a 100%)"  # the accent, a little lighter on the left
 
 # The background drawing: stars, small spiral galaxies and planets (an original SVG, drawn by
 # flame/ui/images/make_space_background.py), embedded so that no file has to be served.
@@ -169,6 +169,14 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_chatbot [data-testid="stPageLink"] * {{ position: static; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] a::after {{ content: ""; position: absolute; inset: 0;
   border-radius: 24px; z-index: 1; }}
+/* Same for Flamy's chat button (`ui_flamy`): the whole card opens the chat window, not only the word. */
+.st-key-ui_flamy {{ cursor: pointer; }}
+.st-key-ui_flamy [data-testid="stElementContainer"], .st-key-ui_flamy [data-testid="stButton"],
+.st-key-ui_flamy [data-testid="stButton"] * {{ position: static; }}
+.st-key-ui_flamy [data-testid="stButton"] button::after {{ content: ""; position: absolute; inset: 0;
+  border-radius: 24px; z-index: 1; }}
+/* Streamlit's captions, a little whiter so that they stand out on the dark glass. */
+[data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] p {{ color: {MUTED}; }}
 
 /* The mascot of the Assistant page, as in a messaging app: on the left, its lower half hidden behind the
    chat box, so that it seems to stand behind it. The chat box is drawn on top of it. */
@@ -358,7 +366,7 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
 .ff-chip {{ background: rgba(255, 255, 255, 0.07); color: {INK}; border: 1px solid rgba(160, 175, 255, 0.16);
   box-shadow: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }}
 .ff-header h1 {{ font-size: 2.2rem; }}
-.ff-header .ff-mark {{ box-shadow: 0 0 18px rgba(255, 122, 61, 0.8); }}
+.ff-header .ff-mark {{ box-shadow: 0 0 18px rgba(232, 98, 42, 0.8); }}
 .ff-bubble, .ff-bubble::before {{ background: rgba(255, 255, 255, 0.08); }}
 .ff-disclaimer, .ff-footer p {{ color: #8790b3; }}
 .ff-footer {{ border-top-color: rgba(160, 175, 255, 0.16); }}
@@ -368,11 +376,11 @@ iframe {{ box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }}
 /* The chatbot icon and the ANALYSE button glow a little, like the flame. */
 .st-key-ui_chatbot, .st-key-ui_flamy {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 122, 61, 0.18); }}
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(232, 98, 42, 0.18); }}
 .st-key-ui_analyse button {{ background: {ACCENT};
-  box-shadow: 0 0 28px rgba(255, 122, 61, 0.35); }}
-.st-key-ui_analyse button:hover {{ background: #ff8c55;
-  box-shadow: 0 0 36px rgba(255, 122, 61, 0.5); }}
+  box-shadow: 0 0 28px rgba(232, 98, 42, 0.35); }}
+.st-key-ui_analyse button:hover {{ background: #f2733a;
+  box-shadow: 0 0 36px rgba(232, 98, 42, 0.5); }}
 
 /* Keyboard focus stays clearly visible on the dark page. */
 .stApp button:focus-visible, .stApp a:focus-visible {{ outline: 2px solid {FLAME}; outline-offset: 2px; }}

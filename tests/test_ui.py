@@ -396,8 +396,8 @@ def test_colours_follow_the_60_30_10_rule():
     interface = Path("flame/ui/style.py").read_text() + Path("flame/ui/components.py").read_text()
     for colour in ("#d9365e", "#f0457a", "#e44a70", "22, 163, 74", "124, 58, 237"):
         assert colour not in interface
-    assert style.FLAME == style.ACCENT == "#ff7a3d"
-    assert chart.SELECTION_COLOR == "255, 122, 61"  # the user's selection is the accent
+    assert style.FLAME == style.ACCENT == "#e8622a"
+    assert chart.SELECTION_COLOR == "232, 98, 42"  # the user's selection is the accent
 
 
 def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():

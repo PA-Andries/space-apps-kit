@@ -16,7 +16,7 @@ UNKNOWN = "unknown"
 
 # Order, wording and colour of each kind (60-30-10: the accent marks the flames that burned).
 KINDS = {
-    BURNED: ("A flame burned", "#ff7a3d"),
+    BURNED: ("A flame burned", "#e8622a"),
     # NASA's "Extinction" (FLEX droplets): the droplet was lit and burned, then the flame went out by itself.
     WENT_OUT: ("Burned, then went out by itself", "#8fa3d9"),
     NO_IGNITION: ("No ignition", "#c9ccd8"),

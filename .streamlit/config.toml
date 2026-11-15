@@ -3,7 +3,7 @@
 # flame orange as the main colour. The universe itself (stars, nebulae, glass) is in flame/ui/style.py.
 [theme]
 base = "dark"
-primaryColor = "#ff7a3d"
+primaryColor = "#e8622a"
 backgroundColor = "#070a1c"
 secondaryBackgroundColor = "#141a3a"
 textColor = "#e9ecf8"
