@@ -1,10 +1,14 @@
-"""Tests de l'assistant. Propriétaire : rôle E. Aucun test n'appelle le vrai Gemini."""
+"""Tests de l'assistant. Propriétaire : rôle E. Aucun test n'appelle le vrai Gemini ni le vrai Claude."""
 
+from types import SimpleNamespace
+
+import anthropic
+import httpx2
 import pandas as pd
 import pytest
 import requests
 
-from flame.assistant import chatbot, environnement, outils, rag
+from flame.assistant import chatbot, claude, environnement, outils, rag
 from flame.commun import charger_fiches, charger_tests
 
 SCENARIO_LUNE = {
@@ -23,6 +27,9 @@ SCENARIO_LUNE = {
 def sans_scenario(monkeypatch):
     """Par défaut, aucun environnement choisi : les tests ne dépendent pas de la mémoire de Streamlit."""
     monkeypatch.setattr(chatbot, "scenario_courant", lambda: {})
+    # Ni clé de Claude par défaut : les tests de Gemini ne dépendent pas des clés de l'ordinateur.
+    monkeypatch.setattr(chatbot, "cle_claude", lambda: None)
+    monkeypatch.delenv("CLAUDE_MODEL", raising=False)
 
 
 class FausseReponse:
@@ -371,3 +378,149 @@ def test_compter_tests_compte_comme_les_pages(monkeypatch):
     assert lune["nb_tests_avec_pression_notee"] == 1
     assert lune["investigations"] == [{"id": "A", "nb_tests": 2}]
     assert "nb_tests_avec_pression_notee" not in outils.compter_tests(oxygene_min_pct=30)
+
+
+# --- Claude ---
+
+
+def texte_claude(texte: str):
+    """Imite une réponse de Claude qui ne contient que du texte."""
+    return SimpleNamespace(stop_reason="end_turn", content=[SimpleNamespace(type="text", text=texte)])
+
+
+def faux_claude(monkeypatch, reponses: list, cle_gemini: str | None = None) -> list[dict]:
+    """Branche un faux Claude qui rend `reponses` dans l'ordre (une exception est levée) ; renvoie ses demandes."""
+    demandes = []
+
+    def create(**options):
+        demandes.append({**options, "messages": list(options["messages"])})
+        reponse = reponses[min(len(demandes) - 1, len(reponses)) - 1]  # demandes[0] est le client
+        if isinstance(reponse, Exception):
+            raise reponse
+        return reponse
+
+    def faux_client(api_key, timeout, max_retries):
+        demandes.append({"cle": api_key})
+        messages = SimpleNamespace(create=create)
+        return SimpleNamespace(messages=messages, beta=SimpleNamespace(messages=messages))
+
+    monkeypatch.setattr(claude.anthropic, "Anthropic", faux_client)
+    monkeypatch.setattr(chatbot, "cle_claude", lambda: "cle-claude")
+    monkeypatch.setattr(chatbot, "cle_api", lambda: cle_gemini)
+    return demandes
+
+
+def erreur_claude(classe, code: int, message: str = "erreur"):
+    """Une erreur de l'API d'Anthropic, comme la bibliothèque la lève."""
+    requete = httpx2.Request("POST", "https://api.anthropic.com/v1/messages")
+    return classe(message, response=httpx2.Response(code, request=requete), body=None)
+
+
+def test_avec_une_cle_claude_c_est_claude_qui_repond(monkeypatch):
+    demandes = faux_claude(monkeypatch, [texte_claude("Réponse (EXEMPLE-A).")])
+    historique = [{"role": "user", "content": "Bonjour"}, {"role": "assistant", "content": "Bonjour !"}]
+    assert chatbot.repondre("Qu'est-ce que BASS ?", historique, charger_fiches()) == "Réponse (EXEMPLE-A)."
+    client, demande = demandes
+    assert client == {"cle": "cle-claude"}
+    assert demande["model"] == claude.MODELE
+    assert "EXEMPLE-A" in demande["system"]  # les fiches partent dans la consigne
+    assert [message["role"] for message in demande["messages"]] == ["user", "assistant", "user"]
+    assert [outil["name"] for outil in demande["tools"]] == list(outils.OUTILS)
+    assert all(outil["input_schema"]["type"] == "object" for outil in demande["tools"])
+    assert "fallbacks" not in demande  # l'option de repli ne sert qu'aux modèles qui l'acceptent
+
+
+def test_claude_appelle_un_outil_puis_repond(monkeypatch):
+    appel = SimpleNamespace(type="tool_use", id="outil_1", name="compter_tests", input={"oxygene_min_pct": 30})
+    demande_d_outil = SimpleNamespace(stop_reason="tool_use", content=[appel])
+    demandes = faux_claude(monkeypatch, [demande_d_outil, texte_claude("Deux tests (EXEMPLE-C, EXEMPLE-D).")])
+    reponse = chatbot.repondre("Combien de tests à 30 % d'oxygène ou plus ?", [], charger_fiches())
+    assert reponse == "Deux tests (EXEMPLE-C, EXEMPLE-D)."
+    # Le second envoi contient la demande de Claude, puis le résultat de l'outil.
+    assert demandes[2]["messages"][-2] == {"role": "assistant", "content": [appel]}
+    resultat = demandes[2]["messages"][-1]["content"][0]
+    assert resultat["type"] == "tool_result" and resultat["tool_use_id"] == "outil_1"
+    assert '"nb_tests": 2' in resultat["content"]
+
+
+def test_claude_ne_tourne_pas_en_rond(monkeypatch):
+    appel = SimpleNamespace(type="tool_use", id="outil_1", name="compter_tests", input={})
+    demandes = faux_claude(monkeypatch, [SimpleNamespace(stop_reason="tool_use", content=[appel])])
+    assert chatbot.repondre("Compte encore", [], charger_fiches()) == chatbot.SANS_REPONSE
+    assert len(demandes) - 1 == claude.NB_MAX_TOURS_OUTILS + 1
+
+
+def test_un_refus_de_claude_donne_un_message_clair(monkeypatch):
+    faux_claude(monkeypatch, [SimpleNamespace(stop_reason="refusal", content=[])])
+    assert chatbot.repondre("Question", [], charger_fiches()) == claude.REFUS
+
+
+def test_une_mauvaise_cle_claude_donne_un_message_clair(monkeypatch):
+    faux_claude(monkeypatch, [erreur_claude(anthropic.AuthenticationError, 401)])
+    assert "ANTHROPIC_API_KEY" in chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches())
+
+
+def test_un_compte_sans_credit_donne_un_message_clair(monkeypatch):
+    sans_credit = erreur_claude(anthropic.BadRequestError, 400, "Your credit balance is too low to access the API.")
+    faux_claude(monkeypatch, [sans_credit])
+    assert "no API credit" in chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches())
+
+
+def test_si_claude_echoue_gemini_prend_le_relais(monkeypatch):
+    faux_claude(monkeypatch, [erreur_claude(anthropic.InternalServerError, 529)], cle_gemini="fausse-cle")
+    monkeypatch.setattr(chatbot, "fiches_proches", lambda texte, fiches, cle: fiches.head(1))
+    monkeypatch.setattr(chatbot.requests, "post", lambda *args, **kwargs: FausseReponse())
+    assert chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches()) == "Réponse (EXEMPLE-A)."
+
+
+def test_si_l_option_de_repli_est_refusee_claude_repond_sans_elle(monkeypatch):
+    refus_de_l_option = erreur_claude(anthropic.BadRequestError, 400, "fallbacks: unknown parameter")
+    monkeypatch.setenv("CLAUDE_MODEL", "claude-sonnet-5-5")
+    demandes = faux_claude(monkeypatch, [refus_de_l_option, texte_claude("Réponse.")])
+    assert chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches()) == "Réponse."
+    assert "fallbacks" in demandes[1] and "fallbacks" not in demandes[2]
+
+
+def test_un_autre_modele_se_choisit_dans_les_secrets(monkeypatch):
+    monkeypatch.setenv("CLAUDE_MODEL", "claude-sonnet-5-5")
+    demandes = faux_claude(monkeypatch, [texte_claude("Réponse.")])
+    chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches())
+    assert demandes[1]["model"] == "claude-sonnet-5-5"
+    assert demandes[1]["fallbacks"] == "default"
+
+
+def test_sans_cle_gemini_la_recherche_se_fait_par_mots():
+    choisies = chatbot.choisir_fiches("tissu", [], FICHES_TEST, None)
+    assert list(choisies["id"]) == ["C"]
+
+
+def test_la_cle_du_modele_a_copier_ne_compte_pas(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", claude.SECRET_A_REMPLIR)
+    monkeypatch.setattr(claude.st, "secrets", {})
+    assert claude.cle_claude() is None
+    monkeypatch.setenv("ANTHROPIC_API_KEY", " sk-ant-exemple ")
+    assert claude.cle_claude() == "sk-ant-exemple"
+
+
+def test_synthetiser_passe_par_claude_sans_outils(monkeypatch):
+    demandes = faux_claude(monkeypatch, [texte_claude("#### Fire behaviour\nTexte (A).")])
+    assert chatbot.synthetiser(FICHES_TEST, ["A", "C"]).startswith("#### Fire behaviour")
+    assert "Fumée des câbles" in demandes[1]["system"] and "tools" not in demandes[1]
+
+
+def test_une_cle_claude_rangee_sous_le_nom_de_gemini_sert_quand_meme(monkeypatch):
+    monkeypatch.setattr(claude.st, "secrets", {"LLM_API_KEY": "sk-ant-exemple"})
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    assert claude.cle_claude() == "sk-ant-exemple"
+    assert chatbot.cle_api() is None  # ce n'est pas une clé de Gemini
+    monkeypatch.setattr(claude.st, "secrets", {"LLM_API_KEY": "cle-de-gemini"})
+    assert claude.cle_claude() is None
+    assert chatbot.cle_api() == "cle-de-gemini"
+    monkeypatch.setattr(claude.st, "secrets", {"LLM_API_KEY": claude.SECRET_A_REMPLIR})
+    assert chatbot.cle_api() is None  # la ligne du modèle, pas encore remplie
+
+
+def test_si_claude_puis_gemini_echouent_on_montre_l_erreur_de_claude(monkeypatch):
+    faux_claude(monkeypatch, [erreur_claude(anthropic.AuthenticationError, 401)], cle_gemini="mauvaise-cle")
+    monkeypatch.setattr(chatbot.requests, "post", lambda *args, **kwargs: FausseReponse(code=400))
+    assert "ANTHROPIC_API_KEY" in chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches())

@@ -6,6 +6,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
+    "anthropic>=2.8.0",
     "pandas>=3.0.6",
     "plotly>=7.1.0",
     "pypdf>=5",
