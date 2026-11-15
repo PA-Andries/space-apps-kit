@@ -32,10 +32,19 @@ def plage(valeurs: object, unite: str) -> str | None:
 
 
 def gravite_en_texte(gravite: object) -> str:
-    """« microgravité (0 g) », « 0.165 g » ou « inconnue »."""
+    """« microgravité (0 g) », « 1 g », « 0.165 g (… aucun test NASA PSI à cette gravité …) » ou « inconnue »."""
     if not isinstance(gravite, int | float):
         return "inconnue"
-    return "microgravité (0 g)" if gravite == 0 else f"{gravite:g} g"
+    if gravite == 0:
+        return "microgravité (0 g)"
+    if 0 < gravite < 1:
+        # La gravité partielle est celle du lieu (Lune, Mars), pas un réglage de l'outil : Flamy ne doit pas
+        # la présenter comme une condition couverte par les données.
+        return (
+            f"{gravite:g} g (gravité propre du lieu ; aucun test NASA PSI à cette gravité : "
+            "les tests existent en microgravité, 0 g, et quelques-uns à 1 g)"
+        )
+    return f"{gravite:g} g"
 
 
 def decrire_environnement(scenario: dict) -> str:

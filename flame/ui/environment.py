@@ -82,13 +82,16 @@ def bounds_text(name: str, bounds: tuple | None, unit: str) -> str | None:
 
 
 def environment_summary(habitat: str) -> str:
-    """One line for the sidebar: "Moon base · O₂ ≥ 30 % · ≤ 70.3 kPa · 0.165 g"."""
+    """One line for the sidebar: "Moon base · O₂ ≥ 30 % · ≤ 70.3 kPa · 0.165 g (no NASA test at this gravity)"."""
     values = environment_values(habitat)
     parts = [label(habitat)]
     parts.append(bounds_text("O₂", values["oxygene_pct"], "%") or "O₂ unknown")
     parts.append(bounds_text("", values["pression_kpa"], "kPa") or "pressure unknown")
     if values["gravite"] is not None:
-        parts.append(f"{values['gravite']:g} g")
+        # Partial gravity (Moon, Mars) is the place's own value, not a setting of the tool: NASA's PSI tests
+        # exist at 0 g and 1 g only, and the line says so instead of showing a bare "0.165 g".
+        partial = 0 < float(values["gravite"]) < 1
+        parts.append(f"{values['gravite']:g} g" + (" (no NASA test at this gravity)" if partial else ""))
     if values["type_combustible"]:
         parts.append(label(";".join(values["type_combustible"])))
     return " · ".join(parts)
