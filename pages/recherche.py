@@ -1,8 +1,9 @@
 """Page Investigations. Propriétaire : rôle C (Recherche). Les textes affichés sont en anglais.
 
-Recadrage du 14 novembre et REPRISE (issue n°2) : trois onglets, Classement · Fiche · Ce qu'on ne sait pas.
-Le classement repose sur les preuves pour l'environnement choisi en page 1 ; il n'y a plus de pilier.
-Le score sert à trier mais n'est pas affiché : la page dit seulement « les plus en lien avec votre environnement ».
+Une seule vue depuis le 15 novembre (rôle F, accord de Martin) : la fiche d'une investigation. Les onglets
+Classement et Ce qu'on ne sait pas sont retirés ; la page 1 montre déjà ce qu'on ne sait pas.
+Le classement reste : il repose sur les preuves pour l'environnement choisi en page 1 et range la liste de
+recherche, la plus pertinente en premier. Le score sert à trier mais n'est pas affiché.
 Chaque fiche montre les rubriques du tableau blanc (comportement, dangers, prévention, trace des données,
 comparer), tirées des fiches et des tests sans rien inventer.
 """
@@ -11,14 +12,8 @@ import pandas as pd
 import streamlit as st
 
 from flame.commun import charger_fiches, charger_tests, get_scenario
-from flame.recherche import (
-    afficher_ce_quon_ne_sait_pas,
-    champs_inconnus,
-    descriptif,
-    les_plus_pertinentes,
-    tests_dans_les_plages,
-)
-from flame.ui import carte_fiche, investigation_details, label
+from flame.recherche import champs_inconnus, les_plus_pertinentes, tests_dans_les_plages
+from flame.ui import carte_fiche, label
 
 TITRES_TESTS = {
     "investigation_id": "Investigation",
@@ -72,31 +67,23 @@ fiches = charger_fiches()
 tests = charger_tests()
 scenario = get_scenario()
 habitat = scenario.get("habitat")
-st.caption(f"Ranked for your environment: {label(habitat)}. Change it on the first page.")
+st.caption(
+    f"Sorted for your environment, {label(habitat)}: the most relevant first (the tests nearest your oxygen and "
+    "pressure, your fuels and your gravity). Change it on the first page."
+)
 
+# Le classement range la liste de recherche ; le score n'est pas affiché, seulement le rang.
 classement = les_plus_pertinentes(fiches, scenario)
-
-onglet_classement, onglet_fiche, onglet_inconnu = st.tabs(["Ranking", "Investigation", "What we don't know"])
-
-with onglet_classement:
-    # Le classement suit toujours le score sur les preuves, mais le score n'est pas affiché (demande du rôle C).
-    st.caption(
-        f"The {len(classement)} investigations most related to your environment, the closest first: "
-        "the tests nearest your oxygen and pressure, your fuels and your gravity."
-    )
-    # Chaque investigation avec ce que l'expérience a étudié (textes de NASA) et les raisons de son rang,
-    # critère par critère, sans les points.
-    for rang, (_, fiche) in enumerate(classement.iterrows(), start=1):
-        investigation_details(fiche, descriptif(fiche, scenario, tests), rang, label(habitat))
-
-with onglet_fiche:
-    noms = dict(zip(classement["id"], classement["nom"], strict=True))
-    choix = st.selectbox(
-        "Investigation",
-        list(noms),
-        format_func=lambda id_fiche: f"{id_fiche} · {noms[id_fiche]}",
-        key="recherche_fiche",
-    )
+rangs = {id_fiche: rang for rang, id_fiche in enumerate(classement["id"], start=1)}
+noms = dict(zip(classement["id"], classement["nom"], strict=True))
+choix = st.selectbox(
+    "Search an investigation, the most relevant first",
+    list(noms),
+    format_func=lambda id_fiche: f"{rangs[id_fiche]}. {noms[id_fiche]} · {id_fiche}",
+    key="recherche_fiche",
+    placeholder="Type a name or a PSI number",
+)
+if choix is not None:
     fiche = classement[classement["id"] == choix].iloc[0]
     siens = tests[tests["investigation_id"] == fiche["id"]]
     resultats = siens["resultat"].dropna().value_counts()
@@ -133,7 +120,3 @@ with onglet_fiche:
 
     st.subheader("Compare")
     st.page_link("pages/comparateur.py", label="Compare with similar investigations", query_params={"id": fiche["id"]})
-
-with onglet_inconnu:
-    st.caption("Gaps in NASA's data for your environment. Counted on PSI's test tables: nothing is guessed.")
-    afficher_ce_quon_ne_sait_pas(fiches, tests, scenario, cle="recherche")
