@@ -132,6 +132,9 @@ def test_la_page_ne_propose_que_les_niveaux_comparables():
     assert [NIVEAUX[niveau] for niveau in NIVEAUX_PROPOSES] == ["Directly comparable", "Comparable in principle"]
     assert all(EXPLICATIONS[niveau] for niveau in NIVEAUX_PROPOSES)
     assert not any("fuel" in EXPLICATIONS[niveau].lower() for niveau in NIVEAUX_PROPOSES)
+    # Chaque phrase dit ce qui relie les deux investigations, puis ce qu'on peut comparer.
+    assert EXPLICATIONS[1].startswith("Same hardware.") and "measurements" in EXPLICATIONS[1]
+    assert EXPLICATIONS[2].startswith("Related, but different hardware.") and "not their numbers" in EXPLICATIONS[2]
 
 
 def test_l_investigation_de_depart_n_est_pas_proposee():
