@@ -1,5 +1,5 @@
-"""Les données des visuels de « What we don't know » : la grille de couverture, la règle de l'oxygène et les
-mesures notées par NASA. Les mêmes comptes que `ce_quon_ne_sait_pas`, rendus sous forme de tableaux.
+"""Les données des visuels de « What we don't know » : la grille de couverture et les règles de l'oxygène et
+de la pression. Les mêmes comptes que `ce_quon_ne_sait_pas`, rendus sous forme de tableaux.
 
 Rien n'est dessiné ici (voir `vue_lacunes`) et rien n'est deviné : une valeur absente reste None.
 """
@@ -8,12 +8,9 @@ import pandas as pd
 
 from flame.commun import TYPES_COMBUSTIBLE
 from flame.recherche.conditions import atmosphere_connue, decrire_plages, plages_du_scenario, tests_dans_les_plages
-from flame.recherche.lacunes import EMULATEURS_DE_SOLIDE, frontiere_des_solides
+from flame.recherche.lacunes import EMULATEURS_DE_SOLIDE
 from flame.recherche.score import type_de_base
 from flame.ui import label
-
-# Les mesures suivies pour « des fiches sans oxygène ni pression » : la colonne et son nom affiché.
-MESURES_SUIVIES = {"oxygene_min": "Oxygen range", "pression_kpa": "Pressure"}
 
 
 def _types_des_tests(fiches: pd.DataFrame, tests: pd.DataFrame) -> pd.Series:
@@ -53,55 +50,67 @@ def couverture(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None)
     return {"atmosphere": decrire_plages(scenario) if connue else None, "cases": cases}
 
 
-def regle_de_l_oxygene(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None) -> dict:
-    """La règle de l'oxygène : la plage testée de chaque combustible face à celle de l'environnement.
+def _trous(plage: tuple[float, float], environnement: tuple) -> list[tuple]:
+    """Les morceaux de l'environnement jamais testés pour un combustible, depuis le bord de sa plage testée.
 
-    {"environnement": (min, max) d'oxygène de l'environnement (None = pas de borne),
-     "combustibles": [{"type", "nom", "plage": (min, max) ou None, "trou": (de, à) ou None, "ecart": % ou None}],
-     "emule": l'oxygène le plus haut d'un émulateur de solide, ou None, "emulateurs": leurs noms}
+    Au-dessus : de la valeur testée la plus haute jusqu'au haut de l'environnement (None = sans borne) ;
+    au-dessous : du bas de l'environnement (None = sans borne) jusqu'à la valeur testée la plus basse.
+    Quand l'environnement est entièrement hors de la plage, le trou le contient donc tout entier.
+    """
+    bas, haut = plage
+    env_min, env_max = environnement
+    trous = []
+    if env_max is None or env_max > haut:
+        trous.append((haut, env_max))
+    if env_min is None or env_min < bas:
+        trous.append((env_min, bas))
+    return trous
+
+
+def regle(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None, colonne: str) -> dict:
+    """La règle d'une condition (`colonne` : "oxygene_pct" ou "pression_kpa") : la plage testée de chaque
+    combustible face à celle de l'environnement.
+
+    {"environnement": (min, max) de l'environnement (None = pas de borne), ou (None, None) s'il est inconnu,
+     "combustibles": [{"type", "nom", "plage": (min, max) ou None, "trous": [(de, à)]}],
+     "emule": la valeur la plus haute d'un émulateur de solide, ou None, "emulateurs": leurs noms}
     Les émulateurs de solide (des brûleurs à gaz) ne comptent pas dans la plage des solides.
-    `trou` : l'oxygène jamais testé entre la plage du combustible et celle de l'environnement ; `ecart` sa largeur.
+    `trous` : ce que l'environnement demande et qu'aucun test du combustible n'a atteint (voir `_trous`) ;
+    vide si l'environnement est inconnu.
     """
     scenario = scenario or {}
-    environnement = plages_du_scenario(scenario)["oxygene_pct"]
-    env_min, env_max = environnement
+    environnement = plages_du_scenario(scenario)[colonne]
+    connu = any(borne is not None for borne in environnement)
     vrais = tests[~tests["investigation_id"].isin(EMULATEURS_DE_SOLIDE)]
     types = _types_des_tests(fiches, vrais)
-    oxygene = pd.to_numeric(vrais["oxygene_pct"], errors="coerce")
+    valeurs_tests = pd.to_numeric(vrais[colonne], errors="coerce")
     combustibles = []
     for type_combustible in _combustibles(scenario):
-        valeurs = oxygene[types == type_combustible].dropna()
+        valeurs = valeurs_tests[types == type_combustible].dropna()
         plage = (float(valeurs.min()), float(valeurs.max())) if len(valeurs) else None
-        trou = None
-        if plage is not None and env_min is not None and env_min > plage[1]:
-            trou = (plage[1], float(env_min))
-        elif plage is not None and env_max is not None and env_max < plage[0]:
-            trou = (float(env_max), plage[0])
         combustibles.append(
             {
                 "type": type_combustible,
                 "nom": label(type_combustible),
                 "plage": plage,
-                "trou": trou,
-                "ecart": round(trou[1] - trou[0], 1) if trou else None,
+                "trous": _trous(plage, environnement) if plage is not None and connu else [],
             }
         )
-    frontiere = frontiere_des_solides(fiches, tests)
+    emules = tests[tests["investigation_id"].isin(EMULATEURS_DE_SOLIDE)]
+    valeurs_emules = pd.to_numeric(emules[colonne], errors="coerce").dropna()
     return {
         "environnement": environnement,
         "combustibles": combustibles,
-        "emule": frontiere["emule"],
-        "emulateurs": frontiere["emulateurs"],
+        "emule": float(valeurs_emules.max()) if len(valeurs_emules) else None,
+        "emulateurs": ", ".join(sorted(EMULATEURS_DE_SOLIDE[i] for i in emules["investigation_id"].unique())),
     }
 
 
-def mesures_notees(fiches: pd.DataFrame) -> dict[str, list[tuple[str, bool]]]:
-    """Pour l'oxygène et la pression : chaque investigation (son nom) et si NASA a noté la mesure."""
-    resultat = {}
-    for colonne, nom in MESURES_SUIVIES.items():
-        valeurs = pd.to_numeric(fiches[colonne], errors="coerce") if colonne in fiches.columns else None
-        resultat[nom] = [
-            (str(fiche["nom"]), valeurs is not None and pd.notna(valeurs.loc[index]))
-            for index, fiche in fiches.iterrows()
-        ]
-    return resultat
+def regle_de_l_oxygene(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None) -> dict:
+    """La règle de l'oxygène (%) : voir `regle`."""
+    return regle(fiches, tests, scenario, "oxygene_pct")
+
+
+def regle_de_la_pression(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dict | None) -> dict:
+    """La règle de la pression (kPa) : voir `regle`. Beaucoup de tests de solides n'ont pas de pression notée."""
+    return regle(fiches, tests, scenario, "pression_kpa")

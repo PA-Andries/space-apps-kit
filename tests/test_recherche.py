@@ -22,9 +22,9 @@ from flame.recherche import (
     frontiere_des_solides,
     independance,
     les_plus_pertinentes,
-    mesures_notees,
     rechercher,
     regle_de_l_oxygene,
+    regle_de_la_pression,
     synthese_des_plus_pertinentes,
     valeurs_possibles,
     verdict,
@@ -488,22 +488,36 @@ def test_la_grille_d_une_atmosphere_inconnue_ne_compte_rien():
     assert all(case["tests"] is None for case in grille["cases"])
 
 
-def test_la_regle_de_l_oxygene_mesure_le_trou_de_chaque_combustible():
+def _lignes(regle: dict) -> dict:
+    return {ligne["type"]: (ligne["plage"], ligne["trous"]) for ligne in regle["combustibles"]}
+
+
+def test_la_zone_jamais_testee_contient_l_environnement():
+    # Lune : O2 ≥ 30 %, sans borne haute. Les solides (16 à 21 %) n'ont rien testé de 21 % jusqu'au bout.
     regle = regle_de_l_oxygene(charger_fiches(), charger_tests(), LUNE)
     assert regle["environnement"] == (30.0, None)
-    lignes = {ligne["type"]: (ligne["plage"], ligne["ecart"]) for ligne in regle["combustibles"]}
-    assert lignes == {"solide": ((16.0, 21.0), 9.0), "liquide": ((10.0, 40.0), None), "gaz": ((21.0, 40.0), None)}
+    assert _lignes(regle) == {
+        "solide": ((16.0, 21.0), [(21.0, None)]),
+        "liquide": ((10.0, 40.0), [(40.0, None)]),
+        "gaz": ((21.0, 40.0), [(40.0, None)]),
+    }
+    # Station : 19 à 23 %. Les solides s'arrêtent à 21 %, les gaz commencent à 21 %.
+    assert _lignes(regle_de_l_oxygene(charger_fiches(), charger_tests(), STATION)) == {
+        "solide": ((16.0, 21.0), [(21.0, 23.0)]),
+        "liquide": ((10.0, 40.0), []),
+        "gaz": ((21.0, 40.0), [(19.0, 21.0)]),
+    }
+
+
+def test_la_regle_de_la_pression_marche_comme_celle_de_l_oxygene():
+    # Lune : pression ≤ 70.3 kPa, sans borne basse.
+    regle = regle_de_la_pression(charger_fiches(), charger_tests(), LUNE)
+    assert regle["environnement"] == (None, 70.3)
+    assert _lignes(regle) == {
+        "solide": ((101.0, 101.0), [(None, 101.0)]),
+        "liquide": ((70.0, 70.0), [(70.0, 70.3), (None, 70.0)]),
+        "gaz": ((101.0, 101.0), [(None, 101.0)]),
+    }
     assert all(
-        ligne["ecart"] is None
-        for ligne in regle_de_l_oxygene(charger_fiches(), charger_tests(), STATION)["combustibles"]
+        ligne["trous"] == [] for ligne in regle_de_la_pression(charger_fiches(), charger_tests(), MARS)["combustibles"]
     )
-
-
-def test_mesures_notees_dit_pour_chaque_investigation_si_l_oxygene_et_la_pression_sont_notes():
-    fiches = charger_fiches()
-    fiches.loc[fiches["id"] == "EXEMPLE-B", "pression_kpa"] = None
-    mesures = mesures_notees(fiches)
-    assert set(mesures) == {"Oxygen range", "Pressure"}
-    assert len(mesures["Pressure"]) == len(fiches)
-    nom_b = fiches.loc[fiches["id"] == "EXEMPLE-B", "nom"].iloc[0]
-    assert (nom_b, False) in mesures["Pressure"]

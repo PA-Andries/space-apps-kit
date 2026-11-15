@@ -5,7 +5,7 @@ from flame.recherche.descriptif import descriptif
 from flame.recherche.filtres import filtrer, valeurs_possibles
 from flame.recherche.independance import independance
 from flame.recherche.lacunes import ce_quon_ne_sait_pas, champs_inconnus, frontiere_des_solides, verdict
-from flame.recherche.lacunes_visuelles import couverture, mesures_notees, regle_de_l_oxygene
+from flame.recherche.lacunes_visuelles import couverture, regle_de_l_oxygene, regle_de_la_pression
 from flame.recherche.moteur import les_plus_pertinentes, rechercher
 from flame.recherche.score import detail_du_score
 from flame.recherche.synthese import citations_des_plus_pertinentes, synthese_des_plus_pertinentes
@@ -23,9 +23,9 @@ __all__ = [
     "frontiere_des_solides",
     "independance",
     "les_plus_pertinentes",
-    "mesures_notees",
     "rechercher",
     "regle_de_l_oxygene",
+    "regle_de_la_pression",
     "synthese_des_plus_pertinentes",
     "tests_dans_les_plages",
     "valeurs_possibles",
