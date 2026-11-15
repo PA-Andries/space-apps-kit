@@ -457,3 +457,12 @@ def test_the_ranking_explains_every_investigation():
     assert not site.exception
     shown = " ".join(str(block.value) for block in site.get("html"))
     assert shown.count("Why it matters for Moon base") >= 3
+
+
+def test_flamy_stays_calm_and_looks_at_the_visitor_on_the_assistant_page():
+    from flame.ui.scene import _fill
+
+    page = _fill("mascot.html", {"calm": True})
+    assert '{"calm": true}' in page and "pointermove" in page  # the eyes follow the pointer
+    assert "mascot_scene(height=170, calm=True)" in Path("flame/ui/home.py").read_text()
+    assert '{"calm": false}' in _fill("mascot.html", {"calm": False})  # elsewhere he still waves
