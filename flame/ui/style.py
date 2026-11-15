@@ -224,6 +224,13 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
 .st-key-ui_flamy button {{ width: 100%; padding: 0.15rem 0.4rem; min-height: 0; border: none; background: transparent;
   color: {ACCENT}; }}
 .st-key-ui_flamy button p {{ font-size: 0.82rem; font-weight: 700; }}
+/* The whole card opens the chat window, Flamy included, not only the word « Flamy »: the button gets an
+   invisible layer over the card (the mascot's frame lets clicks through, and nothing in between is positioned). */
+.st-key-ui_flamy {{ cursor: pointer; }}
+.st-key-ui_flamy [data-testid="stElementContainer"], .st-key-ui_flamy .stButton,
+.st-key-ui_flamy .stButton > *, .st-key-ui_flamy button {{ position: static !important; }}
+.st-key-ui_flamy button::after {{ content: ""; position: absolute; inset: 0; border-radius: 24px; z-index: 1; }}
+.st-key-ui_flamy:hover {{ border-color: {ACCENT}; }}
 section[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; right: 24px; bottom: 24px; margin: 0;
   width: min(420px, calc(100vw - 32px)); background: rgba(14, 18, 44, 0.92); backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px); border: 1px solid {SECONDARY_LINE}; border-radius: 22px; }}
