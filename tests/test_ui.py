@@ -603,3 +603,14 @@ def test_the_research_conditions_say_what_was_tested_and_what_never_was():
     rows = {row["condition"]: row for row in coverage(tests, fiches, station)}
     assert rows["Gravity"]["status"] == "Tested"
     assert rows["Solid fuels"]["status"] == "Partly"  # tested at that oxygen, but its pressure is not recorded
+
+
+def test_coverage_at_1_g_counts_only_rows_with_a_1_g_result():
+    """PSI's tests flew in microgravity: only Saffire-II's rows also record a 1-g burn length."""
+    from flame.commun import charger_fiches, charger_tests
+    from flame.ui import coverage
+
+    earth = {"oxygene_pct": (19.0, 23.0), "pression_kpa": (90.0, 110.0), "gravite": 1.0}
+    gravity = coverage(charger_tests(), charger_fiches(), earth)[0]
+    assert gravity["condition"] == "Gravity" and gravity["status"] != "Tested"
+    assert "microgravity" in gravity["detail"]

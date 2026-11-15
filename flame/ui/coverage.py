@@ -65,28 +65,45 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
         rows.append(
             dict(
                 condition="Gravity",
-                nasa="Microgravity (ISS, Cygnus) and Earth's 1 g",
+                nasa="Microgravity (ISS, Cygnus)",
                 yours="unknown",
                 status=NO_BOUNDS,
                 detail="Your environment gives no gravity.",
             )
         )
-    elif gravity == 0 or gravity == 1:
-        where = "in microgravity on the ISS and the Cygnus spacecraft" if gravity == 0 else "at Earth's 1 g"
+    elif gravity == 0:
         rows.append(
             dict(
                 condition="Gravity",
-                nasa="Microgravity (ISS, Cygnus) and Earth's 1 g",
-                yours=f"{gravity:g} g",
+                nasa="Microgravity (ISS, Cygnus)",
+                yours="0 g",
                 status=TESTED,
-                detail=f"NASA's PSI tests were run {where}.",
+                detail="NASA's PSI tests were run in microgravity on the ISS and the Cygnus spacecraft.",
+            )
+        )
+    elif gravity == 1:
+        # Seules les lignes dont le résultat note une mesure « 1-g » (Saffire-II) ont une valeur à 1 g.
+        results = tests["resultat"].astype(str) if "resultat" in tests.columns else pd.Series(dtype=str)
+        at_1g = int(results.str.contains("1-g", regex=False).sum())
+        rows.append(
+            dict(
+                condition="Gravity",
+                nasa="Microgravity (ISS, Cygnus)",
+                yours="1 g",
+                status=PARTLY if at_1g else NOT_TESTED,
+                detail=(
+                    f"Only {at_1g} test rows record a result at 1 g (a 1-g burn length). "
+                    "All other PSI tests were run in microgravity, and the counts below are not split by gravity."
+                    if at_1g
+                    else "No PSI test row records a result at 1 g: the tests were run in microgravity."
+                ),
             )
         )
     else:
         rows.append(
             dict(
                 condition="Gravity",
-                nasa="Microgravity (ISS, Cygnus) and Earth's 1 g",
+                nasa="Microgravity (ISS, Cygnus)",
                 yours=f"{gravity:g} g",
                 status=NOT_TESTED,
                 detail=f"No PSI test was run at {gravity:g} g: partial gravity has never been tested.",
