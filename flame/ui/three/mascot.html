@@ -13,7 +13,9 @@
       // (the bendy style of 1930s cartoons), waving hello. Decorative only: no data here.
       import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
 
-      const settings = __SETTINGS__; // nothing to set for now: {}
+      const settings = __SETTINGS__; // {"calm": true} on the Assistant page
+      // Calm: almost still, no waving; the eyes follow the visitor's pointer, as if Flamy looked at them.
+      const calm = !!settings.calm;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       let renderer;
@@ -83,6 +85,7 @@
       const face = new THREE.Group();
       face.position.set(0, 0.06, 0.5);
       const eyes = [];
+      const pupils = [];
       for (const side of [-1, 1]) {
         const eye = new THREE.Group();
         const white = new THREE.Mesh(new THREE.SphereGeometry(0.13, 24, 18), toon("#ffffff"));
@@ -93,6 +96,8 @@
         const shine = new THREE.Mesh(new THREE.SphereGeometry(0.028, 12, 10), new THREE.MeshBasicMaterial({ color: "#ffffff" }));
         shine.position.set(-0.03, 0.04, 0.09);
         eye.add(white, pupil, shine);
+        pupil.userData.base = pupil.position.clone();
+        pupils.push(pupil);
         eye.position.set(0.15 * side, 0.08, 0);
         face.add(eye);
         eyes.push(eye);
@@ -175,11 +180,33 @@
         }
       };
 
+      // Where the visitor's pointer is, from -1 to 1 around the scene (read in the page around it).
+      const look = { x: 0, y: 0, tx: 0, ty: 0 };
+      const follow = (event) => {
+        try {
+          const frame = window.frameElement;
+          const box = frame ? frame.getBoundingClientRect() : { left: 0, top: 0, width: innerWidth, height: innerHeight };
+          const view = frame ? window.parent : window;
+          look.tx = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / (view.innerWidth / 2)));
+          look.ty = Math.max(-1, Math.min(1, (event.clientY - (box.top + box.height / 2)) / (view.innerHeight / 2)));
+        } catch (error) {
+          /* the page around is out of reach: Flamy keeps looking ahead */
+        }
+      };
+      if (calm) {
+        window.addEventListener("pointermove", (event) => follow(event));
+        try {
+          window.parent.document.addEventListener("pointermove", follow);
+        } catch (error) {
+          /* same as above */
+        }
+      }
+
       const V = (x, y, z) => new THREE.Vector3(x, y, z);
       // Pose at time t (s): a soft bouncy idle, the right arm waving hello, the left arm swinging gently.
       const pose = (t) => {
-        const bounce = 0.5 + 0.5 * Math.sin(t * 2.6); // smooth up and down
-        const drop = 0.05 * (1 - bounce);
+        const bounce = 0.5 + 0.5 * Math.sin(t * (calm ? 1.4 : 2.6)); // smooth up and down (slow when calm)
+        const drop = (calm ? 0.012 : 0.05) * (1 - bounce);
         body.position.y = -drop;
         const squash = 1 - 0.05 * (1 - bounce);
         body.scale.set(1 / Math.sqrt(squash), squash, 1 / Math.sqrt(squash));
@@ -193,11 +220,18 @@
         const shoulderY = -0.02 - drop;
         // Right arm raised, the hand swinging from the wrist as it waves.
         const wave = talking ? 0.5 * Math.sin(t * 6) : Math.sin(t * 4.5);
-        const raised = bend(arms[0], [V(0.46, shoulderY, 0.05), V(0.66, 0.16 - drop, 0.1), V(0.7 + 0.07 * wave, 0.42 - drop, 0.14)], 0.04);
-        attach(hands[0], raised);
-        hands[0].rotateY(0.35 * wave);
+        if (calm) {
+          // Calm: the right arm rests too, mirroring the left one.
+          const still = Math.sin(t * 1.4 + 2);
+          const resting = bend(arms[0], [V(0.46, shoulderY, 0.05), V(0.62, -0.18 - drop, 0.08), V(0.64 - 0.015 * still, -0.4 - drop, 0.12)], 0.04);
+          attach(hands[0], resting);
+        } else {
+          const raised = bend(arms[0], [V(0.46, shoulderY, 0.05), V(0.66, 0.16 - drop, 0.1), V(0.7 + 0.07 * wave, 0.42 - drop, 0.14)], 0.04);
+          attach(hands[0], raised);
+          hands[0].rotateY(0.35 * wave);
+        }
         // Left arm relaxed, swinging a little.
-        const swing = Math.sin(t * 2.6 + 1);
+        const swing = calm ? 0.25 * Math.sin(t * 1.4 + 1) : Math.sin(t * 2.6 + 1);
         const relaxed = bend(arms[1], [V(-0.46, shoulderY, 0.05), V(-0.62, -0.18 - drop, 0.08), V(-0.64 + 0.04 * swing, -0.4 - drop, 0.12)], 0.04);
         attach(hands[1], relaxed);
         // Short legs: they bend a little as the body comes down, feet stay on the ground.
@@ -214,11 +248,18 @@
         const speech = talking ? Math.abs(Math.sin(t * 13)) * (0.6 + 0.4 * Math.sin(t * 3.1)) : 0;
         mouth.scale.set(1 - 0.15 * speech, 0.85 + 1.4 * speech, 1);
         tongueTip.position.y = -0.14 - 0.07 * speech;
+        // The eyes look at the visitor's pointer (calm), else straight ahead.
+        look.x += (look.tx - look.x) * 0.12;
+        look.y += (look.ty - look.y) * 0.12;
+        pupils.forEach((pupil) => {
+          const base = pupil.userData.base;
+          pupil.position.set(base.x + 0.035 * look.x, base.y - 0.03 * look.y, base.z);
+        });
         // A blink every few seconds.
         const blink = t % 3.6 < 0.12 ? 0.1 : 1;
         eyes.forEach((eye) => (eye.scale.y = blink));
         sparks.forEach((spark) => {
-          const a = spark.userData.angle + t * spark.userData.speed;
+          const a = spark.userData.angle + t * spark.userData.speed * (calm ? 0.3 : 1);
           spark.position.set(0.75 * Math.cos(a), spark.userData.height + 0.08 * Math.sin(t * 2 + a), 0.75 * Math.sin(a) - 0.2);
         });
       };
@@ -237,7 +278,13 @@
         const t = reducedMotion ? 0.5 : time / 1000;
         rise += ((talking ? 0.22 : 0) - rise) * 0.08;
         character.position.y = rise;
-        if (!reducedMotion) character.rotation.y = 0.2 * Math.sin(t * 0.6);
+        if (calm) {
+          // Calm: no sway; the head turns a little towards the pointer.
+          character.rotation.y = 0.18 * look.x;
+          character.rotation.x = 0.06 * look.y;
+        } else if (!reducedMotion) {
+          character.rotation.y = 0.2 * Math.sin(t * 0.6);
+        }
         pose(t);
         renderer.render(scene, camera);
       };

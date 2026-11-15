@@ -188,8 +188,10 @@ def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
                 fill="toself",
                 fillcolor=f"rgba({zone['couleur']}, 0.13)",
                 line={"color": f"rgba({zone['couleur']}, 0.55)", "width": 1},
-                name=f"{zone['nom']} ({zone['source']}{precision})",
-                hoverinfo="name",
+                # La légende ne porte que le nom : la provenance est dans l'infobulle, au survol.
+                name=zone["nom"],
+                hoverinfo="text",
+                hovertext=f"{zone['nom']} — {zone['source']}{precision}",
             )
         )
     if vue == "pression":
@@ -199,8 +201,8 @@ def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
                 y=[COMBINAISON["pression_kpa"]],
                 mode="markers",
                 marker={"symbol": "star", "size": 14, "color": "#7c3aed"},
-                name=f"{COMBINAISON['nom']} ({COMBINAISON['source']})",
-                hovertemplate="Spacesuit: 100 % oxygen, 29.6 kPa<extra></extra>",
+                name=COMBINAISON["nom"],
+                hovertemplate=(f"Spacesuit: 100 % oxygen, 29.6 kPa — {COMBINAISON['source']}<extra></extra>"),
             )
         )
     # Les tests de chaque investigation sont regroupés : une couleur et une ligne de légende par investigation.
@@ -215,7 +217,8 @@ def graphique_conditions(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
             _points(groupe, colonne, noms, nom, couleurs[identifiant], estompe, identifiant, dans_la_legende)
         )
     for identifiant, groupe in surlignes.groupby("investigation_id", sort=True):
-        nom = f"{noms.get(identifiant, identifiant)} (matches)"
+        # Pas de « (matches) » dans la légende : ces tests se reconnaissent à leur cercle (voir `_points`).
+        nom = noms.get(identifiant, identifiant)
         figure.add_trace(
             _points(groupe, colonne, noms, nom, couleurs[identifiant], 0.95, identifiant, True, cercle=True)
         )

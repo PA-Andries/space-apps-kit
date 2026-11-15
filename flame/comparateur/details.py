@@ -31,9 +31,9 @@ SENS_D_UNE_LIGNE = {
     "published data item": "one row = one published data item",
 }
 CONSEQUENCES = {
-    1: "Their results can be read side by side.",
-    2: "Comparing them shows whether a result holds in other hardware or at another scale.",
-    3: "They answer different questions: compare what they study rather than their numbers.",
+    1: "They share a set-up, so what differs is what was burned and under which conditions.",
+    2: "NASA links them without a shared set-up: compare what they study before comparing their numbers.",
+    3: "Nothing in NASA's data links them: compare what they study, not their numbers.",
 }
 ABSENT = "not recorded"
 
@@ -114,7 +114,6 @@ def cote_a_cote(
         fiche = fiches[fiches["id"] == identifiant].iloc[0]
         fins = frequents(tests, identifiant, "resultat")
         colonnes[identifiant] = {
-            "type_combustible": _texte(fiche["type_combustible"]),
             **portrait(fiche, tests, ligne_psi(investigations_psi, identifiant)),
             "How tests ended": "; ".join(f"{valeur} ({nombre})" for valeur, nombre in fins) or ABSENT,
             "Measuring instruments": str(len(instruments_de(fiche["capteurs"]))) or ABSENT,
@@ -191,9 +190,10 @@ def resume(
 
     relation = []
     for autre in ids[1:]:
-        niveau, raison = niveau_et_raison(depart, fiches[fiches["id"] == autre].iloc[0])
+        niveau, raison = niveau_et_raison(depart, fiches[fiches["id"] == autre].iloc[0], investigations_psi, relations)
         relation.append(
-            f"{noms[autre]} is {NIVEAUX[niveau].lower()} to {noms[ids[0]]}: {raison.lower()}. {CONSEQUENCES[niveau]}"
+            f"{noms[autre]} is {NIVEAUX[niveau].lower()} to {noms[ids[0]]}: "
+            f"{raison[:1].lower()}{raison[1:]}. {CONSEQUENCES[niveau]}"
         )
     if relations is not None:
         relation += liens_nasa(relations, ids, noms)
@@ -252,7 +252,9 @@ def resume(
         if nombre:
             exemples = ", ".join(nom for nom, _ in frequents(tests, identifiant, "combustible"))
             combustibles.append(
-                f"{noms[identifiant]} burned {nombre} fuel(s): {exemples}{' and others' if nombre > 3 else ''}."
+                # NASA écrit tantôt un combustible, tantôt un échantillon (« 1 cm wide PMMA 1 mm thick »).
+                f"{noms[identifiant]} lists {nombre} fuel or sample description(s) in NASA's table: "
+                f"{exemples}{' and others' if nombre > 3 else ''}."
             )
     fins = {identifiant: frequents(tests, identifiant, "resultat", 1) for identifiant in ids}
     for identifiant, plus_frequent in fins.items():
@@ -261,6 +263,15 @@ def resume(
             combustibles.append(
                 f"{noms[identifiant]} records how each test ended, most often “{valeur}” ({nombre} rows)."
             )
+    # Les combustibles écrits de la même façon dans les tables de toutes les investigations : rien n'est rapproché
+    # à la main (« Ethylene » et « C2H4 » restent deux écritures différentes).
+    ecrits = [
+        set(tests[tests["investigation_id"] == identifiant]["combustible"].dropna().astype(str)) for identifiant in ids
+    ]
+    partages = sorted(set.intersection(*ecrits)) if ecrits else []
+    if partages:
+        suite = " and others" if len(partages) > 4 else ""
+        combustibles.append(f"NASA's tables list the same fuel for all of them: {', '.join(partages[:4])}{suite}.")
     sans_fin = [noms[identifiant] for identifiant, plus_frequent in fins.items() if not plus_frequent]
     if sans_fin:
         combustibles.append(f"How each test ended is not recorded for {', '.join(sans_fin)}.")

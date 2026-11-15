@@ -52,7 +52,7 @@ GLOBAL_STYLE = f"""<style>
 [data-testid="stPageLink"] a {{ justify-content: center; }}
 [data-testid="stPageLink"] a p {{ color: {FLAME}; font-size: 1.15rem; font-weight: 500; }}
 [data-testid="stPageLink"] a:hover {{ background: transparent; }}
-[data-testid="stPageLink"] a:hover p {{ text-decoration: underline; }}
+[data-testid="stPageLink"] a:hover p {{ text-decoration: none; opacity: 0.8; }}
 
 /* 3D scenes: large round-cornered windows on space, with a soft, wide shadow. The dark background
    shows while a scene loads, instead of a white flash. */
@@ -100,7 +100,7 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-cta:hover {{ background: #c9541c; }}
 .ff-more {{ color: {FLAME} !important; text-decoration: none !important; font-size: 1.1rem; font-weight: 500; }}
 .ff-more::after {{ content: " \\203A"; }}
-.ff-more:hover {{ text-decoration: underline !important; }}
+.ff-more:hover {{ text-decoration: none !important; opacity: 0.8; }}
 
 .ff-section {{ text-align: center; margin: 6rem 0 2rem; scroll-margin-top: 6rem; }}
 .ff-section .ff-step {{ color: {FLAME}; font-weight: 600; font-size: 1rem; margin: 0 0 0.5rem !important; }}
@@ -153,17 +153,18 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-stat small {{ display: block; color: #86868b; font-size: 0.72rem; margin-top: 0.25rem; }}
 
 /* The chatbot icon, pinned to the bottom-right corner (sketch 1 of the whiteboard). */
-.st-key-ui_chatbot {{ position: fixed; right: 22px; bottom: 18px; z-index: 1000; width: 112px; gap: 0;
+.st-key-ui_chatbot, .st-key-ui_flamy {{ position: fixed; right: 22px; bottom: 18px; z-index: 1000; width: 112px; gap: 0;
   background: #fff; border-radius: 24px; padding: 0.3rem 0.4rem 0.4rem;
   box-shadow: 0 10px 30px rgba(29, 29, 31, 0.18); }}
-.st-key-ui_chatbot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
+.st-key-ui_chatbot iframe, .st-key-ui_flamy iframe, .st-key-ui_flamy_face iframe {{ box-shadow: none; border-radius: 0;
+  background: transparent; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
 /* The whole button opens the chatbot, not only the word « Flamy »: the link gets an invisible layer over the
    whole card. The mascot's frame lets the clicks through (it does not react to the mouse), and the elements
    between the card and the link are not positioned, so that the layer covers the card. */
 .st-key-ui_chatbot {{ cursor: pointer; }}
-.st-key-ui_chatbot iframe {{ pointer-events: none; }}
+.st-key-ui_chatbot iframe, .st-key-ui_flamy iframe, .st-key-ui_flamy_face iframe {{ pointer-events: none; }}
 .st-key-ui_chatbot [data-testid="stElementContainer"], .st-key-ui_chatbot [data-testid="stPageLink"],
 .st-key-ui_chatbot [data-testid="stPageLink"] * {{ position: static; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] a::after {{ content: ""; position: absolute; inset: 0;
@@ -195,7 +196,8 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-outcomes li {{ color: {MUTED}; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; margin: 0; }}
 .ff-outcomes li b {{ color: {INK}; }}
 .ff-outcomes i {{ width: 10px; height: 10px; border-radius: 3px; display: inline-block; }}
-.st-key-ui_card_outcomes {{ background: {SECONDARY}; border: 1px solid {SECONDARY_LINE} !important;
+.st-key-ui_card_outcomes, .st-key-ui_card_coverage {{ background: {SECONDARY};
+  border: 1px solid {SECONDARY_LINE} !important;
   border-radius: 24px; padding: 1.1rem 1.2rem 1.2rem; backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%); }}
 
@@ -217,6 +219,76 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
   border: 1px solid {SECONDARY_LINE}; border-radius: 980px; padding: 0.3rem 0.9rem; }}
 .ff-env-line span {{ color: {ACCENT}; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin-right: 0.5rem; }}
+
+/* Flamy's button under the mascot, and its chat window: a small panel in the bottom-right corner. */
+.st-key-ui_flamy button {{ width: 100%; padding: 0.15rem 0.4rem; min-height: 0; border: none; background: transparent;
+  color: {ACCENT}; }}
+.st-key-ui_flamy button p {{ font-size: 0.82rem; font-weight: 700; }}
+section[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; right: 24px; bottom: 24px; margin: 0;
+  width: min(420px, calc(100vw - 32px)); background: rgba(14, 18, 44, 0.92); backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px); border: 1px solid {SECONDARY_LINE}; border-radius: 22px; }}
+/* The chat window, laid out like a messaging app. */
+section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ padding-bottom: 0; }}
+.st-key-ui_flamy_header {{ flex-wrap: nowrap; margin-top: -2.6rem; padding-bottom: 0.6rem;
+  border-bottom: 1px solid {SECONDARY_LINE}; }}
+/* The header is pulled up beside the window's close cross: let clicks go through it, so the cross works. */
+.st-key-ui_flamy_header {{ pointer-events: none; }}
+.st-key-ui_flamy_face {{ flex: 0 0 64px; width: 64px; }}
+.st-key-ui_flamy_header [data-testid="stElementContainer"]:has(.ff-chat-who) {{ flex: 1 1 auto;
+  width: auto; }}
+.st-key-ui_flamy_face iframe {{ width: 64px !important; }}
+.ff-chat-who {{ display: flex; flex-direction: column; line-height: 1.25; }}
+.ff-chat-who b {{ font-size: 1.05rem; color: {INK}; }}
+.ff-chat-who span {{ font-size: 0.78rem; color: {MUTED}; }}
+.st-key-ui_flamy_conversation {{ gap: 0.5rem; padding: 0.4rem 0.1rem; }}
+/* Bubbles: no avatars; Flamy on the left in glass, the visitor on the right in the accent. */
+.st-key-ui_flamy_conversation [data-testid^="stChatMessageAvatar"] {{ display: none; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessage"] {{ width: fit-content; max-width: 85%; gap: 0;
+  padding: 0.55rem 0.85rem; border-radius: 18px 18px 18px 6px; background: rgba(255, 255, 255, 0.07);
+  border: 1px solid {SECONDARY_LINE}; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] {{ padding: 0; margin: 0; min-width: 0;
+  height: auto !important; display: flow-root !important; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] div {{ margin: 0 !important; }}
+/* Inside a bubble, plain blocks: Streamlit's flex boxes would keep the text at one line's height. */
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] div {{ display: block !important;
+  height: auto !important; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] p {{ font-size: 0.92rem; line-height: 1.45;
+  margin: 0 0 0.3rem; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessageContent"] p:last-child {{ margin-bottom: 0; }}
+.st-key-ui_flamy_conversation [data-testid="stElementContainer"]:has([data-testid="stChatMessageAvatarUser"]) {{
+  align-self: flex-end; display: flex; justify-content: flex-end; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {{
+  margin-left: auto; background: {ACCENT}; border-color: {ACCENT}; border-radius: 18px 18px 6px 18px; }}
+.st-key-ui_flamy_conversation [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) p {{
+  color: #fff; }}
+
+/* No underline on any link or button text, even on hover: the site should not look like a back office. */
+.stApp a, .stApp a:hover, .stApp a:focus, .stApp a p, .stApp a:hover p, .stApp a span, .stApp a:hover span,
+.stApp button p, .stApp button:hover p {{ text-decoration: none !important; }}
+
+/* Under which conditions NASA ran its tests: a compact table with a status chip per condition. */
+.ff-coverage {{ display: flex; flex-direction: column; }}
+.ff-cov-row {{ display: grid; grid-template-columns: 1.3fr 1.4fr 1.3fr 0.9fr 2.6fr; gap: 0.8rem; align-items: center;
+  padding: 0.55rem 0.2rem; border-bottom: 1px solid {SECONDARY_LINE}; font-size: 0.9rem; color: {INK}; }}
+.ff-cov-row:last-child {{ border-bottom: none; }}
+.ff-cov-head {{ color: {MUTED}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; }}
+.ff-cov-name {{ font-weight: 700; }}
+.ff-cov-nasa, .ff-cov-detail {{ color: {MUTED}; }}
+.ff-cov-detail a, .ff-cov-verdict a {{ color: {ACCENT}; font-weight: 600; }}
+/* The verdict for the whole combination, above the table. */
+.ff-cov-verdict {{ display: flex; gap: 0.9rem; align-items: flex-start; padding: 0.9rem 1rem; margin-bottom: 0.6rem;
+  border: 1px solid {SECONDARY_LINE}; border-radius: 14px; background: rgba(255, 255, 255, 0.04); color: {INK}; }}
+.ff-cov-verdict .ff-cov-status {{ flex: 0 0 auto; margin-top: 0.15rem; }}
+.ff-cov-verdict b {{ display: block; font-size: 1.05rem; margin-bottom: 0.2rem; }}
+.ff-cov-verdict span:not(.ff-cov-status) {{ color: {MUTED}; font-size: 0.9rem; }}
+.ff-cov-then {{ color: {MUTED}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; margin: 0.4rem 0 0; }}
+.ff-cov-status {{ justify-self: start; border-radius: 980px; padding: 0.15rem 0.65rem; font-size: 0.78rem;
+  font-weight: 700; border: 1px solid {SECONDARY_LINE}; background: rgba(255, 255, 255, 0.06); }}
+.ff-cov-status.ff-tested {{ background: {ACCENT}; border-color: {ACCENT}; color: #fff; }}
+.ff-cov-status.ff-partly {{ border-color: {ACCENT}; color: {ACCENT}; }}
+@media (max-width: 760px) {{ .ff-cov-row {{ grid-template-columns: 1fr 1fr; }} .ff-cov-head {{ display: none; }} }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
@@ -294,7 +366,7 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
 iframe {{ box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }}
 
 /* The chatbot icon and the ANALYSE button glow a little, like the flame. */
-.st-key-ui_chatbot {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
+.st-key-ui_chatbot, .st-key-ui_flamy {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 122, 61, 0.18); }}
 .st-key-ui_analyse button {{ background: {ACCENT};

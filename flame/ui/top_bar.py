@@ -5,12 +5,14 @@ The menu itself is a bar fixed at the top of the window (`st.navigation(position
 there is no sidebar.
 """
 
+from collections.abc import Callable
 from html import escape
 
 import streamlit as st
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 from flame.commun import PROFILS, donnees_exemple, get_scenario, set_scenario
+from flame.ui.chatbot import flamy_corner
 from flame.ui.environment import environment_summary
 from flame.ui.style import apply_style
 
@@ -19,8 +21,11 @@ from flame.ui.style import apply_style
 PROFILES_OFFERED = [profile for profile in PROFILS if profile != "Étudiant"]
 
 
-def show_top_bar() -> None:
-    """Call once, in `app.py` (as `afficher_cadre`): style, disclaimer and scenario of every page."""
+def show_top_bar(answer: Callable | None = None) -> None:
+    """Call once, in `app.py` (as `afficher_cadre`): style, disclaimer and scenario of every page.
+
+    `answer`: the assistant's `repondre`, handed in by `app.py`, for Flamy in the bottom-right corner.
+    """
     scenario = get_scenario()
     # The home page buttons write into these keys: set them only once.
     st.session_state.setdefault("ui_habitat", scenario["habitat"])
@@ -38,6 +43,8 @@ def show_top_bar() -> None:
         st.warning("Fictional sample data: the real NASA data is not loaded yet.")
     # Page 1 writes in the same slot again once its form is read.
     show_environment_in_sidebar()
+    # Flamy in the bottom-right corner of every page; a click opens the chat window.
+    flamy_corner(answer)
 
 
 def show_environment_in_sidebar() -> None:
