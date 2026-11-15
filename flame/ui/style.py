@@ -223,7 +223,10 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 /* The menu: a frosted bar fixed at the top of the window, as on Apple's site. */
 header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid {SECONDARY_LINE}; }}
-[data-testid="stTopNav"] {{ justify-content: center; gap: 0.2rem; }}
+/* The menu sits at the exact middle of the window: placed on its own, it no longer depends on what else the
+   top bar holds (Streamlit's buttons on the right, a scrollbar), which pushed it to the left on some screens. */
+[data-testid="stTopNav"] {{ justify-content: center; gap: 0.2rem; position: absolute; left: 0; right: 0; top: 0;
+  height: 3.75rem; width: auto; align-items: center; }}
 /* Narrow windows: Streamlit swaps its top menu for a button on the left and a sidebar. The same menu,
    made in `top_bar.py`, takes its place, centred in the top bar; the button and the sidebar are hidden. */
 .st-key-ui_small_menu {{ display: none !important; }}
