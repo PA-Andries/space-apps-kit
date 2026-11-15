@@ -554,12 +554,30 @@ def test_chaque_plage_des_rapports_est_ecrite_dans_son_rapport_nasa():
         assert f"{bas:g}" in rapport["citation"] and f"{haut:g}" in rapport["citation"]
 
 
-def test_les_titres_de_la_fiche_disent_ce_qui_est_ecrit_dessous():
-    """Les rubriques de la fiche portent le vocabulaire de l'énoncé, pas « Hazards » ni « Prevention ».
+def _cartes(site) -> list[str]:
+    """Le HTML des cartes d'investigation affichées (celles de `flame.ui.investigation_details`)."""
+    return [str(bloc.value) for bloc in site.get("html") if '<div class="ff-inv-head">' in str(bloc.value)]
 
-    « Hazards » coiffait le combustible et les conditions testées, « Prevention » l'objectif de l'investigation,
-    y compris pour celles qui portent sur la détection ou l'extinction (remarque de Hugo, dimanche 15 nov.).
-    """
+
+def test_la_fiche_est_la_meme_carte_que_sur_la_page_1():
+    """Demande de Hugo (dimanche 15 nov.) : exactement les mêmes informations que sur Home, pas un mur de texte."""
+    from pathlib import Path
+
+    from streamlit.testing.v1 import AppTest
+
+    app = str(Path(__file__).resolve().parents[1] / "app.py")
+    site = AppTest.from_file(app, default_timeout=30).run()
+    premiere_sur_home = _cartes(site)[0]  # la plus pertinente, avec son rang 1
+    assert "What the experiment studied" in premiere_sur_home and "Why it matters for" in premiere_sur_home
+    site = site.switch_page("pages/recherche.py").run()
+    assert not site.exception
+    assert _cartes(site) == [premiere_sur_home]  # la fiche ouverte au départ est la plus pertinente
+    # Les anciennes rubriques (résumé, combustibles à la suite, objectif, mesures) ne sont plus là.
+    assert [titre.value for titre in site.subheader] == []
+    assert [tableau.key for tableau in site.dataframe if tableau.key == "recherche_tests_fiche"] == []
+
+
+def test_un_clic_dans_le_classement_change_la_carte():
     from pathlib import Path
 
     from streamlit.testing.v1 import AppTest
@@ -567,10 +585,13 @@ def test_les_titres_de_la_fiche_disent_ce_qui_est_ecrit_dessous():
     app = str(Path(__file__).resolve().parents[1] / "app.py")
     site = AppTest.from_file(app, default_timeout=30).run()
     site = site.switch_page("pages/recherche.py").run()
+    avant = _cartes(site)
+    rangs = [bouton.key for bouton in site.button if bouton.key and bouton.key.startswith("recherche_rang_")]
+    site.button(key=rangs[1]).click().run()
     assert not site.exception
-    titres = [titre.value for titre in site.subheader]
-    # Les fiches d'exemple ne sont sous aucun axe de l'énoncé : pas de rubrique d'axe.
-    assert titres == ["Summary", "Fuel and test conditions", "Objective", "Measurements and tests", "Compare"]
+    apres = _cartes(site)
+    assert len(apres) == 1 and apres != avant
+    assert '<span class="ff-inv-rank">2</span>' in apres[0]
 
 
 IDS_D_EXEMPLE = ("EXEMPLE-A", "EXEMPLE-B", "EXEMPLE-C", "EXEMPLE-D")
@@ -615,27 +636,29 @@ def test_le_descriptif_nomme_l_axe_de_l_enonce_ou_garde_la_phrase_generale(monke
     assert detail("EXEMPLE-C")["citee"] == ""  # ni citée ni sous un axe
 
 
-def test_la_fiche_montre_l_axe_et_la_phrase_de_l_enonce(monkeypatch):
+def test_la_fiche_garde_l_axe_de_l_enonce_dans_sa_carte(monkeypatch):
+    """Prevention, detection, suppression : la ligne « Statement » de la carte, pour les investigations concernées."""
     from pathlib import Path
 
     from streamlit.testing.v1 import AppTest
 
-    from flame.recherche import AXES, SOURCE_DES_AXES
+    from flame.recherche import AXES
 
-    monkeypatch.setitem(AXES["Detection"], "ids", IDS_D_EXEMPLE)
     app = str(Path(__file__).resolve().parents[1] / "app.py")
     site = AppTest.from_file(app, default_timeout=30).run()
     site = site.switch_page("pages/recherche.py").run()
+    assert "named under" not in _cartes(site)[0]  # les fiches d'exemple ne sont sous aucun axe
+    monkeypatch.setitem(AXES["Detection"], "ids", IDS_D_EXEMPLE)
+    site = site.run()
     assert not site.exception
-    assert "NASA fire-safety axis: Detection" in [titre.value for titre in site.subheader]
-    assert AXES["Detection"]["texte"] in [bloc.value for bloc in site.markdown]
-    assert SOURCE_DES_AXES in [bloc.value for bloc in site.caption]
+    carte = _cartes(site)[0]
+    assert "<b>Statement:</b> named under detection." in carte
+    assert "Smoke and Aerosol Measurement Experiment" in carte
 
 
 def test_la_page_ne_dit_pas_fiche_a_l_ecran():
-    """« fiche » est un mot français : une valeur absente s'affiche « Not recorded for this investigation. »."""
+    """« fiche » est un mot français : il ne s'affiche nulle part sur la page."""
     from pathlib import Path
 
     page = (Path(__file__).resolve().parents[1] / "pages" / "recherche.py").read_text(encoding="utf-8")
-    assert 'NON_NOTE = "Not recorded for this investigation."' in page
     assert "in the fiche" not in page
