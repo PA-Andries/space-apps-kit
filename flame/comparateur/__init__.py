@@ -21,6 +21,7 @@ from flame.comparateur.conditions import (
     environnement_defini,
     graphique_conditions,
     graphique_repartition,
+    investigations_correspondantes,
     plages_du_scenario,
     tests_correspondants,
 )
@@ -63,6 +64,7 @@ __all__ = [
     "graphique_conditions",
     "graphique_repartition",
     "instruments_communs",
+    "investigations_correspondantes",
     "ligne_psi",
     "mesures",
     "plages",

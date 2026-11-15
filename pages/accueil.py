@@ -231,29 +231,26 @@ matching = comparateur.tests_correspondants(tests, fiches, scenario)
 # --- Level 2: the figures, right under the choice that produces them ---------------------------------------
 # Each tile says what it counts: the first figure was the tests whose pressure is recorded, which read as
 # a missing third of the data (Ethan, Sun 15 Nov). The whole count comes first, the sure ones underneath.
+# The second counts investigations the way role D's `investigations_correspondantes` does, so the four
+# computational studies — no test rows of their own — are reachable and the figure can reach 24.
 sure = matching[matching["pression_notee"]]
-ran_tests = tests["investigation_id"].nunique()
-without_tests = len(fiches) - ran_tests
+investigations = comparateur.investigations_correspondantes(tests, fiches, scenario, charger_table_psi("relations"))
 if oxygen == (None, None) and pressure == (None, None):
-    # No atmosphere given (Mars base): every test would "match", so no count is shown.
+    # No atmosphere given (Mars base): no test can be placed against this environment, so the tiles say
+    # what NASA holds in all rather than claiming every test matches it (fact-check of #66).
     stat_tiles(
         [
-            ("—", "Tests in your environment", "no oxygen or pressure given"),
-            ("—", "Investigations", "none can be placed"),
+            (f"{len(tests):,}", "NASA tests in all", "none can be placed without an atmosphere"),
+            (f"{len(fiches)}", "Investigations in all", "move a slider to match them to a range"),
         ],
-        note="Give an oxygen or a pressure range with the sliders to see the NASA tests that match it.",
         compact=True,
     )
 else:
     stat_tiles(
         [
             (f"{len(matching):,}", "Tests in your environment", f"{len(sure):,} with pressure recorded"),
-            (f"{matching['investigation_id'].nunique()}", "Investigations", f"of the {ran_tests} that ran tests"),
+            (f"{len(investigations)}", "Investigations", f"of the {len(fiches)} in NASA's tables"),
         ],
-        note=(
-            f"{without_tests} of the {len(fiches)} investigations ran no test of their own: they reanalyse "
-            "data from other flights, so no test row can be counted for them."
-        ),
         compact=True,
     )
 

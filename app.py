@@ -13,8 +13,8 @@ st.set_page_config(page_title="Flame in Freefall", page_icon=":material/local_fi
 page = st.navigation(
     [
         st.Page("pages/accueil.py", title="Home", icon=":material/home:", default=True),
+        # L'ancienne page de données est retirée : son tableau et son export sont un onglet d'Investigations.
         st.Page("pages/recherche.py", title="Investigations", icon=":material/search:"),
-        st.Page("pages/donnees.py", title="Data and export", icon=":material/scatter_plot:"),
         st.Page("pages/comparateur.py", title="Compare", icon=":material/compare_arrows:"),
     ],
     position="top",  # the menu is a bar at the top of the page, not a sidebar

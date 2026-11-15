@@ -18,10 +18,7 @@ STEPS = [
     ("Read the chart", "Each point is one NASA test. The circled ones are inside your environment."),
     ("Read the results", "What NASA's data lacks for you, then the 3 most relevant investigations."),
 ]
-NEXT = (
-    "Then go further with the menu at the top: Investigations, Data and export, Compare, "
-    "or ask Flamy in the bottom-right corner."
-)
+NEXT = "Then go further with the menu at the top: Investigations, Compare, or ask Flamy in the bottom-right corner."
 HIDDEN_KEY = "ui_intro_hidden"
 
 INTRO_STYLE = f"""<style>

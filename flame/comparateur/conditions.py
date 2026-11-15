@@ -12,6 +12,8 @@ import plotly.graph_objects as go
 from flame.comparateur.comparaison import famille_combustible
 
 SANS_BORNE = (None, None)
+# Le lien de NASA entre une étude de calcul et l'investigation dont elle reprend les données.
+REANALYSE = "reuses data from"
 
 # Repli tant que le scénario étendu (lot A du recadrage) n'est pas dans `main` : les plages de chaque
 # habitat, avec les valeurs de `conditions_habitat`. Un habitat absent d'ici n'a aucune plage connue.
@@ -148,6 +150,31 @@ def tests_correspondants(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: di
         familles = dict(zip(fiches["id"], fiches["type_combustible"].map(famille_combustible), strict=True))
         garde &= tests["investigation_id"].map(familles).isin(plages["type_combustible"])
     return tests[garde].assign(pression_notee=tests.loc[garde, "pression_kpa"].notna())
+
+
+def investigations_correspondantes(
+    tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict, relations: pd.DataFrame | None = None
+) -> list[str]:
+    """Les investigations de l'environnement : celles dont un test correspond, et celles qui les réanalysent.
+
+    Quatre investigations des tables de PSI n'ont aucune ligne de test : ce sont des études de calcul qui
+    reprennent les données d'autres vols. Les compter par leurs tests les rendait inatteignables, et le
+    compteur de la page 1 plafonnait à 20 sur 24. Une étude de calcul compte donc quand l'investigation
+    dont elle réanalyse les données compte : le lien est celui de NASA, `reuses data from` dans
+    `data/psi/relations.csv`, pas une règle de l'équipe. Sans la table des relations, seules les
+    investigations qui ont fait leurs propres tests sont comptées.
+    """
+    retenues = set(tests_correspondants(tests, fiches, scenario)["investigation_id"])
+    if relations is not None and not relations.empty:
+        reprises = relations[relations["relation"] == REANALYSE]
+        # Une réanalyse peut en réanalyser une autre (PSI-117 reprend PSI-142, qui reprend PSI-69) :
+        # on remonte la chaîne jusqu'à ce qu'elle n'apporte plus personne.
+        for _ in range(len(reprises)):
+            gagnees = set(reprises.loc[reprises["to_id"].isin(retenues), "from_id"]) - retenues
+            if not gagnees:
+                break
+            retenues |= gagnees
+    return sorted(retenues & set(fiches["id"]))
 
 
 def _rectangle(x: tuple, y: tuple) -> tuple[list, list]:
