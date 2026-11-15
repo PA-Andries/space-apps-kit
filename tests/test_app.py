@@ -11,9 +11,7 @@ PAGES = [
     "pages/recherche.py",
     "pages/donnees.py",
     "pages/comparateur.py",
-    "pages/equipements.py",
-    "pages/assistant.py",
-]
+]  # Out of the menu: the assistant (Flamy opens on every page) and Equipment (a section of Home). Both files stay.
 
 
 def test_accueil_s_ouvre():
