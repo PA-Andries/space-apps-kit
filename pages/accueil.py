@@ -4,7 +4,7 @@ The page reads from the choice to its consequences (Ethan's ask of Sun 15 Nov):
  1. the environment: one button per place, then the sliders that refine it;
  2. two figures, right underneath: the tests that match, and the investigations behind them;
  3. the chart of NASA's tests against those conditions;
- 4. under which conditions NASA ran its tests (role F's coverage card);
+ 4. has your combination been tested, then under which conditions NASA ran its tests (role F's coverage card);
  5. what we don't know, then the three most relevant investigations;
  6. folded away: the hardware and the shape of the samples.
 Every page of the site is in the menu bar at the top.
@@ -29,6 +29,7 @@ from flame.ui import (
     REFERENCE_PLACES,
     SPACESUIT,
     card_title,
+    combination,
     conditions,
     coverage,
     coverage_card,
@@ -283,12 +284,12 @@ with st.container(key="ui_card_ranking"):
 # --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
 with st.container(key="ui_card_coverage"):
     card_title(
-        "Under which conditions NASA ran its tests",
-        "Gravity, oxygen, pressure, air flow and fuels: what was tested, and what never was, "
-        f"for {title_label(shown_place)}.",
+        "Has your combination been tested?",
+        f"All the settings of {title_label(shown_place)} together, against NASA's tests; then each setting "
+        "on its own: what was tested, and what never was.",
         tag="Research conditions",
     )
-    coverage_card(coverage(tests, fiches, scenario))
+    coverage_card(coverage(tests, fiches, scenario), combination(tests, fiches, scenario))
 
 # --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):
