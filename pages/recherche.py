@@ -90,8 +90,9 @@ with colonne_classement:
     with st.container(key="recherche_classement", height=720, border=False):
         for rang, (id_fiche, nom) in enumerate(zip(classement["id"], classement["nom"], strict=True), start=1):
             st.button(
-                f"{rang}. {nom} · {id_fiche}",
+                f"{rang}. {nom}",
                 key=f"recherche_rang_{id_fiche}",
+                help=f"{nom} · {id_fiche}",  # le nom entier au survol : la liste le coupe après deux lignes
                 type="primary" if id_fiche == choix else "secondary",
                 width="stretch",
                 on_click=_choisir,

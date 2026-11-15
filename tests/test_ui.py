@@ -513,9 +513,10 @@ def test_the_investigation_search_follows_the_ranking():
     assert not site.exception
     assert len(site.tabs) == 0  # no Ranking or What we don't know tab any more
     ranked = list(les_plus_pertinentes(charger_fiches(), get_scenario())["id"])
-    # The ranking on the right: one button per investigation, in the order of the ranking ("1. Name · PSI-10").
+    # The ranking on the right: one button per investigation, in the order of the ranking ("1. Name").
     buttons = [button for button in site.button if button.key.startswith("recherche_rang_")]
-    assert [button.label.split(" · ")[-1] for button in buttons] == ranked
+    assert [button.key.removeprefix("recherche_rang_") for button in buttons] == ranked
+    assert all(button.help.endswith(identifier) for button, identifier in zip(buttons, ranked, strict=True))
     assert buttons[0].label.startswith("1. ") and buttons[0].proto.type == "primary"  # the first shown at start
     # A click on another one shows it.
     site.button(key=f"recherche_rang_{ranked[2]}").click().run()
