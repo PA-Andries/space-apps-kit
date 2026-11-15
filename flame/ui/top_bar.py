@@ -1,4 +1,4 @@
-"""What shows on every page: the site style, a short disclaimer, the warnings, and the user's
+"""What shows on every page: the site style, the warnings, and the user's
 environment recalled under the top menu. The environment itself is set on page 1 (Home).
 
 The menu itself is a bar fixed at the top of the window (`st.navigation(position="top")` in `app.py`);
@@ -22,7 +22,7 @@ PROFILES_OFFERED = [profile for profile in PROFILS if profile != "Étudiant"]
 
 
 def show_top_bar(answer: Callable | None = None) -> None:
-    """Call once, in `app.py` (as `afficher_cadre`): style, disclaimer and scenario of every page.
+    """Call once, in `app.py` (as `afficher_cadre`): style and scenario of every page.
 
     `answer`: the assistant's `repondre`, handed in by `app.py`, for Flamy in the bottom-right corner.
     """
@@ -33,10 +33,9 @@ def show_top_bar(answer: Callable | None = None) -> None:
         profile = scenario["profil"]
         st.session_state["ui_profile"] = profile if profile in PROFILES_OFFERED else PROFILES_OFFERED[0]
     apply_style()
-    # Under the menu: the user's environment on the left, the disclaimer on the right.
+    # Under the menu: the user's environment.
     with st.container(key="ui_status_line", horizontal=True, vertical_alignment="center"):
         st.session_state["ui_sidebar_environment"] = (st.empty(), _this_run())
-        st.html('<p class="ff-disclaimer">A tool to help understand the research: not a safety certification.</p>')
     # Pillars are dropped (PA, Sat 17:00): the obsolete `pilier` key is passed on as it is, never chosen here.
     set_scenario(st.session_state["ui_habitat"], scenario["pilier"], st.session_state["ui_profile"])
     if donnees_exemple():
