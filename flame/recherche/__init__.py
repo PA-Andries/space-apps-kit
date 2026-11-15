@@ -1,7 +1,7 @@
 """Rôle C (Recherche) : le classement des investigations pour un environnement, et ce qu'on ne sait pas."""
 
 from flame.recherche.conditions import tests_dans_les_plages
-from flame.recherche.descriptif import descriptif
+from flame.recherche.descriptif import AXES, SOURCE_DES_AXES, axe_de_securite, descriptif
 from flame.recherche.filtres import filtrer, valeurs_possibles
 from flame.recherche.independance import independance
 from flame.recherche.lacunes import ce_quon_ne_sait_pas, champs_inconnus, frontiere_des_solides, verdict
@@ -12,7 +12,10 @@ from flame.recherche.synthese import citations_des_plus_pertinentes, synthese_de
 from flame.recherche.vue_lacunes import afficher_ce_quon_ne_sait_pas
 
 __all__ = [
+    "AXES",
+    "SOURCE_DES_AXES",
     "afficher_ce_quon_ne_sait_pas",
+    "axe_de_securite",
     "ce_quon_ne_sait_pas",
     "champs_inconnus",
     "citations_des_plus_pertinentes",

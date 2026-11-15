@@ -16,7 +16,13 @@ import streamlit as st
 
 from flame.commun import charger_fiches, charger_tests, get_scenario
 from flame.comparateur import tableau_des_tests
-from flame.recherche import champs_inconnus, les_plus_pertinentes, tests_dans_les_plages
+from flame.recherche import (
+    SOURCE_DES_AXES,
+    axe_de_securite,
+    champs_inconnus,
+    les_plus_pertinentes,
+    tests_dans_les_plages,
+)
 from flame.ui import carte_fiche, label
 
 TITRES_TESTS = {
@@ -29,7 +35,7 @@ TITRES_TESTS = {
     "resultat": "Result",
     "source": "Source",
 }
-NON_NOTE = "Not recorded in the fiche."
+NON_NOTE = "Not recorded for this investigation."
 
 
 def _texte(valeur: object) -> str:
@@ -128,6 +134,14 @@ with onglet_fiche:
 
         st.subheader("Objective")
         st.markdown(f"**What the investigation set out to learn:** {_texte(fiche.get('objectif'))}")
+
+        # Prevention, detection ou suppression : seulement quand l'énoncé range lui-même l'investigation
+        # sous cet axe (huit investigations), avec sa phrase. Rien n'est déduit pour les autres.
+        axe = axe_de_securite(fiche["id"])
+        if axe:
+            st.subheader(f"NASA fire-safety axis: {axe[0]}")
+            st.markdown(axe[1])
+            st.caption(SOURCE_DES_AXES)
 
         st.subheader("Measurements and tests")
         dedans = tests_dans_les_plages(siens, scenario)

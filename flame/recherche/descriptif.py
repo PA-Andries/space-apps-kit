@@ -21,6 +21,48 @@ TEXTES_NASA = {
 LONGUEUR_COURTE = 380  # longueur maximale du début des objectifs montré sur la carte
 CITEE = "Named in NASA's challenge statement."
 
+# Les trois axes du travail de NASA sur la sécurité incendie, d'après l'énoncé du défi (« NASA's spacecraft
+# fire safety work is focused on prevention, detection, and suppression »), avec les seules investigations
+# que l'énoncé range lui-même sous chaque axe, et sa phrase à leur sujet, reprise au plus près.
+# Les autres investigations n'ont pas d'axe ici : la colonne `fire_safety_pillar` des tables est le classement
+# de l'équipe, pas celui de NASA, et elle n'est pas utilisée.
+AXES = {
+    "Prevention": {
+        "ids": ("PSI-25", "PSI-26", "PSI-98", "PSI-99", "PSI-100"),  # BASS-II, BASS, Saffire-I, -II, -III
+        "texte": (
+            "Prevention is achieved by controlling ignition sources and through material selection, which "
+            "depends on understanding flammability limits. This investigation is one of the flammability "
+            "studies of solid materials, such as fabrics and plastics, that the statement names."
+        ),
+    },
+    "Detection": {
+        "ids": ("PSI-101", "PSI-102"),  # SAME-R, SAME
+        "texte": (
+            "Fire detection was tested in microgravity through the Smoke and Aerosol Measurement Experiment "
+            "studies, SAME and SAME-R: this investigation is one of them."
+        ),
+    },
+    "Suppression": {
+        "ids": ("PSI-69",),  # FLEX
+        "texte": (
+            "Suppression was studied in this experiment through dilution of the chamber atmosphere with "
+            "carbon dioxide and helium, both of which suppress fire."
+        ),
+    },
+}
+SOURCE_DES_AXES = "Source: NASA's challenge statement, which names this investigation under this axis."
+
+
+def axe_de_securite(identifiant: object) -> tuple[str, str] | None:
+    """L'axe sous lequel l'énoncé range l'investigation, et sa phrase : ("Prevention", "..."), ou None.
+
+    Seules les huit investigations que l'énoncé nomme sous un axe en ont un. Rien n'est déduit pour les autres.
+    """
+    for axe, contenu in AXES.items():
+        if identifiant in contenu["ids"]:
+            return axe, contenu["texte"]
+    return None
+
 
 def _texte(valeur: object) -> str:
     """Le texte d'une case, ou "" quand elle est vide."""
@@ -91,7 +133,9 @@ def descriptif(
     - `textes` : {titre affiché: texte complet de NASA} pour les objectifs, l'approche, l'hypothèse et les
       retombées sur Terre (seulement ceux qui existent) ;
     - `raisons` : [(critère, explication), ...] de `detail_du_score`, sans les points ;
-    - `citee` : la phrase « citée dans l'énoncé », ou "".
+    - `citee` : la phrase « citée dans l'énoncé », ou "" ; pour une investigation que l'énoncé range sous
+      un axe (prevention, detection, suppression), elle nomme l'axe et reprend la phrase de l'énoncé ;
+    - `axe` : le nom de cet axe, ou "".
 
     `investigations_psi` (table `investigations` du rôle B) est lue sur le disque quand on ne la donne pas.
     """
@@ -108,6 +152,9 @@ def descriptif(
         textes["Objectives"] = objectifs
     raisons = detail_du_score(fiche, scenario, pertinence, tests)
     citee = pd.to_numeric(ligne.get("cited_in_statement_as_fire_safety"), errors="coerce") == 1
+    axe = axe_de_securite(fiche.get("id"))
+    phrase_generale = CITEE if citee else ""
+    phrase_citee = f"named under {axe[0].lower()}. {axe[1]}" if axe else phrase_generale
     return {
         "titre": _texte(ligne.get("title")),
         # Un brûleur à gaz qui imite un solide n'est pas affiché « Solid fuel ».
@@ -118,5 +165,6 @@ def descriptif(
         "objectif_court": debut(objectifs),
         "textes": {titre: texte for titre, texte in textes.items() if texte},
         "raisons": list(zip(raisons["critere"], raisons["explication"], strict=True)),
-        "citee": CITEE if citee else "",
+        "citee": phrase_citee,
+        "axe": axe[0] if axe else "",
     }
