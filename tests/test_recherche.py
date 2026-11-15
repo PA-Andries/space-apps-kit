@@ -22,9 +22,9 @@ from flame.recherche import (
     frontiere_des_solides,
     independance,
     les_plus_pertinentes,
-    mesures_notees,
     rechercher,
     regle_de_l_oxygene,
+    regle_de_la_pression,
     synthese_des_plus_pertinentes,
     valeurs_possibles,
     verdict,
@@ -237,11 +237,74 @@ def test_champs_inconnus_d_une_fiche():
 
 
 def test_la_synthese_compare_les_trois_plus_pertinentes():
+    # Les fiches d'exemple n'ont pas de constat de rapport : les accords retombent sur ce qu'elles ont en commun.
     synthese = synthese_des_plus_pertinentes(charger_fiches(), charger_tests(), LUNE)
     assert len(synthese["investigations"]) == 3
+    assert synthese["accords"][0].startswith("Their NASA reports do not study the same effect")
     assert "All 3 ran tests at 21 % oxygen: a common ground to compare them." in synthese["accords"]
     assert any(phrase.startswith("They burn different fuels") for phrase in synthese["attention"])
-    assert any("partial gravity of the Moon base (0.165 g)" in phrase for phrase in synthese["attention"])
+
+
+def _constats_fictifs():
+    """Des constats de rapports pour les fiches d'exemple : A et C d'accord, C et D en désaccord."""
+    lignes = [
+        ("EXEMPLE-A", "air_flow_extinction", "low_flow_quench", False, "A went out at 2 cm/s.", "q", "Rapport A", "12"),
+        ("EXEMPLE-C", "air_flow_extinction", "low_flow_quench", False, "C went out at 1 cm/s.", "q", "Rapport C", ""),
+        ("EXEMPLE-C", "one_g_vs_microgravity", "1g_test_misses", True, "C burned only in 0 g.", "q", "Rapport C", "3"),
+        (
+            "EXEMPLE-D",
+            "one_g_vs_microgravity",
+            "1g_test_harsher",
+            False,
+            "D burned more at 1 g.",
+            "q",
+            "Rapport D",
+            "8",
+        ),
+        ("EXEMPLE-D", "combustion_products", "toxic_co", True, "D made a lot of CO.", "q", "Rapport D", "9"),
+    ]
+    colonnes = ["investigation_id", "theme", "effet", "important", "constat", "citation", "source", "page"]
+    return pd.DataFrame(lignes, columns=colonnes)
+
+
+def test_les_accords_et_desaccords_viennent_des_rapports(monkeypatch):
+    monkeypatch.setattr(import_module("flame.recherche.synthese"), "charger_constats", _constats_fictifs)
+    fiches = charger_fiches()
+    noms = dict(zip(fiches["id"], fiches["nom"], strict=True))
+    synthese = synthese_des_plus_pertinentes(fiches, charger_tests(), LUNE)
+    assert synthese["accords"][0] == (
+        f"{noms['EXEMPLE-A']} and {noms['EXEMPLE-C']} both found that flames go out when the air flow slows to a "
+        "few cm/s (Rapport A, p. 12; Rapport C)."
+    )
+    attention = synthese["attention"]
+    assert any("do not agree on NASA's 1-g screening test" in phrase for phrase in attention)
+    # Le constat important de C est dans le désaccord, pas répété ; celui de D est seul : il est signalé.
+    assert f"Only {noms['EXEMPLE-D']} reports this: D made a lot of CO. (Rapport D, p. 9)" in attention
+    assert not any(phrase.startswith(f"Only {noms['EXEMPLE-C']}") for phrase in attention)
+
+
+def test_chaque_citation_des_constats_est_dans_son_rapport_nasa():
+    from pathlib import Path
+
+    racine = Path(__file__).resolve().parents[1] / "data"
+    if not (racine / "psi" / "textes").exists():
+        pytest.skip("pas les textes des rapports NASA")
+    constats = import_module("flame.recherche.synthese").charger_constats()
+    tests = pd.read_csv(racine / "tests.csv")
+
+    def normaliser(texte: str) -> str:
+        return " ".join(texte.split()).replace("- ", "-")
+
+    for _, constat in constats.iterrows():
+        if constat["source"].startswith("PSI test table"):
+            siens = tests.loc[tests["investigation_id"] == constat["investigation_id"], "resultat"].astype(str)
+            assert siens.str.contains(constat["citation"], regex=False).any(), constat["citation"]
+        else:
+            dossier = racine / "psi" / "textes" / constat["investigation_id"]
+            textes = " ".join(
+                fichier.read_text(encoding="utf-8", errors="replace") for fichier in dossier.glob("*.txt")
+            )
+            assert normaliser(constat["citation"]) in normaliser(textes), constat["citation"]
 
 
 def test_la_synthese_trouve_le_combustible_et_le_materiau_communs():
@@ -425,22 +488,36 @@ def test_la_grille_d_une_atmosphere_inconnue_ne_compte_rien():
     assert all(case["tests"] is None for case in grille["cases"])
 
 
-def test_la_regle_de_l_oxygene_mesure_le_trou_de_chaque_combustible():
+def _lignes(regle: dict) -> dict:
+    return {ligne["type"]: (ligne["plage"], ligne["trous"]) for ligne in regle["combustibles"]}
+
+
+def test_la_zone_jamais_testee_contient_l_environnement():
+    # Lune : O2 ≥ 30 %, sans borne haute. Les solides (16 à 21 %) n'ont rien testé de 21 % jusqu'au bout.
     regle = regle_de_l_oxygene(charger_fiches(), charger_tests(), LUNE)
     assert regle["environnement"] == (30.0, None)
-    lignes = {ligne["type"]: (ligne["plage"], ligne["ecart"]) for ligne in regle["combustibles"]}
-    assert lignes == {"solide": ((16.0, 21.0), 9.0), "liquide": ((10.0, 40.0), None), "gaz": ((21.0, 40.0), None)}
+    assert _lignes(regle) == {
+        "solide": ((16.0, 21.0), [(21.0, None)]),
+        "liquide": ((10.0, 40.0), [(40.0, None)]),
+        "gaz": ((21.0, 40.0), [(40.0, None)]),
+    }
+    # Station : 19 à 23 %. Les solides s'arrêtent à 21 %, les gaz commencent à 21 %.
+    assert _lignes(regle_de_l_oxygene(charger_fiches(), charger_tests(), STATION)) == {
+        "solide": ((16.0, 21.0), [(21.0, 23.0)]),
+        "liquide": ((10.0, 40.0), []),
+        "gaz": ((21.0, 40.0), [(19.0, 21.0)]),
+    }
+
+
+def test_la_regle_de_la_pression_marche_comme_celle_de_l_oxygene():
+    # Lune : pression ≤ 70.3 kPa, sans borne basse.
+    regle = regle_de_la_pression(charger_fiches(), charger_tests(), LUNE)
+    assert regle["environnement"] == (None, 70.3)
+    assert _lignes(regle) == {
+        "solide": ((101.0, 101.0), [(None, 101.0)]),
+        "liquide": ((70.0, 70.0), [(70.0, 70.3), (None, 70.0)]),
+        "gaz": ((101.0, 101.0), [(None, 101.0)]),
+    }
     assert all(
-        ligne["ecart"] is None
-        for ligne in regle_de_l_oxygene(charger_fiches(), charger_tests(), STATION)["combustibles"]
+        ligne["trous"] == [] for ligne in regle_de_la_pression(charger_fiches(), charger_tests(), MARS)["combustibles"]
     )
-
-
-def test_mesures_notees_dit_pour_chaque_investigation_si_l_oxygene_et_la_pression_sont_notes():
-    fiches = charger_fiches()
-    fiches.loc[fiches["id"] == "EXEMPLE-B", "pression_kpa"] = None
-    mesures = mesures_notees(fiches)
-    assert set(mesures) == {"Oxygen range", "Pressure"}
-    assert len(mesures["Pressure"]) == len(fiches)
-    nom_b = fiches.loc[fiches["id"] == "EXEMPLE-B", "nom"].iloc[0]
-    assert (nom_b, False) in mesures["Pressure"]

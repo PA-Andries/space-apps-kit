@@ -294,7 +294,7 @@ with st.container(key="ui_card_coverage"):
 # --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):
     card_title("What we don't know", "Where NASA's data stops, for this environment.")
-    # Role C's visuals: tests by fuel in your conditions, the oxygen ruler, what NASA did not record.
+    # Role C's visuals: tests by fuel in your conditions, then the oxygen and pressure rulers.
     recherche.afficher_ce_quon_ne_sait_pas(fiches, tests, scenario, cle="ui")
 
 best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
@@ -305,18 +305,6 @@ with st.container(key="ui_card_compare"):
     # Each one with what the experiment studied and why it matters here (role C's `descriptif`).
     for rank, (_, fiche) in enumerate(best.iterrows(), start=1):
         investigation_details(fiche, recherche.descriptif(fiche, scenario, tests), rank, environment_name)
-    # The 3 compared with each other (role C): where they agree, where to be careful.
-    compared = recherche.synthese_des_plus_pertinentes(fiches, tests, scenario)
-    if compared and compared["investigations"]:
-        agree_column, careful_column = st.columns(2, gap="medium")
-        with agree_column:
-            st.markdown("**Where they agree**")
-            for sentence in compared["accords"] or ["No common fuel, material or oxygen level."]:
-                st.markdown(f"- {sentence}")
-        with careful_column:
-            st.markdown("**Be careful**")
-            for sentence in compared["attention"] or ["Nothing to flag."]:
-                st.markdown(f"- {sentence}")
     with st.container(key="ui_analyse"):
         # The orange pill of sketch 1 of the whiteboard, kept as the page's main action.
         if st.button("ANALYSE ALL 24", key="ui_analyse_button"):
