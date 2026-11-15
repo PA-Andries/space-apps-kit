@@ -175,7 +175,7 @@ def test_l_environnement_est_decrit_avec_ses_bornes():
     assert "Habitat : Base lunaire" in texte
     assert "Oxygène : au moins 30 %" in texte
     assert "Pression : au plus 70.3 kPa" in texte
-    assert "Gravité : 0.165 g" in texte
+    assert "Gravité : 0.165 g (gravité propre du lieu ; aucun test NASA PSI à cette gravité" in texte
     assert "Combustibles : tous" in texte
     assert "Pilier" not in texte  # les piliers sont abandonnés (décision du 14 nov. 17h00)
 
@@ -194,6 +194,8 @@ def test_une_plage_s_ecrit_simplement():
     assert environnement.plage((None, None), "%") is None
     assert environnement.plage(21, "%") == "21 %"  # l'ancien scénario donnait un seul nombre
     assert environnement.gravite_en_texte(0.0) == "microgravité (0 g)"
+    assert environnement.gravite_en_texte(1.0) == "1 g"
+    assert "aucun test NASA PSI" in environnement.gravite_en_texte(0.38)
 
 
 def test_repondre_donne_l_environnement_a_gemini(monkeypatch):

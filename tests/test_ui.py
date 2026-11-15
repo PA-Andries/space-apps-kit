@@ -788,3 +788,11 @@ def test_setting_an_air_flow_moves_the_chart_to_the_air_flow_view():
     assert site.session_state["ui_chart_view"] == "debit"
     site.slider(key="ui_air_flow").set_range(-10.0, 100.0).run()
     assert site.session_state["ui_chart_view"] == "pression"
+
+
+def test_the_environment_line_says_partial_gravity_has_no_nasa_test():
+    """The Moon's 0.165 g is the place's own gravity; the tool only has tests at 0 g and 1 g (PA, 15 Nov)."""
+    from flame.ui.environment import environment_summary
+
+    assert environment_summary("Base lunaire").endswith("0.165 g (no NASA test at this gravity)")
+    assert environment_summary("Station").endswith("0 g")
