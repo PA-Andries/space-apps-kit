@@ -156,7 +156,7 @@ picker_column, sliders_column = st.columns([7, 5], gap="medium")
 with picker_column, st.container(key="ui_card_destination", height="stretch"):
     card_title(
         "Habitable crew environment",
-        "Space station, spacecraft, lunar base, pressurized rover or Mars base. "
+        "One button per atmosphere: places that share their conditions share a button. "
         "Earth and the spacesuit are references, not habitats.",
     )
     place_buttons(habitat, selected=not custom)

@@ -10,10 +10,12 @@ from flame.ui.labels import label
 from flame.ui.places import (
     BODIES,
     EARTH,
+    MARS_NOTE,
     PLACE_ICONS,
     PLACE_NAMES,
     PLACE_ROWS,
     PLACES_BY_BODY,
+    SAME_CONDITIONS_AS,
     SPACESUIT,
     choose_body,
     choose_place,
@@ -230,21 +232,32 @@ PLACE_BUTTONS_STYLE = """<style>
 }
 .st-key-ui_places [data-testid="stBaseButton-primary"]:hover { background: #ff8c55; color: #fff; }
 .st-key-ui_places [data-testid="stBaseButton-primary"] p { color: #fff; }
+.st-key-ui_mars_note { margin-top: 0.3rem; padding: 0.55rem 0.85rem; border-radius: 14px;
+  border: 1px dashed rgba(160, 175, 255, 0.3); }
+.st-key-ui_mars_note p { color: #a3abc9; font-size: 0.84rem; line-height: 1.45; margin: 0; }
+.st-key-ui_mars_note strong { color: #dfe3f5; font-weight: 600; }
 </style>"""
 
 
 def place_buttons(current: str, selected: bool = True) -> str:
-    """One button per habitable crew environment, each with a small logo, and Earth as the reference.
+    """One button per atmosphere, each with a small logo: two crew environments, then the two references.
 
+    The spacecraft shares the station's button and the rover the Moon base's (same conditions). Mars has
+    no button: a note under the buttons says why.
     `current`: the place to show while the user has not clicked yet (the scenario's habitat).
     `selected`: False when the user's values left the place's range: no button is highlighted then.
     Returns the place to show; its button is highlighted.
     """
     chosen = current_place() or current
+    highlighted = SAME_CONDITIONS_AS.get(chosen, chosen)
     st.html(PLACE_BUTTONS_STYLE)
     with st.container(key="ui_places"):
         for row in PLACE_ROWS:
-            _button_row(row, chosen if selected else None, choose_place, "ui_place", place_name, PLACE_ICONS)
+            _button_row(row, highlighted if selected else None, choose_place, "ui_place", place_name, PLACE_ICONS)
+    # Mars keeps a place on the page, as a note and not as a button: nothing can be shown for it.
+    title, _, reason = MARS_NOTE.partition(": ")
+    with st.container(key="ui_mars_note"):
+        st.markdown(f":material/landscape: **{title}:** {reason}")
     return chosen
 
 
