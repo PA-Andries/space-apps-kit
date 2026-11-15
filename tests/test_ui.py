@@ -239,7 +239,7 @@ def test_the_three_most_relevant_are_shown_without_a_click():
     assert not site.exception
     textes = [block.value for block in site.markdown]
     assert any("Where they agree" in texte for texte in textes)  # the comparison of the three
-    assert any("PSI's tables" in texte for texte in textes)  # the data gaps, on arrival
+    assert any("Tests in your conditions, by fuel" in texte for texte in textes)  # the data gaps, on arrival
     assert site.button(key="ui_analyse_button").label == "ANALYSE ALL 24"
 
 
@@ -382,7 +382,7 @@ def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
 def test_the_menu_is_a_bar_at_the_top_and_the_environment_shows_under_it():
     app = Path("app.py").read_text()
     assert 'position="top"' in app
-    for title in ("Home", "Investigations", "Data and export", "Compare", "Equipment", "Ask the assistant"):
+    for title in ("Home", "Investigations", "Data and export", "Compare"):
         assert f'title="{title}"' in app
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
@@ -534,3 +534,67 @@ def test_two_handles_on_the_same_point_show_one_number():
     assert not site.exception
     shown = " ".join(str(block.value) for block in site.get("html"))
     assert ".st-key-ui_oxygen" in shown and ".st-key-ui_pressure" not in shown
+
+
+def test_flamy_sits_on_every_page_and_opens_a_chat_window():
+    app = Path("app.py").read_text()
+    assert "pages/assistant.py" not in app and "afficher_cadre(repondre)" in app
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    assert site.button(key="ui_flamy_open")  # Flamy's button, bottom right
+    site.button(key="ui_flamy_open").click().run()
+    assert not site.exception
+
+
+def test_flamy_stays_calm_and_looks_at_the_visitor_on_the_assistant_page():
+    from flame.ui.scene import _fill
+
+    page = _fill("mascot.html", {"calm": True})
+    assert '{"calm": true}' in page and "pointermove" in page  # the eyes follow the pointer
+    assert "mascot_scene(height=170, calm=True)" in Path("flame/ui/home.py").read_text()
+    assert '{"calm": false}' in _fill("mascot.html", {"calm": False})  # elsewhere he still waves
+
+
+def test_the_flamy_window_opens_and_answers():
+    def corner():
+        import streamlit as st
+
+        from flame.ui import flamy_corner
+
+        def fake_answer(question, history, fiches):
+            st.session_state["asked"] = question
+            return "An answer from the records."
+
+        flamy_corner(fake_answer)
+
+    page = AppTest.from_function(corner, default_timeout=30).run()
+    page.button(key="ui_flamy_open").click().run()
+    assert not page.exception  # the window opens without error (it once failed on a missing argument)
+    # The window's content is drawn: the conversation and the question box.
+    assert page.chat_input(key="ui_flamy_question") is not None
+    # (Typing a question reruns the window as a fragment in a real browser; AppTest cannot replay that.)
+
+
+def test_the_research_conditions_say_what_was_tested_and_what_never_was():
+    import pandas as pd
+
+    from flame.ui import coverage
+
+    tests = pd.DataFrame(
+        {
+            "investigation_id": ["A", "A", "B", "C"],
+            "oxygene_pct": [21.0, 35.0, 21.0, 21.0],
+            "pression_kpa": [101.0, 60.0, 101.0, None],
+            "debit_air_cm_s": [None, None, None, None],
+        }
+    )
+    fiches = pd.DataFrame({"id": ["A", "B", "C"], "type_combustible": ["gaz", "liquide", "solide"]})
+    moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3), "gravite": 0.165}
+    rows = {row["condition"]: row for row in coverage(tests, fiches, moon)}
+    assert rows["Gravity"]["status"] == "Not tested"  # partial gravity: never tested, and said so
+    assert rows["Oxygen and pressure together"]["status"] == "Partly"  # 1 test only
+    assert rows["Gas fuels"]["status"] == "Tested" and rows["Liquid fuels"]["status"] == "Not tested"
+    station = {"oxygene_pct": (19.0, 23.0), "pression_kpa": (90.0, 110.0), "gravite": 0.0}
+    rows = {row["condition"]: row for row in coverage(tests, fiches, station)}
+    assert rows["Gravity"]["status"] == "Tested"
+    assert rows["Solid fuels"]["status"] == "Partly"  # tested at that oxygen, but its pressure is not recorded

@@ -22,8 +22,9 @@ from flame.ui import (
     REFERENCE_PLACES,
     SPACESUIT,
     card_title,
-    chatbot_button,
     conditions,
+    coverage,
+    coverage_card,
     dashboard_header,
     environment_values,
     footer,
@@ -231,6 +232,16 @@ with figures_zone:
         compact=True,
     )
 
+# --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
+with st.container(key="ui_card_coverage"):
+    card_title(
+        "Under which conditions NASA ran its tests",
+        "Gravity, oxygen, pressure, air flow and fuels: what was tested, and what never was, "
+        f"for {title_label(shown_place)}.",
+        tag="Research conditions",
+    )
+    coverage_card(coverage(tests, fiches, scenario))
+
 # --- Level 4: what the tests show, what we don't know, then the 3 most relevant investigations ------------
 with st.container(key="ui_card_outcomes"):
     card_title(
@@ -243,8 +254,8 @@ with st.container(key="ui_card_outcomes"):
 # What we don't know comes first, as a full-width banner; then the 3 most relevant investigations.
 with st.container(key="ui_card_gaps"):
     card_title("What we don't know", "Where NASA's data stops, for this environment.")
-    for sentence in recherche.ce_quon_ne_sait_pas(fiches, tests, scenario):
-        st.markdown(f"- {sentence}")
+    # Role C's visuals: tests by fuel in your conditions, the oxygen ruler, what NASA did not record.
+    recherche.afficher_ce_quon_ne_sait_pas(fiches, tests, scenario, cle="ui")
 
 best = recherche.les_plus_pertinentes(fiches, scenario).head(3)
 with st.container(key="ui_card_compare"):
@@ -297,7 +308,6 @@ with st.expander("Hardware and samples: what these tests were run with"):
                 detail = ", ".join(f"{forme} ({nombre} rows)" for forme, nombre in formes) or "not recorded"
                 st.markdown(f"- **{fiche['nom']}** — {detail}")
 
-chatbot_button("pages/assistant.py")
 
 footer(
     [
