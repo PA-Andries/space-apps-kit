@@ -4,7 +4,7 @@ The page reads from the choice to its consequences (Ethan's ask of Sun 15 Nov):
  1. the environment: one button per place, then the sliders that refine it;
  2. two figures, right underneath: the tests that match, and the investigations behind them;
  3. the chart of NASA's tests against those conditions;
- 4. under which conditions NASA ran its tests (role F's coverage card);
+ 4. has your combination been tested, then under which conditions NASA ran its tests (role F's coverage card);
  5. what we don't know, then the three most relevant investigations;
  6. folded away: the hardware and the shape of the samples.
 Every page of the site is in the menu bar at the top.
@@ -29,6 +29,7 @@ from flame.ui import (
     REFERENCE_PLACES,
     SPACESUIT,
     card_title,
+    combination,
     conditions,
     coverage,
     coverage_card,
@@ -180,7 +181,12 @@ with sliders_column, st.container(key="ui_card_conditions", height="stretch"):
         own_gravity = f"{title_label(shown_place)}: {float(values['gravite']):g} g, which no PSI test was run at."
     else:
         own_gravity = f"{title_label(shown_place)}: {float(values['gravite']):g} g."
-    st.caption(f"NASA's PSI tests are run at 0 g, in orbit, or at 1 g, on the ground. {own_gravity}")
+    # PSI's test tables have no gravity column: the flights ran in microgravity, and only Saffire-II's rows
+    # also record a 1-g burn length. Gravity therefore filters no test, and the page says so.
+    st.caption(
+        "NASA's PSI tests were run in microgravity (0 g), in orbit; only a few rows also record a result "
+        f"at 1 g. Gravity does not filter the tests counted here. {own_gravity}"
+    )
     pressure = from_slider(st.slider("P (kPa)", *PRESSURE_SCALE, step=0.1, key="ui_pressure"), PRESSURE_SCALE)
     fuels = st.pills(
         "Fuel (none chosen = all)", fuel_pills(fiches), selection_mode="multi", format_func=label, key="ui_fuels"
@@ -231,17 +237,28 @@ matching = comparateur.tests_correspondants(tests, fiches, scenario)
 sure = matching[matching["pression_notee"]]
 ran_tests = tests["investigation_id"].nunique()
 without_tests = len(fiches) - ran_tests
-stat_tiles(
-    [
-        (f"{len(matching):,}", "Tests in your environment", f"{len(sure):,} with pressure recorded"),
-        (f"{matching['investigation_id'].nunique()}", "Investigations", f"of the {ran_tests} that ran tests"),
-    ],
-    note=(
-        f"{without_tests} of the {len(fiches)} investigations ran no test of their own: they reanalyse "
-        "data from other flights, so no test row can be counted for them."
-    ),
-    compact=True,
-)
+if oxygen == (None, None) and pressure == (None, None):
+    # No atmosphere given (Mars base): every test would "match", so no count is shown.
+    stat_tiles(
+        [
+            ("—", "Tests in your environment", "no oxygen or pressure given"),
+            ("—", "Investigations", "none can be placed"),
+        ],
+        note="Give an oxygen or a pressure range with the sliders to see the NASA tests that match it.",
+        compact=True,
+    )
+else:
+    stat_tiles(
+        [
+            (f"{len(matching):,}", "Tests in your environment", f"{len(sure):,} with pressure recorded"),
+            (f"{matching['investigation_id'].nunique()}", "Investigations", f"of the {ran_tests} that ran tests"),
+        ],
+        note=(
+            f"{without_tests} of the {len(fiches)} investigations ran no test of their own: they reanalyse "
+            "data from other flights, so no test row can be counted for them."
+        ),
+        compact=True,
+    )
 
 # --- Level 3: NASA's tests against those conditions --------------------------------------------------------
 with st.container(key="ui_card_ranking"):
@@ -267,12 +284,12 @@ with st.container(key="ui_card_ranking"):
 # --- Under which conditions NASA's research was done (replaces the Equipment page) ------------------------
 with st.container(key="ui_card_coverage"):
     card_title(
-        "Under which conditions NASA ran its tests",
-        "Gravity, oxygen, pressure, air flow and fuels: what was tested, and what never was, "
-        f"for {title_label(shown_place)}.",
+        "Has your combination been tested?",
+        f"All the settings of {title_label(shown_place)} together, against NASA's tests; then each setting "
+        "on its own: what was tested, and what never was.",
         tag="Research conditions",
     )
-    coverage_card(coverage(tests, fiches, scenario))
+    coverage_card(coverage(tests, fiches, scenario), combination(tests, fiches, scenario))
 
 # --- Level 4: what we don't know, then the 3 most relevant investigations ---------------------------------
 with st.container(key="ui_card_gaps"):

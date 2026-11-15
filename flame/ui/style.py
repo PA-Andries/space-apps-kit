@@ -275,7 +275,15 @@ section[role="dialog"]:has(.st-key-ui_flamy_conversation) > div:first-child {{ p
   letter-spacing: 0.04em; }}
 .ff-cov-name {{ font-weight: 700; }}
 .ff-cov-nasa, .ff-cov-detail {{ color: {MUTED}; }}
-.ff-cov-detail a {{ color: {ACCENT}; font-weight: 600; }}
+.ff-cov-detail a, .ff-cov-verdict a {{ color: {ACCENT}; font-weight: 600; }}
+/* The verdict for the whole combination, above the table. */
+.ff-cov-verdict {{ display: flex; gap: 0.9rem; align-items: flex-start; padding: 0.9rem 1rem; margin-bottom: 0.6rem;
+  border: 1px solid {SECONDARY_LINE}; border-radius: 14px; background: rgba(255, 255, 255, 0.04); color: {INK}; }}
+.ff-cov-verdict .ff-cov-status {{ flex: 0 0 auto; margin-top: 0.15rem; }}
+.ff-cov-verdict b {{ display: block; font-size: 1.05rem; margin-bottom: 0.2rem; }}
+.ff-cov-verdict span:not(.ff-cov-status) {{ color: {MUTED}; font-size: 0.9rem; }}
+.ff-cov-then {{ color: {MUTED}; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; margin: 0.4rem 0 0; }}
 .ff-cov-status {{ justify-self: start; border-radius: 980px; padding: 0.15rem 0.65rem; font-size: 0.78rem;
   font-weight: 700; border: 1px solid {SECONDARY_LINE}; background: rgba(255, 255, 255, 0.06); }}
 .ff-cov-status.ff-tested {{ background: {ACCENT}; border-color: {ACCENT}; color: #fff; }}

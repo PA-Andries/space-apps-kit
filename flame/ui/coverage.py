@@ -1,9 +1,11 @@
-"""Under which conditions NASA's research was done, set against the user's environment.
+"""Has the user's combination of settings been tested? And under which conditions NASA's research was done.
 
-One row per condition (gravity, oxygen, pressure, oxygen and pressure together, air flow, each fuel type):
-what NASA's PSI tests cover, what the environment asks for, and whether any test was run there. When none
-was, the row says so plainly. Everything is counted from NASA's test rows (`charger_tests`) and the team's
-fuel type of each investigation (`charger_fiches`); nothing is estimated.
+First a verdict for all the settings together (`combination`): how many NASA tests match the oxygen, the
+pressure, the air flow, the chosen fuels and the gravity at once. Then one row per condition (gravity,
+oxygen, pressure, oxygen and pressure together, air flow, each fuel type): what NASA's PSI tests cover,
+what the environment asks for, and whether any test was run there. When none was, the row says so plainly.
+Everything is counted from NASA's test rows (`charger_tests`) and the team's fuel type of each
+investigation (`charger_fiches`); nothing is estimated.
 """
 
 from html import escape
@@ -13,6 +15,9 @@ import streamlit as st
 
 TESTED, PARTLY, NOT_TESTED, NO_BOUNDS = "Tested", "Partly", "Not tested", "No bounds given"
 FUEL_TYPES = {"solide": "Solid fuels", "liquide": "Liquid fuels", "gaz": "Gas fuels"}
+# Les familles derrière chaque état de la matière, comme le filtre de Home (pages/accueil.py, FUEL_GROUPS) :
+# la fumée et la poussière sont des solides qui brûlent.
+FUEL_FAMILIES = {"solide": ("solide", "fumée", "poussière"), "liquide": ("liquide",), "gaz": ("gaz",)}
 
 
 def _inside(values: pd.Series, bounds: tuple | None) -> pd.Series:
@@ -56,6 +61,79 @@ def _sources(tests: pd.DataFrame, keep: pd.Series) -> list[tuple[str, str]]:
     return sorted(zip(found["investigation_id"], found["source"], strict=False))
 
 
+def _fuel_types(tests: pd.DataFrame, fiches: pd.DataFrame) -> pd.Series:
+    """Le type de combustible de l'investigation de chaque test (texte de l'équipe, vide si inconnu)."""
+    fuel_of = dict(zip(fiches["id"], fiches["type_combustible"].fillna(""), strict=False))
+    return tests["investigation_id"].map(lambda identifier: str(fuel_of.get(identifier, "")))
+
+
+def _of_families(types: pd.Series, families) -> pd.Series:
+    """Les tests dont le type de combustible contient une de ces familles."""
+    keep = pd.Series(False, index=types.index)
+    for family in families:
+        keep |= types.str.contains(family, regex=False)
+    return keep
+
+
+def combination(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> dict:
+    """Le verdict pour tous les réglages ensemble : {status, headline, detail, sources}.
+
+    Un test compte quand son oxygène, sa pression et son flux d'air tombent dans les plages de l'environnement
+    et que son combustible est un de ceux choisis (aucun choisi = tous). Les tests PSI ont été faits en
+    microgravité : à une autre gravité, la combinaison n'a jamais été testée, et le verdict le dit.
+    """
+    keep = _inside(tests["oxygene_pct"], scenario.get("oxygene_pct")) | _no_bounds(scenario.get("oxygene_pct"))
+    keep &= _inside(tests["pression_kpa"], scenario.get("pression_kpa")) | _no_bounds(scenario.get("pression_kpa"))
+    flow = scenario.get("debit_air_cm_s")
+    if not _no_bounds(flow):
+        keep &= _inside(tests["debit_air_cm_s"], flow)
+    fuels = scenario.get("type_combustible") or []
+    if fuels:
+        keep &= _of_families(_fuel_types(tests, fiches), fuels)
+    count = int(keep.sum())
+    sources = _sources(tests, keep)
+    where = f"in {len(sources)} investigation{'s' if len(sources) > 1 else ''}" if sources else ""
+    gravity = scenario.get("gravite")
+    if gravity == 1:
+        # Seules les lignes dont le résultat note une mesure « 1-g » (Saffire-II) ont une valeur à 1 g.
+        results = tests["resultat"].astype(str) if "resultat" in tests.columns else pd.Series("", index=tests.index)
+        at_1g = keep & results.str.contains("1-g", regex=False)
+        if int(at_1g.sum()):
+            return dict(
+                status=PARTLY,
+                headline=f"Barely: only {int(at_1g.sum())} test rows matching your settings record a result at 1 g.",
+                detail="All other PSI tests were run in microgravity.",
+                sources=_sources(tests, at_1g),
+            )
+    if gravity not in (None, 0, 0.0):
+        if count:
+            detail = (
+                f"NASA's PSI tests were run in microgravity. There, {count:,} tests match all your other "
+                f"settings, {where}: the closest the research gets."
+            )
+        else:
+            detail = "NASA's PSI tests were run in microgravity, and none of them matches your other settings either."
+        return dict(
+            status=NOT_TESTED,
+            headline=f"Your combination has never been tested: no test at {gravity:g} g.",
+            detail=detail,
+            sources=sources if count else [],
+        )
+    if count:
+        return dict(
+            status=TESTED,
+            headline=f"Yes: {count:,} NASA tests match all your settings at once.",
+            detail=f"They were run in microgravity, {where}.",
+            sources=sources,
+        )
+    return dict(
+        status=NOT_TESTED,
+        headline="Your combination has never been tested: no NASA test matches all your settings at once.",
+        detail="The table below shows which setting has no test.",
+        sources=[],
+    )
+
+
 def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[dict]:
     """One row per condition: {condition, nasa, yours, status, detail}. status is Tested, Partly, Not tested
     or No bounds given; detail says how many tests, or what is missing."""
@@ -65,28 +143,45 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
         rows.append(
             dict(
                 condition="Gravity",
-                nasa="Microgravity (ISS, Cygnus) and Earth's 1 g",
+                nasa="Microgravity (ISS, Cygnus)",
                 yours="unknown",
                 status=NO_BOUNDS,
                 detail="Your environment gives no gravity.",
             )
         )
-    elif gravity == 0 or gravity == 1:
-        where = "in microgravity on the ISS and the Cygnus spacecraft" if gravity == 0 else "at Earth's 1 g"
+    elif gravity == 0:
         rows.append(
             dict(
                 condition="Gravity",
-                nasa="Microgravity (ISS, Cygnus) and Earth's 1 g",
-                yours=f"{gravity:g} g",
+                nasa="Microgravity (ISS, Cygnus)",
+                yours="0 g",
                 status=TESTED,
-                detail=f"NASA's PSI tests were run {where}.",
+                detail="NASA's PSI tests were run in microgravity on the ISS and the Cygnus spacecraft.",
+            )
+        )
+    elif gravity == 1:
+        # Seules les lignes dont le résultat note une mesure « 1-g » (Saffire-II) ont une valeur à 1 g.
+        results = tests["resultat"].astype(str) if "resultat" in tests.columns else pd.Series(dtype=str)
+        at_1g = int(results.str.contains("1-g", regex=False).sum())
+        rows.append(
+            dict(
+                condition="Gravity",
+                nasa="Microgravity (ISS, Cygnus)",
+                yours="1 g",
+                status=PARTLY if at_1g else NOT_TESTED,
+                detail=(
+                    f"Only {at_1g} test rows record a result at 1 g (a 1-g burn length). "
+                    "All other PSI tests were run in microgravity, and the counts below are not split by gravity."
+                    if at_1g
+                    else "No PSI test row records a result at 1 g: the tests were run in microgravity."
+                ),
             )
         )
     else:
         rows.append(
             dict(
                 condition="Gravity",
-                nasa="Microgravity (ISS, Cygnus) and Earth's 1 g",
+                nasa="Microgravity (ISS, Cygnus)",
                 yours=f"{gravity:g} g",
                 status=NOT_TESTED,
                 detail=f"No PSI test was run at {gravity:g} g: partial gravity has never been tested.",
@@ -157,12 +252,15 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
             )
         )
 
-    fuel_of = dict(zip(fiches["id"], fiches["type_combustible"].fillna(""), strict=False))
-    types = tests["investigation_id"].map(lambda identifier: str(fuel_of.get(identifier, "")))
+    types = _fuel_types(tests, fiches)
     # Tests at the right oxygen whose pressure was not recorded: they may or may not fit, so they are told apart.
     pressure_unknown = in_oxygen & tests["pression_kpa"].isna() & (not _no_bounds(pressure))
+    chosen = set(scenario.get("type_combustible") or [])
     for key, name in FUEL_TYPES.items():
-        of_type = types.str.contains(key)
+        # Only the fuels the user chose (none chosen = all three).
+        if chosen and not chosen & set(FUEL_FAMILIES[key]):
+            continue
+        of_type = _of_families(types, FUEL_FAMILIES[key])
         count = int((both & of_type).sum())
         unknown = int((pressure_unknown & of_type).sum())
         sources = _sources(tests, (both | pressure_unknown) & of_type)
@@ -187,9 +285,10 @@ def coverage(tests: pd.DataFrame, fiches: pd.DataFrame, scenario: dict) -> list[
     return rows
 
 
-def coverage_card(rows: list[dict]) -> None:
-    """The rows as a compact table: condition, what NASA covers, your environment, and a status chip.
-    Each row links the NASA investigations its tests come from, so the numbers can be checked on psi.nasa.gov."""
+def coverage_card(rows: list[dict], verdict: dict | None = None) -> None:
+    """The verdict for the whole combination, then the rows as a compact table: condition, what NASA
+    covers, your environment, and a status chip. Each row links the NASA investigations its tests come
+    from, so the numbers can be checked on psi.nasa.gov."""
 
     def links(row: dict) -> str:
         found = row.get("sources") or []
@@ -213,7 +312,15 @@ def coverage_card(rows: list[dict]) -> None:
         '<div class="ff-cov-row ff-cov-head"><span>Condition</span><span>Tested by NASA</span>'
         "<span>Your environment</span><span>Status</span><span></span></div>"
     )
-    st.html(f'<div class="ff-coverage">{head}{lines}</div>')
+    top = ""
+    if verdict:
+        chip = verdict["status"].lower().replace(" ", "-")
+        top = (
+            f'<div class="ff-cov-verdict"><span class="ff-cov-status ff-{chip}">{escape(verdict["status"])}</span>'
+            f"<div><b>{escape(verdict['headline'])}</b><span>{escape(verdict['detail'])}{links(verdict)}</span></div>"
+            '</div><p class="ff-cov-then">Setting by setting</p>'
+        )
+    st.html(f'<div class="ff-coverage">{top}{head}{lines}</div>')
     st.caption(
         "Counted from the test rows of NASA's Physical Sciences Informatics (psi.nasa.gov); a test counts when its "
         "recorded value falls in your range. Each link opens the investigation, with its test list and data files. "
