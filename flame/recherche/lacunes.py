@@ -6,7 +6,7 @@ une valeur absente est dite absente. Les phrases s'affichent sur le site : elles
 
 import pandas as pd
 
-from flame.commun import TYPES_COMBUSTIBLE
+from flame.commun import TYPES_COMBUSTIBLE, dans_la_plage
 from flame.recherche.conditions import (
     atmosphere_connue,
     decrire_plages,
@@ -14,11 +14,9 @@ from flame.recherche.conditions import (
     plages_du_scenario,
     tests_dans_les_plages,
 )
-from flame.recherche.score import type_de_base
+from flame.recherche.score import EMULATEURS_DE_SOLIDE, type_de_base
 from flame.ui import label
 
-# Classé « solide », mais sa fiche dit « Gas burner that emulates a burning material » : pas un vrai échantillon.
-EMULATEURS_DE_SOLIDE = {"PSI-20": "ACME BRE"}
 # Pour dire « des fiches sans oxygène » : les colonnes vérifiées et leur nom affiché.
 CHAMPS_SUIVIS = {"oxygene_min": "oxygen range", "pression_kpa": "pressure", "nb_tests": "number of tests"}
 
@@ -38,12 +36,24 @@ def frontiere_des_solides(fiches: pd.DataFrame, tests: pd.DataFrame) -> dict:
     solides = tests[tests["investigation_id"].map(types).fillna("") == "solide"]
     vrais = solides[~solides["investigation_id"].isin(EMULATEURS_DE_SOLIDE)]
     emules = solides[solides["investigation_id"].isin(EMULATEURS_DE_SOLIDE)]
-    oxygene_vrais = pd.to_numeric(vrais["oxygene_pct"], errors="coerce")
-    oxygene_emules = pd.to_numeric(emules["oxygene_pct"], errors="coerce")
+
+    def plus_haut(lignes: pd.DataFrame, emulateur: bool) -> float | None:
+        """Le plus haut oxygène des tests, ou de la fiche quand PSI note une plage (« 25; 40 ») et non une valeur."""
+        valeurs = [pd.to_numeric(lignes["oxygene_pct"], errors="coerce").max()]
+        if "oxygene_max" in fiches.columns:
+            du_groupe = fiches[fiches["type_combustible"].map(type_de_base) == "solide"]
+            du_groupe = du_groupe[du_groupe["id"].isin(EMULATEURS_DE_SOLIDE) == emulateur]
+            valeurs.append(pd.to_numeric(du_groupe["oxygene_max"], errors="coerce").max())
+        connues = [float(valeur) for valeur in valeurs if pd.notna(valeur)]
+        return max(connues) if connues else None
+
+    noms_emules = set(emules["investigation_id"].unique())
+    if "oxygene_max" in fiches.columns:
+        noms_emules |= set(fiches[fiches["id"].isin(EMULATEURS_DE_SOLIDE) & fiches["oxygene_max"].notna()]["id"])
     return {
-        "reel": float(oxygene_vrais.max()) if oxygene_vrais.notna().any() else None,
-        "emule": float(oxygene_emules.max()) if oxygene_emules.notna().any() else None,
-        "emulateurs": ", ".join(sorted(EMULATEURS_DE_SOLIDE[i] for i in emules["investigation_id"].unique())),
+        "reel": plus_haut(vrais, emulateur=False),
+        "emule": plus_haut(emules, emulateur=True),
+        "emulateurs": ", ".join(sorted(EMULATEURS_DE_SOLIDE[i] for i in noms_emules)),
     }
 
 
@@ -62,6 +72,15 @@ def ce_quon_ne_sait_pas(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dic
     else:
         dedans = tests_dans_les_plages(tests, scenario)
         conditions = decrire_plages(scenario)
+        # Le débit d'air choisi en page 1 compte aussi : sinon ces phrases contredisent les chiffres du haut.
+        debit = tuple(scenario.get("debit_air_cm_s") or (None, None))
+        if any(borne is not None for borne in debit):
+            dedans = dedans[dans_la_plage(dedans["debit_air_cm_s"], debit)]
+            mini, maxi = debit
+            if mini is not None and maxi is not None:
+                conditions += f", air flow {mini:g} to {maxi:g} cm/s"
+            else:
+                conditions += f", air flow ≥ {mini:g} cm/s" if maxi is None else f", air flow ≤ {maxi:g} cm/s"
         for type_combustible in scenario.get("type_combustible") or TYPES_COMBUSTIBLE:
             du_type = dedans[dedans["type_de_base"] == type_combustible]
             nom_type = label(type_combustible)
@@ -98,7 +117,8 @@ def ce_quon_ne_sait_pas(fiches: pd.DataFrame, tests: pd.DataFrame, scenario: dic
     elif 0 < gravite < 1:
         constats.append(
             f"No test at the partial gravity of {nom} ({gravite:g} g): PSI has microgravity and Earth-gravity "
-            "data only. E-FIELD Flames mimics partial gravity with an electric field."
+            "data only. According to the challenge statement, E-FIELD Flames mimics partial gravity with an "
+            "electric field."
         )
 
     for colonne, nom_champ in CHAMPS_SUIVIS.items():

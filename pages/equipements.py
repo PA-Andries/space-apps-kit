@@ -67,7 +67,7 @@ with onglet_detecteurs:
     st.subheader("Smoke and particles in microgravity")
     st.write(
         "Without buoyancy, smoke does not rise towards a detector: it follows the ventilation flow. "
-        "These investigations measured the smoke itself."
+        "These investigations measured smoke and airborne particles (DAFT measured dust, to test the instrument)."
     )
     montrer_equipement("detecteurs")
 

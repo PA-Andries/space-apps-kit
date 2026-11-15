@@ -31,6 +31,9 @@ POINTS_PAR_COMBUSTIBLE = {"solide": 25, "liquide": 15, "gaz": 8}
 # Hypothèse : (nombre de tests à atteindre, points), du palier le plus haut au plus bas.
 PALIERS_NB_TESTS = [(50, 15), (10, 10), (1, 5)]
 
+# Classé « solide », mais sa fiche dit « Gas burner that emulates a burning material » : pas un vrai échantillon.
+EMULATEURS_DE_SOLIDE = {"PSI-20": "ACME BRE"}
+
 # Le nom de chaque habitat du contrat dans data/psi/relevance.csv.
 HABITAT_PSI = {
     "Vaisseau": "spacecraft",
@@ -85,8 +88,13 @@ def _points_combustible(fiche: pd.Series, scenario: dict | None) -> tuple[int, s
         return 0, "No solid, liquid or gas fuel recorded."
     if choisis and type_fiche not in choisis:
         return 0, f"{_majuscule(label(type_fiche))} fuel: not one of the fuels you chose."
+    if fiche.get("id") in EMULATEURS_DE_SOLIDE:
+        return POINTS_PAR_COMBUSTIBLE[type_fiche], (
+            "Gas burner that emulates a burning solid: the team counts it with the solids, "
+            "which it ranks first (then liquids, then gases)."
+        )
     return POINTS_PAR_COMBUSTIBLE[type_fiche], (
-        f"{_majuscule(label(type_fiche))} fuel: a habitat holds mostly solids (fabrics, plastics), "
+        f"{_majuscule(label(type_fiche))} fuel: the team ranks solids (fabrics, plastics) first, "
         "then liquids, then gases."
     )
 

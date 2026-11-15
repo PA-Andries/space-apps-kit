@@ -62,7 +62,7 @@ CUR = {
         12.2,
         68,
         76,
-        "First large-scale fire in a spacecraft: 41 x 94 cm cotton-fiberglass fabric.",
+        "Large-scale fire in a Cygnus cargo vehicle: 41 x 94 cm cotton-fiberglass (SIBAL) fabric.",
     ),
     99: (
         "Saffire-II",
@@ -174,7 +174,7 @@ CUR = {
         718.9,
         2771,
         2812,
-        "Cool flames on n-dodecane droplets, discovered during FLEX.",
+        "Cool flames on droplets of n-dodecane and n-dodecane/iso-dodecane mixtures, from 0.25 to 5 atm.",
     ),
     20: (
         "ACME BRE",
@@ -202,7 +202,7 @@ CUR = {
         2085.6,
         3749,
         3756,
-        "Spherical cool flames of gases; holds the highest-oxygen microgravity tests (up to 85% O2, inverse flames).",
+        "Spherical cool flames of gases; oxygen up to 85% (inverse flames), the highest in PSI's tables together with ACME Flame Design.",
     ),
     22: (
         "ACME E-FIELD Flames",

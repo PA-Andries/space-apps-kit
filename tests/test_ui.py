@@ -434,7 +434,12 @@ def test_outcomes_sort_nasa_results_and_show_on_arrival():
 
     moon = {"oxygene_pct": (30.0, None), "pression_kpa": (None, 70.3)}
     assert answer({"burned": 3, "went_out": 1, "no_ignition": 0, "unknown": 5}, moon)[0] == "yes"
-    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    # NASA's "Extinction" is a flame that burned and then went out by itself: it still burned.
+    assert answer({"burned": 0, "went_out": 2, "no_ignition": 1, "unknown": 0}, moon)[0] == "yes"
+    assert answer({"burned": 0, "went_out": 0, "no_ignition": 1, "unknown": 0}, moon)[0] == "not_seen"
+    # Saffire-II: only the microgravity length says whether the sample burned in space.
+    assert kind_of_result("microgravity burn length 5 cm & 0 (note 2); 1-g burn length ~ 0 (Nomex)") == "burned"
+    assert kind_of_result("microgravity burn length ~ 0; 1-g burn length Complete") == "no_ignition"
     assert answer({"burned": 0, "went_out": 0, "no_ignition": 0, "unknown": 4}, moon)[1] == "No data"
     mars = {"oxygene_pct": (None, None), "pression_kpa": (None, None)}  # no atmosphere bounds: no answer
     assert answer({"burned": 400, "went_out": 1, "no_ignition": 1, "unknown": 0}, mars)[1] == "No answer"
@@ -619,3 +624,14 @@ def test_the_research_conditions_say_what_was_tested_and_what_never_was():
     rows = {row["condition"]: row for row in coverage(tests, fiches, station)}
     assert rows["Gravity"]["status"] == "Tested"
     assert rows["Solid fuels"]["status"] == "Partly"  # tested at that oxygen, but its pressure is not recorded
+
+
+def test_coverage_at_1_g_counts_only_rows_with_a_1_g_result():
+    """PSI's tests flew in microgravity: only Saffire-II's rows also record a 1-g burn length."""
+    from flame.commun import charger_fiches, charger_tests
+    from flame.ui import coverage
+
+    earth = {"oxygene_pct": (19.0, 23.0), "pression_kpa": (90.0, 110.0), "gravite": 1.0}
+    gravity = coverage(charger_tests(), charger_fiches(), earth)[0]
+    assert gravity["condition"] == "Gravity" and gravity["status"] != "Tested"
+    assert "microgravity" in gravity["detail"]

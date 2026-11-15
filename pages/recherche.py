@@ -46,8 +46,24 @@ def _plage_testee(fiche: pd.Series) -> str:
     if pd.notna(oxygene_min) and pd.notna(oxygene_max):
         morceaux.append(f"{oxygene_min:g} to {oxygene_max:g} % oxygen")
     if pd.notna(pression):
-        morceaux.append(f"{pression:g} kPa")
+        morceaux.append(f"pressure from {pression:g} kPa (the lowest tested)")
     return ", ".join(morceaux) or "oxygen and pressure not recorded"
+
+
+def _en_anglais(ce_qui_varie: object) -> str:
+    """« oxygène de 12 à 34 % ; combustible (2 différents) » en anglais : la fiche est écrite en français."""
+    texte = _texte(ce_qui_varie)
+    for francais, anglais in (
+        ("débit d'air", "air flow"),
+        ("oxygène", "oxygen"),
+        ("pression", "pressure"),
+        ("combustible", "fuel"),
+        ("différents", "different"),
+        (" de ", " from "),
+        (" à ", " to "),
+    ):
+        texte = texte.replace(francais, anglais)
+    return texte
 
 
 st.title("Investigations")
@@ -95,7 +111,9 @@ with onglet_fiche:
 
     st.subheader("Hazards")
     st.markdown(f"**Fuel:** {_texte(fiche.get('combustible'))} ({label(fiche.get('type_combustible', ''))})")
-    st.markdown(f"**Conditions tested:** {_plage_testee(fiche)} · **What varies:** {_texte(fiche.get('ce_qui_varie'))}")
+    st.markdown(
+        f"**Conditions tested:** {_plage_testee(fiche)} · **What varies:** {_en_anglais(fiche.get('ce_qui_varie'))}"
+    )
 
     st.subheader("Prevention")
     st.markdown(f"**What the investigation set out to learn:** {_texte(fiche.get('objectif'))}")
