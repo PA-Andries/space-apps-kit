@@ -263,9 +263,11 @@ PLACE_BUTTONS_STYLE = """<style>
   color: #e8622a; font-size: 1.7rem; margin-right: 0.3rem; }
 .st-key-ui_mars_note strong { color: #fff; font-weight: 700; margin-right: 0.5rem; }
 .st-key-ui_mars_note .stMarkdownBadge { vertical-align: middle; font-weight: 700; letter-spacing: 0.02em; }
-/* On a narrow screen the three tiles stack and the card is as tall as it needs: each tile keeps its height. */
+/* On a narrow screen the three tiles stack and the card is as tall as it needs: each tile keeps its height.
+   The fixed height above is for the row of three; kept on a phone, the third tile covered the Mars block. */
 @media (max-width: 640px) {
-  .st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_places) { flex: none; }
+  .st-key-ui_card_destination > [data-testid="stLayoutWrapper"]:has(> .st-key-ui_places) {
+    flex: none; height: auto; }
   .st-key-ui_places button { min-height: 7rem; }
   .st-key-ui_places button [data-testid="stIconMaterial"] { font-size: 2.6rem; }
 }
