@@ -382,7 +382,7 @@ def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
 def test_the_menu_is_a_bar_at_the_top_and_the_environment_shows_under_it():
     app = Path("app.py").read_text()
     assert 'position="top"' in app
-    for title in ("Home", "Investigations", "Data and export", "Compare", "Equipment", "Ask the assistant"):
+    for title in ("Home", "Investigations", "Data and export", "Compare", "Equipment"):
         assert f'title="{title}"' in app
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
@@ -534,3 +534,13 @@ def test_two_handles_on_the_same_point_show_one_number():
     assert not site.exception
     shown = " ".join(str(block.value) for block in site.get("html"))
     assert ".st-key-ui_oxygen" in shown and ".st-key-ui_pressure" not in shown
+
+
+def test_flamy_sits_on_every_page_and_opens_a_chat_window():
+    app = Path("app.py").read_text()
+    assert "pages/assistant.py" not in app and "afficher_cadre(repondre)" in app
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    assert not site.exception
+    assert site.button(key="ui_flamy_open")  # Flamy's button, bottom right
+    site.button(key="ui_flamy_open").click().run()
+    assert not site.exception

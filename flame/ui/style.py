@@ -153,17 +153,18 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .ff-stat small {{ display: block; color: #86868b; font-size: 0.72rem; margin-top: 0.25rem; }}
 
 /* The chatbot icon, pinned to the bottom-right corner (sketch 1 of the whiteboard). */
-.st-key-ui_chatbot {{ position: fixed; right: 22px; bottom: 18px; z-index: 1000; width: 112px; gap: 0;
+.st-key-ui_chatbot, .st-key-ui_flamy {{ position: fixed; right: 22px; bottom: 18px; z-index: 1000; width: 112px; gap: 0;
   background: #fff; border-radius: 24px; padding: 0.3rem 0.4rem 0.4rem;
   box-shadow: 0 10px 30px rgba(29, 29, 31, 0.18); }}
-.st-key-ui_chatbot iframe {{ box-shadow: none; border-radius: 0; background: transparent; }}
+.st-key-ui_chatbot iframe, .st-key-ui_flamy iframe, .st-key-ui_flamy_face iframe {{ box-shadow: none; border-radius: 0;
+  background: transparent; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] a {{ justify-content: center; padding: 0; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] p {{ font-size: 0.85rem; font-weight: 600; }}
 /* The whole button opens the chatbot, not only the word « Flamy »: the link gets an invisible layer over the
    whole card. The mascot's frame lets the clicks through (it does not react to the mouse), and the elements
    between the card and the link are not positioned, so that the layer covers the card. */
 .st-key-ui_chatbot {{ cursor: pointer; }}
-.st-key-ui_chatbot iframe {{ pointer-events: none; }}
+.st-key-ui_chatbot iframe, .st-key-ui_flamy iframe, .st-key-ui_flamy_face iframe {{ pointer-events: none; }}
 .st-key-ui_chatbot [data-testid="stElementContainer"], .st-key-ui_chatbot [data-testid="stPageLink"],
 .st-key-ui_chatbot [data-testid="stPageLink"] * {{ position: static; }}
 .st-key-ui_chatbot [data-testid="stPageLink"] a::after {{ content: ""; position: absolute; inset: 0;
@@ -217,6 +218,16 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
   border: 1px solid {SECONDARY_LINE}; border-radius: 980px; padding: 0.3rem 0.9rem; }}
 .ff-env-line span {{ color: {ACCENT}; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; margin-right: 0.5rem; }}
+
+/* Flamy's button under the mascot, and its chat window: a small panel in the bottom-right corner. */
+.st-key-ui_flamy button {{ width: 100%; padding: 0.15rem 0.4rem; min-height: 0; border: none; background: transparent;
+  color: {ACCENT}; }}
+.st-key-ui_flamy button p {{ font-size: 0.82rem; font-weight: 700; }}
+div[role="dialog"]:has(.st-key-ui_flamy_conversation) {{ position: fixed; right: 24px; bottom: 24px; margin: 0;
+  width: min(420px, calc(100vw - 32px)); background: rgba(14, 18, 44, 0.92); backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px); border: 1px solid {SECONDARY_LINE}; border-radius: 22px; }}
+.st-key-ui_flamy_face {{ align-items: center; margin-bottom: -0.6rem; }}
+.st-key-ui_flamy_face iframe {{ width: 130px !important; }}
 
 /* The ANALYSE button under the chart. */
 .st-key-ui_analyse button {{ background: {FLAME}; color: #fff; border: none; letter-spacing: 0.08em; font-weight: 700;
@@ -294,7 +305,7 @@ header[data-testid="stHeader"] {{ background: rgba(7, 10, 28, 0.72); backdrop-fi
 iframe {{ box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }}
 
 /* The chatbot icon and the ANALYSE button glow a little, like the flame. */
-.st-key-ui_chatbot {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
+.st-key-ui_chatbot, .st-key-ui_flamy {{ background: rgba(20, 26, 62, 0.82); border: 1px solid rgba(160, 175, 255, 0.18);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 122, 61, 0.18); }}
 .st-key-ui_analyse button {{ background: {ACCENT};

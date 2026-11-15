@@ -22,7 +22,6 @@ from flame.ui import (
     REFERENCE_PLACES,
     SPACESUIT,
     card_title,
-    chatbot_button,
     conditions,
     dashboard_header,
     environment_values,
@@ -297,7 +296,6 @@ with st.expander("Hardware and samples: what these tests were run with"):
                 detail = ", ".join(f"{forme} ({nombre} rows)" for forme, nombre in formes) or "not recorded"
                 st.markdown(f"- **{fiche['nom']}** — {detail}")
 
-chatbot_button("pages/assistant.py")
 
 footer(
     [

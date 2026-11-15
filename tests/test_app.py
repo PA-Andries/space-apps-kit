@@ -12,8 +12,7 @@ PAGES = [
     "pages/donnees.py",
     "pages/comparateur.py",
     "pages/equipements.py",
-    "pages/assistant.py",
-]
+]  # The assistant is no longer a page of the menu: Flamy opens on every page (pages/assistant.py stays).
 
 
 def test_accueil_s_ouvre():
