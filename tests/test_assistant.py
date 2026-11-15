@@ -427,7 +427,7 @@ def test_avec_une_cle_claude_c_est_claude_qui_repond(monkeypatch):
     assert [message["role"] for message in demande["messages"]] == ["user", "assistant", "user"]
     assert [outil["name"] for outil in demande["tools"]] == list(outils.OUTILS)
     assert all(outil["input_schema"]["type"] == "object" for outil in demande["tools"])
-    assert demande["fallbacks"] == "default"
+    assert "fallbacks" not in demande  # l'option de repli ne sert qu'aux modèles qui l'acceptent
 
 
 def test_claude_appelle_un_outil_puis_repond(monkeypatch):
@@ -475,17 +475,18 @@ def test_si_claude_echoue_gemini_prend_le_relais(monkeypatch):
 
 def test_si_l_option_de_repli_est_refusee_claude_repond_sans_elle(monkeypatch):
     refus_de_l_option = erreur_claude(anthropic.BadRequestError, 400, "fallbacks: unknown parameter")
+    monkeypatch.setenv("CLAUDE_MODEL", "claude-sonnet-5-5")
     demandes = faux_claude(monkeypatch, [refus_de_l_option, texte_claude("Réponse.")])
     assert chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches()) == "Réponse."
     assert "fallbacks" in demandes[1] and "fallbacks" not in demandes[2]
 
 
 def test_un_autre_modele_se_choisit_dans_les_secrets(monkeypatch):
-    monkeypatch.setenv("CLAUDE_MODEL", "claude-haiku-5-5")
+    monkeypatch.setenv("CLAUDE_MODEL", "claude-sonnet-5-5")
     demandes = faux_claude(monkeypatch, [texte_claude("Réponse.")])
     chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches())
-    assert demandes[1]["model"] == "claude-haiku-5-5"
-    assert "fallbacks" not in demandes[1]
+    assert demandes[1]["model"] == "claude-sonnet-5-5"
+    assert demandes[1]["fallbacks"] == "default"
 
 
 def test_sans_cle_gemini_la_recherche_se_fait_par_mots():

@@ -13,7 +13,7 @@ import streamlit as st
 
 from flame.assistant.outils import DECLARATIONS, executer_outil
 
-MODELE = "claude-opus-5-5"
+MODELE = "claude-haiku-5-5"
 NB_MAX_TOKENS = 16000  # plafond de la réponse (réflexion comprise), pas une longueur visée
 DELAI_MAX_S = 90
 NB_MAX_TOURS_OUTILS = 4  # au-delà, on arrête : le modèle tournerait en rond
