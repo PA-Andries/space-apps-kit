@@ -125,13 +125,22 @@ def regle_figure(regle: dict, habitat: str | None, nom: str = "oxygen", unite: s
                 yanchor="top",
                 font={"color": ROUGE[1], "size": 11},
             )
+        # Une plage étroite (99.2 à 99.5 kPa sur un axe de 500) garde une largeur visible, centrée sur elle.
+        marge = max(0.0, bord * 0.012 - (haut - bas)) / 2
         figure.add_shape(
-            type="rect", x0=bas, x1=haut, y0=rang - 0.25, y1=rang + 0.25, fillcolor=VERT[1], opacity=0.85, line_width=0
+            type="rect",
+            x0=bas - marge,
+            x1=haut + marge,
+            y0=rang - 0.25,
+            y1=rang + 0.25,
+            fillcolor=VERT[1],
+            opacity=0.85,
+            line_width=0,
         )
         figure.add_annotation(
             x=bas,
             y=rang + 0.25,
-            text=f"tested {bas:g} to {haut:g} {unite}",
+            text=f"tested {bas:g} to {haut:g} {unite}" + (f" ({ligne['source']})" if ligne.get("source") else ""),
             showarrow=False,
             xanchor="left",
             yanchor="bottom",
@@ -196,4 +205,10 @@ def afficher_ce_quon_ne_sait_pas(fiches: pd.DataFrame, tests: pd.DataFrame, scen
         regle_figure(pression, habitat, "pressure", "kPa"), config={"staticPlot": True}, key=f"{cle}_regle_pression"
     )
     if any(ligne["plage"] is None for ligne in pression["combustibles"]):
-        st.caption("PSI's tables give no pressure for most solid-fuel tests.")
+        st.caption("PSI's test tables give no pressure for some fuels.")
+    for ligne in pression["combustibles"]:
+        if ligne.get("source"):
+            st.caption(
+                f"{ligne['nom'].capitalize()}: PSI's test tables give no pressure, so the range comes from "
+                f"NASA's {ligne['source']}."
+            )
