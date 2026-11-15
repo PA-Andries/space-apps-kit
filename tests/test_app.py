@@ -9,9 +9,9 @@ APP = str(Path(__file__).parents[1] / "app.py")
 PAGES = [
     "pages/accueil.py",
     "pages/recherche.py",
-    "pages/donnees.py",
     "pages/comparateur.py",
 ]  # Out of the menu: the assistant (Flamy opens on every page) and Equipment (a section of Home). Both files stay.
+# Data and export is gone for good (Ethan, Sun 15 Nov): its table and its CSV are an Investigations tab now.
 
 
 def test_accueil_s_ouvre():

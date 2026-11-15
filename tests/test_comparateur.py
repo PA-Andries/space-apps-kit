@@ -422,6 +422,37 @@ def test_cocher_toutes_les_familles_garde_tous_les_tests():
     assert tout_coche["investigation_id"].nunique() == 20
 
 
+def test_les_etudes_de_calcul_comptent_par_les_donnees_qu_elles_reanalysent():
+    """Bug d'Ethan : tout sélectionner affichait 20 investigations sur 24, et rien ne pouvait atteindre 24.
+
+    Quatre investigations n'ont aucune ligne de test : ce sont des études de calcul qui reprennent les
+    données d'autres vols. Elles comptent quand l'investigation qu'elles réanalysent compte, par le lien
+    `reuses data from` de NASA. Tout sélectionner doit donc donner les 24.
+    """
+    from flame.comparateur import investigations_correspondantes
+
+    fiches, tests = _vraies_donnees()
+    relations = pd.read_csv(DONNEES_REELLES / "psi" / "relations.csv")
+    ouvert = {
+        "habitat": "Station",
+        "oxygene_pct": (None, None),
+        "pression_kpa": (None, None),
+        "debit_air_cm_s": (None, None),
+    }
+    sans_relations = investigations_correspondantes(tests, fiches, ouvert)
+    assert len(sans_relations) == 20  # les investigations qui ont fait leurs propres tests
+
+    toutes = investigations_correspondantes(tests, fiches, ouvert, relations)
+    assert len(toutes) == len(fiches) == 24
+    # Les 4 gagnées sont exactement celles qui n'ont aucune ligne de test.
+    sans_test = set(fiches["id"]) - set(tests["investigation_id"])
+    assert set(toutes) - set(sans_relations) == sans_test
+
+    # Une étude de calcul ne compte pas quand la source qu'elle réanalyse ne compte pas.
+    lune = investigations_correspondantes(tests, fiches, LUNE, relations)
+    assert set(lune) == set(correspondants_du_scenario(tests, fiches, LUNE)["investigation_id"])
+
+
 def test_les_zones_disent_d_ou_viennent_leurs_chiffres():
     """La légende ne porte que le nom (demande d'Ethan) ; la provenance reste, au survol."""
     figure = graphique_conditions(charger_tests(), charger_fiches(), LUNE)
@@ -642,28 +673,29 @@ def test_capteurs_filtre_par_investigation():
     assert capteurs(pd.DataFrame(), fiches).empty  # table PSI absente : un tableau vide, pas une erreur
 
 
-def _page_donnees() -> AppTest:
+def _onglet_des_tests() -> AppTest:
+    """L'onglet « Tests + CSV », qui a quitté la page Data pour la page Investigations (Ethan, 15 nov.)."""
     site = AppTest.from_file(APP, default_timeout=30).run()
-    return site.switch_page("pages/donnees.py").run()
+    return site.switch_page("pages/recherche.py").run()
 
 
-def test_la_page_data_compte_les_tests_de_l_environnement():
-    site = _page_donnees()
+def test_le_tableau_ne_montre_que_les_tests_de_l_environnement():
+    site = _onglet_des_tests()
     assert not site.exception
-    assert [metrique.value for metrique in site.metric[:2]] == ["1", "1"]  # base lunaire : C-03, une investigation
+    assert any("test rows from 1 investigations that ran their own tests" in legende.value for legende in site.caption)
 
 
-def test_la_page_data_montre_tout_sur_demande():
-    site = _page_donnees()
-    site.toggle(key="comparateur_donnees_tous").set_value(True).run()
+def test_le_tableau_montre_tout_sur_demande():
+    site = _onglet_des_tests()
+    site.toggle(key="recherche_tests_tous").set_value(True).run()
     assert not site.exception
     assert any("8 test rows" in legende.value for legende in site.caption)
 
 
-def test_la_page_data_change_de_vue():
-    site = _page_donnees()
-    site.radio(key="comparateur_donnees_vue").set_value("Oxygen × air flow").run()
+def test_le_tableau_s_exporte_en_csv():
+    site = _onglet_des_tests()
     assert not site.exception
+    assert any(bouton.label == "Download these tests (CSV)" for bouton in site.get("download_button"))
 
 
 def test_le_graphique_de_repartition_tient_en_trois_couleurs():

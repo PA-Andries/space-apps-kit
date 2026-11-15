@@ -439,8 +439,9 @@ def test_flamy_is_the_chatbot_and_every_page_but_home_has_a_home_link():
 def test_the_menu_is_a_bar_at_the_top_and_the_environment_shows_under_it():
     app = Path("app.py").read_text()
     assert 'position="top"' in app
-    for title in ("Home", "Investigations", "Data and export", "Compare"):
+    for title in ("Home", "Investigations", "Compare"):
         assert f'title="{title}"' in app
+    assert "Data and export" not in app  # retirée : son tableau est un onglet d'Investigations
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
     assert not site.sidebar.children  # no sidebar any more
@@ -508,15 +509,34 @@ def test_page_one_explains_each_of_the_three_investigations():
     assert "Atmosphere:" in shown and "Gravity:" in shown
 
 
+def test_opening_every_slider_counts_all_of_nasa():
+    """Demande d'Ethan : tout sélectionner doit atteindre les 24 investigations, pas plafonner à 20.
+
+    Les quatre études de calcul n'ont aucune ligne de test. Poignées aux deux bouts = aucune borne :
+    les compteurs disent alors ce que NASA tient en tout, sans prétendre que ces tests correspondent.
+    """
+    from flame.commun import charger_fiches, charger_tests
+
+    site = AppTest.from_file(APP, default_timeout=30).run()
+    site.slider(key="ui_oxygen").set_value((0.0, 100.0)).run()
+    site.slider(key="ui_pressure").set_value((0.0, 520.0)).run()
+    assert not site.exception
+    shown = " ".join(str(block.value) for block in site.get("html"))
+    assert f"<strong>{len(charger_tests()):,}</strong>" in shown
+    assert f"<span>Investigations in all</span><strong>{len(charger_fiches())}</strong>" in shown
+
+
 def test_the_investigation_search_follows_the_ranking():
-    """Une seule vue, la fiche ; le classement complet à droite, la plus pertinente en premier, un clic l'affiche."""
+    """La fiche et le classement complet à droite, la plus pertinente en premier, un clic l'affiche ;
+    plus le tableau des tests venu de la page Data."""
     from flame.commun import charger_fiches, get_scenario
     from flame.recherche import les_plus_pertinentes
 
     site = AppTest.from_file(APP, default_timeout=60).run()
     site.switch_page("pages/recherche.py").run()
     assert not site.exception
-    assert len(site.tabs) == 0  # no Ranking or What we don't know tab any more
+    # Ni Ranking ni What we don't know ; la fiche, et le tableau des tests venu de la page Data.
+    assert [onglet.label for onglet in site.tabs] == ["Investigation", "Tests + CSV"]
     ranked = list(les_plus_pertinentes(charger_fiches(), get_scenario())["id"])
     # The ranking on the right: one button per investigation, in the order of the ranking ("1. Name").
     buttons = [button for button in site.button if button.key.startswith("recherche_rang_")]
@@ -580,7 +600,7 @@ def test_a_click_on_the_same_button_brings_its_values_back():
 def test_a_custom_environment_survives_a_visit_to_another_page():
     site = AppTest.from_file(APP, default_timeout=30).run()
     site.slider(key="ui_oxygen").set_value((25.0, 100.0)).run()
-    site.switch_page("pages/donnees.py").run()
+    site.switch_page("pages/recherche.py").run()
     assert not site.exception
     assert site.session_state["habitat"] == "Personnalisé"
     assert site.session_state["scenario_oxygene_pct"] == (25.0, None)

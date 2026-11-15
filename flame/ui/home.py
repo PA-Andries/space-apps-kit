@@ -91,7 +91,9 @@ def stat_tiles(tiles: list[tuple], note: str = "", compact: bool = False, grid: 
         else:
             figure = f"<strong>{escape(value)}</strong>"
         cells.append(f'<div class="ff-stat"><span>{escape(caption)}</span>{figure}{below}</div>')
-    size = (" ff-compact" if compact else "") + (" ff-grid2" if grid else "")
+    # La classe dit combien de tuiles : à deux ou à une, la rangée se centre au lieu de laisser
+    # une colonne vide à droite (demande d'Ethan, dim. 15 nov.).
+    size = (" ff-compact" if compact else "") + (" ff-grid2" if grid else "") + f" ff-cols{len(cells)}"
     st.html(f'<div class="ff-stats{size}">{"".join(cells)}</div>')
     if note:
         st.html(f'<p class="ff-note">{escape(note)}</p>')

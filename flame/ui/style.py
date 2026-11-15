@@ -150,6 +150,10 @@ iframe {{ border-radius: 30px; box-shadow: 0 30px 80px -20px rgba(29, 29, 31, 0.
 .st-key-ui_card_conditions iframe, .st-key-ui_card_destination iframe {{ box-shadow: none; border-radius: 18px; }}
 
 .ff-grid2.ff-stats {{ grid-template-columns: repeat(2, 1fr); }}
+/* Moins de trois tuiles : elles gardent leur taille et la rangée reste centrée. */
+.ff-cols1.ff-stats, .ff-cols2.ff-stats {{ justify-content: center; }}
+.ff-cols1.ff-stats {{ grid-template-columns: minmax(0, 22rem); }}
+.ff-cols2.ff-stats {{ grid-template-columns: repeat(2, minmax(0, 22rem)); }}
 .ff-stat small {{ display: block; color: #86868b; font-size: 0.72rem; margin-top: 0.25rem; }}
 
 /* The chatbot icon, pinned to the bottom-right corner (sketch 1 of the whiteboard). */
