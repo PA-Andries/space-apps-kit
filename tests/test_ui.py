@@ -257,8 +257,9 @@ def test_page_one_has_one_button_per_atmosphere():
     from flame.ui.places import EARTH, PLACE_ICONS, PLACE_ROWS, SAME_CONDITIONS_AS, SPACESUIT
 
     offered = [place for row in PLACE_ROWS for place in row]
-    # Two crew environments, then the two references the statement gives: Earth air and the suit.
-    assert offered == ["Station", "Base lunaire", EARTH, SPACESUIT]
+    # Earth, the reference, then the two crew environments. The spacesuit is no place to live in: no button.
+    assert offered == [EARTH, "Station", "Base lunaire"]
+    assert SPACESUIT not in offered
     assert set(offered) <= set(PLACE_ICONS)  # each button has its small logo
     # A habitat of the contract without a button either has exactly the conditions of a button's place...
     without_button = [habitat for habitat in HABITATS if habitat not in offered]
@@ -270,22 +271,26 @@ def test_page_one_has_one_button_per_atmosphere():
     assert conditions_habitat("Base martienne")["oxygene_pct"] == (None, None)
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert [b.key for b in site.button if b.key.startswith("ui_place_")] == [f"ui_place_{place}" for place in offered]
-    assert [b.label for b in site.button if b.key.startswith("ui_place_")][:2] == [
+    assert [b.label for b in site.button if b.key.startswith("ui_place_")] == [
+        "Earth",
         "Station & spacecraft",
         "Moon base & rover",
     ]
     assert [b.key for b in site.button if b.key.startswith("ui_body_")] == []  # no planet to tap first
 
 
-def test_page_one_says_why_mars_is_not_offered():
-    from flame.ui.places import MARS_NOTE
+def test_page_one_says_why_mars_is_not_offered_and_that_it_will_come():
+    from flame.ui.places import MARS_NOTE, MARS_TAG
 
     site = AppTest.from_file(APP, default_timeout=30).run()
     assert not site.exception
-    notes = [block.value for block in site.markdown if "Mars base" in block.value]
-    assert len(notes) == 1
-    assert "no atmosphere" in notes[0] and "partial gravity" in notes[0]
-    assert "no atmosphere" in MARS_NOTE
+    shown = [block.value for block in site.markdown]
+    titles = [text for text in shown if "**Mars base**" in text]
+    assert len(titles) == 1 and MARS_TAG in titles[0] and MARS_TAG == "Future feature"
+    assert MARS_NOTE in shown
+    # The two checked facts, then the team's intention, without promising that NASA will publish anything.
+    assert "no atmosphere" in MARS_NOTE and "partial gravity" in MARS_NOTE
+    assert MARS_NOTE.endswith("once such data exists.")
 
 
 def test_a_place_without_a_button_highlights_the_button_that_stands_for_it():

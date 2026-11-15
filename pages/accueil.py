@@ -153,7 +153,7 @@ with picker_column, st.container(key="ui_card_destination", height="stretch"):
     card_title(
         "Habitable crew environment",
         "One button per atmosphere: places that share their conditions share a button. "
-        "Earth and the spacesuit are references, not habitats.",
+        "Earth is the reference, not a habitat.",
     )
     place_buttons(habitat, selected=not custom)
     if custom:
