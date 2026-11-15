@@ -19,11 +19,12 @@ from pathlib import Path
 import anthropic
 import pandas as pd
 import requests
-import streamlit as st
 
 from flame.assistant.claude import (
+    DEBUT_CLE_CLAUDE,
     appeler_claude,
     cle_claude,
+    lire_secret,
     message_erreur_claude,
     messages_claude,
 )
@@ -55,11 +56,9 @@ MESSAGES_ERREUR = {
 
 
 def cle_api() -> str | None:
-    """La clé de Gemini rangée dans les Secrets de Streamlit, ou None si elle manque."""
-    try:
-        return st.secrets.get("LLM_API_KEY")
-    except FileNotFoundError:  # aucun fichier .streamlit/secrets.toml sur cet ordinateur
-        return None
+    """La clé de Gemini (`LLM_API_KEY`), ou None si elle manque, n'est pas remplie ou est une clé d'Anthropic."""
+    cle = lire_secret("LLM_API_KEY")
+    return None if cle is None or cle.startswith(DEBUT_CLE_CLAUDE) else cle
 
 
 def lire_prompt(nom: str) -> str:
@@ -182,18 +181,21 @@ def generer(consigne: str, question: str, historique: list[dict[str, str]], avec
     cle_anthropic, cle_gemini = cle_claude(), cle_api()
     if cle_anthropic is None and cle_gemini is None:
         return SANS_CLE
+    erreur_de_claude = None
     if cle_anthropic:
         try:
             return appeler_claude(consigne, messages_claude(question, historique), cle_anthropic, avec_outils)
         except anthropic.APIError as erreur:
+            erreur_de_claude = message_erreur_claude(erreur)
             if cle_gemini is None:
-                return message_erreur_claude(erreur)
+                return erreur_de_claude
             # Visible dans les journaux du site : la réponse vient alors de Gemini.
             journal.warning("Claude n'a pas répondu (%s) : on passe à Gemini.", type(erreur).__name__)
     try:
         return appeler_gemini(consigne, messages_gemini(question, historique), cle_gemini, avec_outils)
     except requests.RequestException as erreur:
-        return message_erreur(erreur)
+        # Si Claude puis Gemini ont échoué, on montre l'erreur de Claude : c'est lui qui devait répondre.
+        return erreur_de_claude or message_erreur(erreur)
 
 
 def repondre(question: str, historique: list[dict[str, str]], fiches: pd.DataFrame) -> str:

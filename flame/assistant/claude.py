@@ -21,6 +21,7 @@ NB_MAX_TOURS_OUTILS = 4  # au-delà, on arrête : le modèle tournerait en rond
 BETA_REPLI = "server-side-fallback-2026-07-01"
 MODELES_AVEC_REPLI = {"claude-opus-5-5", "claude-sonnet-5-5"}
 SECRET_A_REMPLIR = "à-remplacer"  # la valeur du modèle `.streamlit/secrets.toml.example`
+DEBUT_CLE_CLAUDE = "sk-ant-"  # toutes les clés de l'API d'Anthropic commencent ainsi
 REFUS = "I can't answer this question. Try asking it another way."
 # Les mêmes outils que pour Gemini, au format attendu par Claude.
 OUTILS_CLAUDE = [
@@ -40,8 +41,15 @@ def lire_secret(nom: str) -> str | None:
 
 
 def cle_claude() -> str | None:
-    """La clé de l'API d'Anthropic (`ANTHROPIC_API_KEY`), ou None si elle manque."""
-    return lire_secret("ANTHROPIC_API_KEY")
+    """La clé de l'API d'Anthropic, ou None si elle manque.
+
+    Elle se range sous `ANTHROPIC_API_KEY`. Une clé d'Anthropic rangée par erreur sous `LLM_API_KEY`
+    (le nom de la clé de Gemini) est reconnue à son début, « sk-ant- », et sert quand même.
+    """
+    cle = lire_secret("ANTHROPIC_API_KEY") or lire_secret("LLM_API_KEY")
+    if cle and (cle.startswith(DEBUT_CLE_CLAUDE) or lire_secret("ANTHROPIC_API_KEY")):
+        return cle
+    return None
 
 
 def modele_claude() -> str:

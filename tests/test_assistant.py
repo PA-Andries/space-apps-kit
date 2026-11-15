@@ -506,3 +506,21 @@ def test_synthetiser_passe_par_claude_sans_outils(monkeypatch):
     demandes = faux_claude(monkeypatch, [texte_claude("#### Fire behaviour\nTexte (A).")])
     assert chatbot.synthetiser(FICHES_TEST, ["A", "C"]).startswith("#### Fire behaviour")
     assert "Fumée des câbles" in demandes[1]["system"] and "tools" not in demandes[1]
+
+
+def test_une_cle_claude_rangee_sous_le_nom_de_gemini_sert_quand_meme(monkeypatch):
+    monkeypatch.setattr(claude.st, "secrets", {"LLM_API_KEY": "sk-ant-exemple"})
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    assert claude.cle_claude() == "sk-ant-exemple"
+    assert chatbot.cle_api() is None  # ce n'est pas une clé de Gemini
+    monkeypatch.setattr(claude.st, "secrets", {"LLM_API_KEY": "cle-de-gemini"})
+    assert claude.cle_claude() is None
+    assert chatbot.cle_api() == "cle-de-gemini"
+    monkeypatch.setattr(claude.st, "secrets", {"LLM_API_KEY": claude.SECRET_A_REMPLIR})
+    assert chatbot.cle_api() is None  # la ligne du modèle, pas encore remplie
+
+
+def test_si_claude_puis_gemini_echouent_on_montre_l_erreur_de_claude(monkeypatch):
+    faux_claude(monkeypatch, [erreur_claude(anthropic.AuthenticationError, 401)], cle_gemini="mauvaise-cle")
+    monkeypatch.setattr(chatbot.requests, "post", lambda *args, **kwargs: FausseReponse(code=400))
+    assert "ANTHROPIC_API_KEY" in chatbot.repondre("Qu'est-ce que BASS ?", [], charger_fiches())
